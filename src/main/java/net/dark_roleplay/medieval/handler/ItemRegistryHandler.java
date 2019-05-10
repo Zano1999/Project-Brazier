@@ -116,6 +116,7 @@ public class ItemRegistryHandler {
 			reg(new ItemBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_plank_chair", material.getName()))), new Properties().group(DECORATION)), String.format("%s_plank_chair", material.getName()));
 			reg(new ItemBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_solid_chair", material.getName()))), new Properties().group(DECORATION)), String.format("%s_solid_chair", material.getName()));
 			reg(new ItemBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_solid_chair_armrest", material.getName()))), new Properties().group(DECORATION)), String.format("%s_solid_chair_armrest", material.getName()));
+			reg(new ItemBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_solid_bench", material.getName()))), new Properties().group(DECORATION)), String.format("%s_solid_bench", material.getName()));
 		});
 	}
 
