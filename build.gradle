@@ -1,0 +1,124 @@
+buildscript {
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+    }
+}
+apply plugin: 'net.minecraftforge.gradle'
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+version = "1.13.2-0.1.0"
+group = "net.dark_roleplay"
+archivesBaseName = "drpmedieval"
+
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+
+minecraft {
+    mappings channel: 'snapshot', version: '20180921-1.13'
+    runs {
+		client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', ''
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                drpmedieval {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run_server')
+            property 'forge.logging.markers', ''
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                drpmedieval {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+repositories {
+	maven {
+		url = "https://dark-roleplay.net/files/maven/"
+	}
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.13.2-25.0.108'
+	
+	deobf group: "net.dark_roleplay", name: "drplibrary", version: "1.13.2-0.1.1-SNAPSHOT"
+	deobf group: "net.dark_roleplay.modules", name: "drpmarg", version: "1.13.2-0.1.2"
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": "drpmedieval",
+            "Specification-Vendor": "Dark Roleplay",
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": "Dark Roleplay Medieval",
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"examplemodsareus",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+// Publishing
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        include 'META-INF/mods.toml'
+
+        expand 'version': project.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'META-INF/mods.toml'
+    }
+}
+
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = project.archivesBaseName
+            version = project.version
+            groupId = project.group
+			
+            //artifact build
+            //artifact javadocJar
+            artifact sourcesJar
+        }
+    }
+    repositories {
+        maven {
+            url = project.mvn_url
+			credentials {
+				username project.mvn_username_drp
+				password project.mvn_password_drp
+			}
+        }
+    }
+}
