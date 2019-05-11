@@ -14,8 +14,6 @@ public class EntitySittable extends Entity {
 	public int blockPosX;
 	public int blockPosY;
 	public int blockPosZ;
-
-	private boolean enforceRotation = false;
 	
 	public EntitySittable(World world) {
 		super(MedievalEntities.SITTABLE, world);
@@ -43,16 +41,16 @@ public class EntitySittable extends Entity {
 	public void setPositionConsideringRotation(double x, double y, double z, EnumFacing facing) {
 		switch (facing) {
 			case NORTH:
-				setRotation(180, 0);
+				setRotation(180, 90);
 				break;
 			case EAST:
-				setRotation(270, 0);
+				setRotation(270, 90);
 				break;
 			case SOUTH:
-				setRotation(0, 0);
+				setRotation(0, 90);
 				break;
 			case WEST:
-				setRotation(90, 0);
+				setRotation(90, 90);
 				break;
 			case UP:
 			case DOWN:
@@ -87,6 +85,7 @@ public class EntitySittable extends Entity {
 	 * of its passenger.
 	 */
 	protected void applyYawToEntity(Entity entityToUpdate) {
+		if(this.rotationPitch < 89 || this.rotationPitch > 91) return;
 		entityToUpdate.setRenderYawOffset(this.rotationYaw);
 		float f = MathHelper.wrapDegrees(entityToUpdate.rotationYaw - this.rotationYaw);
 		float f1 = MathHelper.clamp(f, -105.0F, 105.0F);
@@ -112,10 +111,8 @@ public class EntitySittable extends Entity {
 	}
 
 	@Override
-	protected void readAdditional(NBTTagCompound compound) {
-	}
+	protected void readAdditional(NBTTagCompound compound) {}
 
 	@Override
-	protected void writeAdditional(NBTTagCompound compound) {
-	}
+	protected void writeAdditional(NBTTagCompound compound) {}
 }

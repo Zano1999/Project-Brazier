@@ -15,7 +15,7 @@
 			"output" : "drpmedieval:models/block/chairs/%wood%_solid_chair.json"
 		},
 		{
-			"input" : "drpmedieval:marg/jsons/item_model/solid_chair_hidden_compartment.json",
+			"input" : "drpmedieval:marg/jsons/block_model/chairs/solid_chair_hidden_compartment.json",
 			"output" : "drpmedieval:models/block/chairs/%wood%_solid_chair_hidden_compartment.json"
 		}
 	]

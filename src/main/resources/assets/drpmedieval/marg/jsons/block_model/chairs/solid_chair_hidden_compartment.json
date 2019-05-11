@@ -1,0 +1,8 @@
+{
+	"credit": "Made by JTK222",
+	"parent": "drpmedieval:block/chairs/solid_chair_hidden_compartment",
+	"textures": {
+		"planks": "drpmarg:block/planks/%wood%_planks",
+		"particle": "drpmarg:block/planks/%wood%_planks"
+	}
+}

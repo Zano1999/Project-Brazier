@@ -2,8 +2,8 @@
 	"credit": "Made by JTK222",
 	"textures": {
 		"1": "drpmedieval:blocks/metal",
-		"planks": "drpmarg:block/planks/%wood%_planks",
-		"particle": "drpmarg:block/planks/%wood%_planks"
+		"planks": "drpmarg:block/planks/oak_planks",
+		"particle": "drpmarg:block/planks/oak_planks"
 	},
 	"elements": [
 		{

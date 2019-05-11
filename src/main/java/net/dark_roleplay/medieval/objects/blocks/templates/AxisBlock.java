@@ -31,12 +31,11 @@ public class AxisBlock extends BaseBlock {
 
 	protected void setShapes(VoxelShape x, VoxelShape y) {
 		this.shapes.put(Axis.X, x);
-		this.shapes.put(Axis.Y, y);
+		this.shapes.put(Axis.Z, y);
 	}
 
 	@Override
 	public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
-		Axis axis = state.get(HORIZONTAL_AXIS);
 		return shapes.get(state.get(HORIZONTAL_AXIS));
 	}
 

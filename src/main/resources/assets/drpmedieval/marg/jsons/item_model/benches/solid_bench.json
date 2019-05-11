@@ -1,8 +1,8 @@
 {
 	"credit": "Made by JTK222",
-	"parent": "drpmedieval:block/chairs/plank_chair",
+	"parent": "drpmedieval:block/benches/solid_bench_single",
 	"textures": {
-		"planks": "drpmarg:block/planks/%wood%_planks",
+		"0": "drpmarg:block/planks/%wood%_planks",
 		"particle": "drpmarg:block/planks/%wood%_planks"
 	},
 	"display": {
@@ -25,16 +25,14 @@
 			"scale": [0.4, 0.4, 0.4]
 		},
 		"ground": {
-			"translation": [0, 3, 0],
 			"scale": [0.25, 0.25, 0.25]
 		},
 		"gui": {
-			"rotation": [30, 225, 0],
-			"translation": [0, -0.75, 0],
-			"scale": [0.625, 0.625, 0.625]
+			"rotation": [15, 35, 0],
+			"translation": [0, 2, 0],
+			"scale": [0.65, 0.65, 0.65]
 		},
 		"fixed": {
-			"rotation": [0, 90, 0],
 			"scale": [0.5, 0.5, 0.5]
 		}
 	}

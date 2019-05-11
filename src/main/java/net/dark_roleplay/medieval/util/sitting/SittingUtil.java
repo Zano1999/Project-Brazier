@@ -11,18 +11,16 @@ public class SittingUtil {
 
 	public static boolean sitOnBlock(World world, double x, double y, double z, EntityPlayer player, double offset){
 		if (!checkForExistingEntity(world, x, y, z, player) && !world.isRemote){
-			if(!world.isRemote) {
-				EntitySittable nemb = new EntitySittable(world, x, y, z, offset);
-				world.spawnEntity(nemb);
-				player.startRiding(nemb);
-			}
+			EntitySittable nemb = new EntitySittable(world, x, y, z, offset);
+			world.spawnEntity(nemb);
+			player.startRiding(nemb);
 		}
 		
 		return true;
 	}
 
 	public static boolean sitOnBlockWithRotation(World world, double x, double y, double z, EntityPlayer player, EnumFacing facing, double offset){
-		if (!checkForExistingEntity(world, x, y, z, player)){
+		if (!checkForExistingEntity(world, x, y, z, player) && !world.isRemote){
 			EntitySittable nemb = new EntitySittable(world, x, y, z, offset, facing);
 			world.spawnEntity(nemb);
 			player.startRiding(nemb);
