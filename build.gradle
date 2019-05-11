@@ -5,13 +5,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.0.120', changing: true
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
 
 version = "1.13.2-0.1.0"
 group = "net.dark_roleplay"
@@ -53,11 +52,14 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.13.2-25.0.108'
+    minecraft 'net.minecraftforge:forge:1.13.2-25.0.192'
 	
-	deobf group: "net.dark_roleplay", name: "drplibrary", version: "1.13.2-0.1.1-SNAPSHOT"
-	deobf group: "net.dark_roleplay.modules", name: "drpmarg", version: "1.13.2-0.1.2"
+	compile "net.dark_roleplay:drplibrary:1.13.2-0.1.3-SNAPSHOT"
+	compile "net.dark_roleplay.modules:drpmarg:1.13.2-0.1.3"
 }
+
+apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.13.2/mods_toml.gradle'
+apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.13.2/embedding.gradle'
 
 jar {
     manifest {
@@ -74,51 +76,5 @@ jar {
 }
 
 // Publishing
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier = 'sources'
-}
-
-artifacts {
-    archives sourcesJar
-}
-
-processResources {
-    from(sourceSets.main.resources.srcDirs) {
-        include 'META-INF/mods.toml'
-
-        expand 'version': project.version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'META-INF/mods.toml'
-    }
-}
-
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = project.archivesBaseName
-            version = project.version
-            groupId = project.group
-			
-            //artifact build
-            //artifact javadocJar
-            artifact sourcesJar
-        }
-    }
-    repositories {
-        maven {
-            url = project.mvn_url
-			credentials {
-				username project.mvn_username_drp
-				password project.mvn_password_drp
-			}
-        }
-    }
-}
+apply from: 'https://raw.githubusercontent.com/MinecraftModDevelopment/Gradle-Collection/master/minecraft/artifacts.gradle'
+apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.13.2/publishing.gradle'
