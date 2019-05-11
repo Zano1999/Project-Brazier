@@ -4,6 +4,7 @@ import static net.dark_roleplay.medieval.holders.MedievalCreativeTabs.DECORATION
 import static net.dark_roleplay.medieval.holders.MedievalCreativeTabs.EQUIPMENT;
 import static net.dark_roleplay.medieval.holders.MedievalCreativeTabs.FOOD;
 import static net.dark_roleplay.medieval.holders.MedievalCreativeTabs.MISCELLANEOUS;
+import static net.dark_roleplay.medieval.holders.MedievalCreativeTabs.BUILDING;
 
 import net.dark_roleplay.drpmarg.api.Constants;
 import net.dark_roleplay.drpmarg.api.MaterialRequirements;
@@ -117,6 +118,7 @@ public class ItemRegistryHandler {
 			reg(new ItemBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_solid_chair", material.getName()))), new Properties().group(DECORATION)), String.format("%s_solid_chair", material.getName()));
 			reg(new ItemBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_solid_chair_armrest", material.getName()))), new Properties().group(DECORATION)), String.format("%s_solid_chair_armrest", material.getName()));
 			reg(new ItemBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_solid_bench", material.getName()))), new Properties().group(DECORATION)), String.format("%s_solid_bench", material.getName()));
+			reg(new ItemBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_platform", material.getName()))), new Properties().group(BUILDING)), String.format("%s_platform", material.getName()));
 		});
 	}
 

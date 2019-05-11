@@ -1,0 +1,16 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+		"model":"drpmedieval:wood_platform/%wood%_platform_full"
+    },
+	"variants": {
+		"axis":{
+			"x":{},
+			"z":{"y":90}
+		},
+		"height":{
+			"full":{"model":"drpmedieval:platforms/%wood%_platform_full"},
+			"half":{"model":"drpmedieval:platforms/%wood%_platform_half"}
+		}
+	}
+}

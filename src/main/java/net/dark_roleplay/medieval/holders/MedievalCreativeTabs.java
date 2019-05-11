@@ -16,12 +16,12 @@ public class MedievalCreativeTabs {
 		}
 	};
 	
-//	public static final ItemGroup BUILDING_MATS = new ItemGroup("drpmedieval.building_materials") {
-//		@OnlyIn(Dist.CLIENT)
-//		public ItemStack createIcon() {
-//			return new ItemStack(Blocks.POWERED_RAIL);
-//		}
-//	};
+	public static final ItemGroup BUILDING = new ItemGroup("drpmedieval.building") {
+		@OnlyIn(Dist.CLIENT)
+		public ItemStack createIcon() {
+			return new ItemStack(MedievalBlocks.ADVENT_WREATH);
+		}
+	};
 	
 //	public static final ItemGroup UTILITY = new ItemGroup("drpmedieval.utility") {
 //		@OnlyIn(Dist.CLIENT)

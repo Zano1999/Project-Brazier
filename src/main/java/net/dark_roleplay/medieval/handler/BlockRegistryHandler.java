@@ -3,6 +3,7 @@ package net.dark_roleplay.medieval.handler;
 import net.dark_roleplay.drpmarg.api.Constants;
 import net.dark_roleplay.drpmarg.api.MaterialRequirements;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
+import net.dark_roleplay.medieval.objects.blocks.building.WoodPlatformBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.advent_wreath.AdventWreathBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.benches.BenchBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.PlankChairBlock;
@@ -31,7 +32,7 @@ public class BlockRegistryHandler {
 		registry = registryEvent.getRegistry();
 		
 		reg(new TorchHolderBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.METAL)), "torch_holder");
-		reg(new AdventWreathBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(1.0F, 1.0F).sound(SoundType.WET_GRASS)), "advent_wreath");
+		reg(new AdventWreathBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(1.0F, 1.0F).sound(SoundType.PLANT)), "advent_wreath");
 
 		MaterialRequirements planks = new MaterialRequirements(Constants.MAT_WOOD, "planks");
 		
@@ -40,7 +41,7 @@ public class BlockRegistryHandler {
 			reg(new SolidChairBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_solid_chair", material.getName()));
 			reg(new SolidChairArmrestBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_solid_chair_armrest", material.getName()));
 			reg(new BenchBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_solid_bench", material.getName()));
-
+			reg(new WoodPlatformBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_platform", material.getName()));
 		});
 	}
 	
