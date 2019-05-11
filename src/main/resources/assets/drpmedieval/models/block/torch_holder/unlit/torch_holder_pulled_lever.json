@@ -3,9 +3,9 @@
 	"textures": {
 		"torch": "drpmedieval:blocks/torch_holder/unlit_torch",
 		"metal": "drpmedieval:blocks/torch_holder/metal",
-		"planks": "drpmedieval:blocks/roof/planks_treaded_wood",
 		"string": "block/white_wool",
-		"particle": "drpmedieval:blocks/roof/planks_treaded_wood" 
+		"planks": "drpmedieval:blocks/torch_holder/wood",
+		"particle": "drpmedieval:blocks/torch_holder/wood" 
 	},
 	"elements": [
 		{
