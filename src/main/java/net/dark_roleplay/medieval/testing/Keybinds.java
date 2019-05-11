@@ -1,6 +1,6 @@
 package net.dark_roleplay.medieval.testing;
 
-import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
+import net.minecraftforge.client.event.InputEvent.KeyInputEvent;
 
 //@EventBusSubscriber(modid = References.MODID,value = Side.CLIENT)
 public class Keybinds {
