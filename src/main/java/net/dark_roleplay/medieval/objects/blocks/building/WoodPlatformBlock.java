@@ -28,10 +28,10 @@ public class WoodPlatformBlock extends AxisBlock{
 		super(properties);
 		
 		setShapes(
-			VoxelShapes.combineAndSimplify(Block.makeCuboidShape(6.5, 11, 0, 9.5, 14, 16),Block.makeCuboidShape(0, 14, 0, 16, 16, 16), IBooleanFunction.OR),
-			VoxelShapes.combineAndSimplify(Block.makeCuboidShape(0, 11, 6.5, 16, 14, 9.5), Block.makeCuboidShape(0, 14, 0, 16, 16, 16), IBooleanFunction.OR),
-			VoxelShapes.combineAndSimplify(Block.makeCuboidShape(6.5, 3, 0, 9.5, 6, 16), Block.makeCuboidShape(0, 6, 0, 16, 8, 16), IBooleanFunction.OR),
-			VoxelShapes.combineAndSimplify(Block.makeCuboidShape(0, 3, 6.5, 16, 6, 9.5), Block.makeCuboidShape(0, 6, 0, 16, 8, 16), IBooleanFunction.OR)
+			VoxelShapes.combineAndSimplify(Block.makeCuboidShape(0, 10, 6.5, 16, 13, 9.5), Block.makeCuboidShape(0, 13, 0, 16, 16, 16), IBooleanFunction.OR),
+			VoxelShapes.combineAndSimplify(Block.makeCuboidShape(6.5, 10, 0, 9.5, 13, 16),Block.makeCuboidShape(0, 13, 0, 16, 16, 16), IBooleanFunction.OR),
+			VoxelShapes.combineAndSimplify(Block.makeCuboidShape(0, 2, 6.5, 16, 5, 9.5), Block.makeCuboidShape(0, 5, 0, 16, 8, 16), IBooleanFunction.OR),
+			VoxelShapes.combineAndSimplify(Block.makeCuboidShape(6.5, 2, 0, 9.5, 5, 16), Block.makeCuboidShape(0, 5, 0, 16, 8, 16), IBooleanFunction.OR)
 		);
 	}
 	

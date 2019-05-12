@@ -1,6 +1,6 @@
 {
 	"credit": "Made by JTK222",
-	"parent": "drpmedieval:block/platforms/wood_platform_half",
+	"parent": "drpmedieval:block/wood_platforms/wood_platform_half",
 	"textures": {
 		"log_top": "block/stripped_%wood%_log_top",
 		"log": "block/stripped_%wood%_log",
