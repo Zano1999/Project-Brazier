@@ -2,6 +2,7 @@ package net.dark_roleplay.medieval.handler;
 
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairTileEntity;
+import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
@@ -21,6 +22,7 @@ public class TileEntityRegistryHandler {
 		registry = registryEvent.getRegistry();
 		
 		reg(TileEntityType.Builder.create(SolidChairTileEntity::new).build(null), "solid_chair_armrest");
+		reg(TileEntityType.Builder.create(RoadSignTileEntity::new).build(null), "road_sign");
 	}
 	
 	protected static void reg(TileEntityType<? extends TileEntity> tileEntity, String registryName) {

@@ -8,5 +8,6 @@ import net.minecraftforge.registries.ObjectHolder;
 public class MedievalTileEntities {
 	
 	public static final TileEntityType<?>
-		SOLID_CHAIR_ARMREST				= null;
+		SOLID_CHAIR_ARMREST				= null,
+		ROAD_SIGN						= null;
 }

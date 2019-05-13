@@ -10,6 +10,7 @@ import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.PlankChairBlo
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairArmrestBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.light_sources.TorchHolderBlock;
+import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -42,6 +43,7 @@ public class BlockRegistryHandler {
 			reg(new SolidChairArmrestBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_solid_chair_armrest", material.getName()));
 			reg(new BenchBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_solid_bench", material.getName()));
 			reg(new WoodPlatformBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_platform", material.getName()));
+			reg(new RoadSign(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_road_sign", material.getName()));
 		});
 	}
 	

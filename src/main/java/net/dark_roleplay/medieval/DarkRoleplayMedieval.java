@@ -1,19 +1,24 @@
 package net.dark_roleplay.medieval;
 
+import net.dark_roleplay.drpmarg.objects.resources.GeneratorReloadListener;
 import net.dark_roleplay.medieval.holders.MedievalConfigs;
 import net.dark_roleplay.medieval.holders.MedievalGuis;
 import net.dark_roleplay.medieval.minigame.MinigameHandler;
-import net.dark_roleplay.medieval.objects.commands.DRPCommand;
+import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntity;
+import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntityRenderer;
+import net.dark_roleplay.medieval.objects.helper.ModelsCache;
 import net.dark_roleplay.medieval.temporary.model_quality.ModelQualityModelLoader;
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.IReloadableResourceManager;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(DarkRoleplayMedieval.MODID)
@@ -57,7 +62,12 @@ public class DarkRoleplayMedieval {
 	}
 	
 	public void setupClientStuff(FMLClientSetupEvent event) {
+		if(Minecraft.getInstance().getResourceManager() instanceof IReloadableResourceManager) {
+			((IReloadableResourceManager)Minecraft.getInstance().getResourceManager()).addReloadListener(ModelsCache.INSTANCE);
+		}
+		
 		ModelLoaderRegistry.registerLoader(ModelQualityModelLoader.INSTANCE);
+		ClientRegistry.bindTileEntitySpecialRenderer(RoadSignTileEntity.class, new RoadSignTileEntityRenderer());
 	}
 
 //	@EventHandler
