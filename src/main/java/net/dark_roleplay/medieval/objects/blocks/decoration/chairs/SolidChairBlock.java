@@ -10,6 +10,7 @@ import net.dark_roleplay.medieval.util.sitting.SittingUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -28,8 +29,10 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -190,23 +193,14 @@ public class SolidChairBlock extends ChairBlock {
 	@Override
 	public boolean onBlockActivated(IBlockState state, World world, BlockPos pos, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
-
+		
 		if (state.get(HIDDEN_COMPARTMENT) && buttons.get(state.get(HORIZONTAL_FACING)).contains(hitX, hitY, hitZ)) {
 			TileEntity te = world.getTileEntity(pos);
 
 			if (te == null)
 				return true;
-			LazyOptional<IItemHandler> itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
-			if (!itemHandler.isPresent())
-				return true;
-			IItemHandler handler = itemHandler.orElse(null);
-			if (handler.getStackInSlot(0).isEmpty() && !player.getHeldItem(hand).isEmpty()) {
-				player.setHeldItem(hand, handler.insertItem(0, player.getHeldItem(hand), false));
-			} else if (!handler.getStackInSlot(0).isEmpty() && player.getHeldItem(hand).isEmpty()) {
-				handler.insertItem(0, player.getHeldItem(hand), false);
-				player.setHeldItem(hand, handler.extractItem(0, handler.getStackInSlot(0).getCount(), false));
-			}
-
+			
+			if(!world.isRemote)NetworkHooks.openGui((EntityPlayerMP) player, (IInteractionObject) te, pos);
 			return true;
 		} else {
 			if (player.getDistance(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) < 3) {
