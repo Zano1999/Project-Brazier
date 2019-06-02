@@ -11,6 +11,7 @@ import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairArm
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.light_sources.TorchHolderBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSign;
+import net.dark_roleplay.medieval.objects.blocks.decoration.wall_brazier.WallBrazierBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -34,7 +35,8 @@ public class BlockRegistryHandler {
 		
 		reg(new TorchHolderBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.METAL)), "torch_holder");
 		reg(new AdventWreathBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(1.0F, 1.0F).sound(SoundType.PLANT)), "advent_wreath");
-
+		reg(new WallBrazierBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.METAL)), "wall_brazier");
+		
 		MaterialRequirements planks = new MaterialRequirements(Constants.MAT_WOOD, "planks");
 		
 		planks.execute(material -> {

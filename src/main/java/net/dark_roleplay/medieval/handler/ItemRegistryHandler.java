@@ -108,6 +108,7 @@ public class ItemRegistryHandler {
 		reg(new Item(new Properties().group(MISCELLANEOUS)), "wooden_cup");
 		
 		reg(new ItemBlock(MedievalBlocks.TORCH_HOLDER, new Properties().group(DECORATION)), "torch_holder");
+		reg(new ItemBlock(MedievalBlocks.WALL_BRAZIER, new Properties().group(DECORATION)), "wall_brazier");
 
 //		registry = null;
 		
@@ -119,6 +120,7 @@ public class ItemRegistryHandler {
 			reg(new ItemBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_solid_chair_armrest", material.getName()))), new Properties().group(DECORATION)), String.format("%s_solid_chair_armrest", material.getName()));
 			reg(new ItemBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_solid_bench", material.getName()))), new Properties().group(DECORATION)), String.format("%s_solid_bench", material.getName()));
 			reg(new ItemBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_platform", material.getName()))), new Properties().group(BUILDING)), String.format("%s_platform", material.getName()));
+			reg(new ItemBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_road_sign", material.getName()))), new Properties().group(DECORATION)), String.format("%s_road_sign", material.getName()));
 		});
 	}
 

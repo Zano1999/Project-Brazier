@@ -5,6 +5,11 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import com.google.common.collect.ImmutableMap;
+
+import net.dark_roleplay.library.DRPLibrary;
+import net.dark_roleplay.library.unstable.experimental.guis.ModularGui_Handler;
+import net.dark_roleplay.library.unstable.experimental.guis.modular.ModularGuiHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -14,6 +19,7 @@ import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.resource.IResourceType;
 import net.minecraftforge.resource.ISelectiveResourceReloadListener;
@@ -54,14 +60,33 @@ public class ModelsCache implements ISelectiveResourceReloadListener {
 	public IBakedModel getBakedModel(final ResourceLocation location, final IModelState state, final VertexFormat format, final Function<ResourceLocation, TextureAtlasSprite> textureGetter) {
 		IBakedModel bakedModel = this.bakedCache.get(location);
 		if (bakedModel == null) {
-			bakedModel = this.getModel(location).bake(null, textureGetter, state, false, format);
+			IModel<?> model = this.getModel(location);
+			bakedModel = model.bake(null, textureGetter, state, false, format);
 			this.bakedCache.put(location, bakedModel);
+		}
+		return bakedModel;
+	}
+	
+	public IBakedModel getRetexturedBakedModel(final ResourceLocation location, String textureKey, String newTexture) {
+		return this.getRetexturedBakedModel(location, DEFAULTMODELSTATE, DEFAULTVERTEXFORMAT, DEFAULTTEXTUREGETTER, textureKey, newTexture);
+	}
+
+	public IBakedModel getRetexturedBakedModel(final ResourceLocation location, final IModelState state, final VertexFormat format, final Function<ResourceLocation, TextureAtlasSprite> textureGetter, String textureKey, String newTexture) {
+		ResourceLocation fakeLoc = new ResourceLocation(location.toString() + "." + textureKey.replace("#", "") + "_" + newTexture.replace(":", "_"));
+		IBakedModel bakedModel = this.bakedCache.get(fakeLoc);
+		if (bakedModel == null) {
+			IModel<?> model = this.getModel(location);
+			model = model.retexture(ImmutableMap.of(textureKey, newTexture));
+			bakedModel = model.bake(null, textureGetter, state, false, format);
+			this.bakedCache.put(fakeLoc, bakedModel);
 		}
 		return bakedModel;
 	}
 
 	@Override
 	public void onResourceManagerReload(final IResourceManager resourceManager, final Predicate<IResourceType> resourcePredicate) {
+		ModularGuiHandler.currentGui = ModularGui_Handler.loadModularGui(new ResourceLocation(DRPLibrary.MODID, "textures/guis/modular_gui/vanilla.json"));//ClientProxy.modularGuis.get(0);
+
 		this.modelCache.clear();
 		this.bakedCache.clear();
 	}

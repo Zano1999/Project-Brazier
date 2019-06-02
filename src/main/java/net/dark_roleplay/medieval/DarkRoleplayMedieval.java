@@ -9,8 +9,10 @@ import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTi
 import net.dark_roleplay.medieval.objects.helper.ModelsCache;
 import net.dark_roleplay.medieval.temporary.model_quality.ModelQualityModelLoader;
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.resources.IReloadableResourceManager;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -28,7 +30,7 @@ public class DarkRoleplayMedieval {
 
 	public DarkRoleplayMedieval() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.WORLD_GENS_SPEC, "World Generation.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.Misc.REGENERATING_ORES_SPEC, "Regenerating Ores.toml");
+		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.Misc.REGENERATING_ORES_SPEC, "Regenerating Ores.toml");
         
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommonStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupServerStuff);
@@ -49,7 +51,6 @@ public class DarkRoleplayMedieval {
 //			
 //			MaterialRegistry.register(mat);
 //		}
-        
 	}
 	
 	
@@ -62,6 +63,8 @@ public class DarkRoleplayMedieval {
 	}
 	
 	public void setupClientStuff(FMLClientSetupEvent event) {
+		OBJLoader.INSTANCE.addDomain(MODID);
+		
 		if(Minecraft.getInstance().getResourceManager() instanceof IReloadableResourceManager) {
 			((IReloadableResourceManager)Minecraft.getInstance().getResourceManager()).addReloadListener(ModelsCache.INSTANCE);
 		}
