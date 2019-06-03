@@ -109,6 +109,13 @@ public class ItemRegistryHandler {
 		
 		reg(new ItemBlock(MedievalBlocks.TORCH_HOLDER, new Properties().group(DECORATION)), "torch_holder");
 		reg(new ItemBlock(MedievalBlocks.WALL_BRAZIER, new Properties().group(DECORATION)), "wall_brazier");
+		reg(new ItemBlock(MedievalBlocks.JAIL_LATTICE, new Properties().group(DECORATION)), "jail_lattice");
+
+		reg(new ItemBlock(MedievalBlocks.RIVERSTONE, new Properties().group(BUILDING)), "riverstone");
+		reg(new ItemBlock(MedievalBlocks.RIVERSTONE_COLORED, new Properties().group(BUILDING)), "riverstone_colored");
+		reg(new ItemBlock(MedievalBlocks.RIVERSTONE_COLORED_PALE, new Properties().group(BUILDING)), "riverstone_colored_pale");
+		reg(new ItemBlock(MedievalBlocks.LARGE_RIVERSTONE, new Properties().group(BUILDING)), "large_riverstone");
+		reg(new ItemBlock(MedievalBlocks.LARGE_RIVERSTONE_DARK, new Properties().group(BUILDING)), "large_riverstone_dark");
 
 //		registry = null;
 		
