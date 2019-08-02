@@ -1,5 +1,5 @@
 {
-	"version" : 1,
+	"version" : 2,
 	"type":"wood",
 	"jsons":[
 		{
@@ -26,6 +26,10 @@
 		{
 			"input" : "drpmedieval:marg/jsons/other_models/road_signs/road_sign_right.obj",
 			"output" : "drpmedieval:models/other/road_signs/%wood%_road_sign_right.obj"
+		},
+		{
+			"input" : "drpmedieval:marg/jsons/item_model/road_signs/simple_road_sign.json",
+			"output" : "drpmedieval:models/item/simple_%wood%_road_sign.json"
 		}
 	]
 }

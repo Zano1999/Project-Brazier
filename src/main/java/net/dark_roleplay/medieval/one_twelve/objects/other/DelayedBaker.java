@@ -6,7 +6,7 @@ package net.dark_roleplay.medieval.one_twelve.objects.other;
 //
 //import com.google.common.collect.ImmutableList;
 //
-//import net.minecraft.block.state.IBlockState;
+//import net.minecraft.block.state.BlockState;
 //import net.minecraft.client.Minecraft;
 //import net.minecraft.client.renderer.block.model.BakedQuad;
 //import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -15,7 +15,7 @@ package net.dark_roleplay.medieval.one_twelve.objects.other;
 //import net.minecraft.client.renderer.block.model.ModelRotation;
 //import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 //import net.minecraft.client.renderer.vertex.VertexFormat;
-//import net.minecraft.util.EnumFacing;
+//import net.minecraft.util.Direction;
 //import net.minecraft.util.ResourceLocation;
 //import net.minecraftforge.client.model.IModel;
 //import net.minecraftforge.common.model.IModelState;
@@ -39,13 +39,13 @@ public abstract class DelayedBaker{// implements IBakedModel, IModel{
 //		this.particle = particle.getNamespace() + ":" + particle.getPath();
 //	}
 //
-//	protected void addQuads(List<BakedQuad> quads, IModel model, int yRotate, int xRotate, IBlockState state, EnumFacing side, long rand){
+//	protected void addQuads(List<BakedQuad> quads, IModel model, int yRotate, int xRotate, BlockState state, Direction side, long rand){
 //		TRSRTransformation transform = TRSRTransformation.from(ModelRotation.getModelRotation(xRotate, yRotate));
 //		IBakedModel baked = model.bake(transform, this.format, this.textureGetter);
 //		quads.addAll(baked.getQuads(state, side,  rand));
 //	}
 //
-//	protected void addQuads(List<BakedQuad> quads, IModel model, IBlockState state, EnumFacing side, long rand){
+//	protected void addQuads(List<BakedQuad> quads, IModel model, BlockState state, Direction side, long rand){
 //		this.addQuads(quads, model, 0, 0, state, side, rand);
 //	}
 //

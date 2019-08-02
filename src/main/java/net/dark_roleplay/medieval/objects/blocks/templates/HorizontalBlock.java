@@ -4,66 +4,65 @@ import java.util.EnumMap;
 
 import javax.annotation.Nullable;
 
+import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper;
+import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper.RotationAmount;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumFacing.Axis;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
-public abstract class HorizontalBlock extends BaseBlock {
+public abstract class HorizontalBlock extends Block {
 
 	protected static final DirectionProperty HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-	protected final EnumMap<EnumFacing, VoxelShape> shapes = new EnumMap<EnumFacing, VoxelShape>(EnumFacing.class);
+	protected final EnumMap<Direction, VoxelShape> shapes = new EnumMap<Direction, VoxelShape>(Direction.class);
 
 	public HorizontalBlock(Properties properties) {
 		super(properties);
 	}
 
-	protected void setShapes(VoxelShape north, VoxelShape east, VoxelShape south, VoxelShape west) {
-		this.shapes.put(EnumFacing.NORTH, north);
-		this.shapes.put(EnumFacing.EAST, east);
-		this.shapes.put(EnumFacing.SOUTH, south);
-		this.shapes.put(EnumFacing.WEST, west);
+	protected void setShapes(VoxelShape north) {
+		this.shapes.put(Direction.NORTH, north);
+		this.shapes.put(Direction.EAST, VoxelShapeHelper.rotateShape(north, RotationAmount.NINETY));
+		this.shapes.put(Direction.SOUTH, VoxelShapeHelper.rotateShape(north, RotationAmount.HUNDRED_EIGHTY));
+		this.shapes.put(Direction.WEST, VoxelShapeHelper.rotateShape(north, RotationAmount.TWO_HUNDRED_SEVENTY));
 	}
 
 	@Override
-	public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
-		EnumFacing facing = state.get(HORIZONTAL_FACING);
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext selectionContext) {
 		return shapes.get(state.get(HORIZONTAL_FACING));
 	}
 
 	@Override
-	public IBlockState rotate(IBlockState state, Rotation rot) {
+	public BlockState rotate(BlockState state, Rotation rot) {
 		return state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)));
 	}
 
 	@Override
-	public IBlockState mirror(IBlockState state, Mirror mirrorIn) {
+	public BlockState mirror(BlockState state, Mirror mirrorIn) {
 		return state.rotate(mirrorIn.toRotation(state.get(HORIZONTAL_FACING)));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HORIZONTAL_FACING);
 	}
 	
 	@Nullable
 	@Override
-	public IBlockState getStateForPlacement(BlockItemUseContext context) {
-		BlockFaceShape shape = context.getWorld().getBlockState(context.getPos().down())
-				.getBlockFaceShape(context.getWorld(), context.getPos().down(), EnumFacing.UP);
-		if (shape != BlockFaceShape.SOLID)
-			return null;
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		if (!Block.func_220064_c(context.getWorld(), context.getPos().down()))
+			return Blocks.AIR.getDefaultState();
 
 		return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}

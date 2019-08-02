@@ -1,22 +1,18 @@
 {
-	"version" : 0,
-	"type":"wood",
+	"version" : 1,
+	"type": "wood",
 	"jsons":[
 		{
 			"input" : "drpmedieval:marg/jsons/blockstates/solid_chair.json",
 			"output" : "drpmedieval:blockstates/%wood%_solid_chair.json"
 		},
 		{
-			"input" : "drpmedieval:marg/jsons/item_model/solid_chair.json",
+			"input" : "drpmedieval:marg/jsons/block_model/chairs/solid_chair.json",
 			"output" : "drpmedieval:models/item/%wood%_solid_chair.json"
 		},
 		{
-			"input" : "drpmedieval:marg/jsons/item_model/solid_chair.json",
+			"input" : "drpmedieval:marg/jsons/block_model/chairs/solid_chair.json",
 			"output" : "drpmedieval:models/block/chairs/%wood%_solid_chair.json"
-		},
-		{
-			"input" : "drpmedieval:marg/jsons/block_model/chairs/solid_chair_hidden_compartment.json",
-			"output" : "drpmedieval:models/block/chairs/%wood%_solid_chair_hidden_compartment.json"
 		}
 	]
 }

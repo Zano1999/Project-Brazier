@@ -1,9 +1,12 @@
 package net.dark_roleplay.medieval.util.sitting;
 
-import net.dark_roleplay.medieval.holders.MedievalEntities;
 import net.minecraft.entity.Entity;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Pose;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.IPacket;
+import net.minecraft.network.play.server.SSpawnObjectPacket;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -15,30 +18,29 @@ public class EntitySittable extends Entity {
 	public int blockPosY;
 	public int blockPosZ;
 	
-	public EntitySittable(World world) {
-		super(MedievalEntities.SITTABLE, world);
+	//TODO EntitySize is now a part of hte Entity Type
+	public EntitySittable(EntityType type, World world) {
+		super(type, world);
 		this.noClip = true;
-		this.height = 0.01F;
-		this.width = 0.01F;
 	}
 
-	public EntitySittable(World world, double x, double y, double z, double yOffset) {
-		this(world);
+	public EntitySittable(EntityType type, World world, double x, double y, double z, double yOffset) {
+		this(type, world);
 		this.blockPosX = (int) x;
 		this.blockPosY = (int) y;
 		this.blockPosZ = (int) z;
 		setPosition(x + 0.5D, y + yOffset, z + 0.5D);
 	}
 
-	public EntitySittable(World world, double x, double y, double z, double yOffset, EnumFacing facing) {
-		this(world);
+	public EntitySittable(EntityType type, World world, double x, double y, double z, double yOffset, Direction facing) {
+		this(type, world);
 		this.blockPosX = (int) x;
 		this.blockPosY = (int) y;
 		this.blockPosZ = (int) z;
 		setPositionConsideringRotation(x + 0.5D, y + yOffset, z + 0.5D, facing);
 	}
 
-	public void setPositionConsideringRotation(double x, double y, double z, EnumFacing facing) {
+	public void setPositionConsideringRotation(double x, double y, double z, Direction facing) {
 		switch (facing) {
 			case NORTH:
 				setRotation(180, 90);
@@ -62,7 +64,7 @@ public class EntitySittable extends Entity {
 
 	@Override
 	public double getMountedYOffset() {
-		return this.height * 0.0D;
+		return this.getSize(Pose.STANDING).height * 0.0D;
 	}
 
 	@Override
@@ -109,10 +111,15 @@ public class EntitySittable extends Entity {
 	@Override
 	protected void registerData() {
 	}
+	
+	@Override
+	protected void readAdditional(CompoundNBT compound) {}
 
 	@Override
-	protected void readAdditional(NBTTagCompound compound) {}
+	protected void writeAdditional(CompoundNBT p_213281_1_) {}
 
 	@Override
-	protected void writeAdditional(NBTTagCompound compound) {}
+	public IPacket<?> createSpawnPacket() {
+	      return new SSpawnObjectPacket(this);
+	}
 }

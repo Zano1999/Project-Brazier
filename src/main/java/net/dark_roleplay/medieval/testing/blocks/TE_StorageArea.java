@@ -6,13 +6,13 @@ public class TE_StorageArea{}/*  extends TileEntity {
 		@Override
 		protected void onContentsChanged(int slot) {
 			TE_StorageArea.this.markDirty();
-	        IBlockState state = TE_StorageArea.this.world.getBlockState(TE_StorageArea.this.getPos());
+	        BlockState state = TE_StorageArea.this.world.getBlockState(TE_StorageArea.this.getPos());
 			TE_StorageArea.this.world.notifyBlockUpdate(TE_StorageArea.this.getPos(), state, state, 2);
 		}
 	};
 
 	@Override
-    public void readFromNBT(NBTTagCompound compound){
+    public void readFromNBT(CompoundNBT compound){
         super.readFromNBT(compound);
 
 //        this.inventoryMain = new ItemStackHandler() {
@@ -23,21 +23,21 @@ public class TE_StorageArea{}/*  extends TileEntity {
 //		};
 
         if(compound.hasKey("inventoryMain"))
-        	this.inventoryMain.deserializeNBT((NBTTagCompound) compound.getTag("inventoryMain"));
+        	this.inventoryMain.deserializeNBT((CompoundNBT) compound.getTag("inventoryMain"));
     }
 
     @Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        NBTTagCompound comp = super.writeToNBT(compound);
+	public CompoundNBT writeToNBT(CompoundNBT compound) {
+        CompoundNBT comp = super.writeToNBT(compound);
 
-        NBTTagCompound inventory = this.inventoryMain.serializeNBT();
+        CompoundNBT inventory = this.inventoryMain.serializeNBT();
         comp.setTag("inventoryMain", inventory);
 
         return comp;
     }
 
 	@Override
-	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
 		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return true;
     	return super.hasCapability(capability, facing);
@@ -45,7 +45,7 @@ public class TE_StorageArea{}/*  extends TileEntity {
 
 	@Override
 	@Nullable
-	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing){
+	public <T> T getCapability(Capability<T> capability, @Nullable Direction facing){
 		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return (T) this.inventoryMain;
     	return super.getCapability(capability, facing);

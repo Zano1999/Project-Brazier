@@ -2,17 +2,14 @@ package net.dark_roleplay.medieval.objects.blocks.decoration.road_sign;
 
 import javax.annotation.Nullable;
 
-import net.dark_roleplay.drpmarg.api.Constants;
-import net.dark_roleplay.drpmarg.api.Materials;
-import net.dark_roleplay.drpmarg.api.materials.Material;
 import net.dark_roleplay.medieval.holders.MedievalTileEntities;
 import net.minecraft.block.Block;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -29,15 +26,15 @@ public class RoadSignTileEntity extends TileEntity {
 
 	public RoadSignTileEntity() {
 		super(MedievalTileEntities.ROAD_SIGN);
-		this.signs = new SignInfo[] {
-				new SignInfo("Castle", 45, 4, true, "acacia"),
-				new SignInfo("Village", 0, 12, false, "birch") };
+		//this.signs = new SignInfo[] {
+		//		new SignInfo("Castle", 45, 4, true, "acacia"),
+		//		new SignInfo("Village", 0, 12, false, "birch") };
 	}
 
 	public VoxelShape getSignsShape() {
 
 		if (signVoxelShape == null) {
-			VoxelShape shape = null;
+			VoxelShape shape = VoxelShapes.empty();
 			for (SignInfo sign : this.signs) {
 				float x1 = 0, x2 = 0, z1 = 0, z2 = 0;
 				double rad = Math.toRadians(-sign.getDirection());
@@ -69,7 +66,7 @@ public class RoadSignTileEntity extends TileEntity {
 	}
 
 	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> capability, EnumFacing side) {
+	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 		}
 
@@ -77,10 +74,10 @@ public class RoadSignTileEntity extends TileEntity {
 	}
 
 	@Override
-	public void read(NBTTagCompound compound) {
+	public void read(CompoundNBT compound) {
 		super.read(compound);
 
-		NBTTagList signs = compound.getList("signs", NBT.TAG_COMPOUND);
+		ListNBT signs = compound.getList("signs", NBT.TAG_COMPOUND);
 		this.signs = new SignInfo[signs.size()];
 		for (int i = 0; i < signs.size(); i++) {
 			this.signs[i] = new SignInfo(signs.getCompound(i));
@@ -88,12 +85,12 @@ public class RoadSignTileEntity extends TileEntity {
 	}
 
 	@Override
-	public NBTTagCompound write(NBTTagCompound compound) {
-		NBTTagList signs = new NBTTagList();
+	public CompoundNBT write(CompoundNBT compound) {
+		ListNBT signs = new ListNBT();
 		for (int i = 0; i < this.signs.length; i++)
 			if (this.signs[i] != null)
 				signs.add(this.signs[i].toNBT());
-		compound.setTag("signs", signs);
+		compound.put("signs", signs);
 		return super.write(compound);
 	}
 
@@ -101,29 +98,40 @@ public class RoadSignTileEntity extends TileEntity {
 		return signs;
 	}
 
+	public void addSign(int height, int direction, String material, boolean pointsRight){
+		SignInfo[] newSigns = new SignInfo[this.signs.length + 1];
+		for(int i = 0; i < this.signs.length; i++){
+			newSigns[i] = this.signs[i];
+		}
+
+		newSigns[this.signs.length] = new SignInfo("", direction, height, pointsRight, material);
+		this.signs = newSigns;
+		this.markDirty();
+	}
+
 	@Nullable
 	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound nbtTag = new NBTTagCompound();
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		CompoundNBT nbtTag = new CompoundNBT();
 		//TODO Optimize, so only changes are sent
-		NBTTagList signs = new NBTTagList();
+		ListNBT signs = new ListNBT();
 		for (int i = 0; i < this.signs.length; i++)
 			if (this.signs[i] != null)
 				signs.add(this.signs[i].toNBT());
-		nbtTag.setTag("signs", signs);
-		return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+		nbtTag.put("signs", signs);
+		return new SUpdateTileEntityPacket(getPos(), 1, nbtTag);
 	}
 
 	@Override
-	public NBTTagCompound getUpdateTag() {
-		return this.write(new NBTTagCompound());
+	public CompoundNBT getUpdateTag() {
+		return this.write(new CompoundNBT());
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		NBTTagCompound tag = pkt.getNbtCompound();
+	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+		CompoundNBT tag = pkt.getNbtCompound();
 		//TODO Optimize, so only changes are sent
-		NBTTagList signs = tag.getList("signs", NBT.TAG_COMPOUND);
+		ListNBT signs = tag.getList("signs", NBT.TAG_COMPOUND);
 		this.signs = new SignInfo[signs.size()];
 		for (int i = 0; i < signs.size(); i++) {
 			this.signs[i] = new SignInfo(signs.getCompound(i));
@@ -131,7 +139,7 @@ public class RoadSignTileEntity extends TileEntity {
 	}
 
 	@Override
-	public void handleUpdateTag(NBTTagCompound tag) {
+	public void handleUpdateTag(CompoundNBT tag) {
 		this.read(tag);
 	}
 }

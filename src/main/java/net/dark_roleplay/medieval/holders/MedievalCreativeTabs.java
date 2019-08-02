@@ -1,6 +1,5 @@
 package net.dark_roleplay.medieval.holders;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;

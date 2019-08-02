@@ -9,10 +9,10 @@ public class CustomBlockstateLoader{}/*  implements ICustomModelLoader{
 	@Override
 	public void onResourceManagerReload(IResourceManager resourceManager) {
 		this.manager = resourceManager;
-		SpecialRendererRoof.north = new HashMap<IBlockState, TextureAtlasSprite>();
-		SpecialRendererRoof.east = new HashMap<IBlockState, TextureAtlasSprite>();
-		SpecialRendererRoof.south = new HashMap<IBlockState, TextureAtlasSprite>();
-		SpecialRendererRoof.west = new HashMap<IBlockState, TextureAtlasSprite>();
+		SpecialRendererRoof.north = new HashMap<BlockState, TextureAtlasSprite>();
+		SpecialRendererRoof.east = new HashMap<BlockState, TextureAtlasSprite>();
+		SpecialRendererRoof.south = new HashMap<BlockState, TextureAtlasSprite>();
+		SpecialRendererRoof.west = new HashMap<BlockState, TextureAtlasSprite>();
 	}
 
 	@Override

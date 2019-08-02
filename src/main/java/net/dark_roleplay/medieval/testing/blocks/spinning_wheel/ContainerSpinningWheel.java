@@ -1,16 +1,5 @@
 package net.dark_roleplay.medieval.testing.blocks.spinning_wheel;
 
-import javax.annotation.Nonnull;
-
-import net.dark_roleplay.medieval.holders.MedievalItems;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.items.SlotItemHandler;
-
 public class ContainerSpinningWheel{}/*  extends Container{
 
 	private SpinningWheelTileEntity te;

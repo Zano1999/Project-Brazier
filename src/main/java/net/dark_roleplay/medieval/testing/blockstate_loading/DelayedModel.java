@@ -12,7 +12,7 @@ public class DelayedModel{}/*  extends DelayedBaker{
 	}
 	
 	@Override
-	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
+	public List<BakedQuad> getQuads(BlockState state, Direction side, long rand) {
 		// TODO Auto-generated method stub
 		new BakedQuad(createFace(0,0,0, 1,0,0, 1,1,0 ,0,1,0), 0, side, null, false, this.format);
 		return null;

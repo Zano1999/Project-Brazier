@@ -2,10 +2,10 @@
 	"credit": "Made by JTK222",
 	"parent": "drpmedieval:block/wood_platforms/wood_platform_half",
 	"textures": {
-		"log_top": "block/stripped_%wood%_log_top",
-		"log": "block/stripped_%wood%_log",
-		"planks": "block/%wood%_planks",
-		"particle": "block/%wood%_planks"
+		"log_top": "marg:block/stripped_log_top/stripped_%wood%_log_top",
+		"log": "marg:block/stripped_log_side/stripped_%wood%_log_side",
+		"planks": "marg:block/planks/%wood%_planks",
+		"particle": "marg:block/planks/%wood%_planks"
 	},
 	"display": {
 		"thirdperson_righthand": {

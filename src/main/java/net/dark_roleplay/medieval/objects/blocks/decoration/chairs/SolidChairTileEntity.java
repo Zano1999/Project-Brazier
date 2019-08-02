@@ -1,25 +1,26 @@
 package net.dark_roleplay.medieval.objects.blocks.decoration.chairs;
 
-import net.dark_roleplay.medieval.holders.MedievalGuis;
 import net.dark_roleplay.medieval.holders.MedievalTileEntities;
 import net.dark_roleplay.medieval.objects.guis.generic_container.GenericContainer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityLockableLoot;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
+import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.IInteractionObject;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class SolidChairTileEntity extends TileEntity implements IInteractionObject{
+public class SolidChairTileEntity extends TileEntity implements INamedContainerProvider{
 
-	TileEntityLockableLoot t;
+	LockableLootTileEntity t;
 	
 	protected ItemStackHandler hidden_inventory = null;
 
@@ -34,7 +35,7 @@ public class SolidChairTileEntity extends TileEntity implements IInteractionObje
 	}
 
 	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> capability, EnumFacing side) {
+	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			return LazyOptional.of(() -> {
 				return (T) hidden_inventory;
@@ -45,43 +46,28 @@ public class SolidChairTileEntity extends TileEntity implements IInteractionObje
 	}
 
 	@Override
-	public void read(NBTTagCompound compound) {
+	public void read(CompoundNBT compound) {
 		super.read(compound);
 
-		if (compound.hasKey("hidden_inventory"))
-			this.hidden_inventory.deserializeNBT((NBTTagCompound) compound.getTag("hidden_inventory"));
+		if (compound.contains("hidden_inventory"))
+			this.hidden_inventory.deserializeNBT((CompoundNBT) compound.get("hidden_inventory"));
 	}
 
 	@Override
-	public NBTTagCompound write(NBTTagCompound compound) {
+	public CompoundNBT write(CompoundNBT compound) {
 		compound = super.write(compound);
-		NBTTagCompound inventory = this.hidden_inventory.serializeNBT();
-		compound.setTag("hidden_inventory", inventory);
+		CompoundNBT inventory = this.hidden_inventory.serializeNBT();
+		compound.put("hidden_inventory", inventory);
 		return compound;
 	}
 
 	@Override
-	public ITextComponent getName() {
-		return null;
+	public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player) {
+		return new GenericContainer(id, playerInv, IWorldPosCallable.of(this.world, this.pos));
 	}
 
 	@Override
-	public boolean hasCustomName() {
-		return false;
-	}
-
-	@Override
-	public ITextComponent getCustomName() {
-		return null;
-	}
-
-	@Override
-	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
-		return new GenericContainer(this, playerInventory);
-	}
-
-	@Override
-	public String getGuiID() {
-		return MedievalGuis.GUI_GENERIC_STORAGE.toString();
+	public ITextComponent getDisplayName() {
+		return new TranslationTextComponent("drpmedieval.gui.container.chair_hidden_compartment"); 
 	}
 }

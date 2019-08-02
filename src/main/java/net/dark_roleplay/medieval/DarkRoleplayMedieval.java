@@ -1,19 +1,10 @@
 package net.dark_roleplay.medieval;
 
-import net.dark_roleplay.drpmarg.objects.resources.GeneratorReloadListener;
+import net.dark_roleplay.medieval.handler.KeybindHandler;
 import net.dark_roleplay.medieval.holders.MedievalConfigs;
-import net.dark_roleplay.medieval.holders.MedievalGuis;
-import net.dark_roleplay.medieval.minigame.MinigameHandler;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntityRenderer;
-import net.dark_roleplay.medieval.objects.helper.ModelsCache;
-import net.dark_roleplay.medieval.temporary.model_quality.ModelQualityModelLoader;
-import net.minecraft.client.Minecraft;
-import net.minecraft.nbt.NBTUtil;
-import net.minecraft.resources.IReloadableResourceManager;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.client.model.obj.OBJLoader;
-import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -36,8 +27,6 @@ public class DarkRoleplayMedieval {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupServerStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClientStuff);
         
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(MinigameHandler::setupCommonStuff);
-        
 //        MaterialType woodType = new MaterialType("wood");
 //		String[] woods = {"acacia", "birch", "dark_oak", "jungle", "oak", "spruce"};
 //		
@@ -55,7 +44,7 @@ public class DarkRoleplayMedieval {
 	
 	
 	public void setupCommonStuff(FMLCommonSetupEvent event) {
-		ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.GUIFACTORY, () -> MedievalGuis::openGui);
+//		ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.GUIFACTORY, () -> MedievalGuis::openGui);
 	}
 	
 	public void setupServerStuff(FMLDedicatedServerSetupEvent event) {
@@ -65,12 +54,9 @@ public class DarkRoleplayMedieval {
 	public void setupClientStuff(FMLClientSetupEvent event) {
 		OBJLoader.INSTANCE.addDomain(MODID);
 		
-		if(Minecraft.getInstance().getResourceManager() instanceof IReloadableResourceManager) {
-			((IReloadableResourceManager)Minecraft.getInstance().getResourceManager()).addReloadListener(ModelsCache.INSTANCE);
-		}
-		
-		ModelLoaderRegistry.registerLoader(ModelQualityModelLoader.INSTANCE);
+		//ModelLoaderRegistry.registerLoader(ModelQualityModelLoader.INSTANCE);
 		ClientRegistry.bindTileEntitySpecialRenderer(RoadSignTileEntity.class, new RoadSignTileEntityRenderer());
+		ClientRegistry.registerKeyBinding(KeybindHandler.BLOCK_INTERACTOR);
 	}
 
 //	@EventHandler
@@ -177,8 +163,8 @@ public class DarkRoleplayMedieval {
 //			ColorHandlerDryClayGrass color = new ColorHandlerDryClayGrass();
 //			Minecraft.getInstance().getBlockColors().register(color, MedievalBlocks.DRY_CLAY_GRASS);
 //			Minecraft.getInstance().getItemColors().register((IItemColor) (stack, tintIndex) -> {
-//			    IBlockState iblockstate = ((ItemBlock)stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
-//			    return color.colorMultiplier(iblockstate, (IBlockAccess)null, (BlockPos)null, tintIndex);
+//			    BlockState BlockState = ((ItemBlock)stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
+//			    return color.colorMultiplier(BlockState, (IBlockAccess)null, (BlockPos)null, tintIndex);
 //			}, MedievalBlocks.DRY_CLAY_GRASS);
 //			Minecraft.getInstance().getItemColors().register(new ColorHandlerPaintBrush(), MedievalItems.DIRTY_PAINTBRUSH);
 //

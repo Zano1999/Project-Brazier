@@ -1,7 +1,7 @@
 {
     "forge_marker": 1,
     "defaults": {
-		"model": "drpmedieval:advent_wreath/advent_wreath",
+		"model": "drpmedieval:block/advent_wreath/advent_wreath",
         "transform": "forge:default-block"
     },
 	"variants": {

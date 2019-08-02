@@ -20,7 +20,7 @@ public class TimberedClayHud{//  extends Hud{
 //			int baseX = this.alignment.getBaseX(width, 0) + this.posX;
 //			int baseY = this.alignment.getBaseY(height, 0) + this.posY;
 //
-//			IBlockState state = Minecraft.getInstance().world.getBlockState(info.getPos());
+//			BlockState state = Minecraft.getInstance().world.getBlockState(info.getPos());
 //
 //			if(!(state.getBlock() instanceof TimberedClay)) return;
 //

@@ -1,24 +1,25 @@
 package net.dark_roleplay.medieval.objects.guis.generic_container;
 
-import net.dark_roleplay.library.unstable.experimental.guis.modular.ModularGui_Drawer;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
 
-public class GenericContainerGui extends GuiContainer {
+public class GenericContainerGui<T extends Container> extends ContainerScreen<T> {
 
 	private static final ResourceLocation BACKGROUND = new ResourceLocation(DarkRoleplayMedieval.MODID,
 			"textures/guis/storage/generic_storage.png");
 
-	public GenericContainerGui(Container inventorySlotsIn) {
-		super(inventorySlotsIn);
+	public GenericContainerGui(T inventorySlotsIn) {
+		super(inventorySlotsIn, (PlayerInventory) null, new TranslationTextComponent("drpmedieval.gui.title.generic_storage"));
 	}
 
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks) {
-		this.drawDefaultBackground();
+		this.renderBackground();
 		super.render(mouseX, mouseY, partialTicks);
 		this.renderHoveredToolTip(mouseX, mouseY);
 	}
@@ -30,9 +31,9 @@ public class GenericContainerGui extends GuiContainer {
 
 //		ModularGui_Drawer.drawBackground(posX, posY, this.xSize, this.ySize);
 
-		this.mc.getTextureManager().bindTexture(BACKGROUND);
-		for (Slot slot : this.inventorySlots.inventorySlots) {
-			this.drawTexturedModalRect((posX + slot.xPos) - 1, (posY + slot.yPos) - 1, 0, 238, 18, 18);
+		this.minecraft.getTextureManager().bindTexture(BACKGROUND);
+		for (Slot slot : this.getContainer().inventorySlots) {
+			this.blit((posX + slot.xPos) - 1, (posY + slot.yPos) - 1, 0, 238, 18, 18);
 
 		}
 	}

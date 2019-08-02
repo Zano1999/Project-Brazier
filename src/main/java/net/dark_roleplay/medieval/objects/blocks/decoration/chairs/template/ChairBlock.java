@@ -2,16 +2,19 @@ package net.dark_roleplay.medieval.objects.blocks.decoration.chairs.template;
 
 import net.dark_roleplay.medieval.objects.blocks.templates.HorizontalBlock;
 import net.dark_roleplay.medieval.util.sitting.SittingUtil;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class ChairBlock extends HorizontalBlock {
 
@@ -21,20 +24,21 @@ public class ChairBlock extends HorizontalBlock {
 	}
 	
 	@Override
-	public IBlockState updatePostPlacement(IBlockState state, EnumFacing facing, IBlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
-		if (facing != EnumFacing.DOWN)
+	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+		if (facing != Direction.DOWN)
 			return state;
-		if (facingState.getBlockFaceShape(world, facingPos, EnumFacing.UP) != BlockFaceShape.SOLID)
+		if (!Block.func_220064_c(world, facingPos))			
 			return Blocks.AIR.getDefaultState();
 		return state;
 	}
 	
 	@Override
-	public boolean onBlockActivated(IBlockState state, World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if(player.getDistance(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) < 3) {
-			SittingUtil.sitOnBlockWithRotation(world, pos.getX(), pos.getY(), pos.getZ(), player, state.get(HORIZONTAL_FACING), 0.2F);
+	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
+		if(player.getPositionVec().squareDistanceTo(new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5)) < 9) {
+			if(world instanceof ServerWorld)
+				SittingUtil.sitOnBlockWithRotation((ServerWorld) world, pos.getX(), pos.getY(), pos.getZ(), player, state.get(HORIZONTAL_FACING), 0.2F);
 		}else {
-			player.sendStatusMessage(new TextComponentTranslation("interaction.drpmedieval.chair.to_far", state.getBlock().getNameTextComponent().getFormattedText()), true);
+			player.sendStatusMessage(new TranslationTextComponent("interaction.drpmedieval.chair.to_far", state.getBlock().getNameTextComponent().getFormattedText()), true);
 		}
 		return true;
 	}

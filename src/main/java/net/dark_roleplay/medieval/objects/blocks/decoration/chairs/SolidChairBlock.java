@@ -3,34 +3,33 @@ package net.dark_roleplay.medieval.objects.blocks.decoration.chairs;
 import java.util.EnumMap;
 import java.util.stream.Stream;
 
-import net.dark_roleplay.medieval.holders.MedievalItems;
-import net.dark_roleplay.medieval.holders.MedievalTileEntities;
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.template.ChairBlock;
+import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper;
+import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper.RotationAmount;
 import net.dark_roleplay.medieval.util.sitting.SittingUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemStack;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.IBooleanFunction;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -40,11 +39,11 @@ public class SolidChairBlock extends ChairBlock {
 
 	public static final BooleanProperty HIDDEN_COMPARTMENT = BooleanProperty.create("hidden_compartment");
 
-	protected final EnumMap<EnumFacing, VoxelShape> compartmentShapes = new EnumMap<EnumFacing, VoxelShape>(
-			EnumFacing.class);
+	protected final EnumMap<Direction, VoxelShape> compartmentShapes = new EnumMap<Direction, VoxelShape>(
+			Direction.class);
 
-	protected final EnumMap<EnumFacing, AxisAlignedBB> buttons = new EnumMap<EnumFacing, AxisAlignedBB>(
-			EnumFacing.class);
+	protected final EnumMap<Direction, AxisAlignedBB> buttons = new EnumMap<Direction, AxisAlignedBB>(
+			Direction.class);
 
 	public SolidChairBlock(Properties properties) {
 		super(properties);
@@ -57,34 +56,8 @@ public class SolidChairBlock extends ChairBlock {
 				Block.makeCuboidShape(1, 7, 2.5, 15, 8, 15), Block.makeCuboidShape(3.5, 11, 13.5, 12.5, 17, 14.5))
 				.reduce((v1, v2) -> {
 					return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-				}).get(),
-				Stream.of(Block.makeCuboidShape(11, 0, 1.5, 13, 7, 3.5),
-						Block.makeCuboidShape(11, 0, 12.5, 13, 7, 14.5), Block.makeCuboidShape(1, 0, 12.5, 3, 18, 14.5),
-						Block.makeCuboidShape(1, 0, 1.5, 3, 18, 3.5),
-						VoxelShapes.combineAndSimplify(Block.makeCuboidShape(1.5, 5.5, 2, 12.5, 7, 14),
-								Block.makeCuboidShape(2.5, 5.5, 3, 11.5, 7, 13), IBooleanFunction.ONLY_FIRST),
-						Block.makeCuboidShape(1, 7, 1, 13.5, 8, 15), Block.makeCuboidShape(1.5, 11, 3.5, 2.5, 17, 12.5))
-						.reduce((v1, v2) -> {
-							return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-						}).get(),
-				Stream.of(Block.makeCuboidShape(12.5, 0, 11, 14.5, 7, 13),
-						Block.makeCuboidShape(1.5, 0, 11, 3.5, 7, 13), Block.makeCuboidShape(1.5, 0, 1, 3.5, 18, 3),
-						Block.makeCuboidShape(12.5, 0, 1, 14.5, 18, 3),
-						VoxelShapes.combineAndSimplify(Block.makeCuboidShape(2, 5.5, 1.5, 14, 7, 12.5),
-								Block.makeCuboidShape(3, 5.5, 2.5, 13, 7, 11.5), IBooleanFunction.ONLY_FIRST),
-						Block.makeCuboidShape(1, 7, 1, 15, 8, 13.5), Block.makeCuboidShape(3.5, 11, 1.5, 12.5, 17, 2.5))
-						.reduce((v1, v2) -> {
-							return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-						}).get(),
-				Stream.of(Block.makeCuboidShape(3, 0, 12.5, 5, 7, 14.5), Block.makeCuboidShape(3, 0, 1.5, 5, 7, 3.5),
-						Block.makeCuboidShape(13, 0, 1.5, 15, 18, 3.5),
-						Block.makeCuboidShape(13, 0, 12.5, 15, 18, 14.5),
-						VoxelShapes.combineAndSimplify(Block.makeCuboidShape(3.5, 5.5, 2, 14.5, 7, 14),
-								Block.makeCuboidShape(4.5, 5.5, 3, 13.5, 7, 13), IBooleanFunction.ONLY_FIRST),
-						Block.makeCuboidShape(2.5, 7, 1, 15, 8, 15),
-						Block.makeCuboidShape(13.5, 11, 3.5, 14.5, 17, 12.5)).reduce((v1, v2) -> {
-							return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-						}).get());
+				}).get()
+		);
 
 		setShapesCompartment(
 				Stream.of(
@@ -96,34 +69,8 @@ public class SolidChairBlock extends ChairBlock {
 					Block.makeCuboidShape(3.5, 11, 13.5, 12.5, 17, 14.5),
 					Block.makeCuboidShape(6.5, 6.5, 14.5, 9.5, 7, 14.75), 
 					Block.makeCuboidShape(2, 5.5, 3.5, 14, 7, 14.5))
-				.reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get(),
-				Stream.of(Block.makeCuboidShape(11, 0, 1.5, 13, 7, 3.5),
-					Block.makeCuboidShape(11, 0, 12.5, 13, 7, 14.5), 
-					Block.makeCuboidShape(1, 0, 12.5, 3, 18, 14.5),
-					Block.makeCuboidShape(1, 0, 1.5, 3, 18, 3.5), 
-					Block.makeCuboidShape(1, 7, 1, 13.5, 8, 15),
-					Block.makeCuboidShape(1.5, 11, 3.5, 2.5, 17, 12.5),
-					Block.makeCuboidShape(1.25, 6.5, 6.5, 1.5, 7, 9.5),
-					Block.makeCuboidShape(1.5, 5.5, 2, 12.5, 7, 14))
-				.reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get(),
-				Stream.of(Block.makeCuboidShape(12.5, 0, 11, 14.5, 7, 13),
-					Block.makeCuboidShape(1.5, 0, 11, 3.5, 7, 13), 
-					Block.makeCuboidShape(1.5, 0, 1, 3.5, 18, 3),
-					Block.makeCuboidShape(12.5, 0, 1, 14.5, 18, 3), 
-					Block.makeCuboidShape(1, 7, 1, 15, 8, 13.5),
-					Block.makeCuboidShape(3.5, 11, 1.5, 12.5, 17, 2.5),
-					Block.makeCuboidShape(6.5, 6.5, 1.25, 9.5, 7, 1.5),
-					Block.makeCuboidShape(2, 5.5, 1.5, 14, 7, 12.5))
-				.reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get(),
-				Stream.of(Block.makeCuboidShape(3, 0, 12.5, 5, 7, 14.5), 
-					Block.makeCuboidShape(3, 0, 1.5, 5, 7, 3.5),
-					Block.makeCuboidShape(13, 0, 1.5, 15, 18, 3.5),
-					Block.makeCuboidShape(13, 0, 12.5, 15, 18, 14.5), 
-					Block.makeCuboidShape(2.5, 7, 1, 15, 8, 15),
-					Block.makeCuboidShape(13.5, 11, 3.5, 14.5, 17, 12.5),
-					Block.makeCuboidShape(14.5, 6.5, 6.5, 14.75, 7, 9.5),
-					Block.makeCuboidShape(3.5, 5.5, 2, 14.5, 7, 14))
-				.reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get());
+				.reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get()
+		);
 		setButtons(
 			Block.makeCuboidShape(6.5, 6.5, 14.5, 9.5, 7, 14.75),
 			Block.makeCuboidShape(1.25, 6.5, 6.5, 1.5, 7, 9.5), 
@@ -133,7 +80,7 @@ public class SolidChairBlock extends ChairBlock {
 	}
 
 	@Override
-	public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext selectionContext) {
 		if (state.get(HIDDEN_COMPARTMENT)) {
 			return compartmentShapes.get(state.get(HORIZONTAL_FACING));
 		} else {
@@ -142,41 +89,41 @@ public class SolidChairBlock extends ChairBlock {
 	}
 
 	protected void setButtons(VoxelShape north, VoxelShape east, VoxelShape south, VoxelShape west) {
-		this.buttons.put(EnumFacing.NORTH,
+		this.buttons.put(Direction.NORTH,
 				north.getBoundingBox().expand(0.0001, 0.0001, 0.0001).expand(-0.0001, -0.0001, -0.0001));
-		this.buttons.put(EnumFacing.EAST,
+		this.buttons.put(Direction.EAST,
 				east.getBoundingBox().expand(0.0001, 0.0001, 0.0001).expand(-0.0001, -0.0001, -0.0001));
-		this.buttons.put(EnumFacing.SOUTH,
+		this.buttons.put(Direction.SOUTH,
 				south.getBoundingBox().expand(0.0001, 0.0001, 0.0001).expand(-0.0001, -0.0001, -0.0001));
-		this.buttons.put(EnumFacing.WEST,
+		this.buttons.put(Direction.WEST,
 				west.getBoundingBox().expand(0.0001, 0.0001, 0.0001).expand(-0.0001, -0.0001, -0.0001));
 	}
 
-	protected void setShapesCompartment(VoxelShape north, VoxelShape east, VoxelShape south, VoxelShape west) {
-		this.compartmentShapes.put(EnumFacing.NORTH, north);
-		this.compartmentShapes.put(EnumFacing.EAST, east);
-		this.compartmentShapes.put(EnumFacing.SOUTH, south);
-		this.compartmentShapes.put(EnumFacing.WEST, west);
+	protected void setShapesCompartment(VoxelShape north) {
+		this.compartmentShapes.put(Direction.NORTH, north);
+		this.compartmentShapes.put(Direction.EAST, VoxelShapeHelper.rotateShape(north, RotationAmount.NINETY));
+		this.compartmentShapes.put(Direction.SOUTH, VoxelShapeHelper.rotateShape(north, RotationAmount.HUNDRED_EIGHTY));
+		this.compartmentShapes.put(Direction.WEST, VoxelShapeHelper.rotateShape(north, RotationAmount.TWO_HUNDRED_SEVENTY));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
 		builder.add(HIDDEN_COMPARTMENT);
 	}
 
 	@Override
-	public boolean hasTileEntity(IBlockState state) {
+	public boolean hasTileEntity(BlockState state) {
 		return state.get(HIDDEN_COMPARTMENT);
 	}
 
 	@Override
-	public TileEntity createTileEntity(IBlockState state, IBlockReader world) {
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new SolidChairTileEntity();
 	}
 
 	@Override
-	public void onReplaced(IBlockState state, World world, BlockPos pos, IBlockState newState, boolean isMoving) {
+	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			TileEntity tileentity = world.getTileEntity(pos);
 			
@@ -191,23 +138,22 @@ public class SolidChairBlock extends ChairBlock {
 	}
 
 	@Override
-	public boolean onBlockActivated(IBlockState state, World world, BlockPos pos, EntityPlayer player, EnumHand hand,
-			EnumFacing side, float hitX, float hitY, float hitZ) {
-		
-		if (state.get(HIDDEN_COMPARTMENT) && buttons.get(state.get(HORIZONTAL_FACING)).contains(hitX, hitY, hitZ)) {
+	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
+		Vec3d hitVec = rayTraceResult.getHitVec();
+		if (state.get(HIDDEN_COMPARTMENT) && buttons.get(state.get(HORIZONTAL_FACING)).contains(hitVec.x, hitVec.y, hitVec.z)) {
 			TileEntity te = world.getTileEntity(pos);
 
 			if (te == null)
 				return true;
 			
-			if(!world.isRemote)NetworkHooks.openGui((EntityPlayerMP) player, (IInteractionObject) te, pos);
+			if(!world.isRemote)NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) te, pos);
 			return true;
 		} else {
-			if (player.getDistance(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) < 3) {
-				SittingUtil.sitOnBlockWithRotation(world, pos.getX(), pos.getY(), pos.getZ(), player,
-						state.get(HORIZONTAL_FACING), 0.2F);
+			if(player.getPositionVec().squareDistanceTo(new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5)) < 9) {
+				if(world instanceof ServerWorld)
+					SittingUtil.sitOnBlockWithRotation((ServerWorld) world, pos.getX(), pos.getY(), pos.getZ(), player, state.get(HORIZONTAL_FACING), 0.2F);
 			} else {
-				player.sendStatusMessage(new TextComponentTranslation("interaction.drpmedieval.chair.to_far",
+				player.sendStatusMessage(new TranslationTextComponent("interaction.drpmedieval.chair.to_far",
 						state.getBlock().getNameTextComponent().getFormattedText()), true);
 			}
 			return true;

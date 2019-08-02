@@ -1,11 +1,7 @@
 {
     "forge_marker": 1,
     "defaults": {
-		"model":"drpmedieval:chairs/%wood%_solid_chair",
-        "textures": {
-			"planks": "drpmarg:block/planks/%wood%_planks",
-			"particle": "drpmarg:block/planks/%wood%_planks"
-        }
+		"model":"drpmedieval:block/chairs/%wood%_solid_chair"
     },
 	"variants": {
 		"facing":{
@@ -15,7 +11,7 @@
 			"west":{"y":270}
 		},
 		"hidden_compartment":{
-			"true":{"model":"drpmedieval:chairs/%wood%_solid_chair_hidden_compartment"},
+			"true":{"model":"drpmedieval:block/chairs/%wood%_solid_chair_hidden_compartment"},
 			"false":{}
 		}
 	}

@@ -22,6 +22,7 @@ public class ModelQualityModelLoader implements ICustomModelLoader {
 
 	@Override
 	public IUnbakedModel loadModel(ResourceLocation modelLocation) throws Exception {
-		return ModelQualityModel.INSTANCE;
+//		return ModelQualityModel.INSTANCE;
+		return null;
 	}
 }

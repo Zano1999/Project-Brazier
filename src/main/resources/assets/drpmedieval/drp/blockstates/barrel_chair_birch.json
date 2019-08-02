@@ -1,8 +1,8 @@
 {
 	"drp_marker" : 1,
 	"models":{
-		"chair":"model":"drpmedieval:barrel_chairs/barrel_chair_birch"
-	}
+		"model":"drpmedieval:barrel_chairs/barrel_chair_birch"
+	},
 	"variants":{
 		"facing":{
 			"north":{},

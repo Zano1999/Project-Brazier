@@ -1,18 +1,20 @@
 package net.dark_roleplay.medieval.objects.blocks.decoration.road_sign;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
-import net.dark_roleplay.medieval.objects.helper.ModelsCache;
+import com.mojang.blaze3d.platform.GlStateManager;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
@@ -20,9 +22,10 @@ import net.minecraftforge.client.model.pipeline.LightUtil;
 
 public class RoadSignTileEntityRenderer extends TileEntityRenderer<RoadSignTileEntity> {
 
+	public static final Map<ResourceLocation, IBakedModel> bakedCache	= new HashMap<>();
+
 	@Override
-	public void render(RoadSignTileEntity tileEntity, double x, double y, double z, float partialTicks,
-			int destroyStage) {
+	public void render(RoadSignTileEntity tileEntity, double x, double y, double z, float partialTicks, int destroyStage) {
 		SignInfo[] signs = tileEntity.getSigns();
 
 		GlStateManager.pushMatrix();
@@ -30,13 +33,15 @@ public class RoadSignTileEntityRenderer extends TileEntityRenderer<RoadSignTileE
 		GlStateManager.color4f(1, 1, 1, 1);
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder buffer = tessellator.getBuffer();
-		Minecraft.getInstance().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		Minecraft.getInstance().getTextureManager().bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
 		for (SignInfo sign : signs) {
 			IBakedModel model = sign.isPointsLeft()
-					? ModelsCache.INSTANCE.getBakedModel(new ResourceLocation(
-							"drpmedieval:other/road_signs/" + sign.getMaterial() + "_road_sign_left.obj"))
-					: ModelsCache.INSTANCE.getBakedModel(new ResourceLocation(
-							"drpmedieval:other/road_signs/" + sign.getMaterial() + "_road_sign_right.obj"));
+					? this.bakedCache.get(new ResourceLocation(
+					"drpmedieval:" + sign.getMaterial() + "_road_sign_left.obj"))
+					: this.bakedCache.get(new ResourceLocation(
+					"drpmedieval:" + sign.getMaterial() + "_road_sign_right.obj"));
+			if(model == null) continue;
+
 			buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.ITEM);
 
 			List<BakedQuad> quads = model.getQuads(null, null, new Random());
@@ -52,6 +57,8 @@ public class RoadSignTileEntityRenderer extends TileEntityRenderer<RoadSignTileE
 
 			GlStateManager.translated(+0.5, -sign.getHeight() * 0.0625F, +0.5);
 			GlStateManager.rotatef(-sign.getDirection(), 0.0F, 1.0F, 0.0F);
+
+
 		}
 		GlStateManager.popMatrix();
 		for (SignInfo sign : signs) {

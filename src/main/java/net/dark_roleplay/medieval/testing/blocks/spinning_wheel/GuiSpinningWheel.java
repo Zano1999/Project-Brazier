@@ -1,8 +1,5 @@
 package net.dark_roleplay.medieval.testing.blocks.spinning_wheel;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
-
 public class GuiSpinningWheel{}/*  extends GuiContainer{
 
 	public GuiSpinningWheel(Container inventorySlots) {

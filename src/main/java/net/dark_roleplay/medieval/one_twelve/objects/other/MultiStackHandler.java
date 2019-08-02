@@ -3,9 +3,10 @@ package net.dark_roleplay.medieval.one_twelve.objects.other;
 import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -158,29 +159,29 @@ public class MultiStackHandler extends ItemStackHandler{
     }
 
     @Override
-    public NBTTagCompound serializeNBT(){
-        NBTTagList nbtTagList = new NBTTagList();
+    public CompoundNBT serializeNBT(){
+        ListNBT ListNBT = new ListNBT();
         for (int i = 0; i < this.stacks.size(); i++){
             if (!this.stacks.get(i).isEmpty()){
-                NBTTagCompound itemTag = new NBTTagCompound();
-                itemTag.setInt("amount", this.stackSizes[i]);
-                itemTag.setInt("slot", i);
+                CompoundNBT itemTag = new CompoundNBT();
+                itemTag.putInt("amount", this.stackSizes[i]);
+                itemTag.putInt("slot", i);
                 this.stacks.get(i).write(itemTag);
-                nbtTagList.add(itemTag);
+                ListNBT.add(itemTag);
             }
         }
-        NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setTag("items", nbtTagList);
-        nbt.setInt("size", this.stacks.size());
+        CompoundNBT nbt = new CompoundNBT();
+        nbt.put("items", ListNBT);
+        nbt.putInt("size", this.stacks.size());
         return nbt;
     }
 
     @Override
-    public void deserializeNBT(NBTTagCompound nbt){
-        this.setSize(nbt.hasKey("size") ? nbt.getInt("size") : 1);
-        NBTTagList tagList = (NBTTagList) nbt.getTag("items");
+    public void deserializeNBT(CompoundNBT nbt){
+        this.setSize(nbt.hasUniqueId("size") ? nbt.getInt("size") : 1);
+        ListNBT tagList = nbt.getList("items", NBT.TAG_COMPOUND);
         for (int i = 0; i < tagList.size(); i++){
-            NBTTagCompound itemTags = tagList.getCompound(i);
+            CompoundNBT itemTags = tagList.getCompound(i);
             int amount = itemTags.getInt("amount");
 
             this.stacks.set(itemTags.getInt("slot"), ItemStack.read(itemTags));

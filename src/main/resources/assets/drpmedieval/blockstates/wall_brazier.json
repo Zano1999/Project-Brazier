@@ -1,7 +1,7 @@
 {
     "forge_marker": 1,
     "defaults": {
-		"model": "drpmedieval:torch_holder/torch_holder_empty",
+		"model": "drpmedieval:block/torch_holder/torch_holder_empty",
         "transform": "forge:default-block"
     },
 	"variants": {
@@ -12,9 +12,9 @@
 			"west":{"y":270}
 		},
 		"coal_state":{
-			"empty":{"model" : "drpmedieval:wall_brazier/empty_wall_brazier"},
-			"coal":{"model" : "drpmedieval:wall_brazier/coal_wall_brazier"},
-			"burning":{"model" : "drpmedieval:wall_brazier/coal_wall_brazier"}
+			"empty":{"model" : "drpmedieval:block/wall_brazier/empty_wall_brazier"},
+			"coal":{"model" : "drpmedieval:block/wall_brazier/coal_wall_brazier"},
+			"burning":{"model" : "drpmedieval:block/wall_brazier/coal_wall_brazier"}
 		}
 	}
 }

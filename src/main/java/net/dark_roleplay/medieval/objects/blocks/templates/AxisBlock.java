@@ -5,21 +5,21 @@ import java.util.EnumMap;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumFacing.Axis;
+import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
-public class AxisBlock extends BaseBlock {
+public class AxisBlock extends Block {
 
 	protected static final EnumProperty<Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS;
 
@@ -35,36 +35,34 @@ public class AxisBlock extends BaseBlock {
 	}
 
 	@Override
-	public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext selectionContext) {
 		return shapes.get(state.get(HORIZONTAL_AXIS));
 	}
 
 	@Override
-	public IBlockState rotate(IBlockState state, Rotation rot) {
+	public BlockState rotate(BlockState state, Rotation rot) {
 		//TODO IMPLEMENT LATER
 //		return state.with(HORIZONTAL_AXIS, rot =));
 		return state;
 	}
 
 	@Override
-	public IBlockState mirror(IBlockState state, Mirror mirrorIn) {
+	public BlockState mirror(BlockState state, Mirror mirrorIn) {
 		//TODO IMPLEMENT LATER
 //		return state.rotate(mirrorIn.toRotation(state.get(HORIZONTAL_FACING)));
 		return state;
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HORIZONTAL_AXIS);
 	}
 	
 	@Nullable
 	@Override
-	public IBlockState getStateForPlacement(BlockItemUseContext context) {
-		BlockFaceShape shape = context.getWorld().getBlockState(context.getPos().down())
-				.getBlockFaceShape(context.getWorld(), context.getPos().down(), EnumFacing.UP);
-		if (shape != BlockFaceShape.SOLID)
-			return null;
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		if (!Block.func_220064_c(context.getWorld(), context.getPos().down()))
+			return Blocks.AIR.getDefaultState();
 
 		return this.getDefaultState().with(HORIZONTAL_AXIS, context.getPlacementHorizontalFacing().rotateY().getAxis());
 	}

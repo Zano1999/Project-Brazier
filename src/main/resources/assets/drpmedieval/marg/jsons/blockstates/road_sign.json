@@ -1,13 +1,13 @@
 {
     "forge_marker": 1,
     "defaults": {
-		"model":"drpmedieval:road_signs/%wood%_road_sign",
+		"model":"drpmedieval:block/road_signs/%wood%_road_sign",
         "textures": {
-			"planks": "drpmarg:block/planks/%wood%_planks",
-			"particle": "drpmarg:block/planks/%wood%_planks"
+			"planks": "marg:block/planks/%wood%_planks",
+			"particle": "marg:block/planks/%wood%_planks"
         }
     },
 	"variants": {
-		"":{"model":"drpmedieval:road_signs/%wood%_road_sign"}
+		"":{"model":"drpmedieval:block/road_signs/%wood%_road_sign"}
 	}
 }

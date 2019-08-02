@@ -1,13 +1,13 @@
 {
     "forge_marker": 1,
     "defaults": {
-		"model": "drpmedieval:jail_lattice/jail_lattice",
+		"model": "drpmedieval:block/jail_lattice/jail_lattice",
         "transform": "forge:default-block"
     },
 	"variants": {
 		"axis":{
 			"x":{},
-			"y":{"y":90}
+			"z":{"y":90}
 		},
 		"top":{
 			"false":{
@@ -20,7 +20,7 @@
 		"bottom":{
 			"false":{
 				"submodel" : {
-         			 "top": { "model": "drpmedieval:jail_lattice/jail_lattice_border_bottom" }
+         			 "bottom": { "model": "drpmedieval:jail_lattice/jail_lattice_border_bottom" }
         		}
         	},
 			"true":{}
@@ -28,7 +28,7 @@
 		"left":{
 			"false":{
 				"submodel" : {
-         			 "top": { "model": "drpmedieval:jail_lattice/jail_lattice_border_left" }
+         			 "left": { "model": "drpmedieval:jail_lattice/jail_lattice_border_left" }
         		}
         	},
 			"true":{}
@@ -36,7 +36,7 @@
 		"right":{
 			"false":{
 				"submodel" : {
-         			 "top": { "model": "drpmedieval:jail_lattice/jail_lattice_border_right" }
+         			 "right": { "model": "drpmedieval:jail_lattice/jail_lattice_border_right" }
         		}
         	},
 			"true":{}

@@ -1,16 +1,5 @@
 package net.dark_roleplay.medieval.testing.blocks.spinning_wheel;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-
 public class SpinningWheelTileEntity{}/*  extends TileEntity{
 
 	protected ItemStackHandler inventory = new ItemStackHandler(4) {
@@ -29,23 +18,23 @@ public class SpinningWheelTileEntity{}/*  extends TileEntity{
 	}
 	
 	@Override
-    public void readFromNBT(NBTTagCompound compound){
+    public void readFromNBT(CompoundNBT compound){
         super.readFromNBT(compound);
         if(compound.hasKey("inventory"))
-        	inventory.deserializeNBT((NBTTagCompound) compound.getTag("inventory"));   
+        	inventory.deserializeNBT((CompoundNBT) compound.getTag("inventory"));   
     }
 
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        NBTTagCompound comp = super.writeToNBT(compound);
+    public CompoundNBT writeToNBT(CompoundNBT compound) {
+        CompoundNBT comp = super.writeToNBT(compound);
         
-        NBTTagCompound inventory = this.inventory.serializeNBT();
+        CompoundNBT inventory = this.inventory.serializeNBT();
         comp.setTag("inventory", inventory);
         
         return comp;
     }
 	
 	@Override
-	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
 		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return true;
     	return super.hasCapability(capability, facing);
@@ -53,7 +42,7 @@ public class SpinningWheelTileEntity{}/*  extends TileEntity{
 
 	@Override
 	@Nullable
-	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing){
+	public <T> T getCapability(Capability<T> capability, @Nullable Direction facing){
 		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return (T) this.inventory;
     	return super.getCapability(capability, facing);

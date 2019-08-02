@@ -7,23 +7,26 @@ import net.dark_roleplay.medieval.objects.blocks.templates.AxisBlock;
 import net.dark_roleplay.medieval.objects.enums.BenchSection;
 import net.dark_roleplay.medieval.util.sitting.SittingUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumFacing.Axis;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Direction.Axis;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.IBooleanFunction;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class BenchBlock extends AxisBlock{
 
@@ -83,42 +86,43 @@ public class BenchBlock extends AxisBlock{
 	}
 
 	@Override
-	public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext selectionContext) {
 		return shapes.get(state.get(BENCH_SECTION)).get(state.get(HORIZONTAL_AXIS));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
 		builder.add(BENCH_SECTION);
 	}
 	
 	@Override
-	public boolean onBlockActivated(IBlockState state, World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if(player.getDistance(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) < 3) {
-			SittingUtil.sitOnBlock(world, pos.getX(), pos.getY(), pos.getZ(), player, 0.3F);
+	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
+		if(player.getPositionVec().squareDistanceTo(new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5)) < 9) {
+			if(world instanceof ServerWorld)
+				SittingUtil.sitOnBlock((ServerWorld) world, pos.getX(), pos.getY(), pos.getZ(), player, 0.3F);
 		}else {
-			player.sendStatusMessage(new TextComponentTranslation("interaction.drpmedieval.chair.to_far", state.getBlock().getNameTextComponent().getFormattedText()), true);
+			player.sendStatusMessage(new TranslationTextComponent("interaction.drpmedieval.chair.to_far", state.getBlock().getNameTextComponent().getFormattedText()), true);
 		}
 		return true;
 	}
 	
 	@Override
-	public IBlockState updatePostPlacement(IBlockState state, EnumFacing facing, IBlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {	
-		if (facing != EnumFacing.DOWN) {
+	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+		if (facing != Direction.DOWN) {
 			return getPropperBenchState(state, facing, facingState, world, currentPos, facingPos);
 		}
-		if (facingState.getBlockFaceShape(world, facingPos, EnumFacing.UP) != BlockFaceShape.SOLID)
+		if (!Block.func_220064_c(world, facingPos))
 			return Blocks.AIR.getDefaultState();
 		return state;
 	}
 	
-	private IBlockState getPropperBenchState(IBlockState state, EnumFacing facing, IBlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+	private BlockState getPropperBenchState(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
 		
 		Axis axis = state.get(HORIZONTAL_AXIS);
 		if(axis == Axis.X) {
 			int left = 0, right = 0;
-			IBlockState otherState;
+			BlockState otherState;
 			if((otherState = world.getBlockState(currentPos.west())).getBlock().getClass() == this.getClass()) {
 				BenchSection bench = otherState.get(BENCH_SECTION);
 				if(!world.isRemote()) System.out.println("L: " + bench);
@@ -143,7 +147,7 @@ public class BenchBlock extends AxisBlock{
 			}
 		}else if(axis == Axis.Z) {
 			int left = 0, right = 0;
-			IBlockState otherState;
+			BlockState otherState;
 			if((otherState = world.getBlockState(currentPos.north())).getBlock().getClass() == this.getClass()) {
 				BenchSection bench = otherState.get(BENCH_SECTION);
 				if(!world.isRemote()) System.out.println("L: " + bench);

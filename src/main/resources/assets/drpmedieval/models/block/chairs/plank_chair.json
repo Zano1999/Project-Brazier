@@ -1,8 +1,7 @@
 {
 	"credit": "Made by JTK222",
 	"textures": {
-		"planks": "drpmarg:block/planks/oak_planks",
-		"particle": "drpmarg:block/planks/oak_planks"
+		"particle": "marg:block/planks/oak_planks"
 	},
 	"elements": [
 		{

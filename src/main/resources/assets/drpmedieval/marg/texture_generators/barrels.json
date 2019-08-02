@@ -1,10 +1,6 @@
 {
 	"version": 0,
 	"type":"wood",
-	"outputs":[
-		"drpmedieval:textures/blocks/barrels/%wood%_barrel_side",
-		"drpmedieval:textures/blocks/barrels/%wood%_barrel_top"
-	],
 	"required_textures":[
 		"drpmedieval:marg/textures/overlays/barrel_side.png",
 		"drpmedieval:marg/textures/overlays/barrel_top.png"

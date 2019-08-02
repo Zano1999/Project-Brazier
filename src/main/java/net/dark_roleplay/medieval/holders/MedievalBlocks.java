@@ -24,7 +24,8 @@ public class MedievalBlocks {
 		OAK_SOLID_CHAIR_ARMREST		= null,
 		OAK_SOLID_BENCH				= null,
 		OAK_PLATFORM				= null,
-		WALL_BRAZIER				= null;
+		WALL_BRAZIER				= null,
+		CLEAN_TIMBERED_CLAY			= null;
 }
 
 //reg(new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F)), "riverstone");

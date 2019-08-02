@@ -1,6 +1,6 @@
 package net.dark_roleplay.medieval.objects.blocks.decoration.road_sign;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 public class SignInfo {
 
@@ -18,7 +18,7 @@ public class SignInfo {
 		this.material = material;
 	}
 	
-	public SignInfo(NBTTagCompound tag) {
+	public SignInfo(CompoundNBT tag) {
 		this.text = tag.getString("text");
 		this.direction = tag.getInt("direction");
 		this.height = tag.getInt("height");
@@ -66,13 +66,13 @@ public class SignInfo {
 		this.material = material;
 	}
 	
-	public NBTTagCompound toNBT() {
-		NBTTagCompound tag = new NBTTagCompound();
-		tag.setString("text", this.text);
-		tag.setInt("direction", this.direction);
-		tag.setInt("height", this.height);
-		tag.setBoolean("isLeft", this.pointsLeft);
-		tag.setString("material", this.material);
+	public CompoundNBT toNBT() {
+		CompoundNBT tag = new CompoundNBT();
+		tag.putString("text", this.text);
+		tag.putInt("direction", this.direction);
+		tag.putInt("height", this.height);
+		tag.putBoolean("isLeft", this.pointsLeft);
+		tag.putString("material", this.material);
 		return tag;
 	}
 }

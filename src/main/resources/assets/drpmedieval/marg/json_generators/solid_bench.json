@@ -27,7 +27,7 @@
 			"output" : "drpmedieval:models/block/benches/%wood%_solid_bench_center_support.json"
 		},
 		{
-			"input" : "drpmedieval:marg/jsons/item_model/benches/solid_bench.json",
+			"input" : "drpmedieval:marg/jsons/block_model/benches/solid_bench_single.json",
 			"output" : "drpmedieval:models/item/%wood%_solid_bench.json"
 		}
 	]

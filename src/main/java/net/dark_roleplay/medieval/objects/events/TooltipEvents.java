@@ -3,13 +3,13 @@ package net.dark_roleplay.medieval.objects.events;
 import java.util.List;
 
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -26,16 +26,17 @@ public class TooltipEvents {
 	public static void getInformation(ItemTooltipEvent event) {
 		Item item = event.getItemStack().getItem();
 		
+		//contains method
 		if(WORK_IN_PROGRESS.contains(item)) {
-			event.getToolTip().add(new TextComponentTranslation("guis.drpmedieval.tooltip_work_in_progress" , TextFormatting.YELLOW));
+			event.getToolTip().add(new TranslationTextComponent("guis.drpmedieval.tooltip_work_in_progress" , TextFormatting.YELLOW));
 		}
 		
 		if(HAS_DESCRIPTION.contains(item)) {
-			if(GuiScreen.isCtrlKeyDown()) {
+			if(Screen.hasControlDown()) {
 				List<ITextComponent> tooltip = event.getToolTip();
-				event.getToolTip().add(new TextComponentTranslation(String.format("item.description.%s.%s", item.getRegistryName().getNamespace(), item.getRegistryName().getPath()), TextFormatting.GRAY));
+				event.getToolTip().add(new TranslationTextComponent(String.format("item.description.%s.%s", item.getRegistryName().getNamespace(), item.getRegistryName().getPath()), TextFormatting.GRAY));
 			}else {
-				event.getToolTip().add(new TextComponentTranslation("guis.drpmedieval.tooltip_description" , TextFormatting.GRAY));
+				event.getToolTip().add(new TranslationTextComponent("guis.drpmedieval.tooltip_description" , TextFormatting.GRAY));
 			}
 		}
 	}

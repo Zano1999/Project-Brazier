@@ -3,15 +3,28 @@ package net.dark_roleplay.medieval.objects.helper;
 import net.dark_roleplay.medieval.objects.enums.TelescopeZoom;
 import net.dark_roleplay.medieval.objects.items.equipment.tools.ItemTelescope;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextComponent;
+import net.minecraft.util.text.TextComponentUtils;
 
 public class TelescopeHelper {
 
+	private static TelescopeZoom prevZoom = TelescopeZoom.NONE;
 	private static TelescopeZoom currentZoom = TelescopeZoom.NONE;
 	
 	public static TelescopeZoom getCurrentZoom() {
 		if(currentZoom != TelescopeZoom.NONE && !(Minecraft.getInstance().player.getHeldItemMainhand().getItem() instanceof ItemTelescope))
 			currentZoom = TelescopeZoom.NONE;
 		return currentZoom;
+	}
+
+	public static TelescopeZoom getPrevZoom(){
+		return prevZoom;
+	}
+
+	public static void updatePrev(){
+		prevZoom = currentZoom;
 	}
 	
 	public static void increaseZoom() {

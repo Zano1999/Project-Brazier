@@ -11,6 +11,12 @@
 	"itemGroup.drpmedieval.equipment" : "Equipment",
 	"itemGroup.drpmedieval.miscellaneous" : "Miscellaneous",
 	"itemGroup.drpmedieval.creative_only" : "Creative Only",
+
+	"overlay.drpmedieval.road_sign.a": "Press '",
+	"overlay.drpmedieval.road_sign.b": "' to toggle direction",
+
+	"keybind.drpmedieval.interactor" : "(Advanced) Interact with Block",
+	"keybind.category.drpmedieval" : "Dark Roleplay Medieval",
 	
 	"item.drpmedieval.barley" : "Barley",
 	"item.drpmedieval.barley_dough" : "Barley Dough",
@@ -81,11 +87,11 @@
 	"item.drpmedieval.yellow_pear" : "Yellow Pear",
 	
 	
-	"item.description.drpmedieval.golden_telescope" : "Very useful to spy at your enemies from a safe distance, also very shiny",
-	"item.description.drpmedieval.silver_telescope" : "Very useful to spy at your enemies from a safe distance, also very shiny",
-	"item.description.drpmedieval.trigger_trap" : "Can be used on certain blocks to create secret levers.",
-	"item.description.drpmedieval.stone_street_stomper" : "Can be used to press stone tiles into dirt, \ncreating stronger paths.",
-	"item.description.drpmedieval.wooden_street_stomper" : "Can be used to turn Grass Blocks into Paths.",
-	"item.description.drpmedieval.hardened_leather" : "Provided better protection than normal Leather, \nbut also limits movement.",
-	"item.description.drpmedieval.barley" : "Just a type of grain, can be processed into flour."
+	"item.description.drpmedieval.golden_telescope" : "%sVery useful to spy at your enemies from a safe distance, also very shiny",
+	"item.description.drpmedieval.silver_telescope" : "%sVery useful to spy at your enemies from a safe distance, also very shiny",
+	"item.description.drpmedieval.trigger_trap" : "%sCan be used on certain blocks to create secret levers.",
+	"item.description.drpmedieval.stone_street_stomper" : "%sCan be used to press stone tiles into dirt, \ncreating stronger paths.",
+	"item.description.drpmedieval.wooden_street_stomper" : "%sCan be used to turn Grass Blocks into Paths.",
+	"item.description.drpmedieval.hardened_leather" : "%sProvided better protection than normal Leather, \nbut also limits movement.",
+	"item.description.drpmedieval.barley" : "%sJust a type of grain, can be processed into flour."
 }

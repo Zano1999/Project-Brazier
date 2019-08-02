@@ -3,7 +3,7 @@
 	"parent": "drpmedieval:block/wood_platforms/wood_platform_half",
 	"textures": {
 		"log_top": "block/stripped_%wood%_log_top",
-		"log": "block/stripped_%wood%_log",
+		"log_side": "block/stripped_%wood%_log",
 		"planks": "block/%wood%_planks",
 		"particle": "block/%wood%_planks"
 	}

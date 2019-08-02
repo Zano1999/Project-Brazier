@@ -8,18 +8,18 @@ public class BuildingScanner{}/*  extends Block{
 	}
 
 	@Override
-	public boolean hasTileEntity(IBlockState state){
+	public boolean hasTileEntity(BlockState state){
         return true;
     }
 
     @Override
 	@Nullable
-    public TileEntity createTileEntity(World world, IBlockState state){
+    public TileEntity createTileEntity(World world, BlockState state){
     	return new TE_BuildingScanner();
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ){
+    public boolean onBlockActivated(World worldIn, BlockPos pos, BlockState state, EntityPlayer playerIn, EnumHand hand, Direction facing, float hitX, float hitY, float hitZ){
     	TE_BuildingScanner scan = (TE_BuildingScanner) worldIn.getTileEntity(pos);
     	scan.activate();
         return true;

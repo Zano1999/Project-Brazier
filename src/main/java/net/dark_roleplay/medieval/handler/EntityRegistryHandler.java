@@ -3,6 +3,7 @@ package net.dark_roleplay.medieval.handler;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.util.sitting.EntitySittable;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -22,7 +23,7 @@ private static int entityID = 0;
     public static void registerEntities(final RegistryEvent.Register<EntityType<?>> event) {
 		registry = event.getRegistry();
 
-		reg(EntityType.Builder.create(EntitySittable.class, EntitySittable::new).disableSummoning().tracker(32, 1, false), "sittable");
+		reg(EntityType.Builder.create(EntitySittable::new, EntityClassification.MISC).disableSummoning().setUpdateInterval(100).setTrackingRange(32).setShouldReceiveVelocityUpdates(false), "sittable");
 //		EntityType.Builder.create(
 //        final IForgeRegistry<EntityEntry> reg = event.getRegistry();
 //

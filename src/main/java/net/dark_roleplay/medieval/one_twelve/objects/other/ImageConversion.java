@@ -5,24 +5,24 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.awt.image.Raster;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 public class ImageConversion {
 
-	public static NBTTagCompound imgToNBT(BufferedImage img){
-		NBTTagCompound imgNBT = new NBTTagCompound();
+	public static CompoundNBT imgToNBT(BufferedImage img){
+		CompoundNBT imgNBT = new CompoundNBT();
 
 		int[] imageBytes = ((DataBufferInt) img.getData().getDataBuffer()).getData();
 
-		imgNBT.setInt("width", img.getWidth());
-		imgNBT.setInt("height", img.getHeight());
-		imgNBT.setIntArray("imgBuf", imageBytes);
+		imgNBT.putInt("width", img.getWidth());
+		imgNBT.putInt("height", img.getHeight());
+		imgNBT.putIntArray("imgBuf", imageBytes);
 
 		return imgNBT;
 	}
 
-	public static BufferedImage imgFromNBT(NBTTagCompound imgNBT){
-		if(!imgNBT.hasKey("width") || !imgNBT.hasKey("height") || !imgNBT.hasKey("imgBuf")){
+	public static BufferedImage imgFromNBT(CompoundNBT imgNBT){
+		if(!imgNBT.hasUniqueId("width") || !imgNBT.hasUniqueId("height") || !imgNBT.hasUniqueId("imgBuf")){
 			return null;
 		}
 

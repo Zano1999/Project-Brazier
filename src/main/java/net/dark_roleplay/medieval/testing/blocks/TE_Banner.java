@@ -19,15 +19,15 @@ public class TE_Banner{}/*  extends TileEntity{
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound){
+	public void readFromNBT(CompoundNBT compound){
         super.readFromNBT(compound);
         if(compound.hasKey("image")){
-        	this.image = ImageHelper.read((NBTTagCompound) compound.getTag("image"));
+        	this.image = ImageHelper.read((CompoundNBT) compound.getTag("image"));
         }
     }
 
 	@Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound){
+    public CompoundNBT writeToNBT(CompoundNBT compound){
     	compound = super.writeToNBT(compound);
     	if(this.image != null)
     		compound.setTag("image", this.image.write());
@@ -35,12 +35,12 @@ public class TE_Banner{}/*  extends TileEntity{
     }
 
 	@Override
-	public NBTTagCompound getUpdateTag() {
+	public CompoundNBT getUpdateTag() {
 		return super.getUpdateTag();
 	}
 
 	@Override
-	public void handleUpdateTag(NBTTagCompound compound) {
+	public void handleUpdateTag(CompoundNBT compound) {
 		super.handleUpdateTag(compound);
 	}
 

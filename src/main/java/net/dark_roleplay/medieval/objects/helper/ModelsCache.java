@@ -4,22 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableMap;
 
 import net.dark_roleplay.library.DRPLibrary;
-import net.dark_roleplay.library.unstable.experimental.guis.ModularGui_Handler;
-import net.dark_roleplay.library.unstable.experimental.guis.modular.ModularGuiHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.model.ModelBakery;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
+import net.minecraft.profiler.EmptyProfiler;
+import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.resource.IResourceType;
 import net.minecraftforge.resource.ISelectiveResourceReloadListener;
@@ -36,6 +37,8 @@ public class ModelsCache implements ISelectiveResourceReloadListener {
 	public static final VertexFormat									DEFAULTVERTEXFORMAT		= DefaultVertexFormats.ITEM;
 	public static final Function<ResourceLocation, TextureAtlasSprite>	DEFAULTTEXTUREGETTER	= texture -> Minecraft.getInstance().getTextureMap().getAtlasSprite(texture.toString());
 
+	private ModelBakery bakery;
+	
 	private final Map<ResourceLocation, IModel>			modelCache	= new HashMap<>();
 	private final Map<ResourceLocation, IBakedModel>	bakedCache	= new HashMap<>();
 
@@ -61,7 +64,7 @@ public class ModelsCache implements ISelectiveResourceReloadListener {
 		IBakedModel bakedModel = this.bakedCache.get(location);
 		if (bakedModel == null) {
 			IModel<?> model = this.getModel(location);
-			bakedModel = model.bake(null, textureGetter, state, false, format);
+			bakedModel = model.bake(this.bakery, textureGetter, null, format);
 			this.bakedCache.put(location, bakedModel);
 		}
 		return bakedModel;
@@ -77,7 +80,7 @@ public class ModelsCache implements ISelectiveResourceReloadListener {
 		if (bakedModel == null) {
 			IModel<?> model = this.getModel(location);
 			model = model.retexture(ImmutableMap.of(textureKey, newTexture));
-			bakedModel = model.bake(null, textureGetter, state, false, format);
+			bakedModel = model.bake(this.bakery, textureGetter, null, format);;
 			this.bakedCache.put(fakeLoc, bakedModel);
 		}
 		return bakedModel;
@@ -85,10 +88,10 @@ public class ModelsCache implements ISelectiveResourceReloadListener {
 
 	@Override
 	public void onResourceManagerReload(final IResourceManager resourceManager, final Predicate<IResourceType> resourcePredicate) {
-		ModularGuiHandler.currentGui = ModularGui_Handler.loadModularGui(new ResourceLocation(DRPLibrary.MODID, "textures/guis/modular_gui/vanilla.json"));//ClientProxy.modularGuis.get(0);
-
 		this.modelCache.clear();
 		this.bakedCache.clear();
+		
+		//this.bakery = new ModelBakery(resourceManager, Minecraft.getInstance().getTextureMap(), EmptyProfiler.INSTANCE);
 	}
 
 }

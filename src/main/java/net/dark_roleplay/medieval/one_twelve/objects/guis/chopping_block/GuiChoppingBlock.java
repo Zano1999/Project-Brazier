@@ -1,7 +1,5 @@
 package net.dark_roleplay.medieval.one_twelve.objects.guis.chopping_block;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-
 public class GuiChoppingBlock{// extends GuiContainer{
 //
 //    public GuiChoppingBlock(Container inventorySlots) {

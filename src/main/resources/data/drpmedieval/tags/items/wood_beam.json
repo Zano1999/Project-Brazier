@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+  	"drpmedieval:oak_wood_beam",
+	"drpmedieval:spruce_wood_beam",
+	"drpmedieval:birch_wood_beam",
+	"drpmedieval:dark_oak_wood_beam",
+	"drpmedieval:acacia_wood_beam",
+	"drpmedieval:jungle_wood_beam"
+  ]
+}

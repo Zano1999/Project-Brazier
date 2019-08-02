@@ -39,7 +39,7 @@ public class Model implements IBetterModel{
 	}
 
 
-//	private static int[] createFullQuad(EnumFacing facing, TextureAtlasSprite sprite) {
+//	private static int[] createFullQuad(Direction facing, TextureAtlasSprite sprite) {
 //		int[] output = new int[0];
 //
 //		output = ArrayUtils.addAll(output, vertexToInts(0, 1, 0, -1, sprite, 0, 16));

@@ -1,0 +1,39 @@
+{
+	"version" : 0,
+	"entries" : [
+		{
+			"condition": {
+				"type": "property",
+				"height": "full"
+			},
+			"voxel_shapes": [
+				{
+					"operation": "or",
+					"boxes": [
+						[0, 10, 6.5, 16, 13, 9.5],
+						[0, 13, 0, 16, 16, 16]
+					]
+				}
+			],
+			"allow_rotation": true,
+			"override": true
+		},
+		{
+			"condition": {
+				"type": "property",
+				"height": "half"
+			},
+			"voxel_shapes": [
+				{
+					"operation": "or",
+					"boxes": [
+						[0, 2, 6.5, 16, 5, 9.5],
+						[0, 5, 0, 16, 8, 16]
+					]
+				}
+			],
+			"allow_rotation": true,
+			"override": true
+		}
+	]
+}

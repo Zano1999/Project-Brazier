@@ -18,22 +18,37 @@ public class TelescopeEvents {
 	public static final TelescopeOverlay telescope = new TelescopeOverlay();
 	
 	private static SmoothCameraStage prevSmoothCamera = SmoothCameraStage.UNKNOWN;
-	
+	private static double currentModifier = 0F;
+
 	@SubscribeEvent
 	public static void updateFov(EntityViewRenderEvent.FOVModifier event) {
+		TelescopeZoom prevZoom = TelescopeHelper.getPrevZoom();
 		TelescopeZoom zoom = TelescopeHelper.getCurrentZoom();
-		if(zoom == TelescopeZoom.LOW) event.setFOV(50);
-		else if(zoom == TelescopeZoom.MEDIUM) event.setFOV(30);
-		else if(zoom == TelescopeZoom.HIGH) event.setFOV(10);
-		else if(prevSmoothCamera != SmoothCameraStage.UNKNOWN){
+
+		if(prevZoom.ID < zoom.ID)
+			currentModifier = Math.min(currentModifier + (event.getRenderPartialTicks() * 0.5), event.getFOV() - zoom.targetFOV);
+		else if(prevZoom.ID > zoom.ID)
+			currentModifier = Math.max(currentModifier - (event.getRenderPartialTicks() * 2), -0.1);
+
+		//System.out.println(prevZoom + " -> " + zoom);
+
+		event.setFOV(event.getFOV() - currentModifier);
+
+		if((prevZoom != zoom) && (currentModifier < 0 || (event.getFOV() - 1 < zoom.targetFOV && event.getFOV() + 1 > zoom.targetFOV))){
+			TelescopeHelper.updatePrev();
+		}
+
+		if(currentModifier < 0){
+			currentModifier = 0;
+			TelescopeHelper.updatePrev();
 			Minecraft.getInstance().gameSettings.smoothCamera = prevSmoothCamera == SmoothCameraStage.TRUE ? true : false;
 			prevSmoothCamera = SmoothCameraStage.UNKNOWN;
-			return;
-		}else return;
+		}
 		
-		if(SmoothCameraStage.UNKNOWN == prevSmoothCamera)
+		if(zoom != TelescopeZoom.NONE && SmoothCameraStage.UNKNOWN == prevSmoothCamera){
 			prevSmoothCamera = Minecraft.getInstance().gameSettings.smoothCamera ? SmoothCameraStage.TRUE : SmoothCameraStage.FALSE;
-		Minecraft.getInstance().gameSettings.smoothCamera = true;
+			Minecraft.getInstance().gameSettings.smoothCamera = true;
+		}
 	}
 
 	@SubscribeEvent
