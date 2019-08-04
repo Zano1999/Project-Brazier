@@ -78,7 +78,7 @@ public class HitboxDrawListener {
 
             GlStateManager.translated(
                     hitPos.getX() - view.x + 0.5,
-                    (hitPos.getY() - view.y) + ((int)((event.getTarget().getHitVec().y - hitPos.getY()) * 16)/16f) + 0.0325F,
+                    (hitPos.getY() - view.y) + ((int)((event.getTarget().getHitVec().y - hitPos.getY()) * 16)/16f) + 0.03125F,
                     hitPos.getZ() - view.z + 0.5);
             GlStateManager.rotatef(-viewEntity.rotationYaw, 0.0F, 1.0F, 0.0F);
             GlStateManager.translated(-0.5,0,-0.5);

@@ -132,6 +132,7 @@ public class ItemRegistryHandler {
 		planks.execute(material -> {
 			reg(new RoadSignItem(
 					new Properties().group(MISCELLANEOUS),
+					material,
 					new ResourceLocation(material.getNamed("drpmedieval:%wood%_road_sign_left.obj")),
 					new ResourceLocation(material.getNamed("drpmedieval:%wood%_road_sign_right.obj"))
 			),material.getNamed("simple_%wood%_road_sign"));

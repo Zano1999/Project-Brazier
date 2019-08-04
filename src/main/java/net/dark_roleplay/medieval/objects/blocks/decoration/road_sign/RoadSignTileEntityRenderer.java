@@ -26,7 +26,7 @@ public class RoadSignTileEntityRenderer extends TileEntityRenderer<RoadSignTileE
 
 	@Override
 	public void render(RoadSignTileEntity tileEntity, double x, double y, double z, float partialTicks, int destroyStage) {
-		SignInfo[] signs = tileEntity.getSigns();
+		List<SignInfo> signs = tileEntity.getSigns();
 
 		GlStateManager.pushMatrix();
 		GlStateManager.translated(x + 0.5, y, z + 0.5);
@@ -49,14 +49,13 @@ public class RoadSignTileEntityRenderer extends TileEntityRenderer<RoadSignTileE
 			for (BakedQuad quad : quads) {
 				LightUtil.renderQuadColor(buffer, quad, 0xFFFFFFFF);
 			}
-
+			GlStateManager.pushMatrix();
 			GlStateManager.rotatef(sign.getDirection(), 0.0F, 1.0F, 0.0F);
-			GlStateManager.translated(-0.5, sign.getHeight() * 0.0625F, -0.5);
+			GlStateManager.translated(-0.5, sign.getHeight() * 0.0625F + 0.03125F, -0.5);
 
 			tessellator.draw();
 
-			GlStateManager.translated(+0.5, -sign.getHeight() * 0.0625F, +0.5);
-			GlStateManager.rotatef(-sign.getDirection(), 0.0F, 1.0F, 0.0F);
+			GlStateManager.popMatrix();
 
 
 		}
@@ -69,7 +68,7 @@ public class RoadSignTileEntityRenderer extends TileEntityRenderer<RoadSignTileE
 			GlStateManager.translatef(0F, 0F, -0.26F);
 			GlStateManager.scalef(-0.025F, -0.025F, 0.025F);
 			int i = this.getFontRenderer().getStringWidth(sign.getText()) / 2;
-			float verticalShift = -3.5f - sign.getHeight() * 2.5f;
+			float verticalShift = -3.5f - sign.getHeight() * 2.5f - 1;
 
 			this.getFontRenderer().drawString(sign.getText(),
 					(float) (-this.getFontRenderer().getStringWidth(sign.getText()) / 2), (float) verticalShift, 0);

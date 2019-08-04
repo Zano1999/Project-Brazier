@@ -1,10 +1,15 @@
 package net.dark_roleplay.medieval;
 
+import net.dark_roleplay.library.networking.NetworkHelper;
 import net.dark_roleplay.medieval.handler.KeybindHandler;
 import net.dark_roleplay.medieval.holders.MedievalConfigs;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntityRenderer;
+import net.dark_roleplay.medieval.objects.packets.RoadSignEditSignPacket;
+import net.dark_roleplay.medieval.objects.packets.RoadSignPlacementPacket;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -13,13 +18,28 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 @Mod(DarkRoleplayMedieval.MODID)
 public class DarkRoleplayMedieval {
 
 	public static final String MODID = "drpmedieval";
+	public static SimpleChannel MOD_CHANNEL;
 
 	public DarkRoleplayMedieval() {
+		DarkRoleplayMedieval.MOD_CHANNEL = NetworkRegistry.ChannelBuilder
+				.named(new ResourceLocation(DarkRoleplayMedieval.MODID, "main_channel"))
+				.clientAcceptedVersions("1.0"::equals)
+				.serverAcceptedVersions("1.0"::equals)
+				.networkProtocolVersion(() -> "1.0")
+				.simpleChannel();
+
+		NetworkHelper.initChannel(MOD_CHANNEL);
+		NetworkHelper.registerPacket(RoadSignPlacementPacket.class);
+		NetworkHelper.registerPacket(RoadSignEditSignPacket.class);
+		NetworkHelper.clearChannel();
+
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.WORLD_GENS_SPEC, "World Generation.toml");
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.Misc.REGENERATING_ORES_SPEC, "Regenerating Ores.toml");
         
