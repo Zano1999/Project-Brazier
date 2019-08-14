@@ -53,7 +53,7 @@ public class BlockRegistryHandler {
 		reg(new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F)), "riverstone_colored");
 		reg(new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F)), "riverstone_colored_pale");
 
-		reg(new TimberedClay(PLACEHOLDER, TimberedClayType.CLEAN), "clean_timbered_clay");
+		reg(new Block(PLACEHOLDER), "clean_timbered_clay");
 
 		MaterialRequirements planks = new MaterialRequirements(Constants.MAT_WOOD, "planks");
 
@@ -62,6 +62,7 @@ public class BlockRegistryHandler {
 				if(type == TimberedClayType.CLEAN) continue;
 				reg(new TimberedClay(PLACEHOLDER, type), String.format("%s_%s_timbered_clay", material.getName(), type.getName()));
 			}
+			reg(new TimberedClay(PLACEHOLDER, TimberedClayType.CLEAN), material.getNamed("clean_%wood%_timbered_clay"));
 
 			reg(new PlankChairBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_plank_chair", material.getName()));
 			reg(new SolidChairBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_solid_chair", material.getName()));

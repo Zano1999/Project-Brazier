@@ -1,30 +1,8 @@
 {
   "forge_marker": 1,
-  "defaults": {
-    "model": "drpmedieval:block/timbered_clay/clean_timbered_clay",
-    "transform": "forge:default-block"
-  },
   "variants": {
-    "":[{}],
-    "axis": {
-      "x": { "y" :  0},
-      "y": { "y" :  90}
-    },
-    "top": {
-      "true": {"model": "drpmedieval:block/timbered_clay/templates/base_border"},
-      "false": {}
-    },
-    "right": {
-      "true": {"model": "drpmedieval:block/timbered_clay/templates/base_border"},
-      "false": {}
-    },
-    "bottom": {
-      "true": {"model": "drpmedieval:block/timbered_clay/templates/base_border"},
-      "false": {}
-    },
-    "left": {
-      "true": {"model": "drpmedieval:block/timbered_clay/templates/base_border"},
-      "false": {}
+    "": {
+      "model": "drpmedieval:block/timbered_clay/clean_timbered_clay"
     }
   }
 }

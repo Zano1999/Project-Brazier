@@ -3,11 +3,7 @@
 	"textures": {
 		"base": "drpmedieval:blocks/timbered_clay/timbered_clay",
 		"particle": "drpmedieval:blocks/timbered_clay/timbered_clay",
-		"top": "drpmedieval:block/timbered_clay/borders/acacia_5",
-		"bottom": "drpmedieval:block/timbered_clay/borders/acacia_5",
-		"left": "drpmedieval:block/timbered_clay/borders/acacia_10",
-		"right": "drpmedieval:block/timbered_clay/borders/acacia_10",
-		"border": "drpmedieval:block/timbered_clay/borders/acacia_15"
+		"shape": "drpmedieval:block/timbered_clay/shapes/acacia_arrow_b"
 	},
 	"elements": [
 		{
@@ -26,12 +22,8 @@
 			"from": [0, 0, 0],
 			"to": [16, 16, 16],
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#border"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "#left"},
-				"south": {"uv": [16, 0, 0, 16], "texture": "#border"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#right"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#top"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#shape"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#shape"}
 			}
 		}
 	]

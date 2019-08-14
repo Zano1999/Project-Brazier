@@ -9,14 +9,18 @@ import net.dark_roleplay.medieval.objects.enums.TimberedClayEnums;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.client.renderer.model.ModelRotation;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.BasicState;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -35,6 +39,29 @@ public class ModelBakeListener {
         assert location != null;
         return Minecraft.getInstance().getTextureMap().getAtlasSprite(location.toString());
     };
+
+    private static ResourceLocation inputEmpty = new ResourceLocation("drpmedieval:block/timbered_clay/templates/shape");
+    private static ResourceLocation inputFull = new ResourceLocation("drpmedieval:block/timbered_clay/templates/full");
+
+
+    @SubscribeEvent
+    public static void textureStitching(TextureStitchEvent.Pre event){
+        if(event.getMap().getBasePath().equals("textures")){
+
+            MaterialRequirements planks = new MaterialRequirements(Constants.MAT_WOOD, "planks");
+            event.addSprite(new ResourceLocation("drpmedieval:blocks/timbered_clay/timbered_clay_empty"));
+
+            planks.execute(material -> {
+                for(int i = 1; i <= 15; i++){
+                    event.addSprite(new ResourceLocation(material.getNamed("drpmedieval:block/timbered_clay/borders/%wood%_") + i));
+                }
+                for(TimberedClayEnums.TimberedClayType type : TimberedClayEnums.TimberedClayType.values()) {
+                    if (type == TimberedClayEnums.TimberedClayType.CLEAN) continue;
+                    event.addSprite(new ResourceLocation(material.getNamed("drpmedieval:block/timbered_clay/shapes/%wood%_") + type.getName()));
+                }
+            });
+        }
+    }
 
     @SubscribeEvent
     public static void onModelBakeEvent(ModelBakeEvent event){
@@ -62,35 +89,47 @@ public class ModelBakeListener {
             catch(Exception e){
                 //LOGGER.error("Error loading road sign right model", e);
             }
-            /*for(TimberedClayEnums.TimberedClayType type : TimberedClayEnums.TimberedClayType.values()) {
+
+            for(TimberedClayEnums.TimberedClayType type : TimberedClayEnums.TimberedClayType.values()) {
                 if (type == TimberedClayEnums.TimberedClayType.CLEAN) continue;
 
-
-
                 ResourceLocation name = new ResourceLocation("drpmedieval", String.format("%s_%s_timbered_clay", material.getName(), type.getName()));
-                for(int i = 1; i <= 15; i++){
-                    ModelResourceLocation modelLoc = new ModelResourceLocation(name, String.format("top=%s,right=%s,bottom=%s,left=%s", (i & 1) == 1, (i & 2) == 2, (i & 4) == 4, (i & 8) == 8));
+                for(int i = 0; i <= 15; i++){
 
-                    IModel<?> unbakedModel = ModelLoaderRegistry.getModelOrLogError(modelLoc, "Error loading fence model");
+                    try {
+                        IModel<?> timberedClayShape = ModelLoaderRegistry.getModel(inputEmpty);
+                        IModel<?> timberedClayFull = ModelLoaderRegistry.getModel(inputFull);
 
-                    ImmutableMap.Builder<String, String> retextures = ImmutableMap.builder();
+                        IModel<?> unbaked = i == 0 ? timberedClayShape : timberedClayFull;
 
-                    retextures.put("border", "block/timbered_clay/borders/%wood%_" + i);
-                    if((i & 1) == 1)
-                        retextures.put("top", "block/timbered_clay/borders/%wood%_5");
-                    if((i & 2) == 2)
-                        retextures.put("right", "block/timbered_clay/borders/%wood%_10");
-                    if((i & 4) == 4)
-                        retextures.put("bottom", "block/timbered_clay/borders/%wood%_5");
-                    if((i & 8) == 8)
-                        retextures.put("left", "block/timbered_clay/borders/%wood%_10");
+                        ModelResourceLocation outputLoc = new ModelResourceLocation(name, String.format("axis=x,bottom=%s,left=%s,right=%s,top=%s", (i & 4) == 4, (i & 8) == 8, (i & 2) == 2, (i & 1) == 1));
+                        ModelResourceLocation outputLocB = new ModelResourceLocation(name, String.format("axis=z,bottom=%s,left=%s,right=%s,top=%s", (i & 4) == 4, (i & 8) == 8, (i & 2) == 2, (i & 1) == 1));
 
-                    IBakedModel fenceResult = unbakedModel.retexture(retextures.build()).bake(event.getModelLoader(), textureGetter, new BasicState(unbakedModel.getDefaultState(), false), DefaultVertexFormats.ITEM);
-                    event.getModelRegistry().put(modelLoc, fenceResult);
+                        ImmutableMap.Builder<String, String> retextures = ImmutableMap.builder();
+
+                        retextures.put("shape", material.getNamed("drpmedieval:block/timbered_clay/shapes/%wood%_") + type.getName());
+
+                        retextures.put("border", material.getNamed("drpmedieval:block/timbered_clay/borders/%wood%_") + i);
+                        if((i & 1) == 1)
+                            retextures.put("top", material.getNamed("drpmedieval:block/timbered_clay/borders/%wood%_5"));
+                        if((i & 2) == 2)
+                            retextures.put("right", material.getNamed("drpmedieval:block/timbered_clay/borders/%wood%_10"));
+                        if((i & 4) == 4)
+                            retextures.put("bottom", material.getNamed("drpmedieval:block/timbered_clay/borders/%wood%_5"));
+                        if((i & 8) == 8)
+                            retextures.put("left", material.getNamed("drpmedieval:block/timbered_clay/borders/%wood%_10"));
+
+                        IBakedModel retexturedTimberedClay = unbaked.retexture(retextures.build()).bake(event.getModelLoader(), textureGetter, new BasicState(unbaked.getDefaultState(), false), DefaultVertexFormats.ITEM);
+                        IBakedModel retexturedTimberedClayB = unbaked.retexture(retextures.build()).bake(event.getModelLoader(), textureGetter, new BasicState(TRSRTransformation.from(ModelRotation.X0_Y90), false), DefaultVertexFormats.ITEM);
+
+                        event.getModelRegistry().put(outputLoc, retexturedTimberedClay);
+                        event.getModelRegistry().put(outputLocB, retexturedTimberedClayB);
+                    } catch(Exception e){
+                        //LOGGER.error("Error loading road sign Left model", e);
+                        e.printStackTrace();
+                    }
                 }
-            }*/
+            }
         });
-
-
     }
 }

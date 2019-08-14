@@ -80,4 +80,4 @@ jar {
 apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.14.2/mods_toml.gradle'
 
 // Publishing
-apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.14.2/publishing.gradle'
+//apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.14.2/publishing.gradle'
