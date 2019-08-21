@@ -1,45 +1,37 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-		"model": "drpmedieval:block/jail_lattice/jail_lattice",
-        "transform": "forge:default-block"
-    },
-	"variants": {
-		"axis":{
-			"x":{},
-			"z":{"y":90}
+	"multipart": [
+		{   "when": { "axis": "x" },
+			"apply": {"model": "drpmedieval:block/jail_lattice/jail_lattice"}
 		},
-		"top":{
-			"false":{
-				"submodel" : {
-         			 "top": { "model": "drpmedieval:jail_lattice/jail_lattice_border_top" }
-        		}
-        	},
-			"true":{}
+		{   "when": { "axis": "z" },
+			"apply": {"model": "drpmedieval:block/jail_lattice/jail_lattice", "y" : 90}
 		},
-		"bottom":{
-			"false":{
-				"submodel" : {
-         			 "bottom": { "model": "drpmedieval:jail_lattice/jail_lattice_border_bottom" }
-        		}
-        	},
-			"true":{}
+		{   "when": { "axis": "x", "top" : "false"},
+			"apply": {"model": "drpmedieval:block/jail_lattice/jail_lattice_border_top"}
 		},
-		"left":{
-			"false":{
-				"submodel" : {
-         			 "left": { "model": "drpmedieval:jail_lattice/jail_lattice_border_left" }
-        		}
-        	},
-			"true":{}
+		{   "when": { "axis": "z", "top" : "false"},
+			"apply": {"model": "drpmedieval:block/jail_lattice/jail_lattice_border_top", "y" : 90}
 		},
-		"right":{
-			"false":{
-				"submodel" : {
-         			 "right": { "model": "drpmedieval:jail_lattice/jail_lattice_border_right" }
-        		}
-        	},
-			"true":{}
+
+		{   "when": { "axis": "x", "right" : "false"},
+			"apply": {"model": "drpmedieval:block/jail_lattice/jail_lattice_border_right"}
+		},
+		{   "when": { "axis": "z", "right" : "false"},
+			"apply": {"model": "drpmedieval:block/jail_lattice/jail_lattice_border_right", "y" : 90}
+		},
+
+		{   "when": { "axis": "x", "bottom" : "false"},
+			"apply": {"model": "drpmedieval:block/jail_lattice/jail_lattice_border_bottom"}
+		},
+		{   "when": { "axis": "z", "bottom" : "false"},
+			"apply": {"model": "drpmedieval:block/jail_lattice/jail_lattice_border_bottom", "y" : 90}
+		},
+
+		{   "when": { "axis": "x", "left" : "false"},
+			"apply": {"model": "drpmedieval:block/jail_lattice/jail_lattice_border_left"}
+		},
+		{   "when": { "axis": "z", "left" : "false"},
+			"apply": {"model": "drpmedieval:block/jail_lattice/jail_lattice_border_left", "y" : 90}
 		}
-	}
+	]
 }

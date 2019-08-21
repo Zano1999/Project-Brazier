@@ -16,6 +16,7 @@ import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairTil
 import net.dark_roleplay.medieval.objects.blocks.decoration.light_sources.TorchHolderBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSign;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntity;
+import net.dark_roleplay.medieval.objects.blocks.decoration.tables.SimpleTable;
 import net.dark_roleplay.medieval.objects.blocks.decoration.wall_brazier.WallBrazierBlock;
 import net.dark_roleplay.medieval.objects.enums.TimberedClayEnums.TimberedClayType;
 import net.minecraft.block.Block;
@@ -64,12 +65,13 @@ public class BlockRegistryHandler {
 			}
 			reg(new TimberedClay(PLACEHOLDER, TimberedClayType.CLEAN), material.getNamed("clean_%wood%_timbered_clay"));
 
-			reg(new PlankChairBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_plank_chair", material.getName()));
-			reg(new SolidChairBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_solid_chair", material.getName()));
-			reg(new BenchBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_solid_bench", material.getName()));
-			reg(new WoodPlatformBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_platform", material.getName()));
-			reg(new WoodPlatformStairsBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_platform_stairs", material.getName()));
-			reg(new RoadSign(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_road_sign", material.getName()), RoadSignTileEntity.class);
+			reg(new SimpleTable(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), material.getNamed("solid_%wood%_table"));
+			reg(new PlankChairBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), material.getNamed("%wood%_plank_chair"));
+			reg(new SolidChairBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), material.getNamed("%wood%_solid_chair"));
+			reg(new BenchBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), material.getNamed("%wood%_solid_bench"));
+			reg(new WoodPlatformBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), material.getNamed("%wood%_platform"));
+			reg(new WoodPlatformStairsBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), material.getNamed("%wood%_platform_stairs"));
+			reg(new RoadSign(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)),material.getNamed("%wood%_road_sign"), RoadSignTileEntity.class);
 
 			//Also register for a TileEntity
 			reg(new SolidChairArmrestBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), String.format("%s_solid_chair_armrest", material.getName()), SolidChairTileEntity.class);

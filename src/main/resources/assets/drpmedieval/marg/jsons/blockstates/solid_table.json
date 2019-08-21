@@ -1,0 +1,43 @@
+{
+  "multipart": [
+    {
+      "apply": { "model": "block/birch_fence_post" },
+    },{
+      "when": { "connected_n": "false" },
+      "apply": { "model": "drpmedieval:tables/solid_table/%wood%/north"}
+    },{
+      "when": { "connected_e": "false" },
+      "apply": { "model": "drpmedieval:tables/solid_table/%wood%/east"}
+    },{
+      "when": { "connected_s": "false" },
+      "apply": { "model": "drpmedieval:tables/solid_table/%wood%/south"}
+    },{
+      "when": { "connected_w": "false" },
+      "apply": { "model": "drpmedieval:tables/solid_table/%wood%/west"}
+    },{
+      "when": { "connected_n": "false", "leg_ne": "false" },
+      "apply": { "model": "drpmedieval:tables/solid_table/%wood%/north_e"}
+    },{
+      "when": { "connected_n": "false", "leg_nw": "false" },
+      "apply": { "model": "drpmedieval:tables/solid_table/%wood%/north_w"}
+    },{
+      "when": { "connected_e": "false", "leg_ne": "false"  },
+      "apply": { "model": "drpmedieval:tables/solid_table/%wood%/east_n"}
+    },{
+      "when": { "connected_e": "false", "leg_se": "false"  },
+      "apply": { "model": "drpmedieval:tables/solid_table/%wood%/east_s"}
+    },{
+      "when": { "connected_s": "false", "leg_sw": "false"  },
+      "apply": { "model": "drpmedieval:tables/solid_table/%wood%/south_w"}
+    },{
+      "when": { "connected_s": "false", "leg_se": "false"  },
+      "apply": { "model": "drpmedieval:tables/solid_table/%wood%/south_e"}
+    },{
+      "when": { "connected_w": "false", "leg_nw": "false"  },
+      "apply": { "model": "drpmedieval:tables/solid_table/%wood%/west_n"}
+    },{
+      "when": { "connected_w": "false", "leg_sw": "false"  },
+      "apply": { "model": "drpmedieval:tables/solid_table/%wood%/west_s"}
+    }
+  ]
+}

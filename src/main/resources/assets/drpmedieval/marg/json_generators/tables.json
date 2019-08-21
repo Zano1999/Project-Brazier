@@ -1,0 +1,10 @@
+{
+  "version" : 0,
+  "type": "wood",
+  "jsons":[
+    {
+      "input" : "drpmedieval:marg/jsons/item_model/simple_solid_table.json",
+      "output" : "drpmedieval:models/item/solid_%wood%_table.json"
+    }
+  ]
+}

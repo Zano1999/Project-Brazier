@@ -140,6 +140,7 @@ public class ItemRegistryHandler {
 			reg(new Item(new Properties().group(MISCELLANEOUS)), String.format("%s_plank", material.getName()));
 			reg(new Item(new Properties().group(MISCELLANEOUS)), String.format("%s_firewood", material.getName()));
 
+			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, material.getNamed("solid_%wood%_table"))), new Properties().group(DECORATION)), material.getNamed("solid_%wood%_table"));
 			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_plank_chair", material.getName()))), new Properties().group(DECORATION)), String.format("%s_plank_chair", material.getName()));
 			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_solid_chair", material.getName()))), new Properties().group(DECORATION)), String.format("%s_solid_chair", material.getName()));
 			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_solid_chair_armrest", material.getName()))), new Properties().group(DECORATION)), String.format("%s_solid_chair_armrest", material.getName()));
