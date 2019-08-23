@@ -8,6 +8,7 @@ import net.dark_roleplay.medieval.objects.guis.overlays.AdvancedInteractionOverl
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -22,9 +23,11 @@ public class GameOverListener {
 
     @SubscribeEvent
     public static void GameOverlay(RenderGameOverlayEvent.Post event){
+        if(Minecraft.getInstance().currentScreen != null) return;
         RayTraceResult rayTrace = Minecraft.getInstance().objectMouseOver;
         if(rayTrace.getType() == RayTraceResult.Type.BLOCK){
-            BlockState hitState = Minecraft.getInstance().world.getBlockState(new BlockPos(rayTrace.getHitVec()));
+            BlockRayTraceResult blockRayTrace = (BlockRayTraceResult) rayTrace;
+            BlockState hitState = Minecraft.getInstance().world.getBlockState(blockRayTrace.getPos());
 
             if(hitState.getBlock() == MedievalBlocks.JAIL_LATTICE){
                 blockInteractionOverlay.draw(Minecraft.getInstance());

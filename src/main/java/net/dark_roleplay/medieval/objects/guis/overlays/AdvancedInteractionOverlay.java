@@ -11,9 +11,11 @@ public class AdvancedInteractionOverlay extends AbstractGui {
 
     boolean wasPressed = false;
     long firstPressed = 0;
-    int requiredMs = 3000;
+    int requiredMs = 1000;
 
     public void draw(Minecraft mc){
+
+        requiredMs = 650;
         int width = Minecraft.getInstance().mainWindow.getScaledWidth() / 2;
 
         fill(width - 50, 10, width + 50, 20, 0xFFFF0000);
@@ -25,10 +27,12 @@ public class AdvancedInteractionOverlay extends AbstractGui {
             }else{
                 elapsed = System.currentTimeMillis() - firstPressed;
             }
-            fill(width - 50, 10, (int) (width - 50 + (Math.min(100, Math.ceil(100 * (elapsed/requiredMs))))), 20, 0xFF00FF00);
+            fill(width - 50, 10, (int) (width - 50 + (Math.min(100, Math.ceil(100 * (elapsed/(requiredMs * 1d)))))), 20, 0xFF00FF00);
 
             if(elapsed > requiredMs){
                 System.out.println("Debug");
+                wasPressed = false;
+                //TODO Open selection GUI
             }
         }else{
             wasPressed = false;

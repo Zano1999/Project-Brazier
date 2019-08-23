@@ -26,24 +26,22 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', ''
             property 'forge.logging.console.level', 'debug'
+            property 'forge.logging.noansi', "false"
 
-            mods {
-                drpmedieval {
-                    source sourceSets.main
-                }
-            }
+            ideaModule "${project.name}.main"
+
+            environment 'MOD_CLASSES', "${project.file("out/production//resources").canonicalPath};${project.file("out/production//classes").canonicalPath}"
         }
 
         server {
             workingDirectory project.file('run')
             property 'forge.logging.markers', ''
             property 'forge.logging.console.level', 'debug'
+            property 'forge.logging.noansi', "false"
 
-            mods {
-                drpmedieval {
-                    source sourceSets.main
-                }
-            }
+            ideaModule "${project.name}.main"
+
+            environment 'MOD_CLASSES', "${project.file("out/production//resources").canonicalPath};${project.file("out/production//classes").canonicalPath}"
         }
     }
 }
