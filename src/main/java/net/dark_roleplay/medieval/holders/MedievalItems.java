@@ -1,6 +1,7 @@
 package net.dark_roleplay.medieval.holders;
 
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.ObjectHolder;
 

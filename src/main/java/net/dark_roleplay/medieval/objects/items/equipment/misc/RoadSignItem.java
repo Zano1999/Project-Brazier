@@ -3,6 +3,7 @@ package net.dark_roleplay.medieval.objects.items.equipment.misc;
 import net.dark_roleplay.marg.api.materials.Material;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class RoadSignItem extends Item {
 

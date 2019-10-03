@@ -3,6 +3,8 @@
 	"guis.drpmedieval.tooltip_description" : "%sPress 'CTRL' to show more Info",
 	
 	"interaction.drpmedieval.chair.to_far" : "%s is to far away",
+	"blockInteraction.drpmedieval.rope_anchor.dropRope": "Throw rope down",
+	"blockInteraction.drpmedieval.rope_anchor.pullRope": "Pull rope up",
 	
 	"itemGroup.drpmedieval.decoration" : "Decorations",
 	"itemGroup.drpmedieval.building_materials" : "Building Materials",

@@ -1,0 +1,22 @@
+{
+	"credit": "Made by JTK222",
+	"textures": {
+		"wood": "marg:block/planks/%wood%_planks",
+		"particle": "marg:block/planks/%wood%_planks"
+	},
+	"elements": [
+		{
+			"from": [15, 0, 12],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 20]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 16], "texture": "#wood"},
+				"east": {"uv": [0, 0, 4, 16], "texture": "#wood"},
+				"south": {"uv": [15, 0, 16, 16], "texture": "#wood"},
+				"west": {"uv": [12, 0, 16, 16], "texture": "#wood"},
+				"up": {"uv": [15, 12, 16, 16], "texture": "#wood"},
+				"down": {"uv": [15, 0, 16, 4], "texture": "#wood"}
+			}
+		}
+	]
+}

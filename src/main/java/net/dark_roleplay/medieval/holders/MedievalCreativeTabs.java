@@ -1,5 +1,6 @@
 package net.dark_roleplay.medieval.holders;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,12 +23,12 @@ public class MedievalCreativeTabs {
 		}
 	};
 	
-//	public static final ItemGroup UTILITY = new ItemGroup("drpmedieval.utility") {
-//		@OnlyIn(Dist.CLIENT)
-//		public ItemStack createIcon() {
-//			return new ItemStack(Blocks.POWERED_RAIL);
-//		}
-//	};
+	public static final ItemGroup UTILITY = new ItemGroup("drpmedieval.utility") {
+		@OnlyIn(Dist.CLIENT)
+		public ItemStack createIcon() {
+			return new ItemStack(Blocks.POWERED_RAIL);
+		}
+	};
 	
 	public static final ItemGroup FOOD = new ItemGroup("drpmedieval.food") {
 		@OnlyIn(Dist.CLIENT)

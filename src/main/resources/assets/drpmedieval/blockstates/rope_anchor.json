@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "drpmedieval:block/rope/rope_anchor",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "":[{}],
+    "facing":{
+      "north":{},
+      "east":{"y":90},
+      "south":{"y":180},
+      "west":{"y":270}
+    },
+    "has_rope": {
+      "true": {"model": "drpmedieval:block/rope/rope_anchor_pile"},
+      "false": {"model": "drpmedieval:block/rope/rope_anchor"}
+    }
+  }
+}

@@ -1,8 +1,12 @@
 package net.dark_roleplay.medieval.handler;
 
+import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntity;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntity;
+import net.dark_roleplay.medieval.objects.blocks.utility.AnchorTileEntity;
+import net.dark_roleplay.medieval.objects.blocks.utility.barrel.BarrelTileEntity;
+import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -30,8 +34,14 @@ public class TileEntityRegistryHandler {
 	public static void registerItems(RegistryEvent.Register<TileEntityType<?>> registryEvent) {
 		registry = registryEvent.getRegistry();
 
+		reg(createType(BarrelTileEntity::new, BarrelTileEntity.class), "barrel");
 		reg(createType(SolidChairTileEntity::new, SolidChairTileEntity.class), "solid_chair_armrest");
 		reg(createType(RoadSignTileEntity::new, RoadSignTileEntity.class), "road_sign");
+		reg(createType(AnchorTileEntity::new, AnchorTileEntity.class), "anchor");
+
+		//Used for testing Bedrock Models
+		reg(createType(ModelTesterTileEntity::new, ModelTesterTileEntity.class), "model_tester");
+		reg(createType(ChoppingTileEntity::new, ChoppingTileEntity.class), "chopping_block");
 	}
 
 	protected static <T extends TileEntity> TileEntityType createType(Supplier<T> supplier, Class<T> teClass){

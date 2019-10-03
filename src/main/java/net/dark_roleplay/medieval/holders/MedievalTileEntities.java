@@ -9,5 +9,8 @@ public class MedievalTileEntities {
 	
 	public static final TileEntityType<?>
 		SOLID_CHAIR_ARMREST				= null,
-		ROAD_SIGN						= null;
+		ROAD_SIGN						= null,
+		ANCHOR							= null,
+		BARREL							= null,
+		CHOPPING_BLOCK					= null;
 }

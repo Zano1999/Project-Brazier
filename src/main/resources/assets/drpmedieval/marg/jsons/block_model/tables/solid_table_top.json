@@ -1,0 +1,8 @@
+{
+	"credit": "Made by JTK222",
+	"parent": "drpmedieval:block/tables/solid_table_top",
+	"textures": {
+		"table_top": "marg:block/planks/%wood%_planks",
+		"particle": "marg:block/planks/%wood%_planks"
+	}
+}

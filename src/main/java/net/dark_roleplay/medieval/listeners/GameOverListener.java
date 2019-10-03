@@ -5,6 +5,7 @@ import net.dark_roleplay.medieval.holders.MedievalBlocks;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignHelper;
 import net.dark_roleplay.medieval.objects.guis.RoadSignOverlay;
 import net.dark_roleplay.medieval.objects.guis.overlays.AdvancedInteractionOverlay;
+import net.dark_roleplay.medieval.util.AdvancedInteractionHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
@@ -19,24 +20,11 @@ import net.minecraftforge.fml.common.Mod;
 public class GameOverListener {
 
     public static final RoadSignOverlay roadSignOverlay = new RoadSignOverlay();
-    public static final AdvancedInteractionOverlay blockInteractionOverlay = new AdvancedInteractionOverlay();
 
     @SubscribeEvent
     public static void GameOverlay(RenderGameOverlayEvent.Post event){
-        if(Minecraft.getInstance().currentScreen != null) return;
-        RayTraceResult rayTrace = Minecraft.getInstance().objectMouseOver;
-        if(rayTrace.getType() == RayTraceResult.Type.BLOCK){
-            BlockRayTraceResult blockRayTrace = (BlockRayTraceResult) rayTrace;
-            BlockState hitState = Minecraft.getInstance().world.getBlockState(blockRayTrace.getPos());
-
-            if(hitState.getBlock() == MedievalBlocks.JAIL_LATTICE){
-                blockInteractionOverlay.draw(Minecraft.getInstance());
-            }else if(RoadSignHelper.INSTANCE.shouldDisplayRoadSignHud()){
-                roadSignOverlay.draw(Minecraft.getInstance());
-            }
-            //rayTrace.getHitVec()
+        if(RoadSignHelper.INSTANCE.shouldDisplayRoadSignHud()){
+            roadSignOverlay.draw(Minecraft.getInstance());
         }
-
-
     }
 }

@@ -1,14 +1,24 @@
 package net.dark_roleplay.medieval;
 
+import net.dark_roleplay.IModule;
+import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntity;
+import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntityRenderer;
 import net.dark_roleplay.library.networking.NetworkHelper;
 import net.dark_roleplay.medieval.handler.KeybindHandler;
 import net.dark_roleplay.medieval.holders.MedievalConfigs;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntityRenderer;
+import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntity;
+import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntityRenderer;
 import net.dark_roleplay.medieval.objects.packets.RoadSignEditSignPacket;
 import net.dark_roleplay.medieval.objects.packets.RoadSignPlacementPacket;
+import net.dark_roleplay.tertiary_interactor.TertiaryInteractionModule;
+import net.dark_roleplay.tertiary_interactor.network.TertiaryInteractionStarted;
+import net.dark_roleplay.tertiary_interactor.network.TertiaryInteractionStopped;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -21,11 +31,15 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
+import java.io.IOException;
+
 @Mod(DarkRoleplayMedieval.MODID)
 public class DarkRoleplayMedieval {
 
 	public static final String MODID = "drpmedieval";
 	public static SimpleChannel MOD_CHANNEL;
+
+	private IModule[] modules = {new TertiaryInteractionModule()};
 
 	public DarkRoleplayMedieval() {
 		DarkRoleplayMedieval.MOD_CHANNEL = NetworkRegistry.ChannelBuilder
@@ -38,15 +52,28 @@ public class DarkRoleplayMedieval {
 		NetworkHelper.initChannel(MOD_CHANNEL);
 		NetworkHelper.registerPacket(RoadSignPlacementPacket.class);
 		NetworkHelper.registerPacket(RoadSignEditSignPacket.class);
+
+		for(IModule module : modules)
+			module.registerPackets();
+
 		NetworkHelper.clearChannel();
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.WORLD_GENS_SPEC, "World Generation.toml");
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.Misc.REGENERATING_ORES_SPEC, "Regenerating Ores.toml");
-        
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommonStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupServerStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClientStuff);
-        
+
+        BatModelExporter exporter = new BatModelExporter();
+		try {
+			exporter.writeModel();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+
 //        MaterialType woodType = new MaterialType("wood");
 //		String[] woods = {"acacia", "birch", "dark_oak", "jungle", "oak", "spruce"};
 //		
@@ -76,6 +103,10 @@ public class DarkRoleplayMedieval {
 		
 		//ModelLoaderRegistry.registerLoader(ModelQualityModelLoader.INSTANCE);
 		ClientRegistry.bindTileEntitySpecialRenderer(RoadSignTileEntity.class, new RoadSignTileEntityRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(ChoppingTileEntity.class, new ChoppingTileEntityRenderer());
+
+
+		ClientRegistry.bindTileEntitySpecialRenderer(ModelTesterTileEntity.class, new ModelTesterTileEntityRenderer());
 		ClientRegistry.registerKeyBinding(KeybindHandler.BLOCK_INTERACTOR);
 	}
 

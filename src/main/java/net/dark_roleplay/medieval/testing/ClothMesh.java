@@ -1,7 +1,5 @@
 package net.dark_roleplay.medieval.testing;
 
-import javafx.geometry.Point2D;
-import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 
 public class ClothMesh {

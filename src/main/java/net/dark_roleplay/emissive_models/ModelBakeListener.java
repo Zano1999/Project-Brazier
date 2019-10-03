@@ -1,4 +1,4 @@
-package net.dark_roleplay.medieval.objects.events;
+package net.dark_roleplay.emissive_models;
 
 import com.google.common.collect.ImmutableMap;
 import net.dark_roleplay.marg.api.Constants;

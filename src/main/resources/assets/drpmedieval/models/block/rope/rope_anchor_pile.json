@@ -1,0 +1,22 @@
+{
+	"credit": "Made by JTK222",
+	"textures": {
+		"0": "drpmedieval:white_box",
+		"particle": "drpmedieval:white_box"
+	},
+	"elements": [
+		{
+			"from": [2, 0, 2],
+			"to": [14, 5, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [10, 8, 10]},
+			"faces": {
+				"north": {"uv": [0, 0, 12, 5], "texture": "#0"},
+				"east": {"uv": [0, 0, 12, 5], "texture": "#0"},
+				"south": {"uv": [0, 0, 12, 5], "texture": "#0"},
+				"west": {"uv": [0, 0, 12, 5], "texture": "#0"},
+				"up": {"uv": [0, 0, 12, 12], "texture": "#0"},
+				"down": {"uv": [0, 0, 12, 12], "texture": "#0"}
+			}
+		}
+	]
+}

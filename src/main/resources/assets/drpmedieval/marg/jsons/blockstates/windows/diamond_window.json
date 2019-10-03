@@ -1,0 +1,68 @@
+{
+	"multipart": [
+		{   "when": { "facing": "north" },
+			"apply": {"model": "drpmedieval:block/wood_windows/diamond_%wood%_window", "y" : 180}
+		},
+		{   "when": { "facing": "east" },
+			"apply": {"model": "drpmedieval:block/wood_windows/diamond_%wood%_window", "y" : 270}
+		},
+		{   "when": { "facing": "south" },
+			"apply": {"model": "drpmedieval:block/wood_windows/diamond_%wood%_window"}
+		},
+		{   "when": { "facing": "west" },
+			"apply": {"model": "drpmedieval:block/wood_windows/diamond_%wood%_window", "y" : 90}
+		},
+
+		{   "when": { "facing": "north", "top" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_top", "y" : 180}
+		},
+		{   "when": { "facing": "east", "top" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_top", "y" : 270}
+		},
+		{   "when": { "facing": "south", "top" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_top"}
+		},
+		{   "when": { "facing": "west", "top" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_top", "y" : 90}
+		},
+
+		{   "when": { "facing": "north", "right" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_right", "y" : 180}
+		},
+		{   "when": { "facing": "east", "right" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_right", "y" : 270}
+		},
+		{   "when": { "facing": "south", "right" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_right"}
+		},
+		{   "when": { "facing": "west", "right" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_right", "y" : 90}
+		},
+
+		{   "when": { "facing": "north", "bottom" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_bottom", "y" : 180}
+		},
+		{   "when": { "facing": "east", "bottom" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_bottom", "y" : 270}
+		},
+		{   "when": { "facing": "south", "bottom" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_bottom"}
+		},
+		{   "when": { "facing": "west", "bottom" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_bottom", "y" : 90}
+		},
+
+		{   "when": { "facing": "north", "left" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_left", "y" : 180}
+		},
+		{   "when": { "facing": "east", "left" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_left", "y" : 270}
+		},
+		{   "when": { "facing": "south", "left" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_left"}
+		},
+		{   "when": { "facing": "west", "left" : "false"},
+			"apply": {"model": "drpmedieval:block/wood_windows/%wood%_window_left", "y" : 90}
+		}
+	]
+}

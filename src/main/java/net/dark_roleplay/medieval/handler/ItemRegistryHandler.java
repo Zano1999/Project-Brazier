@@ -5,14 +5,25 @@ import static net.dark_roleplay.medieval.holders.MedievalCreativeTabs.EQUIPMENT;
 import static net.dark_roleplay.medieval.holders.MedievalCreativeTabs.FOOD;
 import static net.dark_roleplay.medieval.holders.MedievalCreativeTabs.MISCELLANEOUS;
 import static net.dark_roleplay.medieval.holders.MedievalCreativeTabs.BUILDING;
+import static net.dark_roleplay.medieval.holders.MedievalCreativeTabs.UTILITY;
 
 import net.dark_roleplay.marg.api.Constants;
 import net.dark_roleplay.marg.api.MaterialRequirements;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.holders.MedievalBlocks;
 import net.dark_roleplay.medieval.holders.MedievalFoods;
+import net.dark_roleplay.medieval.objects.blocks.building.wooden_window.WoodenWindowBlock;
+import net.dark_roleplay.medieval.objects.blocks.utility.RopeAnchor;
+import net.dark_roleplay.medieval.objects.blocks.utility.RopeLadder;
+import net.dark_roleplay.medieval.objects.blocks.utility.RopeLadderAnchor;
+import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingBlock;
+import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntity;
 import net.dark_roleplay.medieval.objects.items.equipment.misc.RoadSignItem;
 import net.dark_roleplay.medieval.objects.items.equipment.tools.ItemTelescope;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Foods;
@@ -124,11 +135,19 @@ public class ItemRegistryHandler {
 		reg(new BlockItem(MedievalBlocks.LARGE_RIVERSTONE_DARK, new Properties().group(BUILDING)), "large_riverstone_dark");
 
 		reg(new BlockItem(MedievalBlocks.CLEAN_TIMBERED_CLAY, new Properties().group(BUILDING)), "clean_timbered_clay");
+		reg(new BlockItem(MedievalBlocks.ROPE_ANCHOR, new Properties().group(UTILITY)), "rope_anchor");
+		reg(new BlockItem(MedievalBlocks.OAK_ROPE_LADDER, new Properties().group(UTILITY)), "oak_rope_ladder");
+		reg(new BlockItem(MedievalBlocks.OAK_ROPE_LADDER_ANCHOR, new Properties().group(UTILITY)), "oak_rope_ladder_anchor");
 
 		// registry = null;
 
-		MaterialRequirements planks = new MaterialRequirements(Constants.MAT_WOOD, "planks");
+		MaterialRequirements log = new MaterialRequirements(Constants.MAT_WOOD, Constants.MatWood.LOG_SIDE, Constants.MatWood.LOG_TOP);
 
+		log.execute(material -> {
+			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, material.getNamed("%wood%_chopping_block"))), new Properties().group(UTILITY)), material.getNamed("%wood%_chopping_block"));
+		});
+
+		MaterialRequirements planks = new MaterialRequirements(Constants.MAT_WOOD, "planks");
 		planks.execute(material -> {
 			reg(new RoadSignItem(
 					new Properties().group(MISCELLANEOUS),
@@ -148,6 +167,13 @@ public class ItemRegistryHandler {
 			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_platform", material.getName()))), new Properties().group(BUILDING)), String.format("%s_platform", material.getName()));
 			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_platform_stairs", material.getName()))), new Properties().group(BUILDING)), String.format("%s_platform_stairs", material.getName()));
 			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, String.format("%s_road_sign", material.getName()))), new Properties().group(DECORATION)), String.format("%s_road_sign", material.getName()));
+
+			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, material.getNamed("vertical_%wood%_window"))), new Properties().group(BUILDING)), material.getNamed("vertical_%wood%_window"));
+			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, material.getNamed("dense_vertical_%wood%_window"))), new Properties().group(BUILDING)), material.getNamed("dense_vertical_%wood%_window"));
+			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, material.getNamed("cross_%wood%_window"))), new Properties().group(BUILDING)), material.getNamed("cross_%wood%_window"));
+			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, material.getNamed("grid_%wood%_window"))), new Properties().group(BUILDING)), material.getNamed("grid_%wood%_window"));
+			reg(new BlockItem(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DarkRoleplayMedieval.MODID, material.getNamed("diamond_%wood%_window"))), new Properties().group(BUILDING)), material.getNamed("diamond_%wood%_window"));
+
 		});
 	}
 
