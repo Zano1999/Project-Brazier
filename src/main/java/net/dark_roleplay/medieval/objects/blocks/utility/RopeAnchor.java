@@ -1,6 +1,7 @@
 package net.dark_roleplay.medieval.objects.blocks.utility;
 
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
+import net.dark_roleplay.medieval.handler_2.MBlocks;
 import net.dark_roleplay.medieval.holders.MedievalBlocks;
 import net.dark_roleplay.medieval.holders.MedievalTileEntities;
 import net.dark_roleplay.medieval.objects.blocks.templates.HorizontalBlock;
@@ -68,9 +69,9 @@ public class RopeAnchor extends HorizontalBlock {
             for(int i = 1; i < 16; i++){
                 BlockPos downPos = pos.offset(direction).offset(Direction.DOWN, i);
                 if(world.isAirBlock(downPos)){
-                    world.setBlockState(downPos, MedievalBlocks.ROPE.getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(Rope.IS_PILE, false));
+                    world.setBlockState(downPos, MBlocks.ROPE.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(Rope.IS_PILE, false));
                 }else{
-                    world.setBlockState(downPos.up(), MedievalBlocks.ROPE.getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(Rope.IS_PILE, true));
+                    world.setBlockState(downPos.up(), MBlocks.ROPE.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(Rope.IS_PILE, true));
                     break;
                 }
             }
@@ -83,7 +84,7 @@ public class RopeAnchor extends HorizontalBlock {
         Direction direction = state.get(HORIZONTAL_FACING);
         for(int i = 1; i < 16; i++){
             BlockPos downPos = pos.offset(direction).offset(Direction.DOWN, i);
-            if(world.getBlockState(downPos).getBlock() == MedievalBlocks.ROPE){
+            if(world.getBlockState(downPos).getBlock() == MBlocks.ROPE.get()){
                 world.destroyBlock(downPos, false);
             }else{
                 break;

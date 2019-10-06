@@ -12,24 +12,11 @@ import net.dark_roleplay.marg.api.MaterialRequirements;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.holders.MedievalBlocks;
 import net.dark_roleplay.medieval.holders.MedievalFoods;
-import net.dark_roleplay.medieval.objects.blocks.building.wooden_window.WoodenWindowBlock;
-import net.dark_roleplay.medieval.objects.blocks.utility.RopeAnchor;
-import net.dark_roleplay.medieval.objects.blocks.utility.RopeLadder;
-import net.dark_roleplay.medieval.objects.blocks.utility.RopeLadderAnchor;
-import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingBlock;
-import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntity;
 import net.dark_roleplay.medieval.objects.items.equipment.misc.RoadSignItem;
 import net.dark_roleplay.medieval.objects.items.equipment.tools.ItemTelescope;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Food;
-import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
-import net.minecraft.item.SoupItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -51,28 +38,7 @@ public class ItemRegistryHandler {
 
 		// FOOD
 //		new Food(0, 0, false, false, false, null);
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.BELL_PEPPER)), "bell_pepper");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.BLUEBERRIES)), "blueberries");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.BUTTER)), "butter");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.CARAMELIZED_APPLE)), "caramelized_green_apple");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.CARAMELIZED_APPLE)), "caramelized_red_apple");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.CARAMELIZED_APPLE)), "caramelized_yellow_apple");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.CAULIFLOWER)), "cauliflower");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.EGGPLANT)), "eggplant");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.GARLIC)), "garlic");
-		reg(new Item(new Properties().group(FOOD).food(Foods.APPLE)), "green_apple");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.PEAR)), "green_pear");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.GRILLED_CATFISH)), "grilled_catfish");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.GRILLED_WOLF)), "grilled_wolf");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.HONEY_COMB)), "honey_comb");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.HOPS)), "hops");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.ONION)), "onion");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.RAW_CATFISH)), "raw_catfish");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.RAW_WOLF)), "raw_wolf");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.GRAPES)), "red_grapes");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.TURNIP)), "turnip");
-		reg(new Item(new Properties().group(FOOD).food(Foods.APPLE)), "yellow_apple");
-		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.PEAR)), "yellow_pear");
+
 		
 		reg(new Item(new Properties().group(FOOD).food(MedievalFoods.SPRUCE_TEA)), "spruce_tea");//TODO Change to cup based.
 		
@@ -123,21 +89,6 @@ public class ItemRegistryHandler {
 		reg(new Item(new Properties().group(MISCELLANEOUS)), "wheat_flour");
 		reg(new Item(new Properties().group(MISCELLANEOUS)), "wolf_fur");
 		reg(new Item(new Properties().group(MISCELLANEOUS)), "wooden_cup");
-
-		reg(new BlockItem(MedievalBlocks.TORCH_HOLDER, new Properties().group(DECORATION)), "torch_holder");
-		reg(new BlockItem(MedievalBlocks.WALL_BRAZIER, new Properties().group(DECORATION)), "wall_brazier");
-		reg(new BlockItem(MedievalBlocks.JAIL_LATTICE, new Properties().group(DECORATION)), "jail_lattice");
-
-		reg(new BlockItem(MedievalBlocks.RIVERSTONE, new Properties().group(BUILDING)), "riverstone");
-		reg(new BlockItem(MedievalBlocks.RIVERSTONE_COLORED, new Properties().group(BUILDING)), "riverstone_colored");
-		reg(new BlockItem(MedievalBlocks.RIVERSTONE_COLORED_PALE, new Properties().group(BUILDING)), "riverstone_colored_pale");
-		reg(new BlockItem(MedievalBlocks.LARGE_RIVERSTONE, new Properties().group(BUILDING)), "large_riverstone");
-		reg(new BlockItem(MedievalBlocks.LARGE_RIVERSTONE_DARK, new Properties().group(BUILDING)), "large_riverstone_dark");
-
-		reg(new BlockItem(MedievalBlocks.CLEAN_TIMBERED_CLAY, new Properties().group(BUILDING)), "clean_timbered_clay");
-		reg(new BlockItem(MedievalBlocks.ROPE_ANCHOR, new Properties().group(UTILITY)), "rope_anchor");
-		reg(new BlockItem(MedievalBlocks.OAK_ROPE_LADDER, new Properties().group(UTILITY)), "oak_rope_ladder");
-		reg(new BlockItem(MedievalBlocks.OAK_ROPE_LADDER_ANCHOR, new Properties().group(UTILITY)), "oak_rope_ladder_anchor");
 
 		// registry = null;
 

@@ -49,26 +49,6 @@ public class BlockRegistryHandler {
 	public static void registerItems(RegistryEvent.Register<Block> registryEvent) {
 		registry = registryEvent.getRegistry();
 
-		reg(new TorchHolderBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.METAL)), "torch_holder");
-		reg(new AdventWreathBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(1.0F, 1.0F).sound(SoundType.PLANT)), "advent_wreath");
-		reg(new WallBrazierBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.METAL)), "wall_brazier");
-
-		reg(new JailLatticeBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.METAL)), "jail_lattice");
-
-		reg(new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F)), "riverstone");
-		reg(new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F)), "large_riverstone");
-		reg(new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F)), "large_riverstone_dark");
-		reg(new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F)), "riverstone_colored");
-		reg(new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F)), "riverstone_colored_pale");
-
-		reg(new RopeAnchor(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), "rope_anchor", AnchorTileEntity.class);
-		reg(new Rope(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), "rope");
-		reg(new RopeLadderAnchor(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), "oak_rope_ladder_anchor", AnchorTileEntity.class);
-		reg(new RopeLadder(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD)), "oak_rope_ladder");
-
-		reg(new ModelTesterBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD)), "model_tester");
-
-		reg(new Block(PLACEHOLDER), "clean_timbered_clay");
 
 		MaterialRequirements planks = new MaterialRequirements(Constants.MAT_WOOD, "planks");
 		MaterialRequirements log = new MaterialRequirements(Constants.MAT_WOOD, Constants.MatWood.LOG_SIDE, Constants.MatWood.LOG_TOP);

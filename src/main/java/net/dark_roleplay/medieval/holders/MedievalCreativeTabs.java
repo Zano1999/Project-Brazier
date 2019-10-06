@@ -1,5 +1,6 @@
 package net.dark_roleplay.medieval.holders;
 
+import net.dark_roleplay.medieval.handler_2.MBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -8,7 +9,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class MedievalCreativeTabs {
 
-	//TODO Updateh Items
+	//TODO Updateh MItems
 	public static final ItemGroup DECORATION = new ItemGroup("drpmedieval.decoration") {
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
@@ -19,7 +20,7 @@ public class MedievalCreativeTabs {
 	public static final ItemGroup BUILDING = new ItemGroup("drpmedieval.building") {
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
-			return new ItemStack(MedievalBlocks.ADVENT_WREATH);
+			return new ItemStack(MBlocks.ADVENT_WREATH.get());
 		}
 	};
 	
@@ -54,7 +55,7 @@ public class MedievalCreativeTabs {
 //	public static final ItemGroup CREATIVE = new ItemGroup("drpmedieval.creative_only") {
 //		@OnlyIn(Dist.CLIENT)
 //		public ItemStack createIcon() {
-//			return new ItemStack(Blocks.BARRIER.asItem());
+//			return new ItemStack(MBlocks.BARRIER.asItem());
 //		}
 //	};
 }
