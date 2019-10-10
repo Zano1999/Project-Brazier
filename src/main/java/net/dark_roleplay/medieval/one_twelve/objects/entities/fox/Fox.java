@@ -14,7 +14,7 @@ public class Fox{}/* extends EntityCreature implements IWorldNameable{
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
         this.tasks.addTask(3, new EntityAIPanic(this, 0.8D));
-        this.tasks.addTask(4, new EntityAITempt(this, 0.8D, MItems.WHEAT, false));
+        this.tasks.addTask(4, new EntityAITempt(this, 0.8D, MedievalItems.WHEAT, false));
 
         this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.7D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));

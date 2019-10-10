@@ -35,7 +35,7 @@ public class RoadSignTileEntity extends TileEntity {
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			//TODO add Sign MItems
+			//TODO add Sign MedievalItems
 		}
 
 		return super.getCapability(capability, side);

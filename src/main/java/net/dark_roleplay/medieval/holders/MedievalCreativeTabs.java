@@ -1,6 +1,8 @@
 package net.dark_roleplay.medieval.holders;
 
-import net.dark_roleplay.medieval.handler_2.MBlocks;
+import net.dark_roleplay.marg.api.Materials;
+import net.dark_roleplay.medieval.handler_2.MedievalBlocks;
+import net.dark_roleplay.medieval.handler_2.MedievalItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -9,18 +11,18 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class MedievalCreativeTabs {
 
-	//TODO Updateh MItems
+	//TODO Updateh MedievalItems
 	public static final ItemGroup DECORATION = new ItemGroup("drpmedieval.decoration") {
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
-			return new ItemStack(MedievalItems.OAK_SOLID_CHAIR_ARMREST);
-		}
+			return new ItemStack(MedievalBlocks.TORCH_HOLDER.get());
+	}
 	};
 	
 	public static final ItemGroup BUILDING = new ItemGroup("drpmedieval.building") {
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
-			return new ItemStack(MBlocks.ADVENT_WREATH.get());
+			return new ItemStack(MedievalBlocks.ADVENT_WREATH.get());
 		}
 	};
 	
@@ -34,7 +36,7 @@ public class MedievalCreativeTabs {
 	public static final ItemGroup FOOD = new ItemGroup("drpmedieval.food") {
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
-			return new ItemStack(MedievalItems.CARAMELIZED_RED_APPLE);
+			return new ItemStack(MedievalItems.RED_CARAMELIZED_APPLE.get());
 		}
 	};
 	
@@ -55,7 +57,7 @@ public class MedievalCreativeTabs {
 //	public static final ItemGroup CREATIVE = new ItemGroup("drpmedieval.creative_only") {
 //		@OnlyIn(Dist.CLIENT)
 //		public ItemStack createIcon() {
-//			return new ItemStack(MBlocks.BARRIER.asItem());
+//			return new ItemStack(MedievalBlocks.BARRIER.asItem());
 //		}
 //	};
 }

@@ -1,16 +1,11 @@
 package net.dark_roleplay.medieval.objects.blocks.utility;
 
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.handler_2.MBlocks;
-import net.dark_roleplay.medieval.holders.MedievalBlocks;
-import net.dark_roleplay.medieval.holders.MedievalTileEntities;
+import net.dark_roleplay.medieval.handler_2.MedievalBlocks;
 import net.dark_roleplay.medieval.objects.blocks.templates.HorizontalBlock;
 import net.dark_roleplay.medieval.util.AdvancedInteractionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -18,7 +13,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 
 import javax.annotation.Nullable;
 
@@ -69,9 +63,9 @@ public class RopeAnchor extends HorizontalBlock {
             for(int i = 1; i < 16; i++){
                 BlockPos downPos = pos.offset(direction).offset(Direction.DOWN, i);
                 if(world.isAirBlock(downPos)){
-                    world.setBlockState(downPos, MBlocks.ROPE.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(Rope.IS_PILE, false));
+                    world.setBlockState(downPos, MedievalBlocks.ROPE.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(Rope.IS_PILE, false));
                 }else{
-                    world.setBlockState(downPos.up(), MBlocks.ROPE.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(Rope.IS_PILE, true));
+                    world.setBlockState(downPos.up(), MedievalBlocks.ROPE.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(Rope.IS_PILE, true));
                     break;
                 }
             }
@@ -84,7 +78,7 @@ public class RopeAnchor extends HorizontalBlock {
         Direction direction = state.get(HORIZONTAL_FACING);
         for(int i = 1; i < 16; i++){
             BlockPos downPos = pos.offset(direction).offset(Direction.DOWN, i);
-            if(world.getBlockState(downPos).getBlock() == MBlocks.ROPE.get()){
+            if(world.getBlockState(downPos).getBlock() == MedievalBlocks.ROPE.get()){
                 world.destroyBlock(downPos, false);
             }else{
                 break;

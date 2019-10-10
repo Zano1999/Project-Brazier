@@ -5,8 +5,8 @@ import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntity;
 import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntityRenderer;
 import net.dark_roleplay.library.networking.NetworkHelper;
 import net.dark_roleplay.medieval.handler.KeybindHandler;
-import net.dark_roleplay.medieval.handler_2.MBlocks;
-import net.dark_roleplay.medieval.handler_2.MItems;
+import net.dark_roleplay.medieval.handler_2.MedievalBlocks;
+import net.dark_roleplay.medieval.handler_2.MedievalItems;
 import net.dark_roleplay.medieval.holders.MedievalConfigs;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntityRenderer;
@@ -39,8 +39,8 @@ public class DarkRoleplayMedieval {
 	private IModule[] modules = {new TertiaryInteractionModule()};
 
 	public DarkRoleplayMedieval() {
-		MItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		MedievalItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        MedievalBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
 		DarkRoleplayMedieval.MOD_CHANNEL = NetworkRegistry.ChannelBuilder
 				.named(new ResourceLocation(DarkRoleplayMedieval.MODID, "main_channel"))
@@ -122,10 +122,10 @@ public class DarkRoleplayMedieval {
 //
 //		((UnlitWallMount)MedievalBlocks.CANDLE_HOLDER_UNLIT).init(MedievalBlocks.CANDLE_HOLDER_LIT, Item.getItemFromBlock(MedievalBlocks.BEESWAX_CANDLE));;
 //		((LitWallMount)MedievalBlocks.CANDLE_HOLDER_LIT).init(MedievalBlocks.CANDLE_HOLDER_UNLIT, Item.getItemFromBlock(MedievalBlocks.BEESWAX_CANDLE));
-//		((UnlitWallMount)MedievalBlocks.TORCH_HOLDER_UNLIT).init(MedievalBlocks.TORCH_HOLDER_LIT, Item.getItemFromBlock(MBlocks.TORCH));
-//		((LitWallMount)MedievalBlocks.TORCH_HOLDER_LIT).init(MedievalBlocks.TORCH_HOLDER_UNLIT, Item.getItemFromBlock(MBlocks.TORCH));
+//		((UnlitWallMount)MedievalBlocks.TORCH_HOLDER_UNLIT).init(MedievalBlocks.TORCH_HOLDER_LIT, Item.getItemFromBlock(MedievalBlocks.TORCH));
+//		((LitWallMount)MedievalBlocks.TORCH_HOLDER_LIT).init(MedievalBlocks.TORCH_HOLDER_UNLIT, Item.getItemFromBlock(MedievalBlocks.TORCH));
 //		((EmptyWallMount)MedievalBlocks.CANDLE_HOLDER_EMPTY).init(MedievalBlocks.CANDLE_HOLDER_UNLIT, Item.getItemFromBlock(MedievalBlocks.BEESWAX_CANDLE));
-//		((EmptyWallMount)MedievalBlocks.TORCH_HOLDER_EMPTY).init(MedievalBlocks.TORCH_HOLDER_UNLIT, Item.getItemFromBlock(MBlocks.TORCH));
+//		((EmptyWallMount)MedievalBlocks.TORCH_HOLDER_EMPTY).init(MedievalBlocks.TORCH_HOLDER_UNLIT, Item.getItemFromBlock(MedievalBlocks.TORCH));
 //
 //		((AdvancedOre)MedievalBlocks.SALPETER_ORE).init(MedievalItems.SALPETER_ORE_CHUNK);
 //		((AdvancedOre)MedievalBlocks.SILVER_ORE).init(MedievalItems.SILVER_ORE_CHUNK);
@@ -133,22 +133,22 @@ public class DarkRoleplayMedieval {
 //		((AdvancedOre)MedievalBlocks.COPPER_ORE).init(MedievalItems.COPPER_ORE_CHUNK);
 //		((AdvancedOre)MedievalBlocks.SULFUR_ORE).init(MedievalItems.SULFUR_ORE_CHUNK);
 //
-//		((RegeneratingOre)MedievalBlocks.REGENERATING_EMERALD_ORE).setOre(MBlocks.EMERALD_ORE);
-//		((RegeneratingOre)MedievalBlocks.REGENERATING_DIAMOND_ORE).setOre(MBlocks.DIAMOND_ORE);
-//		((RegeneratingOre)MedievalBlocks.REGENERATING_LAPIS_ORE).setOre(MBlocks.LAPIS_ORE);
-//		((RegeneratingOre)MedievalBlocks.REGENERATING_REDSTONE_ORE).setOre(MBlocks.REDSTONE_ORE);
-//		((RegeneratingOre)MedievalBlocks.REGENERATING_GOLD_ORE).setOre(MBlocks.GOLD_ORE);
-//		((RegeneratingOre)MedievalBlocks.REGENERATING_IRON_ORE).setOre(MBlocks.IRON_ORE);
-//		((RegeneratingOre)MedievalBlocks.REGENERATING_COAL_ORE).setOre(MBlocks.COAL_ORE);
-//		((RegeneratingOre)MedievalBlocks.REGENERATING_QUARTZ_ORE).setOre(MBlocks.QUARTZ_ORE);
+//		((RegeneratingOre)MedievalBlocks.REGENERATING_EMERALD_ORE).setOre(MedievalBlocks.EMERALD_ORE);
+//		((RegeneratingOre)MedievalBlocks.REGENERATING_DIAMOND_ORE).setOre(MedievalBlocks.DIAMOND_ORE);
+//		((RegeneratingOre)MedievalBlocks.REGENERATING_LAPIS_ORE).setOre(MedievalBlocks.LAPIS_ORE);
+//		((RegeneratingOre)MedievalBlocks.REGENERATING_REDSTONE_ORE).setOre(MedievalBlocks.REDSTONE_ORE);
+//		((RegeneratingOre)MedievalBlocks.REGENERATING_GOLD_ORE).setOre(MedievalBlocks.GOLD_ORE);
+//		((RegeneratingOre)MedievalBlocks.REGENERATING_IRON_ORE).setOre(MedievalBlocks.IRON_ORE);
+//		((RegeneratingOre)MedievalBlocks.REGENERATING_COAL_ORE).setOre(MedievalBlocks.COAL_ORE);
+//		((RegeneratingOre)MedievalBlocks.REGENERATING_QUARTZ_ORE).setOre(MedievalBlocks.QUARTZ_ORE);
 //
-//		GameRegistry.addSmelting(MedievalItems.WHEAT_DOUGH, new ItemStack(MItems.BREAD), 0.1f);
-//		GameRegistry.addSmelting(MedievalItems.BARLEY_DOUGH, new ItemStack(MItems.BREAD), 0.1f);
+//		GameRegistry.addSmelting(MedievalItems.WHEAT_DOUGH, new ItemStack(MedievalItems.BREAD), 0.1f);
+//		GameRegistry.addSmelting(MedievalItems.BARLEY_DOUGH, new ItemStack(MedievalItems.BREAD), 0.1f);
 //		GameRegistry.addSmelting(MedievalItems.RAW_WOLF, new ItemStack(MedievalItems.COOKED_WOLF), 0.1f);
 //		GameRegistry.addSmelting(MedievalItems.RAW_CATFISH, new ItemStack(MedievalItems.COOKED_CATFISH), 0.1f);
 //		GameRegistry.addSmelting(MedievalItems.WHEAT_PUMPKIN_DOUGH, new ItemStack(MedievalItems.PUMPKIN_BREAD), 0.1f);
 //		GameRegistry.addSmelting(MedievalItems.BARLEY_PUMPKIN_DOUGH, new ItemStack(MedievalItems.PUMPKIN_BREAD), 0.1f);
-//		GameRegistry.addSmelting(Item.getItemFromBlock(MBlocks.OBSIDIAN), new ItemStack(MedievalBlocks.OBSIDIAN_GLASS), 0.1f);
+//		GameRegistry.addSmelting(Item.getItemFromBlock(MedievalBlocks.OBSIDIAN), new ItemStack(MedievalBlocks.OBSIDIAN_GLASS), 0.1f);
 //		GameRegistry.addSmelting(Item.getItemFromBlock(MedievalBlocks.UNFIRED_VASE), new ItemStack(MedievalBlocks.FIRED_VASE), 0.1f);
 //	}
 

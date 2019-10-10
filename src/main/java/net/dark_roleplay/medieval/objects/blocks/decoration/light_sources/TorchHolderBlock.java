@@ -4,7 +4,6 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import net.dark_roleplay.medieval.holders.MedievalItems;
 import net.dark_roleplay.medieval.objects.enums.TorchHolderEnums.Addons;
 import net.dark_roleplay.medieval.objects.enums.TorchHolderEnums.Torch;
 import net.minecraft.block.Block;

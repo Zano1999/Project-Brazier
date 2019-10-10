@@ -11,10 +11,10 @@ public class RoadSignItem extends Item {
     private ResourceLocation signModelRight;
     private Material material;
 
-    public RoadSignItem(Properties properties, Material material, ResourceLocation signModelLeft, ResourceLocation signModelRight) {
+    public RoadSignItem(Properties properties, Material material, String modelLoc) {
         super(properties);
-        this.signModelLeft = signModelLeft;
-        this.signModelRight = signModelRight;
+        this.signModelLeft = new ResourceLocation(material.getNamed(String.format(modelLoc, "left")));
+        this.signModelRight = new ResourceLocation(material.getNamed(String.format(modelLoc, "right")));
         this.material = material;
     }
 
