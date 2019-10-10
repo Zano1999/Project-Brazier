@@ -7,6 +7,7 @@ import net.dark_roleplay.medieval.objects.blocks.building.jail_lattice.JailLatti
 import net.dark_roleplay.medieval.objects.blocks.building.platforms.WoodPlatformBlock;
 import net.dark_roleplay.medieval.objects.blocks.building.platforms.WoodPlatformStairsBlock;
 import net.dark_roleplay.medieval.objects.blocks.building.timbered_clay.TimberedClay;
+import net.dark_roleplay.medieval.objects.blocks.building.wood_stairs.SimpleWoodStairs;
 import net.dark_roleplay.medieval.objects.blocks.building.wooden_window.WoodenWindowBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.advent_wreath.AdventWreathBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.benches.BenchBlock;
@@ -44,6 +45,8 @@ public class MedievalBlocks {
 
     private static final MaterialRequirements logMat = new MaterialRequirements(Constants.MAT_WOOD, Constants.MatWood.LOG_SIDE, Constants.MatWood.LOG_TOP);
     private static final MaterialRequirements plankMat = new MaterialRequirements(Constants.MAT_WOOD, "planks");
+    private static final MaterialRequirements logPlankMat = new MaterialRequirements(Constants.MAT_WOOD, Constants.MatWood.LOG_SIDE, Constants.MatWood.LOG_TOP, "planks");
+
 
     public static final RegistryObject<Block>
         TORCH_HOLDER                = BLOCKS.register("torch_holder", () -> new TorchHolderBlock(metalBaseProperties)),
@@ -63,16 +66,17 @@ public class MedievalBlocks {
 
     public static final Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Block>>
         CHOPPING_BLOCK              = materialRegister(logMat, "%wood%_chopping_block", () -> new ChoppingBlock(woodBaseProperties)),
-        VERTICAL_WOOD_WINDOW        = materialRegister(plankMat, "vertical_%wood%_block", () -> new WoodenWindowBlock(woodBaseProperties)),
-        DENSE_VERTICAL_WOOD_WINDOW  = materialRegister(plankMat, "dense_vertical_%wood%_block", () -> new WoodenWindowBlock(woodBaseProperties)),
-        CROSS_WOOD_WINDOW           = materialRegister(plankMat, "cross_%wood%_block", () -> new WoodenWindowBlock(woodBaseProperties)),
-        GRID_WOOD_WINDOW            = materialRegister(plankMat, "grid_%wood%_block", () -> new WoodenWindowBlock(woodBaseProperties)),
-        DIAMOND_WOOD_WINDOW         = materialRegister(plankMat, "diamond_%wood%_block", () -> new WoodenWindowBlock(woodBaseProperties)),
+        SIMPLE_WOOD_STAIRS          = materialRegister(logPlankMat, "simple_%wood%_stairs", () -> new SimpleWoodStairs(woodBaseProperties)),
+        VERTICAL_WOOD_WINDOW        = materialRegister(plankMat, "vertical_%wood%_window", () -> new WoodenWindowBlock(woodBaseProperties)),
+        DENSE_VERTICAL_WOOD_WINDOW  = materialRegister(plankMat, "dense_vertical_%wood%_window", () -> new WoodenWindowBlock(woodBaseProperties)),
+        CROSS_WOOD_WINDOW           = materialRegister(plankMat, "cross_%wood%_window", () -> new WoodenWindowBlock(woodBaseProperties)),
+        GRID_WOOD_WINDOW            = materialRegister(plankMat, "grid_%wood%_window", () -> new WoodenWindowBlock(woodBaseProperties)),
+        DIAMOND_WOOD_WINDOW         = materialRegister(plankMat, "diamond_%wood%_window", () -> new WoodenWindowBlock(woodBaseProperties)),
         SOLID_WOOD_TABLE            = materialRegister(plankMat, "solid_%wood%_table", () -> new SimpleTable(woodBaseProperties)),
         WOOD_PLANK_CHAIR            = materialRegister(plankMat, "%wood%_plank_chair", () -> new PlankChairBlock(woodBaseProperties)),
         WOOD_SOLID_CHAIR            = materialRegister(plankMat, "%wood%_solid_chair", () -> new SolidChairBlock(woodBaseProperties)),
         WOOD_SOLID_BENCH            = materialRegister(plankMat, "%wood%_solid_bench", () -> new BenchBlock(woodBaseProperties)),
-        WOOD_PLATFORM = materialRegister(plankMat, "%wood%_platform", () -> new WoodPlatformBlock(woodBaseProperties)),
+        WOOD_PLATFORM               = materialRegister(plankMat, "%wood%_platform", () -> new WoodPlatformBlock(woodBaseProperties)),
         WOOD_PLATFORM_STAIRS        = materialRegister(plankMat, "%wood%_platform_stairs", () -> new WoodPlatformStairsBlock(woodBaseProperties)),
         WOOD_ROAD_SIGN              = materialRegister(plankMat, "%wood%_road_sign", () -> new RoadSign(woodBaseProperties)), //Needs TE
         WOOD_SOLID_ARMREST_CHAIR    = materialRegister(plankMat, "%wood%_solid_chair_armrest", () -> new SolidChairArmrestBlock(woodBaseProperties)), //Needs TE

@@ -39,8 +39,8 @@ public class DarkRoleplayMedieval {
 	private IModule[] modules = {new TertiaryInteractionModule()};
 
 	public DarkRoleplayMedieval() {
+		MedievalBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MedievalItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MedievalBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
 		DarkRoleplayMedieval.MOD_CHANNEL = NetworkRegistry.ChannelBuilder
 				.named(new ResourceLocation(DarkRoleplayMedieval.MODID, "main_channel"))

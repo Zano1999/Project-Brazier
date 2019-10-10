@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import net.dark_roleplay.medieval.handler_2.MedievalItems;
 import net.dark_roleplay.medieval.objects.enums.TorchHolderEnums.Addons;
 import net.dark_roleplay.medieval.objects.enums.TorchHolderEnums.Torch;
 import net.minecraft.block.Block;
@@ -86,7 +87,7 @@ public class TorchHolderBlock extends Block {
 		}
 
 		if (state.get(ADDONS) == Addons.NONE) {
-			if (heldItem.getItem() == MedievalItems.TRIGGER_TRAP) {
+			if (heldItem.getItem() == MedievalItems.TRIGGER_TRAP.get()) {
 				world.setBlockState(pos, state.with(ADDONS, Addons.LEVER), 3);
 				world.playSound(null, pos, SoundEvents.ENTITY_ITEM_FRAME_ADD_ITEM, SoundCategory.PLAYERS, 1F, 1F);
 				if (!player.isCreative())
