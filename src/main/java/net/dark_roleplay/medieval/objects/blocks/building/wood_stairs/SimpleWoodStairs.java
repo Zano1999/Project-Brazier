@@ -20,9 +20,12 @@ public class SimpleWoodStairs extends HorizontalBlock {
     public static final BooleanProperty GROUNDED = BooleanProperty.create("grounded");
     public static final EnumProperty<WoodStairsType> TYPE = EnumProperty.create("type", WoodStairsType.class);
 
-
     public SimpleWoodStairs(Properties properties) {
         super(properties);
+        setShapes(
+                Block.makeCuboidShape(0, 0, 0, 16, 16, 16)
+        );
+        this.setDefaultState(this.getDefaultState().with(GROUNDED, true).with(TYPE, WoodStairsType.DOUBLE));
     }
 
     @Override
@@ -50,7 +53,11 @@ public class SimpleWoodStairs extends HorizontalBlock {
 
     @Override
     public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
-        if(facing != Direction.DOWN) return state;
-        return state.with(GROUNDED, world.getBlockState(facingPos).func_224755_d(world, facingPos, Direction.UP));
+        if(facing == Direction.DOWN)
+            return state.with(GROUNDED, world.getBlockState(facingPos).func_224755_d(world, facingPos, Direction.UP));
+        else if(facing == state.get(HORIZONTAL_FACING).rotateY() || facing == state.get(HORIZONTAL_FACING).rotateYCCW())
+            return state.with(TYPE, (facingState.getBlock() == this ? WoodStairsType.SINGLE : WoodStairsType.DOUBLE));
+        else
+            return state;
     }
 }
