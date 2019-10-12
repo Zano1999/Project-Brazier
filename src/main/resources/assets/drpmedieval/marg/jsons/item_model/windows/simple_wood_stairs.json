@@ -1,0 +1,7 @@
+{
+  "parent": "drpmedieval:item/simple_wood_stairs",
+  "textures": {
+    "planks": "marg:block/planks/%wood%_planks",
+    "bark": "marg:block/log_side/%wood%_log_side"
+  }
+}d

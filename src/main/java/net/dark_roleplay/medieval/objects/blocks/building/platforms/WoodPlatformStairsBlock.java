@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 import net.dark_roleplay.medieval.objects.blocks.templates.HorizontalBlock;
 import net.dark_roleplay.medieval.objects.enums.PlatformHeight;
 import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper;
-import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper.RotationAmount;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
@@ -43,13 +42,13 @@ public class WoodPlatformStairsBlock extends HorizontalBlock{
 	
 	protected void setShapes(VoxelShape full, VoxelShape half) {
 		this.shapesFull.put(Direction.NORTH, full);
-		this.shapesFull.put(Direction.EAST, VoxelShapeHelper.rotateShape(full, RotationAmount.NINETY));
-		this.shapesFull.put(Direction.SOUTH, VoxelShapeHelper.rotateShape(full, RotationAmount.HUNDRED_EIGHTY));
-		this.shapesFull.put(Direction.WEST, VoxelShapeHelper.rotateShape(full, RotationAmount.TWO_HUNDRED_SEVENTY));
+		this.shapesFull.put(Direction.EAST, VoxelShapeHelper.rotateShape(full, Direction.EAST));
+		this.shapesFull.put(Direction.SOUTH, VoxelShapeHelper.rotateShape(full, Direction.SOUTH));
+		this.shapesFull.put(Direction.WEST, VoxelShapeHelper.rotateShape(full, Direction.WEST));
 		this.shapesHalf.put(Direction.NORTH, half);
-		this.shapesHalf.put(Direction.EAST, VoxelShapeHelper.rotateShape(half, RotationAmount.NINETY));
-		this.shapesHalf.put(Direction.SOUTH, VoxelShapeHelper.rotateShape(half, RotationAmount.HUNDRED_EIGHTY));
-		this.shapesHalf.put(Direction.WEST, VoxelShapeHelper.rotateShape(half, RotationAmount.TWO_HUNDRED_SEVENTY));
+		this.shapesHalf.put(Direction.EAST, VoxelShapeHelper.rotateShape(half, Direction.EAST));
+		this.shapesHalf.put(Direction.SOUTH, VoxelShapeHelper.rotateShape(half, Direction.SOUTH));
+		this.shapesHalf.put(Direction.WEST, VoxelShapeHelper.rotateShape(half, Direction.WEST));
 	}
 	
 
