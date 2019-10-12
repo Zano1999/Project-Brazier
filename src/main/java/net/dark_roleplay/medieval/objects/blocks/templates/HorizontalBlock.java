@@ -5,7 +5,6 @@ import java.util.EnumMap;
 import javax.annotation.Nullable;
 
 import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper;
-import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper.RotationAmount;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -33,9 +32,9 @@ public abstract class HorizontalBlock extends Block {
 
 	protected void setShapes(VoxelShape north) {
 		this.shapes.put(Direction.NORTH, north);
-		this.shapes.put(Direction.EAST, VoxelShapeHelper.rotateShape(north, RotationAmount.NINETY));
-		this.shapes.put(Direction.SOUTH, VoxelShapeHelper.rotateShape(north, RotationAmount.HUNDRED_EIGHTY));
-		this.shapes.put(Direction.WEST, VoxelShapeHelper.rotateShape(north, RotationAmount.TWO_HUNDRED_SEVENTY));
+		this.shapes.put(Direction.EAST, VoxelShapeHelper.rotateShape(north, Direction.EAST));
+		this.shapes.put(Direction.SOUTH, VoxelShapeHelper.rotateShape(north, Direction.SOUTH));
+		this.shapes.put(Direction.WEST, VoxelShapeHelper.rotateShape(north, Direction.WEST));
 	}
 
 	@Override

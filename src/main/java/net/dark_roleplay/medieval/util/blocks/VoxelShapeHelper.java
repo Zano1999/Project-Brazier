@@ -11,27 +11,28 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 
 public final class VoxelShapeHelper {
 
-	public static VoxelShape rotateShape(VoxelShape shape, RotationAmount rotation) {
+	/**
+	 * Rotates a VoxelShape in steps of 90°
+	 * @param shape the input VoxelShape is assumed to be facing NORTH
+	 * @param direction Direction.EAST would result in 90° Clockwise Rotation around the Y axis
+	 * @return a new Instance of the rotated VoxelShape
+	 */
+	public static VoxelShape rotateShape(VoxelShape shape, Direction direction) {
+		if(direction == Direction.NORTH) return shape;
 		Set<VoxelShape> rotatedShapes = new HashSet<VoxelShape>();
-		
+
 		shape.forEachBox((x1, y1, z1, x2, y2, z2) -> {
 			x1 = (x1 * 16) - 8; x2 = (x2 * 16) - 8;
 			z1 = (z1 * 16) - 8; z2 = (z2 * 16) - 8;
-			
-			if(rotation == RotationAmount.NINETY)
+
+			if(direction == Direction.EAST)
 				rotatedShapes.add(Block.makeCuboidShape(8 - z1, y1 * 16, 8 + x1, 8 - z2, y2 * 16, 8 + x2));
-			else if(rotation == RotationAmount.HUNDRED_EIGHTY)
+			else if(direction == Direction.SOUTH)
 				rotatedShapes.add(Block.makeCuboidShape(8 - x1, y1 * 16, 8 - z1, 8 - x2, y2 * 16, 8 - z2));
-			else if(rotation == RotationAmount.TWO_HUNDRED_SEVENTY)
-					rotatedShapes.add(Block.makeCuboidShape(8 + z1, y1 * 16, 8 - x1, 8 + z2, y2 * 16, 8 - x2));
+			else if(direction == Direction.WEST)
+				rotatedShapes.add(Block.makeCuboidShape(8 + z1, y1 * 16, 8 - x1, 8 + z2, y2 * 16, 8 - x2));
 		});
-		
+
 		return rotatedShapes.stream().reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-	}
-	
-	public static enum RotationAmount{
-		NINETY,
-		HUNDRED_EIGHTY,
-		TWO_HUNDRED_SEVENTY
 	}
 }
