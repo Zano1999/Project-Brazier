@@ -6,6 +6,7 @@ import net.dark_roleplay.marg.api.materials.Material;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.objects.items.equipment.misc.RoadSignItem;
 import net.dark_roleplay.medieval.objects.items.equipment.tools.ItemTelescope;
+import net.dark_roleplay.medieval.objects.items.equipment.tools.RoofersNotes;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Foods;
@@ -61,11 +62,12 @@ public class MedievalItems {
         SPRUCE_TEA                  = ITEMS.register("spruce_tea", () -> new Item(foodProperties.food(MedievalFoods.SPRUCE_TEA))),//TODO Custom Item
 
         TORCH_HOLDER                = ITEMS.register("torch_holder", () -> new BlockItem(MedievalBlocks.TORCH_HOLDER.get(), decoProperties)),
+        ADVENT_WREATH               = ITEMS.register("advent_wreath", () -> new BlockItem(MedievalBlocks.ADVENT_WREATH.get(), decoProperties)),
         WALL_BRAZIER                = ITEMS.register("wall_brazier", () -> new BlockItem(MedievalBlocks.WALL_BRAZIER.get(), decoProperties)),
         JAIL_LATTICE                = ITEMS.register("jail_lattice", () -> new BlockItem(MedievalBlocks.JAIL_LATTICE.get(), decoProperties)),
         RIVERSTONE                  = ITEMS.register("riverstone", () -> new BlockItem(MedievalBlocks.RIVERSTONE.get(), buildProperties)),
         LARGE_RIVERSTONE            = ITEMS.register("large_riverstone", () -> new BlockItem(MedievalBlocks.LARGE_RIVERSTONE.get(), buildProperties)),
-        LARGE_DARK_RIFVERSTONE      = ITEMS.register("large_dark_riverstone", () -> new BlockItem(MedievalBlocks.LARGE_DARK_RIFVERSTONE.get(), buildProperties)),
+        LARGE_DARK_RIFVERSTONE      = ITEMS.register("dark_large_riverstone", () -> new BlockItem(MedievalBlocks.DARK_LARGE_RIVERSTONE.get(), buildProperties)),
         COLORFUL_COBBLESTONE        = ITEMS.register("colorful_cobblestone", () -> new BlockItem(MedievalBlocks.COLORFUL_COBBLESTONE.get(), buildProperties)),
         PALE_COLORFUL_COBBLESTONE   = ITEMS.register("pale_colorful_cobblestone", () -> new BlockItem(MedievalBlocks.PALE_COLORFUL_COBBLESTONE.get(), buildProperties)),
         TIMBERED_CLAY               = ITEMS.register("clean_timbered_clay", () -> new BlockItem(MedievalBlocks.TIMBERED_CLAY.get(), buildProperties)),
@@ -112,7 +114,9 @@ public class MedievalItems {
         WOODEN_KEY                  = ITEMS.register("wooden_key", () -> new Item(equipProperties)),
         WOODEN_LOCK                 = ITEMS.register("wooden_lock", () -> new Item(equipProperties)),
         WOODEN_STREET_STOMPER       = ITEMS.register("wooden_street_stomper", () -> new Item(equipProperties)),
-        WOODEN_WRENCH               = ITEMS.register("wooden_wrench", () -> new Item(equipProperties));
+        WOODEN_WRENCH               = ITEMS.register("wooden_wrench", () -> new Item(equipProperties)),
+        ROOFERS_NOTES               = ITEMS.register("roofers_notes", () -> new RoofersNotes(equipProperties));
+
 
 
     public static final Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>>

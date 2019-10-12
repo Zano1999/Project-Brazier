@@ -47,7 +47,6 @@ public class MedievalBlocks {
     private static final MaterialRequirements plankMat = new MaterialRequirements(Constants.MAT_WOOD, "planks");
     private static final MaterialRequirements logPlankMat = new MaterialRequirements(Constants.MAT_WOOD, Constants.MatWood.LOG_SIDE, Constants.MatWood.LOG_TOP, "planks");
 
-
     public static final RegistryObject<Block>
         TORCH_HOLDER                = BLOCKS.register("torch_holder", () -> new TorchHolderBlock(metalBaseProperties)),
         WALL_BRAZIER                = BLOCKS.register("wall_brazier", () -> new WallBrazierBlock(metalBaseProperties)),
@@ -58,7 +57,7 @@ public class MedievalBlocks {
         OAK_ROPE_LADDER             = BLOCKS.register("oak_rope_ladder", () -> new RopeLadder(clothBaseProperties)),
         RIVERSTONE                  = BLOCKS.register("riverstone", () -> new Block(stoneBaseProperties)),
         LARGE_RIVERSTONE            = BLOCKS.register("large_riverstone", () -> new Block(stoneBaseProperties)),
-        LARGE_DARK_RIFVERSTONE      = BLOCKS.register("dark_large_riverstone", () -> new Block(stoneBaseProperties)),
+        DARK_LARGE_RIVERSTONE       = BLOCKS.register("dark_large_riverstone", () -> new Block(stoneBaseProperties)),
         COLORFUL_COBBLESTONE        = BLOCKS.register("colorful_cobblestone", () -> new Block(stoneBaseProperties)),
         PALE_COLORFUL_COBBLESTONE   = BLOCKS.register("pale_colorful_cobblestone", () -> new Block(stoneBaseProperties)),
         ADVENT_WREATH               = BLOCKS.register("advent_wreath", () -> new AdventWreathBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(1.0F, 1.0F).sound(SoundType.PLANT))),
