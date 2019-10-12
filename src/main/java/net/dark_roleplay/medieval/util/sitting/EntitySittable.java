@@ -12,6 +12,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 public class EntitySittable extends Entity {
 	public int blockPosX;
@@ -21,6 +22,7 @@ public class EntitySittable extends Entity {
 	//TODO EntitySize is now a part of hte Entity Type
 	public EntitySittable(EntityType type, World world) {
 		super(type, world);
+		System.out.println("Created Sittable");
 		this.noClip = true;
 	}
 
@@ -65,11 +67,6 @@ public class EntitySittable extends Entity {
 	@Override
 	public double getMountedYOffset() {
 		return this.getSize(Pose.STANDING).height * 0.0D;
-	}
-
-	@Override
-	protected boolean shouldSetPosAfterLoading() {
-		return false;
 	}
 
 	@Override
@@ -120,6 +117,6 @@ public class EntitySittable extends Entity {
 
 	@Override
 	public IPacket<?> createSpawnPacket() {
-	      return new SSpawnObjectPacket(this);
+		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

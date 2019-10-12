@@ -5,7 +5,6 @@ import java.util.stream.Stream;
 
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.template.ChairBlock;
 import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper;
-import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper.RotationAmount;
 import net.dark_roleplay.medieval.util.sitting.SittingUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -101,9 +100,9 @@ public class SolidChairBlock extends ChairBlock {
 
 	protected void setShapesCompartment(VoxelShape north) {
 		this.compartmentShapes.put(Direction.NORTH, north);
-		this.compartmentShapes.put(Direction.EAST, VoxelShapeHelper.rotateShape(north, RotationAmount.NINETY));
-		this.compartmentShapes.put(Direction.SOUTH, VoxelShapeHelper.rotateShape(north, RotationAmount.HUNDRED_EIGHTY));
-		this.compartmentShapes.put(Direction.WEST, VoxelShapeHelper.rotateShape(north, RotationAmount.TWO_HUNDRED_SEVENTY));
+		this.compartmentShapes.put(Direction.EAST, VoxelShapeHelper.rotateShape(north, Direction.EAST));
+		this.compartmentShapes.put(Direction.SOUTH, VoxelShapeHelper.rotateShape(north, Direction.SOUTH));
+		this.compartmentShapes.put(Direction.WEST, VoxelShapeHelper.rotateShape(north, Direction.WEST));
 	}
 
 	@Override
@@ -150,7 +149,7 @@ public class SolidChairBlock extends ChairBlock {
 			return true;
 		} else {
 			if(player.getPositionVec().squareDistanceTo(new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5)) < 9) {
-				if(world instanceof ServerWorld)
+				if(!world.isRemote())
 					SittingUtil.sitOnBlockWithRotation((ServerWorld) world, pos.getX(), pos.getY(), pos.getZ(), player, state.get(HORIZONTAL_FACING), 0.2F);
 			} else {
 				player.sendStatusMessage(new TranslationTextComponent("interaction.drpmedieval.chair.to_far",

@@ -2,7 +2,7 @@ package net.dark_roleplay.medieval.util.sitting;
 
 import java.util.List;
 
-import net.dark_roleplay.medieval.holders.MedievalEntities;
+import net.dark_roleplay.medieval.handler_2.MedievalEntities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -13,8 +13,8 @@ public class SittingUtil {
 
 	public static boolean sitOnBlock(ServerWorld world, double x, double y, double z, PlayerEntity player, double offset){
 		if (!checkForExistingEntity(world, x, y, z, player) && !world.isRemote){
-			EntitySittable chairEntity = new EntitySittable(MedievalEntities.SITTABLE, world, x, y, z, offset);
-			world.summonEntity(chairEntity);
+			EntitySittable chairEntity = new EntitySittable(MedievalEntities.SITTABLE.get(), world, x, y, z, offset);
+			world.addEntity(chairEntity);
 			player.startRiding(chairEntity);
 		}
 		
@@ -23,7 +23,7 @@ public class SittingUtil {
 
 	public static boolean sitOnBlockWithRotation(ServerWorld world, double x, double y, double z, PlayerEntity player, Direction facing, double offset){
 		if (!checkForExistingEntity(world, x, y, z, player) && !world.isRemote){
-			EntitySittable chairEntity = new EntitySittable(MedievalEntities.SITTABLE, world, x, y, z, offset, facing);
+			EntitySittable chairEntity = new EntitySittable(MedievalEntities.SITTABLE.get(), world, x, y, z, offset, facing);
 			world.summonEntity(chairEntity);
 			player.startRiding(chairEntity);
 		}

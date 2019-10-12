@@ -6,6 +6,7 @@ import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntityRenderer;
 import net.dark_roleplay.library.networking.NetworkHelper;
 import net.dark_roleplay.medieval.handler.KeybindHandler;
 import net.dark_roleplay.medieval.handler_2.MedievalBlocks;
+import net.dark_roleplay.medieval.handler_2.MedievalEntities;
 import net.dark_roleplay.medieval.handler_2.MedievalItems;
 import net.dark_roleplay.medieval.holders.MedievalConfigs;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntity;
@@ -41,6 +42,7 @@ public class DarkRoleplayMedieval {
 	public DarkRoleplayMedieval() {
 		MedievalBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MedievalItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		MedievalEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
 		DarkRoleplayMedieval.MOD_CHANNEL = NetworkRegistry.ChannelBuilder
 				.named(new ResourceLocation(DarkRoleplayMedieval.MODID, "main_channel"))
