@@ -1,9 +1,8 @@
 package net.dark_roleplay.medieval.objects.blocks.utility;
 
-import net.dark_roleplay.medieval.holders.MedievalTileEntities;
+import net.dark_roleplay.medieval.handler_2.MedievalTileEntities;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 
 public class AnchorTileEntity extends TileEntity{
 
@@ -14,7 +13,7 @@ public class AnchorTileEntity extends TileEntity{
     }
 
     public AnchorTileEntity(int length) {
-        super(MedievalTileEntities.ANCHOR);
+        super(MedievalTileEntities.ANCHOR.get());
         remainingLength = length;
     }
 

@@ -13,8 +13,8 @@ public class RoadSignItem extends Item {
 
     public RoadSignItem(Properties properties, Material material, String modelLoc) {
         super(properties);
-        this.signModelLeft = new ResourceLocation(String.format(material.getNamed(modelLoc), "left"));
-        this.signModelRight = new ResourceLocation(String.format(material.getNamed(modelLoc), "right"));
+        this.signModelLeft = new ResourceLocation(String.format(material.getTextProv().searchAndReplace(modelLoc), "left"));
+        this.signModelRight = new ResourceLocation(String.format(material.getTextProv().searchAndReplace(modelLoc), "right"));
         this.material = material;
     }
 

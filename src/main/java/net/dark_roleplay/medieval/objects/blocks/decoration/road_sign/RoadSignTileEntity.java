@@ -1,26 +1,20 @@
 package net.dark_roleplay.medieval.objects.blocks.decoration.road_sign;
 
-import javax.annotation.Nullable;
-
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.holders.MedievalTileEntities;
+import net.dark_roleplay.medieval.handler_2.MedievalTileEntities;
 import net.dark_roleplay.medieval.objects.packets.RoadSignEditSignPacket;
-import net.minecraft.block.Block;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.SignTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +23,7 @@ public class RoadSignTileEntity extends TileEntity {
 	private List<SignInfo> signs = new ArrayList<>();
 
 	public RoadSignTileEntity() {
-		super(MedievalTileEntities.ROAD_SIGN);
+		super(MedievalTileEntities.ROAD_SIGN.get());
 	}
 
 	@Override

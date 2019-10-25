@@ -1,0 +1,6 @@
+{
+  "parent": "drpmedieval:item/wood_beam",
+  "textures": {
+    "texture": "${texture%planks}"
+  }
+}

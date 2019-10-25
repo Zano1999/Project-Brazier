@@ -1,24 +1,20 @@
 package net.dark_roleplay.medieval.objects.blocks.decoration.road_sign;
 
-import net.dark_roleplay.library.networking.NetworkHelper;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.holders.MedievalTileEntities;
+import net.dark_roleplay.medieval.handler_2.MedievalTileEntities;
 import net.dark_roleplay.medieval.objects.guis.EditRoadSignScreen;
 import net.dark_roleplay.medieval.objects.items.equipment.misc.RoadSignItem;
 import net.dark_roleplay.medieval.objects.packets.RoadSignPlacementPacket;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.EditSignScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -35,7 +31,7 @@ public class RoadSign extends Block{
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return MedievalTileEntities.ROAD_SIGN.create();
+		return MedievalTileEntities.ROAD_SIGN.get().create();
 	}
 	
 	@Override

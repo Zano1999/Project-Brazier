@@ -1,0 +1,9 @@
+{
+	"credit": "Made by JTK222",
+	"parent": "drpmedieval:block/chopping_block/chopping_block",
+	"textures": {
+		"0": "${texture%log}",
+		"1": "${texture%log_top}",
+		"particle": "${texture%log}"
+	}
+}

@@ -1,15 +1,13 @@
 package net.dark_roleplay.medieval.objects.blocks.utility.barrel;
 
-import net.dark_roleplay.medieval.holders.MedievalTileEntities;
+import net.dark_roleplay.medieval.handler_2.MedievalTileEntities;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -70,7 +68,7 @@ public class BarrelTileEntity extends TileEntity {
     private LazyOptional<FluidTank> lazyFluidHandler =  LazyOptional.of(() ->  fluidHandler);
 
     public BarrelTileEntity() {
-        super(MedievalTileEntities.BARREL);
+        super(MedievalTileEntities.BARREL.get());
     }
 
     @Override

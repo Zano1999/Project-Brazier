@@ -3,12 +3,12 @@
 	"textures": {
 		"base": "drpmedieval:blocks/timbered_clay/timbered_clay",
 		"particle": "drpmedieval:blocks/timbered_clay/timbered_clay",
-		"top": "drpmedieval:block/timbered_clay/borders/acacia_5",
-		"bottom": "drpmedieval:block/timbered_clay/borders/acacia_5",
-		"left": "drpmedieval:block/timbered_clay/borders/acacia_10",
-		"right": "drpmedieval:block/timbered_clay/borders/acacia_10",
-		"type": "drpmedieval:block/timbered_clay/shapes/acacia_diagonal_tb",
-		"border": "drpmedieval:block/timbered_clay/borders/acacia_15"
+		"top": "drpmedieval:blocks/timbered_clay/full_transparency",
+		"bottom": "drpmedieval:blocks/timbered_clay/full_transparency",
+		"left": "drpmedieval:blocks/timbered_clay/full_transparency",
+		"right": "drpmedieval:blocks/timbered_clay/full_transparency",
+		"type": "drpmedieval:blocks/timbered_clay/full_transparency",
+		"border": "drpmedieval:blocks/timbered_clay/full_transparency"
 	},
 	"elements": [
 		{

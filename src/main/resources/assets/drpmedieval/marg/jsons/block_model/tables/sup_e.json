@@ -1,8 +1,0 @@
-{
-	"credit": "Made by JTK222",
-	"parent": "drpmedieval:block/tables/sup_e",
-	"textures": {
-		"leg": "marg:block/stripped_log_side/stripped_%wood%_log_side",
-		"particle": "marg:block/stripped_log_side/stripped_%wood%_log_side"
-	}
-}

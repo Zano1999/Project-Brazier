@@ -1,0 +1,61 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "drpmedieval:block/tables/solid_table_top",
+		"textures": {
+			"table_top": "${texture%planks}",
+			"leg": "${texture%stripped_log}",
+			"particle": "${texture%stripped_log}"
+		}
+	},
+	"variants": {
+		"leg_ne": {
+			"true": {
+				"submodel": { "leg_ne": {"model": "drpmedieval:block/tables/leg_ne"}}
+			},
+			"false": {}
+		},
+		"leg_nw": {
+			"true": {
+				"submodel": { "leg_nw": {"model": "drpmedieval:block/tables/leg_nw"}}
+			},
+			"false": {}
+		},
+		"leg_se": {
+			"true": {
+				"submodel": { "leg_se": {"model": "drpmedieval:block/tables/leg_se"}}
+			},
+			"false": {}
+		},
+		"leg_sw": {
+			"true": {
+				"submodel": { "leg_sw": {"model": "drpmedieval:block/tables/leg_sw"}}
+			},
+			"false": {}
+		},
+		"connected_n": {
+			"true": {},
+			"false": {
+				"submodel": { "connected_n": {"model": "drpmedieval:block/tables/sup_n"}}
+			}
+		},
+		"connected_e": {
+			"true": {},
+			"false": {
+				"submodel": { "connected_e": {"model": "drpmedieval:block/tables/sup_e"}}
+			}
+		},
+		"connected_s": {
+			"true": {},
+			"false": {
+				"submodel": { "connected_s": {"model": "drpmedieval:block/tables/sup_s"}}
+			}
+		},
+		"connected_w": {
+			"true": {},
+			"false": {
+				"submodel": { "connected_w": {"model": "drpmedieval:block/tables/sup_w"}}
+			}
+		}
+	}
+}

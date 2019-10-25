@@ -1,8 +1,7 @@
 package net.dark_roleplay.medieval.handler_2;
 
-import net.dark_roleplay.marg.api.Constants;
-import net.dark_roleplay.marg.api.MaterialRequirements;
 import net.dark_roleplay.marg.api.materials.Material;
+import net.dark_roleplay.marg.api.materials.MaterialRequirement;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.objects.items.equipment.misc.RoadSignItem;
 import net.dark_roleplay.medieval.objects.items.equipment.tools.ItemTelescope;
@@ -20,7 +19,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static net.dark_roleplay.medieval.holders.MedievalCreativeTabs.*;
+import static net.dark_roleplay.medieval.handler_2.MedievalCreativeTabs.*;
 
 public class MedievalItems {
 
@@ -33,8 +32,8 @@ public class MedievalItems {
     private static final Item.Properties utilityProperties = new Item.Properties().group(UTILITY);
     private static final Item.Properties buildProperties = new Item.Properties().group(BUILDING);
 
-    private static final MaterialRequirements logMat = new MaterialRequirements(Constants.MAT_WOOD, Constants.MatWood.LOG_SIDE, Constants.MatWood.LOG_TOP);
-    private static final MaterialRequirements plankMat = new MaterialRequirements(Constants.MAT_WOOD, "planks");
+    private static final MaterialRequirement logMat = new MaterialRequirement("wood", "log", "log_top");
+    private static final MaterialRequirement plankMat = new MaterialRequirement("wood", "planks");
 
     public static final RegistryObject<Item>
         BELL_PEPPER                 = ITEMS.register("bell_pepper", () -> new Item(foodProperties.food(MedievalFoods.BELL_PEPPER))),
@@ -120,12 +119,13 @@ public class MedievalItems {
 
 
     public static final Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>>
-        WOOD_BEAMS                  = materialRegister(plankMat, "%wood%_wood_beam", () -> new Item(miscProperties)),
-        PLANKS                      = materialRegister(plankMat, "%wood%_plank", () -> new Item(miscProperties)),
-        FIREWOOD                    = materialRegister(logMat, "%wood%_firewood", () -> new Item(miscProperties)),
-        SIMPLE_ROAD_SIGN            = materialRegister(plankMat, "simple_%wood%_road_sign", material -> () -> new RoadSignItem(miscProperties, material,"drpmedieval:%wood%_road_sign_%s.obj"));
+        WOOD_BEAMS                  = materialRegister(plankMat, "${material}_wood_beam", () -> new Item(miscProperties)),
+        PLANKS                      = materialRegister(plankMat, "${material}_plank", () -> new Item(miscProperties)),
+        FIREWOOD                    = materialRegister(logMat, "${material}_firewood", () -> new Item(miscProperties)),
+        SIMPLE_ROAD_SIGN            = materialRegister(plankMat, "simple_${material}_road_sign", material -> () -> new RoadSignItem(miscProperties, material,"drpmedieval:${material}_road_sign_%s.obj"));
 
     public static final Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>>
+        SHINGLE_ROOF                = materialRegisterBlocks(MedievalBlocks.SHINGLE_ROOF, block -> new BlockItem(block.get(), buildProperties)),
         CHOPPING_BLOCK              = materialRegisterBlocks(MedievalBlocks.CHOPPING_BLOCK, block -> new BlockItem(block.get(), utilityProperties)),
         SIMPLE_WOOD_STAIRS          = materialRegisterBlocks(MedievalBlocks.SIMPLE_WOOD_STAIRS, block -> new BlockItem(block.get(), buildProperties)),
         SOLID_WOOD_TABLE            = materialRegisterBlocks(MedievalBlocks.SOLID_WOOD_TABLE, block -> new BlockItem(block.get(), decoProperties)),
@@ -142,20 +142,20 @@ public class MedievalItems {
         GRID_WOOD_WINDOW            = materialRegisterBlocks(MedievalBlocks.GRID_WOOD_WINDOW, block -> new BlockItem(block.get(), buildProperties)),
         DIAMOND_WOOD_WINDOW         = materialRegisterBlocks(MedievalBlocks.DIAMOND_WOOD_WINDOW, block -> new BlockItem(block.get(), buildProperties));
 
-    private static Map<Material, RegistryObject<Item>> materialRegister(MaterialRequirements matGetter, String name, Supplier<Item> suplier){
+    private static Map<Material, RegistryObject<Item>> materialRegister(MaterialRequirement matGetter, String name, Supplier<Item> suplier){
         Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>> items = new HashMap<>();
 
         matGetter.execute(material -> {
-            items.put(material, ITEMS.register(material.getNamed(name), suplier));
+            items.put(material, ITEMS.register(material.getTextProv().searchAndReplace(name), suplier));
         });
         return items;
     }
 
-    private static Map<Material, RegistryObject<Item>> materialRegister(MaterialRequirements matGetter, String name, Function<Material, Supplier<Item>> suplier){
+    private static Map<Material, RegistryObject<Item>> materialRegister(MaterialRequirement matGetter, String name, Function<Material, Supplier<Item>> suplier){
         Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>> items = new HashMap<>();
 
         matGetter.execute(material -> {
-            items.put(material, ITEMS.register(material.getNamed(name), suplier.apply(material)));
+            items.put(material, ITEMS.register(material.getTextProv().searchAndReplace(name), suplier.apply(material)));
         });
         return items;
     }

@@ -1,6 +1,8 @@
 package net.dark_roleplay.emissive_models;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemOverrideList;
@@ -12,6 +14,7 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.pipeline.IVertexConsumer;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
+import net.minecraftforge.client.model.pipeline.VertexLighterFlat;
 import net.minecraftforge.client.model.pipeline.VertexTransformer;
 
 import javax.annotation.Nonnull;
@@ -21,6 +24,8 @@ import java.util.List;
 import java.util.Random;
 
 public class EmissiveBakedModel implements IBakedModel {
+    private static final VertexFormat ITEM_FORMAT_WITH_LIGHTMAP = new VertexFormat(DefaultVertexFormats.ITEM).addElement(DefaultVertexFormats.TEX_2S);
+
     IBakedModel emissiveModel = null;
     IBakedModel nonEmissiveModel = null;
 
@@ -34,30 +39,9 @@ public class EmissiveBakedModel implements IBakedModel {
         List<BakedQuad> emissive = emissiveModel.getQuads(state, side, rand);
         List<BakedQuad> combinedQuads = new ArrayList<>();
 
-        UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(DefaultVertexFormats.BLOCK);
-        final IVertexConsumer consumer = new VertexTransformer(builder) {
-            @Override
-            public void put(int element, float... data) {
-                VertexFormatElement formatElement = DefaultVertexFormats.BLOCK.getElement(element);
-                switch(formatElement.getUsage()) {
-                    case UV: {
-                        float[] newData = new float[2];
-                        newData[0] = 1f;
-                        newData[1] = 1f;
-                        parent.put(element, newData);
-                        break;
-                    }
-                    default: {
-                        //parent.put(element, data);
-                        break;
-                    }
-                }
-            }
-        };
-
         for(BakedQuad quad : emissive){
-            quad.pipe(consumer);
-            combinedQuads.add(builder.build());
+            combinedQuads.add(transformQuad(quad, 0.007F));
+
         }
 
         combinedQuads.addAll(nonEmissiveModel.getQuads(state, side, rand));
@@ -93,5 +77,51 @@ public class EmissiveBakedModel implements IBakedModel {
     @Override
     public ItemOverrideList getOverrides() {
         return nonEmissiveModel.getOverrides();
+    }
+
+    private static BakedQuad transformQuad(BakedQuad quad, float light) {
+
+        VertexFormat format = getFormatWithLightMap(quad.getFormat());
+
+        UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
+
+        VertexLighterFlat trans = new VertexLighterFlat(Minecraft.getInstance().getBlockColors()) {
+            @Override
+            protected void updateLightmap(float[] normal, float[] lightmap, float x, float y, float z) {
+                lightmap[0] = light;
+                lightmap[1] = light;
+            }
+
+            @Override
+            public void setQuadTint(int tint) {}
+        };
+
+        trans.setParent(builder);
+
+        quad.pipe(trans);
+
+        builder.setQuadTint(quad.getTintIndex());
+        builder.setQuadOrientation(quad.getFace());
+        builder.setTexture(quad.getSprite());
+        builder.setApplyDiffuseLighting(false);
+
+        return builder.build();
+    }
+
+    public static VertexFormat getFormatWithLightMap(VertexFormat format) {
+
+        if (format == DefaultVertexFormats.BLOCK) {
+            return DefaultVertexFormats.BLOCK;
+        } else if (format == DefaultVertexFormats.ITEM) {
+            return ITEM_FORMAT_WITH_LIGHTMAP;
+        } else if (!format.hasUv(1)) {
+            VertexFormat result = new VertexFormat(format);
+
+            result.addElement(DefaultVertexFormats.TEX_2S);
+
+            return result;
+        }
+
+        return format;
     }
 }

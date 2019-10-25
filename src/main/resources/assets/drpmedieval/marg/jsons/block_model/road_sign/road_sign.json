@@ -1,8 +1,0 @@
-{
-	"credit": "Made by JTK222",
-	"parent": "drpmedieval:block/road_signs/post",
-	"textures": {
-		"planks": "marg:block/planks/%wood%_planks",
-		"particle": "marg:block/planks/%wood%_planks"
-	}
-}

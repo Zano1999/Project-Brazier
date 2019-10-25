@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "material": {
+    "type": "wood",
+    "required_textures": [
+      "planks",
+      "log"
+    ],
+    "required_items": [
+      "planks"
+    ]
+  },
+  "tasks": [
+    {
+      "input": "drpmedieval:marg/text_files/blockstates/simple_stairs.json",
+      "output": "drpmedieval:blockstates/simple_${material}_stairs.json"
+    },{
+      "input" : "drpmedieval:marg/text_files/item_models/blocks/stairs/simple_stairs.json",
+      "output" : "drpmedieval:models/item/simple_${material}_stairs.json"
+    }
+  ]
+}

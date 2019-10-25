@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "material": {
+    "type": "wood",
+    "required_textures": [
+      "planks"
+    ],
+    "required_items": [
+      "planks"
+    ]
+  },
+  "tasks": [
+    {
+      "input" : "drpmedieval:marg/text_files/blockstates/plank_chair.json",
+      "output" : "drpmedieval:blockstates/${material}_plank_chair.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/blocks/chairs/plank_chair.json",
+      "output" : "drpmedieval:models/item/${material}_plank_chair.json"
+    },
+
+    {
+      "input" : "drpmedieval:marg/text_files/blockstates/solid_chair.json",
+      "output" : "drpmedieval:blockstates/${material}_solid_chair.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/blocks/chairs/solid_chair.json",
+      "output" : "drpmedieval:models/item/${material}_solid_chair.json"
+    },
+
+    {
+      "input" : "drpmedieval:marg/text_files/blockstates/solid_chair_armrest.json",
+      "output" : "drpmedieval:blockstates/${material}_solid_chair_armrest.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/blocks/chairs/solid_chair_armrest.json",
+      "output" : "drpmedieval:models/item/${material}_solid_chair_armrest.json"
+    },
+
+    {
+      "input" : "drpmedieval:marg/text_files/blockstates/solid_bench.json",
+      "output" : "drpmedieval:blockstates/${material}_solid_bench.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/blocks/chairs/solid_bench.json",
+      "output" : "drpmedieval:models/item/${material}_solid_bench.json"
+    }
+  ]
+}

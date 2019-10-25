@@ -67,7 +67,7 @@ public class WoodPlatformStairsBlock extends HorizontalBlock{
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		return this.getDefaultState()
-				.with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().rotateY())
+				.with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite())
 				.with(PLATFORM_HEIGHT, context.getFace() == Direction.UP ? PlatformHeight.HALF : context.getHitVec().y >= 0.5 ? PlatformHeight.FULL : PlatformHeight.HALF);
 	}
 }

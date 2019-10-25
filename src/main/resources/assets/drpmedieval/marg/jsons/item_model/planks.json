@@ -1,7 +1,0 @@
-{
-  "parent": "drpmedieval:item/planks",
-  "textures": {
-    "particle": "marg:block/planks/%wood%_planks",
-    "0": "marg:block/planks/%wood%_planks"
-  }
-}

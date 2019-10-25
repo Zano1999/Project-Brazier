@@ -1,0 +1,14 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+		"model": "drpmedieval:block/chopping_block/chopping_block",
+		"textures": {
+			"0": "${texture%log}",
+			"1": "${texture%log_top}",
+			"particle": "${texture%log}"
+		}
+    },
+	"variants": {
+		"": [{}]
+	}
+}

@@ -3,15 +3,18 @@ buildscript {
         maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
         mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath "com.wynprice.cursemaven:CurseMaven:1.2.3"
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: "com.wynprice.cursemaven"
 
 version = '1.14.3-0.1.0'
 group = 'net.dark_roleplay'
@@ -50,13 +53,17 @@ repositories {
 	maven {
 		url = "https://dark-roleplay.net/files/maven/"
 	}
+	maven{
+        url = "https://minecraft.curseforge.com/api/maven/"
+	}
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${MC_VERSION}-${FORGE_VERSION}"
 
-	compile(fg.deobf("net.dark_roleplay:marg:1.14.3-0.1.5.1"))
+	compile(fg.deobf("net.dark_roleplay:marg:1.14.4-0.2.5"))
 	compile(fg.deobf("net.dark_roleplay:drplibrary:1.14.2-0.1.0"))
+	//runtime(fg.deobf(curse.resolve("biomes-o-plenty", 2801408)))
 }
 
 apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.14.2/contained_deps.gradle'

@@ -1,0 +1,23 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+		"model":"drpmedieval:block/platforms/platform_full",
+		"uvlock": true,
+		"textures": {
+			"log_top": "${texture%stripped_log_top}",
+			"log_side": "${texture%stripped_log}",
+			"planks": "${texture%planks}",
+			"particle": "${texture%planks}"
+		}
+    },
+	"variants": {
+		"axis":{
+			"x":{},
+			"z":{"y":90, "uvlock": true}
+		},
+		"height":{
+			"full":{"model":"drpmedieval:block/platforms/platform_full"},
+			"half":{"model":"drpmedieval:block/platforms/platform_half"}
+		}
+	}
+}

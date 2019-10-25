@@ -1,8 +1,0 @@
-{
-	"credit": "Made by JTK222",
-	"parent": "drpmedieval:block/benches/solid_bench_right",
-	"textures": {
-		"0": "marg:block/planks/%wood%_planks",
-		"particle": "marg:block/planks/%wood%_planks"
-	}
-}

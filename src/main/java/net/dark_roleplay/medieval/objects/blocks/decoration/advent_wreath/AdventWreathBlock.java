@@ -88,13 +88,6 @@ public class AdventWreathBlock extends Block{
 	}
 	
 	@Override
-	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
-		if (!Block.func_220064_c(world, facingPos))
-			return Blocks.AIR.getDefaultState();
-		return state;
-	}
-	
-	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext selectionContext) {
 		return HITBOX;
 	}

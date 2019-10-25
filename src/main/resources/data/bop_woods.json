@@ -1,0 +1,134 @@
+[
+  {
+    "type": "wood",
+    "name": "fir",
+    "textures": {
+      "log": "biomesoplenty:block/fir_log",
+      "log_top": "biomesoplenty:block/fir_log_top",
+      "stripped_log": "biomesoplenty:block/stripped_fir_log",
+      "stripped_log_top": "biomesoplenty:block/stripped_fir_log_top",
+      "planks": "biomesoplenty:block/fir_planks"
+    }
+  },
+  {
+    "type": "wood",
+    "name": "redwood",
+    "textures": {
+      "log": "biomesoplenty:block/redwood_log",
+      "log_top": "biomesoplenty:block/redwood_log_top",
+      "stripped_log": "biomesoplenty:block/stripped_redwood_log",
+      "stripped_log_top": "biomesoplenty:block/stripped_redwood_log_top",
+      "planks": "biomesoplenty:block/redwood_planks"
+    }
+  },
+  {
+    "type": "wood",
+    "name": "cherry",
+    "textures": {
+      "log": "biomesoplenty:block/cherry_log",
+      "log_top": "biomesoplenty:block/cherry_log_top",
+      "stripped_log": "biomesoplenty:block/stripped_cherry_log",
+      "stripped_log_top": "biomesoplenty:block/stripped_cherry_log_top",
+      "planks": "biomesoplenty:block/cherry_planks"
+    }
+  },
+  {
+    "type": "wood",
+    "name": "mahogany",
+    "textures": {
+      "log": "biomesoplenty:block/mahogany_log",
+      "log_top": "biomesoplenty:block/mahogany_log_top",
+      "stripped_log": "biomesoplenty:block/stripped_mahogany_log",
+      "stripped_log_top": "biomesoplenty:block/stripped_mahogany_log_top",
+      "planks": "biomesoplenty:block/mahogany_planks"
+    }
+  },
+  {
+    "type": "wood",
+    "name": "jacaranda",
+    "textures": {
+      "log": "biomesoplenty:block/jacaranda_log",
+      "log_top": "biomesoplenty:block/jacaranda_log_top",
+      "stripped_log": "biomesoplenty:block/stripped_jacaranda_log",
+      "stripped_log_top": "biomesoplenty:block/stripped_jacaranda_log_top",
+      "planks": "biomesoplenty:block/jacaranda_planks"
+    }
+  },
+  {
+    "type": "wood",
+    "name": "palm",
+    "textures": {
+      "log": "biomesoplenty:block/palm_log",
+      "log_top": "biomesoplenty:block/palm_log_top",
+      "stripped_log": "biomesoplenty:block/stripped_palm_log",
+      "stripped_log_top": "biomesoplenty:block/stripped_palm_log_top",
+      "planks": "biomesoplenty:block/palm_planks"
+    }
+  },
+  {
+    "type": "wood",
+    "name": "willow",
+    "textures": {
+      "log": "biomesoplenty:block/willow_log",
+      "log_top": "biomesoplenty:block/willow_log_top",
+      "stripped_log": "biomesoplenty:block/stripped_willow_log",
+      "stripped_log_top": "biomesoplenty:block/stripped_willow_log_top",
+      "planks": "biomesoplenty:block/willow_planks"
+    }
+  },
+  {
+    "type": "wood",
+    "name": "dead",
+    "textures": {
+      "log": "biomesoplenty:block/dead_log",
+      "log_top": "biomesoplenty:block/dead_log_top",
+      "stripped_log": "biomesoplenty:block/stripped_dead_log",
+      "stripped_log_top": "biomesoplenty:block/stripped_dead_log_top",
+      "planks": "biomesoplenty:block/dead_planks"
+    }
+  },
+  {
+    "type": "wood",
+    "name": "magic",
+    "textures": {
+      "log": "biomesoplenty:block/magic_log",
+      "log_top": "biomesoplenty:block/magic_log_top",
+      "stripped_log": "biomesoplenty:block/stripped_magic_log",
+      "stripped_log_top": "biomesoplenty:block/stripped_magic_log_top",
+      "planks": "biomesoplenty:block/magic_planks"
+    }
+  },
+  {
+    "type": "wood",
+    "name": "umbran",
+    "textures": {
+      "log": "biomesoplenty:block/umbran_log",
+      "log_top": "biomesoplenty:block/umbran_log_top",
+      "stripped_log": "biomesoplenty:block/stripped_umbran_log",
+      "stripped_log_top": "biomesoplenty:block/stripped_umbran_log_top",
+      "planks": "biomesoplenty:block/umbran_planks"
+    }
+  },
+  {
+    "type": "wood",
+    "name": "hellbark",
+    "textures": {
+      "log": "biomesoplenty:block/hellbark_log",
+      "log_top": "biomesoplenty:block/hellbark_log_top",
+      "stripped_log": "biomesoplenty:block/stripped_hellbark_log",
+      "stripped_log_top": "biomesoplenty:block/stripped_hellbark_log_top",
+      "planks": "biomesoplenty:block/hellbark_planks"
+    }
+  },
+  {
+    "type": "wood",
+    "name": "ethereal",
+    "textures": {
+      "log": "biomesoplenty:block/ethereal_log",
+      "log_top": "biomesoplenty:block/ethereal_log_top",
+      "stripped_log": "biomesoplenty:block/stripped_ethereal_log",
+      "stripped_log_top": "biomesoplenty:block/stripped_ethereal_log_top",
+      "planks": "biomesoplenty:block/ethereal_planks"
+    }
+  }
+]

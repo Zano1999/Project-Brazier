@@ -1,0 +1,7 @@
+{
+  "parent": "drpmedieval:item/simple_solid_table",
+  "textures": {
+    "table_top": "${texture%planks}",
+    "leg": "${texture%stripped_log}"
+  }
+}

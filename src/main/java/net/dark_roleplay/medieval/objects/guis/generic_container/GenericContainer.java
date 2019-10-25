@@ -1,6 +1,6 @@
 package net.dark_roleplay.medieval.objects.guis.generic_container;
 
-import net.dark_roleplay.medieval.holders.MedievalContainers;
+import net.dark_roleplay.medieval.handler_2.MedievalContainers;
 import net.dark_roleplay.medieval.objects.helper.LambdaHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -22,7 +22,7 @@ public class GenericContainer extends Container {
 	}
 
 	public GenericContainer(int id, PlayerInventory playerInventory, final IWorldPosCallable worldPos) {
-		super(MedievalContainers.GENERIC_CONTAINER, id);
+		super(MedievalContainers.GENERIC_CONTAINER.get(), id);
 		this.worldPos = worldPos;
 		worldPos.consume((world, pos) -> {
 			TileEntity te = world.getTileEntity(pos);

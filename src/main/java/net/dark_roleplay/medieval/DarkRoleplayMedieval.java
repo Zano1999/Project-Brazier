@@ -1,14 +1,18 @@
 package net.dark_roleplay.medieval;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import net.dark_roleplay.IModule;
 import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntity;
 import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntityRenderer;
 import net.dark_roleplay.library.networking.NetworkHelper;
+import net.dark_roleplay.marg.Marg;
+import net.dark_roleplay.marg.api.materials.Material;
 import net.dark_roleplay.medieval.handler.KeybindHandler;
-import net.dark_roleplay.medieval.handler_2.MedievalBlocks;
-import net.dark_roleplay.medieval.handler_2.MedievalEntities;
-import net.dark_roleplay.medieval.handler_2.MedievalItems;
+import net.dark_roleplay.medieval.handler_2.*;
 import net.dark_roleplay.medieval.holders.MedievalConfigs;
+import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofTileEntity;
+import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofTileEntityRenderer;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntityRenderer;
 import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntity;
@@ -30,6 +34,7 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 @Mod(DarkRoleplayMedieval.MODID)
 public class DarkRoleplayMedieval {
@@ -40,9 +45,15 @@ public class DarkRoleplayMedieval {
 	private IModule[] modules = {new TertiaryInteractionModule()};
 
 	public DarkRoleplayMedieval() {
+		//Biomes o' Plenty Support
+		//JsonReader reader = new JsonReader(new InputStreamReader(Marg.class.getClassLoader().getResourceAsStream("data/bop_woods.json")));
+		//Marg.MARG_GSON.fromJson(reader, Material.class);
+
 		MedievalBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MedievalItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		MedievalTileEntities.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MedievalEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+		MedievalContainers.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
 		DarkRoleplayMedieval.MOD_CHANNEL = NetworkRegistry.ChannelBuilder
 				.named(new ResourceLocation(DarkRoleplayMedieval.MODID, "main_channel"))
@@ -75,20 +86,6 @@ public class DarkRoleplayMedieval {
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
-
-//        MaterialType woodType = new MaterialType("wood");
-//		String[] woods = {"acacia", "birch", "dark_oak", "jungle", "oak", "spruce"};
-//		
-//		for(String wood : woods) {
-//			Material mat = new Material(woodType, wood, String.format("drpmaarg.material.%s", wood));
-//			mat.setTexture("log_side", new ResourceLocation("minecraft", String.format("textures/block/%s_log.png", wood)));
-//			mat.setTexture("log_top", new ResourceLocation("minecraft", String.format("textures/block/%s_log_top.png", wood)));
-//			mat.setTexture("stripped_log_side", new ResourceLocation("minecraft", String.format("textures/block/stripped_%s_log.png", wood)));
-//			mat.setTexture("stripped_log_top", new ResourceLocation("minecraft", String.format("textures/block/stripped_%s_log_top.png", wood)));
-//			mat.setTexture("planks", new ResourceLocation("minecraft", String.format("textures/block/%s_planks.png", wood)));
-//			
-//			MaterialRegistry.register(mat);
-//		}
 	}
 	
 	
@@ -106,6 +103,7 @@ public class DarkRoleplayMedieval {
 		//ModelLoaderRegistry.registerLoader(ModelQualityModelLoader.INSTANCE);
 		ClientRegistry.bindTileEntitySpecialRenderer(RoadSignTileEntity.class, new RoadSignTileEntityRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(ChoppingTileEntity.class, new ChoppingTileEntityRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(RoofTileEntity.class, new RoofTileEntityRenderer());
 
 
 		ClientRegistry.bindTileEntitySpecialRenderer(ModelTesterTileEntity.class, new ModelTesterTileEntityRenderer());

@@ -4,9 +4,15 @@ import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairTil
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 
 public class ChoppingBlock extends Block {
+
+    private static final VoxelShape shape = Block.makeCuboidShape(1, 0, 1, 15, 11, 15);
 
     public ChoppingBlock(Properties properties) {
         super(properties);
@@ -18,7 +24,10 @@ public class ChoppingBlock extends Block {
     }
 
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new ChoppingTileEntity();
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) { return new ChoppingTileEntity(); }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return shape;
     }
 }

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "material": {
+    "type": "wood",
+    "required_textures": [
+      "planks"
+    ],
+    "required_items": [
+      "planks"
+    ]
+  },
+  "tasks": [
+    {
+      "input" : "drpmedieval:marg/text_files/blockstates/chopping_block.json",
+      "output" : "drpmedieval:blockstates/${material}_chopping_block.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/blocks/chopping_block/chopping_block.json",
+      "output" : "drpmedieval:models/item/${material}_chopping_block.json"
+    }
+  ]
+}

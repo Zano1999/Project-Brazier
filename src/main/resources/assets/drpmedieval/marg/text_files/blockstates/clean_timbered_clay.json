@@ -1,0 +1,275 @@
+{
+  "forge_marker": 1,
+  "_comment": "defaults are not working with full variants for some reason",
+  "variants": {
+    "axis=x,bottom=false,left=false,right=false,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/empty"
+    },
+    "axis=x,bottom=false,left=false,right=false,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_1",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5"
+      }
+    },
+    "axis=x,bottom=false,left=false,right=true,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_2",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      }
+    },
+    "axis=x,bottom=false,left=false,right=true,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_3",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      }
+    },
+    "axis=x,bottom=true,left=false,right=false,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_4",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5"
+      }
+    },
+    "axis=x,bottom=true,left=false,right=false,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5"
+      }
+    },
+    "axis=x,bottom=true,left=false,right=true,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_6",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5"
+      }
+    },
+    "axis=x,bottom=true,left=false,right=true,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_7",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5"
+      }
+    },
+    "axis=x,bottom=false,left=true,right=false,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_8",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      }
+    },
+    "axis=x,bottom=false,left=true,right=false,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_9",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      }
+    },
+    "axis=x,bottom=false,left=true,right=true,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      }
+    },
+    "axis=x,bottom=false,left=true,right=true,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_11",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      }
+    },
+    "axis=x,bottom=true,left=true,right=false,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_12",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      }
+    },
+    "axis=x,bottom=true,left=true,right=false,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_13",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      }
+    },
+    "axis=x,bottom=true,left=true,right=true,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_14",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      }
+    },
+    "axis=x,bottom=true,left=true,right=true,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_15",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      }
+    },
+
+
+
+
+    "axis=z,bottom=false,left=false,right=false,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/empty"
+    },
+    "axis=z,bottom=false,left=false,right=false,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_1",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=false,left=false,right=true,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_2",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=false,left=false,right=true,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_3",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=true,left=false,right=false,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_4",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=true,left=false,right=false,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=true,left=false,right=true,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_6",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=true,left=false,right=true,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_7",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=false,left=true,right=false,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_8",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=false,left=true,right=false,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_9",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=false,left=true,right=true,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=false,left=true,right=true,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_11",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=true,left=true,right=false,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_12",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=true,left=true,right=false,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_13",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=true,left=true,right=true,top=false": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_14",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      },
+      "y": 90
+    },
+    "axis=z,bottom=true,left=true,right=true,top=true": {
+      "model": "drpmedieval:block/timbered_clay/templates/base_border",
+      "textures": {
+        "border": "drpmedieval:block/timbered_clay/borders/${material}_15",
+        "top": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "right": "drpmedieval:block/timbered_clay/borders/${material}_10",
+        "bottom": "drpmedieval:block/timbered_clay/borders/${material}_5",
+        "left": "drpmedieval:block/timbered_clay/borders/${material}_10"
+      },
+      "y": 90
+    }
+  }
+}

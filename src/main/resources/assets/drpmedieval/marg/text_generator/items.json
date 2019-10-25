@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "material": {
+    "type": "wood",
+    "required_textures": [
+      "log_top",
+      "log"
+    ],
+    "required_items": [
+      "log"
+    ]
+  },
+  "tasks": [
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/firewood.json",
+      "output" : "drpmedieval:models/item/${material}_firewood.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/wood_beam.json",
+      "output" : "drpmedieval:models/item/${material}_wood_beam.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/planks.json",
+      "output" : "drpmedieval:models/item/${material}_plank.json"
+    }
+  ]
+}

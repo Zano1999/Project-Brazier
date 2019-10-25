@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "material": {
+    "type": "wood",
+    "required_textures": [
+      "planks"
+    ],
+    "required_items": [
+      "planks"
+    ]
+  },
+  "tasks": [
+    {
+      "input" : "drpmedieval:marg/text_files/blockstates/solid_table.json",
+      "output" : "drpmedieval:blockstates/solid_${material}_table.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/blocks/tables/simple_solid_table.json",
+      "output" : "drpmedieval:models/item/solid_${material}_table.json"
+    }
+  ]
+}

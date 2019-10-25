@@ -1,0 +1,66 @@
+{
+	"version": 0,
+	"type": "wood",
+	"required_textures":[
+		"drpmedieval:marg/textures/masks/timbered_clay/double_diagonal_b_bt.png",
+		"drpmedieval:marg/textures/masks/timbered_clay/double_diagonal_b_tb.png",
+		"drpmedieval:marg/textures/masks/timbered_clay/double_diagonal_l_lr.png",
+		"drpmedieval:marg/textures/masks/timbered_clay/double_diagonal_l_rl.png",
+		"drpmedieval:marg/textures/masks/timbered_clay/double_diagonal_r_lr.png",
+		"drpmedieval:marg/textures/masks/timbered_clay/double_diagonal_r_rl.png",
+		"drpmedieval:marg/textures/masks/timbered_clay/double_diagonal_t_bt.png",
+		"drpmedieval:marg/textures/masks/timbered_clay/double_diagonal_t_tb.png",
+		"drpmedieval:marg/textures/overlays/timbered_clay/double_diagonal_b_bt.png",
+		"drpmedieval:marg/textures/overlays/timbered_clay/double_diagonal_b_tb.png",
+		"drpmedieval:marg/textures/overlays/timbered_clay/double_diagonal_l_lr.png",
+		"drpmedieval:marg/textures/overlays/timbered_clay/double_diagonal_l_rl.png",
+		"drpmedieval:marg/textures/overlays/timbered_clay/double_diagonal_r_lr.png",
+		"drpmedieval:marg/textures/overlays/timbered_clay/double_diagonal_r_rl.png",
+		"drpmedieval:marg/textures/overlays/timbered_clay/double_diagonal_t_bt.png",
+		"drpmedieval:marg/textures/overlays/timbered_clay/double_diagonal_t_tb.png"
+	],
+	"tasks": [
+		{
+			"input_type": "material",
+			"input": "planks",
+			"manipulations": [{"type":"mask", "texture": 0}, {"type": "overlay", "texture": 8}],
+			"output_type": "file", "output":  "drpmedieval:textures/block/timbered_clay/shapes/${material}_double_diagonal_b_bt"
+		},
+		{
+			"input_type": "material",
+			"input": "planks",
+			"manipulations": [{"type":"mask", "texture": 1}, {"type": "overlay", "texture": 9}],
+			"output_type": "file", "output":  "drpmedieval:textures/block/timbered_clay/shapes/${material}_double_diagonal_b_tb"
+		},{
+			"input_type": "material",
+			"input": "planks",
+			"manipulations": [{"type":"mask", "texture": 2}, {"type": "overlay", "texture": 10}],
+			"output_type": "file", "output":  "drpmedieval:textures/block/timbered_clay/shapes/${material}_double_diagonal_l_lr"
+		},{
+			"input_type": "material",
+			"input": "planks",
+			"manipulations": [{"type":"mask", "texture": 3}, {"type": "overlay", "texture": 11}],
+			"output_type": "file", "output":  "drpmedieval:textures/block/timbered_clay/shapes/${material}_double_diagonal_l_rl"
+		},{
+			"input_type": "material",
+			"input": "planks",
+			"manipulations": [{"type":"mask", "texture": 4}, {"type": "overlay", "texture": 12}],
+			"output_type": "file", "output":  "drpmedieval:textures/block/timbered_clay/shapes/${material}_double_diagonal_r_lr"
+		},{
+			"input_type": "material",
+			"input": "planks",
+			"manipulations": [{"type":"mask", "texture": 5}, {"type": "overlay", "texture": 13}],
+			"output_type": "file", "output":  "drpmedieval:textures/block/timbered_clay/shapes/${material}_double_diagonal_r_rl"
+		},{
+			"input_type": "material",
+			"input": "planks",
+			"manipulations": [{"type":"mask", "texture": 6}, {"type": "overlay", "texture": 14}],
+			"output_type": "file", "output":  "drpmedieval:textures/block/timbered_clay/shapes/${material}_double_diagonal_t_bt"
+		},{
+			"input_type": "material",
+			"input": "planks",
+			"manipulations": [{"type":"mask", "texture": 7}, {"type": "overlay", "texture": 15}],
+			"output_type": "file", "output":  "drpmedieval:textures/block/timbered_clay/shapes/${material}_double_diagonal_t_tb"
+		}
+	]
+}

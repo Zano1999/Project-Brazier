@@ -5,18 +5,28 @@ import net.dark_roleplay.medieval.objects.enums.WoodStairsType;
 import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.EnumMap;
@@ -102,6 +112,27 @@ public class SimpleWoodStairs extends HorizontalBlock {
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
         builder.add(GROUNDED, TYPE);
+    }
+
+    @Override
+    @Deprecated
+    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        ItemStack stack = player.getHeldItem(handIn);
+        if(stack.getItem() instanceof BlockItem && ((BlockItem) stack.getItem()).getBlock() == this){
+            BlockPos targetPos = pos.offset(state.get(HORIZONTAL_FACING).getOpposite()).up();
+            if(!World.isValid(targetPos)){
+                player.sendStatusMessage(new TranslationTextComponent("build.tooHigh", targetPos.getY()).applyTextStyle(TextFormatting.RED), true);
+                return true;
+            }
+            if(worldIn.isAirBlock(targetPos)){
+                worldIn.setBlockState(targetPos, this.getStateForPlacement(new BlockItemUseContext(new ItemUseContext(player, handIn, hit))));
+                worldIn.playSound(null, targetPos, this.getSoundType(state, worldIn, targetPos, player).getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
+                if(!player.isCreative())
+                    stack.shrink(1);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

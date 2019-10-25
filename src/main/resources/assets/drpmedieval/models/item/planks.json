@@ -1,6 +1,5 @@
 {
   "textures": {
-    "particle": "marg:block/planks/oak_planks",
     "0": "marg:block/planks/oak_planks"
   },
   "elements": [
