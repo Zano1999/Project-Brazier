@@ -29,7 +29,7 @@ public class RoofTileEntityRenderer extends TileEntityRenderer<RoofTileEntity> {
 
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
 
-        boolean result = Minecraft.getInstance().getBlockRendererDispatcher().getBlockModelRenderer().renderModel(tileEntity.getWorld(), model, tileEntity.getBlockState(), tileEntity.getPos(), buffer, false, tileEntity.getWorld().getRandom(), tileEntity.getWorld().getSeed(), EmptyModelData.INSTANCE);
+        Minecraft.getInstance().getBlockRendererDispatcher().getBlockModelRenderer().renderModel(tileEntity.getWorld(), model, tileEntity.getBlockState(), tileEntity.getPos(), buffer, true, tileEntity.getWorld().getRandom(), tileEntity.getWorld().getSeed(), EmptyModelData.INSTANCE);
 
         tessellator.draw();
         GlStateManager.popMatrix();

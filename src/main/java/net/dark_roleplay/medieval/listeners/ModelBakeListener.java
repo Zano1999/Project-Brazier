@@ -90,8 +90,8 @@ public class ModelBakeListener {
                 //LOGGER.error("Error loading road sign right model", e);
             }
 
-//            for(TimberedClayEnums.TimberedClayType type : TimberedClayEnums.TimberedClayType.values()) {
-//                if (type == TimberedClayEnums.TimberedClayType.CLEAN) continue;
+//            for(TimberedClayEnums.TimberedClayVariant type : TimberedClayEnums.TimberedClayVariant.values()) {
+//                if (type == TimberedClayEnums.TimberedClayVariant.CLEAN) continue;
 //
 //                ResourceLocation name = new ResourceLocation("drpmedieval", String.format("%s_%s_timbered_clay", material.getName(), type.getName()));
 //                for(int i = 0; i <= 15; i++){

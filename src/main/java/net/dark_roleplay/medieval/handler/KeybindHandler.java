@@ -1,7 +1,8 @@
 package net.dark_roleplay.medieval.handler;
 
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignHelper;
+import net.dark_roleplay.crafter.objects.guis.CraftingScreen;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
@@ -17,7 +18,9 @@ public class KeybindHandler {
     @SubscribeEvent
     public static void KeyInput(InputEvent.KeyInputEvent event) {
         if (BLOCK_INTERACTOR.isPressed()) {
-            RoadSignHelper.INSTANCE.setRight(!RoadSignHelper.INSTANCE.isRight());
+            Minecraft.getInstance().displayGuiScreen(new CraftingScreen());
+//            Minecraft.getInstance().displayGuiScreen(new TimberedScreen(new TimberedArea(Minecraft.getInstance().world, new BlockPos(-1030, 70, 828), new BlockPos(-1024, 72, 828))));
+            //RoadSignHelper.INSTANCE.setRight(!RoadSignHelper.INSTANCE.isRight());
         }
     }
 

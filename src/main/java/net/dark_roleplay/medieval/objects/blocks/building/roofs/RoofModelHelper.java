@@ -112,7 +112,7 @@ public class RoofModelHelper {
             new Vec3d(0, 0, 1)
         }, new Vec3d(0.5, 0.5, 1), Direction.SOUTH);
 
-        public final Vec3d[] vectors;
+        public Vec3d[] vectors;
         public final Vec3d altVec;
         public final Direction dir;
         public final int normal;

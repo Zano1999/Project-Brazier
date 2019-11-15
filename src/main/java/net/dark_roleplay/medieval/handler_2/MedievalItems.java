@@ -3,6 +3,7 @@ package net.dark_roleplay.medieval.handler_2;
 import net.dark_roleplay.marg.api.materials.Material;
 import net.dark_roleplay.marg.api.materials.MaterialRequirement;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
+import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofItem;
 import net.dark_roleplay.medieval.objects.items.equipment.misc.RoadSignItem;
 import net.dark_roleplay.medieval.objects.items.equipment.tools.ItemTelescope;
 import net.dark_roleplay.medieval.objects.items.equipment.tools.RoofersNotes;
@@ -125,7 +126,7 @@ public class MedievalItems {
         SIMPLE_ROAD_SIGN            = materialRegister(plankMat, "simple_${material}_road_sign", material -> () -> new RoadSignItem(miscProperties, material,"drpmedieval:${material}_road_sign_%s.obj"));
 
     public static final Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>>
-        SHINGLE_ROOF                = materialRegisterBlocks(MedievalBlocks.SHINGLE_ROOF, block -> new BlockItem(block.get(), buildProperties)),
+        SHINGLE_ROOF                = materialRegisterBlocks(MedievalBlocks.SHINGLE_ROOF, block -> new RoofItem(block.get(), buildProperties)),
         CHOPPING_BLOCK              = materialRegisterBlocks(MedievalBlocks.CHOPPING_BLOCK, block -> new BlockItem(block.get(), utilityProperties)),
         SIMPLE_WOOD_STAIRS          = materialRegisterBlocks(MedievalBlocks.SIMPLE_WOOD_STAIRS, block -> new BlockItem(block.get(), buildProperties)),
         SOLID_WOOD_TABLE            = materialRegisterBlocks(MedievalBlocks.SOLID_WOOD_TABLE, block -> new BlockItem(block.get(), decoProperties)),
