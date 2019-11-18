@@ -17,6 +17,18 @@
     {
       "input" : "drpmedieval:marg/text_files/item_models/blocks/road_sign/road_sign.json",
       "output" : "drpmedieval:models/item/${material}_road_sign.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/other_models/road_sign_left.json",
+      "output" : "drpmedieval:models/item/simple_${material}_road_sign.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/other_models/road_sign_left.json",
+      "output" : "drpmedieval:models/other/simple_${material}_road_sign_left.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/other_models/road_sign_right.json",
+      "output" : "drpmedieval:models/other/simple_${material}_road_sign_right.json"
     }
   ]
 }

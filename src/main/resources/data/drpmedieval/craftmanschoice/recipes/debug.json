@@ -4,7 +4,7 @@
   "output": [
     {
       "type": "craftmanschoice:item",
-      "item": "minecraft:diamond",
+      "item": "minecraft:dried_kelp_block",
       "count": 1
     }
   ],

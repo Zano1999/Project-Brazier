@@ -123,7 +123,7 @@ public class MedievalItems {
         WOOD_BEAMS                  = materialRegister(plankMat, "${material}_wood_beam", () -> new Item(miscProperties)),
         PLANKS                      = materialRegister(plankMat, "${material}_plank", () -> new Item(miscProperties)),
         FIREWOOD                    = materialRegister(logMat, "${material}_firewood", () -> new Item(miscProperties)),
-        SIMPLE_ROAD_SIGN            = materialRegister(plankMat, "simple_${material}_road_sign", material -> () -> new RoadSignItem(miscProperties, material,"drpmedieval:${material}_road_sign_%s.obj"));
+        SIMPLE_ROAD_SIGN            = materialRegister(plankMat, "simple_${material}_road_sign", material -> () -> new RoadSignItem(miscProperties, material,"drpmedieval:other/simple_${material}_road_sign_%s"));
 
     public static final Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>>
         SHINGLE_ROOF                = materialRegisterBlocks(MedievalBlocks.SHINGLE_ROOF, block -> new RoofItem(block.get(), buildProperties)),

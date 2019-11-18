@@ -27,11 +27,11 @@ public class MedievalTileEntities {
     public static final RegistryObject<TileEntityType<?>>
         SHINGLE_ROOF            = TILE_ENTITIES.register("shingle_roof", () -> createType(RoofTileEntity::new, RoofTileEntity.class, MedievalBlocks.SHINGLE_ROOF)),
         BARREL                  = TILE_ENTITIES.register("barrel", () -> createType(BarrelTileEntity::new, BarrelTileEntity.class)),
-        SOLID_CHAIR                  = TILE_ENTITIES.register("solid_chair_armrest", () -> createType(SolidChairTileEntity::new, SolidChairTileEntity.class)),
-        ROAD_SIGN                  = TILE_ENTITIES.register("road_sign", () -> createType(RoadSignTileEntity::new, RoadSignTileEntity.class)),
+        SOLID_CHAIR             = TILE_ENTITIES.register("solid_chair_armrest", () -> createType(SolidChairTileEntity::new, SolidChairTileEntity.class)),
+        ROAD_SIGN               = TILE_ENTITIES.register("road_sign", () -> createType(RoadSignTileEntity::new, RoadSignTileEntity.class, MedievalBlocks.WOOD_ROAD_SIGN)),
         ANCHOR                  = TILE_ENTITIES.register("anchor", () -> createType(AnchorTileEntity::new, AnchorTileEntity.class)),
-        MODEL_TESTER              = TILE_ENTITIES.register("model_tester", () -> createType(ModelTesterTileEntity::new, ModelTesterTileEntity.class)),
-        CHOPPING_BLOCK                  = TILE_ENTITIES.register("chopping_block", () -> createType(ChoppingTileEntity::new, ChoppingTileEntity.class));
+        MODEL_TESTER            = TILE_ENTITIES.register("model_tester", () -> createType(ModelTesterTileEntity::new, ModelTesterTileEntity.class)),
+        CHOPPING_BLOCK          = TILE_ENTITIES.register("chopping_block", () -> createType(ChoppingTileEntity::new, ChoppingTileEntity.class));
 
 
     protected static <T extends TileEntity> TileEntityType createType(Supplier<T> supplier, Class<T> teClass){

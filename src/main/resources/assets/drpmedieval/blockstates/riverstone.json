@@ -1,7 +1,7 @@
 {
-    "variants": {
-        "": [
-        	{ "model": "drpmedieval:block/riverstone/riverstone" }
-        ]
-    }
+  "variants": {
+    "": [
+      { "model": "drpmedieval:block/riverstone/riverstone" }
+    ]
+  }
 }

@@ -12,6 +12,7 @@ import net.dark_roleplay.medieval.objects.blocks.building.wood_stairs.SimpleWood
 import net.dark_roleplay.medieval.objects.blocks.building.wooden_window.WoodenWindowBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.advent_wreath.AdventWreathBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.benches.BenchBlock;
+import net.dark_roleplay.medieval.objects.blocks.decoration.candles.Candles;
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.PlankChairBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairArmrestBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairBlock;
@@ -61,6 +62,7 @@ public class MedievalBlocks {
         DARK_LARGE_RIVERSTONE       = BLOCKS.register("dark_large_riverstone", () -> new Block(stoneBaseProperties)),
         COLORFUL_COBBLESTONE        = BLOCKS.register("colorful_cobblestone", () -> new Block(stoneBaseProperties)),
         PALE_COLORFUL_COBBLESTONE   = BLOCKS.register("pale_colorful_cobblestone", () -> new Block(stoneBaseProperties)),
+        BEESWAX_CANDLE              = BLOCKS.register("beeswax_candle", () -> new Candles(woodBaseProperties)),
         ADVENT_WREATH               = BLOCKS.register("advent_wreath", () -> new AdventWreathBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(1.0F, 1.0F).sound(SoundType.PLANT))),
         TIMBERED_CLAY               = BLOCKS.register("clean_timbered_clay", () -> new Block(PLACEHOLDER));
 

@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -48,14 +49,13 @@ public class HitboxDrawListener {
 
             ResourceLocation modelLoc = RoadSignHelper.INSTANCE.isRight() ? ((RoadSignItem) heldItem.getItem()).getSignModelRight() : ((RoadSignItem) heldItem.getItem()).getSignModelLeft();
 
-            IBakedModel model =  RoadSignTileEntityRenderer.bakedCache.get(modelLoc);
+            IBakedModel model =  Minecraft.getInstance().getModelManager().getModel(modelLoc);
             if(model == null) return;
 
             RoadSignHelper.INSTANCE.displayRoadSignHud();
 
             PlayerEntity player = Minecraft.getInstance().player;
 
-            List<BakedQuad> quads = model.getQuads(null, null, new Random());
 
 
             GL11.glEnable(GL11.GL_BLEND);
@@ -67,9 +67,14 @@ public class HitboxDrawListener {
             Minecraft.getInstance().getTextureManager().bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
 
             buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.ITEM);
-            for (BakedQuad quad : quads) {
-                LightUtil.renderQuadColor(buffer, quad, 0xFFFFFFFF);
-            }
+
+            //for(Direction dir : Direction.values()){
+                List<BakedQuad> quads = model.getQuads(null, null, new Random());
+
+                for (BakedQuad quad : quads) {
+                    LightUtil.renderQuadColor(buffer, quad, 0xFFFFFFFF);
+                }
+            //}
 
             Entity viewEntity = Minecraft.getInstance().getRenderViewEntity();
             Vec3d view = viewEntity.getEyePosition(event.getPartialTicks());

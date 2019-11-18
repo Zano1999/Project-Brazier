@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import net.minecraft.util.Direction;
 import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -22,8 +23,6 @@ import net.minecraftforge.client.model.pipeline.LightUtil;
 
 public class RoadSignTileEntityRenderer extends TileEntityRenderer<RoadSignTileEntity> {
 
-	public static final Map<ResourceLocation, IBakedModel> bakedCache	= new HashMap<>();
-
 	@Override
 	public void render(RoadSignTileEntity tileEntity, double x, double y, double z, float partialTicks, int destroyStage) {
 		List<SignInfo> signs = tileEntity.getSigns();
@@ -36,10 +35,10 @@ public class RoadSignTileEntityRenderer extends TileEntityRenderer<RoadSignTileE
 		Minecraft.getInstance().getTextureManager().bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
 		for (SignInfo sign : signs) {
 			IBakedModel model = sign.isPointsLeft()
-					? this.bakedCache.get(new ResourceLocation(
-					"drpmedieval:" + sign.getMaterial() + "_road_sign_left.obj"))
-					: this.bakedCache.get(new ResourceLocation(
-					"drpmedieval:" + sign.getMaterial() + "_road_sign_right.obj"));
+					? Minecraft.getInstance().getModelManager().getModel(new ResourceLocation(
+					"drpmedieval:other/simple_" + sign.getMaterial() + "_road_sign_left"))
+					: Minecraft.getInstance().getModelManager().getModel(new ResourceLocation(
+					"drpmedieval:other/simple_" + sign.getMaterial() + "_road_sign_right"));
 			if(model == null) continue;
 
 			buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.ITEM);
@@ -49,6 +48,7 @@ public class RoadSignTileEntityRenderer extends TileEntityRenderer<RoadSignTileE
 			for (BakedQuad quad : quads) {
 				LightUtil.renderQuadColor(buffer, quad, 0xFFFFFFFF);
 			}
+
 			GlStateManager.pushMatrix();
 			GlStateManager.rotatef(sign.getDirection(), 0.0F, 1.0F, 0.0F);
 			GlStateManager.translated(-0.5, sign.getHeight() * 0.0625F + 0.03125F, -0.5);

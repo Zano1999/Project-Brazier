@@ -14,6 +14,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class RoofTileEntity extends TileEntity {
 
+
+    //TODO Clear bakedModelCache on texture reload
     private BlockState containedState = null;
     private RoofModelHelper.RoofModel bakedModel = null;
     private boolean hasModelFailed = false;

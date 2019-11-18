@@ -1,0 +1,11 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "drpmedieval:block/candles/candle_test"
+  },
+  "variants": {
+    "": {
+      "model": "drpmedieval:block/candles/candle_test"
+    }
+  }
+}
