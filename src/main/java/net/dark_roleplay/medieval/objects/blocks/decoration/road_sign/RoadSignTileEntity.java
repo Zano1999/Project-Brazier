@@ -3,6 +3,7 @@ package net.dark_roleplay.medieval.objects.blocks.decoration.road_sign;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.handler_2.MedievalTileEntities;
 import net.dark_roleplay.medieval.objects.packets.RoadSignEditSignPacket;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.NetworkManager;
@@ -57,8 +58,8 @@ public class RoadSignTileEntity extends TileEntity {
 		return signs;
 	}
 
-	public int addSign(int height, int direction, String material, boolean pointsRight){
-		this.signs.add(new SignInfo("", direction, height, pointsRight, material));
+	public int addSign(int height, int direction, ItemStack signItem, boolean pointsRight){
+		this.signs.add(new SignInfo("", direction, height, pointsRight, signItem));
 		this.markDirty();
 		return this.signs.size() - 1;
 	}

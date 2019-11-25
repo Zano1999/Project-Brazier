@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -55,7 +56,7 @@ public class RoadSign extends Block{
 
 		RoadSignTileEntity rte = (RoadSignTileEntity) te;
 
-		int signID = rte.addSign((int)((hit.getHitVec().y - pos.getY()) * 16), (int) (-player.getYaw(0)), ((RoadSignItem) player.getHeldItemMainhand().getItem()).getMaterial().getName(), !isRight);
+		int signID = rte.addSign((int)((hit.getHitVec().y - pos.getY()) * 16), (int) (-player.getYaw(0)), new ItemStack(player.getHeldItemMainhand().getItem()), !isRight);
 		if(!world.isRemote && !player.isCreative()) player.getHeldItemMainhand().shrink(1);
 
 		world.markAndNotifyBlock(pos, world.getChunkAt(pos), state, state, 3);

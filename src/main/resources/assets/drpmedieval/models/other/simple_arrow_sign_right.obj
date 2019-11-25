@@ -1,6 +1,6 @@
 # Blender v2.80 (sub 53) OBJ File: 'untitled.blend'
 # www.blender.org
-mtllib road_sign_right.mtl
+mtllib simple_arrow_sign_right.mtl
 o Cube
 v 0.937473 0.156250 0.375188
 v 0.937473 -0.156250 0.375188

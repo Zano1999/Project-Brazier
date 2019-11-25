@@ -74,6 +74,7 @@ public class MedievalItems {
         ROPE_ANCHOR                 = ITEMS.register("rope_anchor", () -> new BlockItem(MedievalBlocks.ROPE_ANCHOR.get(), decoProperties)),
         OAK_ROPE_LADDER_ANCHOR      = ITEMS.register("oak_rope_ladder_anchor", () -> new BlockItem(MedievalBlocks.OAK_ROPE_LADDER_ANCHOR.get(), decoProperties)),
         OAK_ROPE_LADDER             = ITEMS.register("oak_rope_ladder", () -> new BlockItem(MedievalBlocks.OAK_ROPE_LADDER.get(), decoProperties)),
+        BEESWAX_CANDLE              = ITEMS.register("beeswax_candle", () -> new BlockItem(MedievalBlocks.BEESWAX_CANDLE.get(), decoProperties)),
 
         BARLEY                      = ITEMS.register("barley", () -> new Item(miscProperties)),
         BARLEY_DOUGH                = ITEMS.register("barley_dough", () -> new Item(miscProperties)),
@@ -123,7 +124,7 @@ public class MedievalItems {
         WOOD_BEAMS                  = materialRegister(plankMat, "${material}_wood_beam", () -> new Item(miscProperties)),
         PLANKS                      = materialRegister(plankMat, "${material}_plank", () -> new Item(miscProperties)),
         FIREWOOD                    = materialRegister(logMat, "${material}_firewood", () -> new Item(miscProperties)),
-        SIMPLE_ROAD_SIGN            = materialRegister(plankMat, "simple_${material}_road_sign", material -> () -> new RoadSignItem(miscProperties, material,"drpmedieval:other/simple_${material}_road_sign_%s"));
+        SIMPLE_ARROW_SIGN           = materialRegister(plankMat, "simple_${material}_arrow_sign", material -> () -> new RoadSignItem(miscProperties, material,"drpmedieval:other/simple_${material}_arrow_sign_%s"));
 
     public static final Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>>
         SHINGLE_ROOF                = materialRegisterBlocks(MedievalBlocks.SHINGLE_ROOF, block -> new RoofItem(block.get(), buildProperties)),
@@ -136,7 +137,7 @@ public class MedievalItems {
         WOOD_SOLID_BENCH            = materialRegisterBlocks(MedievalBlocks.WOOD_SOLID_BENCH, block -> new BlockItem(block.get(), decoProperties)),
         WOOD_PLATFORM               = materialRegisterBlocks(MedievalBlocks.WOOD_PLATFORM, block -> new BlockItem(block.get(), buildProperties)),
         WOOD_PLATFORM_STAIRS        = materialRegisterBlocks(MedievalBlocks.WOOD_PLATFORM_STAIRS, block -> new BlockItem(block.get(), buildProperties)),
-        WOOD_ROAD_SIGN              = materialRegisterBlocks(MedievalBlocks.WOOD_ROAD_SIGN, block -> new BlockItem(block.get(), decoProperties)),
+        WOOD_SIGN_POST              = materialRegisterBlocks(MedievalBlocks.WOOD_SIGN_POST, block -> new BlockItem(block.get(), decoProperties)),
         VERTICAL_WOOD_WINDOW        = materialRegisterBlocks(MedievalBlocks.VERTICAL_WOOD_WINDOW, block -> new BlockItem(block.get(), buildProperties)),
         DENSE_VERTICAL_WOOD_WINDOW  = materialRegisterBlocks(MedievalBlocks.DENSE_VERTICAL_WOOD_WINDOW, block -> new BlockItem(block.get(), buildProperties)),
         CROSS_WOOD_WINDOW           = materialRegisterBlocks(MedievalBlocks.CROSS_WOOD_WINDOW, block -> new BlockItem(block.get(), buildProperties)),

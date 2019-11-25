@@ -28,7 +28,7 @@ public class MedievalTileEntities {
         SHINGLE_ROOF            = TILE_ENTITIES.register("shingle_roof", () -> createType(RoofTileEntity::new, RoofTileEntity.class, MedievalBlocks.SHINGLE_ROOF)),
         BARREL                  = TILE_ENTITIES.register("barrel", () -> createType(BarrelTileEntity::new, BarrelTileEntity.class)),
         SOLID_CHAIR             = TILE_ENTITIES.register("solid_chair_armrest", () -> createType(SolidChairTileEntity::new, SolidChairTileEntity.class)),
-        ROAD_SIGN               = TILE_ENTITIES.register("road_sign", () -> createType(RoadSignTileEntity::new, RoadSignTileEntity.class, MedievalBlocks.WOOD_ROAD_SIGN)),
+        ROAD_SIGN               = TILE_ENTITIES.register("road_sign", () -> createType(RoadSignTileEntity::new, RoadSignTileEntity.class, MedievalBlocks.WOOD_SIGN_POST)),
         ANCHOR                  = TILE_ENTITIES.register("anchor", () -> createType(AnchorTileEntity::new, AnchorTileEntity.class)),
         MODEL_TESTER            = TILE_ENTITIES.register("model_tester", () -> createType(ModelTesterTileEntity::new, ModelTesterTileEntity.class)),
         CHOPPING_BLOCK          = TILE_ENTITIES.register("chopping_block", () -> createType(ChoppingTileEntity::new, ChoppingTileEntity.class));

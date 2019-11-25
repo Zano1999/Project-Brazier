@@ -1,11 +1,32 @@
 {
   "forge_marker": 1,
-  "defaults": {
-    "model": "drpmedieval:block/candles/candle_test"
+  "default": {
+    "model":  "drpmedieval:block/candles/beeswax_candles_1"
   },
   "variants": {
-    "": {
-      "model": "drpmedieval:block/candles/candle_test"
-    }
+    "count=1": [
+      { "model":  "drpmedieval:block/candles/beeswax_candles_1"},
+      { "model":  "drpmedieval:block/candles/beeswax_candles_1", "y":  90},
+      { "model":  "drpmedieval:block/candles/beeswax_candles_1", "y":  180},
+      { "model":  "drpmedieval:block/candles/beeswax_candles_1", "y":  270}
+    ],
+    "count=2": [
+      { "model":  "drpmedieval:block/candles/beeswax_candles_2"},
+      { "model":  "drpmedieval:block/candles/beeswax_candles_2", "y":  90},
+      { "model":  "drpmedieval:block/candles/beeswax_candles_2", "y":  180},
+      { "model":  "drpmedieval:block/candles/beeswax_candles_2", "y":  270}
+    ],
+    "count=3": [
+      { "model":  "drpmedieval:block/candles/beeswax_candles_3"},
+      { "model":  "drpmedieval:block/candles/beeswax_candles_3", "y":  90},
+      { "model":  "drpmedieval:block/candles/beeswax_candles_3", "y":  180},
+      { "model":  "drpmedieval:block/candles/beeswax_candles_3", "y":  270}
+    ],
+    "count=4": [
+      { "model":  "drpmedieval:block/candles/beeswax_candles_4"},
+      { "model":  "drpmedieval:block/candles/beeswax_candles_4", "y":  90},
+      { "model":  "drpmedieval:block/candles/beeswax_candles_4", "y":  180},
+      { "model":  "drpmedieval:block/candles/beeswax_candles_4", "y":  270}
+    ]
   }
 }

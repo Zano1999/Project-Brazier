@@ -1,13 +1,13 @@
 {
     "forge_marker": 1,
     "defaults": {
-		"model":"drpmedieval:block/road_signs/post",
+		"model":"drpmedieval:block/signs/post",
         "textures": {
 			"planks": "${texture%planks}",
 			"particle": "${texture%planks}"
         }
     },
 	"variants": {
-		"":{"model":"drpmedieval:block/road_signs/post"}
+		"": {"model":"drpmedieval:block/signs/post"}
 	}
 }

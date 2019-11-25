@@ -41,7 +41,6 @@ public class EmissiveBakedModel implements IBakedModel {
 
         for(BakedQuad quad : emissive){
             combinedQuads.add(transformQuad(quad, 0.007F));
-
         }
 
         combinedQuads.addAll(nonEmissiveModel.getQuads(state, side, rand));
@@ -80,7 +79,6 @@ public class EmissiveBakedModel implements IBakedModel {
     }
 
     private static BakedQuad transformQuad(BakedQuad quad, float light) {
-
         VertexFormat format = getFormatWithLightMap(quad.getFormat());
 
         UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);

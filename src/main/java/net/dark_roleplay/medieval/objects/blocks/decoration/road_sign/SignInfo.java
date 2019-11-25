@@ -1,5 +1,6 @@
 package net.dark_roleplay.medieval.objects.blocks.decoration.road_sign;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 
 public class SignInfo {
@@ -8,14 +9,14 @@ public class SignInfo {
 	private String text = "";
 	private boolean pointsLeft = true;
 	private int height = 0;
-	private String material = "";
+	private ItemStack signItem = null;
 	
-	public SignInfo(String text, int direction, int height, boolean pointsLeft, String material) {
+	public SignInfo(String text, int direction, int height, boolean pointsLeft, ItemStack signItem) {
 		this.direction = direction;
 		this.pointsLeft = pointsLeft;
 		this.text = text;
 		this.height = height;
-		this.material = material;
+		this.signItem = signItem;
 	}
 	
 	public SignInfo(CompoundNBT tag) {
@@ -23,7 +24,7 @@ public class SignInfo {
 		this.direction = tag.getInt("direction");
 		this.height = tag.getInt("height");
 		this.pointsLeft = tag.getBoolean("isLeft");
-		this.material = tag.getString("material");
+		this.signItem = ItemStack.read(tag.getCompound("signItem"));
 	}
 
 	public int getDirection() {
@@ -58,12 +59,12 @@ public class SignInfo {
 		this.height = height;
 	}
 
-	public String getMaterial() {
-		return material;
+	public ItemStack getSignItem() {
+		return signItem;
 	}
 
-	public void setMaterial(String material) {
-		this.material = material;
+	public void setSignItem(ItemStack signItem) {
+		this.signItem = signItem;
 	}
 	
 	public CompoundNBT toNBT() {
@@ -72,7 +73,7 @@ public class SignInfo {
 		tag.putInt("direction", this.direction);
 		tag.putInt("height", this.height);
 		tag.putBoolean("isLeft", this.pointsLeft);
-		tag.putString("material", this.material);
+		tag.put("signItem", this.signItem.write(new CompoundNBT()));
 		return tag;
 	}
 }

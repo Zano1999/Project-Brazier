@@ -103,6 +103,7 @@ public class DarkRoleplayMedieval {
 
 		ClientRegistry.bindTileEntitySpecialRenderer(ModelTesterTileEntity.class, new ModelTesterTileEntityRenderer());
 		ClientRegistry.registerKeyBinding(KeybindHandler.BLOCK_INTERACTOR);
+		ClientRegistry.registerKeyBinding(KeybindHandler.DODGE);
 	}
 
 //	@EventHandler

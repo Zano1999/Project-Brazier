@@ -1,10 +1,19 @@
 {
 	"credit": "Made by JTK222",
-	"parent": "drpmedieval:block/road_signs/post",
-	"textures": {
-		"planks": "${texture%planks}",
-		"particle": "${texture%planks}"
-	},
+	"elements": [
+		{
+			"from": [6, 0, 6],
+			"to": [10, 16, 10],
+			"faces": {
+				"north": {"uv": [6, 0, 10, 16], "texture": "#planks"},
+				"east": {"uv": [6, 0, 10, 16], "texture": "#planks"},
+				"south": {"uv": [6, 0, 10, 16], "texture": "#planks"},
+				"west": {"uv": [6, 0, 10, 16], "texture": "#planks"},
+				"up": {"uv": [6, 6, 10, 10], "texture": "#planks", "cullface": "up"},
+				"down": {"uv": [6, 6, 10, 10], "texture": "#planks", "cullface": "down"}
+			}
+		}
+	],
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [75, 45, 0],

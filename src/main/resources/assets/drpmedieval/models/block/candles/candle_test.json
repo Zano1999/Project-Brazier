@@ -1,5 +1,5 @@
 {
-	"loader":  "drpmedieval:debug_loader",
+	"loader":  "modelz:locator_loader",
 	"original_loader": "minecraft:elements",
 	"credit": "Made by JTK222",
 	"elements": [
@@ -31,7 +31,8 @@
 			}
 		}
 	],
-	"marker": {
+	"accessKey": "drpmedieval:beeswax_candles",
+	"locator": {
 		"particles": [2.5, 6.0, 2.5]
 	}
 }

@@ -81,7 +81,7 @@ public class MedievalBlocks {
         WOOD_SOLID_BENCH            = materialRegister(plankMat, "${material}_solid_bench", () -> new BenchBlock(woodBaseProperties)),
         WOOD_PLATFORM               = materialRegister(plankMat, "${material}_platform", () -> new WoodPlatformBlock(woodBaseProperties)),
         WOOD_PLATFORM_STAIRS        = materialRegister(plankMat, "${material}_platform_stairs", () -> new WoodPlatformStairsBlock(woodBaseProperties)),
-        WOOD_ROAD_SIGN              = materialRegister(plankMat, "${material}_road_sign", () -> new RoadSign(woodBaseProperties)), //Needs TE
+        WOOD_SIGN_POST              = materialRegister(plankMat, "${material}_sign_post", () -> new RoadSign(woodBaseProperties)), //Needs TE
         WOOD_SOLID_ARMREST_CHAIR    = materialRegister(plankMat, "${material}_solid_chair_armrest", () -> new SolidChairArmrestBlock(woodBaseProperties)), //Needs TE
         CLEAN_TIMBERED_CLAY         = materialRegister(plankMat, "clean_${material}_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.CLEAN)),
         VERTICAL_TIMBERED_CLAY      = materialRegister(plankMat, "${material}_vertical_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.VERTICAL)),
