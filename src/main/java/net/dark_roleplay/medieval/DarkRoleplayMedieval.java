@@ -13,6 +13,7 @@ import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTi
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntityRenderer;
 import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntityRenderer;
+import net.dark_roleplay.medieval.objects.packets.DodgePacket;
 import net.dark_roleplay.medieval.objects.packets.RoadSignEditSignPacket;
 import net.dark_roleplay.medieval.objects.packets.RoadSignPlacementPacket;
 import net.dark_roleplay.tertiary_interactor.TertiaryInteractionModule;
@@ -60,6 +61,7 @@ public class DarkRoleplayMedieval {
 		NetworkHelper.initChannel(MOD_CHANNEL);
 		NetworkHelper.registerPacket(RoadSignPlacementPacket.class);
 		NetworkHelper.registerPacket(RoadSignEditSignPacket.class);
+		NetworkHelper.registerPacket(DodgePacket.class);
 
 		for(IModule module : modules)
 			module.registerPackets();
@@ -68,6 +70,7 @@ public class DarkRoleplayMedieval {
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.WORLD_GENS_SPEC, "World Generation.toml");
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.Misc.REGENERATING_ORES_SPEC, "Regenerating Ores.toml");
+		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.SKILL_CONFIG_SPEC, "Abilities.toml");
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommonStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupServerStuff);
