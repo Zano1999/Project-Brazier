@@ -17,5 +17,10 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+      env:
+        MVN_REPO: ${{ secrets.mvn_repo }}
+        MVN_USER: ${{ secrets.mvn_username }}
+        MVN_PASSWORD: ${{ secrets.mvn_password }}
+        
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew publish
