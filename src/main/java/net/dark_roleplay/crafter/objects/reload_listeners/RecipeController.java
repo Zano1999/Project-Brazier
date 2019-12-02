@@ -14,7 +14,10 @@ import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.util.Map;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public final class RecipeController extends JsonReloadListener {
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
@@ -51,9 +54,7 @@ public final class RecipeController extends JsonReloadListener {
             }
         }
 
-        this.recipes = map.entrySet().stream().collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, (p_223400_0_) -> {
-            return p_223400_0_.getValue().build();
-        }));
+        this.recipes = map.entrySet().stream().collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, (p_223400_0_) -> { return p_223400_0_.getValue().build(); }));
         LOGGER.info("Loaded {} recipes", (int)map.size());
     }
 

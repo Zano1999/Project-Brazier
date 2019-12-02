@@ -58,7 +58,6 @@ public class KeybindHandler {
             double speedMult = player.collidedVertically ? player.isSprinting() ? 0.3 : 0.5 : player.isSprinting() ? 0.05 : 0.3;
 
             player.setVelocity(motion.x + dodgeVec.x * speedMult, 0.3, motion.z + dodgeVec.z * speedMult);
-            //TODO Send packet to server, remove fall damage add config for this.
         }
     }
 
