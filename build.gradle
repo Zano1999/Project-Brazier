@@ -86,7 +86,6 @@ jar {
 }
 
 apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.14.2/mods_toml.gradle'
-System.getenv('API_TOKEN')
 
 // Publishing
 def reobfFile = file("$buildDir/reobfJar/output.jar")
