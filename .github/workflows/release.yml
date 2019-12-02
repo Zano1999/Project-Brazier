@@ -3,8 +3,7 @@ name: Java CI
 on:
   push:
     tags:
-      - beta
-      - release
+      - 'v*'
 
 jobs:
   build:
