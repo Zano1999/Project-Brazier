@@ -61,7 +61,7 @@ repositories {
 }
 
 dependencies {
-  minecraft "net.minecraftforge:forge:1.14.4-28.1.120-model-system-rework"//${MC_VERSION}-${FORGE_VERSION}"
+  minecraft "net.minecraftforge:forge:${MC_VERSION}-${FORGE_VERSION}"
 
 	compile(fg.deobf("net.dark_roleplay:marg:1.14.4-0.2.5"))
 	compile(fg.deobf("net.dark_roleplay:drplibrary:1.14.2-0.1.0"))
