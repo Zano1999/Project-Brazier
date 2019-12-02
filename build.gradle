@@ -16,7 +16,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: "com.wynprice.cursemaven"
 
-version = '1.14.3-0.1.0'
+version = '1.14.3-0.1.2'
 group = 'net.dark_roleplay'
 archivesBaseName = 'drpmedieval'
 
@@ -86,6 +86,27 @@ jar {
 }
 
 apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.14.2/mods_toml.gradle'
+System.getenv('API_TOKEN')
 
 // Publishing
-//apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.14.2/publishing.gradle'
+def reobfFile = file("$buildDir/reobfJar/output.jar")
+def reobfArtifact = artifacts.add('default', reobfFile) {
+    type 'jar'
+    builtBy 'reobfJar'
+}
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact reobfArtifact
+        }
+    }
+    repositories {
+        maven {
+            url System.getenv("MVN_REPO")
+			credentials {
+				username System.getenv("MVN_USER")
+				password System.getenv("MVN_PASSWORD")
+			}
+        }
+    }
+}
