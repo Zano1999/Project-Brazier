@@ -11,6 +11,7 @@ jobs:
       MVN_REPO: ${{ secrets.mvn_repo }}
       MVN_USER: ${{ secrets.mvn_user }}
       MVN_PASSWORD: ${{ secrets.mvn_password }}
+      CURSE_API_KEY: ${{ secrets.CURSE_API_KEY }}
       
     runs-on: ubuntu-latest
 
