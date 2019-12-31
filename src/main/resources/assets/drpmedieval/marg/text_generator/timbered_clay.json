@@ -19,15 +19,15 @@
     "arrow_top",
     "arrow_right",
     "arrow_left",
-    "straigt_cross",
-    "double_diagonal_bt_t",
-    "double_diagonal_bt_b",
-    "double_diagonal_tb_t",
-    "double_diagonal_tb_b",
-    "double_diagonal_lr_l",
-    "double_diagonal_lr_l",
-    "double_diagonal_rl_r",
-    "double_diagonal_rl_r"
+    "straight_cross",
+    "double_diagonal_t_bt",
+    "double_diagonal_b_bt",
+    "double_diagonal_t_tb",
+    "double_diagonal_b_tb",
+    "double_diagonal_l_lr",
+    "double_diagonal_r_lr",
+    "double_diagonal_l_rl",
+    "double_diagonal_r_rl"
   ],
   "tasks": [
     {

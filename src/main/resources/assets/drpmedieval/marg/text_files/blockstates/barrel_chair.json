@@ -1,0 +1,19 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+		"model":"drpmedieval:block/chairs/barrel_chair",
+		"textures": {
+			"0": "drpmedieval:block/barrels/${material}_barrel_side",
+			"1": "drpmedieval:block/barrels/${material}_barrel_top",
+			"particle": "drpmedieval:block/barrels/${material}_barrel_side"
+		}
+    },
+	"variants": {
+		"facing":{
+			"north":{},
+			"east":{"y":90},
+			"south":{"y":180},
+			"west":{"y":270}
+		}
+	}
+}

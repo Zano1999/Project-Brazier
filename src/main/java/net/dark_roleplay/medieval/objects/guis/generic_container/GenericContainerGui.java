@@ -6,15 +6,16 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class GenericContainerGui<T extends Container> extends ContainerScreen<T> {
+public class GenericContainerGui extends ContainerScreen<GenericContainer> {
 
 	private static final ResourceLocation BACKGROUND = new ResourceLocation(DarkRoleplayMedieval.MODID,
 			"textures/guis/storage/generic_storage.png");
 
-	public GenericContainerGui(T inventorySlotsIn) {
-		super(inventorySlotsIn, (PlayerInventory) null, new TranslationTextComponent("drpmedieval.gui.title.generic_storage"));
+	public GenericContainerGui(GenericContainer inventorySlotsIn, PlayerInventory playerInventory, ITextComponent title) {
+		super(inventorySlotsIn, playerInventory, title);
 	}
 
 	@Override

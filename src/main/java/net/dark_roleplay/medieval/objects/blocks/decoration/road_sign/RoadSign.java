@@ -1,7 +1,7 @@
 package net.dark_roleplay.medieval.objects.blocks.decoration.road_sign;
 
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.handler_2.MedievalTileEntities;
+import net.dark_roleplay.medieval.handler.MedievalTileEntities;
 import net.dark_roleplay.medieval.objects.guis.EditRoadSignScreen;
 import net.dark_roleplay.medieval.objects.items.equipment.misc.RoadSignItem;
 import net.dark_roleplay.medieval.objects.packets.RoadSignPlacementPacket;

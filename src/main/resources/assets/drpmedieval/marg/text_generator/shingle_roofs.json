@@ -13,6 +13,14 @@
     {
       "input" : "drpmedieval:marg/text_files/blockstates/shingle_roof.json",
       "output" : "drpmedieval:blockstates/${material}_shingle_roof.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/blockstates/shingle_roof_rim.json",
+      "output" : "drpmedieval:blockstates/${material}_shingle_roof_rim.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/blocks/shingle_roof.json",
+      "output" : "drpmedieval:models/item/${material}_shingle_roof.json"
     }
   ]
 }

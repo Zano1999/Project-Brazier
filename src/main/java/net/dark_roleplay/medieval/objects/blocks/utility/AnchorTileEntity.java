@@ -1,6 +1,6 @@
 package net.dark_roleplay.medieval.objects.blocks.utility;
 
-import net.dark_roleplay.medieval.handler_2.MedievalTileEntities;
+import net.dark_roleplay.medieval.handler.MedievalTileEntities;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "material": {
+    "type": "wood",
+    "required_textures": [
+      "planks"
+    ],
+    "required_items": [
+      "planks"
+    ]
+  },
+  "tasks": [
+    {
+      "input" : "drpmedieval:marg/text_files/blockstates/barrel.json",
+      "output" : "drpmedieval:blockstates/${material}_barrel.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/blocks/barrels/barrel.json",
+      "output" : "drpmedieval:models/item/${material}_barrel.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/blocks/barrels/closed_barrel.json",
+      "output" : "drpmedieval:models/item/closed_${material}_barrel.json"
+    }
+  ]
+}

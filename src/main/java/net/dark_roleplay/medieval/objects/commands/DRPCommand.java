@@ -50,7 +50,7 @@ public class DRPCommand {
 	private static boolean requiresPermission(CommandSource source, String permissionNode) {
 //		System.out.println(source);
 //		try {
-			return true;
+			return false;
 //			EntityPlayer player = source.asPlayer();
 //			return PermissionAPI.hasPermission(player, permissionNode);
 //		} catch (CommandSyntaxException e) {

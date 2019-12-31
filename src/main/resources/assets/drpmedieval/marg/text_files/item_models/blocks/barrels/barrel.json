@@ -1,0 +1,9 @@
+{
+	"credit": "Made by JTK222",
+	"parent": "drpmedieval:block/barrels/empty_barrel",
+	"textures": {
+		"particle": "drpmedieval:block/barrels/${material}_barrel_side",
+		"side": "drpmedieval:block/barrels/${material}_barrel_side",
+		"top": "drpmedieval:block/barrels/${material}_barrel_top"
+	}
+}

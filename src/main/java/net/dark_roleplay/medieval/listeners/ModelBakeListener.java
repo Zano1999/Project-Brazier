@@ -1,28 +1,16 @@
 package net.dark_roleplay.medieval.listeners;
 
-import com.google.common.collect.ImmutableMap;
-import net.dark_roleplay.marg.api.Constants;
-import net.dark_roleplay.marg.api.materials.MaterialRequirement;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntityRenderer;
-import net.dark_roleplay.medieval.objects.enums.TimberedClayEnums;
+import net.dark_roleplay.medieval.objects.blocks.building.roofs.hacks.GeneratedRoofModel;
+import net.dark_roleplay.medieval.objects.blocks.building.roofs.hacks.StraightRoofModelGenerator;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
-import net.minecraft.client.renderer.model.ModelRotation;
-import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.client.model.BasicState;
-import net.minecraftforge.client.model.IModel;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.function.Function;
 
 
-//@EventBusSubscriber(modid = DarkRoleplayMedieval.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = DarkRoleplayMedieval.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModelBakeListener {
 
     private static Logger LOGGER = LogManager.getLogger();
@@ -43,6 +31,31 @@ public class ModelBakeListener {
     private static ResourceLocation inputEmpty = new ResourceLocation("drpmedieval:block/timbered_clay/templates/shape");
     private static ResourceLocation inputFull = new ResourceLocation("drpmedieval:block/timbered_clay/templates/full");
 
+    @SubscribeEvent
+    public static void bakeModels(ModelBakeEvent event){
+        StraightRoofModelGenerator generator = new StraightRoofModelGenerator(16, 16, 6, new Vec3d(0, 16, 0));
+
+
+        event.getModelRegistry().put(new ModelResourceLocation("drpmedieval:oak_shingle_roof_rim#facing=north,placement=bottom,variant=normal"), new GeneratedRoofModel(generator.getBottomRim()));
+        event.getModelRegistry().put(new ModelResourceLocation("drpmedieval:oak_shingle_roof_rim#facing=north,placement=left,variant=normal"), new GeneratedRoofModel(generator.getLeftRim()));
+        event.getModelRegistry().put(new ModelResourceLocation("drpmedieval:oak_shingle_roof_rim#facing=north,placement=right,variant=normal"), new GeneratedRoofModel(generator.getRightRim()));
+        event.getModelRegistry().put(new ModelResourceLocation("drpmedieval:oak_shingle_roof_rim#facing=north,placement=bottom_left,variant=normal"), new GeneratedRoofModel(generator.getLeftBottomRim()));
+        event.getModelRegistry().put(new ModelResourceLocation("drpmedieval:oak_shingle_roof_rim#facing=north,placement=bottom_right,variant=normal"), new GeneratedRoofModel(generator.getRightBottomRim()));
+
+
+        //event.getModelRegistry().put(new ModelResourceLocation("minecraft:iron_block#"), new GeneratedRoofModel(generator.getFull()));
+        //event.getModelRegistry().put(new ModelResourceLocation("minecraft:gold_block#"), new GeneratedRoofModel(generator.getLeftRim()));
+        //event.getModelRegistry().put(new ModelResourceLocation("minecraft:emerald_block#"), new GeneratedRoofModel(generator.getRightRim()));
+        //event.getModelRegistry().put(new ModelResourceLocation("minecraft:quartz_block#"), new GeneratedRoofModel(generator.getBottomRim()));
+        //event.getModelRegistry().put(new ModelResourceLocation("minecraft:diamond_block#"), new GeneratedRoofModel(generator.getLeftBottomRim()));
+        //event.getModelRegistry().put(new ModelResourceLocation("minecraft:coal_block#"), new GeneratedRoofModel(generator.getRightBottomRim()));
+
+
+        //event.getModelRegistry().put(new ModelResourceLocation("minecraft:gold_block#"), new GeneratedRoofModel(16, 8, 5, new Vec3d(0, 16, 0)));
+        //event.getModelRegistry().put(new ModelResourceLocation("minecraft:quartz_block#"), new GeneratedRoofModel(16, 8, 5, new Vec3d(0, 8, 0)));
+        //event.getModelRegistry().put(new ModelResourceLocation("minecraft:emerald_block#"), new GeneratedRoofModel(8, 16, 5, new Vec3d(0, 16, 0)));
+        //event.getModelRegistry().put(new ModelResourceLocation("minecraft:diorite#"), new GeneratedRoofModel(8, 16, 5, new Vec3d(0, 16, 8)));
+    }
 
 //    @SubscribeEvent
 //    public static void textureStitching(TextureStitchEvent.Pre event){

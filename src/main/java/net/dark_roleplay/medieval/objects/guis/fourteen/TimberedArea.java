@@ -1,8 +1,7 @@
 package net.dark_roleplay.medieval.objects.guis.fourteen;
 
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.handler_2.MedievalBlocks;
-import net.dark_roleplay.medieval.objects.blocks.building.timbered_clay.TimberedClay;
+import net.dark_roleplay.medieval.handler.MedievalBlocks;
 import net.dark_roleplay.medieval.objects.timbered_clay.variants.TimberedClayVariant;
 import net.dark_roleplay.medieval.util.BlockPosUtil;
 import net.minecraft.block.BlockState;

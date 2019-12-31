@@ -1,38 +1,27 @@
 {
 	"version": 0,
-	"type":"wood",
+	"type": "wood",
 	"required_textures":[
 		"drpmedieval:marg/textures/overlays/barrel_side.png",
 		"drpmedieval:marg/textures/overlays/barrel_top.png"
 	],
-	"textures":[
+	"tasks":[
 		{
-			"base":"planks",
-			"manipulations":[
-				{
-					"type":"rotate",
-					"angle":90
-				},
-				{
-					"type":"overlay",
-					"texture":0
-				}
+			"input_type": "material",
+			"input": "planks",
+			"manipulations": [
+				{"type": "rotate", "angle": 90},
+				{"type": "overlay", "texture":  0}
 			],
-			"output":"drpmedieval:textures/blocks/barrels/%wood%_barrel_side"
+			"output_type": "file", "output":  "drpmedieval:textures/block/barrels/${material}_barrel_side"
 		},
 		{
-			"base":"planks",
-			"manipulations":[
-				{
-					"type":"rotate",
-					"angle":90
-				},
-				{
-					"type":"overlay",
-					"texture":1
-				}
+			"input_type": "material",
+			"input": "planks",
+			"manipulations": [
+				{"type": "overlay", "texture":  1}
 			],
-			"output":"drpmedieval:textures/blocks/barrels/%wood%_barrel_top"
+			"output_type": "file", "output":  "drpmedieval:textures/block/barrels/${material}_barrel_top"
 		}
 	]
 }

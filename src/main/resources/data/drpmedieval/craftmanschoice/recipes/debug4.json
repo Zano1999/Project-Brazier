@@ -1,0 +1,16 @@
+{
+  "station": "craftmanschoice:handheld",
+  "id": "drpmedieval:debug_2",
+  "output": [
+    {
+      "type": "craftmanschoice:item",
+      "item": "minecraft:diamond",
+      "count": 1
+    }
+  ],
+  "input": [
+    {
+      "item": "minecraft:dirt"
+    }
+  ]
+}

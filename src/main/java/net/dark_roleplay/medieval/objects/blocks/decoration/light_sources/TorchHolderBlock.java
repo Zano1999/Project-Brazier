@@ -4,7 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import net.dark_roleplay.medieval.handler_2.MedievalItems;
+import net.dark_roleplay.medieval.handler.MedievalItems;
 import net.dark_roleplay.medieval.objects.enums.TorchHolderEnums.Addons;
 import net.dark_roleplay.medieval.objects.enums.TorchHolderEnums.Torch;
 import net.minecraft.block.Block;
@@ -44,8 +44,8 @@ public class TorchHolderBlock extends Block {
 	private static VoxelShape EMPTY_SOUTH = Block.makeCuboidShape(5.75, 1.5, 0, 10.25, 9.5, 5.25);
 	private static VoxelShape EMPTY_WEST = Block.makeCuboidShape(10.75, 1.5, 5.75, 16, 9.5, 10.25);
 
-	protected static final EnumProperty<Addons> ADDONS = EnumProperty.create("addons", Addons.class);
-	protected static final EnumProperty<Torch> TORCH = EnumProperty.create("torch", Torch.class);
+	public static final EnumProperty<Addons> ADDONS = EnumProperty.create("addons", Addons.class);
+	public static final EnumProperty<Torch> TORCH = EnumProperty.create("torch", Torch.class);
 	public static final DirectionProperty HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
 
 	public TorchHolderBlock(Properties properties) {

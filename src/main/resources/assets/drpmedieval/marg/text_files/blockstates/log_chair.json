@@ -1,0 +1,20 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+		"model":"drpmedieval:block/chairs/log_chair",
+		"textures": {
+			"log": "${texture%log}",
+			"inner_log": "drpmedieval:block/small_logs/small_${material}_cut_log",
+			"top_log+": "drpmedieval:block/small_logs/small_${material}_log_top",
+			"particle": "${texture%log}"
+		}
+    },
+	"variants": {
+		"facing":{
+			"north":{},
+			"east":{"y":90},
+			"south":{"y":180},
+			"west":{"y":270}
+		}
+	}
+}

@@ -1,14 +1,10 @@
 package net.dark_roleplay.tertiary_interactor.listeners;
 
-import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.handler.KeybindHandler;
 import net.dark_roleplay.tertiary_interactor.RunningTertiaryInteraction;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.HashMap;
 import java.util.Map;

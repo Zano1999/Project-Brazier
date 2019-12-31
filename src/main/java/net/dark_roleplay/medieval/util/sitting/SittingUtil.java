@@ -2,7 +2,7 @@ package net.dark_roleplay.medieval.util.sitting;
 
 import java.util.List;
 
-import net.dark_roleplay.medieval.handler_2.MedievalEntities;
+import net.dark_roleplay.medieval.handler.MedievalEntities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;

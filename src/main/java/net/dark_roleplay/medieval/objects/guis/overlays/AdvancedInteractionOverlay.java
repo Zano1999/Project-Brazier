@@ -2,30 +2,17 @@ package net.dark_roleplay.medieval.objects.guis.overlays;
 
 import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.handler.KeybindHandler;
-import net.dark_roleplay.medieval.one_twelve.objects.entities.sledge.ModelSledge;
+import net.dark_roleplay.medieval.handler.MedievalKeybinds;
 import net.dark_roleplay.medieval.util.AdvancedInteractionHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.KeybindTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import org.lwjgl.opengl.GL11;
-
-import java.util.Arrays;
 
 public class AdvancedInteractionOverlay{
 
@@ -41,7 +28,7 @@ public class AdvancedInteractionOverlay{
         boolean result = false;
 
         long elapsed = 0;
-        if(KeybindHandler.BLOCK_INTERACTOR.isKeyDown()){
+        if(MedievalKeybinds.BLOCK_INTERACTOR.isKeyDown()){
             if(!wasPressed){
                 firstPressed = System.currentTimeMillis();
                 wasPressed = true;

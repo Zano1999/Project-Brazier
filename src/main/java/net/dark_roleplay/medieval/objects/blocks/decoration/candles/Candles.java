@@ -1,15 +1,13 @@
 package net.dark_roleplay.medieval.objects.blocks.decoration.candles;
 
-import net.dark_roleplay.medieval.handler_2.MedievalItems;
+import net.dark_roleplay.medieval.handler.MedievalItems;
 import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper;
-import net.dark_roleplay.modelz.locator_loader.LocatorModelLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.*;
@@ -28,7 +26,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -137,13 +134,13 @@ public class Candles extends Block {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, World world, BlockPos pos, Random rand) {
-        Map<String, Vec3d[]> locators = LocatorModelLoader.getLocators(new ResourceLocation("drpmedieval:beeswax_candles_" + state.get(COUNT)));
+        /*Map<String, Vec3d[]> locators = LocatorModelLoader.getLocators(new ResourceLocation("drpmedieval:beeswax_candles_" + state.get(COUNT)));
         Vec3d[] particleLocs = locators.get("particles");
         if(particleLocs == null) return;
         for (Vec3d vec : particleLocs) {
             spawnParticleRotated(world, ParticleTypes.SMOKE, vec, state, pos, true);
             spawnParticleRotated(world, ParticleTypes.FLAME, vec, state, pos, true);
-        }
+        }*/
     }
 
     private static WeightedRandom.Item

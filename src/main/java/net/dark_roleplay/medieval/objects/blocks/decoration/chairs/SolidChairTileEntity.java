@@ -1,6 +1,6 @@
 package net.dark_roleplay.medieval.objects.blocks.decoration.chairs;
 
-import net.dark_roleplay.medieval.handler_2.MedievalTileEntities;
+import net.dark_roleplay.medieval.handler.MedievalTileEntities;
 import net.dark_roleplay.medieval.objects.guis.generic_container.GenericContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -63,7 +63,7 @@ public class SolidChairTileEntity extends TileEntity implements INamedContainerP
 
 	@Override
 	public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player) {
-		return new GenericContainer(id, playerInv, IWorldPosCallable.of(this.world, this.pos));
+		return new GenericContainer(id, playerInv, this.world, this.pos);
 	}
 
 	@Override

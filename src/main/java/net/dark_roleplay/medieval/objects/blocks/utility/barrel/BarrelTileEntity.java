@@ -1,14 +1,21 @@
 package net.dark_roleplay.medieval.objects.blocks.utility.barrel;
 
-import net.dark_roleplay.medieval.handler_2.MedievalTileEntities;
+import net.dark_roleplay.medieval.handler.MedievalTileEntities;
+import net.dark_roleplay.medieval.objects.guis.generic_container.GenericContainer;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -19,7 +26,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BarrelTileEntity extends TileEntity {
+public class BarrelTileEntity extends TileEntity implements INamedContainerProvider {
 
     private StorageType storageType = StorageType.NONE;
 
@@ -155,6 +162,17 @@ public class BarrelTileEntity extends TileEntity {
 
     public StorageType getStorageType() {
         return this.storageType;
+    }
+
+    @Override
+    public ITextComponent getDisplayName() {
+        return new TranslationTextComponent("drpmedieval.gui.container.barrel");
+    }
+
+    @Nullable
+    @Override
+    public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity player) {
+        return new GenericContainer(id, playerInventory, this.world, this.pos);
     }
 
     public static enum StorageType {

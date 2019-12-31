@@ -1,0 +1,12 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "block/cube_all",
+        "textures": {
+            "all": "drpmedieval:block/packed_ice_bricks"
+        }
+    },
+    "variants": {
+        "": [{}]
+    }
+}

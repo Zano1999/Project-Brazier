@@ -25,7 +25,7 @@ public class RoofModelHelper {
     public static RoofModel create(BlockState roofState, BlockState otherState, IBakedModel otherModel) {
         RoofModel model = new RoofModel();
 
-        RoofSegment roofSegment = roofState.get(Roof.SEGMENT);
+        RoofSegment roofSegment = roofState.get(RoofBlock.SEGMENT);
         Direction roofDir = roofState.get(BlockStateProperties.HORIZONTAL_FACING);
 
         EnumMap<Direction, List<BakedQuad>> otherQuads = new EnumMap<>(Direction.class);

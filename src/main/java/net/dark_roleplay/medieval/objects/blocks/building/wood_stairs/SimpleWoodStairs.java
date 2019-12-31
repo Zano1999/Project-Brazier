@@ -1,5 +1,6 @@
 package net.dark_roleplay.medieval.objects.blocks.building.wood_stairs;
 
+import net.dark_roleplay.medieval.handler.MedievalItems;
 import net.dark_roleplay.medieval.objects.blocks.templates.HorizontalBlock;
 import net.dark_roleplay.medieval.objects.enums.WoodStairsType;
 import net.dark_roleplay.medieval.util.blocks.VoxelShapeHelper;
@@ -117,8 +118,9 @@ public class SimpleWoodStairs extends HorizontalBlock {
     @Override
     @Deprecated
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        ItemStack stack = player.getHeldItem(handIn);
-        if(stack.getItem() instanceof BlockItem && ((BlockItem) stack.getItem()).getBlock() == this){
+        ItemStack stack = player.getHeldItem(Hand.OFF_HAND);
+        ItemStack mainStack = player.getHeldItem(Hand.MAIN_HAND);
+        if(mainStack.getItem() == MedievalItems.WOODEN_MALLET.get() && stack.getItem() instanceof BlockItem && ((BlockItem) stack.getItem()).getBlock() == this){
             BlockPos targetPos = pos.offset(state.get(HORIZONTAL_FACING).getOpposite()).up();
             if(!World.isValid(targetPos)){
                 player.sendStatusMessage(new TranslationTextComponent("build.tooHigh", targetPos.getY()).applyTextStyle(TextFormatting.RED), true);

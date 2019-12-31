@@ -1,0 +1,13 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "block/cube_all",
+        "textures": {
+            "all": "drpmedieval:block/stones/granite_bricks"
+        },
+        "transform": "forge:default-block"
+    },
+    "variants": {
+      "": [{}]
+	}
+}

@@ -1,0 +1,26 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+		"model": "drpmedieval:block/shingle_roofs/straight_rim_bottom",
+		"textures": {
+			"planks": "drpmedieval:block/shingle_roofs/planks_treated_wood",
+			"shingles": "drpmedieval:block/shingle_roofs/${material}_shingles",
+			"particle": "drpmedieval:block/shingle_roofs/${material}_shingles"
+		}
+    },
+	"variants": {
+		"facing": {
+			"north": {},
+			"east": {"y":  90},
+			"south": {"y":  180},
+			"west": {"y":  270}
+		},
+		"segment": {
+			"straight": {},
+			"straight_left": {"model": "drpmedieval:block/shingle_roofs/straight_rim_left"},
+			"straight_right": {"model": "drpmedieval:block/shingle_roofs/straight_rim_right"},
+			"outer_corner": {"model": "drpmedieval:block/shingle_roofs/outer_corner_rim"},
+			"inner_corner": {"model": "drpmedieval:block/shingle_roofs/inner_corner"}
+		}
+	}
+}

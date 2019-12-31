@@ -1,0 +1,42 @@
+{
+	"version": 0,
+	"type": "wood",
+	"required_textures":[
+		"drpmedieval:marg/textures/masks/small_top_log.png",
+		"drpmedieval:marg/textures/masks/small_cut_log.png"
+	],
+	"tasks":[
+		{
+			"input_type": "material",
+			"input": "log",
+			"manipulations": [
+				{"type": "mask", "texture":  0}
+			],
+			"output_type": "cache", "output":  "drpmedieval_small_${material}_log_top"
+		},
+		{
+			"input_type": "material",
+			"input": "log_top",
+			"manipulations": [
+				{"type": "overlay", "cached_texture": "drpmedieval_small_${material}_log_top"}
+			],
+			"output_type": "file", "output": "drpmedieval:textures/block/small_logs/small_${material}_log_top"
+		},
+		{
+			"input_type": "material",
+			"input": "log",
+			"manipulations": [
+				{"type": "mask", "texture":  1}
+			],
+			"output_type": "cache", "output":  "drpmedieval_small_${material}_cut_log"
+		},
+		{
+			"input_type": "material",
+			"input": "stripped_log",
+			"manipulations": [
+				{"type": "overlay", "cached_texture": "drpmedieval_small_${material}_cut_log"}
+			],
+			"output_type": "file", "output": "drpmedieval:textures/block/small_logs/small_${material}_cut_log"
+		}
+	]
+}

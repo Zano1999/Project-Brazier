@@ -2,6 +2,7 @@ package net.dark_roleplay.crafter.objects.recipes.simple_recipe;
 
 import net.dark_roleplay.crafter.api.recipe.IRecipe;
 import net.dark_roleplay.crafter.api.recipe_parts.IRecipePart;
+import net.dark_roleplay.crafter.objects.guis.RecipeWidget;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -29,6 +30,11 @@ public class SimpleRecipe implements IRecipe {
         this.id = id;
         this.craftingTime = craftingTime;
         this.station = station == null ? new ResourceLocation("craftmanschoice:handheld") : station;
+    }
+
+    @Override
+    public RecipeWidget getListWidget() {
+        return new RecipeWidget(this);
     }
 
     @Override

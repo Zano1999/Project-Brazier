@@ -1,7 +1,7 @@
 package net.dark_roleplay.medieval.objects.blocks.utility;
 
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.handler_2.MedievalBlocks;
+import net.dark_roleplay.medieval.handler.MedievalBlocks;
 import net.dark_roleplay.medieval.objects.blocks.templates.HorizontalBlock;
 import net.dark_roleplay.medieval.util.AdvancedInteractionHelper;
 import net.minecraft.block.Block;

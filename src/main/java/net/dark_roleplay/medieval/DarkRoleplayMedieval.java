@@ -4,8 +4,9 @@ import net.dark_roleplay.IModule;
 import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntity;
 import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntityRenderer;
 import net.dark_roleplay.library.networking.NetworkHelper;
-import net.dark_roleplay.medieval.handler.KeybindHandler;
-import net.dark_roleplay.medieval.handler_2.*;
+import net.dark_roleplay.marg.api.Constants;
+import net.dark_roleplay.medieval.handler.MedievalKeybinds;
+import net.dark_roleplay.medieval.handler.*;
 import net.dark_roleplay.medieval.holders.MedievalConfigs;
 import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofTileEntityRenderer;
@@ -13,12 +14,18 @@ import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTi
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntityRenderer;
 import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntityRenderer;
+import net.dark_roleplay.medieval.objects.guis.generic_container.GenericContainer;
+import net.dark_roleplay.medieval.objects.guis.generic_container.GenericContainerGui;
 import net.dark_roleplay.medieval.objects.packets.DodgePacket;
 import net.dark_roleplay.medieval.objects.packets.RoadSignEditSignPacket;
 import net.dark_roleplay.medieval.objects.packets.RoadSignPlacementPacket;
 import net.dark_roleplay.tertiary_interactor.TertiaryInteractionModule;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -68,7 +75,7 @@ public class DarkRoleplayMedieval {
 
 		NetworkHelper.clearChannel();
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.WORLD_GENS_SPEC, "World Generation.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MedievalConfigs.WORLD_GENS_SPEC, "World Generation.toml");
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.Misc.REGENERATING_ORES_SPEC, "Regenerating Ores.toml");
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.SKILL_CONFIG_SPEC, "Abilities.toml");
 
@@ -87,26 +94,27 @@ public class DarkRoleplayMedieval {
 	}
 	
 	
-	public void setupCommonStuff(FMLCommonSetupEvent event) {
-//		ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.GUIFACTORY, () -> MedievalGuis::openGui);
-	}
+	public void setupCommonStuff(FMLCommonSetupEvent event) {}
 	
-	public void setupServerStuff(FMLDedicatedServerSetupEvent event) {
-		
-	}
+	public void setupServerStuff(FMLDedicatedServerSetupEvent event) {}
 	
 	public void setupClientStuff(FMLClientSetupEvent event) {
-		OBJLoader.INSTANCE.addDomain(MODID);
-		
-		//ModelLoaderRegistry.registerLoader(ModelQualityModelLoader.INSTANCE);
-		ClientRegistry.bindTileEntitySpecialRenderer(RoadSignTileEntity.class, new RoadSignTileEntityRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(ChoppingTileEntity.class, new ChoppingTileEntityRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(RoofTileEntity.class, new RoofTileEntityRenderer());
+
+		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+			ScreenManager.registerFactory(MedievalContainers.GENERIC_CONTAINER.get(), GenericContainerGui::new);
+
+			OBJLoader.INSTANCE.addDomain(MODID);
+
+			//ModelLoaderRegistry.registerLoader(ModelQualityModelLoader.INSTANCE);
+			ClientRegistry.bindTileEntitySpecialRenderer(RoadSignTileEntity.class, new RoadSignTileEntityRenderer());
+			ClientRegistry.bindTileEntitySpecialRenderer(ChoppingTileEntity.class, new ChoppingTileEntityRenderer());
+			ClientRegistry.bindTileEntitySpecialRenderer(RoofTileEntity.class, new RoofTileEntityRenderer());
 
 
-		ClientRegistry.bindTileEntitySpecialRenderer(ModelTesterTileEntity.class, new ModelTesterTileEntityRenderer());
-		ClientRegistry.registerKeyBinding(KeybindHandler.BLOCK_INTERACTOR);
-		ClientRegistry.registerKeyBinding(KeybindHandler.DODGE);
+			ClientRegistry.bindTileEntitySpecialRenderer(ModelTesterTileEntity.class, new ModelTesterTileEntityRenderer());
+			ClientRegistry.registerKeyBinding(MedievalKeybinds.BLOCK_INTERACTOR);
+			ClientRegistry.registerKeyBinding(MedievalKeybinds.DODGE);
+		});
 	}
 
 //	@EventHandler
@@ -218,7 +226,7 @@ public class DarkRoleplayMedieval {
 //			}, MedievalBlocks.DRY_CLAY_GRASS);
 //			Minecraft.getInstance().getItemColors().register(new ColorHandlerPaintBrush(), MedievalItems.DIRTY_PAINTBRUSH);
 //
-//			Minecraft.getInstance().getBlockColors().register(new ColorHandlerRoofs(),
+//			Minecraft.getInstance().getBlockColors().register(new SingleColorHandler(),
 ////				MedievalBlocks.WHITE_CLAY_SHINGLE_ROOF,
 //				MedievalBlocks.Roofs.ORANGE_CLAY_SHINGLE_ROOF,
 //				MedievalBlocks.Roofs.MAGENTA_CLAY_SHINGLE_ROOF,

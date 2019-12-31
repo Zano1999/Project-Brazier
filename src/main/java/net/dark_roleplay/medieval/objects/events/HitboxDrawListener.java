@@ -38,6 +38,8 @@ public class HitboxDrawListener {
 
     @SubscribeEvent
     public static void drawHitbox(DrawBlockHighlightEvent event){
+        //TODO Re-Implement IN 1.15
+        if(true) return;
         if(event.getTarget().getType() != RayTraceResult.Type.BLOCK) return;
 
         BlockPos hitPos = new BlockPos(event.getTarget().getHitVec());
@@ -49,7 +51,8 @@ public class HitboxDrawListener {
 
             ResourceLocation modelLoc = RoadSignHelper.INSTANCE.isRight() ? ((RoadSignItem) heldItem.getItem()).getSignModelRight() : ((RoadSignItem) heldItem.getItem()).getSignModelLeft();
 
-            IBakedModel model =  Minecraft.getInstance().getModelManager().getModel(modelLoc);
+            //TODO FIX IN 1.15
+            IBakedModel model =  null;//Minecraft.getInstance().getModelManager().getModel(modelLoc);
             if(model == null) return;
 
             RoadSignHelper.INSTANCE.displayRoadSignHud();

@@ -1,0 +1,22 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model":"drpmedieval:block/barrels/empty_barrel",
+		"textures": {
+			"side": "drpmedieval:block/barrels/${material}_barrel_side",
+			"top": "drpmedieval:block/barrels/${material}_barrel_top",
+			"particle": "drpmedieval:block/barrels/${material}_barrel_side"
+		},
+		"transform": "forge:default-block"
+	},
+	"variants": {
+		"has_lid":{
+			"true":{
+				"model":"drpmedieval:block/barrels/closed_barrel"
+			},
+			"false":{
+				"model":"drpmedieval:block/barrels/empty_barrel"
+			}
+		}
+	}
+}

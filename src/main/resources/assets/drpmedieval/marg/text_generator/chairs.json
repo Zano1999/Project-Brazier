@@ -44,6 +44,22 @@
     {
       "input" : "drpmedieval:marg/text_files/item_models/blocks/chairs/solid_bench.json",
       "output" : "drpmedieval:models/item/${material}_solid_bench.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/blockstates/barrel_chair.json",
+      "output" : "drpmedieval:blockstates/${material}_barrel_chair.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/blocks/chairs/barrel_chair.json",
+      "output" : "drpmedieval:models/item/${material}_barrel_chair.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/blockstates/log_chair.json",
+      "output" : "drpmedieval:blockstates/${material}_log_chair.json"
+    },
+    {
+      "input" : "drpmedieval:marg/text_files/item_models/blocks/chairs/log_chair.json",
+      "output" : "drpmedieval:models/item/${material}_log_chair.json"
     }
   ]
 }
