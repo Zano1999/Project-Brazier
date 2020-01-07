@@ -26,4 +26,4 @@ jobs:
       - name: Publish to maven with Gradle
         run: ./gradlew publish
       - name: Publish to curseforge with Gradle
-        run: ./gradlew upload
+        run: ./gradlew curseforge
