@@ -1,31 +1,18 @@
 package net.dark_roleplay.medieval;
 
 import net.dark_roleplay.IModule;
-import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntity;
-import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntityRenderer;
-import net.dark_roleplay.library.networking.NetworkHelper;
-import net.dark_roleplay.marg.api.Constants;
-import net.dark_roleplay.medieval.handler.MedievalKeybinds;
 import net.dark_roleplay.medieval.handler.*;
 import net.dark_roleplay.medieval.holders.MedievalConfigs;
 import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofTileEntityRenderer;
-import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntity;
-import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntityRenderer;
 import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntityRenderer;
-import net.dark_roleplay.medieval.objects.guis.generic_container.GenericContainer;
 import net.dark_roleplay.medieval.objects.guis.generic_container.GenericContainerGui;
-import net.dark_roleplay.medieval.objects.packets.DodgePacket;
-import net.dark_roleplay.medieval.objects.packets.RoadSignEditSignPacket;
-import net.dark_roleplay.medieval.objects.packets.RoadSignPlacementPacket;
 import net.dark_roleplay.tertiary_interactor.TertiaryInteractionModule;
 import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -34,8 +21,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import java.io.IOException;
 
@@ -43,7 +28,6 @@ import java.io.IOException;
 public class DarkRoleplayMedieval {
 
 	public static final String MODID = "drpmedieval";
-	public static SimpleChannel MOD_CHANNEL;
 
 	private IModule[] modules = {new TertiaryInteractionModule()};
 
@@ -58,22 +42,7 @@ public class DarkRoleplayMedieval {
 		MedievalEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MedievalContainers.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-		DarkRoleplayMedieval.MOD_CHANNEL = NetworkRegistry.ChannelBuilder
-				.named(new ResourceLocation(DarkRoleplayMedieval.MODID, "main_channel"))
-				.clientAcceptedVersions("1.0"::equals)
-				.serverAcceptedVersions("1.0"::equals)
-				.networkProtocolVersion(() -> "1.0")
-				.simpleChannel();
-
-		NetworkHelper.initChannel(MOD_CHANNEL);
-		NetworkHelper.registerPacket(RoadSignPlacementPacket.class);
-		NetworkHelper.registerPacket(RoadSignEditSignPacket.class);
-		NetworkHelper.registerPacket(DodgePacket.class);
-
-		for(IModule module : modules)
-			module.registerPackets();
-
-		NetworkHelper.clearChannel();
+		MedievalNetworking.initNetworking();
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MedievalConfigs.WORLD_GENS_SPEC, "World Generation.toml");
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.Misc.REGENERATING_ORES_SPEC, "Regenerating Ores.toml");
@@ -106,14 +75,14 @@ public class DarkRoleplayMedieval {
 			OBJLoader.INSTANCE.addDomain(MODID);
 
 			//ModelLoaderRegistry.registerLoader(ModelQualityModelLoader.INSTANCE);
-			ClientRegistry.bindTileEntitySpecialRenderer(RoadSignTileEntity.class, new RoadSignTileEntityRenderer());
+//			ClientRegistry.bindTileEntitySpecialRenderer(RoadSignTileEntity.class, new RoadSignTileEntityRenderer());
 			ClientRegistry.bindTileEntitySpecialRenderer(ChoppingTileEntity.class, new ChoppingTileEntityRenderer());
 			ClientRegistry.bindTileEntitySpecialRenderer(RoofTileEntity.class, new RoofTileEntityRenderer());
-
-
-			ClientRegistry.bindTileEntitySpecialRenderer(ModelTesterTileEntity.class, new ModelTesterTileEntityRenderer());
-			ClientRegistry.registerKeyBinding(MedievalKeybinds.BLOCK_INTERACTOR);
-			ClientRegistry.registerKeyBinding(MedievalKeybinds.DODGE);
+//
+//
+//			ClientRegistry.bindTileEntitySpecialRenderer(ModelTesterTileEntity.class, new ModelTesterTileEntityRenderer());
+//			ClientRegistry.registerKeyBinding(MedievalKeybinds.BLOCK_INTERACTOR);
+//			ClientRegistry.registerKeyBinding(MedievalKeybinds.DODGE);
 		});
 	}
 

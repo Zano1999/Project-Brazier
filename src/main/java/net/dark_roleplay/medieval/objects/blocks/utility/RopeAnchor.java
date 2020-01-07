@@ -60,15 +60,16 @@ public class RopeAnchor extends HorizontalBlock {
 //
 //        }else{
             Direction direction = state.get(HORIZONTAL_FACING);
-            for(int i = 1; i < 16; i++){
-                BlockPos downPos = pos.offset(direction).offset(Direction.DOWN, i);
-                if(world.isAirBlock(downPos)){
-                    world.setBlockState(downPos, MedievalBlocks.ROPE.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(Rope.IS_PILE, false));
-                }else{
-                    world.setBlockState(downPos.up(), MedievalBlocks.ROPE.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(Rope.IS_PILE, true));
-                    break;
-                }
-            }
+            //TODO REIMPLEMENT
+//            for(int i = 1; i < 16; i++){
+//                BlockPos downPos = pos.offset(direction).offset(Direction.DOWN, i);
+//                if(world.isAirBlock(downPos)){
+//                    world.setBlockState(downPos, MedievalBlocks.ROPE.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(Rope.IS_PILE, false));
+//                }else{
+//                    world.setBlockState(downPos.up(), MedievalBlocks.ROPE.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(Rope.IS_PILE, true));
+//                    break;
+//                }
+//            }
             world.setBlockState(pos, state.with(HAS_ROPE, false));
 //        }
     }
@@ -76,14 +77,15 @@ public class RopeAnchor extends HorizontalBlock {
     public void pullRope(World world, BlockPos pos, BlockState state){
 
         Direction direction = state.get(HORIZONTAL_FACING);
-        for(int i = 1; i < 16; i++){
-            BlockPos downPos = pos.offset(direction).offset(Direction.DOWN, i);
-            if(world.getBlockState(downPos).getBlock() == MedievalBlocks.ROPE.get()){
-                world.destroyBlock(downPos, false);
-            }else{
-                break;
-            }
-        }
+        //TODO REIMPLEMENT
+//        for(int i = 1; i < 16; i++){
+//            BlockPos downPos = pos.offset(direction).offset(Direction.DOWN, i);
+//            if(world.getBlockState(downPos).getBlock() == MedievalBlocks.ROPE.get()){
+//                world.destroyBlock(downPos, false);
+//            }else{
+//                break;
+//            }
+//        }
         world.setBlockState(pos, state.with(HAS_ROPE, true));
 
         if (world.isRemote()) {

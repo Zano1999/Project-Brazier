@@ -1,12 +1,11 @@
 package net.dark_roleplay.medieval.handler;
 
-import net.dark_roleplay.marg.api.materials.Material;
-import net.dark_roleplay.marg.api.materials.MaterialRequirement;
+import net.dark_roleplay.marg.api.materials.BaseMaterialCondition;
+import net.dark_roleplay.marg.api.materials.IMaterial;
+import net.dark_roleplay.marg.api.materials.IMaterialCondition;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofItem;
-import net.dark_roleplay.medieval.objects.items.equipment.misc.RoadSignItem;
 import net.dark_roleplay.medieval.objects.items.equipment.tools.ItemTelescope;
-import net.dark_roleplay.medieval.objects.items.equipment.tools.RoofersNotes;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.DyeColor;
@@ -35,8 +34,8 @@ public class MedievalItems {
     private static final Item.Properties utilityProperties = new Item.Properties().group(UTILITY);
     private static final Item.Properties buildProperties = new Item.Properties().group(BUILDING);
 
-    private static final MaterialRequirement logMat = new MaterialRequirement("wood", "log", "log_top");
-    private static final MaterialRequirement plankMat = new MaterialRequirement("wood", "planks");
+    private static final IMaterialCondition logMat = new BaseMaterialCondition("wood", "log", "log_top");
+    private static final IMaterialCondition plankMat = new BaseMaterialCondition("wood", "planks");
 
     public static final RegistryObject<Item>
         BELL_PEPPER                 = ITEMS.register("bell_pepper", () -> new Item(foodProperties.food(MedievalFoods.BELL_PEPPER))),
@@ -65,17 +64,17 @@ public class MedievalItems {
 
         TORCH_HOLDER                = ITEMS.register("torch_holder", () -> blockItem(MedievalBlocks.TORCH_HOLDER, decoProperties)),
         ADVENT_WREATH               = ITEMS.register("advent_wreath", () -> blockItem(MedievalBlocks.ADVENT_WREATH, decoProperties)),
-        WALL_BRAZIER                = ITEMS.register("wall_brazier", () -> blockItem(MedievalBlocks.WALL_BRAZIER, decoProperties)),
-        JAIL_LATTICE                = ITEMS.register("jail_lattice", () -> blockItem(MedievalBlocks.JAIL_LATTICE, decoProperties)),
+//        WALL_BRAZIER                = ITEMS.register("wall_brazier", () -> blockItem(MedievalBlocks.WALL_BRAZIER, decoProperties)),
+//        JAIL_LATTICE                = ITEMS.register("jail_lattice", () -> blockItem(MedievalBlocks.JAIL_LATTICE, decoProperties)),
         RIVERSTONE                  = ITEMS.register("riverstone", () -> blockItem(MedievalBlocks.RIVERSTONE, buildProperties)),
         LARGE_RIVERSTONE            = ITEMS.register("large_riverstone", () -> blockItem(MedievalBlocks.LARGE_RIVERSTONE, buildProperties)),
         LARGE_DARK_RIFVERSTONE      = ITEMS.register("dark_large_riverstone", () -> blockItem(MedievalBlocks.DARK_LARGE_RIVERSTONE, buildProperties)),
         COLORFUL_COBBLESTONE        = ITEMS.register("colorful_cobblestone", () -> blockItem(MedievalBlocks.COLORFUL_COBBLESTONE, buildProperties)),
         PALE_COLORFUL_COBBLESTONE   = ITEMS.register("pale_colorful_cobblestone", () -> blockItem(MedievalBlocks.PALE_COLORFUL_COBBLESTONE, buildProperties)),
         TIMBERED_CLAY               = ITEMS.register("clean_timbered_clay", () -> blockItem(MedievalBlocks.TIMBERED_CLAY, buildProperties)),
-        ROPE_ANCHOR                 = ITEMS.register("rope_anchor", () -> blockItem(MedievalBlocks.ROPE_ANCHOR, decoProperties)),
-        OAK_ROPE_LADDER_ANCHOR      = ITEMS.register("oak_rope_ladder_anchor", () -> blockItem(MedievalBlocks.OAK_ROPE_LADDER_ANCHOR, decoProperties)),
-        OAK_ROPE_LADDER             = ITEMS.register("oak_rope_ladder", () -> blockItem(MedievalBlocks.OAK_ROPE_LADDER, decoProperties)),
+//        ROPE_ANCHOR                 = ITEMS.register("rope_anchor", () -> blockItem(MedievalBlocks.ROPE_ANCHOR, decoProperties)),
+//        OAK_ROPE_LADDER_ANCHOR      = ITEMS.register("oak_rope_ladder_anchor", () -> blockItem(MedievalBlocks.OAK_ROPE_LADDER_ANCHOR, decoProperties)),
+//        OAK_ROPE_LADDER             = ITEMS.register("oak_rope_ladder", () -> blockItem(MedievalBlocks.OAK_ROPE_LADDER, decoProperties)),
         BEESWAX_CANDLE              = ITEMS.register("beeswax_candle", () -> blockItem(MedievalBlocks.BEESWAX_CANDLE, decoProperties)),
         ANDESITE_PILLAR             = ITEMS.register("andesite_pillar", () -> blockItem(MedievalBlocks.ANDESITE_PILLAR, buildProperties)),
         DIORITE_PILLAR              = ITEMS.register("diorite_pillar", () -> blockItem(MedievalBlocks.DIORITE_PILLAR, buildProperties)),
@@ -95,7 +94,7 @@ public class MedievalItems {
         BRONZE_COIN                 = ITEMS.register("bronze_coin", () -> new Item(miscProperties)),
         CHARCOAL_POWDER             = ITEMS.register("charcoal_powder", () -> new Item(miscProperties)),
         COPPER_COIN                 = ITEMS.register("copper_coin", () -> new Item(miscProperties)),
-        COPPER_ORE_CHUNK            = ITEMS.register("copper_ore_chunk", () -> new Item(miscProperties)),
+//        COPPER_ORE_CHUNK            = ITEMS.register("copper_ore_chunk", () -> new Item(miscProperties)),
         CUT_GRASS                   = ITEMS.register("cut_grass", () -> new Item(miscProperties)),
         DRY_CLAY_CHUNK              = ITEMS.register("dry_clay_chunk", () -> new Item(miscProperties)),
         GOLD_COIN                   = ITEMS.register("gold_coin", () -> new Item(miscProperties)),
@@ -104,13 +103,13 @@ public class MedievalItems {
         HAY                         = ITEMS.register("hay", () -> new Item(miscProperties)),
         LEATHER_BOOK_COVER          = ITEMS.register("leather_book_cover", () -> new Item(miscProperties)),
         LEATHER_STRIP               = ITEMS.register("leather_strip", () -> new Item(miscProperties)),
-        SALPETER_ORE_CHUNK          = ITEMS.register("salpeter_ore_chunk", () -> new Item(miscProperties)),
+//        SALPETER_ORE_CHUNK          = ITEMS.register("salpeter_ore_chunk", () -> new Item(miscProperties)),
         SILVER_COIN                 = ITEMS.register("silver_coin", () -> new Item(miscProperties)),
-        SILVER_ORE_CHUNK            = ITEMS.register("silver_ore_chunk", () -> new Item(miscProperties)),
-        SULFUR_ORE_CHUNK            = ITEMS.register("sulfur_ore_chunk", () -> new Item(miscProperties)),
+//        SILVER_ORE_CHUNK            = ITEMS.register("silver_ore_chunk", () -> new Item(miscProperties)),
+//        SULFUR_ORE_CHUNK            = ITEMS.register("sulfur_ore_chunk", () -> new Item(miscProperties)),
         THICK_LEATHER_BOOK_COVER    = ITEMS.register("thick_leather_book_cover", () -> new Item(miscProperties)),
         THIN_LEATHER_BOOK_COVER     = ITEMS.register("thin_leather_book_cover", () -> new Item(miscProperties)),
-        TIN_ORE_CHUNK               = ITEMS.register("tin_ore_chunk", () -> new Item(miscProperties)),
+//        TIN_ORE_CHUNK               = ITEMS.register("tin_ore_chunk", () -> new Item(miscProperties)),
         TRIGGER_TRAP                = ITEMS.register("trigger_trap", () -> new Item(miscProperties)),
         WHEAT_DOUGH                 = ITEMS.register("wheat_dough", () -> new Item(miscProperties)),
         WHEAT_FLOUR                 = ITEMS.register("wheat_flour", () -> new Item(miscProperties)),
@@ -126,8 +125,7 @@ public class MedievalItems {
         WOODEN_KEY                  = ITEMS.register("wooden_key", () -> new Item(equipProperties)),
         WOODEN_LOCK                 = ITEMS.register("wooden_lock", () -> new Item(equipProperties)),
         WOODEN_STREET_STOMPER       = ITEMS.register("wooden_street_stomper", () -> new Item(equipProperties)),
-        WOODEN_WRENCH               = ITEMS.register("wooden_wrench", () -> new Item(equipProperties)),
-        ROOFERS_NOTES               = ITEMS.register("roofers_notes", () -> new RoofersNotes(equipProperties)),
+//        ROOFERS_NOTES               = ITEMS.register("roofers_notes", () -> new RoofersNotes(equipProperties)),
         WOODEN_MALLET               = ITEMS.register("wooden_mallet", () -> new Item(equipProperties));
 
 
@@ -135,13 +133,13 @@ public class MedievalItems {
             return new BlockItem(obj.get(), properties);
         }
 
-    public static final Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>>
+    public static final Map<IMaterial, RegistryObject<Item>>
         WOOD_BEAMS                  = materialRegister(plankMat, "${material}_wood_beam", () -> new Item(miscProperties)),
         PLANKS                      = materialRegister(plankMat, "${material}_plank", () -> new Item(miscProperties)),
-        FIREWOOD                    = materialRegister(logMat, "${material}_firewood", () -> new Item(miscProperties)),
-        SIMPLE_ARROW_SIGN           = materialRegister(plankMat, "simple_${material}_arrow_sign", material -> () -> new RoadSignItem(miscProperties, material,"drpmedieval:other/simple_${material}_arrow_sign_%s"));
+        FIREWOOD                    = materialRegister(logMat, "${material}_firewood", () -> new Item(miscProperties));
+//        SIMPLE_ARROW_SIGN           = materialRegister(plankMat, "simple_${material}_arrow_sign", material -> () -> new RoadSignItem(miscProperties, material,"drpmedieval:other/simple_${material}_arrow_sign_%s"));
 
-    public static final Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>>
+    public static final Map<IMaterial, RegistryObject<Item>>
         BARREL_LIT                  = materialRegister(plankMat, "${material}_barrel_lit", mat -> () -> new Item(miscProperties)),
         WOOD_SHINGLE_ROOF           = materialRegisterBlocks(MedievalBlocks.WOOD_SHINGLE_ROOF, block -> new RoofItem(block.get(), buildProperties)),
         CHOPPING_BLOCK              = materialRegisterBlocks(MedievalBlocks.CHOPPING_BLOCK, block -> new BlockItem(block.get(), utilityProperties)),
@@ -158,7 +156,7 @@ public class MedievalItems {
         WOOD_SOLID_BENCH            = materialRegisterBlocks(MedievalBlocks.WOOD_SOLID_BENCH, block -> new BlockItem(block.get(), decoProperties)),
         WOOD_PLATFORM               = materialRegisterBlocks(MedievalBlocks.WOOD_PLATFORM, block -> new BlockItem(block.get(), buildProperties)),
         WOOD_PLATFORM_STAIRS        = materialRegisterBlocks(MedievalBlocks.WOOD_PLATFORM_STAIRS, block -> new BlockItem(block.get(), buildProperties)),
-        WOOD_SIGN_POST              = materialRegisterBlocks(MedievalBlocks.WOOD_SIGN_POST, block -> new BlockItem(block.get(), decoProperties)),
+//        WOOD_SIGN_POST              = materialRegisterBlocks(MedievalBlocks.WOOD_SIGN_POST, block -> new BlockItem(block.get(), decoProperties)),
         VERTICAL_WOOD_WINDOW        = materialRegisterBlocks(MedievalBlocks.VERTICAL_WOOD_WINDOW, block -> new BlockItem(block.get(), buildProperties)),
         DENSE_VERTICAL_WOOD_WINDOW  = materialRegisterBlocks(MedievalBlocks.DENSE_VERTICAL_WOOD_WINDOW, block -> new BlockItem(block.get(), buildProperties)),
         CROSS_WOOD_WINDOW           = materialRegisterBlocks(MedievalBlocks.CROSS_WOOD_WINDOW, block -> new BlockItem(block.get(), buildProperties)),
@@ -168,20 +166,20 @@ public class MedievalItems {
     public static final Map<DyeColor, RegistryObject<Item>>
         COLORED_SHINGLE_ROOFS       = colorRegisterBlocks(MedievalBlocks.COLORED_SHINGLE_ROOFS, block -> new RoofItem(block.get(), buildProperties));
 
-    private static Map<Material, RegistryObject<Item>> materialRegister(MaterialRequirement matGetter, String name, Supplier<Item> suplier){
-        Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>> items = new HashMap<>();
+    private static Map<IMaterial, RegistryObject<Item>> materialRegister(IMaterialCondition matGetter, String name, Supplier<Item> suplier){
+        Map<IMaterial, RegistryObject<Item>> items = new HashMap<>();
 
-        matGetter.execute(material -> {
-            items.put(material, ITEMS.register(material.getTextProv().searchAndReplace(name), suplier));
+        matGetter.forEach(material -> {
+            items.put(material, ITEMS.register(material.getTextProvider().apply(name), suplier));
         });
         return items;
     }
 
-    private static Map<Material, RegistryObject<Item>> materialRegister(MaterialRequirement matGetter, String name, Function<Material, Supplier<Item>> suplier){
-        Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>> items = new HashMap<>();
+    private static Map<IMaterial, RegistryObject<Item>> materialRegister(IMaterialCondition matGetter, String name, Function<IMaterial, Supplier<Item>> suplier){
+        Map<IMaterial, RegistryObject<Item>> items = new HashMap<>();
 
-        matGetter.execute(material -> {
-            items.put(material, ITEMS.register(material.getTextProv().searchAndReplace(name), suplier.apply(material)));
+        matGetter.forEach(material -> {
+            items.put(material, ITEMS.register(material.getTextProvider().apply(name), suplier.apply(material)));
         });
         return items;
     }
@@ -196,10 +194,10 @@ public class MedievalItems {
         return items;
     }
 
-    private static Map<Material, RegistryObject<Item>> materialRegisterBlocks(Map<Material, RegistryObject<Block>> blocks, Function<RegistryObject<Block>, Item> func){
-        Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Item>> items = new HashMap<>();
+    private static Map<IMaterial, RegistryObject<Item>> materialRegisterBlocks(Map<IMaterial, RegistryObject<Block>> blocks, Function<RegistryObject<Block>, Item> func){
+        Map<net.dark_roleplay.marg.api.materials.IMaterial, RegistryObject<Item>> items = new HashMap<>();
 
-        for(Map.Entry<Material, RegistryObject<Block>> entry : blocks.entrySet()){
+        for(Map.Entry<IMaterial, RegistryObject<Block>> entry : blocks.entrySet()){
             items.put(entry.getKey(), ITEMS.register(entry.getValue().getId().getPath(), () -> func.apply(entry.getValue())));
         }
 

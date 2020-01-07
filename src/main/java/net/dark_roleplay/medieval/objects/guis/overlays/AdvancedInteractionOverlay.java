@@ -28,24 +28,24 @@ public class AdvancedInteractionOverlay{
         boolean result = false;
 
         long elapsed = 0;
-        if(MedievalKeybinds.BLOCK_INTERACTOR.isKeyDown()){
-            if(!wasPressed){
-                firstPressed = System.currentTimeMillis();
-                wasPressed = true;
-            }else{
-                elapsed = System.currentTimeMillis() - firstPressed;
-            }
-
-            if(elapsed > interactor.getRequiredMS()){
-                wasPressed = false;
-
-                result = true;
-
-                String[] args;
-            }
-        }else{
-            wasPressed = false;
-        }
+//        if(MedievalKeybinds.BLOCK_INTERACTOR.isKeyDown()){
+//            if(!wasPressed){
+//                firstPressed = System.currentTimeMillis();
+//                wasPressed = true;
+//            }else{
+//                elapsed = System.currentTimeMillis() - firstPressed;
+//            }
+//
+//            if(elapsed > interactor.getRequiredMS()){
+//                wasPressed = false;
+//
+//                result = true;
+//
+//                String[] args;
+//            }
+//        }else{
+//            wasPressed = false;
+//        }
 
         ActiveRenderInfo activerenderinfo = mc.gameRenderer.getActiveRenderInfo();
         double d0 = pos.squareDistanceTo(activerenderinfo.getProjectedView().x, activerenderinfo.getProjectedView().y, activerenderinfo.getProjectedView().z);

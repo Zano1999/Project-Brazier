@@ -10,6 +10,7 @@ public class ModelTesterTileEntity extends TileEntity{
     }
 
     public ModelTesterTileEntity(int length) {
-        super(MedievalTileEntities.ANCHOR.get());
+        super(null); //TODO FIX
+//        super(MedievalTileEntities.ANCHOR.get());
     }
 }

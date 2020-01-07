@@ -6,7 +6,7 @@ public class SkillConfig {
 
     private static String DASH_LANG = "drpmedieval.config.abilities.dash.";
 
-    public final ForgeConfigSpec.BooleanValue ALLOOW_AIRBORNE;
+    public final ForgeConfigSpec.BooleanValue ALLOW_AIRBORNE;
     public final ForgeConfigSpec.IntValue DASH_COUNT;
     public final ForgeConfigSpec.IntValue TOTAL_DASH_COUNT;
     public final ForgeConfigSpec.IntValue DASH_COOLDOWN;
@@ -16,7 +16,7 @@ public class SkillConfig {
         builder.comment("Some settings for the dashing ability");
         builder.push("Dash");
         {
-            ALLOOW_AIRBORNE = builder
+            ALLOW_AIRBORNE = builder
                     .comment("Can the player dash mid air?")
                     .translation(DASH_LANG + "airborn")
                     .define("airborne", true);

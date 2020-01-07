@@ -1,13 +1,12 @@
 package net.dark_roleplay.medieval.one_twelve.objects.packets.other;
 
-import java.util.function.Supplier;
-
-import net.dark_roleplay.library.networking.SimplePacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 
+import java.util.function.Supplier;
+
 //PORT to 1.13
-public class MergeCoins extends SimplePacket<MergeCoins>{
+public class MergeCoins{// extends SimplePacket<MergeCoins>{
 //
 //	protected int slot = 0;
 //
@@ -46,19 +45,19 @@ public class MergeCoins extends SimplePacket<MergeCoins>{
 //		});
 //	}
 
-	@Override
+//	@Override
 	public MergeCoins decode(PacketBuffer arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+//	@Override
 	public void encode(MergeCoins arg0, PacketBuffer arg1) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+//	@Override
 	public void onMessage(MergeCoins arg0, Supplier<Context> arg1) {
 		// TODO Auto-generated method stub
 		

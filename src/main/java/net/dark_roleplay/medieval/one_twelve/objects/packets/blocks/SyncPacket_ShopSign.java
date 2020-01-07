@@ -1,14 +1,13 @@
 package net.dark_roleplay.medieval.one_twelve.objects.packets.blocks;
 
-import java.awt.image.BufferedImage;
-import java.util.function.Supplier;
-
-import net.dark_roleplay.library.networking.SimplePacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 
-public class SyncPacket_ShopSign extends SimplePacket<SyncPacket_ShopSign>{
+import java.awt.image.BufferedImage;
+import java.util.function.Supplier;
+
+public class SyncPacket_ShopSign{// extends SimplePacket<SyncPacket_ShopSign>{
 //PORT to 1.13
 	BufferedImage img;
 	BlockPos pos;
@@ -52,19 +51,19 @@ public class SyncPacket_ShopSign extends SimplePacket<SyncPacket_ShopSign>{
 //		}
 //	}
 	
-	@Override
+//	@Override
 	public SyncPacket_ShopSign decode(PacketBuffer packet) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+//	@Override
 	public void encode(SyncPacket_ShopSign message, PacketBuffer packet) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+//	@Override
 	public void onMessage(SyncPacket_ShopSign message, Supplier<Context> context) {
 		context.get().enqueueWork(() -> {
 //			World world = player.getEntityWorld();

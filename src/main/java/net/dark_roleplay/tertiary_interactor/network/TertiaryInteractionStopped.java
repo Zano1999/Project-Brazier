@@ -1,24 +1,23 @@
 package net.dark_roleplay.tertiary_interactor.network;
 
-import net.dark_roleplay.library.networking.SimplePacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class TertiaryInteractionStopped extends SimplePacket<TertiaryInteractionStopped> {
+public class TertiaryInteractionStopped{// extends SimplePacket<TertiaryInteractionStopped> {
 
     public TertiaryInteractionStopped(){}
 
-    @Override
+//    @Override
     public void encode(TertiaryInteractionStopped roadSignEditSignPacket, PacketBuffer packetBuffer) { }
 
-    @Override
+//    @Override
     public TertiaryInteractionStopped decode(PacketBuffer packetBuffer) {
         return new TertiaryInteractionStopped();
     }
 
-    @Override
+//    @Override
     public void onMessage(TertiaryInteractionStopped obj, Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
 //        if(obj.tePos.distanceSq(context.getSender().getPositionVec(), true) < 49){

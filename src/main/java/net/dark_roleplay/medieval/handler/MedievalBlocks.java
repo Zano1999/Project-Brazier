@@ -1,6 +1,9 @@
 package net.dark_roleplay.medieval.handler;
 
-import net.dark_roleplay.marg.api.materials.MaterialRequirement;
+import net.dark_roleplay.marg.api.Materials;
+import net.dark_roleplay.marg.api.materials.BaseMaterialCondition;
+import net.dark_roleplay.marg.api.materials.IMaterial;
+import net.dark_roleplay.marg.api.materials.IMaterialCondition;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.objects.blocks.building.jail_lattice.JailLatticeBlock;
 import net.dark_roleplay.medieval.objects.blocks.building.platforms.WoodPlatformBlock;
@@ -52,16 +55,15 @@ public class MedievalBlocks {
     private static final Block.Properties metalBaseProperties = Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.METAL);
     private static final Block.Properties PLACEHOLDER = Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.METAL);
 
-    private static final MaterialRequirement logMat = new MaterialRequirement("wood", "log", "log_top");
+    private static final IMaterialCondition logMat = new BaseMaterialCondition("wood", "log", "log_top");
 
-    private static final MaterialRequirement logMat2 = new MaterialRequirement("wood", "log", "log_top", "stripped_log");
-    private static final MaterialRequirement plankMat = new MaterialRequirement("wood", "planks");
-    private static final MaterialRequirement logPlankMat = new MaterialRequirement("wood", "log", "log_top", "planks");
+    private static final IMaterialCondition logMat2 = new BaseMaterialCondition("wood", "log", "log_top", "stripped_log");
+    private static final IMaterialCondition plankMat = new BaseMaterialCondition("wood", "planks");
+    private static final IMaterialCondition logPlankMat = new BaseMaterialCondition("wood", "log", "log_top", "planks");
 
-    private static final Map<net.dark_roleplay.marg.api.materials.Material, Block.Properties> woodDeco = new HashMap<net.dark_roleplay.marg.api.materials.Material, Block.Properties>(){{
-        put(net.dark_roleplay.marg.api.materials.Material.getMaterialForName("oak"), Block.Properties.create(new Material.Builder(MaterialColor.WOOD).build()));
+    private static final Map<IMaterial, Block.Properties> woodDeco = new HashMap<IMaterial, Block.Properties>(){{
+        put(Materials.getMaterial("oak"), Block.Properties.create(new Material.Builder(MaterialColor.WOOD).build()));
     }};
-
 
     public static final RegistryObject<Block>
         ANDESITE_PILLAR             = BLOCKS.register("andesite_pillar", () -> new RotatedPillarBlock(stoneBaseProperties)),
@@ -74,12 +76,12 @@ public class MedievalBlocks {
         PACKED_ICE_BRICKS           = BLOCKS.register("packed_ice_bricks", () -> new Block(PLACEHOLDER)),
 
         TORCH_HOLDER                = BLOCKS.register("torch_holder", () -> new TorchHolderBlock(metalBaseProperties)),
-        WALL_BRAZIER                = BLOCKS.register("wall_brazier", () -> new WallBrazierBlock(metalBaseProperties)),
-        JAIL_LATTICE                = BLOCKS.register("jail_lattice", () -> new JailLatticeBlock(metalBaseProperties)),
-        ROPE_ANCHOR                 = BLOCKS.register("rope_anchor", () -> new RopeAnchor(woodBaseProperties)),
-        ROPE                        = BLOCKS.register("rope", () -> new Rope(clothBaseProperties)),
-        OAK_ROPE_LADDER_ANCHOR      = BLOCKS.register("oak_rope_ladder_anchor", () -> new RopeLadderAnchor(woodBaseProperties)),
-        OAK_ROPE_LADDER             = BLOCKS.register("oak_rope_ladder", () -> new RopeLadder(clothBaseProperties)),
+//        WALL_BRAZIER                = BLOCKS.register("wall_brazier", () -> new WallBrazierBlock(metalBaseProperties)),
+//        JAIL_LATTICE                = BLOCKS.register("jail_lattice", () -> new JailLatticeBlock(metalBaseProperties)),
+//        ROPE_ANCHOR                 = BLOCKS.register("rope_anchor", () -> new RopeAnchor(woodBaseProperties)),
+//        ROPE                        = BLOCKS.register("rope", () -> new Rope(clothBaseProperties)),
+//        OAK_ROPE_LADDER_ANCHOR      = BLOCKS.register("oak_rope_ladder_anchor", () -> new RopeLadderAnchor(woodBaseProperties)),
+//        OAK_ROPE_LADDER             = BLOCKS.register("oak_rope_ladder", () -> new RopeLadder(clothBaseProperties)),
         RIVERSTONE                  = BLOCKS.register("riverstone", () -> new Block(stoneBaseProperties)),
         LARGE_RIVERSTONE            = BLOCKS.register("large_riverstone", () -> new Block(stoneBaseProperties)),
         DARK_LARGE_RIVERSTONE       = BLOCKS.register("dark_large_riverstone", () -> new Block(stoneBaseProperties)),
@@ -93,10 +95,10 @@ public class MedievalBlocks {
     public static final Map<DyeColor, RegistryObject<Block>>
         COLORED_SHINGLE_ROOFS       = colorRegister("%s_clay_shingle_roof", () -> new RoofBlock(stoneBaseProperties));
 
-    public static final Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Block>>
+    public static final Map<IMaterial, RegistryObject<Block>>
         BARREL                      = materialRegister(plankMat, "${material}_barrel", material -> () -> new BarrelBlock(woodDecoProperties, material)),
         WOOD_SHINGLE_ROOF           = materialRegister(plankMat, "${material}_shingle_roof", () -> new RoofBlock(woodBaseProperties)),
-        //SHINGLE_ROOF_RIM            = materialRegister(plankMat, "${material}_shingle_roof_rim", () -> new RoofRim(woodBaseProperties)),
+//        SHINGLE_ROOF_RIM            = materialRegister(plankMat, "${material}_shingle_roof_rim", () -> new RoofRim(woodBaseProperties)),
         CHOPPING_BLOCK              = materialRegister(logMat, "${material}_chopping_block", () -> new ChoppingBlock(woodBaseProperties)),
         SIMPLE_WOOD_STAIRS          = materialRegister(logPlankMat, "simple_${material}_stairs", () -> new SimpleWoodStairs(woodBaseProperties)),
         VERTICAL_WOOD_WINDOW        = materialRegister(plankMat, "vertical_${material}_window", () -> new WoodenWindowBlock(woodBaseProperties)),
@@ -114,7 +116,7 @@ public class MedievalBlocks {
         WOOD_SOLID_BENCH            = materialRegister(plankMat, "${material}_solid_bench", () -> new BenchBlock(woodBaseProperties)),
         WOOD_PLATFORM               = materialRegister(plankMat, "${material}_platform", () -> new WoodPlatformBlock(woodBaseProperties)),
         WOOD_PLATFORM_STAIRS        = materialRegister(plankMat, "${material}_platform_stairs", () -> new WoodPlatformStairsBlock(woodBaseProperties)),
-        WOOD_SIGN_POST              = materialRegister(plankMat, "${material}_sign_post", () -> new RoadSign(woodBaseProperties)), //Needs TE
+//        WOOD_SIGN_POST              = materialRegister(plankMat, "${material}_sign_post", () -> new RoadSign(woodBaseProperties)), //Needs TE
         WOOD_SOLID_ARMREST_CHAIR    = materialRegister(plankMat, "${material}_solid_chair_armrest", () -> new SolidChairArmrestBlock(woodBaseProperties)), //Needs TE
         CLEAN_TIMBERED_CLAY         = materialRegister(plankMat, "clean_${material}_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.CLEAN)),
         VERTICAL_TIMBERED_CLAY      = materialRegister(plankMat, "${material}_vertical_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.VERTICAL)),
@@ -146,22 +148,22 @@ public class MedievalBlocks {
         return blocks;
     }
 
-    private static Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Block>> materialRegister(MaterialRequirement matGetter, String name, Function<net.dark_roleplay.marg.api.materials.Material, Supplier<Block>> func){
-        Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Block>> blocks = new HashMap<>();
+    private static Map<IMaterial, RegistryObject<Block>> materialRegister(IMaterialCondition matGetter, String name, Function<IMaterial, Supplier<Block>> func){
+        Map<IMaterial, RegistryObject<Block>> blocks = new HashMap<>();
 
-        matGetter.execute(material -> {
-            blocks.put(material, BLOCKS.register(material.getTextProv().searchAndReplace(name), func.apply(material)));
+        matGetter.forEach(material -> {
+            blocks.put(material, BLOCKS.register(material.getTextProvider().apply(name), func.apply(material)));
         });
 
         return blocks;
     }
 
 
-    private static Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Block>> materialRegister(MaterialRequirement matGetter, String name, Supplier<Block> suplier){
-        Map<net.dark_roleplay.marg.api.materials.Material, RegistryObject<Block>> blocks = new HashMap<>();
+    private static Map<IMaterial, RegistryObject<Block>> materialRegister(IMaterialCondition matGetter, String name, Supplier<Block> suplier){
+        Map<IMaterial, RegistryObject<Block>> blocks = new HashMap<>();
 
-        matGetter.execute(material -> {
-            blocks.put(material, BLOCKS.register(material.getTextProv().searchAndReplace(name), suplier));
+        matGetter.forEach(material -> {
+            blocks.put(material, BLOCKS.register(material.getTextProvider().apply(name), suplier));
         });
 
         return blocks;

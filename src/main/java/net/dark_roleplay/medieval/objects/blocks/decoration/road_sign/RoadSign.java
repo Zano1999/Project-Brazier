@@ -1,10 +1,9 @@
 package net.dark_roleplay.medieval.objects.blocks.decoration.road_sign;
 
-import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.handler.MedievalTileEntities;
+import net.dark_roleplay.medieval.handler.MedievalNetworking;
+import net.dark_roleplay.medieval.networking.sign_post.SignPostPlacementPacket;
 import net.dark_roleplay.medieval.objects.guis.EditRoadSignScreen;
 import net.dark_roleplay.medieval.objects.items.equipment.misc.RoadSignItem;
-import net.dark_roleplay.medieval.objects.packets.RoadSignPlacementPacket;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -32,7 +31,8 @@ public class RoadSign extends Block{
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return MedievalTileEntities.ROAD_SIGN.get().create();
+		return null;//TODO restore
+//		return MedievalTileEntities.ROAD_SIGN.get().create();
 	}
 	
 	@Override
@@ -47,12 +47,11 @@ public class RoadSign extends Block{
 		TileEntity te = world.getTileEntity(pos);
 		if(!(te instanceof RoadSignTileEntity)) return false;
 		if(world.isRemote){
-			DarkRoleplayMedieval.MOD_CHANNEL.sendToServer(new RoadSignPlacementPacket());
+			MedievalNetworking.CHANNEL.sendToServer(new SignPostPlacementPacket());
 			return true;
 		}
 
-		Boolean isRight = RoadSignPlacementPacket.players.get(player);
-		if(isRight == null) isRight = false;
+		Boolean isRight = SignPostPlacementPacket.getPlayer(player);
 
 		RoadSignTileEntity rte = (RoadSignTileEntity) te;
 

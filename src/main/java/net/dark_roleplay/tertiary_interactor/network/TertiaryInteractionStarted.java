@@ -1,6 +1,5 @@
 package net.dark_roleplay.tertiary_interactor.network;
 
-import net.dark_roleplay.library.networking.SimplePacket;
 import net.dark_roleplay.tertiary_interactor.TertiaryInteraction;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,21 +15,21 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.function.Supplier;
 
-public class TertiaryInteractionStarted extends SimplePacket<TertiaryInteractionStarted> {
+public class TertiaryInteractionStarted{// extends SimplePacket<TertiaryInteractionStarted> {
 
     private static Logger LOGGER = LogManager.getLogger();
 
     public TertiaryInteractionStarted(){}
 
-    @Override
+//    @Override
     public void encode(TertiaryInteractionStarted roadSignEditSignPacket, PacketBuffer packetBuffer) { }
 
-    @Override
+//    @Override
     public TertiaryInteractionStarted decode(PacketBuffer packetBuffer) {
         return new TertiaryInteractionStarted();
     }
 
-    @Override
+//    @Override
     public void onMessage(TertiaryInteractionStarted obj, Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         PlayerEntity player = context.getSender();

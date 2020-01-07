@@ -1,6 +1,6 @@
 package net.dark_roleplay.medieval.handler;
 
-import net.dark_roleplay.marg.api.materials.Material;
+import net.dark_roleplay.marg.api.Materials;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -14,14 +14,14 @@ public class MedievalCreativeTabs {
 
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
-			return new ItemStack(MedievalBlocks.WOOD_SOLID_ARMREST_CHAIR.get(Material.getMaterialForName("spruce")).get());
+			return new ItemStack(MedievalBlocks.WOOD_SOLID_ARMREST_CHAIR.get(Materials.getMaterial("spruce")).get());
 		}
 	};
 	
 	public static final ItemGroup BUILDING = new ItemGroup("drpmedieval.building") {
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
-			return new ItemStack(MedievalBlocks.DIAMOND_WOOD_WINDOW.get(Material.getMaterialForName("birch")).get());
+			return new ItemStack(MedievalBlocks.DIAMOND_WOOD_WINDOW.get(Materials.getMaterial("birch")).get());
 		}
 	};
 	

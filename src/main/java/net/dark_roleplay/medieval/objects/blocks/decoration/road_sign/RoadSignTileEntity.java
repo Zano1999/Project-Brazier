@@ -1,8 +1,9 @@
 package net.dark_roleplay.medieval.objects.blocks.decoration.road_sign;
 
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.handler.MedievalTileEntities;
-import net.dark_roleplay.medieval.objects.packets.RoadSignEditSignPacket;
+import net.dark_roleplay.medieval.handler.MedievalNetworking;
+import net.dark_roleplay.medieval.networking.sign_post.SignPostEditPacket;
+import net.dark_roleplay.medieval.networking.sign_post.SignPostPlacementPacket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
@@ -24,7 +25,8 @@ public class RoadSignTileEntity extends TileEntity {
 	private List<SignInfo> signs = new ArrayList<>();
 
 	public RoadSignTileEntity() {
-		super(MedievalTileEntities.ROAD_SIGN.get());
+		super(null);
+		//super(MedievalTileEntities.ROAD_SIGN.get());
 	}
 
 	@Override
@@ -95,6 +97,6 @@ public class RoadSignTileEntity extends TileEntity {
 	}
 
 	public void sendChangesToServer(int signID){
-		DarkRoleplayMedieval.MOD_CHANNEL.sendToServer(new RoadSignEditSignPacket(this.getPos(), signID, this.getSigns().get(signID).getText()));
+		MedievalNetworking.CHANNEL.sendToServer(new SignPostEditPacket().setTileEntityPosition(this.getPos()).setSignID(signID).setNewText(this.getSigns().get(signID).getText()));
 	}
 }

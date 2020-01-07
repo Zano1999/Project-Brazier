@@ -25,34 +25,34 @@ public class PlayerClientTickListener {
 
         if (event.side == LogicalSide.SERVER) return;
 
-        if (MedievalKeybinds.BLOCK_INTERACTOR.isKeyDown()) {
-            BlockRayTraceResult rayTrace = (BlockRayTraceResult) Minecraft.getInstance().objectMouseOver;
-            if (Minecraft.getInstance().objectMouseOver.getType() != RayTraceResult.Type.BLOCK) return; //Not looking at a block
-
-            if (runningInteraction == null) {
-                if (lastCheckedPos != null && lastCheckedPos.equals(rayTrace.getPos())) return; //Already checked and Failed
-                if(lastCheckedPos != null) lastCheckedPos = null;
-
-                TertiaryInteraction interaction = TertiaryInteraction.getInteraction(Minecraft.getInstance().world, rayTrace, Minecraft.getInstance().player);
-
-                if (interaction == null) {
-                    //No valid Interaction found
-                    lastCheckedPos = rayTrace.getPos();
-                    return;
-                }
-                //Not pressed before, do checks and send packets
-
-            }else if(runningInteraction.isValid(rayTrace.getPos(), Minecraft.getInstance().world.getBlockState(rayTrace.getPos()))){
-                runningInteraction.tick();
-            }else{
-                runningInteraction = null;
-                lastCheckedPos = null;
-            }
-        } else {
-            if (runningInteraction != null){
-                runningInteraction = null;
-                lastCheckedPos = null;
-            }
-        }
+//        if (MedievalKeybinds.BLOCK_INTERACTOR.isKeyDown()) {
+//            BlockRayTraceResult rayTrace = (BlockRayTraceResult) Minecraft.getInstance().objectMouseOver;
+//            if (Minecraft.getInstance().objectMouseOver.getType() != RayTraceResult.Type.BLOCK) return; //Not looking at a block
+//
+//            if (runningInteraction == null) {
+//                if (lastCheckedPos != null && lastCheckedPos.equals(rayTrace.getPos())) return; //Already checked and Failed
+//                if(lastCheckedPos != null) lastCheckedPos = null;
+//
+//                TertiaryInteraction interaction = TertiaryInteraction.getInteraction(Minecraft.getInstance().world, rayTrace, Minecraft.getInstance().player);
+//
+//                if (interaction == null) {
+//                    //No valid Interaction found
+//                    lastCheckedPos = rayTrace.getPos();
+//                    return;
+//                }
+//                //Not pressed before, do checks and send packets
+//
+//            }else if(runningInteraction.isValid(rayTrace.getPos(), Minecraft.getInstance().world.getBlockState(rayTrace.getPos()))){
+//                runningInteraction.tick();
+//            }else{
+//                runningInteraction = null;
+//                lastCheckedPos = null;
+//            }
+//        } else {
+//            if (runningInteraction != null){
+//                runningInteraction = null;
+//                lastCheckedPos = null;
+//            }
+//        }
     }
 }

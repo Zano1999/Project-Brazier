@@ -31,11 +31,11 @@ public class MedievalTileEntities {
                 addAll(MedievalBlocks.COLORED_SHINGLE_ROOFS.values());
                 add(MedievalBlocks.SHINGLE_ROOF);
             }})),
-        ROAD_SIGN               = TILE_ENTITIES.register("road_sign", () -> createType(RoadSignTileEntity::new, RoadSignTileEntity.class, MedievalBlocks.WOOD_SIGN_POST.values())),
+//        ROAD_SIGN               = TILE_ENTITIES.register("road_sign", () -> createType(RoadSignTileEntity::new, RoadSignTileEntity.class, MedievalBlocks.WOOD_SIGN_POST.values())),
         BARREL                  = TILE_ENTITIES.register("barrel", () -> createType(BarrelTileEntity::new, BarrelTileEntity.class, MedievalBlocks.BARREL.values())),
         SOLID_CHAIR             = TILE_ENTITIES.register("solid_chair_armrest", () -> createType(SolidChairTileEntity::new, SolidChairTileEntity.class)),
-        ANCHOR                  = TILE_ENTITIES.register("anchor", () -> createType(AnchorTileEntity::new, AnchorTileEntity.class)),
-        MODEL_TESTER            = TILE_ENTITIES.register("model_tester", () -> createType(ModelTesterTileEntity::new, ModelTesterTileEntity.class)),
+//        ANCHOR                  = TILE_ENTITIES.register("anchor", () -> createType(AnchorTileEntity::new, AnchorTileEntity.class)),
+//        MODEL_TESTER            = TILE_ENTITIES.register("model_tester", () -> createType(ModelTesterTileEntity::new, ModelTesterTileEntity.class)),
         CHOPPING_BLOCK          = TILE_ENTITIES.register("chopping_block", () -> createType(ChoppingTileEntity::new, ChoppingTileEntity.class));
 
     protected static <T extends TileEntity> TileEntityType createType(Supplier<T> supplier, Class<T> teClass){

@@ -1,5 +1,6 @@
 package net.dark_roleplay.medieval.objects.blocks.utility.barrel;
 
+import net.dark_roleplay.marg.api.materials.IMaterial;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.handler.MedievalItems;
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairTileEntity;
@@ -46,9 +47,9 @@ public class BarrelBlock extends Block {
 
     public static final BooleanProperty HAS_LIT = BooleanProperty.create("has_lid");
 
-    private net.dark_roleplay.marg.api.materials.Material woodMaterial;
+    private IMaterial woodMaterial;
 
-    public BarrelBlock(Properties properties, net.dark_roleplay.marg.api.materials.Material woodMaterial) {
+    public BarrelBlock(Properties properties, IMaterial woodMaterial) {
         super(properties);
         this.woodMaterial = woodMaterial;
         this.setDefaultState(this.getDefaultState().with(HAS_LIT, false));

@@ -1,3 +1,67 @@
-This version is extremly unstable, use at your own risk!
-+ Added Benches
-- Removed most blocks
+This version is extremely unstable, use at your own risk!
+A lot of things are not ported yet/will be removed.
+(You can find a list of them bellow, most will be re-introduced later)
+Crafting is not available in this version.
+As well as most blocks don't drop anything.
+There may be bugs, and the performance may not be great.
+
+Changes in v0.4.1
+* Removed dependency on DRPLibrary
+
+Changes in v0.4.0
+Added following Blocks/Items:
++ Chairs with Armrest
++ Benches
++ Wooden Platforms
++ Wooden Platform Stairs
++ Mallet
+
+Removed/not ported following Blocks/Items:
+- Wooden Wrench
+- Obsidian Glass
+- Gunpowder Barrels
+- Laying Barrels
+- Ore Chunks
+- Ships Helm
+- Clock Core
+- Hanging Bridge
+- Beheading block
+- Mistletoe
+- Rope Anchor & Rope
+- Mugs
+- Candle Holders
+- Stone Arch
+- Rope Fence
+- Dry Clay
+- Lantern
+- Pottery
+- Minecraft Stopper
+- Shop Sign
+- Buckets
+- Flower Pot
+- Firewood Block
+- Carpenter Table
+- Forge
+- Cauldron
+- Anvil
+- Juice Press
+- Grindstone
+- Hanging Cauldron
+- Mortars
+- Pottery Turntable
+- Butter Churn
+- Fireplace
+- Shelfs
+- Chests
+- Crates
+- Lecterns
+- Honey Centrifuges
+- Spinning Wheel
+- Ores
+- Regenerating Ores
+- Wood Supports
+- Mossy Logs
+- Clean Planks
+- Flint Knife
+- Doughs
+- Iron Tap

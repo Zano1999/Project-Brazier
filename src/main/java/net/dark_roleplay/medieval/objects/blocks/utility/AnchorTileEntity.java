@@ -13,7 +13,8 @@ public class AnchorTileEntity extends TileEntity{
     }
 
     public AnchorTileEntity(int length) {
-        super(MedievalTileEntities.ANCHOR.get());
+        super(null);
+//        super(MedievalTileEntities.ANCHOR.get());
         remainingLength = length;
     }
 

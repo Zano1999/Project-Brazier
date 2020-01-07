@@ -1,6 +1,5 @@
 package net.dark_roleplay.crafter.objects.guis;
 
-import net.dark_roleplay.library.unstable.experimental.variables.wrappers.IntegerWrapper;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.IRenderable;

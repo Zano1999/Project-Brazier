@@ -1,20 +1,19 @@
 package net.dark_roleplay.medieval.objects.items.equipment.misc;
 
-import net.dark_roleplay.marg.api.materials.Material;
+import net.dark_roleplay.marg.api.materials.IMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class RoadSignItem extends Item {
 
     private ResourceLocation signModelLeft;
     private ResourceLocation signModelRight;
-    private Material material;
+    private IMaterial material;
 
-    public RoadSignItem(Properties properties, Material material, String modelLoc) {
+    public RoadSignItem(Properties properties, IMaterial material, String modelLoc) {
         super(properties);
-        this.signModelLeft = new ResourceLocation(String.format(material.getTextProv().searchAndReplace(modelLoc), "left"));
-        this.signModelRight = new ResourceLocation(String.format(material.getTextProv().searchAndReplace(modelLoc), "right"));
+        this.signModelLeft = new ResourceLocation(String.format(material.getTextProvider().apply(modelLoc), "left"));
+        this.signModelRight = new ResourceLocation(String.format(material.getTextProvider().apply(modelLoc), "right"));
         this.material = material;
     }
 
@@ -26,7 +25,7 @@ public class RoadSignItem extends Item {
         return signModelRight;
     }
 
-    public Material getMaterial() {
+    public IMaterial getMaterial() {
         return material;
     }
 }
