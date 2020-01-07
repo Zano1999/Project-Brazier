@@ -12,7 +12,6 @@ jobs:
       MVN_USER: ${{ secrets.mvn_user }}
       MVN_PASSWORD: ${{ secrets.mvn_password }}
       CURSE_API_KEY: ${{ secrets.CURSE_API_KEY }}
-      
     runs-on: ubuntu-latest
 
     steps:
@@ -24,9 +23,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-        env:
-          MVN_REPO: ${{ secrets.mvn_repo }}
-          MVN_USER: ${{ secrets.mvn_username }}
-          MVN_PASSWORD: ${{ secrets.mvn_password }}
-      - name: Build with Gradle
+      - name: Publish to maven with Gradle
         run: ./gradlew publish
+      - name: Publish to curseforge with Gradle
+        run: ./gradlew upload
