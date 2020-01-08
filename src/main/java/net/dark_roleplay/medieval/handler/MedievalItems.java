@@ -6,6 +6,7 @@ import net.dark_roleplay.marg.api.materials.IMaterialCondition;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofItem;
 import net.dark_roleplay.medieval.objects.items.equipment.tools.ItemTelescope;
+import net.dark_roleplay.medieval.objects.items.tools.timbering_notes.TimberingNotesItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.DyeColor;
@@ -86,6 +87,7 @@ public class MedievalItems {
         PACKED_ICE_BRICKS           = ITEMS.register("packed_ice_bricks", () -> blockItem(MedievalBlocks.PACKED_ICE_BRICKS, buildProperties)),
         SHINGLE_ROOF                = ITEMS.register("clay_shingle_roof", () -> new RoofItem(MedievalBlocks.SHINGLE_ROOF.get(), buildProperties)),
 
+        TIMBERING_NOTES             = ITEMS.register("timbering_notes", () -> new TimberingNotesItem(miscProperties)),
         BARLEY                      = ITEMS.register("barley", () -> new Item(miscProperties)),
         BARLEY_DOUGH                = ITEMS.register("barley_dough", () -> new Item(miscProperties)),
         BARLEY_FLOUR                = ITEMS.register("barley_flour", () -> new Item(miscProperties)),

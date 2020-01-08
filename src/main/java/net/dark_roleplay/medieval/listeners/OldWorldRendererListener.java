@@ -18,7 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 //@Mod.EventBusSubscriber(modid = DarkRoleplayMedieval.MODID, value = Dist.CLIENT)
-public class WorldRendererListener {
+public class OldWorldRendererListener {
 
     private static BlockPos lastCheckedPos = null;
     private static BlockState lastCheckedState = null;

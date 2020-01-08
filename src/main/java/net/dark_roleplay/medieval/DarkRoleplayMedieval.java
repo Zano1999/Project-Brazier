@@ -10,6 +10,8 @@ import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.Chopping
 import net.dark_roleplay.medieval.objects.guis.generic_container.GenericContainerGui;
 import net.dark_roleplay.tertiary_interactor.TertiaryInteractionModule;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.DistExecutor;
@@ -70,6 +72,15 @@ public class DarkRoleplayMedieval {
 	public void setupClientStuff(FMLClientSetupEvent event) {
 
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+			MedievalItems.TIMBERING_NOTES.get().addPropertyOverride(new ResourceLocation(MODID, "positions"), (stack, world, entity) -> {
+				CompoundNBT nbt = stack.getOrCreateTag();
+				float res = 0;
+				if(!nbt.contains("TimberingData")) return 0;
+				res += nbt.getCompound("TimberingData").contains("PosA") ? 0.3 : 0;
+				res += nbt.getCompound("TimberingData").contains("PosB") ? 0.6 : 0;
+				return res;
+			});
+
 			ScreenManager.registerFactory(MedievalContainers.GENERIC_CONTAINER.get(), GenericContainerGui::new);
 
 			OBJLoader.INSTANCE.addDomain(MODID);

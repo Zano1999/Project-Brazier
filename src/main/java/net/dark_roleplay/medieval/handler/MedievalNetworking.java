@@ -7,6 +7,8 @@ import net.dark_roleplay.medieval.networking.sign_post.SignPostEditPacket;
 import net.dark_roleplay.medieval.networking.sign_post.SignPostEditPacketHandler;
 import net.dark_roleplay.medieval.networking.sign_post.SignPostPlacementPacket;
 import net.dark_roleplay.medieval.networking.sign_post.SignPostPlacementPacketHandler;
+import net.dark_roleplay.medieval.networking.timbering.TimberingNotesSwitchPacket;
+import net.dark_roleplay.medieval.networking.timbering.TimberingNotesSwitchPacketHandler;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -22,6 +24,8 @@ public class MedievalNetworking {
                 .serverAcceptedVersions("1.0"::equals)
                 .networkProtocolVersion(() -> "1.0")
                 .simpleChannel();
+
+        registerPackets();
     }
 
     private static void registerPackets(){
@@ -29,6 +33,7 @@ public class MedievalNetworking {
         CHANNEL.registerMessage(0, DodgePacket.class, DodgePacketHandler::encode, DodgePacketHandler::decode, DodgePacketHandler::onMessage);
         CHANNEL.registerMessage(1, SignPostEditPacket.class, SignPostEditPacketHandler::encode, SignPostEditPacketHandler::decode, SignPostEditPacketHandler::onMessage);
         CHANNEL.registerMessage(2, SignPostPlacementPacket.class, SignPostPlacementPacketHandler::encode, SignPostPlacementPacketHandler::decode, SignPostPlacementPacketHandler::onMessage);
+        CHANNEL.registerMessage(3, TimberingNotesSwitchPacket.class, TimberingNotesSwitchPacketHandler::encode, TimberingNotesSwitchPacketHandler::decode, TimberingNotesSwitchPacketHandler::onMessage);
 
     }
 
