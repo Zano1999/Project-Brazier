@@ -1,0 +1,53 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"type": "wood",
+		"textures": [
+			"log",
+			"log_top",
+			"stripped_log"
+		]
+	},
+	"requiredTextures": [
+		"drpmedieval:marg/textures/masks/small_top_log.png",
+		"drpmedieval:marg/textures/masks/small_cut_log.png"
+	],
+	"tasks": [
+		{
+			"inputType": "material",
+			"inputName": "log",
+			"manipulations": [
+				{"type": "mask", "textureID": 0}
+			],
+			"outputType": "cache",
+			"outputName": "drpmedieval_small_${material}_log_top"
+		},
+		{
+			"inputType": "material",
+			"inputName": "log",
+			"manipulations": [
+				{"type": "mask", "textureID": 1}
+			],
+			"outputType": "cache",
+			"outputName": "drpmedieval_small_${material}_cut_log"
+		},
+		{
+			"inputType": "material",
+			"inputName": "log_top",
+			"manipulations": [
+				{"type": "overlay", "textureName": "drpmedieval_small_${material}_log_top"}
+			],
+			"outputType": "file",
+			"outputName": "drpmedieval:textures/block/small_logs/small_${material}_log_top"
+		},
+		{
+			"inputType": "material",
+			"inputName": "stripped_log",
+			"manipulations": [
+				{"type": "overlay", "textureName": "drpmedieval_small_${material}_cut_log"}
+			],
+			"outputType": "file",
+			"outputName": "drpmedieval:textures/block/small_logs/small_${material}_cut_log"
+		}
+	]
+}

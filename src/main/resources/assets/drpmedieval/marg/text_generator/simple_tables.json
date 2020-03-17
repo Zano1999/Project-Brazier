@@ -1,0 +1,28 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"type": "wood",
+		"textures": [
+			"planks"
+		]
+	},
+	"tasks": [
+		{
+			"input" : "drpmedieval:marg/text_files/blockstates/plank_table.json",
+			"output" : "drpmedieval:blockstates/${material}_plank_table.json"
+		},
+		{
+			"input" : "drpmedieval:marg/text_files/blockstates/solid_table.json",
+			"output" : "drpmedieval:blockstates/solid_${material}_table.json"
+		},
+
+		{
+			"input" : "drpmedieval:marg/text_files/models/block/simple_solid_table.json",
+			"output" : "drpmedieval:models/item/solid_${material}_table.json"
+		},
+		{
+			"input" : "drpmedieval:marg/text_files/models/block/plank_table.json",
+			"output" : "drpmedieval:models/item/${material}_plank_table.json"
+		}
+	]
+}

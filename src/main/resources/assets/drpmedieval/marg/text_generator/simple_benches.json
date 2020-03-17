@@ -1,0 +1,20 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"type": "wood",
+		"textures": [
+			"planks"
+		]
+	},
+	"tasks": [
+		{
+			"input" : "drpmedieval:marg/text_files/blockstates/solid_bench.json",
+			"output" : "drpmedieval:blockstates/${material}_solid_bench.json"
+		},
+
+		{
+			"input": "drpmedieval:marg/text_files/models/block/solid_bench.json",
+			"output": "drpmedieval:models/item/${material}_solid_bench.json"
+		}
+	]
+}

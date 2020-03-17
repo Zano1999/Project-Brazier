@@ -1,8 +1,8 @@
 package net.dark_roleplay.medieval.handler;
 
-import net.dark_roleplay.marg.api.materials.BaseMaterialCondition;
 import net.dark_roleplay.marg.api.materials.IMaterial;
 import net.dark_roleplay.marg.api.materials.IMaterialCondition;
+import net.dark_roleplay.marg.api.materials.ItemMaterialCondition;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofItem;
 import net.dark_roleplay.medieval.objects.items.equipment.tools.ItemTelescope;
@@ -35,8 +35,8 @@ public class MedievalItems {
     private static final Item.Properties utilityProperties = new Item.Properties().group(UTILITY);
     private static final Item.Properties buildProperties = new Item.Properties().group(BUILDING);
 
-    private static final IMaterialCondition logMat = new BaseMaterialCondition("wood", "log", "log_top");
-    private static final IMaterialCondition plankMat = new BaseMaterialCondition("wood", "planks");
+    private static final IMaterialCondition logMat = new ItemMaterialCondition("wood", "log");
+    private static final IMaterialCondition plankMat = new ItemMaterialCondition("wood", "planks");
 
     public static final RegistryObject<Item>
         BELL_PEPPER                 = ITEMS.register("bell_pepper", () -> new Item(foodProperties.food(MedievalFoods.BELL_PEPPER))),

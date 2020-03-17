@@ -1,11 +1,10 @@
 package net.dark_roleplay.medieval.handler;
 
-import net.dark_roleplay.marg.api.Materials;
-import net.dark_roleplay.marg.api.materials.BaseMaterialCondition;
+import net.dark_roleplay.marg.api.MargAPI;
 import net.dark_roleplay.marg.api.materials.IMaterial;
 import net.dark_roleplay.marg.api.materials.IMaterialCondition;
+import net.dark_roleplay.marg.api.materials.ItemMaterialCondition;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.objects.blocks.building.jail_lattice.JailLatticeBlock;
 import net.dark_roleplay.medieval.objects.blocks.building.platforms.WoodPlatformBlock;
 import net.dark_roleplay.medieval.objects.blocks.building.platforms.WoodPlatformStairsBlock;
 import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofBlock;
@@ -17,15 +16,12 @@ import net.dark_roleplay.medieval.objects.blocks.decoration.benches.BenchBlock;
 import net.dark_roleplay.medieval.objects.blocks.decoration.candles.Candles;
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.*;
 import net.dark_roleplay.medieval.objects.blocks.decoration.light_sources.TorchHolderBlock;
-import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSign;
 import net.dark_roleplay.medieval.objects.blocks.decoration.tables.AxisTable;
 import net.dark_roleplay.medieval.objects.blocks.decoration.tables.BarrelTable;
 import net.dark_roleplay.medieval.objects.blocks.decoration.tables.SimpleTable;
-import net.dark_roleplay.medieval.objects.blocks.decoration.wall_brazier.WallBrazierBlock;
-import net.dark_roleplay.medieval.objects.blocks.utility.*;
 import net.dark_roleplay.medieval.objects.blocks.utility.barrel.BarrelBlock;
 import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingBlock;
-import net.dark_roleplay.medieval.objects.enums.TimberedClayEnums.TimberedClayType;
+import net.dark_roleplay.medieval.objects.timbered_clay.variants.TimberedClayVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SoundType;
@@ -46,7 +42,6 @@ public class MedievalBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, DarkRoleplayMedieval.MODID);
 
-
     private static final Block.Properties woodBaseProperties = Block.Properties.create(Material.WOOD).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD);
     private static final Block.Properties woodDecoProperties = Block.Properties.create(Material.LEAVES).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.WOOD);
 
@@ -55,14 +50,14 @@ public class MedievalBlocks {
     private static final Block.Properties metalBaseProperties = Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.METAL);
     private static final Block.Properties PLACEHOLDER = Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F, 3.0F).sound(SoundType.METAL);
 
-    private static final IMaterialCondition logMat = new BaseMaterialCondition("wood", "log", "log_top");
+    private static final IMaterialCondition logMat = new ItemMaterialCondition("wood", "log");
 
-    private static final IMaterialCondition logMat2 = new BaseMaterialCondition("wood", "log", "log_top", "stripped_log");
-    private static final IMaterialCondition plankMat = new BaseMaterialCondition("wood", "planks");
-    private static final IMaterialCondition logPlankMat = new BaseMaterialCondition("wood", "log", "log_top", "planks");
+    private static final IMaterialCondition logMat2 = new ItemMaterialCondition("wood", "log", "stripped_log");
+    private static final IMaterialCondition plankMat = new ItemMaterialCondition("wood", "planks");
+    private static final IMaterialCondition logPlankMat = new ItemMaterialCondition("wood", "log", "planks");
 
     private static final Map<IMaterial, Block.Properties> woodDeco = new HashMap<IMaterial, Block.Properties>(){{
-        put(Materials.getMaterial("oak"), Block.Properties.create(new Material.Builder(MaterialColor.WOOD).build()));
+        put(MargAPI.getMaterials().getMaterial("oak"), Block.Properties.create(new Material.Builder(MaterialColor.WOOD).build()));
     }};
 
     public static final RegistryObject<Block>
@@ -118,25 +113,29 @@ public class MedievalBlocks {
         WOOD_PLATFORM_STAIRS        = materialRegister(plankMat, "${material}_platform_stairs", () -> new WoodPlatformStairsBlock(woodBaseProperties)),
 //        WOOD_SIGN_POST              = materialRegister(plankMat, "${material}_sign_post", () -> new RoadSign(woodBaseProperties)), //Needs TE
         WOOD_SOLID_ARMREST_CHAIR    = materialRegister(plankMat, "${material}_solid_chair_armrest", () -> new SolidChairArmrestBlock(woodBaseProperties)), //Needs TE
-        CLEAN_TIMBERED_CLAY         = materialRegister(plankMat, "clean_${material}_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.CLEAN)),
-        VERTICAL_TIMBERED_CLAY      = materialRegister(plankMat, "${material}_vertical_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.VERTICAL)),
-        HORIZONTAL_TIMBERED_CLAY    = materialRegister(plankMat, "${material}_horizontal_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.HORIZONTAL)),
-        DIAGONAL_BT_TIMBERED_CLAY   = materialRegister(plankMat, "${material}_diagonal_bt_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.DIAGONAL_BT)),
-        DIAGONAL_TB_TIMBERED_CLAY   = materialRegister(plankMat, "${material}_diagonal_tb_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.DIAGONAL_TB)),
-        CROSS_TIMBERED_CLAY         = materialRegister(plankMat, "${material}_cross_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.CROSS)),
-        ARROW_BOTTOM_TIMBERED_CLAY  = materialRegister(plankMat, "${material}_arrow_bottom_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.ARROW_BOTTOM)),
-        ARROW_TOP_TIMBERED_CLAY     = materialRegister(plankMat, "${material}_arrow_top_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.ARROW_TOP)),
-        ARROW_RIGHT_TIMBERED_CLAY   = materialRegister(plankMat, "${material}_arrow_right_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.ARROW_RIGHT)),
-        ARROW_LEFT_TIMBERED_CLAY    = materialRegister(plankMat, "${material}_arrow_left_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.ARROW_LEFT)),
-        STRAIGHT_CROSS_TIMBERED_CLAY = materialRegister(plankMat, "${material}_straight_cross_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.STRAIGHT_CROSS)),
-        DOUBLE_DIAGONAL_T_BT_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_t_bt_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.DOUBLE_DIAGONAL_T_BT)),
-        DOUBLE_DIAGONAL_B_BT_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_b_bt_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.DOUBLE_DIAGONAL_B_BT)),
-        DOUBLE_DIAGONAL_T_TB_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_t_tb_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.DOUBLE_DIAGONAL_T_TB)),
-        DOUBLE_DIAGONAL_B_TB_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_b_tb_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.DOUBLE_DIAGONAL_B_TB)),
-        DOUBLE_DIAGONAL_L_LR_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_l_lr_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.DOUBLE_DIAGONAL_L_LR)),
-        DOUBLE_DIAGONAL_R_LR_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_r_lr_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.DOUBLE_DIAGONAL_R_LR)),
-        DOUBLE_DIAGONAL_L_RL_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_l_rl_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.DOUBLE_DIAGONAL_L_RL)),
-        DOUBLE_DIAGONAL_R_RL_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_r_rl_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayType.DOUBLE_DIAGONAL_R_RL));
+        CLEAN_TIMBERED_CLAY         = materialRegister(plankMat, "clean_${material}_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.CLEAN)),
+        VERTICAL_TIMBERED_CLAY      = materialRegister(plankMat, "${material}_vertical_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.VERTICAL)),
+        HORIZONTAL_TIMBERED_CLAY    = materialRegister(plankMat, "${material}_horizontal_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.HORIZONTAL)),
+        DIAGONAL_BT_TIMBERED_CLAY   = materialRegister(plankMat, "${material}_diagonal_bt_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.DIAGONAL_BT)),
+        DIAGONAL_TB_TIMBERED_CLAY   = materialRegister(plankMat, "${material}_diagonal_tb_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.DIAGONAL_TB)),
+        CROSS_TIMBERED_CLAY         = materialRegister(plankMat, "${material}_cross_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.CROSS)),
+        ARROW_BOTTOM_TIMBERED_CLAY  = materialRegister(plankMat, "${material}_arrow_down_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.ARROW_DOWN)),
+        ARROW_TOP_TIMBERED_CLAY     = materialRegister(plankMat, "${material}_arrow_top_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.ARROW_TOP)),
+        ARROW_RIGHT_TIMBERED_CLAY   = materialRegister(plankMat, "${material}_arrow_right_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.ARROW_RIGHT)),
+        ARROW_LEFT_TIMBERED_CLAY    = materialRegister(plankMat, "${material}_arrow_left_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.ARROW_LEFT)),
+        BIRD_FOOT_BOTTOM_TIMBERED_CLAY  = materialRegister(plankMat, "${material}_bird_foot_down_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.BIRD_FOOT_DOWN)),
+        BIRD_FOOT_TOP_TIMBERED_CLAY     = materialRegister(plankMat, "${material}_bird_foot_top_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.BIRD_FOOT_TOP)),
+        BIRD_FOOT_RIGHT_TIMBERED_CLAY   = materialRegister(plankMat, "${material}_bird_foot_right_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.BIRD_FOOT_RIGHT)),
+        BIRD_FOOT_LEFT_TIMBERED_CLAY    = materialRegister(plankMat, "${material}_bird_foot_left_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.BIRD_FOOT_LEFT)),
+        STRAIGHT_CROSS_TIMBERED_CLAY = materialRegister(plankMat, "${material}_straight_cross_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.STRAIGHT_CROSS)),
+        DOUBLE_DIAGONAL_T_BT_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_t_bt_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.DD_T_BT)),
+        DOUBLE_DIAGONAL_B_BT_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_b_bt_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.DD_B_BT)),
+        DOUBLE_DIAGONAL_T_TB_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_t_tb_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.DD_T_TB)),
+        DOUBLE_DIAGONAL_B_TB_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_b_tb_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.DD_B_TB)),
+        DOUBLE_DIAGONAL_L_LR_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_l_lr_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.DD_L_LR)),
+        DOUBLE_DIAGONAL_R_LR_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_r_lr_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.DD_R_LR)),
+        DOUBLE_DIAGONAL_L_RL_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_l_rl_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.DD_L_RL)),
+        DOUBLE_DIAGONAL_R_RL_TIMBERED_CLAY = materialRegister(plankMat, "${material}_double_diagonal_r_rl_timbered_clay", () -> new TimberedClay(woodBaseProperties, TimberedClayVariant.DD_R_RL));
 
     private static Map<DyeColor, RegistryObject<Block>> colorRegister(String name, Supplier<Block> suplier){
         Map<DyeColor, RegistryObject<Block>> blocks = new EnumMap<>(DyeColor.class);

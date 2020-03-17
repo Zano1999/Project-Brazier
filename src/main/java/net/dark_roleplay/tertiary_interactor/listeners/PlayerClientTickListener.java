@@ -25,7 +25,7 @@ public class PlayerClientTickListener {
 
         if (event.side == LogicalSide.SERVER) return;
 
-//        if (MedievalKeybinds.BLOCK_INTERACTOR.isKeyDown()) {
+//        if (CrafterKeybinds.BLOCK_INTERACTOR.isKeyDown()) {
 //            BlockRayTraceResult rayTrace = (BlockRayTraceResult) Minecraft.getInstance().objectMouseOver;
 //            if (Minecraft.getInstance().objectMouseOver.getType() != RayTraceResult.Type.BLOCK) return; //Not looking at a block
 //

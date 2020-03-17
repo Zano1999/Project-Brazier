@@ -22,7 +22,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'com.wynprice.cursemaven'
 
 
-def MOD_VERSION = System.getenv('RELEASE_VERSION')?: '0.4.1';
+def MOD_VERSION = System.getenv('RELEASE_VERSION')?: '0.4.2';
 
 version = "${MC_VERSION}-${MOD_VERSION}"
 group = 'net.dark_roleplay'
@@ -35,19 +35,15 @@ configurations {
 }
 
 sourceSets {
-    generated
     api
+    main.resources.srcDirs += 'src/generated/resources'
     main {
         compileClasspath += sourceSets.api.output
         runtimeClasspath += sourceSets.api.output
-        compileClasspath += sourceSets.generated.output
-        runtimeClasspath += sourceSets.generated.output
     }
     test {
         compileClasspath += sourceSets.api.output
         runtimeClasspath += sourceSets.api.output
-        compileClasspath += sourceSets.generated.output
-        runtimeClasspath += sourceSets.generated.output
     }
 }
 
@@ -62,8 +58,7 @@ minecraft {
                     "archivesBaseName%%${project.file('out/production/resources').canonicalPath};" +
                             "archivesBaseName%%${project.file('out/production/classes').canonicalPath};" +
                             "archivesBaseName%%${project.file('out/api/resources').canonicalPath};"+
-                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath};"+
-                            "archivesBaseName%%${project.file('out/generated/resources').canonicalPath}"
+                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath}"
         }
 
         server {
@@ -74,8 +69,7 @@ minecraft {
                     "archivesBaseName%%${project.file('out/production/resources').canonicalPath};" +
                             "archivesBaseName%%${project.file('out/production/classes').canonicalPath};" +
                             "archivesBaseName%%${project.file('out/api/resources').canonicalPath};"+
-                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath};"+
-                            "archivesBaseName%%${project.file('out/generated/resources').canonicalPath}"
+                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath}"
         }
 
         data {
@@ -86,15 +80,14 @@ minecraft {
                     "archivesBaseName%%${project.file('out/production/resources').canonicalPath};" +
                             "archivesBaseName%%${project.file('out/production/classes').canonicalPath};" +
                             "archivesBaseName%%${project.file('out/api/resources').canonicalPath};"+
-                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath};"+
-                            "archivesBaseName%%${project.file('out/generated/resources').canonicalPath}"        }
+                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath}"
+        }
     }
 }
 
 repositories {
-	maven {url = "https://dark-roleplay.net/files/maven/"}
-	maven{url = "https://minecraft.curseforge.com/api/maven/"}
-	
+    maven {url = "https://maven.dark-roleplay.net/"}
+    maven {url = "https://minecraft.curseforge.com/api/maven/"}
     mavenLocal()
 }
 
@@ -106,21 +99,17 @@ dependencies {
 
     ])
 
-	compile(fg.deobf("net.dark_roleplay:marg:1.14.4-0.3.2:api"))
-    runtime(fg.deobf("net.dark_roleplay:marg:1.14.4-0.3.2"))
+	compile(fg.deobf("net.dark_roleplay:marg:1.14.4-0.4.3:api"))
+    runtime(fg.deobf("net.dark_roleplay:marg:1.14.4-0.4.3"))
 	//compile(fg.deobf("net.dark_roleplay:modelz:1.14.4-0.1.3"))
 	//runtime(fg.deobf(curse.resolve("biomes-o-plenty", 2801408)))
 }
-
-apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.14.2/contained_deps.gradle'
 
 jar {
     from sourceSets.main.output.classesDirs
     from sourceSets.main.output.resourcesDir
     from sourceSets.api.output.resourcesDir
     from sourceSets.api.output.classesDirs
-    from sourceSets.generated.output.classesDirs
-    from sourceSets.generated.output.resourcesDir
 
     manifest {
         attributes([
@@ -144,7 +133,6 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
     from sourceSets.api.allSource
-    from sourceSets.generated.allSource
 }
 
 task apiJar(type: Jar) {

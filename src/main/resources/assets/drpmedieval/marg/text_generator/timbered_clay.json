@@ -1,42 +1,43 @@
 {
-  "version": 1,
-  "material": {
-    "type": "wood",
-    "required_textures": [
-      "planks"
-    ],
-    "required_items": [
-      "planks"
-    ]
-  },
-  "custom_keys": [
-    "vertical",
-    "horizontal",
-    "diagonal_bt",
-    "diagonal_tb",
-    "cross",
-    "arrow_bottom",
-    "arrow_top",
-    "arrow_right",
-    "arrow_left",
-    "straight_cross",
-    "double_diagonal_t_bt",
-    "double_diagonal_b_bt",
-    "double_diagonal_t_tb",
-    "double_diagonal_b_tb",
-    "double_diagonal_l_lr",
-    "double_diagonal_r_lr",
-    "double_diagonal_l_rl",
-    "double_diagonal_r_rl"
-  ],
-  "tasks": [
-    {
-      "input" : "drpmedieval:marg/text_files/blockstates/timbered_clay.json",
-      "output" : "drpmedieval:blockstates/${material}_${custom}_timbered_clay.json"
-    },
-    {
-      "input" : "drpmedieval:marg/text_files/blockstates/clean_timbered_clay.json",
-      "output" : "drpmedieval:blockstates/clean_${material}_timbered_clay.json"
-    }
-  ]
+	"generatorVersion": 0,
+	"material": {
+		"type": "wood",
+		"textures": [
+			"planks"
+		]
+	},
+	"customKeys": [
+		"vertical",
+		"horizontal",
+		"diagonal_bt",
+		"diagonal_tb",
+		"bird_foot_down",
+		"bird_foot_left",
+		"bird_foot_right",
+		"bird_foot_top",
+		"cross",
+		"arrow_down",
+		"arrow_top",
+		"arrow_right",
+		"arrow_left",
+		"straight_cross",
+		"double_diagonal_t_bt",
+		"double_diagonal_b_bt",
+		"double_diagonal_t_tb",
+		"double_diagonal_b_tb",
+		"double_diagonal_l_lr",
+		"double_diagonal_r_lr",
+		"double_diagonal_l_rl",
+		"double_diagonal_r_rl"
+	],
+	"tasks": [
+		{
+			"input" : "drpmedieval:marg/text_files/blockstates/timbered_clay.json",
+			"output" : "drpmedieval:blockstates/${material}_${custom}_timbered_clay.json"
+		},
+		{
+			"input" : "drpmedieval:marg/text_files/blockstates/clean_timbered_clay.json",
+			"output" : "drpmedieval:blockstates/clean_${material}_timbered_clay.json"
+		}
+	]
 }

@@ -542,53 +542,5 @@
 			"translation": [0, 2.5, 0],
 			"scale": [0.75, 0.75, 0.75]
 		}
-	},
-	"groups": [
-		{
-			"name": "octagon",
-			"origin": [8, 8, 8],
-			"children": []
-		},
-		{
-			"name": "outer_ring",
-			"origin": [8, 8, 8],
-			"children": [0, 1, 2, 3, 4, 5, 6, 7]
-		},
-		{
-			"name": "center_ring",
-			"shade": false,
-			"origin": [8, 8, 8],
-			"children": [8, 9, 10, 11, 12, 13, 14, 15]
-		},
-		{
-			"name": "inner_ring",
-			"origin": [8, 8, 8],
-			"children": [16, 17, 18, 19, 20, 21, 22, 23]
-		},
-		{
-			"name": "octagon",
-			"origin": [8, 8, 8],
-			"children": [24, 25, 26, 27, 28, 29, 30, 31]
-		},
-		{
-			"name": "candle_1",
-			"origin": [8, 8, 8],
-			"children": [32, 33, 34]
-		},
-		{
-			"name": "candle_1",
-			"origin": [8, 8, 8],
-			"children": [35, 36, 37]
-		},
-		{
-			"name": "candle_1",
-			"origin": [8, 8, 8],
-			"children": [38, 39, 40]
-		},
-		{
-			"name": "candle_1",
-			"origin": [8, 8, 8],
-			"children": [41, 42, 43]
-		}
-	]
+	}
 }

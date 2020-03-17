@@ -1,0 +1,19 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"type": "wood",
+		"items": [
+			"log"
+		]
+	},
+	"tasks": [
+		{
+			"input" : "drpmedieval:marg/text_files/blockstates/log_chair.json",
+			"output" : "drpmedieval:blockstates/${material}_log_chair.json"
+		},
+		{
+			"input" : "drpmedieval:marg/text_files/models/block/log_chair.json",
+			"output" : "drpmedieval:models/item/${material}_log_chair.json"
+		}
+	]
+}

@@ -1,29 +1,26 @@
 {
-  "version": 1,
-  "material": {
-    "type": "wood",
-    "required_textures": [
-      "planks"
-    ],
-    "required_items": [
-      "planks"
-    ]
-  },
-  "custom_keys": [
-    "cross",
-    "dense_vertical",
-    "diamond",
-    "grid",
-    "vertical"
-  ],
-  "tasks": [
-    {
-      "input" : "drpmedieval:marg/text_files/blockstates/window.json",
-      "output" : "drpmedieval:blockstates/${custom}_${material}_window.json"
-    },
-    {
-      "input" : "drpmedieval:marg/text_files/item_models/blocks/window/window.json",
-      "output" : "drpmedieval:models/item/${custom}_${material}_window.json"
-    }
-  ]
+	"generatorVersion": 0,
+	"material": {
+		"type": "wood",
+		"textures": [
+			"planks"
+		]
+	},
+	"customKeys": [
+		"cross",
+		"dense_vertical",
+		"diamond",
+		"grid",
+		"vertical"
+	],
+	"tasks": [
+		{
+			"input" : "drpmedieval:marg/text_files/blockstates/window.json",
+			"output" : "drpmedieval:blockstates/${custom}_${material}_window.json"
+		},
+		{
+			"input" : "drpmedieval:marg/text_files/models/block/window.json",
+			"output" : "drpmedieval:models/item/${custom}_${material}_window.json"
+		}
+	]
 }

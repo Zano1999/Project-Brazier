@@ -1,6 +1,7 @@
 package net.dark_roleplay.medieval.objects.guis.fourteen;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.dark_roleplay.medieval.objects.timbered_clay.util.TimberedClayState;
 import net.dark_roleplay.medieval.objects.timbered_clay.variants.TimberedClayVariant;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.screen.Screen;
@@ -49,7 +50,7 @@ public class MoveableWidget extends Widget {
 
     public void renderButton(int mouseX, int mouseY, float partialTicks) {
         GlStateManager.disableDepthTest();
-        TimberedArea.TimberedClayState.setupTexture();
+        TimberedClayState.setupTexture();
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         blit(this.x, this.y,16 * type.getTextX(), 16 * type.getTextY(), 16, 16, 128,128);
         //fill(this.x, this.y, this.x + this.width, this.y + this.height, isPrimary ? 0xFFFF0000 : 0xFFFFFF00);

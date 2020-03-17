@@ -7,6 +7,8 @@ import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofTileEntityRenderer;
 import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntityRenderer;
+import net.dark_roleplay.medieval.objects.entities.training_dummy.TrainingDummyEntity;
+import net.dark_roleplay.medieval.objects.entities.training_dummy.TrainingDummyRenderer;
 import net.dark_roleplay.medieval.objects.guis.generic_container.GenericContainerGui;
 import net.dark_roleplay.tertiary_interactor.TertiaryInteractionModule;
 import net.minecraft.client.gui.ScreenManager;
@@ -14,9 +16,11 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -29,73 +33,79 @@ import java.io.IOException;
 @Mod(DarkRoleplayMedieval.MODID)
 public class DarkRoleplayMedieval {
 
-	public static final String MODID = "drpmedieval";
+    public static final String MODID = "drpmedieval";
 
-	private IModule[] modules = {new TertiaryInteractionModule()};
+    private IModule[] modules = {new TertiaryInteractionModule()};
 
-	public DarkRoleplayMedieval() {
-		//Biomes o' Plenty Support
-		//JsonReader reader = new JsonReader(new InputStreamReader(Marg.class.getClassLoader().getResourceAsStream("data/bop_woods.json")));
-		//Marg.MARG_GSON.fromJson(reader, Material.class);
+    public DarkRoleplayMedieval() {
+        //Biomes o' Plenty Support
+        //JsonReader reader = new JsonReader(new InputStreamReader(Marg.class.getClassLoader().getResourceAsStream("data/bop_woods.json")));
+        //Marg.MARG_GSON.fromJson(reader, Material.class);
 
-		MedievalBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-		MedievalItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-		MedievalTileEntities.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-		MedievalEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-		MedievalContainers.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-		MedievalNetworking.initNetworking();
+        MedievalNetworking.initNetworking();
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MedievalConfigs.WORLD_GENS_SPEC, "World Generation.toml");
-		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.Misc.REGENERATING_ORES_SPEC, "Regenerating Ores.toml");
-		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.SKILL_CONFIG_SPEC, "Abilities.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MedievalConfigs.SKILL_CONFIG_SPEC, "Abilities.toml");
 
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::hackyHackToByPassLoadingOrder);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommonStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupServerStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClientStuff);
 
         BatModelExporter exporter = new BatModelExporter();
-		try {
-			exporter.writeModel();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	public void setupCommonStuff(FMLCommonSetupEvent event) {}
-	
-	public void setupServerStuff(FMLDedicatedServerSetupEvent event) {}
-	
-	public void setupClientStuff(FMLClientSetupEvent event) {
+        try {
+            exporter.writeModel();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 
-		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
-			MedievalItems.TIMBERING_NOTES.get().addPropertyOverride(new ResourceLocation(MODID, "positions"), (stack, world, entity) -> {
-				CompoundNBT nbt = stack.getOrCreateTag();
-				float res = 0;
-				if(!nbt.contains("TimberingData")) return 0;
-				res += nbt.getCompound("TimberingData").contains("PosA") ? 0.3 : 0;
-				res += nbt.getCompound("TimberingData").contains("PosB") ? 0.6 : 0;
-				return res;
-			});
+    public void hackyHackToByPassLoadingOrder(RegistryEvent.NewRegistry event){
+        MedievalBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        MedievalItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        MedievalTileEntities.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        MedievalEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        MedievalContainers.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+    }
 
-			ScreenManager.registerFactory(MedievalContainers.GENERIC_CONTAINER.get(), GenericContainerGui::new);
 
-			OBJLoader.INSTANCE.addDomain(MODID);
+    public void setupCommonStuff(FMLCommonSetupEvent event) {
+    }
 
-			//ModelLoaderRegistry.registerLoader(ModelQualityModelLoader.INSTANCE);
+    public void setupServerStuff(FMLDedicatedServerSetupEvent event) {
+    }
+
+    public void setupClientStuff(FMLClientSetupEvent event) {
+
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+            MedievalItems.TIMBERING_NOTES.get().addPropertyOverride(new ResourceLocation(MODID, "positions"), (stack, world, entity) -> {
+                CompoundNBT nbt = stack.getOrCreateTag();
+                float res = 0;
+                if (!nbt.contains("TimberingData")) return 0;
+                res += nbt.getCompound("TimberingData").contains("Start") ? 0.3 : 0;
+                res += nbt.getCompound("TimberingData").contains("Target") ? 0.6 : 0;
+                return res;
+            });
+
+            ScreenManager.registerFactory(MedievalContainers.GENERIC_CONTAINER.get(), GenericContainerGui::new);
+
+            OBJLoader.INSTANCE.addDomain(MODID);
+
+            RenderingRegistry.registerEntityRenderingHandler(TrainingDummyEntity.class, TrainingDummyRenderer::new);
+
+            //ModelLoaderRegistry.registerLoader(ModelQualityModelLoader.INSTANCE);
 //			ClientRegistry.bindTileEntitySpecialRenderer(RoadSignTileEntity.class, new RoadSignTileEntityRenderer());
-			ClientRegistry.bindTileEntitySpecialRenderer(ChoppingTileEntity.class, new ChoppingTileEntityRenderer());
-			ClientRegistry.bindTileEntitySpecialRenderer(RoofTileEntity.class, new RoofTileEntityRenderer());
+            ClientRegistry.bindTileEntitySpecialRenderer(ChoppingTileEntity.class, new ChoppingTileEntityRenderer());
+            ClientRegistry.bindTileEntitySpecialRenderer(RoofTileEntity.class, new RoofTileEntityRenderer());
 //
 //
 //			ClientRegistry.bindTileEntitySpecialRenderer(ModelTesterTileEntity.class, new ModelTesterTileEntityRenderer());
-//			ClientRegistry.registerKeyBinding(MedievalKeybinds.BLOCK_INTERACTOR);
-//			ClientRegistry.registerKeyBinding(MedievalKeybinds.DODGE);
-		});
-	}
+//			ClientRegistry.registerKeyBinding(CrafterKeybinds.BLOCK_INTERACTOR);
+//			ClientRegistry.registerKeyBinding(CrafterKeybinds.DODGE);
+        });
+    }
 
 //	@EventHandler
 //	public static void init(FMLInitializationEvent event) {

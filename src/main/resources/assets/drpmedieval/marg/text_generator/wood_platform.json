@@ -1,0 +1,28 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"type": "wood",
+		"textures": [
+			"planks"
+		]
+	},
+	"tasks": [
+		{
+			"input" : "drpmedieval:marg/text_files/blockstates/wood_platform.json",
+			"output" : "drpmedieval:blockstates/${material}_platform.json"
+		},
+		{
+			"input" : "drpmedieval:marg/text_files/blockstates/wood_platform_stairs.json",
+			"output" : "drpmedieval:blockstates/${material}_platform_stairs.json"
+		},
+
+		{
+			"input" : "drpmedieval:marg/text_files/models/block/wood_platform.json",
+			"output" : "drpmedieval:models/item/${material}_platform.json"
+		},
+		{
+			"input" : "drpmedieval:marg/text_files/models/block/wood_platform_stairs.json",
+			"output" : "drpmedieval:models/item/${material}_platform_stairs.json"
+		}
+	]
+}

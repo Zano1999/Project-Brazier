@@ -4,7 +4,7 @@ import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.handler.MedievalItems;
 import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignHelper;
 import net.dark_roleplay.medieval.objects.guis.RoadSignOverlay;
-import net.dark_roleplay.medieval.objects.items.tools.timbering_notes.TimberingNotesRenderer;
+import net.dark_roleplay.medieval.objects.timbered_clay.util.TimberingNotesRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

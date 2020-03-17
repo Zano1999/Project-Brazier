@@ -1,6 +1,7 @@
 package net.dark_roleplay.medieval.objects.guis.fourteen;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.dark_roleplay.medieval.objects.timbered_clay.util.TimberedClayState;
 import net.dark_roleplay.medieval.objects.timbered_clay.variants.TimberedClayVariant;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.Widget;
@@ -9,9 +10,9 @@ public class DropArea extends Widget {
 
     private Screen screen;
     private int mouseOffsetX = 0, mouseOffsetY = 0;
-    private TimberedArea.TimberedClayState state;
+    private TimberedClayState state;
 
-    public DropArea(Screen screen, int posX, int posY, TimberedArea.TimberedClayState state) {
+    public DropArea(Screen screen, int posX, int posY, TimberedClayState state) {
         super(posX, posY, 16, 16, "");
         this.screen = screen;
         this.state = state;
@@ -39,15 +40,9 @@ public class DropArea extends Widget {
 
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        if(state.hasPrimary()){
-            this.state.setupTexture();
-            blit(this.x, this.y,16 * this.state.getPrimary().getTextX(), 16 * this.state.getPrimary().getTextY(), 16, 16, 128,128);
-        }
-
-        if(state.hasSecondary()){
-            this.state.setupTexture();
-            blit(this.x, this.y,16 * this.state.getSecondary().getTextX(), 16 * this.state.getSecondary().getTextY(), 16, 16, 128,128);
-        }
+        this.state.setupTexture();
+        blit(this.x, this.y,16 * this.state.getPrimary().getTextX(), 16 * this.state.getPrimary().getTextY(), 16, 16, 128,128);
+        blit(this.x, this.y,16 * this.state.getSecondary().getTextX(), 16 * this.state.getSecondary().getTextY(), 16, 16, 128,128);
     }
 
     @Override

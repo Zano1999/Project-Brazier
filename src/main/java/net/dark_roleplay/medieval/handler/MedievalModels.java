@@ -1,7 +1,7 @@
 package net.dark_roleplay.medieval.handler;
 
-import net.dark_roleplay.marg.api.materials.BaseMaterialCondition;
 import net.dark_roleplay.marg.api.materials.IMaterialCondition;
+import net.dark_roleplay.marg.api.materials.ItemMaterialCondition;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = DarkRoleplayMedieval.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class MedievalModels {
 
-    private static final IMaterialCondition plankMat = new BaseMaterialCondition("wood", "planks");
+    private static final IMaterialCondition plankMat = new ItemMaterialCondition("wood", "planks");
 
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event){

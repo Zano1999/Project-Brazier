@@ -28,7 +28,7 @@ public class AdvancedInteractionOverlay{
         boolean result = false;
 
         long elapsed = 0;
-//        if(MedievalKeybinds.BLOCK_INTERACTOR.isKeyDown()){
+//        if(CrafterKeybinds.BLOCK_INTERACTOR.isKeyDown()){
 //            if(!wasPressed){
 //                firstPressed = System.currentTimeMillis();
 //                wasPressed = true;

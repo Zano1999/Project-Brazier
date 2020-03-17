@@ -1,16 +1,25 @@
 package net.dark_roleplay.medieval.handler;
 
-//@Mod.EventBusSubscriber(modid = DarkRoleplayMedieval.MODID, value = Dist.CLIENT)
+import net.dark_roleplay.medieval.DarkRoleplayMedieval;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.lwjgl.glfw.GLFW;
+
+@Mod.EventBusSubscriber(modid = DarkRoleplayMedieval.MODID, value = Dist.CLIENT)
 public class MedievalKeybinds {
 //
-//    public static KeyBinding BLOCK_INTERACTOR = new KeyBinding("keybind.drpmedieval.interactor", GLFW.GLFW_KEY_GRAVE_ACCENT, "keybind.category.drpmedieval");
+
+    //    public static KeyBinding BLOCK_INTERACTOR = new KeyBinding("keybind.drpmedieval.interactor", GLFW.GLFW_KEY_GRAVE_ACCENT, "keybind.category.drpmedieval");
 //    public static KeyBinding DODGE = new KeyBinding("keybind.drpmedieval.movement.dodge", GLFW.GLFW_KEY_B, "keybind.category.drpmedieval");
 //
 //    @SubscribeEvent
 //    public static void KeyInput(InputEvent.KeyInputEvent event) {
 //        if (BLOCK_INTERACTOR.isPressed()) {
 //            Minecraft.getInstance().displayGuiScreen(new CraftingScreen());
-//            //Minecraft.getInstance().displayGuiScreen(new TimberedScreen(new TimberedArea(Minecraft.getInstance().world, new BlockPos(-1031, 70, 821), new BlockPos(-1031, 72, 815))));
+//
 //            //RoadSignHelper.INSTANCE.setRight(!RoadSignHelper.INSTANCE.isRight());
 //        }else if(DODGE.isPressed()){
 //            PlayerEntity player = Minecraft.getInstance().player;
