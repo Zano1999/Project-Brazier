@@ -22,7 +22,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'com.wynprice.cursemaven'
 
 
-def MOD_VERSION = System.getenv('RELEASE_VERSION')?: '0.4.2';
+def MOD_VERSION = System.getenv('RELEASE_VERSION')?: '0.4.3';
 
 version = "${MC_VERSION}-${MOD_VERSION}"
 group = 'net.dark_roleplay'
@@ -175,6 +175,9 @@ curseforge {
         releaseType = 'alpha'
         mainArtifact(jar) {
             displayName = "DRP Medieval - ${MC_VERSION} - v${MOD_VERSION} Alpha"
+            relations {
+                requiredDependency 'marg'
+            }
         }
     }
 }

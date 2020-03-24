@@ -5,6 +5,13 @@ Crafting is not available in this version.
 As well as most blocks don't drop anything.
 There may be bugs, and the performance may not be great.
 
+Changes in v0.4.3
+* Fixed most missing textures and models (needs latest version of MARG
++ Added 4(1 but rotated in all 4 directions) new Timbering Pattern
+* Fixed most missing Translations, the remaining ones will be fixed by a future MARG update
++ Added Timbering Notes, you can use those to add Timbering to your timbered clay walls (not finished yet, just a prototype)
+* Renamed 2 Timbered Clay variants, you'll be asked to confirm this, nothing should break unless you placed those trough commands.
+
 Changes in v0.4.1
 * Removed dependency on DRPLibrary
 

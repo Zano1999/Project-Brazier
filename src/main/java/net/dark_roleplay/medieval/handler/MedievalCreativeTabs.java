@@ -28,7 +28,7 @@ public class MedievalCreativeTabs {
 	public static final ItemGroup UTILITY = new ItemGroup("drpmedieval.utility") {
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
-			return new ItemStack(Blocks.POWERED_RAIL);
+			return new ItemStack(MedievalBlocks.BARREL.get(MargAPI.getMaterials().getMaterial("oak")).get());
 		}
 	};
 	

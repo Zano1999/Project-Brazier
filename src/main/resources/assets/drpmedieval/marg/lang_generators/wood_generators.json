@@ -1,0 +1,35 @@
+
+{
+	"material": {
+		"type": "wood"
+	},
+	"language_entries": {
+
+		"block.drpmedieval.plank_chair": "block.drpmedieval.${material}_plank_chair",
+		"block.drpmedieval.solid_chair": "block.drpmedieval.${material}_solid_chair",
+		"block.drpmedieval.solid_chair_armrest": "block.drpmedieval.${material}_solid_chair_armrest",
+		"block.drpmedieval.solid_bench": "block.drpmedieval.${material}_solid_bench",
+		"block.drpmedieval.solid_table": "block.drpmedieval.solid_${material}_table",
+		"block.drpmedieval.plank_table": "block.drpmedieval.${material}_plank_table",
+		"block.drpmedieval.barrel_table": "block.drpmedieval.${material}_barrel_table",
+		"block.drpmedieval.barrel_chair": "block.drpmedieval.${material}_barrel_chair",
+		"block.drpmedieval.log_chair": "block.drpmedieval.${material}_log_chair",
+		"block.drpmedieval.platform": "block.drpmedieval.${material}_platform",
+		"block.drpmedieval.platform_stairs": "block.drpmedieval.${material}_platform_stairs",
+
+		"block.drpmedieval.grid_wind": "block.drpmedieval.grid_${material}_wind",
+		"block.drpmedieval.cross_wind": "block.drpmedieval.cross_${material}_wind",
+		"block.drpmedieval.dense_vertical_wind": "block.drpmedieval.dense_vertical_${material}_wind",
+		"block.drpmedieval.vertical_wind": "block.drpmedieval.vertical_${material}_wind",
+		"block.drpmedieval.diamond_wind": "block.drpmedieval.diamond_${material}_wind",
+		"block.drpmedieval.shingle_roof": "block.drpmedieval.${material}_shingle_roof",
+		"block.drpmedieval.simple_stairs": "block.drpmedieval.simple_${material}_stairs",
+		"block.drpmedieval.chopping_block": "block.drpmedieval.${material}_chopping_block",
+		"block.drpmedieval.barrel": "block.drpmedieval.${material}_barrel",
+
+		"item.drpmedieval.wood_beam": "item.drpmedieval.${material}_wood_beam",
+		"item.drpmedieval.plank": "item.drpmedieval.${material}_plank",
+		"item.drpmedieval.firewood": "item.drpmedieval.${material}_firewood",
+		"item.drpmedieval.barrel_lit": "item.drpmedieval.${material}_barrel_lit"
+	}
+}

@@ -87,7 +87,7 @@ public class MedievalItems {
         PACKED_ICE_BRICKS           = ITEMS.register("packed_ice_bricks", () -> blockItem(MedievalBlocks.PACKED_ICE_BRICKS, buildProperties)),
         SHINGLE_ROOF                = ITEMS.register("clay_shingle_roof", () -> new RoofItem(MedievalBlocks.SHINGLE_ROOF.get(), buildProperties)),
 
-        TIMBERING_NOTES             = ITEMS.register("timbering_notes", () -> new TimberingNotesItem(miscProperties)),
+        TIMBERING_NOTES             = ITEMS.register("timbering_notes", () -> new TimberingNotesItem(equipProperties)),
         BARLEY                      = ITEMS.register("barley", () -> new Item(miscProperties)),
         BARLEY_DOUGH                = ITEMS.register("barley_dough", () -> new Item(miscProperties)),
         BARLEY_FLOUR                = ITEMS.register("barley_flour", () -> new Item(miscProperties)),
