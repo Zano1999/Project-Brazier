@@ -45,16 +45,17 @@ public class RoofTileBox extends AdvancedModelBox {
 
         float baseOffset = ((part % 3) * 5 * vS);
 
-        quads.add(new BakedQuad(generateVertexData(minU, minV + baseOffset + vS * 4, maxU, minV + baseOffset, vertices[7], vertices[6], vertices[5], vertices[4]), 0, Direction.UP, sprite, false, DefaultVertexFormats.BLOCK));
-
-        if(part == 0)
-            quads.add(new BakedQuad(generateVertexData(minU, minV + baseOffset + vS * 5, maxU, minV + baseOffset + vS * 4, vertices[4], vertices[5], vertices[1], vertices[0]), 0, Direction.SOUTH, sprite, false, DefaultVertexFormats.BLOCK));
-        quads.add(new BakedQuad(generateVertexData(minU, minV + baseOffset + vS * 5, maxU, minV + baseOffset + vS * 4, vertices[3], vertices[2], vertices[6], vertices[7]), 0, Direction.NORTH, sprite, false, DefaultVertexFormats.BLOCK));
-
-        //WEST first was a 4
-        quads.add(new BakedQuad(generateVertexData(minU, minV + baseOffset, minU + uS, minV + baseOffset + (4*vS), vertices[4], vertices[4], vertices[3], vertices[7]), 0, Direction.WEST, sprite, false, DefaultVertexFormats.BLOCK));
-        //EAST
-        quads.add(new BakedQuad(generateVertexData(minU, minV + baseOffset, minU + uS, minV + baseOffset + (4*vS), vertices[5], vertices[5], vertices[6], vertices[2]), 0, Direction.EAST, sprite, false, DefaultVertexFormats.BLOCK));
+        //TODO 1.15 update
+//        quads.add(new BakedQuad(generateVertexData(minU, minV + baseOffset + vS * 4, maxU, minV + baseOffset, vertices[7], vertices[6], vertices[5], vertices[4]), 0, Direction.UP, sprite, false, DefaultVertexFormats.BLOCK));
+//
+//        if(part == 0)
+//            quads.add(new BakedQuad(generateVertexData(minU, minV + baseOffset + vS * 5, maxU, minV + baseOffset + vS * 4, vertices[4], vertices[5], vertices[1], vertices[0]), 0, Direction.SOUTH, sprite, false, DefaultVertexFormats.BLOCK));
+//        quads.add(new BakedQuad(generateVertexData(minU, minV + baseOffset + vS * 5, maxU, minV + baseOffset + vS * 4, vertices[3], vertices[2], vertices[6], vertices[7]), 0, Direction.NORTH, sprite, false, DefaultVertexFormats.BLOCK));
+//
+//        //WEST first was a 4
+//        quads.add(new BakedQuad(generateVertexData(minU, minV + baseOffset, minU + uS, minV + baseOffset + (4*vS), vertices[4], vertices[4], vertices[3], vertices[7]), 0, Direction.WEST, sprite, false, DefaultVertexFormats.BLOCK));
+//        //EAST
+//        quads.add(new BakedQuad(generateVertexData(minU, minV + baseOffset, minU + uS, minV + baseOffset + (4*vS), vertices[5], vertices[5], vertices[6], vertices[2]), 0, Direction.EAST, sprite, false, DefaultVertexFormats.BLOCK));
         return quads.toArray(new BakedQuad[quads.size()]);
     }
 }

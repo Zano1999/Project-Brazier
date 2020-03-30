@@ -12,6 +12,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.Hand;
@@ -97,14 +98,14 @@ public class BenchBlock extends AxisBlock{
 	}
 	
 	@Override
-	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
 		if(player.getPositionVec().squareDistanceTo(new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5)) < 9) {
 			if(!world.isRemote())
 				SittingUtil.sitOnBlock((ServerWorld) world, pos.getX(), pos.getY(), pos.getZ(), player, 0.3F);
 		}else {
 			player.sendStatusMessage(new TranslationTextComponent("interaction.drpmedieval.chair.to_far", state.getBlock().getNameTextComponent().getFormattedText()), true);
 		}
-		return true;
+		return ActionResultType.SUCCESS;
 	}
 	
 	@Override
@@ -112,7 +113,7 @@ public class BenchBlock extends AxisBlock{
 		if (facing != Direction.DOWN) {
 			return getPropperBenchState(state, facing, facingState, world, currentPos, facingPos);
 		}
-		if (!Block.func_220064_c(world, facingPos))
+		if (!Block.hasSolidSideOnTop(world, facingPos))
 			return Blocks.AIR.getDefaultState();
 		return state;
 	}

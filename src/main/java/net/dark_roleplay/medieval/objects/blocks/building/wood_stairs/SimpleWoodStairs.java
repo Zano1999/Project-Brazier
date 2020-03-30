@@ -14,6 +14,7 @@ import net.minecraft.item.ItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -117,24 +118,24 @@ public class SimpleWoodStairs extends HorizontalBlock {
 
     @Override
     @Deprecated
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         ItemStack stack = player.getHeldItem(Hand.OFF_HAND);
         ItemStack mainStack = player.getHeldItem(Hand.MAIN_HAND);
         if(mainStack.getItem() == MedievalItems.WOODEN_MALLET.get() && stack.getItem() instanceof BlockItem && ((BlockItem) stack.getItem()).getBlock() == this){
             BlockPos targetPos = pos.offset(state.get(HORIZONTAL_FACING).getOpposite()).up();
             if(!World.isValid(targetPos)){
                 player.sendStatusMessage(new TranslationTextComponent("build.tooHigh", targetPos.getY()).applyTextStyle(TextFormatting.RED), true);
-                return true;
+                return ActionResultType.SUCCESS;
             }
             if(worldIn.isAirBlock(targetPos)){
                 worldIn.setBlockState(targetPos, this.getStateForPlacement(new BlockItemUseContext(new ItemUseContext(player, handIn, hit))));
                 worldIn.playSound(null, targetPos, this.getSoundType(state, worldIn, targetPos, player).getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
                 if(!player.isCreative())
                     stack.shrink(1);
-                return true;
+                return ActionResultType.SUCCESS;
             }
         }
-        return false;
+        return ActionResultType.PASS;
     }
 
     @Override
@@ -147,7 +148,7 @@ public class SimpleWoodStairs extends HorizontalBlock {
         IBlockReader world = context.getWorld();
         BlockPos pos = context.getPos();
 
-        state = state.with(GROUNDED, world.getBlockState(pos.down()).func_224755_d(world, pos.down(), Direction.UP));
+        state = state.with(GROUNDED, world.getBlockState(pos.down()).isSolidSide(world, pos.down(), Direction.UP));
         state = state.with(TYPE, (world.getBlockState(pos.offset(facing.rotateY())).getBlock() == this ||
                 world.getBlockState(pos.offset(facing.rotateYCCW())).getBlock() == this) ? WoodStairsType.DOUBLE : WoodStairsType.SINGLE);
 
@@ -157,7 +158,7 @@ public class SimpleWoodStairs extends HorizontalBlock {
     @Override
     public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
         if(facing == Direction.DOWN)
-            return state.with(GROUNDED, world.getBlockState(facingPos).func_224755_d(world, facingPos, Direction.UP));
+            return state.with(GROUNDED, world.getBlockState(facingPos).isSolidSide(world, facingPos, Direction.UP));
         else if(facing == state.get(HORIZONTAL_FACING).rotateY() || facing == state.get(HORIZONTAL_FACING).rotateYCCW())
             return state.with(TYPE, (facingState.getBlock() == this ? WoodStairsType.DOUBLE : WoodStairsType.SINGLE));
         else

@@ -3,30 +3,33 @@ package net.dark_roleplay.medieval.testing.blocks.hanging_bridge_v2;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.dark_roleplay.medieval.util.ModelUtility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.inventory.container.PlayerContainer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 
-public class RopeBridgeModel{
+public class RopeBridgeModel {
 
 	List<TexturedVertex> vertices = new ArrayList<TexturedVertex>();
 
 	public RopeBridgeModel(Vec3d posA1, Vec3d posA2, Vec3d posB1, Vec3d posB2) {
-		posA1 = posA1.add(new Vec3d(1,1,1));
-		posA2 = posA2.add(new Vec3d(1,1,1));
-		posB1 = posB1.add(new Vec3d(1,1,1));
-		posB2 = posB2.add(new Vec3d(1,1,1));
-		 this.addHandel(posA1, posA2);
-		 this.addHandel(posB1, posB2);
+		posA1 = posA1.add(new Vec3d(1, 1, 1));
+		posA2 = posA2.add(new Vec3d(1, 1, 1));
+		posB1 = posB1.add(new Vec3d(1, 1, 1));
+		posB2 = posB2.add(new Vec3d(1, 1, 1));
+		this.addHandel(posA1, posA2);
+		this.addHandel(posB1, posB2);
 	}
 
 	private void addHandel(Vec3d posA, Vec3d posB) {
 		float width = 0.0625f;
-		TextureAtlasSprite rope = Minecraft.getInstance().getTextureMap().getAtlasSprite("drpmedieval:blocks/rope");
+		TextureAtlasSprite rope = ModelUtility.getBlockSprite(new ResourceLocation("drpmedieval:blocks/rope"));
 
 		Vec3d size = posB.subtract(posA);
 		double distance = size.length();
-		for(double i = 0d; i < distance; i++) {
+		for (double i = 0d; i < distance; i++) {
 
 			float u0 = rope.getMinU();
 			float u1 = rope.getMinU() + (((rope.getMaxU() - rope.getMinU()) / 16) * 2);
@@ -97,7 +100,7 @@ public class RopeBridgeModel{
 		return this.vertices;
 	}
 
-	public static class TexturedVertex{
+	public static class TexturedVertex {
 
 		public float x, y, z;
 		public float u, v;

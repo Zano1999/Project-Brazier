@@ -14,8 +14,8 @@ public class TelescopeOverlay extends AbstractGui {
 	private static final int BLACK = 0xFF000000;
 	
 	public void draw(Minecraft mc){
-        int width = Minecraft.getInstance().mainWindow.getScaledWidth();
-        int height = Minecraft.getInstance().mainWindow.getScaledHeight();
+        int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
+        int height = Minecraft.getInstance().getMainWindow().getScaledHeight();
         
         mc.getTextureManager().bindTexture(TelescopeOverlay.SCOPE);
 

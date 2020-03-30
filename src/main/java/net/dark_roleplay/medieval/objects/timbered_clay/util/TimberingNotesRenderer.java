@@ -17,17 +17,18 @@ public class TimberingNotesRenderer extends AbstractGui {
 
     public static TimberingNotesRenderer INSTANCE = new TimberingNotesRenderer();
 
+    //TODO 1.15 update fix blending
     public void renderHud(ItemStack stack){
         CompoundNBT tag = stack.getOrCreateTag();
         boolean editB = tag.getBoolean("EditPosB");
 
-        int topX = (int) Math.ceil(Minecraft.getInstance().mainWindow.getScaledWidth() / 2F) - 7;
-        int topY = (int) Math.ceil(Minecraft.getInstance().mainWindow.getScaledHeight() / 2F) - 7;
+        int topX = (int) Math.ceil(Minecraft.getInstance().getMainWindow().getScaledWidth() / 2F) - 7;
+        int topY = (int) Math.ceil(Minecraft.getInstance().getMainWindow().getScaledHeight() / 2F) - 7;
 
         GlStateManager.enableBlend();
         GlStateManager.disableTexture();
         GlStateManager.depthMask(false);
-        GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        //GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.color4f(1, 1, 1, 0);
 
         simpleFill(topX, topY, topX + 1, topY + 13);
@@ -42,7 +43,7 @@ public class TimberingNotesRenderer extends AbstractGui {
 
         GL11.glLineWidth(1.0F);
         GlStateManager.depthMask(true);
-        GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        //GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.enableTexture();
 
     }

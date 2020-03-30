@@ -39,16 +39,16 @@ public class RoofBottomBox extends AdvancedModelBox {
         float minV = sprite.getMinV(), maxV = sprite.getMaxV();
 
         float uS = (sprite.getMaxU() - sprite.getMinU()) / 16;
-
-        quads.add(new BakedQuad(generateVertexData(minU, minV, maxU, maxV, vertices[0], vertices[1], vertices[2], vertices[3]), 0, Direction.UP, sprite, false, DefaultVertexFormats.BLOCK));
-
-        quads.add(new BakedQuad(generateVertexData(minU, minV, maxU, maxV, vertices[4], vertices[5], vertices[1], vertices[0]), 0, Direction.SOUTH, sprite, false, DefaultVertexFormats.BLOCK));
-        quads.add(new BakedQuad(generateVertexData(minU, minV, maxU, maxV, vertices[3], vertices[2], vertices[6], vertices[7]), 0, Direction.NORTH, sprite, false, DefaultVertexFormats.BLOCK));
-
-        //WEST first was a 4
-        quads.add(new BakedQuad(generateVertexData(minU, minV, minU + uS, maxV, vertices[4], vertices[0], vertices[3], vertices[7]), 0, Direction.WEST, sprite, false, DefaultVertexFormats.BLOCK));
-        //EAST
-        quads.add(new BakedQuad(generateVertexData(minU, minV, minU + uS, maxV, vertices[1], vertices[5], vertices[6], vertices[2]), 0, Direction.EAST, sprite, false, DefaultVertexFormats.BLOCK));
+//TODO 1.15 update
+//        quads.add(new BakedQuad(generateVertexData(minU, minV, maxU, maxV, vertices[0], vertices[1], vertices[2], vertices[3]), 0, Direction.UP, sprite, false, DefaultVertexFormats.BLOCK));
+//
+//        quads.add(new BakedQuad(generateVertexData(minU, minV, maxU, maxV, vertices[4], vertices[5], vertices[1], vertices[0]), 0, Direction.SOUTH, sprite, false, DefaultVertexFormats.BLOCK));
+//        quads.add(new BakedQuad(generateVertexData(minU, minV, maxU, maxV, vertices[3], vertices[2], vertices[6], vertices[7]), 0, Direction.NORTH, sprite, false, DefaultVertexFormats.BLOCK));
+//
+//        //WEST first was a 4
+//        quads.add(new BakedQuad(generateVertexData(minU, minV, minU + uS, maxV, vertices[4], vertices[0], vertices[3], vertices[7]), 0, Direction.WEST, sprite, false, DefaultVertexFormats.BLOCK));
+//        //EAST
+//        quads.add(new BakedQuad(generateVertexData(minU, minV, minU + uS, maxV, vertices[1], vertices[5], vertices[6], vertices[2]), 0, Direction.EAST, sprite, false, DefaultVertexFormats.BLOCK));
         return quads.toArray(new BakedQuad[quads.size()]);
     }
 }

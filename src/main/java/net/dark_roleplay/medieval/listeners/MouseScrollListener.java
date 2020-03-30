@@ -21,7 +21,7 @@ public class MouseScrollListener {
         PlayerEntity player = Minecraft.getInstance().player;
         ItemStack heldItem = player.getHeldItemMainhand();
         if(heldItem.getItem() == MedievalItems.TIMBERING_NOTES.get()){
-            if(player.isSneaking() || event.isMiddleDown()){
+            if(player.isCrouching() || event.isMiddleDown()){
                 event.setCanceled(true);
                 MedievalNetworking.CHANNEL.sendToServer(new TimberingNotesSwitchPacket());
             }

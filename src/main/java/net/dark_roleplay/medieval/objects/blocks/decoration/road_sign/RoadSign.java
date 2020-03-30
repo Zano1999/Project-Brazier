@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -41,14 +42,14 @@ public class RoadSign extends Block{
 	}
 
 	@Override
-	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if(!(player.getHeldItemMainhand().getItem() instanceof RoadSignItem)) return false;
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if(!(player.getHeldItemMainhand().getItem() instanceof RoadSignItem)) return ActionResultType.PASS;
 
 		TileEntity te = world.getTileEntity(pos);
-		if(!(te instanceof RoadSignTileEntity)) return false;
+		if(!(te instanceof RoadSignTileEntity)) return ActionResultType.FAIL;
 		if(world.isRemote){
 			MedievalNetworking.CHANNEL.sendToServer(new SignPostPlacementPacket());
-			return true;
+			return ActionResultType.SUCCESS;
 		}
 
 		Boolean isRight = SignPostPlacementPacket.getPlayer(player);
@@ -61,6 +62,6 @@ public class RoadSign extends Block{
 		world.markAndNotifyBlock(pos, world.getChunkAt(pos), state, state, 3);
 
 		Minecraft.getInstance().displayGuiScreen(new EditRoadSignScreen(rte, signID));
-		return true;
+		return ActionResultType.SUCCESS;
 	}
 }

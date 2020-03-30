@@ -39,7 +39,7 @@ public class RoofItem extends BlockItem {
 
             Vec3d hitVec = context.getHitVec();
 
-            BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos(blockpos);
+            BlockPos.Mutable mutablePos = new BlockPos.Mutable(blockpos);
             System.out.println(hitVec.getY());
             if(hitVec.getY() - blockpos.getY() > 0.75){
                 mutablePos = mutablePos.move(direction.getOpposite()).move(Direction.UP);

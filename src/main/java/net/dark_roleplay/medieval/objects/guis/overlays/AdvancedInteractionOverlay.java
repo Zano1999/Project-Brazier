@@ -66,58 +66,58 @@ public class AdvancedInteractionOverlay{
     }
 
     public static void drawNameplate(FontRenderer fontRendererIn, String str, float x, float y, float z, float progress, float viewerYaw, float viewerPitch) {
-        GlStateManager.activeTexture(GLX.GL_TEXTURE1);
-        GlStateManager.disableTexture();
-        GlStateManager.activeTexture(GLX.GL_TEXTURE0);
-
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(x, y, z);
-        GlStateManager.normal3f(0.0F, 1.0F, 0.0F);
-        GlStateManager.rotatef(-viewerYaw, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotatef(viewerPitch, 1.0F, 0.0F, 0.0F);
-        GlStateManager.scalef(-0.0125F, -0.0125F, 0.0125F);
-        GlStateManager.disableLighting();
-        GlStateManager.depthMask(false);
-
-        GlStateManager.disableDepthTest();
-
-        GlStateManager.enableBlend();
-        GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        int i = fontRendererIn.getStringWidth(str) / 2;
-        double j = (i * 2 + 1) * progress;
-        GlStateManager.disableTexture();
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferbuilder = tessellator.getBuffer();
-        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
-        float f = Minecraft.getInstance().gameSettings.func_216840_a(0.25F);
-        float f2 = (int) (Minecraft.getInstance().gameSettings.func_216840_a(0.75F) * 256);
-
-        bufferbuilder.pos((double)(-i - 1), (double)(-1), 0.0D).color(0.0F, 0.0F, 0.0F, f).endVertex();
-        bufferbuilder.pos((double)(-i - 1), (double)(8), 0.0D).color(0.0F, 0.0F, 0.0F, f).endVertex();
-        bufferbuilder.pos((double)(i + 1), (double)(8), 0.0D).color(0.0F, 0.0F, 0.0F, f).endVertex();
-        bufferbuilder.pos((double)(i + 1), (double)(-1), 0.0D).color(0.0F, 0.0F, 0.0F, f).endVertex();
-
-        float r = 35/256, g = 110/256, b = 44/256;
-
-        bufferbuilder.pos((double)(-i - 0.5), (double)(-0.5), 0.0D).color(191, 24, 91, f2).endVertex();
-        bufferbuilder.pos((double)(-i - 0.5), (double)(7.5), 0.0D).color(191, 24, 91, f2).endVertex();
-        bufferbuilder.pos((double)(-i - 0.5 + j), (double)(7.5), 0.0D).color(191, 24, 91, f2).endVertex();
-        bufferbuilder.pos((double)(-i - 0.5 + j), (double)(-0.5), 0.0D).color(191, 24, 91, f2).endVertex();
-        tessellator.draw();
-        GlStateManager.enableTexture();
-
-        fontRendererIn.drawString(str, (float)(-fontRendererIn.getStringWidth(str) / 2), 0, 553648127);
-        GlStateManager.enableDepthTest();
-
-        GlStateManager.depthMask(true);
-        fontRendererIn.drawString(str, (float)(-fontRendererIn.getStringWidth(str) / 2), 0, -1);
-        GlStateManager.enableLighting();
-        GlStateManager.disableBlend();
-        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GlStateManager.popMatrix();
-
-        GlStateManager.activeTexture(GLX.GL_TEXTURE1);
-        GlStateManager.enableTexture();
-        GlStateManager.activeTexture(GLX.GL_TEXTURE0);
+//        GlStateManager.activeTexture(GLX.GL_TEXTURE1);
+//        GlStateManager.disableTexture();
+//        GlStateManager.activeTexture(GLX.GL_TEXTURE0);
+//
+//        GlStateManager.pushMatrix();
+//        GlStateManager.translatef(x, y, z);
+//        GlStateManager.normal3f(0.0F, 1.0F, 0.0F);
+//        GlStateManager.rotatef(-viewerYaw, 0.0F, 1.0F, 0.0F);
+//        GlStateManager.rotatef(viewerPitch, 1.0F, 0.0F, 0.0F);
+//        GlStateManager.scalef(-0.0125F, -0.0125F, 0.0125F);
+//        GlStateManager.disableLighting();
+//        GlStateManager.depthMask(false);
+//
+//        GlStateManager.disableDepthTest();
+//
+//        GlStateManager.enableBlend();
+//        GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+//        int i = fontRendererIn.getStringWidth(str) / 2;
+//        double j = (i * 2 + 1) * progress;
+//        GlStateManager.disableTexture();
+//        Tessellator tessellator = Tessellator.getInstance();
+//        BufferBuilder bufferbuilder = tessellator.getBuffer();
+//        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
+//        float f = Minecraft.getInstance().gameSettings.func_216840_a(0.25F);
+//        float f2 = (int) (Minecraft.getInstance().gameSettings.func_216840_a(0.75F) * 256);
+//
+//        bufferbuilder.pos((double)(-i - 1), (double)(-1), 0.0D).color(0.0F, 0.0F, 0.0F, f).endVertex();
+//        bufferbuilder.pos((double)(-i - 1), (double)(8), 0.0D).color(0.0F, 0.0F, 0.0F, f).endVertex();
+//        bufferbuilder.pos((double)(i + 1), (double)(8), 0.0D).color(0.0F, 0.0F, 0.0F, f).endVertex();
+//        bufferbuilder.pos((double)(i + 1), (double)(-1), 0.0D).color(0.0F, 0.0F, 0.0F, f).endVertex();
+//
+//        float r = 35/256, g = 110/256, b = 44/256;
+//
+//        bufferbuilder.pos((double)(-i - 0.5), (double)(-0.5), 0.0D).color(191, 24, 91, f2).endVertex();
+//        bufferbuilder.pos((double)(-i - 0.5), (double)(7.5), 0.0D).color(191, 24, 91, f2).endVertex();
+//        bufferbuilder.pos((double)(-i - 0.5 + j), (double)(7.5), 0.0D).color(191, 24, 91, f2).endVertex();
+//        bufferbuilder.pos((double)(-i - 0.5 + j), (double)(-0.5), 0.0D).color(191, 24, 91, f2).endVertex();
+//        tessellator.draw();
+//        GlStateManager.enableTexture();
+//
+//        fontRendererIn.drawString(str, (float)(-fontRendererIn.getStringWidth(str) / 2), 0, 553648127);
+//        GlStateManager.enableDepthTest();
+//
+//        GlStateManager.depthMask(true);
+//        fontRendererIn.drawString(str, (float)(-fontRendererIn.getStringWidth(str) / 2), 0, -1);
+//        GlStateManager.enableLighting();
+//        GlStateManager.disableBlend();
+//        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+//        GlStateManager.popMatrix();
+//
+//        GlStateManager.activeTexture(GLX.GL_TEXTURE1);
+//        GlStateManager.enableTexture();
+//        GlStateManager.activeTexture(GLX.GL_TEXTURE0);
     }
 }

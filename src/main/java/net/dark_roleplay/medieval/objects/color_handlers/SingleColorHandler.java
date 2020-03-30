@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IEnviromentBlockReader;
+import net.minecraft.world.ILightReader;
 
 import javax.annotation.Nullable;
 
@@ -18,13 +18,13 @@ public class SingleColorHandler implements IBlockColor, IItemColor {
 	}
 
 	@Override
-	public int getColor(BlockState state, @Nullable IEnviromentBlockReader reader, @Nullable BlockPos pos, int index) {
-		return index == 0 ? color : -1;
-    }
-
-	@Override
 	public int getColor(ItemStack stack, int index) {
 		return index == 0 ? color : -1;
 
+	}
+
+	@Override
+	public int getColor(BlockState state, @Nullable ILightReader reader, @Nullable BlockPos pos, int index) {
+		return index == 0 ? color : -1;
 	}
 }

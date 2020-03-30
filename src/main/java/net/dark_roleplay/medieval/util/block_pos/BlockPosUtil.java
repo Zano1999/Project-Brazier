@@ -1,9 +1,6 @@
 package net.dark_roleplay.medieval.util.block_pos;
 
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
-import static net.minecraft.util.math.BlockPos.PooledMutableBlockPos;
 
 import java.util.function.BiConsumer;
 
@@ -21,8 +18,8 @@ public class BlockPosUtil {
     public static void walkRegion(BlockPos startIn, BlockPos targetIn, BiConsumer<BlockPos, BlockPos> consumer){
         BlockPos start = getMin(startIn, targetIn);
         BlockPos target = getMax(startIn, targetIn);
-        PooledMutableBlockPos mutable = PooledMutableBlockPos.retain(start.getX(), start.getY(), start.getZ());
-        PooledMutableBlockPos offset = PooledMutableBlockPos.retain();
+        BlockPos.PooledMutable mutable = BlockPos.PooledMutable.retain(start.getX(), start.getY(), start.getZ());
+        BlockPos.PooledMutable offset = BlockPos.PooledMutable.retain();
 
         int width = target.getX() - start.getX() + 1;
         int height = target.getY() - start.getY() + 1;

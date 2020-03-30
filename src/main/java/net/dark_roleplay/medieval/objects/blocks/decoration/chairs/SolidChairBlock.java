@@ -15,6 +15,7 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -137,16 +138,16 @@ public class SolidChairBlock extends ChairBlock {
 	}
 
 	@Override
-	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
 		Vec3d hitVec = rayTraceResult.getHitVec();
 		if (state.get(HIDDEN_COMPARTMENT) && buttons.get(state.get(HORIZONTAL_FACING)).contains(hitVec.x, hitVec.y, hitVec.z)) {
 			TileEntity te = world.getTileEntity(pos);
 
 			if (te == null)
-				return true;
+				return ActionResultType.SUCCESS;
 			
 			if(!world.isRemote)NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) te, pos);
-			return true;
+			return ActionResultType.SUCCESS;
 		} else {
 			if(player.getPositionVec().squareDistanceTo(new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5)) < 9) {
 				if(!world.isRemote())
@@ -155,7 +156,7 @@ public class SolidChairBlock extends ChairBlock {
 				player.sendStatusMessage(new TranslationTextComponent("interaction.drpmedieval.chair.to_far",
 						state.getBlock().getNameTextComponent().getFormattedText()), true);
 			}
-			return true;
+			return ActionResultType.SUCCESS;
 		}
 	}
 }

@@ -20,11 +20,8 @@ import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
+import net.minecraft.util.*;
 import net.minecraft.util.Direction.Axis;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -67,9 +64,9 @@ public class WallBrazierBlock extends Block {
 //	}
 
 	@Override
-	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
 		if (world.isRemote) {
-			return true;
+			return ActionResultType.SUCCESS;
 		}
 		
 		ItemStack heldItem = player.getHeldItem(hand);
@@ -80,33 +77,33 @@ public class WallBrazierBlock extends Block {
 				world.playSound(null, pos, SoundEvents.ENTITY_ITEM_FRAME_ADD_ITEM, SoundCategory.PLAYERS, 1F, 1F);
 				if (!player.isCreative())
 					heldItem.shrink(1);
-				return true;
+				return ActionResultType.SUCCESS;
 			}
 		}else if(state.get(COAL_STATE) == BrazierState.COAL) {
-			if(player.isSneaking()) {
+			if(player.isCrouching()) {
 				world.setBlockState(pos, state.with(COAL_STATE, BrazierState.EMPTY));
 				world.playSound(null, pos, SoundEvents.ENTITY_ITEM_FRAME_REMOVE_ITEM, SoundCategory.PLAYERS, 1F, 1F);
 				if(!player.isCreative() && !player.inventory.addItemStackToInventory(new ItemStack(Items.COAL)))
 					((ServerWorld) world).summonEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.COAL)));
-				return true;
+				return ActionResultType.SUCCESS;
 			}else {
 				if(heldItem.getItem() == Items.FLINT_AND_STEEL) {
 					world.setBlockState(pos, state.with(COAL_STATE, BrazierState.BURNING), 3);
 					world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, 0.9F);
 					if (!player.isCreative())
 						heldItem.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) player);
-					return true;
+					return ActionResultType.SUCCESS;
 				}
 			}
 		}else if(state.get(COAL_STATE) == BrazierState.BURNING) {
-			if(player.isSneaking()) {
+			if(player.isCrouching()) {
 				world.setBlockState(pos, state.with(COAL_STATE, BrazierState.COAL));
 				world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 2.5F);
 			}
-			return true;
+			return ActionResultType.SUCCESS;
 		}
 		
-		return true;
+		return ActionResultType.PASS;
 	}
 	
 
@@ -163,7 +160,7 @@ public class WallBrazierBlock extends Block {
 		if (face.getAxis() == Axis.Y)
 			return null;
 
-		if (!Block.func_220055_a(context.getWorld(), context.getPos().offset(face.getOpposite()), face))
+		if (!Block.hasEnoughSolidSide(context.getWorld(), context.getPos().offset(face.getOpposite()), face))
 			return Blocks.AIR.getDefaultState();
 
 		return this.getDefaultState().with(HORIZONTAL_FACING, face);
@@ -173,8 +170,8 @@ public class WallBrazierBlock extends Block {
 	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
 		if (facing != state.get(HORIZONTAL_FACING).getOpposite())
 			return state;
-		
-		if (!Block.func_220064_c(world, facingPos))
+
+		if (!Block.hasEnoughSolidSide(world, facingPos, facing))
 			return Blocks.AIR.getDefaultState();
 		return state;
 	}

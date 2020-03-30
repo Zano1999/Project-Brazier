@@ -31,11 +31,6 @@ public class DataGenListener {
                 return DataGenListener.BLOCK_LOOT_TABLES;
             }
 
-
-            @Override
-            protected void validate(Map<ResourceLocation, LootTable> map, ValidationResults validationresults) {
-            }
-
             @Override
             public String getName() {
                 return "Dark Roleplay Medieval - LootTables";

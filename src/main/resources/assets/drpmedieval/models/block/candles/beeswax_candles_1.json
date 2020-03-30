@@ -1,5 +1,6 @@
 {
-	"loader":  "modelz:locator_loader",
+	"loader": "minecraft:elements",
+	"loader2":  "modelz:locator_loader",
 	"original_loader": "minecraft:elements",
 	"accessKey": "drpmedieval:beeswax_candles_1",
 	"locator": {

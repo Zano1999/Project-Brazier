@@ -4,7 +4,7 @@
 	"textures": {
 		"log": "${texture%log}",
 		"inner_log": "drpmedieval:block/small_logs/small_${material}_cut_log",
-		"top_log+": "drpmedieval:block/small_logs/small_${material}_log_top",
+		"top_log": "drpmedieval:block/small_logs/small_${material}_log_top",
 		"particle": "${texture%log}"
 	}
 }

@@ -12,7 +12,7 @@ import java.awt.*;
 public class RoadSignOverlay extends AbstractGui {
 
     public void draw(Minecraft mc){
-        int width = Minecraft.getInstance().mainWindow.getScaledWidth() / 2;
+        int width = Minecraft.getInstance().getMainWindow().getScaledWidth() / 2;
 
         ITextComponent tc = new TranslationTextComponent("overlay.drpmedieval.road_sign.a")
                 .appendSibling(new KeybindTextComponent("keybind.drpmedieval.interactor"))

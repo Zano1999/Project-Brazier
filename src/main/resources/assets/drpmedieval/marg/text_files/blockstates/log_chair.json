@@ -1,20 +1,8 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-		"model":"drpmedieval:block/chairs/log_chair",
-		"textures": {
-			"log": "${texture%log}",
-			"inner_log": "drpmedieval:block/small_logs/small_${material}_cut_log",
-			"top_log+": "drpmedieval:block/small_logs/small_${material}_log_top",
-			"particle": "${texture%log}"
-		}
-    },
 	"variants": {
-		"facing":{
-			"north":{},
-			"east":{"y":90},
-			"south":{"y":180},
-			"west":{"y":270}
-		}
+		"facing=north": {"model": "drpmedieval:block/${material}_log_chair"},
+		"facing=east": {"model": "drpmedieval:block/${material}_log_chair", "y":90},
+		"facing=south": {"model": "drpmedieval:block/${material}_log_chair", "y":180},
+		"facing=west": {"model": "drpmedieval:block/${material}_log_chair", "y":270}
 	}
 }

@@ -2,17 +2,23 @@ package net.dark_roleplay.medieval.objects.blocks.building.roofs;
 
 import com.google.common.primitives.Ints;
 import net.dark_roleplay.medieval.objects.enums.RoofSegment;
+import net.dark_roleplay.medieval.util.ModelUtility;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
+import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.client.model.pipeline.BakedQuadBuilder;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -54,62 +60,36 @@ public class RoofModelHelper {
         return model;
     }
 
-    private static BakedQuad createBakedQuadForFace(int tintIndex, BakedQuad sourceQuad, Direction face, Type type) {
-        TextureAtlasSprite texture = sourceQuad == null ? Minecraft.getInstance().getTextureMap().getSprite(null) : sourceQuad.getSprite();
-        UVHelper uv = UVHelper.getHelper(sourceQuad);
-        QuadHelper helper = QuadHelper.getQuadHelp(face);
-        return new BakedQuad(
-                Ints.concat(
-                    vertexToInts(helper.vectors[0], 0xFFFFFFFF, texture, uv.uv[0], uv.uv[1]),
-                    vertexToInts(type == Type.RIGHT ? helper.altVec : helper.vectors[1], 0xFFFFFFFF, texture, type == Type.RIGHT ? 8 : uv.uv[2], type == Type.RIGHT ? 8 : uv.uv[3]),
-                    vertexToInts(type == Type.LEFT ? helper.altVec : helper.vectors[2], 0xFFFFFFFF, texture, uv.uv[4], uv.uv[5]),
-                    vertexToInts(helper.vectors[3], 0xFFFFFFFF, texture, uv.uv[6], uv.uv[7])
-                ),
-                tintIndex, type == Type.LEFT ? face.rotateYCCW() : type == Type.RIGHT ? face.rotateY() : face, texture, true, DefaultVertexFormats.BLOCK);
-    }
-
-    private static int[] vertexToInts(Vec3d vec, int color, TextureAtlasSprite texture, float u, float v) {
-        return new int[]{
-                Float.floatToRawIntBits((float) vec.getX()),
-                Float.floatToRawIntBits((float) vec.getY()),
-                Float.floatToRawIntBits((float) vec.getZ()),
-                color,
-                Float.floatToRawIntBits(texture.getInterpolatedU(u)),
-                Float.floatToRawIntBits(texture.getInterpolatedV(v)),
-                0
-        };
-    }
-
     public enum QuadHelper {
         DOWN(new Vec3d[]{
-                new Vec3d(1, 0, 0),
-                new Vec3d(1, 0, 1),
-                new Vec3d(0, 0, 1),
-                new Vec3d(0, 0, 0)
+              new Vec3d(1, 0, 0),
+              new Vec3d(1, 0, 1),
+              new Vec3d(0, 0, 1),
+              new Vec3d(0, 0, 0)
         }, new Vec3d(0, 0, 0), Direction.DOWN),
         WEST(new Vec3d[]{
-                new Vec3d(0, 0, 1),
-                new Vec3d(0, 1, 1),
-                new Vec3d(0, 1, 0),
-                new Vec3d(0, 0, 0)
+              new Vec3d(0, 0, 1),
+              new Vec3d(0, 1, 1),
+              new Vec3d(0, 1, 0),
+              new Vec3d(0, 0, 0)
         }, new Vec3d(0, 0.5, 0.5), Direction.WEST),
         EAST(new Vec3d[]{
-                new Vec3d(1, 0, 0),
-                new Vec3d(1, 1, 0),
-                new Vec3d(1, 1, 1),
-                new Vec3d(1, 0, 1)
+              new Vec3d(1, 0, 0),
+              new Vec3d(1, 1, 0),
+              new Vec3d(1, 1, 1),
+              new Vec3d(1, 0, 1)
         }, new Vec3d(1, 0.5, 0.5), Direction.EAST),
         NORTH(new Vec3d[]{
-                new Vec3d(0, 0, 0),
-                new Vec3d(0, 1, 0),
-                new Vec3d(1, 1, 0),
-                new Vec3d(1, 0, 0)
+              new Vec3d(0, 0, 0),
+              new Vec3d(0, 1, 0),
+              new Vec3d(1, 1, 0),
+              new Vec3d(1, 0, 0)
         }, new Vec3d(0.5, 0.5, 0), Direction.NORTH),
         SOUTH(new Vec3d[]{
-            new Vec3d(1, 0, 1),
-            new Vec3d(1, 1, 1),
-            new Vec3d(0, 1, 1),
-            new Vec3d(0, 0, 1)
+              new Vec3d(1, 0, 1),
+              new Vec3d(1, 1, 1),
+              new Vec3d(0, 1, 1),
+              new Vec3d(0, 0, 1)
         }, new Vec3d(0.5, 0.5, 1), Direction.SOUTH);
 
         public Vec3d[] vectors;
@@ -117,15 +97,15 @@ public class RoofModelHelper {
         public final Direction dir;
         public final int normal;
 
-        QuadHelper(Vec3d[] vectors, Vec3d altVec, Direction dir){
+        QuadHelper(Vec3d[] vectors, Vec3d altVec, Direction dir) {
             this.vectors = vectors;
             this.altVec = altVec;
             this.dir = dir;
             this.normal = calculatePackedNormal(vectors[0], vectors[1], vectors[2], vectors[3]);
         }
 
-        public static QuadHelper getQuadHelp(Direction dir){
-            switch(dir){
+        public static QuadHelper getQuadHelp(Direction dir) {
+            switch (dir) {
                 case DOWN:
                     return DOWN;
                 case WEST:
@@ -139,6 +119,58 @@ public class RoofModelHelper {
             }
             return null;
         }
+    }
+
+    private static BakedQuad createBakedQuadForFace(int tintIndex, BakedQuad sourceQuad, Direction face, Type type) {
+        TextureAtlasSprite texture = ModelUtility.getBlockSprite((ResourceLocation)null);
+        if(sourceQuad != null)
+            texture = sourceQuad.func_187508_a();
+
+        UVHelper uv = UVHelper.getHelper(sourceQuad);
+        QuadHelper helper = QuadHelper.getQuadHelp(face);
+
+        boolean isRight = type == Type.RIGHT;
+        boolean isLeft = type == Type.LEFT;
+
+        ModelUtility.Vertex[] vertices = new ModelUtility.Vertex[]{
+              new ModelUtility.Vertex(
+                    helper.vectors[0],
+                    0xFFFFFFFF,
+                    new Vec2f(uv.uv[0], uv.uv[1]),
+                    new Vec2f(0, 0),
+                    new Vec3d(0, 0, 0)
+              ),
+              new ModelUtility.Vertex(
+                    isRight ? helper.altVec : helper.vectors[1],
+                    0xFFFFFFFF,
+                    new Vec2f(isRight ? 8 : uv.uv[2], isRight ? 8 : uv.uv[3]),
+                    new Vec2f(0, 0),
+                    new Vec3d(0, 0, 0)
+              ),
+              new ModelUtility.Vertex(
+                    isLeft ? helper.altVec : helper.vectors[2],
+                    0xFFFFFFFF,
+                    new Vec2f(uv.uv[4], uv.uv[5]),
+                    new Vec2f(0, 0)
+                    , new Vec3d(0, 0, 0)
+              ),
+              new ModelUtility.Vertex(
+                    helper.vectors[3],
+                    0xFFFFFFFF,
+                    new Vec2f(uv.uv[6], uv.uv[7]),
+                    new Vec2f(0, 0),
+                    new Vec3d(0, 0, 0)
+              )
+        };
+
+
+        BakedQuadBuilder quadBuilder = new BakedQuadBuilder();
+        ModelUtility.generateBakedQuad(quadBuilder, texture, vertices);
+        quadBuilder.setQuadTint(tintIndex);
+        quadBuilder.setQuadOrientation(isLeft ? face.rotateYCCW() : isRight ? face.rotateY() : face);
+        quadBuilder.setTexture(texture);
+
+        return quadBuilder.build();
     }
 
     private enum Type{
@@ -160,12 +192,9 @@ public class RoofModelHelper {
         }
 
         public static UVHelper getHelper(BakedQuad quad){
-            RIGHT.uv = new float[]{16, 0, 0, 0, 0, 16, 16, 16};
-            TextureAtlasSprite spire = quad.getSprite();
             int[] vertexData = quad.getVertexData();
-            VertexFormat format = quad.getFormat();
-            int offset = format.getUvOffsetById(DefaultVertexFormats.TEX_2F.getIndex()) / 4;
-            int size = format.getIntegerSize();
+            int offset = DefaultVertexFormats.BLOCK.getOffset(DefaultVertexFormats.TEX_2F.getIndex()) / 4;
+            int size = DefaultVertexFormats.BLOCK.getIntegerSize();
             float[] uv = new float[8];
             for(int i = 0; i < 4; i++){
                 uv[i * 2] = Float.intBitsToFloat(vertexData[(size * i) + offset]);
@@ -250,6 +279,11 @@ public class RoofModelHelper {
 
         @Override
         public boolean isGui3d() {
+            return false;
+        }
+
+        @Override
+        public boolean func_230044_c_() {
             return false;
         }
 

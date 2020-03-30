@@ -48,7 +48,7 @@ public class GenericContainer extends Container {
 
 	@Override
 	public boolean canInteractWith(PlayerEntity player) {
-		return this.worldPos.distanceSq(player.posX, player.posY, player.posZ, true) < 25;
+		return this.worldPos.distanceSq(player.getPosX(), player.getPosY(), player.getPosZ(), true) < 25;
 	}
 
 	//TODO Properly Implement Shift Clicking

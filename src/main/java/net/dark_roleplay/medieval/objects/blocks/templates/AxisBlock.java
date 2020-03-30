@@ -61,7 +61,7 @@ public class AxisBlock extends Block {
 	@Nullable
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		if (!Block.func_220064_c(context.getWorld(), context.getPos().down()))
+		if (!Block.hasSolidSideOnTop(context.getWorld(), context.getPos().down()))
 			return Blocks.AIR.getDefaultState();
 
 		return this.getDefaultState().with(HORIZONTAL_AXIS, context.getPlacementHorizontalFacing().rotateY().getAxis());

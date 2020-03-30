@@ -21,11 +21,8 @@ import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
+import net.minecraft.util.*;
 import net.minecraft.util.Direction.Axis;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -54,9 +51,9 @@ public class TorchHolderBlock extends Block {
 	}
 
 	@Override
-	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
 		if (world.isRemote) {
-			return true;
+			return ActionResultType.SUCCESS;
 		}
 		ItemStack heldItem = player.getHeldItem(hand);
 
@@ -66,24 +63,24 @@ public class TorchHolderBlock extends Block {
 			world.playSound(null, pos, SoundEvents.ENTITY_ITEM_FRAME_ADD_ITEM, SoundCategory.PLAYERS, 1F, 1F);
 			if (!player.isCreative())
 				heldItem.shrink(1);
-			return true;
+			return ActionResultType.SUCCESS;
 		} else if (state.get(TORCH) == Torch.UNLIT && heldItem.getItem() == Items.FLINT_AND_STEEL) {
 			world.setBlockState(pos, state.with(TORCH, Torch.LIT), 3);
 			world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, 0.9F);
 			if (!player.isCreative())
 				heldItem.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) player);
-			return true;
-		} else if (state.get(TORCH) == Torch.UNLIT && heldItem.isEmpty() && player.isSneaking()) {
+			return ActionResultType.SUCCESS;
+		} else if (state.get(TORCH) == Torch.UNLIT && heldItem.isEmpty() && player.isCrouching()) {
 			world.setBlockState(pos, state.with(TORCH, Torch.NONE), 3);
 			world.playSound(null, pos, SoundEvents.ENTITY_ITEM_FRAME_REMOVE_ITEM, SoundCategory.BLOCKS, 1.0F, 0.9F);
 			if (!player.inventory.addItemStackToInventory(new ItemStack(Blocks.TORCH.asItem())))
 				((ServerWorld) world).summonEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(),
 						new ItemStack(Blocks.TORCH.asItem())));
-			return true;
-		} else if (state.get(TORCH) == Torch.LIT && heldItem.isEmpty() && player.isSneaking()) {
+			return ActionResultType.SUCCESS;
+		} else if (state.get(TORCH) == Torch.LIT && heldItem.isEmpty() && player.isCrouching()) {
 			world.setBlockState(pos, state.with(TORCH, Torch.UNLIT), 3);
 			world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 2.5F);
-			return true;
+			return ActionResultType.SUCCESS;
 		}
 
 		if (state.get(ADDONS) == Addons.NONE) {
@@ -92,29 +89,29 @@ public class TorchHolderBlock extends Block {
 				world.playSound(null, pos, SoundEvents.ENTITY_ITEM_FRAME_ADD_ITEM, SoundCategory.PLAYERS, 1F, 1F);
 				if (!player.isCreative())
 					heldItem.shrink(1);
-				return true;
+				return ActionResultType.SUCCESS;
 			} else if (heldItem.getItem() == Blocks.LEVER.asItem()) {
 				world.setBlockState(pos, state.with(ADDONS, Addons.HIDDEN_LEVER), 3);
 				world.playSound(null, pos, SoundEvents.ENTITY_ITEM_FRAME_ADD_ITEM, SoundCategory.PLAYERS, 1F, 1F);
 				if (!player.isCreative())
 					heldItem.shrink(1);
-				return true;
+				return ActionResultType.SUCCESS;
 			}
 			if (heldItem.getItem() == Items.FLINT) {
 				world.setBlockState(pos, state.with(ADDONS, Addons.LIGHTER), 3);
 				world.playSound(null, pos, SoundEvents.ENTITY_ITEM_FRAME_ADD_ITEM, SoundCategory.PLAYERS, 1F, 1F);
 				if (!player.isCreative())
 					heldItem.shrink(1);
-				return true;
+				return ActionResultType.SUCCESS;
 			}
 		} else if (state.get(ADDONS).isLever()) {
 			world.setBlockState(pos, state.with(ADDONS, state.get(ADDONS).toggleLever()), 3);
 			world.playSound(null, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3F, 0.1F);
 			world.notifyNeighborsOfStateChange(pos.offset(state.get((HORIZONTAL_FACING)).getOpposite()), this);
-			return true;
+			return ActionResultType.SUCCESS;
 		}
 
-		return false;
+		return ActionResultType.PASS;
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -135,7 +132,7 @@ public class TorchHolderBlock extends Block {
 	}
 
 	@Override
-	public void tick(BlockState state, World world, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
 		if (!world.isRemote) {
 			if (state.get(ADDONS) == Addons.LIGHTER
 					&& (state.get(TORCH) == Torch.UNLIT || state.get(TORCH) == Torch.LIT)) {
@@ -195,7 +192,7 @@ public class TorchHolderBlock extends Block {
 			return null;
 
 
-		if (!Block.func_220055_a(context.getWorld(), context.getPos().offset(face.getOpposite()), face))
+		if (!Block.hasEnoughSolidSide(context.getWorld(), context.getPos().offset(face.getOpposite()), face))
 			return Blocks.AIR.getDefaultState();
 
 		return this.getDefaultState().with(HORIZONTAL_FACING, face);
@@ -205,7 +202,7 @@ public class TorchHolderBlock extends Block {
 	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world,  BlockPos currentPos, BlockPos facingPos) {
 		if (facing != state.get(HORIZONTAL_FACING).getOpposite())
 			return state;
-		if (!Block.func_220055_a(world, facingPos, facing))
+		if (!Block.hasEnoughSolidSide(world, facingPos, facing))
 			return Blocks.AIR.getDefaultState();
 		
 		//TODO Re-Implement lighter addon

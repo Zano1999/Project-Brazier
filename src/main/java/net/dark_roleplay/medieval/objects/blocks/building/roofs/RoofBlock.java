@@ -14,6 +14,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -99,8 +100,8 @@ public class RoofBlock extends HorizontalBlock {
 
     @Override
     @Deprecated
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(player.getHeldItem(handIn).getItem() instanceof RoofItem) return false;
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if(player.getHeldItem(handIn).getItem() instanceof RoofItem) return ActionResultType.PASS;
         if(worldIn.isRemote() && state.get(HAS_TE)){
             TileEntity te = worldIn.getTileEntity(pos);
             if(te != null && te instanceof RoofTileEntity){
@@ -117,11 +118,11 @@ public class RoofBlock extends HorizontalBlock {
                 TileEntity te = worldIn.getTileEntity(pos);
                 if(te != null && te instanceof RoofTileEntity){
                     ((RoofTileEntity) te).setContainedState(containedState);
-                    return true;
+                    return ActionResultType.SUCCESS;
                 }
             }
         }
-        return false;
+        return ActionResultType.PASS;
     }
 
     @Override

@@ -3,8 +3,10 @@ package net.dark_roleplay.medieval.listeners;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.objects.blocks.building.roofs.hacks.GeneratedRoofModel;
 import net.dark_roleplay.medieval.objects.blocks.building.roofs.hacks.StraightRoofModelGenerator;
+import net.dark_roleplay.medieval.util.ModelUtility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
@@ -25,7 +27,7 @@ public class ModelBakeListener {
 
     private static Function<ResourceLocation, TextureAtlasSprite> textureGetter = location -> {
         assert location != null;
-        return Minecraft.getInstance().getTextureMap().getAtlasSprite(location.toString());
+        return ModelUtility.getBlockSprite(location);
     };
 
     private static ResourceLocation inputEmpty = new ResourceLocation("drpmedieval:block/timbered_clay/templates/shape");

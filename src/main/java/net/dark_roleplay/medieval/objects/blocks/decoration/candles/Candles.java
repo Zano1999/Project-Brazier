@@ -91,14 +91,9 @@ public class Candles extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        if (!Block.func_220064_c(context.getWorld(), context.getPos().down()))
+        if (!Block.hasSolidSideOnTop(context.getWorld(), context.getPos().down()))
             return Blocks.AIR.getDefaultState();
         return this.getDefaultState().with(COUNT, 1);
-    }
-
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
     }
 
     //TODO HANDLE HITBOX PROPERLY
@@ -117,7 +112,7 @@ public class Candles extends Block {
 
     @Override
     @Deprecated
-    public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if(player.getHeldItem(hand).getItem() == MedievalItems.BEESWAX_CANDLE.get()){
             if(state.get(COUNT) < 4) {
                 world.setBlockState(pos, state.with(COUNT, state.get(COUNT) + 1));
@@ -125,10 +120,10 @@ public class Candles extends Block {
                 if (!player.isCreative())
                     player.getHeldItem(hand).shrink(1);
 
-                return true;
+                return ActionResultType.SUCCESS;
             }
         }
-        return false;
+        return ActionResultType.PASS;
     }
 
     @Override

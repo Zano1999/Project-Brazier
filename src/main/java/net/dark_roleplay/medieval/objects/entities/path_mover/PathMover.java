@@ -1,5 +1,7 @@
 package net.dark_roleplay.medieval.objects.entities.path_mover;
 
+import net.minecraft.client.renderer.Vector3f;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -32,14 +34,11 @@ public class PathMover extends Entity {
             super.tick();
 
             Vec3d vec3d = this.getMotion();
-            this.posX += vec3d.x;
-            this.posY += vec3d.y;
-            this.posZ += vec3d.z;
             ProjectileHelper.rotateTowardsMovement(this, 0.2F);
             float f = 1F;//this.getMotionFactor();
 
             this.setMotion(vec3d.add(this.accelerationX, this.accelerationY, this.accelerationZ).scale((double)f));
-            this.setPosition(this.posX, this.posY, this.posZ);
+            //this.setPosition(this.getPosX(), this.posY, this.posZ);
         } else {
             this.remove();
         }

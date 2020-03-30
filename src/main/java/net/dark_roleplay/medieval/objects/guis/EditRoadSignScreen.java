@@ -17,6 +17,7 @@ import java.util.List;
 
 public class EditRoadSignScreen extends Screen {
 
+    //TODO 1.15 update
     private RoadSignTileEntity te;
     private SignInfo teSign;
     private int signID = 0;
@@ -68,38 +69,39 @@ public class EditRoadSignScreen extends Screen {
         return this.textInputUtil.func_216897_a(p_keyPressed_1_) ? true : super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
     }
 
-    public void render(int p_render_1_, int p_render_2_, float p_render_3_) {
-        this.renderBackground();
-
-        List<SignInfo> signs = te.getSigns();
-
-        RenderHelper.enableGUIStandardItemLighting();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef((float)(this.width / 2), this.height/2F, -10.0F);
-        GlStateManager.scalef(-93.75F, -93.75F, -93.75F);
-
-        ItemRenderer itemRender = Minecraft.getInstance().getItemRenderer();
-        for (SignInfo sign : signs) {
-            GlStateManager.pushMatrix();
-            GlStateManager.translatef(0, 0.0625F * (8.5f + sign.getHeight()), 0);
-            itemRender.renderItem(sign.getSignItem(), ItemCameraTransforms.TransformType.NONE);
-
-            GlStateManager.popMatrix();
-        }
-
-        GlStateManager.popMatrix();
-
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(0, 0, 100);
-
-        for (SignInfo sign : signs) {
-            this.drawCenteredString(this.font, sign.getText(), this.width / 2, this.height/2 - 6 - sign.getHeight() * 6, 0xFFFFFFFF);
-        }
-
-        this.drawCenteredString(this.font, teSign.getText(), this.width / 2, this.height/2 - 6 - this.teSign.getHeight() * 6, 0xFFFFFFFF);
-
-
-        GlStateManager.popMatrix();
-        super.render(p_render_1_, p_render_2_, p_render_3_);
+    @Override
+    public void render(int mouseX, int mouseY, float delta) {
+//        this.renderBackground();
+//
+//        List<SignInfo> signs = te.getSigns();
+//
+//        RenderHelper.enableGUIStandardItemLighting();
+//        GlStateManager.pushMatrix();
+//        GlStateManager.translatef((float)(this.width / 2), this.height/2F, -10.0F);
+//        GlStateManager.scalef(-93.75F, -93.75F, -93.75F);
+//
+//        ItemRenderer itemRender = Minecraft.getInstance().getItemRenderer();
+//        for (SignInfo sign : signs) {
+//            GlStateManager.pushMatrix();
+//            GlStateManager.translatef(0, 0.0625F * (8.5f + sign.getHeight()), 0);
+//            itemRender.renderItem(sign.getSignItem(), ItemCameraTransforms.TransformType.NONE);
+//
+//            GlStateManager.popMatrix();
+//        }
+//
+//        GlStateManager.popMatrix();
+//
+//        GlStateManager.pushMatrix();
+//        GlStateManager.translatef(0, 0, 100);
+//
+//        for (SignInfo sign : signs) {
+//            this.drawCenteredString(this.font, sign.getText(), this.width / 2, this.height/2 - 6 - sign.getHeight() * 6, 0xFFFFFFFF);
+//        }
+//
+//        this.drawCenteredString(this.font, teSign.getText(), this.width / 2, this.height/2 - 6 - this.teSign.getHeight() * 6, 0xFFFFFFFF);
+//
+//
+//        GlStateManager.popMatrix();
+//        super.render(p_render_1_, p_render_2_, p_render_3_);
     }
 }

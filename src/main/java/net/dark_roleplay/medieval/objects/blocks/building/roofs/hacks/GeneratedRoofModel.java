@@ -1,12 +1,15 @@
 package net.dark_roleplay.medieval.objects.blocks.building.roofs.hacks;
 
+import net.dark_roleplay.medieval.util.ModelUtility;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -17,6 +20,7 @@ import java.util.Random;
 
 public class GeneratedRoofModel implements IBakedModel {
 
+    //TODO 1.15 update
     List<BakedQuad> quads = null;
 
     public GeneratedRoofModel(List<BakedQuad> quads){
@@ -39,13 +43,23 @@ public class GeneratedRoofModel implements IBakedModel {
     }
 
     @Override
+    public boolean func_230044_c_() {
+        return false;
+    }
+
+    @Override
     public boolean isBuiltInRenderer() {
         return false;
     }
 
     @Override
     public TextureAtlasSprite getParticleTexture() {
-        return Minecraft.getInstance().getTextureMap().getAtlasSprite("drpmedieval:block/shingle_roofs/planks_treated_wood");
+        return ModelUtility.getBlockSprite(new ResourceLocation("drpmedieval", "block/shingle_roofs/planks_treated_wood"));
+    }
+
+    @Override
+    public ItemCameraTransforms getItemCameraTransforms() {
+        return null;
     }
 
     @Override

@@ -38,7 +38,7 @@ public class TimberingNotesItem extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
         player.getCooldownTracker().setCooldown(this, 20);
-        if(player.isSneaking()){    //Used to clear TimberingData, replace with crafting in the future?
+        if(player.isCrouching()){    //Used to clear TimberingData, replace with crafting in the future?
             CompoundNBT compound = player.getHeldItem(hand).getTag();
             if(compound != null){
                 compound.remove("TimberingData");

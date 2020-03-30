@@ -46,9 +46,9 @@ public class MedievalLootTables implements Consumer<BiConsumer<ResourceLocation,
                 .rolls(ConstantRange.of(1))
                 .addEntry(ItemLootEntry.builder(b))
                 .acceptFunction(CopyName.builder(CopyName.Source.BLOCK_ENTITY))
-                .acceptFunction(CopyNbt.func_215881_a(CopyNbt.Source.BLOCK_ENTITY)
-                    .func_216055_a("inv", "BlockEntityTag.inv", CopyNbt.Action.REPLACE)
-                    .func_216055_a("energy", "BlockEntityTag.energy", CopyNbt.Action.REPLACE)
+                .acceptFunction(CopyNbt.builder(CopyNbt.Source.BLOCK_ENTITY)
+                    .addOperation("inv", "BlockEntityTag.inv", CopyNbt.Action.REPLACE)
+                    .addOperation("energy", "BlockEntityTag.energy", CopyNbt.Action.REPLACE)
                 );
 
         return LootTable.builder().addLootPool(builder);

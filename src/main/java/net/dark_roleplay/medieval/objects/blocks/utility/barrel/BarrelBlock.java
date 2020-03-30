@@ -1,45 +1,35 @@
 package net.dark_roleplay.medieval.objects.blocks.utility.barrel;
 
 import net.dark_roleplay.marg.api.materials.IMaterial;
-import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.handler.MedievalItems;
-import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.BlockParticleData;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.Direction;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
@@ -53,12 +43,6 @@ public class BarrelBlock extends Block {
         super(properties);
         this.woodMaterial = woodMaterial;
         this.setDefaultState(this.getDefaultState().with(HAS_LIT, false));
-    }
-
-    //TODO Fix: Temporary Hacky Solution
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Override
@@ -84,15 +68,15 @@ public class BarrelBlock extends Block {
     }
 
     @Override
-    public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
+    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
         boolean closed = state.get(HAS_LIT);
 
         if(closed) {
-            if(player.isSneaking()) {
+            if(player.isCrouching()) {
                 //for(int i = 0; i < 15; i++)
                     //world.addParticle(, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F, Math.random() - 0.5F, Math.random(), Math.random() - 0.5F, Block.getStateId(state));
 
-                if(world.isRemote) return true;
+                if(world.isRemote) return ActionResultType.SUCCESS;
 
                 world.setBlockState(pos, state.with(HAS_LIT, false));
 
@@ -100,7 +84,7 @@ public class BarrelBlock extends Block {
 
             }
         }else {
-            if(world.isRemote) return true;
+            if(world.isRemote) return ActionResultType.SUCCESS;
 
             Item litItem = MedievalItems.BARREL_LIT.get(this.woodMaterial).get();
 
@@ -109,11 +93,11 @@ public class BarrelBlock extends Block {
                 heldItem.shrink(1);
                 world.setBlockState(pos, state.with(HAS_LIT, true));
                 world.playSound(null, pos, this.getSoundType(state, world, pos, null).getPlaceSound(), SoundCategory.BLOCKS, 2f, 1F);
-                return true;
+                return ActionResultType.SUCCESS;
             }
 
             TileEntity tileEntity = world.getTileEntity(pos);
-            if(!(tileEntity instanceof BarrelTileEntity)) return true;
+            if(!(tileEntity instanceof BarrelTileEntity)) return ActionResultType.SUCCESS;
             BarrelTileEntity tileEntityBarrel = (BarrelTileEntity) tileEntity;
             BarrelTileEntity.StorageType type = tileEntityBarrel.getStorageType();
 
@@ -138,17 +122,17 @@ public class BarrelBlock extends Block {
                     return false;
                 }).orElse(false);
                 if(success)
-                    return true;
+                    return ActionResultType.SUCCESS;
             }
             if(type == BarrelTileEntity.StorageType.ITEMS || type == BarrelTileEntity.StorageType.NONE) {
                 LazyOptional<IItemHandler> invCap = tileEntityBarrel.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
                 NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, pos);
-                return true;
+                return ActionResultType.SUCCESS;
             }
         }
 
-        return false;
+        return ActionResultType.PASS;
     }
 
     @Override

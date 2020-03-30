@@ -1,7 +1,6 @@
 package net.dark_roleplay.medieval.handler;
 
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
-import net.dark_roleplay.medieval.objects.entities.training_dummy.TrainingDummyEntity;
 import net.dark_roleplay.medieval.util.sitting.EntitySittable;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -24,12 +23,12 @@ public class MedievalEntities {
                             .build("sittable")
             );
 
-    public static final RegistryObject<EntityType<?>> TRAINING_DUMMY =
-            ENTITIES.register("training_dummy",
-                    () -> Builder.create(TrainingDummyEntity::new, EntityClassification.AMBIENT)
-                            .disableSerialization()
-                            .setShouldReceiveVelocityUpdates(false)
-                            .size(0.001F, 0.001F)
-                            .build("training_dummy")
-            );
+//    public static final RegistryObject<EntityType<?>> TRAINING_DUMMY =
+//            ENTITIES.register("training_dummy",
+//                    () -> Builder.create(TrainingDummyEntity::new, EntityClassification.AMBIENT)
+//                            .disableSerialization()
+//                            .setShouldReceiveVelocityUpdates(false)
+//                            .size(0.001F, 0.001F)
+//                            .build("training_dummy")
+//            );
 }

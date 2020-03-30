@@ -1,8 +1,4 @@
 {
-  "forge_marker": 1,
-  "default": {
-    "model":  "drpmedieval:block/candles/beeswax_candles_1"
-  },
   "variants": {
     "count=1": [
       { "model":  "drpmedieval:block/candles/beeswax_candles_1"},

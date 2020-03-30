@@ -1,5 +1,6 @@
 package net.dark_roleplay.medieval.objects.blocks.building.roofs.hacks;
 
+import net.dark_roleplay.medieval.util.ModelUtility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -37,8 +38,8 @@ public class StraightRoofModelGenerator {
         this.singleLength = Math.sqrt(sqrC - (steps * steps)) / steps;
         this.angle = Math.atan(b/a) - Math.atan(steps/(steps * singleLength)) ;
 
-        TextureAtlasSprite roofTile = Minecraft.getInstance().getTextureMap().getAtlasSprite("drpmedieval:block/shingle_roofs/oak_shingles");
-        TextureAtlasSprite plank = Minecraft.getInstance().getTextureMap().getAtlasSprite("drpmedieval:block/shingle_roofs/planks_treated_wood");
+        TextureAtlasSprite roofTile = ModelUtility.getBlockSprite("drpmedieval:block/shingle_roofs/oak_shingles");
+        TextureAtlasSprite plank = ModelUtility.getBlockSprite("drpmedieval:block/shingle_roofs/planks_treated_wood");
 
         //Setup fullBoxes
         setupBox(fullBoxes, 16, 0, steps, roofTile, plank);

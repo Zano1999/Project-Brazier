@@ -1,11 +1,8 @@
 package net.dark_roleplay.medieval.handler;
 
-import net.dark_roleplay.bedrock_entities.tester.ModelTesterTileEntity;
 import net.dark_roleplay.medieval.DarkRoleplayMedieval;
 import net.dark_roleplay.medieval.objects.blocks.building.roofs.RoofTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.decoration.chairs.SolidChairTileEntity;
-import net.dark_roleplay.medieval.objects.blocks.decoration.road_sign.RoadSignTileEntity;
-import net.dark_roleplay.medieval.objects.blocks.utility.AnchorTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.utility.barrel.BarrelTileEntity;
 import net.dark_roleplay.medieval.objects.blocks.utility.chopping_block.ChoppingTileEntity;
 import net.minecraft.block.Block;
