@@ -1,9 +1,9 @@
 {
     "variants": {
         "": [
-        	{ "model": "drpmedieval:block/riverstone/large_riverstone_dark_0" },
-        	{ "model": "drpmedieval:block/riverstone/large_riverstone_dark_1" },
-        	{ "model": "drpmedieval:block/riverstone/large_riverstone_dark_2" }
+        	{ "model": "drpmedieval:block/dark_large_riverstone_0" },
+        	{ "model": "drpmedieval:block/dark_large_riverstone_1" },
+        	{ "model": "drpmedieval:block/dark_large_riverstone_2" }
         ]
     }
 }

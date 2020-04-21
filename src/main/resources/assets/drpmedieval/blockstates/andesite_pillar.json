@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"axis=y": {"model": "drpmedieval:block/andesite_pillar"},
+		"axis=z": {"model": "drpmedieval:block/andesite_pillar", "x":90},
+		"axis=x": {"model": "drpmedieval:block/andesite_pillar", "x":90, "y":90}
+	}
+}

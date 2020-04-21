@@ -1,10 +1,10 @@
 {
     "variants": {
         "": [
-        	{ "model": "drpmedieval:block/riverstone/riverstone_colored_pale_0", "weight": 4},
-        	{ "model": "drpmedieval:block/riverstone/riverstone_colored_pale_1", "weight": 3},
-        	{ "model": "drpmedieval:block/riverstone/riverstone_colored_pale_2", "weight": 2},
-        	{ "model": "drpmedieval:block/riverstone/riverstone_colored_pale_3", "weight": 1}
+        	{ "model": "drpmedieval:block/pale_colorful_cobblestone_0", "weight": 4},
+        	{ "model": "drpmedieval:block/pale_colorful_cobblestone_1", "weight": 3},
+        	{ "model": "drpmedieval:block/pale_colorful_cobblestone_2", "weight": 2},
+        	{ "model": "drpmedieval:block/pale_colorful_cobblestone_3", "weight": 1}
         ]
     }
 }

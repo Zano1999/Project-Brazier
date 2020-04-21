@@ -1,6 +1,3 @@
 {
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "drpmedieval:block/stones/diorite_bricks"
-  }
+	"parent": "drpmedieval:block/diorite_bricks"
 }

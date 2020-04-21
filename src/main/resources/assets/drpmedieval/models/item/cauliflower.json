@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "drpmedieval:items/food/vegetables/cauliflower"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "drpmedieval:item/cauliflower"
+	}
 }

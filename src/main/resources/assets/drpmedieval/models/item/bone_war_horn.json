@@ -1,9 +1,7 @@
 {
-	"credit": "Made by Kanno with Blockbench",
 	"textures": {
-		"0": "drpmedieval:items/equipment/instruments/horns/bone_horn_1",
-		"1": "drpmedieval:items/equipment/instruments/horns/bone_horn_2",
-		"particle": "blocks/1"
+		"0": "drpmedieval:item/bone_horn_0",
+		"1": "drpmedieval:item/bone_horn_1"
 	},
 	"elements": [
 		{
@@ -165,17 +163,5 @@
 			"rotation": [16, 152, 32],
 			"translation": [2, 2, 1.5]
 		}
-	},
-	"groups": [
-		{
-			"name": "Base",
-			"isOpen": true,
-			"shade": true,
-			"display": {
-				"visibility": true,
-				"autouv": true
-			},
-			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-		}
-	]
+	}
 }

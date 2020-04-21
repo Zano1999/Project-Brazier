@@ -1,0 +1,5 @@
+{
+	"variants": {
+		"": {"model":  "drpmedieval:block/${material}_${custom}_barrel"}
+	}
+}

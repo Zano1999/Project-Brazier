@@ -19,7 +19,7 @@
 				{"type": "overlay", "textureID":  0}
 			],
 			"outputType": "file",
-			"outputName": "drpmedieval:textures/block/barrels/${material}_barrel_side"
+			"outputName": "drpmedieval:textures/block/${material}_barrel_side"
 		},
 		{
 			"inputType": "material",
@@ -28,7 +28,16 @@
 				{"type":  "overlay", "textureID":  1}
 			],
 			"outputType": "file",
-			"outputName": "drpmedieval:textures/block/barrels/${material}_barrel_top"
+			"outputName": "drpmedieval:textures/block/${material}_barrel_top"
+		},
+		{
+			"inputType": "material",
+			"inputName": "planks",
+			"manipulations": [
+				{"type": "rotate", "angle": 90}
+			],
+			"outputType": "file",
+			"outputName": "drpmedieval:textures/block/${material}_barrel_inside"
 		}
 	]
 }

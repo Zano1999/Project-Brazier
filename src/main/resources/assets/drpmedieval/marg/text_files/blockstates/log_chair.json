@@ -1,8 +1,0 @@
-{
-	"variants": {
-		"facing=north": {"model": "drpmedieval:block/${material}_log_chair"},
-		"facing=east": {"model": "drpmedieval:block/${material}_log_chair", "y":90},
-		"facing=south": {"model": "drpmedieval:block/${material}_log_chair", "y":180},
-		"facing=west": {"model": "drpmedieval:block/${material}_log_chair", "y":270}
-	}
-}

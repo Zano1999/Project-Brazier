@@ -1,6 +1,0 @@
-{
-  "parent": "drpmedieval:item/planks",
-  "textures": {
-    "0": "${texture%planks}"
-  }
-}

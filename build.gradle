@@ -44,7 +44,7 @@ sourceSets {
 }
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200325-1.15.1'
+    mappings channel: 'snapshot', version: '20200416-1.15.1'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -98,8 +98,8 @@ dependencies {
 
     ])
 
-	compile(fg.deobf("net.dark_roleplay:marg:1.15.2-0.5.0:api"))
-    runtime(fg.deobf("net.dark_roleplay:marg:1.15.2-0.5.0"))
+    compileOnly(fg.deobf("net.dark_roleplay:marg:1.15.2-0.5.0:api"))
+    runtimeOnly(fg.deobf("net.dark_roleplay:marg:1.15.2-0.5.0"))
 }
 
 jar {

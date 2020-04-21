@@ -1,6 +1,0 @@
-{
-  "parent": "drpmedieval:block/tables/barrel_table",
-  "textures": {
-    "texture": "drpmedieval:block/barrels/${material}_barrel_top"
-  }
-}

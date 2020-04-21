@@ -1,8 +1,0 @@
-{
-  "credit": "Made by JTK222",
-  "parent": "drpmedieval:block/signs/post",
-  "textures": {
-    "planks": "${texture%planks}",
-    "particle": "${texture%planks}"
-  }
-}

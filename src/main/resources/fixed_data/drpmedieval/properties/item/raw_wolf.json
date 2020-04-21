@@ -1,0 +1,8 @@
+{
+	"ItemGroup": "food",
+	"Food": {
+		"Value": 4,
+		"Saturation": 0.2,
+		"IsMeat": true
+	}
+}

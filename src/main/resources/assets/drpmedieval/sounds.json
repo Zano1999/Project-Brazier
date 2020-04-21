@@ -1,0 +1,6 @@
+{
+	"war_horn":{
+		"subtitle": "drpmedieval.sounds.war_horn",
+		"sounds": [ "drpmedieval:item/war_horn_0" ]
+	}
+}

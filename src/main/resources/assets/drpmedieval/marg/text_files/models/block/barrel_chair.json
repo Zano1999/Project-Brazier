@@ -1,8 +1,0 @@
-{
-	"credit": "Made by JTK222",
-	"parent": "drpmedieval:block/chairs/barrel_chair",
-	"textures": {
-		"0": "drpmedieval:block/barrels/${material}_barrel_side",
-		"1": "drpmedieval:block/barrels/${material}_barrel_top"
-	}
-}

@@ -1,7 +1,3 @@
 {
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "drpmedieval:block/stones/andesite_pillar_top",
-    "side": "drpmedieval:block/stones/andesite_pillar_side"
-  }
+	"parent": "drpmedieval:block/andesite_pillar"
 }

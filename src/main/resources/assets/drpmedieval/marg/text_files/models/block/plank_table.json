@@ -1,7 +1,0 @@
-{
-  "parent": "drpmedieval:item/plank_table",
-  "textures": {
-    "table_top": "${texture%planks}",
-    "leg": "${texture%stripped_log}"
-  }
-}

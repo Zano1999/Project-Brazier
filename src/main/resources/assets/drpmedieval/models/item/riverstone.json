@@ -1,7 +1,3 @@
 {
-	"credit": "Made by Kanno_",
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "drpmedieval:blocks/riverstone/riverstone"
-    }
+	"parent": "drpmedieval:block/riverstone"
 }

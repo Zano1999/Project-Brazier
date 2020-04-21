@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "drpmedieval:block/diorite_pillar_top",
+    "side": "drpmedieval:block/diorite_pillar_side"
+  }
+}

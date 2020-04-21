@@ -9,6 +9,8 @@ import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 
+import javax.annotation.Nonnull;
+
 public final class VoxelShapeHelper {
 
 	/**

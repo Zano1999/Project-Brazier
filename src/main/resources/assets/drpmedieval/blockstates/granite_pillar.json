@@ -1,18 +1,7 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-		"model": "block/cube_column",
-        "textures": {
-			"end": "drpmedieval:block/stones/granite_pillar_top",
-			"side": "drpmedieval:block/stones/granite_pillar_side"
-        },
-        "transform": "forge:default-block"
-    },
 	"variants": {
-		"axis":{
-			"y":{},
-			"z":{"x":90},
-			"x":{"x":90, "y":90}
-		}
+		"axis=y": {"model": "drpmedieval:block/granite_pillar"},
+		"axis=z": {"model": "drpmedieval:block/granite_pillar", "x":90},
+		"axis=x": {"model": "drpmedieval:block/granite_pillar", "x":90, "y":90}
 	}
 }

@@ -1,0 +1,7 @@
+{
+	"ItemGroup": "food",
+	"Food": {
+		"Value": 3,
+		"Saturation": 0.2
+	}
+}

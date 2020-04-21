@@ -1,8 +1,0 @@
-{
-	"parent": "drpmedieval:block/shingle_roofs/straight",
-	"textures": {
-		"planks": "drpmedieval:block/shingle_roofs/planks_treated_wood",
-		"shingles": "drpmedieval:block/shingle_roofs/${material}_shingles",
-		"particle": "drpmedieval:block/shingle_roofs/${material}_shingles"
-	}
-}

@@ -1,0 +1,9 @@
+{
+	"parent": "drpmedieval:block/${custom}_barrel",
+	"textures": {
+		"particle": "drpmedieval:block/${material}_barrel_side",
+		"side": "drpmedieval:block/${material}_barrel_side",
+		"top": "drpmedieval:block/${material}_barrel_top",
+		"inside": "drpmedieval:block/${material}_barrel_inside"
+	}
+}

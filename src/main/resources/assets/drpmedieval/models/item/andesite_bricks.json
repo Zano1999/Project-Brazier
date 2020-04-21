@@ -1,6 +1,3 @@
 {
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "drpmedieval:block/stones/andesite_bricks"
-  }
+	"parent": "drpmedieval:block/andesite_bricks"
 }
