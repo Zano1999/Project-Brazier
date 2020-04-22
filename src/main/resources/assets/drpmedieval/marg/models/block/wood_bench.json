@@ -1,0 +1,35 @@
+{
+	"loader": "drpmedieval:horizontal_axis_connected_model",
+	"default": {
+		"parent": "drpmedieval:block/default_bench",
+		"textures": {
+			"stripped_log_side": "${texture%stripped_log}",
+			"planks": "${texture%planks}",
+			"particle": "${texture%planks}"
+		}
+	},
+	"positive": {
+		"parent": "drpmedieval:block/positive_bench",
+		"textures": {
+			"stripped_log_side": "${texture%stripped_log}",
+			"planks": "${texture%planks}",
+			"particle": "${texture%planks}"
+		}
+	},
+	"negative": {
+		"parent": "drpmedieval:block/negative_bench",
+		"textures": {
+			"stripped_log_side": "${texture%stripped_log}",
+			"planks": "${texture%planks}",
+			"particle": "${texture%planks}"
+		}
+	},
+	"centered": {
+		"parent": "drpmedieval:block/centered_bench",
+		"textures": {
+			"stripped_log_side": "${texture%stripped_log}",
+			"planks": "${texture%planks}",
+			"particle": "${texture%planks}"
+		}
+	}
+}

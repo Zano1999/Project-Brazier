@@ -1,0 +1,24 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"type": "wood",
+		"textures": [
+			"planks",
+			"stripped_log"
+		]
+	},
+	"tasks": [
+		{
+			"input": "drpmedieval:marg/blockstates/wood_bench.json",
+			"output": "drpmedieval:blockstates/${material}_bench.json"
+		},
+		{
+			"input": "drpmedieval:marg/models/block/wood_bench.json",
+			"output": "drpmedieval:models/block/${material}_bench.json"
+		},
+		{
+			"input": "drpmedieval:marg/models/block/wood_bench.json",
+			"output": "drpmedieval:models/item/${material}_bench.json"
+		}
+	]
+}

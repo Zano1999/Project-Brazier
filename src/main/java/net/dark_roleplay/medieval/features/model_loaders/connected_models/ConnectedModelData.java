@@ -30,26 +30,4 @@ public class ConnectedModelData implements IModelData {
 		return null;
 	}
 
-	public enum ConnectionType {
-		SINGLE,
-		LEFT,
-		RIGHT,
-		CENTER;
-
-		public ConnectionType addLeft() {
-			if (this == SINGLE)
-				return LEFT;
-			else if (this == RIGHT)
-				return CENTER;
-			return this;
-		}
-
-		public ConnectionType addRight() {
-			if (this == SINGLE)
-				return RIGHT;
-			else if (this == LEFT)
-				return CENTER;
-			return this;
-		}
-	}
 }

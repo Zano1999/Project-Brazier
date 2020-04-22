@@ -4,6 +4,7 @@ import net.dark_roleplay.medieval.util.blocks.AxisVoxelShape;
 import net.dark_roleplay.medieval.util.json.VoxelShapeLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -23,6 +24,11 @@ public class AxisDecoBlock extends Block {
 	public AxisDecoBlock(Properties properties, String shapeName) {
 		super(properties);
 		this.shapes = new AxisVoxelShape(VoxelShapeLoader.getVoxelShape(shapeName));
+	}
+
+	@Override
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		return this.getDefaultState().with(HORIZONTAL_AXIS, context.getPlacementHorizontalFacing().rotateY().getAxis());
 	}
 
 	@Override

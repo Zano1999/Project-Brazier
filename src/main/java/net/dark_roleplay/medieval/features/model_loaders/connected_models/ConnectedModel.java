@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.model.*;
 import net.minecraft.resources.IResourceManager;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
@@ -24,38 +23,45 @@ import java.util.function.Function;
 
 public class ConnectedModel implements IModelGeometry {
 
-	IUnbakedModel single, left, right, center;
+	IUnbakedModel defaultModel, positiveModel, negativeModel, centeredModel;
 
-	public ConnectedModel(IUnbakedModel single, IUnbakedModel left, IUnbakedModel right, IUnbakedModel center){
-		this.single = single;
-		this.left = left;
-		this.right = right;
-		this.center = center;
+	public ConnectedModel(IUnbakedModel defaultModel, IUnbakedModel positiveModel, IUnbakedModel right, IUnbakedModel centeredModel){
+		this.defaultModel = defaultModel;
+		this.positiveModel = positiveModel;
+		this.negativeModel = right;
+		this.centeredModel = centeredModel;
 	}
 
 	@Override
 	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
-		IBakedModel singleBaked = this.single.bakeModel(bakery, spriteGetter, modelTransform, modelLocation);
-		IBakedModel leftBaked = this.left.bakeModel(bakery, spriteGetter, modelTransform, modelLocation);
+		IBakedModel singleBaked = this.defaultModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation);
+		IBakedModel leftBaked = this.positiveModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation);
 		return new ConnectedBakedModel(singleBaked, leftBaked,
-				this.right.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
-				this.center.bakeModel(bakery, spriteGetter, modelTransform, modelLocation));
+				this.negativeModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
+				this.centeredModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation));
 	}
 
 	@Override
 	public Collection<Material> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
-		return single.getTextures(modelGetter, missingTextureErrors);
+		Set<Material> textures = new HashSet<>();
+
+		textures.addAll(defaultModel.getTextures(modelGetter, missingTextureErrors));
+		textures.addAll(positiveModel.getTextures(modelGetter, missingTextureErrors));
+		textures.addAll(negativeModel.getTextures(modelGetter, missingTextureErrors));
+		textures.addAll(centeredModel.getTextures(modelGetter, missingTextureErrors));
+
+		return textures;
 	}
 
 	public static class ConnectedBakedModel extends BakedModelWrapper {
 
-		protected IBakedModel left, right, center;
+		protected IBakedModel positiveModel, negativeModel, centeredModel;
 
-		public ConnectedBakedModel(IBakedModel single, IBakedModel left, IBakedModel right, IBakedModel center) {
-			super(single);
-			this.left = left;
-			this.right = right;
-			this.center = center;
+		public ConnectedBakedModel(IBakedModel defaultModel, IBakedModel positiveModel, IBakedModel negativeModel, IBakedModel centeredModel) {
+			super(defaultModel);
+			this.positiveModel = positiveModel;
+			this.negativeModel = negativeModel;
+			this.centeredModel = centeredModel;
 		}
 
 		@Nonnull
@@ -63,14 +69,14 @@ public class ConnectedModel implements IModelGeometry {
 		public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
 			if (extraData instanceof ConnectedModelData) {
 				switch (extraData.getData(ConnectedModelData.CONNECTION)) {
-					case SINGLE:
+					case DEFAULT:
 						return this.originalModel.getQuads(state, side, rand, extraData);
-					case LEFT:
-						return this.left.getQuads(state, side, rand, extraData);
-					case RIGHT:
-						return this.right.getQuads(state, side, rand, extraData);
-					case CENTER:
-						return this.center.getQuads(state, side, rand, extraData);
+					case POSITIVE:
+						return this.positiveModel.getQuads(state, side, rand, extraData);
+					case NEGATIVE:
+						return this.negativeModel.getQuads(state, side, rand, extraData);
+					case CENTERED:
+						return this.centeredModel.getQuads(state, side, rand, extraData);
 				}
 			}
 
@@ -81,21 +87,7 @@ public class ConnectedModel implements IModelGeometry {
 		@Override
 		public IModelData getModelData(@Nonnull ILightReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull IModelData tileData) {
 			IModelData data = new ConnectedModelData();
-
-			ConnectedModelData.ConnectionType type = ConnectedModelData.ConnectionType.SINGLE;
-			if (state.has(BlockStateProperties.HORIZONTAL_AXIS)) {
-				Direction.Axis axis = state.get(BlockStateProperties.HORIZONTAL_AXIS);
-				switch (axis) {
-					case X:
-						type = type.addLeft();
-						break;
-					case Z:
-						type = type.addRight();
-						break;
-				}
-			}
-			type = type.addLeft();
-			data.setData(ConnectedModelData.CONNECTION, type);
+			data.setData(ConnectedModelData.CONNECTION, ConnectionType.getConnections(world, pos, state));
 			return data;
 		}
 	}
@@ -107,20 +99,20 @@ public class ConnectedModel implements IModelGeometry {
 
 		@Override
 		public IModelGeometry read(JsonDeserializationContext deserializationContext, JsonObject modelContents) {
-			IUnbakedModel single = null, left = null, right = null, center = null;
-			if(modelContents.has("singleModel")){
-				single = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"singleModel"), BlockModel.class);
+			IUnbakedModel defaultModel = null, positiveModel = null, negativeModel = null, centeredModel = null;
+			if(modelContents.has("default")){
+				defaultModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"default"), BlockModel.class);
 			}
-			if(modelContents.has("leftModel")){
-				left = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"leftModel"), BlockModel.class);
+			if(modelContents.has("positive")){
+				positiveModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"positive"), BlockModel.class);
 			}
-			if(modelContents.has("rightModel")){
-				right = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"rightModel"), BlockModel.class);
+			if(modelContents.has("negative")){
+				negativeModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"negative"), BlockModel.class);
 			}
-			if(modelContents.has("centerModel")){
-				center = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"centerModel"), BlockModel.class);
+			if(modelContents.has("centered")){
+				centeredModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"centered"), BlockModel.class);
 			}
-			return new ConnectedModel(single, left, right, center);
+			return new ConnectedModel(defaultModel, positiveModel, negativeModel, centeredModel);
 		}
 	}
 

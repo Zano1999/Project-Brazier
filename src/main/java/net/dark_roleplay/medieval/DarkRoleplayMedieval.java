@@ -57,7 +57,7 @@ public class DarkRoleplayMedieval {
 
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
             MedievalKeybinds.registerKeybinds(event);
-            ModelLoaderRegistry.registerLoader(new ResourceLocation(MODID, "axis_connected_model"), new ConnectedModel.Loader());
+            ModelLoaderRegistry.registerLoader(new ResourceLocation(MODID, "horizontal_axis_connected_model"), new ConnectedModel.Loader());
             //DarkRoleplayMedievalClient.regoatisterRenderLayers();
         });
     }

@@ -47,6 +47,7 @@ public class MedievalBlocks {
 	public static final Map<IMaterial, RegistryObject<Block>>
 			OPEN_BARREL 					= register("${material}_open_barrel", planksOnly, BlockCreators::createOpenBarrel),
 			CLOSED_BARREL 					= register("${material}_closed_barrel", planksOnly, BlockCreators::createClosedBarrel),
+			WOOD_BENCH				 		= register("${material}_bench", planksStrippedLogs, mat -> BlockCreators.createWoodBench(mat)),
 			TOP_WOOD_PLATFORM 			= registerNoItems("top_${material}_platform", planksStrippedLogs, mat -> BlockCreators.createWoodPlatform(mat, true)),
 			BOTTOM_WOOD_PLATFORM 		= registerNoItems("bottom_${material}_platform", planksStrippedLogs, mat -> BlockCreators.createWoodPlatform(mat, false));
 
