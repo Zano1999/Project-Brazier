@@ -1,6 +1,32 @@
 {
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "drpmedieval:block/andesite_bricks"
+  "loader": "drpmedieval:axis_connected_model",
+  "singleModel": {
+    "parent": "block/cube_all",
+    "textures": {
+      "all": "drpmedieval:block/andesite_bricks"
+    }
+  },
+  "leftModel": {
+    "parent": "drpmedieval:block/open_barrel",
+    "textures": {
+      "particle": "drpmedieval:block/oak_barrel_side",
+      "side": "drpmedieval:block/oak_barrel_side",
+      "top": "drpmedieval:block/oak_barrel_top",
+      "inside": "drpmedieval:block/oak_barrel_inside"
+    }
+  },
+  "rightModel": {
+    "parent": "block/cube_all",
+    "textures": {
+      "all": "drpmedieval:block/granite_bricks"
+    }
+  },
+  "centerModel": {
+    "parent": "block/cube_all",
+    "textures": {
+      "all": "drpmedieval:block/andesite_bricks"
+    }
   }
 }
+
+

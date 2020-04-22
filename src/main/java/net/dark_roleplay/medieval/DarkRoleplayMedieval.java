@@ -1,11 +1,13 @@
 package net.dark_roleplay.medieval;
 
+import net.dark_roleplay.medieval.features.model_loaders.connected_models.ConnectedModel;
 import net.dark_roleplay.medieval.handler.*;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -55,6 +57,7 @@ public class DarkRoleplayMedieval {
 
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
             MedievalKeybinds.registerKeybinds(event);
+            ModelLoaderRegistry.registerLoader(new ResourceLocation(MODID, "axis_connected_model"), new ConnectedModel.Loader());
             //DarkRoleplayMedievalClient.regoatisterRenderLayers();
         });
     }
