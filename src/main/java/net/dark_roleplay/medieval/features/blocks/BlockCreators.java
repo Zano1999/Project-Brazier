@@ -43,4 +43,12 @@ public class BlockCreators {
 						.sound(SoundType.WOOD);
 		return new ConnectedAxisDecoBlock(properties, "default_wood_bench", "positive_wood_bench", "negative_wood_bench", "centered_wood_bench");
 	}
+
+	public static Block createPolsteredWoodBench(IMaterial material){
+		Block.Properties properties =
+				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
+						.hardnessAndResistance(2.0F, 3.0F)
+						.sound(SoundType.WOOD);
+		return new ConnectedAxisDecoBlock(properties, "default_polstered_wood_bench", "positive_polstered_wood_bench", "negative_polstered_wood_bench", "centered_polstered_wood_bench");
+	}
 }

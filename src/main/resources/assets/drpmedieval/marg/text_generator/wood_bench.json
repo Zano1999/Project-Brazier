@@ -17,7 +17,7 @@
 			"output": "drpmedieval:models/block/${material}_bench.json"
 		},
 		{
-			"input": "drpmedieval:marg/models/block/wood_bench.json",
+			"input": "drpmedieval:marg/models/item/wood_bench.json",
 			"output": "drpmedieval:models/item/${material}_bench.json"
 		}
 	]

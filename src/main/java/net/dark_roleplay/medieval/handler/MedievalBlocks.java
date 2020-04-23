@@ -9,9 +9,11 @@ import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.item.DyeColor;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -47,9 +49,12 @@ public class MedievalBlocks {
 	public static final Map<IMaterial, RegistryObject<Block>>
 			OPEN_BARREL 					= register("${material}_open_barrel", planksOnly, BlockCreators::createOpenBarrel),
 			CLOSED_BARREL 					= register("${material}_closed_barrel", planksOnly, BlockCreators::createClosedBarrel),
-			WOOD_BENCH				 		= register("${material}_bench", planksStrippedLogs, mat -> BlockCreators.createWoodBench(mat)),
+			WOOD_BENCH				 		= register("${material}_bench", planksStrippedLogs, BlockCreators::createWoodBench),
 			TOP_WOOD_PLATFORM 			= registerNoItems("top_${material}_platform", planksStrippedLogs, mat -> BlockCreators.createWoodPlatform(mat, true)),
 			BOTTOM_WOOD_PLATFORM 		= registerNoItems("bottom_${material}_platform", planksStrippedLogs, mat -> BlockCreators.createWoodPlatform(mat, false));
+
+	public static final Map<DyeColor, Map<IMaterial, RegistryObject<Block>>>
+			POLSTERED_WOOD_BENCH			= registerInColors("${color}_polstered_${material}_bench", planksStrippedLogs, BlockCreators::createPolsteredWoodBench);
 
 	private static RegistryObject<Block> register(String name, Function<Block.Properties, Block> suplier, Block.Properties props) {
 		return BLOCKS.register(name, () -> suplier.apply(props));
@@ -61,6 +66,16 @@ public class MedievalBlocks {
 
 	private static Map<IMaterial, RegistryObject<Block>> register(String name, IMaterialCondition condition, Function<IMaterial, Block> suplier){
 		return register(BLOCKS, name, condition, suplier);
+	}
+
+	private static Map<DyeColor, Map<IMaterial, RegistryObject<Block>>> registerInColors(String name, IMaterialCondition condition, Function<IMaterial, Block> suplier){
+		Map<DyeColor, Map<IMaterial, RegistryObject<Block>>> blocks = new EnumMap<>(DyeColor.class);
+
+		for(DyeColor color : DyeColor.values()){
+			blocks.put(color, register(BLOCKS, name.replace("${color}", color.getName()), condition, suplier));
+		}
+
+		return blocks;
 	}
 
 	private static Map<IMaterial, RegistryObject<Block>> registerNoItems(String name, IMaterialCondition condition, Function<IMaterial, Block> suplier){

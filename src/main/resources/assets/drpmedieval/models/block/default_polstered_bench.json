@@ -2,6 +2,17 @@
 	"parent": "minecraft:block/block",
 	"elements": [
 		{
+			"from": [0, 9, 2.5],
+			"to": [16, 10, 13.5],
+			"faces": {
+				"north": {"uv": [0, 6, 16, 7], "texture": "#wool"},
+				"east": {"uv": [2.5, 6, 13.5, 7], "texture": "#wool", "cullface": "east"},
+				"south": {"uv": [0, 6, 16, 7], "texture": "#wool"},
+				"west": {"uv": [2.5, 6, 13.5, 7], "texture": "#wool", "cullface": "west"},
+				"up": {"uv": [0, 2.5, 16, 13.5], "texture": "#wool"}
+			}
+		},
+		{
 			"from": [0, 2.5, 6.5],
 			"to": [16, 3.5, 9.5],
 			"faces": {

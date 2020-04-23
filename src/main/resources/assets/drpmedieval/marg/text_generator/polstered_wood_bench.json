@@ -1,0 +1,42 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"type": "wood",
+		"textures": [
+			"planks",
+			"stripped_log"
+		]
+	},
+	"customKeys": [
+		"black",
+		"blue",
+		"brown",
+		"cyan",
+		"gray",
+		"green",
+		"light_blue",
+		"light_gray",
+		"lime",
+		"magenta",
+		"orange",
+		"pink",
+		"purple",
+		"red",
+		"white",
+		"yellow"
+	],
+	"tasks": [
+		{
+			"input": "drpmedieval:marg/blockstates/polstered_wood_bench.json",
+			"output": "drpmedieval:blockstates/${custom}_polstered_${material}_bench.json"
+		},
+		{
+			"input": "drpmedieval:marg/models/block/polstered_wood_bench.json",
+			"output": "drpmedieval:models/block/${custom}_polstered_${material}_bench.json"
+		},
+		{
+			"input": "drpmedieval:marg/models/item/polstered_wood_bench.json",
+			"output": "drpmedieval:models/item/${custom}_polstered_${material}_bench.json"
+		}
+	]
+}

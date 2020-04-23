@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 
 public class ConnectedAxisDecoBlock extends AxisDecoBlock {
@@ -31,7 +32,6 @@ public class ConnectedAxisDecoBlock extends AxisDecoBlock {
 	//TODO Optimize getRaytraceShape
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
-		System.out.println("Test");
 		ConnectionType type = ConnectionType.getConnections(world, pos, state);
 		switch(type){
 			case DEFAULT:

@@ -72,7 +72,7 @@ minecraft {
         }
 
         data {
-            workingDirectory project.file('run/data_gen')
+            workingDirectory project.file('runs/data_gen')
             args '--mod', 'drpmedieval', '--all', '--output', file('src/generated/resources/')
 
             environment 'MOD_CLASSES',
