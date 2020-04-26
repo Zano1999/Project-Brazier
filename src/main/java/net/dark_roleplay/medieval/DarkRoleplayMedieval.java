@@ -1,6 +1,6 @@
 package net.dark_roleplay.medieval;
 
-import net.dark_roleplay.medieval.features.model_loaders.connected_models.ConnectedModel;
+import net.dark_roleplay.medieval.features.model_loaders.connected_models.AxisConnectedModel;
 import net.dark_roleplay.medieval.features.model_loaders.emissive.EmissiveModel;
 import net.dark_roleplay.medieval.handler.*;
 import net.minecraft.item.Item;
@@ -58,7 +58,7 @@ public class DarkRoleplayMedieval {
 
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
             MedievalKeybinds.registerKeybinds(event);
-            ModelLoaderRegistry.registerLoader(new ResourceLocation(MODID, "horizontal_axis_connected_model"), new ConnectedModel.Loader());
+            ModelLoaderRegistry.registerLoader(new ResourceLocation(MODID, "axis_connected_model"), new AxisConnectedModel.Loader());
             ModelLoaderRegistry.registerLoader(new ResourceLocation(MODID, "emissive"), new EmissiveModel.Loader());
             //DarkRoleplayMedievalClient.regoatisterRenderLayers();
         });

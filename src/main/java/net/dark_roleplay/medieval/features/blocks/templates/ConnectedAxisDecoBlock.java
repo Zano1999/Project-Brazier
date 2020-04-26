@@ -1,13 +1,12 @@
 package net.dark_roleplay.medieval.features.blocks.templates;
 
-import net.dark_roleplay.medieval.features.model_loaders.connected_models.ConnectionType;
+import net.dark_roleplay.medieval.features.model_loaders.connected_models.AxisConnectionType;
 import net.dark_roleplay.medieval.util.blocks.AxisVoxelShape;
 import net.dark_roleplay.medieval.util.json.VoxelShapeLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 
 public class ConnectedAxisDecoBlock extends AxisDecoBlock {
@@ -32,7 +31,7 @@ public class ConnectedAxisDecoBlock extends AxisDecoBlock {
 	//TODO Optimize getRaytraceShape
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
-		ConnectionType type = ConnectionType.getConnections(world, pos, state);
+		AxisConnectionType type = AxisConnectionType.getConnections(world, pos, state);
 		switch(type){
 			case DEFAULT:
 				return shapes.get(state.get(HORIZONTAL_AXIS));

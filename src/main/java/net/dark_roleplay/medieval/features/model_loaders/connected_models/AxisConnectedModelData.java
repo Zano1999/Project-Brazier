@@ -5,10 +5,10 @@ import net.minecraftforge.client.model.data.ModelProperty;
 
 import javax.annotation.Nullable;
 
-public class ConnectedModelData implements IModelData {
+public class AxisConnectedModelData implements IModelData {
 
-	public static final ModelProperty<ConnectionType> CONNECTION = new ModelProperty();
-	private ConnectionType connection;
+	public static final ModelProperty<AxisConnectionType> CONNECTION = new ModelProperty();
+	private AxisConnectionType connection;
 
 	@Override
 	public boolean hasProperty(ModelProperty<?> prop) {
@@ -26,7 +26,7 @@ public class ConnectedModelData implements IModelData {
 	@Nullable
 	@Override
 	public <T> T setData(ModelProperty<T> prop, T data) {
-		if(prop == CONNECTION && data instanceof ConnectionType) connection = (ConnectionType) data;
+		if(prop == CONNECTION && data instanceof AxisConnectionType) connection = (AxisConnectionType) data;
 		return null;
 	}
 

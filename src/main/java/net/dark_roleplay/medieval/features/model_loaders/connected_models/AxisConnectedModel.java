@@ -21,11 +21,11 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Function;
 
-public class ConnectedModel implements IModelGeometry {
+public class AxisConnectedModel implements IModelGeometry {
 
 	IUnbakedModel defaultModel, positiveModel, negativeModel, centeredModel;
 
-	public ConnectedModel(IUnbakedModel defaultModel, IUnbakedModel positiveModel, IUnbakedModel right, IUnbakedModel centeredModel){
+	public AxisConnectedModel(IUnbakedModel defaultModel, IUnbakedModel positiveModel, IUnbakedModel right, IUnbakedModel centeredModel){
 		this.defaultModel = defaultModel;
 		this.positiveModel = positiveModel;
 		this.negativeModel = right;
@@ -67,8 +67,8 @@ public class ConnectedModel implements IModelGeometry {
 		@Nonnull
 		@Override
 		public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
-			if (extraData instanceof ConnectedModelData) {
-				switch (extraData.getData(ConnectedModelData.CONNECTION)) {
+			if (extraData instanceof AxisConnectedModelData) {
+				switch (extraData.getData(AxisConnectedModelData.CONNECTION)) {
 					case DEFAULT:
 						return this.originalModel.getQuads(state, side, rand, extraData);
 					case POSITIVE:
@@ -86,8 +86,8 @@ public class ConnectedModel implements IModelGeometry {
 		@Nonnull
 		@Override
 		public IModelData getModelData(@Nonnull ILightReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull IModelData tileData) {
-			IModelData data = new ConnectedModelData();
-			data.setData(ConnectedModelData.CONNECTION, ConnectionType.getConnections(world, pos, state));
+			IModelData data = new AxisConnectedModelData();
+			data.setData(AxisConnectedModelData.CONNECTION, AxisConnectionType.getConnections(world, pos, state));
 			return data;
 		}
 	}
@@ -112,7 +112,7 @@ public class ConnectedModel implements IModelGeometry {
 			if(modelContents.has("centered")){
 				centeredModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"centered"), BlockModel.class);
 			}
-			return new ConnectedModel(defaultModel, positiveModel, negativeModel, centeredModel);
+			return new AxisConnectedModel(defaultModel, positiveModel, negativeModel, centeredModel);
 		}
 	}
 

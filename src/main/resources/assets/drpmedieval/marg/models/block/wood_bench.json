@@ -1,5 +1,5 @@
 {
-	"loader": "drpmedieval:horizontal_axis_connected_model",
+	"loader": "drpmedieval:axis_connected_model",
 	"default": {
 		"parent": "drpmedieval:block/default_bench",
 		"textures": {

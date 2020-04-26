@@ -8,13 +8,13 @@ import net.minecraft.world.IBlockReader;
 
 import javax.annotation.Nonnull;
 
-public enum ConnectionType {
+public enum AxisConnectionType {
 	DEFAULT,
 	POSITIVE,
 	NEGATIVE,
 	CENTERED;
 
-	public ConnectionType addPositive() {
+	public AxisConnectionType addPositive() {
 		if (this == DEFAULT)
 			return POSITIVE;
 		else if (this == NEGATIVE)
@@ -22,7 +22,7 @@ public enum ConnectionType {
 		return this;
 	}
 
-	public ConnectionType addNegative() {
+	public AxisConnectionType addNegative() {
 		if (this == DEFAULT)
 			return NEGATIVE;
 		else if (this == POSITIVE)
@@ -30,16 +30,23 @@ public enum ConnectionType {
 		return this;
 	}
 
-	public static ConnectionType getConnections(@Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull BlockState state){
-		if (state.has(BlockStateProperties.HORIZONTAL_AXIS)) {
-			ConnectionType type = ConnectionType.DEFAULT;
+	public static AxisConnectionType getConnections(@Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull BlockState state){
+		boolean flag = false;
+		if ((flag = state.has(BlockStateProperties.HORIZONTAL_AXIS)) || state.has(BlockStateProperties.AXIS)) {
+			AxisConnectionType type = AxisConnectionType.DEFAULT;
 
-			Direction.Axis axis = state.get(BlockStateProperties.HORIZONTAL_AXIS);
+			Direction.Axis axis = flag ? state.get(BlockStateProperties.HORIZONTAL_AXIS) : state.get(BlockStateProperties.AXIS);
 			switch (axis) {
 				case X:
 					if(world.getBlockState(pos.east()) == state)
 						type = type.addPositive();
 					if(world.getBlockState(pos.west()) == state)
+						type = type.addNegative();
+					break;
+				case Y:
+					if(world.getBlockState(pos.up()) == state)
+						type = type.addPositive();
+					if(world.getBlockState(pos.down()) == state)
 						type = type.addNegative();
 					break;
 				case Z:
@@ -51,6 +58,6 @@ public enum ConnectionType {
 			}
 			return type;
 		}
-		return ConnectionType.DEFAULT;
+		return AxisConnectionType.DEFAULT;
 	}
 }
