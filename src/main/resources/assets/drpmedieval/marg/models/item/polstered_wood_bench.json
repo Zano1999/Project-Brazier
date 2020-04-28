@@ -1,9 +1,0 @@
-{
-	"parent": "drpmedieval:block/default_polstered_bench",
-	"textures": {
-		"stripped_log_side": "${texture%stripped_log}",
-		"planks": "${texture%planks}",
-		"particle": "${texture%planks}",
-		"wool": "minecraft:block/${custom}_wool"
-	}
-}

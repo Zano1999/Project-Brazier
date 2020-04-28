@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "": [
+        	{ "model": "projectbrazier:block/dark_large_riverstone_0" },
+        	{ "model": "projectbrazier:block/dark_large_riverstone_1" },
+        	{ "model": "projectbrazier:block/dark_large_riverstone_2" }
+        ]
+    }
+}

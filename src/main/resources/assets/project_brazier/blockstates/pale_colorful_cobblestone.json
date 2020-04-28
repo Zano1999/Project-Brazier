@@ -1,0 +1,22 @@
+{
+	"variants": {
+		"": [
+			{
+				"model": "projectbrazier:block/pale_colorful_cobblestone_0",
+				"weight": 4
+			},
+			{
+				"model": "projectbrazier:block/pale_colorful_cobblestone_1",
+				"weight": 3
+			},
+			{
+				"model": "projectbrazier:block/pale_colorful_cobblestone_2",
+				"weight": 2
+			},
+			{
+				"model": "projectbrazier:block/pale_colorful_cobblestone_3",
+				"weight": 1
+			}
+		]
+	}
+}

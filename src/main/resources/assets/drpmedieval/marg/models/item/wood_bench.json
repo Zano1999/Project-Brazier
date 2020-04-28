@@ -1,8 +1,0 @@
-{
-	"parent": "drpmedieval:block/default_bench",
-	"textures": {
-		"stripped_log_side": "${texture%stripped_log}",
-		"planks": "${texture%planks}",
-		"particle": "${texture%planks}"
-	}
-}

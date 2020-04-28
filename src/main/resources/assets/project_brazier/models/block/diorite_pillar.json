@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "projectbrazier:block/diorite_pillar_top",
+    "side": "projectbrazier:block/diorite_pillar_side"
+  }
+}

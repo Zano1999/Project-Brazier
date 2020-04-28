@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"axis=x": {"model": "drpmedieval:block/${custom}_polstered_${material}_bench"},
-		"axis=z": {"model": "drpmedieval:block/${custom}_polstered_${material}_bench", "y":  90}
-	}
-}

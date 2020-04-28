@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model":  "projectbrazier:block/jail_lattice"},
+		"facing=east": {"model":  "projectbrazier:block/jail_lattice", "y": 90},
+		"facing=south": {"model":  "projectbrazier:block/jail_lattice", "y":  180},
+		"facing=west": {"model":  "projectbrazier:block/jail_lattice", "y":  270}
+	}
+}

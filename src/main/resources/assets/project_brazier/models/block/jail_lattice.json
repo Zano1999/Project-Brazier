@@ -1,0 +1,14 @@
+{
+	"loader": "projectbrazier:simple_pane_connected_model",
+	"base": {
+		"parent": "projectbrazier:block/jail_lattice/jail_lattice"
+	},
+	"primary": {
+		"positive": {"parent": "projectbrazier:block/jail_lattice/jail_lattice_top"},
+		"negative": {"parent": "projectbrazier:block/jail_lattice/jail_lattice_bottom"}
+	},
+	"secondary": {
+		"positive": {"parent": "projectbrazier:block/jail_lattice/jail_lattice_left"},
+		"negative": {"parent": "projectbrazier:block/jail_lattice/jail_lattice_right"}
+	}
+}

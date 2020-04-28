@@ -1,0 +1,9 @@
+{
+	"variants": {
+			"": [
+				{ "model": "projectbrazier:block/large_riverstone_0" },
+				{ "model": "projectbrazier:block/large_riverstone_1" },
+				{ "model": "projectbrazier:block/large_riverstone_2" }
+			]
+	}
+}

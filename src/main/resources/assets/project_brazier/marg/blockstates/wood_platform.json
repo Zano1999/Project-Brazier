@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"axis=x": {"model": "projectbrazier:block/${custom}_${material}_platform"},
+		"axis=z": {"model": "projectbrazier:block/${custom}_${material}_platform", "y":  90, "uvlock": true}
+	}
+}

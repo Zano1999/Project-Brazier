@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"axis=y": {"model": "projectbrazier:block/andesite_pillar"},
+		"axis=z": {"model": "projectbrazier:block/andesite_pillar", "x":90},
+		"axis=x": {"model": "projectbrazier:block/andesite_pillar", "x":90, "y":90}
+	}
+}

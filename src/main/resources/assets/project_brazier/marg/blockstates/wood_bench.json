@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"axis=x": {"model": "projectbrazier:block/${material}_bench"},
+		"axis=z": {"model": "projectbrazier:block/${material}_bench", "y":  90}
+	}
+}

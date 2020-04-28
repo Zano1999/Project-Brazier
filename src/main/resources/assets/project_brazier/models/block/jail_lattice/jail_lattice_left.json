@@ -1,0 +1,21 @@
+{
+	"textures": {
+		"metal": "projectbrazier:block/packed_ice_bricks",
+		"particle": "projectbrazier:block/packed_ice_bricks"
+	},
+	"elements": [
+		{
+			"name": "left",
+			"from": [15, 0, 6.5],
+			"to": [16, 16, 9.5],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 16], "texture": "#metal"},
+				"east": {"uv": [6.5, 0, 9.5, 16], "texture": "#metal"},
+				"south": {"uv": [15, 0, 16, 16], "texture": "#metal"},
+				"west": {"uv": [6.5, 0, 9.5, 16], "texture": "#metal"},
+				"up": {"uv": [15, 6.5, 16, 9.5], "texture": "#metal"},
+				"down": {"uv": [15, 6.5, 16, 9.5], "texture": "#metal"}
+			}
+		}
+	]
+}

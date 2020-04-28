@@ -3,17 +3,17 @@ loaderVersion="[28,)" #mandatory
 issueTrackerURL="http://my.issue.tracker/" #optional
 
 [[mods]]
-	modId="drpmedieval"
+	modId="projectbrazier"
 	version="${version}"
-	displayName="Dark Roleplay Medieval"
-	updateJSONURL="https://dark-roleplay.net/files/versions/drpmedieval/drpmedieval-1.13.2.json" #optional
+	displayName="Project Brazier"
+	#updateJSONURL="https://dark-roleplay.net/files/versions/drpmedieval/drpmedieval-1.13.2.json" #optional
 	displayURL="https://dark-roleplay.net/"
 	#logoFile="examplemod.png" #optional
 	credits="Lead Programmer: JTK222, Jr. Programmer: 0Mr_X0, Artists: Rolfaal & Kanno (https://twitter.com/lKanno_)"
 	authors=["JTK222", "0Mr_X0", "Rolfaal", "Kanno"]
-	description='''Dark Roleplay Medieval, is... //TODO FINISH THE DESCRIPTION'''
+	description='''Project Brazier is the continuation of the Dark Roleplay Medieval mod.'''
 
-dependencies.drpmedieval = [
+dependencies.projectbrazier = [
     {modid="forge", mandatory=true, versionRange="[28.1,)", ordering="NONE",side="BOTH"},
     {modid="marg", mandatory=true, versionRange="[1.14.4-0.3,)", ordering="BEFORE",side="BOTH"}
 ]

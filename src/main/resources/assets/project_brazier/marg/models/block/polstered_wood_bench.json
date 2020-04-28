@@ -1,0 +1,39 @@
+{
+	"loader": "projectbrazier:axis_connected_model",
+	"default": {
+		"parent": "projectbrazier:block/default_polstered_bench",
+		"textures": {
+			"stripped_log_side": "${texture%stripped_log}",
+			"planks": "${texture%planks}",
+			"particle": "${texture%planks}",
+			"wool": "minecraft:block/${custom}_wool"
+		}
+	},
+	"positive": {
+		"parent": "projectbrazier:block/positive_polstered_bench",
+		"textures": {
+			"stripped_log_side": "${texture%stripped_log}",
+			"planks": "${texture%planks}",
+			"particle": "${texture%planks}",
+			"wool": "minecraft:block/${custom}_wool"
+		}
+	},
+	"negative": {
+		"parent": "projectbrazier:block/negative_polstered_bench",
+		"textures": {
+			"stripped_log_side": "${texture%stripped_log}",
+			"planks": "${texture%planks}",
+			"particle": "${texture%planks}",
+			"wool": "minecraft:block/${custom}_wool"
+		}
+	},
+	"centered": {
+		"parent": "projectbrazier:block/centered_polstered_bench",
+		"textures": {
+			"stripped_log_side": "${texture%stripped_log}",
+			"planks": "${texture%planks}",
+			"particle": "${texture%planks}",
+			"wool": "minecraft:block/${custom}_wool"
+		}
+	}
+}
