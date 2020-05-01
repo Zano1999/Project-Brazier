@@ -1,0 +1,20 @@
+{
+	"variants": {
+		"facing=north": [
+			{"model":  "projectbrazier:block/hanging_bone_horn"},
+			{"model":  "projectbrazier:block/hanging_bone_horn2"}
+		],
+		"facing=east": [
+			{"model":  "projectbrazier:block/hanging_bone_horn", "y":  90},
+			{"model":  "projectbrazier:block/hanging_bone_horn2", "y":  90}
+		],
+		"facing=south": [
+			{"model":  "projectbrazier:block/hanging_bone_horn", "y":  180},
+			{"model":  "projectbrazier:block/hanging_bone_horn2", "y":  180}
+		],
+		"facing=west": [
+			{"model":  "projectbrazier:block/hanging_bone_horn", "y":  270},
+			{"model":  "projectbrazier:block/hanging_bone_horn2", "y":  270}
+		]
+	}
+}

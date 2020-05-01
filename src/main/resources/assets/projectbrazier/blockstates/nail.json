@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model":  "projectbrazier:block/nail"},
+		"facing=east": {"model":  "projectbrazier:block/nail", "y": 90},
+		"facing=south": {"model":  "projectbrazier:block/nail", "y":  180},
+		"facing=west": {"model":  "projectbrazier:block/nail", "y":  270}
+	}
+}

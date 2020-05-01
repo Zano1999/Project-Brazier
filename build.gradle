@@ -26,7 +26,7 @@ def MOD_VERSION = '0.5';
 
 version = "${MC_VERSION}-${MOD_VERSION}"
 group = 'net.dark_roleplay'
-archivesBaseName = 'drpmedieval'
+archivesBaseName = 'project_brazier'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
@@ -110,10 +110,10 @@ jar {
 
     manifest {
         attributes([
-            "Specification-Title": "drpmedieval",
+            "Specification-Title": "projectbrazier",
             "Specification-Vendor": "Dark Roleplay",
-            "Specification-Version": "0.1",
-            "Implementation-Title": "Dark Roleplay Medieval",
+            "Specification-Version": "${version}",
+            "Implementation-Title": "Project Brazier",
             "Implementation-Version": "${version}",
             "Implementation-Vendor": "Dark Roleplay",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
