@@ -1,0 +1,19 @@
+{
+	"credit": "Made by JTK222",
+	"textures": {
+		"1": "projectbrazier:block/acacia_planks"
+	},
+	"elements": [
+		{
+			"from": [15, 0, 6.5],
+			"to": [16, 16, 9.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [15.5, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"east": {"uv": [6.5, 0, 9.5, 16], "texture": "#1"},
+				"south": {"uv": [15, 0, 16, 16], "texture": "#1"},
+				"west": {"uv": [6.5, 0, 9.5, 16], "texture": "#1"}
+			}
+		}
+	]
+}

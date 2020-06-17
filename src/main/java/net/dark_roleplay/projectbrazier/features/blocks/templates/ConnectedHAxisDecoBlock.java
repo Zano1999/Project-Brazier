@@ -9,13 +9,13 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
-public class ConnectedAxisDecoBlock extends AxisDecoBlock {
+public class ConnectedHAxisDecoBlock extends HAxisDecoBlock {
 
 	protected final AxisVoxelShape positiveShapes;
 	protected final AxisVoxelShape negativeShapes;
 	protected final AxisVoxelShape centeredShapes;
 
-	public ConnectedAxisDecoBlock(Properties properties, String shapeName, String positiveShapeName, String negativeShapeName,String centeredShapeName) {
+	public ConnectedHAxisDecoBlock(Properties properties, String shapeName, String positiveShapeName, String negativeShapeName, String centeredShapeName) {
 		super(properties, shapeName);
 		this.positiveShapes = new AxisVoxelShape(VoxelShapeLoader.getVoxelShape(positiveShapeName));
 		this.negativeShapes = new AxisVoxelShape(VoxelShapeLoader.getVoxelShape(negativeShapeName));

@@ -1,8 +1,12 @@
 {
 	"variants": {
-		"facing=north": {"model":  "projectbrazier:block/nail"},
-		"facing=east": {"model":  "projectbrazier:block/nail", "y": 90},
-		"facing=south": {"model":  "projectbrazier:block/nail", "y":  180},
-		"facing=west": {"model":  "projectbrazier:block/nail", "y":  270}
+		"facing=north,hidden_lever=true": {"model":  "projectbrazier:block/nail_hidden_lever"},
+		"facing=east,hidden_lever=true": {"model":  "projectbrazier:block/nail_hidden_lever", "y": 90},
+		"facing=south,hidden_lever=true": {"model":  "projectbrazier:block/nail_hidden_lever", "y":  180},
+		"facing=west,hidden_lever=true": {"model":  "projectbrazier:block/nail_hidden_lever", "y":  270},
+		"facing=north,hidden_lever=false": {"model":  "projectbrazier:block/nail"},
+		"facing=east,hidden_lever=false": {"model":  "projectbrazier:block/nail", "y": 90},
+		"facing=south,hidden_lever=false": {"model":  "projectbrazier:block/nail", "y":  180},
+		"facing=west,hidden_lever=false": {"model":  "projectbrazier:block/nail", "y":  270}
 	}
 }

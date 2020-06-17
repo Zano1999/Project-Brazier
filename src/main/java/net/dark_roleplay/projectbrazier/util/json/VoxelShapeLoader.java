@@ -22,7 +22,8 @@ public class VoxelShapeLoader {
 			}else if(token == JsonToken.BEGIN_OBJECT){
 				return VoxelShapes.fullCube();
 			}
-		}catch(IOException e){
+		}catch(Exception e){
+			System.out.println(name);
 			e.printStackTrace();
 		}
 		return VoxelShapes.fullCube();

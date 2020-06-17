@@ -1,18 +1,34 @@
 {
 	"variants": {
-		"facing=north": [
+		"facing=north,hidden_lever=true": [
+			{"model":  "projectbrazier:block/hanging_bone_horn_hidden_lever"},
+			{"model":  "projectbrazier:block/hanging_bone_horn_hidden_lever2"}
+		],
+		"facing=east,hidden_lever=true": [
+			{"model":  "projectbrazier:block/hanging_bone_horn_hidden_lever", "y":  90},
+			{"model":  "projectbrazier:block/hanging_bone_horn_hidden_lever2", "y":  90}
+		],
+		"facing=south,hidden_lever=true": [
+			{"model":  "projectbrazier:block/hanging_bone_horn_hidden_lever", "y":  180},
+			{"model":  "projectbrazier:block/hanging_bone_horn_hidden_lever2", "y":  180}
+		],
+		"facing=west,hidden_lever=true": [
+			{"model":  "projectbrazier:block/hanging_bone_horn_hidden_lever", "y":  270},
+			{"model":  "projectbrazier:block/hanging_bone_horn_hidden_lever2", "y":  270}
+		],
+		"facing=north,hidden_lever=false": [
 			{"model":  "projectbrazier:block/hanging_bone_horn"},
 			{"model":  "projectbrazier:block/hanging_bone_horn2"}
 		],
-		"facing=east": [
+		"facing=east,hidden_lever=false": [
 			{"model":  "projectbrazier:block/hanging_bone_horn", "y":  90},
 			{"model":  "projectbrazier:block/hanging_bone_horn2", "y":  90}
 		],
-		"facing=south": [
+		"facing=south,hidden_lever=false": [
 			{"model":  "projectbrazier:block/hanging_bone_horn", "y":  180},
 			{"model":  "projectbrazier:block/hanging_bone_horn2", "y":  180}
 		],
-		"facing=west": [
+		"facing=west,hidden_lever=false": [
 			{"model":  "projectbrazier:block/hanging_bone_horn", "y":  270},
 			{"model":  "projectbrazier:block/hanging_bone_horn2", "y":  270}
 		]

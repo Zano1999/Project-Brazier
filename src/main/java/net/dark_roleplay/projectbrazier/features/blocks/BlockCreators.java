@@ -1,6 +1,8 @@
 package net.dark_roleplay.projectbrazier.features.blocks;
 
 import net.dark_roleplay.marg.api.materials.IMaterial;
+import net.dark_roleplay.projectbrazier.features.blocks.lattice_block.AxisLatticeBlock;
+import net.dark_roleplay.projectbrazier.features.blocks.lattice_block.FacedLatticeBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.nail.HangUpItemBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.nail.NailBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.templates.*;
@@ -33,7 +35,7 @@ public class BlockCreators {
 				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
 						.hardnessAndResistance(2.0F, 3.0F)
 						.sound(SoundType.WOOD);
-		return new AxisDecoBlock(properties, isTop ? "top_wood_platform" : "bottom_wood_platform");
+		return new HAxisDecoBlock(properties, isTop ? "top_wood_platform" : "bottom_wood_platform");
 	}
 
 
@@ -42,7 +44,7 @@ public class BlockCreators {
 				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
 						.hardnessAndResistance(2.0F, 3.0F)
 						.sound(SoundType.WOOD);
-		return new ConnectedAxisDecoBlock(properties, "default_wood_bench", "positive_wood_bench", "negative_wood_bench", "centered_wood_bench");
+		return new ConnectedHAxisDecoBlock(properties, "default_wood_bench", "positive_wood_bench", "negative_wood_bench", "centered_wood_bench");
 	}
 
 	public static Block createPolsteredWoodBench(IMaterial material){
@@ -50,7 +52,7 @@ public class BlockCreators {
 				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
 						.hardnessAndResistance(2.0F, 3.0F)
 						.sound(SoundType.WOOD);
-		return new ConnectedAxisDecoBlock(properties, "default_polstered_wood_bench", "positive_polstered_wood_bench", "negative_polstered_wood_bench", "centered_polstered_wood_bench");
+		return new ConnectedHAxisDecoBlock(properties, "default_polstered_wood_bench", "positive_polstered_wood_bench", "negative_polstered_wood_bench", "centered_polstered_wood_bench");
 	}
 
 	public static Block createJailLattice(){
@@ -58,7 +60,15 @@ public class BlockCreators {
 				Block.Properties.create(Material.IRON, MaterialColor.IRON)
 						.hardnessAndResistance(5.0F, 1200.0F)
 						.sound(SoundType.ANVIL);
-		return new FacedDecoBlock(properties, "jail_lattice");
+		return new FacedLatticeBlock(properties, "lattice");
+	}
+
+	public static Block createJailLatticeB(){
+		Block.Properties properties =
+				Block.Properties.create(Material.IRON, MaterialColor.IRON)
+						.hardnessAndResistance(5.0F, 1200.0F)
+						.sound(SoundType.ANVIL);
+		return new AxisLatticeBlock(properties, "lattice_centered");
 	}
 
 	public static Block createNail(){
@@ -84,4 +94,8 @@ public class BlockCreators {
 						.sound(SoundType.ANVIL);
 		return new HangUpItemBlock(properties, "hanging_horn", 10);
 	}
+
+//	public interface IBlockGenerator{
+//		public Block mkBlock(Block.Properties
+//	}
 }

@@ -7,9 +7,9 @@
 	"elements": [
 		{
 			"name": "top",
-			"from": [0, 15, 0],
-			"to": [16, 16, 3],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 15.5, 1.5]},
+			"from": [0, 15, 6.5],
+			"to": [16, 16, 9.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 15.5, 8]},
 			"faces": {
 				"north": {"uv": [0, 0, 16, 1], "texture": "#metal"},
 				"south": {"uv": [0, 0, 16, 1], "texture": "#metal"},

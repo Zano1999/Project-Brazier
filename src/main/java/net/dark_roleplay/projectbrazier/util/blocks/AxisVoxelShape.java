@@ -6,11 +6,12 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 
 public class AxisVoxelShape {
 
-	private final VoxelShape x, z;
+	private final VoxelShape x, y, z;
 
 	public AxisVoxelShape(VoxelShape shape){
 		this.x = shape;
 		this.z = VoxelShapeHelper.rotateShape(shape, Direction.EAST);
+		this.y = VoxelShapeHelper.rotateShape(shape, Direction.UP);
 	}
 
 	public VoxelShape get(Direction.Axis axis){
@@ -19,6 +20,8 @@ public class AxisVoxelShape {
 				return this.x;
 			case Z:
 				return this.z;
+			case Y:
+				return this.y;
 			default:
 				return VoxelShapes.fullCube();
 		}

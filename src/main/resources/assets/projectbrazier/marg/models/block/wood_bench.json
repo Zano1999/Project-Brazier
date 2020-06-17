@@ -1,7 +1,7 @@
 {
-	"loader": "drpmedieval:axis_connected_model",
+	"loader": "projectbrazier:axis_connected_model",
 	"default": {
-		"parent": "drpmedieval:block/default_bench",
+		"parent": "projectbrazier:block/default_bench",
 		"textures": {
 			"stripped_log_side": "${texture%stripped_log}",
 			"planks": "${texture%planks}",
@@ -9,7 +9,7 @@
 		}
 	},
 	"positive": {
-		"parent": "drpmedieval:block/positive_bench",
+		"parent": "projectbrazier:block/positive_bench",
 		"textures": {
 			"stripped_log_side": "${texture%stripped_log}",
 			"planks": "${texture%planks}",
@@ -17,7 +17,7 @@
 		}
 	},
 	"negative": {
-		"parent": "drpmedieval:block/negative_bench",
+		"parent": "projectbrazier:block/negative_bench",
 		"textures": {
 			"stripped_log_side": "${texture%stripped_log}",
 			"planks": "${texture%planks}",
@@ -25,7 +25,7 @@
 		}
 	},
 	"centered": {
-		"parent": "drpmedieval:block/centered_bench",
+		"parent": "projectbrazier:block/centered_bench",
 		"textures": {
 			"stripped_log_side": "${texture%stripped_log}",
 			"planks": "${texture%planks}",

@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.features.blocks.templates;
+package net.dark_roleplay.projectbrazier.features.blocks.lattice_block;
 
 import net.dark_roleplay.projectbrazier.util.blocks.AxisVoxelShape;
 import net.dark_roleplay.projectbrazier.util.json.VoxelShapeLoader;
@@ -15,36 +15,37 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
-public class AxisDecoBlock extends Block {
+public class AxisLatticeBlock extends Block {
 
-	protected static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS;
+	protected static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
 
 	protected final AxisVoxelShape shapes;
 
-	public AxisDecoBlock(Properties properties, String shapeName) {
+	public AxisLatticeBlock(Properties properties, String shapeName) {
 		super(properties);
 		this.shapes = new AxisVoxelShape(VoxelShapeLoader.getVoxelShape(shapeName));
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(HORIZONTAL_AXIS, context.getPlacementHorizontalFacing().rotateY().getAxis());
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+		return shapes.get(state.get(AXIS));
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return shapes.get(state.get(HORIZONTAL_AXIS));
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		return this.getDefaultState().with(AXIS, context.getPlacementHorizontalFacing().rotateY().getAxis());
 	}
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		Direction.Axis currentAxis = state.get(HORIZONTAL_AXIS);
+		Direction.Axis currentAxis = state.get(AXIS);
+		if(currentAxis != Direction.Axis.Y);
 		Direction newDir = rot.rotate(currentAxis == Direction.Axis.X ? Direction.EAST : Direction.NORTH);
-		return state.with(HORIZONTAL_AXIS, newDir.getAxis());
+		return state.with(AXIS, newDir.getAxis());
 	}
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(HORIZONTAL_AXIS);
+		builder.add(AXIS);
 	}
 }

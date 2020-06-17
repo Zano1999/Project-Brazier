@@ -42,6 +42,7 @@ public class MedievalBlocks {
 			PACKED_ICE_BRICKS           = register("packed_ice_bricks", Block::new, packedIceProps),
 
 			JAIL_LATTICE          		 = register("jail_lattice", BlockCreators::createJailLattice),
+			JAIL_LATTICE_CENTERED       = registerNoItem("jail_lattice_centered", BlockCreators::createJailLatticeB),
 			NAIL          					 = register("nail", BlockCreators::createNail),
 			HANGING_HORN					 = registerNoItem("hanging_bone_horn", BlockCreators::createHangingHorn),
 			HANGING_SILVER_SPYGLASS		 = registerNoItem("hanging_silver_spyglass", BlockCreators::createHangingSpyglass),

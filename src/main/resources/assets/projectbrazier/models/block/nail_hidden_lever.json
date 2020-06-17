@@ -1,0 +1,45 @@
+{
+	"credit": "Made by JTK222",
+	"textures": {
+		"particle": "projectbrazier:block/jail_lattice",
+		"metal": "projectbrazier:block/jail_lattice"
+	},
+	"elements": [
+		{
+			"from": [7.75, 14.25, 14],
+			"to": [8.25, 14.75, 16],
+			"rotation": {"angle": 45, "axis": "z", "origin": [8, 14.5, 14.4375]},
+			"faces": {
+				"east": {"uv": [5, 0, 7, 1], "texture": "#metal"},
+				"west": {"uv": [5, 2, 7, 3], "texture": "#metal"},
+				"up": {"uv": [3, 0, 4, 2], "texture": "#metal"},
+				"down": {"uv": [0, 0, 1, 2], "texture": "#metal"}
+			}
+		},
+		{
+			"from": [7.5, 14, 13.75],
+			"to": [8.5, 15, 14],
+			"rotation": {"angle": 45, "axis": "z", "origin": [8, 14.5, 14.4375]},
+			"faces": {
+				"north": {"uv": [5, 1, 6.5, 2.5], "texture": "#metal"},
+				"east": {"uv": [0, 0, 0.25, 1.5], "texture": "#metal"},
+				"south": {"uv": [0, 0, 1.5, 1.5], "texture": "#metal"},
+				"west": {"uv": [0, 0, 0.25, 1.5], "texture": "#metal"},
+				"up": {"uv": [0, 0, 1.5, 0.25], "texture": "#metal"},
+				"down": {"uv": [0, 0, 1.5, 0.25], "texture": "#metal"}
+			}
+		},
+		{
+			"from": [7.5, 14, 15.75],
+			"to": [8.5, 15, 16],
+			"rotation": {"angle": 45, "axis": "z", "origin": [8, 14.5, 16.4375]},
+			"faces": {
+				"north": {"uv": [5, 1, 6.5, 2.5], "texture": "#metal"},
+				"east": {"uv": [0, 0, 0.25, 1.5], "texture": "#metal"},
+				"west": {"uv": [0, 0, 0.25, 1.5], "texture": "#metal"},
+				"up": {"uv": [0, 0, 1.5, 0.25], "texture": "#metal"},
+				"down": {"uv": [0, 0, 1.5, 0.25], "texture": "#metal"}
+			}
+		}
+	]
+}
