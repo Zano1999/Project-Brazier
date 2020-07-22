@@ -1,0 +1,26 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"type": "wood",
+		"textures": [
+			"planks"
+		]
+	},
+	"customKeys": [
+		"cross",
+		"dense_vertical",
+		"diamond",
+		"grid",
+		"vertical"
+	],
+	"tasks": [
+		{
+			"input": "projectbrazier:marg/blockstates/lattice.json",
+			"output": "projectbrazier:blockstates/${material}_${custom}_lattice.json"
+		},
+		{
+			"input": "projectbrazier:marg/blockstates/lattice_cantered.json",
+			"output": "projectbrazier:blockstates/${material}_${custom}_lattice_cantered.json"
+		}
+	]
+}

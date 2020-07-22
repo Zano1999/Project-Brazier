@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"axis=z": {"model":  "projectbrazier:block/${material}_${custom}_lattice_centered"},
+		"axis=x": {"model":  "projectbrazier:block/${material}_${custom}_lattice_centered", "y": 90},
+		"axis=y": {"model":  "projectbrazier:block/${material}_${custom}_lattice_centered", "x":  270}
+	}
+}

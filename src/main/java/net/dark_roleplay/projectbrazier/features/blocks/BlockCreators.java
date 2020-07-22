@@ -5,6 +5,7 @@ import net.dark_roleplay.projectbrazier.features.blocks.lattice_block.AxisLattic
 import net.dark_roleplay.projectbrazier.features.blocks.lattice_block.FacedLatticeBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.nail.HangUpItemBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.nail.NailBlock;
+import net.dark_roleplay.projectbrazier.features.blocks.special.BrazierBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.templates.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -71,12 +72,36 @@ public class BlockCreators {
 		return new AxisLatticeBlock(properties, "lattice_centered");
 	}
 
+	public static Block createWoodWindow(IMaterial material){
+		Block.Properties properties =
+				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
+						.hardnessAndResistance(2.0F, 3.0F)
+						.sound(SoundType.WOOD);
+		return new FacedLatticeBlock(properties, "lattice");
+	}
+
+	public static Block createWoodWindowB(IMaterial material){
+		Block.Properties properties =
+				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
+						.hardnessAndResistance(2.0F, 3.0F)
+						.sound(SoundType.WOOD);
+		return new AxisLatticeBlock(properties, "lattice_centered");
+	}
+
 	public static Block createNail(){
 		Block.Properties properties =
 				Block.Properties.create(Material.ANVIL, MaterialColor.IRON)
 						.hardnessAndResistance(5.0F, 1200.0F)
 						.sound(SoundType.ANVIL);
 		return new NailBlock(properties, "nail");
+	}
+
+	public static Block createIronBrazier(){
+		Block.Properties properties =
+				Block.Properties.create(Material.ANVIL, MaterialColor.IRON)
+						.hardnessAndResistance(5.0F, 1200.0F)
+						.sound(SoundType.ANVIL);
+		return new BrazierBlock(properties);
 	}
 
 	public static Block createHangingHorn(){
