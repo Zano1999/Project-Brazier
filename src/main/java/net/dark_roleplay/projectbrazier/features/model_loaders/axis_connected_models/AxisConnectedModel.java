@@ -9,7 +9,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ILightReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraftforge.client.model.BakedModelWrapper;
 import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.IModelLoader;
@@ -42,8 +42,8 @@ public class AxisConnectedModel implements IModelGeometry {
 	}
 
 	@Override
-	public Collection<Material> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
-		Set<Material> textures = new HashSet<>();
+	public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
+		Set<RenderMaterial> textures = new HashSet<>();
 
 		textures.addAll(defaultModel.getTextures(modelGetter, missingTextureErrors));
 		textures.addAll(positiveModel.getTextures(modelGetter, missingTextureErrors));
@@ -84,8 +84,7 @@ public class AxisConnectedModel implements IModelGeometry {
 		}
 
 		@Nonnull
-		@Override
-		public IModelData getModelData(@Nonnull ILightReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull IModelData tileData) {
+		public IModelData getModelData(@Nonnull IWorldReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull IModelData tileData) {
 			IModelData data = new AxisConnectedModelData();
 			data.setData(AxisConnectedModelData.CONNECTION, AxisConnectionType.getConnections(world, pos, state));
 			return data;

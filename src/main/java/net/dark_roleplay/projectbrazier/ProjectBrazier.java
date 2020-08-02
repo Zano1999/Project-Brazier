@@ -27,7 +27,7 @@ public class ProjectBrazier {
         //JsonReader reader = new JsonReader(new InputStreamReader(Marg.class.getClassLoader().getResourceAsStream("data/bop_woods.json")));
         //Marg.MARG_GSON.fromJson(reader, Material.class);
 
-        MedievalNetworking.initNetworking();
+        MedievalNetworking.registerPackets();
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::hackyHackToByPassLoadingOrder);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommonStuff);

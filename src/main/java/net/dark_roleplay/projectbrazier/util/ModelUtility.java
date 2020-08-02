@@ -6,8 +6,8 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.Vec2f;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector2f;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.client.model.pipeline.BakedQuadBuilder;
 
 public class ModelUtility {
@@ -59,13 +59,13 @@ public class ModelUtility {
 	}
 
 	public static class Vertex {
-		private Vec3d pos;
+		private Vector3d pos;
 		private int color;
-		private Vec2f texUV;
-		private Vec2f lightUV;
-		private Vec3d normal;
+		private Vector2f texUV;
+		private Vector2f lightUV;
+		private Vector3d normal;
 
-		public Vertex(Vec3d pos, int color, Vec2f texUV, Vec2f lightUV, Vec3d normal) {
+		public Vertex(Vector3d pos, int color, Vector2f texUV, Vector2f lightUV, Vector3d normal) {
 			this.pos = pos;
 			this.color = color;
 			this.texUV = texUV;
@@ -73,7 +73,7 @@ public class ModelUtility {
 			this.normal = normal;
 		}
 
-		public Vec3d getPos() {
+		public Vector3d getPos() {
 			return pos;
 		}
 
@@ -81,15 +81,15 @@ public class ModelUtility {
 			return color;
 		}
 
-		public Vec2f getTexUV() {
+		public Vector2f getTexUV() {
 			return texUV;
 		}
 
-		public Vec2f getLightUV() {
+		public Vector2f getLightUV() {
 			return lightUV;
 		}
 
-		public Vec3d getNormal() {
+		public Vector3d getNormal() {
 			return normal;
 		}
 	}

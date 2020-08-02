@@ -4,6 +4,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import net.dark_roleplay.projectbrazier.features.model_loaders.axis_connected_models.AxisConnectionType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.model.*;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -11,7 +12,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ILightReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraftforge.client.model.BakedModelWrapper;
 import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.IModelLoader;
@@ -46,9 +47,9 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 	}
 
 	@Override
-	public Collection<Material> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
+	public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
 
-		Set<Material> textures = new HashSet<>();
+		Set<RenderMaterial> textures = new HashSet<>();
 
 		textures.addAll(baseModel.getTextures(modelGetter, missingTextureErrors));
 		textures.addAll(priPosModel.getTextures(modelGetter, missingTextureErrors));
@@ -72,11 +73,12 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 		}
 
 
+		//func_235901_b_ -> BlockState#has
 		@Nonnull
 		@Override
 		public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
-			Direction facing = state.has(BlockStateProperties.HORIZONTAL_FACING) ? state.get(BlockStateProperties.HORIZONTAL_FACING) :
-					state.has(BlockStateProperties.FACING) ? state.get(BlockStateProperties.FACING) : null;
+			Direction facing = state.func_235901_b_(BlockStateProperties.HORIZONTAL_FACING) ? state.get(BlockStateProperties.HORIZONTAL_FACING) :
+					state.func_235901_b_(BlockStateProperties.FACING) ? state.get(BlockStateProperties.FACING) : null;
 			boolean flag = facing == Direction.NORTH || facing == Direction.EAST || facing == Direction.UP || facing == Direction.DOWN;
 			boolean flag2 = facing == Direction.DOWN;
 
@@ -102,16 +104,16 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 			return this.originalModel.getQuads(state, side, rand, extraData);
 		}
 
+		// func_235901_b_ -> BlockState#has
 		@Nonnull
-		@Override
-		public IModelData getModelData(@Nonnull ILightReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull IModelData tileData) {
+		public IModelData getModelData(@Nonnull IWorldReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull IModelData tileData) {
 			IModelData data = new SimplePaneModelData();
 
 			boolean flag, flag2 = false, flag3 = false;
-			if ((flag = state.has(BlockStateProperties.HORIZONTAL_AXIS)) ||
-					(flag2 = state.has(BlockStateProperties.AXIS)) ||
-					(flag3 = state.has(BlockStateProperties.HORIZONTAL_FACING)) ||
-					state.has(BlockStateProperties.FACING)
+			if ((flag = state.func_235901_b_(BlockStateProperties.HORIZONTAL_AXIS)) ||
+					(flag2 = state.func_235901_b_(BlockStateProperties.AXIS)) ||
+					(flag3 = state.func_235901_b_(BlockStateProperties.HORIZONTAL_FACING)) ||
+					state.func_235901_b_(BlockStateProperties.FACING)
 			) {
 				Direction.Axis axis = flag ?
 						state.get(BlockStateProperties.HORIZONTAL_AXIS) :

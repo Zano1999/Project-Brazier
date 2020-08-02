@@ -14,7 +14,14 @@ public class AxisVoxelShape {
 		this.y = VoxelShapeHelper.rotateShape(shape, Direction.UP);
 	}
 
-	public VoxelShape get(Direction.Axis axis){
+	public AxisVoxelShape(VoxelShape shape, boolean rotateFirstZ){
+		this.x = shape;
+		this.z = VoxelShapeHelper.rotateShape(shape, Direction.EAST);
+		this.y = VoxelShapeHelper.rotateShape(VoxelShapeHelper.rotateShape(shape, Direction.EAST), Direction.UP);
+	}
+
+
+		public VoxelShape get(Direction.Axis axis){
 		switch(axis){
 			case X:
 				return this.x;

@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.handler;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
+import net.dark_roleplay.projectbrazier.features.blocks.drawbridge.DrawbridgeAnchorTileEntity;
 import net.dark_roleplay.projectbrazier.features.tile_entities.SingleItemTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
@@ -15,12 +16,14 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class MedievalTileEntities {
-	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, ProjectBrazier.MODID);
+	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ProjectBrazier.MODID);
 
-	public static final RegistryObject<TileEntityType<?>>
+	public static final RegistryObject<TileEntityType<SingleItemTileEntity>>
 			SINGLE_ITEM_STORAGE = TILE_ENTITIES.register("single_item_storage", () -> createType(SingleItemTileEntity::new,
 			MedievalBlocks.HANGING_HORN
 	));
+	public static final RegistryObject<TileEntityType<DrawbridgeAnchorTileEntity>>
+			DRAWBRODGE_ANCHOR = TILE_ENTITIES.register("drawbridge_anchor", () -> createType(DrawbridgeAnchorTileEntity::new, MedievalBlocks.DRAWBRIDGE_ANCHOR));
 
 
 	protected static <T extends TileEntity> TileEntityType<T> createType(Supplier<T> supplier, RegistryObject<Block>... blocks) {

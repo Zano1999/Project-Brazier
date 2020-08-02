@@ -1,11 +1,14 @@
 package net.dark_roleplay.projectbrazier;
 
 import net.dark_roleplay.marg.api.materials.IMaterial;
+import net.dark_roleplay.projectbrazier.features.blocks.drawbridge.DrawbridgeAnchorTileEntityRenderer;
 import net.dark_roleplay.projectbrazier.handler.MedievalBlocks;
+import net.dark_roleplay.projectbrazier.handler.MedievalTileEntities;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 import java.util.Map;
 
@@ -17,6 +20,8 @@ public class ProjectBrazierClient {
 	public static void registerRenderLayers(){
 		RenderTypeLookup.setRenderLayer(MedievalBlocks.HANGING_HORN.get(), RenderType.getCutout());
 
+		//TODO Move to TER registration event?
+		ClientRegistry.bindTileEntityRenderer(MedievalTileEntities.DRAWBRODGE_ANCHOR.get(), DrawbridgeAnchorTileEntityRenderer::new);
 	}
 
 	private static void setRenderLayer(RenderType type, Map<IMaterial, RegistryObject<Block>>... materialBlockObjects){

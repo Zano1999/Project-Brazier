@@ -56,7 +56,7 @@ public class ZoomListeners {
 	public static void GameOverlay(RenderGameOverlayEvent.Pre event){
 		if(event.getType() != RenderGameOverlayEvent.ElementType.ALL) return;
 		if(zoom > 0){
-			SpyglassOverlay.INSTANCE.render(0, 0, 0);
+			SpyglassOverlay.INSTANCE.render(event.getMatrixStack(), 0, 0, 0);
 		}
 	}
 

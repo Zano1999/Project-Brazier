@@ -4,6 +4,7 @@ import net.dark_roleplay.marg.api.materials.IMaterial;
 import net.dark_roleplay.marg.api.materials.IMaterialCondition;
 import net.dark_roleplay.marg.api.materials.ItemMaterialCondition;
 import net.dark_roleplay.projectbrazier.features.blocks.BlockCreators;
+import net.dark_roleplay.projectbrazier.features.blocks.drawbridge.DrawbridgeAnchorBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SoundType;
@@ -32,6 +33,7 @@ public class MedievalBlocks {
 
 
 	public static final RegistryObject<Block>
+			DRAWBRIDGE_ANCHOR				 = register("drawbridge_anchor", DrawbridgeAnchorBlock::new, stoneProps),
 			ANDESITE_BRICKS             = register("andesite_bricks", Block::new, stoneProps),
 			DIORITE_BRICKS              = register("diorite_bricks", Block::new, stoneProps),
 			GRANITE_BRICKS              = register("granite_bricks", Block::new, stoneProps),
@@ -97,7 +99,7 @@ public class MedievalBlocks {
 		Map<DyeColor, Map<IMaterial, RegistryObject<Block>>> blocks = new EnumMap<>(DyeColor.class);
 
 		for(DyeColor color : DyeColor.values()){
-			blocks.put(color, register(BLOCKS, name.replace("${color}", color.getName()), condition, suplier));
+			blocks.put(color, register(BLOCKS, name.replace("${color}", color.getTranslationKey()), condition, suplier));
 		}
 
 		return blocks;

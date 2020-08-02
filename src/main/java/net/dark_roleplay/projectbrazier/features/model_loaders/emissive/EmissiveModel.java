@@ -3,6 +3,7 @@ package net.dark_roleplay.projectbrazier.features.model_loaders.emissive;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.IResourceManager;
@@ -56,8 +57,7 @@ public class EmissiveModel implements IModelGeometry {
 					preEmissiveBakedModel.getOverrides()
 			));
 		}
-
-		return new CompositeModel(owner.isShadedInGui(), owner.useSmoothLighting(), ((Function<Material, TextureAtlasSprite>)spriteGetter).apply(owner.resolveTexture("particle")), builder.build(), owner.getCombinedTransform(), overrides);
+		return new CompositeModel(owner.isShadedInGui(), owner.isSideLit(), owner.useSmoothLighting(), ((Function<RenderMaterial, TextureAtlasSprite>)spriteGetter).apply(owner.resolveTexture("particle")), builder.build(), owner.getCombinedTransform(), overrides);
 	}
 
 	@Override
@@ -109,12 +109,13 @@ public class EmissiveModel implements IModelGeometry {
 		vertexData[6 + 8 + 8] = light;
 		vertexData[6 + 8 + 8 + 8] = light;
 
+		//func_239287_f_ -> shouldApplyDiffuseLighting
 		return new BakedQuad(
 				vertexData,
 				quad.getTintIndex(),
 				quad.getFace(),
 				quad.func_187508_a(),
-				quad.shouldApplyDiffuseLighting()
+				quad.func_239287_f_()
 		);
 	}
 }

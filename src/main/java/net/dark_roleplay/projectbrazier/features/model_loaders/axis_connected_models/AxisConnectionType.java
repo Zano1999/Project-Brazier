@@ -45,9 +45,11 @@ public enum AxisConnectionType {
 		return this.isNegative;
 	}
 
+
+	//func_235901_b_ -> has
 	public static AxisConnectionType getConnections(@Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull BlockState state){
 		boolean flag = false;
-		if ((flag = state.has(BlockStateProperties.HORIZONTAL_AXIS)) || state.has(BlockStateProperties.AXIS)) {
+		if ((flag = state.func_235901_b_(BlockStateProperties.HORIZONTAL_AXIS)) || state.func_235901_b_(BlockStateProperties.AXIS)) {
 			Direction.Axis axis = flag ? state.get(BlockStateProperties.HORIZONTAL_AXIS) : state.get(BlockStateProperties.AXIS);
 			return getConnections(world, pos, state, axis);
 		}

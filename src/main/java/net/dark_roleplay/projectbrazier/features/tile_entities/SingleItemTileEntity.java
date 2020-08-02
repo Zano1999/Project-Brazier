@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.features.tile_entities;
 
 import net.dark_roleplay.projectbrazier.handler.MedievalTileEntities;
+import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -35,8 +36,8 @@ public class SingleItemTileEntity extends TileEntity {
 	}
 
 	@Override
-	public void read(CompoundNBT compound) {
-		super.read(compound);
+	public void read(BlockState state, CompoundNBT compound) {
+		super.read(state, compound);
 		if(compound.contains("inventory"))
 			this.inventory.deserializeNBT( compound.getCompound("inventory"));
 	}

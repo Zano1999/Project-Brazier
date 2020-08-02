@@ -23,7 +23,7 @@ public class AxisLatticeBlock extends Block {
 
 	public AxisLatticeBlock(Properties properties, String shapeName) {
 		super(properties);
-		this.shapes = new AxisVoxelShape(VoxelShapeLoader.getVoxelShape(shapeName));
+		this.shapes = new AxisVoxelShape(VoxelShapeLoader.getVoxelShape(shapeName), true);
 	}
 
 	@Override
