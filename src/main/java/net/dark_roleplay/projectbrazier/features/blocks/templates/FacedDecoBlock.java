@@ -1,7 +1,6 @@
 package net.dark_roleplay.projectbrazier.features.blocks.templates;
 
 import net.dark_roleplay.projectbrazier.util.blocks.FacedVoxelShape;
-import net.dark_roleplay.projectbrazier.util.blocks.HFacedVoxelShape;
 import net.dark_roleplay.projectbrazier.util.json.VoxelShapeLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -2,7 +2,6 @@ package net.dark_roleplay.projectbrazier.features.blocks.nail;
 
 import net.dark_roleplay.projectbrazier.handler.MedievalBlocks;
 import net.dark_roleplay.projectbrazier.handler.MedievalItems;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import java.util.HashMap;

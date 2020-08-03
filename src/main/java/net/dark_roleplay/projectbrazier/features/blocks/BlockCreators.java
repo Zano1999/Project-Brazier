@@ -6,7 +6,9 @@ import net.dark_roleplay.projectbrazier.features.blocks.lattice_block.FacedLatti
 import net.dark_roleplay.projectbrazier.features.blocks.nail.HangUpItemBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.nail.NailBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.special.BrazierBlock;
-import net.dark_roleplay.projectbrazier.features.blocks.templates.*;
+import net.dark_roleplay.projectbrazier.features.blocks.templates.ConnectedHAxisDecoBlock;
+import net.dark_roleplay.projectbrazier.features.blocks.templates.DecoBlock;
+import net.dark_roleplay.projectbrazier.features.blocks.templates.HAxisDecoBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

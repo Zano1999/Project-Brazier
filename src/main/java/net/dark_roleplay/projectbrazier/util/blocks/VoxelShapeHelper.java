@@ -1,13 +1,13 @@
 package net.dark_roleplay.projectbrazier.util.blocks;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import net.minecraft.block.Block;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public final class VoxelShapeHelper {
 
