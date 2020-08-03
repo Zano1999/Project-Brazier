@@ -45,6 +45,7 @@ public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableT
 		width = bridgeComp.getInt("width");
 		height = bridgeComp.getInt("height");
 		angle = bridgeComp.getInt("angle");
+		prevAngle = angle;
 		movementState = State.getFromID(bridgeComp.getInt("state"));
 	}
 
@@ -104,7 +105,6 @@ public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableT
 	@Override
 	public void tick() {
 		if(movementState != State.STOPPED){
-			System.out.println(this.world.isRemote);
 			prevAngle = angle;
 			float tmpAngle = angle + (movementState == State.RAISING ? 1 : -1);
 			angle = Math.max(0, Math.min(90, tmpAngle));
