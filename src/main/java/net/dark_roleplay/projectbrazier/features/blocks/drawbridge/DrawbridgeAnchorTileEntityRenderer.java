@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Quaternion;
@@ -18,6 +19,7 @@ import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.IBlockDisplayReader;
 import net.minecraftforge.client.model.data.EmptyModelData;
 import org.lwjgl.system.MathUtil;
+import sun.java2d.windows.GDIRenderer;
 
 public class DrawbridgeAnchorTileEntityRenderer extends TileEntityRenderer<DrawbridgeAnchorTileEntity> {
 	public DrawbridgeAnchorTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcher) {
@@ -33,26 +35,29 @@ public class DrawbridgeAnchorTileEntityRenderer extends TileEntityRenderer<Drawb
 
 		IVertexBuilder vBuffer = buffer.getBuffer(RenderType.getSolid());
 
+		Direction dir = te.getBlockState().get(DrawbridgeAnchorBlock.HORIZONTAL_FACING);
+		Direction dirRY = dir.rotateY();
+
 		matrixStack.push();
 
 		matrixStack.translate(0.5F, 0.5F, 0.5F);
-		matrixStack.rotate(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, te.getPrevAngle(), te.getAngle())));
+		matrixStack.rotate(dirRY.toVector3f().rotationDegrees(MathHelper.lerp(partialTicks, te.getPrevAngle(), te.getAngle())));
 
 		matrixStack.translate(-0.5F, -0.5F, -0.5F);
 		BlockPos.Mutable pos2 = new BlockPos.Mutable(te.getPos().getX(), te.getPos().getY() ,te.getPos().getZ());
 
-		for(int w = 0; w < 5; w++){
-			matrixStack.translate(0, 0, 1);
-			pos2.move(0, 0, 1);
-			for(int h = 0; h < 8; h++) {
+		for(int w = 0; w < te.getWidth(); w++){
+			matrixStack.translate(dirRY.getXOffset(), dirRY.getYOffset(), dirRY.getZOffset());
+			pos2.move(dirRY);
+			for(int h = 0; h < te.getHeight(); h++) {
 				Minecraft.getInstance().getBlockRendererDispatcher().getBlockModelRenderer()
 						.renderModelSmooth(te.getWorld(), planksModel, Blocks.OAK_PLANKS.getDefaultState(), pos2, matrixStack, vBuffer, false, te.getWorld().getRandom(), 0L, combinedLight, EmptyModelData.INSTANCE);
 
-				matrixStack.translate(1, 0, 0);
-				pos2.move(1, 0, 0);
+				matrixStack.translate(dir.getXOffset(), dir.getYOffset(), dir.getZOffset());
+				pos2.move(dir);
 			}
-			matrixStack.translate(-8, 0, 0);
-			pos2.move(-8, 0, 0);
+			matrixStack.translate(-dir.getXOffset() * te.getHeight(), -dir.getYOffset() * te.getHeight(), -dir.getZOffset() * te.getHeight());
+			pos2.move(dir, -te.getHeight());
 		}
 
 
