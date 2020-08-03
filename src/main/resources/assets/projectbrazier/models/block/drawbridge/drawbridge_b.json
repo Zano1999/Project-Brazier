@@ -1,0 +1,30 @@
+{
+	"credit": "Made by JTK222",
+	"textures": {
+		"0": "block/oak_planks",
+		"1": "block/stripped_oak_log",
+		"particle": "block/oak_planks"
+	},
+	"elements": [
+		{
+			"from": [0, 10.5, 0],
+			"to": [16, 14.5, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8.5, 8]},
+			"faces": {
+				"south": {"uv": [0, 0, 16, 4], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 5, 5],
+			"to": [16, 10.5, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 7.5, 3]},
+			"faces": {
+				"north": {"uv": [5.5, 0, 11, 16], "rotation": 90, "texture": "#1"},
+				"south": {"uv": [5.5, 0, 11, 16], "rotation": 90, "texture": "#1"},
+				"down": {"uv": [5, 0, 11, 16], "rotation": 90, "texture": "#1"}
+			}
+		}
+	]
+}

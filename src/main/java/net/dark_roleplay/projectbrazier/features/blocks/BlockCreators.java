@@ -20,7 +20,7 @@ public class BlockCreators {
 		Block.Properties properties =
 				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
 						.hardnessAndResistance(2.0F, 3.0F)
-						.sound(SoundType.WOOD);
+						.sound(SoundType.WOOD).notSolid();
 		return new DecoBlock(properties, "closed_barrel");
 	}
 
@@ -29,7 +29,7 @@ public class BlockCreators {
 		Block.Properties properties =
 				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
 						.hardnessAndResistance(2.0F, 3.0F)
-						.sound(SoundType.WOOD);
+						.sound(SoundType.WOOD).notSolid();
 		return new DecoBlock(properties, "open_barrel");
 	}
 
@@ -46,7 +46,7 @@ public class BlockCreators {
 		Block.Properties properties =
 				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
 						.hardnessAndResistance(2.0F, 3.0F)
-						.sound(SoundType.WOOD);
+						.sound(SoundType.WOOD).notSolid();
 		return new ConnectedHAxisDecoBlock(properties, "default_wood_bench", "positive_wood_bench", "negative_wood_bench", "centered_wood_bench");
 	}
 
@@ -54,7 +54,7 @@ public class BlockCreators {
 		Block.Properties properties =
 				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
 						.hardnessAndResistance(2.0F, 3.0F)
-						.sound(SoundType.WOOD);
+						.sound(SoundType.WOOD).notSolid();
 		return new ConnectedHAxisDecoBlock(properties, "default_polstered_wood_bench", "positive_polstered_wood_bench", "negative_polstered_wood_bench", "centered_polstered_wood_bench");
 	}
 
@@ -62,7 +62,7 @@ public class BlockCreators {
 		Block.Properties properties =
 				Block.Properties.create(Material.IRON, MaterialColor.IRON)
 						.hardnessAndResistance(5.0F, 1200.0F)
-						.sound(SoundType.ANVIL);
+						.sound(SoundType.ANVIL).notSolid();
 		return new FacedLatticeBlock(properties, "lattice");
 	}
 
@@ -70,7 +70,7 @@ public class BlockCreators {
 		Block.Properties properties =
 				Block.Properties.create(Material.IRON, MaterialColor.IRON)
 						.hardnessAndResistance(5.0F, 1200.0F)
-						.sound(SoundType.ANVIL);
+						.sound(SoundType.ANVIL).notSolid();
 		return new AxisLatticeBlock(properties, "lattice_centered");
 	}
 
@@ -78,7 +78,7 @@ public class BlockCreators {
 		Block.Properties properties =
 				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
 						.hardnessAndResistance(2.0F, 3.0F)
-						.sound(SoundType.WOOD);
+						.sound(SoundType.WOOD).notSolid();
 		return new FacedLatticeBlock(properties, "lattice");
 	}
 
@@ -86,7 +86,7 @@ public class BlockCreators {
 		Block.Properties properties =
 				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
 						.hardnessAndResistance(2.0F, 3.0F)
-						.sound(SoundType.WOOD);
+						.sound(SoundType.WOOD).notSolid();
 		return new AxisLatticeBlock(properties, "lattice_centered");
 	}
 
@@ -94,7 +94,7 @@ public class BlockCreators {
 		Block.Properties properties =
 				Block.Properties.create(Material.ANVIL, MaterialColor.IRON)
 						.hardnessAndResistance(5.0F, 1200.0F)
-						.sound(SoundType.ANVIL);
+						.sound(SoundType.ANVIL).notSolid();
 		return new NailBlock(properties, "nail");
 	}
 
@@ -102,7 +102,7 @@ public class BlockCreators {
 		Block.Properties properties =
 				Block.Properties.create(Material.ANVIL, MaterialColor.IRON)
 						.hardnessAndResistance(5.0F, 1200.0F)
-						.sound(SoundType.ANVIL);
+						.sound(SoundType.ANVIL).notSolid();
 		return new BrazierBlock(properties);
 	}
 
@@ -110,7 +110,7 @@ public class BlockCreators {
 		Block.Properties properties =
 				Block.Properties.create(Material.ANVIL, MaterialColor.IRON)
 						.hardnessAndResistance(5.0F, 1200.0F)
-						.sound(SoundType.ANVIL);
+						.sound(SoundType.ANVIL).notSolid();
 		return new HangUpItemBlock(properties, "hanging_horn", 6);
 	}
 
@@ -118,7 +118,7 @@ public class BlockCreators {
 		Block.Properties properties =
 				Block.Properties.create(Material.ANVIL, MaterialColor.IRON)
 						.hardnessAndResistance(5.0F, 1200.0F)
-						.sound(SoundType.ANVIL);
+						.sound(SoundType.ANVIL).notSolid();
 		return new HangUpItemBlock(properties, "hanging_horn", 10);
 	}
 

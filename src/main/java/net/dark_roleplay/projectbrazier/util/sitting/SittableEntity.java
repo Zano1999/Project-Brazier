@@ -13,19 +13,19 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntitySittable extends Entity {
+public class SittableEntity extends Entity {
 	public int blockPosX;
 	public int blockPosY;
 	public int blockPosZ;
 	
 	//TODO EntitySize is now a part of hte Entity Type
-	public EntitySittable(EntityType type, World world) {
+	public SittableEntity(EntityType type, World world) {
 		super(type, world);
 		System.out.println("Created Sittable");
 		this.noClip = true;
 	}
 
-	public EntitySittable(EntityType type, World world, double x, double y, double z, double yOffset) {
+	public SittableEntity(EntityType type, World world, double x, double y, double z, double yOffset) {
 		this(type, world);
 		this.blockPosX = (int) x;
 		this.blockPosY = (int) y;
@@ -33,7 +33,7 @@ public class EntitySittable extends Entity {
 		setPosition(x + 0.5D, y + yOffset, z + 0.5D);
 	}
 
-	public EntitySittable(EntityType type, World world, double x, double y, double z, double yOffset, Direction facing) {
+	public SittableEntity(EntityType type, World world, double x, double y, double z, double yOffset, Direction facing) {
 		this(type, world);
 		this.blockPosX = (int) x;
 		this.blockPosY = (int) y;

@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "net.dark_roleplay.projectbrazier.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"refmap": "projectbrazier.refmap.json",
+	"mixins": [
+	],
+	"client":[
+		"ExampleMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"minVersion": "0.8"
+}

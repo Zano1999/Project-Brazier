@@ -4,10 +4,12 @@ buildscript {
         jcenter()
         mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
+        maven {url='https://dist.creeper.host/Sponge/maven'}
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
         classpath "com.wynprice.cursemaven:CurseMaven:1.2.3"
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 
@@ -24,9 +26,9 @@ apply plugin: 'com.wynprice.cursemaven'
 
 def MOD_VERSION = '0.5';
 
-version = "${MC_VERSION}-${MOD_VERSION}"
+version = "${mc_version}-${mod_version}"
 group = 'net.dark_roleplay'
-archivesBaseName = 'project_brazier'
+archivesBaseName = "${modid}"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
@@ -44,7 +46,7 @@ sourceSets {
 }
 
 minecraft {
-    mappings channel: 'snapshot', version: "${MAPPINGS_VERSION}"
+    mappings channel: 'snapshot', version: "${mapping}-${mcp_version}"
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -94,7 +96,7 @@ dependencies {
     minecraft([
             group   : 'net.minecraftforge',
             name    : 'forge',
-            version : "${MC_VERSION}-${FORGE_VERSION}"
+            version : "${mc_version}-${forge_version}"
 
     ])
 
@@ -110,13 +112,14 @@ jar {
 
     manifest {
         attributes([
-            "Specification-Title": "projectbrazier",
+            "Specification-Title": "${modid}",
             "Specification-Vendor": "Dark Roleplay",
-            "Specification-Version": "${version}",
+            "Specification-Version": "1",
             "Implementation-Title": "Project Brazier",
             "Implementation-Version": "${version}",
             "Implementation-Vendor": "Dark Roleplay",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            "MixinConfigs": "${modid}.mixins.json"
         ])
     }
 }
@@ -207,4 +210,10 @@ publishing {
             }
         }
     }
+}
+
+apply plugin: 'org.spongepowered.mixin'
+
+mixin {
+    add sourceSets.main, "${modid}.refmap.json"
 }

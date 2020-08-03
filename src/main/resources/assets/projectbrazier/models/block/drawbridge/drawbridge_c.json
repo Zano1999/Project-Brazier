@@ -1,0 +1,17 @@
+{
+	"credit": "Made by JTK222",
+	"textures": {
+		"0": "block/oak_planks",
+		"particle": "block/oak_planks"
+	},
+	"elements": [
+		{
+			"from": [0, 10.5, 0],
+			"to": [16, 14.5, 16],
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		}
+	]
+}
