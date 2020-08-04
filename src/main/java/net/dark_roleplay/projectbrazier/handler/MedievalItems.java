@@ -1,8 +1,8 @@
 package net.dark_roleplay.projectbrazier.handler;
 
+import net.dark_roleplay.projectbrazier.features.data_props.ItemPropertyLoader;
 import net.dark_roleplay.projectbrazier.features.items.WarHornItem;
 import net.dark_roleplay.projectbrazier.features.items.ZoomItem;
-import net.dark_roleplay.projectbrazier.util.json.ItemPropertyLoader;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -67,6 +67,6 @@ public class MedievalItems {
 	}
 
 	private static RegistryObject<Item> register(String name, Function<Item.Properties, Item> suplier) {
-		return ITEMS.register(name, () -> suplier.apply(ItemPropertyLoader.properties(name)));
+		return ITEMS.register(name, () -> suplier.apply(ItemPropertyLoader.getProp(name)));
 	}
 }

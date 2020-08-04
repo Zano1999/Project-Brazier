@@ -42,6 +42,7 @@ sourceSets {
     main {
         compileClasspath += sourceSets.api.output
         runtimeClasspath += sourceSets.api.output
+        ext.refMap = "${modid}.refmap.json"
     }
 }
 

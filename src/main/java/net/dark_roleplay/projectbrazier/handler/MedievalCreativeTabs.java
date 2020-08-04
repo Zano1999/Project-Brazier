@@ -47,4 +47,17 @@ public class MedievalCreativeTabs {
 			return icon.get();
 		}
 	}
+
+	public static ItemGroup getGroupFromName(String name){
+		switch(name){
+			case "misc":
+				return MedievalCreativeTabs.misc();
+			case "food":
+				return MedievalCreativeTabs.food();
+			case "deco":
+				return MedievalCreativeTabs.decor();
+			default:
+				return null;
+		}
+	}
 }

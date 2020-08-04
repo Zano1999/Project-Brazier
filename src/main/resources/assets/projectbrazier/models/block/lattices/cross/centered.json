@@ -1,9 +1,5 @@
 {
 	"credit": "Made for Dark Roleplay",
-	"textures": {
-		"wood": "drpmedieval:blocks/roof/planks_treaded_wood",
-		"particle": "drpmedieval:blocks/roof/planks_treaded_wood"
-	},
 	"elements": [
 		{
 			"name": "base",

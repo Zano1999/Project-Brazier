@@ -4,9 +4,9 @@
 	"compatibilityLevel": "JAVA_8",
 	"refmap": "projectbrazier.refmap.json",
 	"mixins": [
+		"CollisionMixin"
 	],
-	"client":[
-		"ExampleMixin"
+	"client": [
 	],
 	"injectors": {
 		"defaultRequire": 1

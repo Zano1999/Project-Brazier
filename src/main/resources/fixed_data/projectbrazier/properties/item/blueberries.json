@@ -1,8 +1,0 @@
-{
-	"ItemGroup": "food",
-	"Food": {
-		"Value": 1,
-		"Saturation": 0.1,
-		"FastEat": true
-	}
-}

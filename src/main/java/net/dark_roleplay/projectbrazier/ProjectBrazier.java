@@ -6,6 +6,8 @@ import net.dark_roleplay.projectbrazier.features.model_loaders.simple_pane_conne
 import net.dark_roleplay.projectbrazier.handler.*;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.DebugChunkGenerator;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.event.RegistryEvent;
@@ -15,6 +17,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Mod(ProjectBrazier.MODID)
 public class ProjectBrazier {
@@ -50,6 +56,10 @@ public class ProjectBrazier {
 
 
     public void setupCommonStuff(FMLCommonSetupEvent event) {
+        DebugChunkGenerator.ALL_VALID_STATES.clear();
+        DebugChunkGenerator.ALL_VALID_STATES.addAll(ForgeRegistries.BLOCKS.getValues().stream().filter(block -> block.getRegistryName().getNamespace().equals(MODID)).flatMap((p_236067_0_) -> {
+            return p_236067_0_.getStateContainer().getValidStates().stream();
+        }).collect(Collectors.toList()));
     }
 
     public void setupServerStuff(FMLDedicatedServerSetupEvent event) {

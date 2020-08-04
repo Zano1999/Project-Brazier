@@ -1,9 +1,5 @@
 {
 	"credit": "Made by JTK222",
-	"textures": {
-		"particle": "marg:block/planks/%wood%_planks",
-		"wood": "marg:block/planks/%wood%_planks"
-	},
 	"elements": [
 		{
 			"name": "base",

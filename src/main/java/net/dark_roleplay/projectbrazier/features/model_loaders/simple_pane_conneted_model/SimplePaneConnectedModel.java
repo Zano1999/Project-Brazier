@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.features.model_loaders.simple_pane_conneted_model;
 
 import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.dark_roleplay.projectbrazier.features.model_loaders.axis_connected_models.AxisConnectionType;
 import net.minecraft.block.BlockState;
@@ -147,19 +148,34 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 		public void onResourceManagerReload(IResourceManager resourceManager) {}
 
 		@Override
-		public IModelGeometry read(JsonDeserializationContext deserializationContext, JsonObject modelContents) {
+		public IModelGeometry read(JsonDeserializationContext deserCtx, JsonObject modelContents) {
 			IUnbakedModel baseModel, priPosModel, priNegModel, secPosModel, secNegModel;
+
+			JsonObject textures = JSONUtils.getJsonObject(modelContents, "textures", null);
 
 			JsonObject primarySubContents = JSONUtils.getJsonObject(modelContents, "primary");
 			JsonObject secondarySubContents = JSONUtils.getJsonObject(modelContents, "secondary");
 
-			baseModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"base"), BlockModel.class);
-			priPosModel = deserializationContext.deserialize(JSONUtils.getJsonObject(primarySubContents,"positive"), BlockModel.class);
-			priNegModel = deserializationContext.deserialize(JSONUtils.getJsonObject(primarySubContents,"negative"), BlockModel.class);
-			secPosModel = deserializationContext.deserialize(JSONUtils.getJsonObject(secondarySubContents,"positive"), BlockModel.class);
-			secNegModel = deserializationContext.deserialize(JSONUtils.getJsonObject(secondarySubContents,"negative"), BlockModel.class);
+			baseModel = loadSubModel(deserCtx, modelContents, "base", textures);
+			priPosModel = loadSubModel(deserCtx, primarySubContents, "positive", textures);
+			priNegModel = loadSubModel(deserCtx, primarySubContents, "negative", textures);
+			secPosModel = loadSubModel(deserCtx, secondarySubContents, "positive", textures);
+			secNegModel = loadSubModel(deserCtx, secondarySubContents, "negative", textures);
 
 			return new SimplePaneConnectedModel(baseModel, priPosModel, priNegModel, secPosModel, secNegModel);
+		}
+
+		private IUnbakedModel loadSubModel(JsonDeserializationContext deserCtx, JsonObject base, String subModelName, JsonObject textures){
+			JsonObject subModelJson = JSONUtils.getJsonObject(base, subModelName);
+			if(textures != null){
+				JsonObject subModelTextures = JSONUtils.getJsonObject(base, "textures", new JsonObject());
+				for(Map.Entry<String, JsonElement> entry : textures.entrySet())
+					subModelTextures.add(entry.getKey(), entry.getValue());
+
+				subModelJson.add("textures", subModelTextures);
+			}
+
+			return deserCtx.deserialize(subModelJson, BlockModel.class);
 		}
 	}
 }

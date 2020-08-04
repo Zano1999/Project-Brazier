@@ -13,7 +13,7 @@ public class BlockPropertyLoader {
 	public static Block.Properties properties(String name){
 		Block.Properties props = Block.Properties.create(null, (MaterialColor) null);
 		if(name != null) {
-			try (JsonReader reader = new JsonReader(new InputStreamReader(ItemPropertyLoader.class.getClassLoader().getResourceAsStream("fixed_data/projectbrazier/properties/block/" + name + ".json")))) {
+			try (JsonReader reader = new JsonReader(new InputStreamReader(BlockPropertyLoader.class.getClassLoader().getResourceAsStream("fixed_data/projectbrazier/properties/block/" + name + ".json")))) {
 				reader.beginObject();
 
 				while (reader.hasNext()) {

@@ -1,9 +1,5 @@
 {
 	"credit": "Made for Dark Roleplay",
-	"textures": {
-		"wood": "marg:block/planks/%wood%_planks",
-		"particle": "marg:block/planks/%wood%_planks"
-	},
 	"elements": [
 		{
 			"name": "base",

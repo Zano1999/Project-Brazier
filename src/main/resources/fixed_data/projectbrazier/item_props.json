@@ -1,0 +1,208 @@
+{
+	"barley": {
+		"ItemGroup": "misc"
+	},
+	"bat_ear": {
+		"ItemGroup": "misc"
+	},
+	"bat_wing": {
+		"ItemGroup": "misc"
+	},
+	"bell_pepper": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 4,
+			"Saturation": 0.2
+		}
+	},
+	"blueberries": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 1,
+			"Saturation": 0.1,
+			"FastEat": true
+		}
+	},
+	"bone_war_horn": {
+		"ItemGroup": "misc",
+		"MaxCount": 1,
+		"MaxDamage": 128
+	},
+	"bronze_coin": {
+		"ItemGroup": "misc",
+		"MaxCount": 50
+	},
+	"butter": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 8,
+			"Saturation": 0.2
+		}
+	},
+	"cauliflower": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 6,
+			"Saturation": 0.3
+		}
+	},
+	"copper_coin": {
+		"ItemGroup": "misc",
+		"MaxCount": 50
+	},
+	"cut_grass": {
+		"ItemGroup": "misc"
+	},
+	"dough": {
+		"ItemGroup": "misc"
+	},
+	"eggplant": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 4,
+			"Saturation": 0.3
+		}
+	},
+	"flour": {
+		"ItemGroup": "misc"
+	},
+	"garlic": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 1,
+			"Saturation": 0.1
+		}
+	},
+	"gold_coin": {
+		"ItemGroup": "misc",
+		"MaxCount": 50
+	},
+	"gold_spyglass": {
+		"ItemGroup": "misc",
+		"MaxCount": 1
+	},
+	"green_apple": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 4,
+			"Saturation": 0.3
+		}
+	},
+	"green_caramelized_apple": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 6,
+			"Saturation": 0.4
+		}
+	},
+	"green_pear": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 4,
+			"Saturation": 0.3
+		}
+	},
+	"grilled_catfish": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 6,
+			"Saturation": 0.5,
+			"IsMeat": true
+		}
+	},
+	"grilled_wolf": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 6,
+			"Saturation": 0.5,
+			"IsMeat": true
+		}
+	},
+	"hay": {
+		"ItemGroup": "misc"
+	},
+	"hops": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 2,
+			"Saturation": 0.1
+		}
+	},
+	"onion": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 3,
+			"Saturation": 0.2
+		}
+	},
+	"raw_catfish": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 3,
+			"Saturation": 0.2,
+			"IsMeat": true
+		}
+	},
+	"raw_wolf": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 4,
+			"Saturation": 0.2,
+			"IsMeat": true
+		}
+	},
+	"red_caramelized_apple": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 6,
+			"Saturation": 0.4
+		}
+	},
+	"red_grapes": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 2,
+			"Saturation": 0.2,
+			"FastEat": true
+		}
+	},
+	"silver_coin": {
+		"ItemGroup": "misc",
+		"MaxCount": 50
+	},
+	"silver_spyglass": {
+		"ItemGroup": "misc",
+		"MaxCount": 1
+	},
+	"turnip": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 4,
+			"Saturation": 0.2
+		}
+	},
+	"wolf_fur": {
+		"ItemGroup": "misc"
+	},
+	"yellow_apple": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 4,
+			"Saturation": 0.3
+		}
+	},
+	"yellow_caramelized_apple": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 6,
+			"Saturation": 0.4
+		}
+	},
+	"yellow_pear": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 4,
+			"Saturation": 0.3
+		}
+	}
+}
