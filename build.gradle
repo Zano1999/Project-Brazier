@@ -27,7 +27,7 @@ apply plugin: 'com.wynprice.cursemaven'
 def MOD_VERSION = '0.5';
 
 version = "${mc_version}-${mod_version}"
-group = 'net.dark_roleplay'
+group = "net.dark_roleplay.${modid}"
 archivesBaseName = "${modid}"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
@@ -42,7 +42,6 @@ sourceSets {
     main {
         compileClasspath += sourceSets.api.output
         runtimeClasspath += sourceSets.api.output
-        ext.refMap = "${modid}.refmap.json"
     }
 }
 
@@ -54,17 +53,25 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('runs/client')
+            arg "-mixin.config="+archivesBaseName+".mixins.json"
             property 'forge.logging.console.level', 'debug'
 
-            environment 'MOD_CLASSES',
-                    "archivesBaseName%%${project.file('out/production/resources').canonicalPath};" +
-                            "archivesBaseName%%${project.file('out/production/classes').canonicalPath};" +
-                            "archivesBaseName%%${project.file('out/api/resources').canonicalPath};"+
-                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath}"
+            mods {
+                projectbrazier {
+                    source sourceSets.main
+                    source sourceSets.api
+                }
+            }
+//            environment 'MOD_CLASSES',
+//                    "archivesBaseName%%${project.file('out/production/resources').canonicalPath};" +
+//                            "archivesBaseName%%${project.file('out/production/classes').canonicalPath};" +
+//                            "archivesBaseName%%${project.file('out/api/resources').canonicalPath};"+
+//                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath}"
         }
 
         server {
             workingDirectory project.file('runs/server')
+            arg "-mixin.config="+archivesBaseName+".mixins.json"
             property 'forge.logging.console.level', 'debug'
 
             environment 'MOD_CLASSES',
@@ -168,20 +175,20 @@ idea {
     }
 }
 
-curseforge {
-    apiKey = System.getenv('CURSE_API_KEY') // This should really be in a gradle.properties file
-    project {
-        id = '238326'
-        changelog = file('changelog.txt') // A file can also be set using: changelog = file('changelog.txt')
-        releaseType = 'alpha'
-        mainArtifact(jar) {
-            displayName = "DRP Medieval - ${MC_VERSION} - v${MOD_VERSION} Alpha"
-            relations {
-                requiredDependency 'marg'
-            }
-        }
-    }
-}
+//curseforge {
+//    apiKey = System.getenv('CURSE_API_KEY') // This should really be in a gradle.properties file
+//    project {
+//        id = '238326'
+//        changelog = file('changelog.txt') // A file can also be set using: changelog = file('changelog.txt')
+//        releaseType = 'alpha'
+//        mainArtifact(jar) {
+//            displayName = "DRP Medieval - ${MC_VERSION} - v${MOD_VERSION} Alpha"
+//            relations {
+//                requiredDependency 'marg'
+//            }
+//        }
+//    }
+//}
 
 def reobfFile = file("$buildDir/reobfJar/output.jar")
 def reobfArtifact = artifacts.add('default', reobfFile) {

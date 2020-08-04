@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CollisionMixin {
 
     @Inject(method="getAllowedMovement(Lnet/minecraft/util/math/vector/Vector3d;)Lnet/minecraft/util/math/vector/Vector3d", at=@At("TAIL"), cancellable = true)
-    public void considerAddditionalCollision(Vector3d vec, CallbackInfoReturnable<Vector3d> info) {
+    public void considerAdditionalCollision(Vector3d vec, CallbackInfoReturnable<Vector3d> info) {
         System.out.println(vec);
 
         info.setReturnValue(vec);
