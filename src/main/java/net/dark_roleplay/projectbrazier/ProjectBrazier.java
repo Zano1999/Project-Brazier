@@ -6,7 +6,6 @@ import net.dark_roleplay.projectbrazier.features.model_loaders.simple_pane_conne
 import net.dark_roleplay.projectbrazier.handler.*;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.DebugChunkGenerator;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
@@ -20,7 +19,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Mod(ProjectBrazier.MODID)
 public class ProjectBrazier {
