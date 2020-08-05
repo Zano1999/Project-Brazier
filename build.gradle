@@ -57,17 +57,11 @@ minecraft {
             arg "-mixin.config="+archivesBaseName+".mixins.json"
             property 'forge.logging.console.level', 'debug'
 
-            mods {
-                projectbrazier {
-                    source sourceSets.main
-                    source sourceSets.api
-                }
-            }
-//            environment 'MOD_CLASSES',
-//                    "archivesBaseName%%${project.file('out/production/resources').canonicalPath};" +
-//                            "archivesBaseName%%${project.file('out/production/classes').canonicalPath};" +
-//                            "archivesBaseName%%${project.file('out/api/resources').canonicalPath};"+
-//                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath}"
+            environment 'MOD_CLASSES',
+                    "archivesBaseName%%${project.file('out/production/resources').canonicalPath};" +
+                            "archivesBaseName%%${project.file('out/production/classes').canonicalPath};" +
+                            "archivesBaseName%%${project.file('out/api/resources').canonicalPath};"+
+                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath}"
         }
 
         server {
@@ -155,6 +149,9 @@ artifacts {
     archives javadocJar
 }
 
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
 processResources {
     from(sourceSets.main.resources.srcDirs) {
         include 'META-INF/mods.toml'
@@ -164,6 +161,13 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         exclude 'META-INF/mods.toml'
+    }
+
+    // Minify json resources
+    doLast {
+        fileTree(dir: outputs.files.asPath, include: "**/*.json").each {
+            File file -> file.text = JsonOutput.toJson(new JsonSlurper().parse(file))
+        }
     }
 }
 
