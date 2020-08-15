@@ -1,0 +1,9 @@
+{
+	"parent": "projectbrazier:block/${custom}_chair",
+	"textures": {
+		"particle": "${texture%planks}",
+		"log": "${texture%log}",
+		"inner_log": "projectbrazier:block/small_${material}_cut_log",
+		"top_log": "projectbrazier:block/small_${material}_log_top"
+	}
+}

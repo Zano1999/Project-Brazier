@@ -26,6 +26,7 @@ public class MedievalBlocks {
 
 	private static IMaterialCondition planksOnly = new ItemMaterialCondition("wood", "planks");
 	private static IMaterialCondition planksStrippedLogs = new ItemMaterialCondition("wood", "planks", "stripped_log");
+	private static IMaterialCondition logsOnly = new ItemMaterialCondition("wood", "log");
 
 	private static final Block.Properties stoneProps = Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE);
 	private static final Block.Properties snowProps = Block.Properties.create(Material.SNOW).hardnessAndResistance(0.3F).sound(SoundType.SNOW);
@@ -56,16 +57,20 @@ public class MedievalBlocks {
 			PALE_COLORFUL_COBBLESTONE   = register("pale_colorful_cobblestone", Block::new, stoneProps);
 
 	public static final Map<IMaterial, RegistryObject<Block>>
-			WOOD_LATTICE_1 				= registerNoItems("${material}_cross_lattice", planksOnly, BlockCreators::createWoodWindow),
+			PLANK_CHAIR						= register("${material}_plank_chair", planksOnly, BlockCreators::createChair),
+			CHAIR								= register("${material}_solid_chair", planksOnly, BlockCreators::createChair),
+			ARMREST_CHAIR					= register("${material}_armrest_chair", planksOnly, BlockCreators::createChair),
+			LOG_CHAIR						= register("${material}_log_chair", logsOnly, BlockCreators::createChair),
 			WOOD_LATTICE_1_C 				= registerNoItems("${material}_cross_lattice_centered", planksOnly, BlockCreators::createWoodWindowB),
-			WOOD_LATTICE_2 				= registerNoItems("${material}_dense_vertical_lattice", planksOnly, BlockCreators::createWoodWindow),
+			WOOD_LATTICE_1 				= register("${material}_cross_lattice", planksOnly, wood -> BlockCreators.createWoodWindow(wood, WOOD_LATTICE_1_C)),
 			WOOD_LATTICE_2_C 				= registerNoItems("${material}_dense_vertical_lattice_centered", planksOnly, BlockCreators::createWoodWindowB),
-			WOOD_LATTICE_3 				= registerNoItems("${material}_diamond_lattice", planksOnly, BlockCreators::createWoodWindow),
+			WOOD_LATTICE_2 				= register("${material}_dense_vertical_lattice", planksOnly, wood -> BlockCreators.createWoodWindow(wood, WOOD_LATTICE_2_C)),
 			WOOD_LATTICE_3_C 				= registerNoItems("${material}_diamond_lattice_centered", planksOnly, BlockCreators::createWoodWindowB),
-			WOOD_LATTICE_4 				= registerNoItems("${material}_grid_lattice", planksOnly, BlockCreators::createWoodWindow),
+			WOOD_LATTICE_3 				= register("${material}_diamond_lattice", planksOnly, wood -> BlockCreators.createWoodWindow(wood, WOOD_LATTICE_3_C)),
 			WOOD_LATTICE_4_C 				= registerNoItems("${material}_grid_lattice_centered", planksOnly, BlockCreators::createWoodWindowB),
-			WOOD_LATTICE_5 				= registerNoItems("${material}_vertical_lattice", planksOnly, BlockCreators::createWoodWindow),
+			WOOD_LATTICE_4 				= register("${material}_grid_lattice", planksOnly, wood -> BlockCreators.createWoodWindow(wood, WOOD_LATTICE_4_C)),
 			WOOD_LATTICE_5_C 				= registerNoItems("${material}_vertical_lattice_centered", planksOnly, BlockCreators::createWoodWindowB),
+			WOOD_LATTICE_5 				= register("${material}_vertical_lattice", planksOnly, wood -> BlockCreators.createWoodWindow(wood, WOOD_LATTICE_5_C)),
 			OPEN_BARREL 					= register("${material}_open_barrel", planksOnly, BlockCreators::createOpenBarrel),
 			CLOSED_BARREL 					= register("${material}_closed_barrel", planksOnly, BlockCreators::createClosedBarrel),
 			WOOD_BENCH				 		= register("${material}_bench", planksStrippedLogs, BlockCreators::createWoodBench),

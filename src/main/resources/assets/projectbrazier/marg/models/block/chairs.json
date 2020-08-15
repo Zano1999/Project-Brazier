@@ -1,0 +1,7 @@
+{
+	"parent": "projectbrazier:block/${custom}_chair",
+	"textures": {
+		"particle": "${texture%planks}",
+		"planks": "${texture%planks}"
+	}
+}

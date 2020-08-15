@@ -1,0 +1,28 @@
+{
+	"generatorVersion": 0,
+	"customKeys": [
+		"plank",
+		"solid",
+		"armrest"
+	],
+	"material": {
+		"type": "wood",
+		"textures": [
+			"planks"
+		]
+	},
+	"tasks": [
+		{
+			"input": "projectbrazier:marg/blockstates/chair.json",
+			"output": "projectbrazier:blockstates/${material}_${custom}_chair.json"
+		},
+		{
+			"input": "projectbrazier:marg/models/block/chairs.json",
+			"output": "projectbrazier:models/block/${material}_${custom}_chair.json"
+		},
+		{
+			"input": "projectbrazier:marg/models/block/chairs.json",
+			"output": "projectbrazier:models/item/${material}_${custom}_chair.json"
+		}
+	]
+}

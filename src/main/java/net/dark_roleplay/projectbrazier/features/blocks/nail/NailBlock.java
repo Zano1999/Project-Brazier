@@ -36,6 +36,7 @@ public class NailBlock extends WallHFacedDecoBlock {
 	}
 
 	@Deprecated
+	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack held = player.getHeldItem(hand);
 

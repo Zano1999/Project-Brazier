@@ -9,12 +9,24 @@ import net.dark_roleplay.projectbrazier.features.blocks.special.BrazierBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.templates.ConnectedHAxisDecoBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.templates.DecoBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.templates.HAxisDecoBlock;
+import net.dark_roleplay.projectbrazier.handler.MedievalBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraftforge.fml.RegistryObject;
+
+import java.util.Map;
 
 public class BlockCreators {
+
+	public static Block createChair(IMaterial material){
+		Block.Properties properties =
+				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
+						.hardnessAndResistance(2.0F, 3.0F)
+						.sound(SoundType.WOOD).notSolid();
+		return new ChairBlock(properties, "placeholder");
+	}
 
 	public static Block createClosedBarrel(IMaterial material){
 		Block.Properties properties =
@@ -23,7 +35,6 @@ public class BlockCreators {
 						.sound(SoundType.WOOD).notSolid();
 		return new DecoBlock(properties, "closed_barrel");
 	}
-
 
 	public static Block createOpenBarrel(IMaterial material){
 		Block.Properties properties =
@@ -63,7 +74,7 @@ public class BlockCreators {
 				Block.Properties.create(Material.IRON, MaterialColor.IRON)
 						.hardnessAndResistance(5.0F, 1200.0F)
 						.sound(SoundType.ANVIL).notSolid();
-		return new FacedLatticeBlock(properties, "lattice");
+		return new FacedLatticeBlock(properties, "lattice", MedievalBlocks.JAIL_LATTICE_CENTERED);
 	}
 
 	public static Block createJailLatticeB(){
@@ -74,12 +85,12 @@ public class BlockCreators {
 		return new AxisLatticeBlock(properties, "lattice_centered");
 	}
 
-	public static Block createWoodWindow(IMaterial material){
+	public static Block createWoodWindow(IMaterial material, Map<IMaterial, RegistryObject<Block>> centeredWindows){
 		Block.Properties properties =
 				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
 						.hardnessAndResistance(2.0F, 3.0F)
 						.sound(SoundType.WOOD).notSolid();
-		return new FacedLatticeBlock(properties, "lattice");
+		return new FacedLatticeBlock(properties, "lattice", centeredWindows.get(material));
 	}
 
 	public static Block createWoodWindowB(IMaterial material){
