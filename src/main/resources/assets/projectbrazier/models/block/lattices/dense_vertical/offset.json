@@ -1,10 +1,11 @@
 {
-	"credit": "Made for Dark Roleplay",
+	"credit": "Made by JTK222",
 	"elements": [
 		{
 			"name": "base",
-			"from": [1, 0, 13],
-			"to": [3, 16, 15],
+			"from": [1, 0, 0.5],
+			"to": [3, 16, 2.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 1.5]},
 			"faces": {
 				"north": {"uv": [12, 0, 14, 16], "texture": "#wood"},
 				"east": {"uv": [2, 0, 4, 16], "texture": "#wood"},
@@ -16,8 +17,9 @@
 		},
 		{
 			"name": "base",
-			"from": [13, 0, 13],
-			"to": [15, 16, 15],
+			"from": [13, 0, 0.5],
+			"to": [15, 16, 2.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 1.5]},
 			"faces": {
 				"north": {"uv": [0, 0, 2, 16], "texture": "#wood"},
 				"east": {"uv": [6, 0, 8, 16], "texture": "#wood"},
@@ -29,8 +31,9 @@
 		},
 		{
 			"name": "base",
-			"from": [5, 0, 13],
-			"to": [7, 16, 15],
+			"from": [5, 0, 0.5],
+			"to": [7, 16, 2.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 1.5]},
 			"faces": {
 				"north": {"uv": [8, 0, 10, 16], "texture": "#wood"},
 				"east": {"uv": [14, 0, 16, 16], "texture": "#wood"},
@@ -42,8 +45,9 @@
 		},
 		{
 			"name": "base",
-			"from": [9, 0, 13],
-			"to": [11, 16, 15],
+			"from": [9, 0, 0.5],
+			"to": [11, 16, 2.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 1.5]},
 			"faces": {
 				"north": {"uv": [4, 0, 6, 16], "texture": "#wood"},
 				"east": {"uv": [10, 0, 12, 16], "texture": "#wood"},
