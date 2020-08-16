@@ -133,6 +133,26 @@ public class BlockCreators {
 		return new HangUpItemBlock(properties, "hanging_horn", 10);
 	}
 
+	public static Block createMachicolations(){
+		Block.Properties properties =
+				Block.Properties.
+						create(Material.ROCK, MaterialColor.STONE)
+						.hardnessAndResistance(1.5F, 6.0F)
+						.sound(SoundType.STONE)
+						.notSolid();
+		return new Machicolations(properties, "machicolations");
+	}
+
+	public static Block createCrenellations(){
+		Block.Properties properties =
+				Block.Properties.
+						create(Material.ROCK, MaterialColor.STONE)
+						.hardnessAndResistance(1.5F, 6.0F)
+						.sound(SoundType.STONE)
+						.notSolid();
+		return new Machicolations(properties, "crenellations");
+	}
+
 //	public interface IBlockGenerator{
 //		public Block mkBlock(Block.Properties
 //	}

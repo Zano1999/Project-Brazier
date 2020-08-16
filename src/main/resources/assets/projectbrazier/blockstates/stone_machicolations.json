@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model":  "projectbrazier:block/machicolations"},
+		"facing=east": {"model":  "projectbrazier:block/machicolations", "y": 90},
+		"facing=south": {"model":  "projectbrazier:block/machicolations", "y": 180},
+		"facing=west": {"model":  "projectbrazier:block/machicolations", "y": 270}
+	}
+}

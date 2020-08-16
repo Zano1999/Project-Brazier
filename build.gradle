@@ -109,8 +109,8 @@ dependencies {
 
     ])
 
-    compileOnly(fg.deobf("net.dark_roleplay:marg:1.16.1-0.5.2:api"))
-    runtimeOnly(fg.deobf("net.dark_roleplay:marg:1.16.1-0.5.2"))
+    compileOnly(fg.deobf("net.dark_roleplay:marg:1.16.1-0.5.4:api"))
+    runtimeOnly(fg.deobf("net.dark_roleplay:marg:1.16.1-0.5.4"))
 }
 
 jar {

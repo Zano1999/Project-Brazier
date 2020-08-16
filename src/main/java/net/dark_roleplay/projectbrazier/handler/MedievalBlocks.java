@@ -34,6 +34,8 @@ public class MedievalBlocks {
 
 
 	public static final RegistryObject<Block>
+			STONE_MACHICOLATIONS			 = register("stone_machicolations", BlockCreators::createMachicolations),
+			STONE_CRENELLATIONS			 = register("stone_crenellations", BlockCreators::createCrenellations),
 			DRAWBRIDGE_ANCHOR				 = register("drawbridge_anchor", DrawbridgeAnchorBlock::new, stoneProps),
 			ANDESITE_BRICKS             = register("andesite_bricks", Block::new, stoneProps),
 			DIORITE_BRICKS              = register("diorite_bricks", Block::new, stoneProps),
