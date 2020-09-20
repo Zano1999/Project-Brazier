@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model":  "projectbrazier:block/hoof_fungus"},
+		"facing=east": {"model":  "projectbrazier:block/hoof_fungus", "y": 90},
+		"facing=south": {"model":  "projectbrazier:block/hoof_fungus", "y": 180},
+		"facing=west": {"model":  "projectbrazier:block/hoof_fungus", "y": 270}
+	}
+}

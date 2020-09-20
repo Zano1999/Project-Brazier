@@ -1,6 +1,6 @@
 package net.dark_roleplay.projectbrazier.features.blocks.nail;
 
-import net.dark_roleplay.projectbrazier.features.blocks.BrazierStateProperties;
+import net.dark_roleplay.projectbrazier.features.blocks.brazier.BrazierStateProperties;
 import net.dark_roleplay.projectbrazier.features.blocks.templates.WallHFacedDecoBlock;
 import net.dark_roleplay.projectbrazier.handler.MedievalBlocks;
 import net.minecraft.block.Block;

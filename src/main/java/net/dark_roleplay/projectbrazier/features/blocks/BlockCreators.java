@@ -5,8 +5,7 @@ import net.dark_roleplay.projectbrazier.features.blocks.lattice_block.AxisLattic
 import net.dark_roleplay.projectbrazier.features.blocks.lattice_block.FacedLatticeBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.nail.HangUpItemBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.nail.NailBlock;
-import net.dark_roleplay.projectbrazier.features.blocks.special.BrazierBlock;
-import net.dark_roleplay.projectbrazier.features.blocks.templates.ConnectedHAxisDecoBlock;
+import net.dark_roleplay.projectbrazier.features.blocks.brazier.BrazierBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.templates.DecoBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.templates.HAxisDecoBlock;
 import net.dark_roleplay.projectbrazier.handler.MedievalBlocks;
@@ -19,6 +18,16 @@ import net.minecraftforge.fml.RegistryObject;
 import java.util.Map;
 
 public class BlockCreators {
+
+	public static Block createFungi(){
+		Block.Properties properties =
+				Block.Properties.
+						create(Material.PLANTS, MaterialColor.WOOD)
+						.hardnessAndResistance(1.5F, 6.0F)
+						.sound(SoundType.PLANT)
+						.notSolid();
+		return new WallFungi(properties);
+	}
 
 	public static Block createChair(IMaterial material){
 		Block.Properties properties =
@@ -58,7 +67,7 @@ public class BlockCreators {
 				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
 						.hardnessAndResistance(2.0F, 3.0F)
 						.sound(SoundType.WOOD).notSolid();
-		return new ConnectedHAxisDecoBlock(properties, "default_wood_bench", "positive_wood_bench", "negative_wood_bench", "centered_wood_bench");
+		return new BenchBlock(properties, "default_wood_bench", "positive_wood_bench", "negative_wood_bench", "centered_wood_bench");
 	}
 
 	public static Block createPolsteredWoodBench(IMaterial material){
@@ -66,7 +75,7 @@ public class BlockCreators {
 				Block.Properties.create(Material.WOOD, material.getProperties().getMaterialColor())
 						.hardnessAndResistance(2.0F, 3.0F)
 						.sound(SoundType.WOOD).notSolid();
-		return new ConnectedHAxisDecoBlock(properties, "default_polstered_wood_bench", "positive_polstered_wood_bench", "negative_polstered_wood_bench", "centered_polstered_wood_bench");
+		return new BenchBlock(properties, "default_polstered_wood_bench", "positive_polstered_wood_bench", "negative_polstered_wood_bench", "centered_polstered_wood_bench");
 	}
 
 	public static Block createJailLattice(){

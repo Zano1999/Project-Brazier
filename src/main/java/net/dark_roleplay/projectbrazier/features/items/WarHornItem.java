@@ -43,13 +43,13 @@ public class WarHornItem extends Item {
 		if (entity.areEyesInFluid(FluidTags.WATER)) {
 			Vector3d spawnPoint = entity.getPositionVec().add(0, entity.getEyeHeight(), 0).add(entity.getLookVec().mul(0.5F, 0.5F, 0.5F));
 			((ServerWorld) world).spawnParticle(ParticleTypes.BUBBLE, spawnPoint.x, spawnPoint.y, spawnPoint.z, 8, 0.05, 0, 0.05, 0.005);
-			world.playSound(null, entity.func_233580_cy_(), SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundCategory.PLAYERS, 1, 1);
+			world.playSound(null, entity.getPosition(), SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundCategory.PLAYERS, 1, 1);
 			entity.setAir(Math.max(0, entity.getAir() - 90));
 		} else {
 			for (ServerPlayerEntity receiver : ((ServerWorld) world).getPlayers()) {
 				double distance = receiver.getPositionVec().distanceTo(entity.getPositionVec());
 				if (distance > maxDistance) continue;
-				Vector3d sourcePos = receiver.getPositionVec().add(receiver.getPositionVec().subtract(entity.getPositionVec()).normalize().mul(10, 10, 10));
+				Vector3d sourcePos = receiver.getPositionVec().add(entity.getPositionVec().subtract(receiver.getPositionVec()).normalize().mul(10, 10, 10));
 
 				receiver.connection.sendPacket(new SPlaySoundEffectPacket(MedievalSounds.WAR_HORN.get(), SoundCategory.PLAYERS, sourcePos.x, sourcePos.y, sourcePos.z, (float) ((maxDistance - distance) / maxDistance) * 0.5F, 0.9F + world.getRandom().nextFloat() * 0.2F));
 			}
@@ -59,7 +59,7 @@ public class WarHornItem extends Item {
 			player.getCooldownTracker().setCooldown(stack.getItem(), 120);
 
 		stack.damageItem(1, entity, breaker -> {
-			world.playSound(null, breaker.func_233580_cy_(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1);
+			world.playSound(null, breaker.getPosition(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1);
 		});
 
 		return stack;

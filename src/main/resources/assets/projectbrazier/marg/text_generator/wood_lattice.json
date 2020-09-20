@@ -29,6 +29,10 @@
 		{
 			"input": "projectbrazier:marg/models/block/lattice_centered.json",
 			"output": "projectbrazier:models/block/${material}_${custom}_lattice_centered.json"
+		},
+		{
+			"input": "projectbrazier:marg/models/item/lattice.json",
+			"output": "projectbrazier:models/item/${material}_${custom}_lattice.json"
 		}
 	]
 }

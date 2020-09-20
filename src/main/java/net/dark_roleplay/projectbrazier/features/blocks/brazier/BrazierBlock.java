@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.features.blocks.special;
+package net.dark_roleplay.projectbrazier.features.blocks.brazier;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -11,8 +11,11 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
@@ -35,6 +38,12 @@ public class BrazierBlock extends Block {
 	}
 
 	@Override
+	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+		return state.get(BURNING) ? 15 : 0;
+	}
+
+
+	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack heldItem = player.getHeldItem(hand);
 		if(state.get(BURNING)){
@@ -42,6 +51,7 @@ public class BrazierBlock extends Block {
 				if(world.isRemote()) return ActionResultType.SUCCESS;
 				heldItem.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) (player));
 				world.setBlockState(pos, state.with(BURNING, false));
+				world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.8f, 2f);
 				return ActionResultType.SUCCESS;
 			}
 		}else{
@@ -49,6 +59,7 @@ public class BrazierBlock extends Block {
 				if(world.isRemote()) return ActionResultType.SUCCESS;
 				heldItem.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) (player));
 				world.setBlockState(pos, state.with(BURNING, true));
+				world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.PLAYERS, 1f, 1f);
 				return ActionResultType.SUCCESS;
 			}
 		}

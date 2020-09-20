@@ -5,6 +5,7 @@ import net.dark_roleplay.projectbrazier.util.json.VoxelShapeLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.Item;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -14,16 +15,24 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraftforge.fml.RegistryObject;
 
 public class AxisLatticeBlock extends Block {
 
 	protected static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
+
+	protected Item item;
+	protected RegistryObject<Block> mainBlock;
 
 	protected final AxisVoxelShape shapes;
 
 	public AxisLatticeBlock(Properties properties, String shapeName) {
 		super(properties);
 		this.shapes = new AxisVoxelShape(VoxelShapeLoader.getVoxelShape(shapeName), true);
+	}
+
+	public void initMainBlock(RegistryObject<Block> mainBlock){
+		this.mainBlock = mainBlock;
 	}
 
 	@Override
@@ -47,5 +56,13 @@ public class AxisLatticeBlock extends Block {
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(AXIS);
+	}
+
+	public Item asItem() {
+		if (this.item == null) {
+			this.item = Item.getItemFromBlock(this.mainBlock.get());
+		}
+
+		return this.item.delegate.get(); //Forge: Vanilla caches the items, update with registry replacements.
 	}
 }

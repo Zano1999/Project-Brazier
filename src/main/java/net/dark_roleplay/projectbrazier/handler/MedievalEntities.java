@@ -13,9 +13,8 @@ public class MedievalEntities {
 			ENTITIES.register("sittable",
 					() -> EntityType.Builder.<SittableEntity>create(SittableEntity::new, EntityClassification.MISC)
 							.disableSummoning()
-							.disableSerialization()
 							.setShouldReceiveVelocityUpdates(false)
-							.size(1F, 2F)
+							.size(0.5F, 0.001F)
 							.build("sittable")
 			);
 }

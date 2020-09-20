@@ -77,8 +77,8 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 		@Nonnull
 		@Override
 		public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
-			Direction facing = state.func_235901_b_(BlockStateProperties.HORIZONTAL_FACING) ? state.get(BlockStateProperties.HORIZONTAL_FACING) :
-					state.func_235901_b_(BlockStateProperties.FACING) ? state.get(BlockStateProperties.FACING) : null;
+			Direction facing = state.hasProperty(BlockStateProperties.HORIZONTAL_FACING) ? state.get(BlockStateProperties.HORIZONTAL_FACING) :
+					state.hasProperty(BlockStateProperties.FACING) ? state.get(BlockStateProperties.FACING) : null;
 			boolean flag = facing == Direction.NORTH || facing == Direction.EAST || facing == Direction.UP || facing == Direction.DOWN;
 			boolean flag2 = facing == Direction.DOWN;
 
@@ -111,10 +111,10 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 			IModelData data = new SimplePaneModelData();
 
 			boolean flag, flag2 = false, flag3 = false;
-			if ((flag = state.func_235901_b_(BlockStateProperties.HORIZONTAL_AXIS)) ||
-					(flag2 = state.func_235901_b_(BlockStateProperties.AXIS)) ||
-					(flag3 = state.func_235901_b_(BlockStateProperties.HORIZONTAL_FACING)) ||
-					state.func_235901_b_(BlockStateProperties.FACING)
+			if ((flag = state.hasProperty(BlockStateProperties.HORIZONTAL_AXIS)) ||
+					(flag2 = state.hasProperty(BlockStateProperties.AXIS)) ||
+					(flag3 = state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) ||
+					state.hasProperty(BlockStateProperties.FACING)
 			) {
 				Direction.Axis axis = flag ?
 						state.get(BlockStateProperties.HORIZONTAL_AXIS) :

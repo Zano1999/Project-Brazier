@@ -1,6 +1,6 @@
 {
 	"variants": {
-		"burning=false": {"model":  "projectbrazier:block/iron_brazier"},
-		"burning=true": {"model":  "projectbrazier:block/iron_brazier"}
+		"burning=false": {"model":  "projectbrazier:block/iron_brazier_coal"},
+		"burning=true": {"model":  "projectbrazier:block/iron_brazier_coal_burning"}
 	}
 }

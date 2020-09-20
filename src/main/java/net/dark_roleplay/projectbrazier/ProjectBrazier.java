@@ -36,7 +36,8 @@ public class ProjectBrazier {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::hackyHackToByPassLoadingOrder);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommonStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupServerStuff);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClientStuff);
+
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ProjectBrazierClient::modConstructor);
     }
 
     public void hackyHackToByPassLoadingOrder(RegistryEvent.NewRegistry event){
@@ -45,7 +46,10 @@ public class ProjectBrazier {
         MedievalBlocks.BLOCKS_NO_ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         MedievalItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, MedievalItems::registerItemBlocks);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, MedievalBlocks::postBlockRegistryCallback);
+
         MedievalTileEntities.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         MedievalEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 //        MedievalContainers.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -61,17 +65,5 @@ public class ProjectBrazier {
     }
 
     public void setupServerStuff(FMLDedicatedServerSetupEvent event) {
-    }
-
-    public void setupClientStuff(FMLClientSetupEvent event) {
-
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
-
-            MedievalKeybinds.registerKeybinds(event);
-            ModelLoaderRegistry.registerLoader(new ResourceLocation(MODID, "simple_pane_connected_model"), new SimplePaneConnectedModel.Loader());
-            ModelLoaderRegistry.registerLoader(new ResourceLocation(MODID, "axis_connected_model"), new AxisConnectedModel.Loader());
-            ModelLoaderRegistry.registerLoader(new ResourceLocation(MODID, "emissive"), new EmissiveModel.Loader());
-            ProjectBrazierClient.registerRenderLayers();
-        });
     }
 }

@@ -11,23 +11,40 @@ import java.util.List;
 
 public class SittingUtil {
 
-	public static boolean sitOnBlock(ServerWorld world, double x, double y, double z, PlayerEntity player, double offset){
-		if (!checkForExistingEntity(world, x, y, z, player) && !world.isRemote){
-			SittableEntity chairEntity = new SittableEntity(MedievalEntities.SITTABLE.get(), world, x, y, z, offset);
-			world.addEntity(chairEntity);
-			player.startRiding(chairEntity);
-		}
-		
-		return true;
+	public static boolean sitOnBlock(ServerWorld world, double x, double y, double z, PlayerEntity player, double heightOffset){
+		return sitDownPlayer(world, x, y, z, player, null, null, heightOffset);
 	}
 
-	public static boolean sitOnBlockWithRotation(ServerWorld world, double x, double y, double z, PlayerEntity player, Direction facing, double offset){
+	public static boolean sitOnBlockWithRotation(ServerWorld world, double x, double y, double z, PlayerEntity player, Direction facing, double heightOffset){
+		return sitDownPlayer(world, x, y, z, player, facing, null, heightOffset);
+	}
+
+	public static boolean sitOnBlock(ServerWorld world, double x, double y, double z, PlayerEntity player, Direction initFacing, double heightOffset){
+		return sitDownPlayer(world, x, y, z, player, null, initFacing, heightOffset);
+	}
+
+	public static boolean sitOnBlockWithRotation(ServerWorld world, double x, double y, double z, PlayerEntity player, Direction facing, Direction initFacing, double heightOffset){
+		return sitDownPlayer(world, x, y, z, player, facing, initFacing, heightOffset);
+	}
+
+	private static boolean sitDownPlayer(ServerWorld world, double x, double y, double z, PlayerEntity player, Direction facing, Direction initFacing, double heightOffset){
 		if (!checkForExistingEntity(world, x, y, z, player) && !world.isRemote){
-			SittableEntity chairEntity = new SittableEntity(MedievalEntities.SITTABLE.get(), world, x, y, z, offset, facing);
+			SittableEntity chairEntity = new SittableEntity(MedievalEntities.SITTABLE.get(), world, x, y, z, heightOffset);
+
+			if(facing != null)
+				chairEntity.setRotation(facing);
+
+			if(initFacing != null){
+				player.prevRotationYaw = initFacing.getHorizontalAngle();
+				player.rotationYaw = initFacing.getHorizontalAngle();
+			}
+
 			world.summonEntity(chairEntity);
 			player.startRiding(chairEntity);
+
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public static boolean checkForExistingEntity(World world, double x, double y, double z, PlayerEntity player){

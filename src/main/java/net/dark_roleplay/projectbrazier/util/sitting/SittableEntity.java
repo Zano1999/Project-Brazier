@@ -21,7 +21,6 @@ public class SittableEntity extends Entity {
 	//TODO EntitySize is now a part of hte Entity Type
 	public SittableEntity(EntityType type, World world) {
 		super(type, world);
-		System.out.println("Created Sittable");
 		this.noClip = true;
 	}
 
@@ -33,34 +32,8 @@ public class SittableEntity extends Entity {
 		setPosition(x + 0.5D, y + yOffset, z + 0.5D);
 	}
 
-	public SittableEntity(EntityType type, World world, double x, double y, double z, double yOffset, Direction facing) {
-		this(type, world);
-		this.blockPosX = (int) x;
-		this.blockPosY = (int) y;
-		this.blockPosZ = (int) z;
-		setPositionConsideringRotation(x + 0.5D, y + yOffset, z + 0.5D, facing);
-	}
-
-	public void setPositionConsideringRotation(double x, double y, double z, Direction facing) {
-		switch (facing) {
-			case NORTH:
-				setRotation(180, 90);
-				break;
-			case EAST:
-				setRotation(270, 90);
-				break;
-			case SOUTH:
-				setRotation(0, 90);
-				break;
-			case WEST:
-				setRotation(90, 90);
-				break;
-			case UP:
-			case DOWN:
-			default:
-				break;
-		}
-		setPosition(x, y, z);
+	public void setRotation(Direction facing) {
+		setRotation(facing.getHorizontalAngle(), 90);
 	}
 
 	@Override
@@ -78,10 +51,6 @@ public class SittableEntity extends Entity {
 		}
 	}
 
-	/**
-	 * Applies this boat's yaw to the given entity. Used to update the orientation
-	 * of its passenger.
-	 */
 	protected void applyYawToEntity(Entity entityToUpdate) {
 		if(this.rotationPitch < 89 || this.rotationPitch > 91) return;
 		entityToUpdate.setRenderYawOffset(this.rotationYaw);
@@ -95,7 +64,6 @@ public class SittableEntity extends Entity {
 	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void applyOrientationToEntity(Entity entityToUpdate) {
-//		if(this.enforceRotation)
 		this.applyYawToEntity(entityToUpdate);
 	}
 

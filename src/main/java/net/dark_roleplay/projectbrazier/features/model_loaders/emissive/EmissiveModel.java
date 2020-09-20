@@ -50,7 +50,7 @@ public class EmissiveModel implements IModelGeometry {
 			builder.put("emissive",new SimpleBakedModel(
 					quads, faceQuads,
 					preEmissiveBakedModel.isAmbientOcclusion(),
-					preEmissiveBakedModel.func_230044_c_(),
+					preEmissiveBakedModel.isSideLit(),
 					preEmissiveBakedModel.isGui3d(),
 					preEmissiveBakedModel.getParticleTexture(),
 					preEmissiveBakedModel.getItemCameraTransforms(),
@@ -114,8 +114,8 @@ public class EmissiveModel implements IModelGeometry {
 				vertexData,
 				quad.getTintIndex(),
 				quad.getFace(),
-				quad.func_187508_a(),
-				quad.func_239287_f_()
+				quad.getSprite(),
+				quad.applyDiffuseLighting()
 		);
 	}
 }

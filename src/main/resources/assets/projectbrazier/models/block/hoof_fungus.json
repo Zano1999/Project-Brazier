@@ -1,0 +1,44 @@
+{
+	"textures": {
+		"1": "projectbrazier:block/hoof_fungus_0",
+		"particle": "projectbrazier:block/hoof_fungus_side",
+		"side": "projectbrazier:block/hoof_fungus_side",
+		"bottom": "block/mushroom_block_inside"
+	},
+	"elements": [
+		{
+			"from": [2, 5, 9],
+			"to": [14, 6, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 13, 16]},
+			"faces": {
+				"north": {"uv": [1, 1, 13, 2], "texture": "#side"},
+				"east": {"uv": [0, 1, 7, 2], "texture": "#side"},
+				"west": {"uv": [7, 3, 14, 4], "texture": "#side"},
+				"up": {"uv": [2, 7, 14, 14], "rotation": 180, "texture": "#1"},
+				"down": {"uv": [2, 7, 14, 14], "rotation": 180, "texture": "#bottom"}
+			}
+		},
+		{
+			"from": [3, 6, 10],
+			"to": [13, 10, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 14, 16]},
+			"faces": {
+				"north": {"uv": [2, 4, 12, 8], "texture": "#side"},
+				"east": {"uv": [7, 8, 13, 12], "texture": "#side"},
+				"west": {"uv": [3, 10, 9, 14], "texture": "#side"},
+				"up": {"uv": [3, 7, 13, 13], "rotation": 180, "texture": "#1"}
+			}
+		},
+		{
+			"from": [4, 10, 11],
+			"to": [12, 11, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 18, 16]},
+			"faces": {
+				"north": {"uv": [8, 11, 16, 12], "texture": "#side"},
+				"east": {"uv": [1, 9, 6, 10], "texture": "#side"},
+				"west": {"uv": [9, 5, 14, 6], "texture": "#side"},
+				"up": {"uv": [4, 7, 12, 12], "rotation": 180, "texture": "#1"}
+			}
+		}
+	]
+}

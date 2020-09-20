@@ -103,8 +103,8 @@ dependencies {
 
     ])
 
-    compileOnly(fg.deobf("net.dark_roleplay:marg:1.16.1-0.5.4:api"))
-    runtimeOnly(fg.deobf("net.dark_roleplay:marg:1.16.1-0.5.4"))
+    compileOnly(fg.deobf("net.dark_roleplay:marg:1.16.2-0.5.5:api"))
+    runtimeOnly(fg.deobf("net.dark_roleplay:marg:1.16.2-0.5.5"))
 }
 
 jar {
@@ -163,10 +163,18 @@ processResources {
         exclude 'META-INF/mods.toml'
     }
 
-    // Minify json resources
     doLast {
+        // Minify json resources
         fileTree(dir: outputs.files.asPath, include: "**/*.json").each {
             File file -> file.text = JsonOutput.toJson(new JsonSlurper().parse(file))
+        }
+
+
+        // Minify pngs resources
+        fileTree(dir: outputs.files.asPath, include: "**/*.png").each {
+            File file ->
+
+            println(file);
         }
     }
 }

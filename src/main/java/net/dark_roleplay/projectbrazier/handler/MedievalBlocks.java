@@ -5,12 +5,15 @@ import net.dark_roleplay.marg.api.materials.IMaterialCondition;
 import net.dark_roleplay.marg.api.materials.ItemMaterialCondition;
 import net.dark_roleplay.projectbrazier.features.blocks.BlockCreators;
 import net.dark_roleplay.projectbrazier.features.blocks.drawbridge.DrawbridgeAnchorBlock;
+import net.dark_roleplay.projectbrazier.features.blocks.lattice_block.AxisLatticeBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.DyeColor;
+import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 
@@ -34,6 +37,7 @@ public class MedievalBlocks {
 
 
 	public static final RegistryObject<Block>
+			HOOF_FUNGUS						 = register("hoof_fungus", BlockCreators::createFungi),
 			STONE_MACHICOLATIONS			 = register("stone_machicolations", BlockCreators::createMachicolations),
 			STONE_CRENELLATIONS			 = register("stone_crenellations", BlockCreators::createCrenellations),
 			DRAWBRIDGE_ANCHOR				 = register("drawbridge_anchor", DrawbridgeAnchorBlock::new, stoneProps),
@@ -81,6 +85,22 @@ public class MedievalBlocks {
 
 	public static final Map<DyeColor, Map<IMaterial, RegistryObject<Block>>>
 			POLSTERED_WOOD_BENCH			= registerInColors("${color}_polstered_${material}_bench", planksStrippedLogs, BlockCreators::createPolsteredWoodBench);
+
+	public static void postBlockRegistryCallback(RegistryEvent.Register<Item> event){
+		((AxisLatticeBlock) JAIL_LATTICE_CENTERED.get()).initMainBlock(JAIL_LATTICE);
+		initLatticeHelper(WOOD_LATTICE_1_C, WOOD_LATTICE_1);
+		initLatticeHelper(WOOD_LATTICE_2_C, WOOD_LATTICE_2);
+		initLatticeHelper(WOOD_LATTICE_3_C, WOOD_LATTICE_3);
+		initLatticeHelper(WOOD_LATTICE_4_C, WOOD_LATTICE_4);
+		initLatticeHelper(WOOD_LATTICE_5_C, WOOD_LATTICE_5);
+	}
+
+	private static void initLatticeHelper(Map<IMaterial, RegistryObject<Block>> center, Map<IMaterial, RegistryObject<Block>> main){
+		for(Map.Entry<IMaterial, RegistryObject<Block>> entry : center.entrySet()){
+			AxisLatticeBlock centerBlock = (AxisLatticeBlock) entry.getValue().get();
+			centerBlock.initMainBlock(main.get(entry.getKey()));
+		}
+	}
 
 	private static RegistryObject<Block> register(String name, Supplier<Block> suplier) {
 		return BLOCKS.register(name, suplier);

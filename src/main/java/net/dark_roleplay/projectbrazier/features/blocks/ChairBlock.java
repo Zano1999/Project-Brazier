@@ -23,7 +23,7 @@ public class ChairBlock extends HFacedDecoBlock {
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		if(player.getPositionVec().squareDistanceTo(new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5)) < 4) {
 			if(!world.isRemote())
-				SittingUtil.sitOnBlockWithRotation((ServerWorld) world, pos.getX(), pos.getY(), pos.getZ(), player, state.get(HORIZONTAL_FACING), 0.2F);
+				SittingUtil.sitOnBlockWithRotation((ServerWorld) world, pos.getX(), pos.getY(), pos.getZ(), player, state.get(HORIZONTAL_FACING), state.get(HORIZONTAL_FACING), 0.2F);
 		}else {
 			player.sendStatusMessage(new TranslationTextComponent("interaction.drpmedieval.chair.to_far", state.getBlock().getTranslatedName()), true);
 		}

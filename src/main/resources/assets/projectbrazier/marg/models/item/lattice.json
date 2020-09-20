@@ -1,0 +1,7 @@
+{
+	"parent": "projectbrazier:block/lattices/${custom}/item",
+	"textures": {
+		"particle": "${texture%planks}",
+		"wood": "${texture%planks}"
+	}
+}

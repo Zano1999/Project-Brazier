@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.features.blocks;
+package net.dark_roleplay.projectbrazier.features.blocks.brazier;
 
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
