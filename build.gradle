@@ -54,37 +54,30 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('runs/client')
-            arg "-mixin.config="+archivesBaseName+".mixins.json"
+            arg "-mixin.config=" + modid + ".mixins.json"
+
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
 
-            environment 'MOD_CLASSES',
-                    "archivesBaseName%%${project.file('out/production/resources').canonicalPath};" +
-                            "archivesBaseName%%${project.file('out/production/classes').canonicalPath};" +
-                            "archivesBaseName%%${project.file('out/api/resources').canonicalPath};"+
-                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath}"
+            mods {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
         }
 
         server {
             workingDirectory project.file('runs/server')
-            arg "-mixin.config="+archivesBaseName+".mixins.json"
+            arg "-mixin.config=" + modid + ".mixins.json"
+
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
 
-            environment 'MOD_CLASSES',
-                    "archivesBaseName%%${project.file('out/production/resources').canonicalPath};" +
-                            "archivesBaseName%%${project.file('out/production/classes').canonicalPath};" +
-                            "archivesBaseName%%${project.file('out/api/resources').canonicalPath};"+
-                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath}"
-        }
-
-        data {
-            workingDirectory project.file('runs/data_gen')
-            args '--mod', 'drpmedieval', '--all', '--output', file('src/generated/resources/')
-
-            environment 'MOD_CLASSES',
-                    "archivesBaseName%%${project.file('out/production/resources').canonicalPath};" +
-                            "archivesBaseName%%${project.file('out/production/classes').canonicalPath};" +
-                            "archivesBaseName%%${project.file('out/api/resources').canonicalPath};"+
-                            "archivesBaseName%%${project.file('out/api/classes').canonicalPath}"
+            mods {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
         }
     }
 }
@@ -175,15 +168,6 @@ processResources {
             File file ->
                 def proc = ('pingo -quiet -strip -auto ' + file).execute();
                 proc.waitFor();
-        }
-    }
-}
-
-idea {
-    module {
-        for (String excludeDirName in ["run", "out", "runs", ".github", ".idea", "gradle"]) {
-            File excludeDir = new File(projectDir, excludeDirName)
-            excludeDirs.add(excludeDir)
         }
     }
 }

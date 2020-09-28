@@ -8,6 +8,7 @@
 		"BlockStateMixin"
 	],
 	"client": [
+		"ClientCommandMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
