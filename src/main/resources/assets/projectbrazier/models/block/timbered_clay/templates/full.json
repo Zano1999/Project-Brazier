@@ -1,0 +1,54 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"base": "drpmedieval:blocks/timbered_clay/timbered_clay",
+		"particle": "drpmedieval:blocks/timbered_clay/timbered_clay",
+		"top": "drpmedieval:blocks/timbered_clay/full_transparency",
+		"bottom": "drpmedieval:blocks/timbered_clay/full_transparency",
+		"left": "drpmedieval:blocks/timbered_clay/full_transparency",
+		"right": "drpmedieval:blocks/timbered_clay/full_transparency",
+		"type": "drpmedieval:blocks/timbered_clay/full_transparency",
+		"border": "drpmedieval:blocks/timbered_clay/full_transparency"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#base"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#base"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#base"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#base"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#base"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#base"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#type"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#left"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#type"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#right"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#top"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#border"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#border"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "full",
+			"origin": [8, 8, 8],
+			"children": [0, 1, 2]
+		}
+	]
+}
