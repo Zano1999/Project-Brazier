@@ -32,10 +32,10 @@ public class ClientCommands {
 	private static CommandDispatcher<CommandSource> commands = new CommandDispatcher();
 
 	static{
-		commands.register(Commands.literal("foo").executes(context -> {
-			context.getSource().sendFeedback(new StringTextComponent("bar"), false);
+		commands.register(Commands.literal("foo").then(Commands.literal("bar").executes(ctx -> {
+			ctx.getSource().sendFeedback(new StringTextComponent("Test"), false);
 			return 1;
-		}));
+		})));
 	}
 
 	@SubscribeEvent
@@ -52,15 +52,12 @@ public class ClientCommands {
 	}
 
 	public static Suggestions getSuggestions(String input, Suggestions suggestions){
-		if(input == null) return suggestions;
-		Collection sugs = new HashSet<>();
-		sugs.add(suggestions);
 		try{
 			ParseResults<CommandSource> parseresults = commands.parse(input.replaceFirst("/", ""), Minecraft.getInstance().player.getCommandSource());
-			sugs.add(commands.getCompletionSuggestions(parseresults).get());
+			return commands.getCompletionSuggestions(parseresults).get();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return Suggestions.merge(input, sugs);
+		return null;
 	}
 }
