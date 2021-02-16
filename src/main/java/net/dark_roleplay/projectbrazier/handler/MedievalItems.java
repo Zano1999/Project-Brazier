@@ -1,8 +1,10 @@
 package net.dark_roleplay.projectbrazier.handler;
 
-import net.dark_roleplay.projectbrazier.features.data_props.ItemPropertyLoader;
-import net.dark_roleplay.projectbrazier.features.items.WarHornItem;
-import net.dark_roleplay.projectbrazier.features.items.ZoomItem;
+import net.dark_roleplay.marg.api.materials.IMaterial;
+import net.dark_roleplay.projectbrazier.ProjectBrazier;
+import net.dark_roleplay.projectbrazier.experiments.data_props.ItemPropertyLoader;
+import net.dark_roleplay.projectbrazier.objects.items.WarHornItem;
+import net.dark_roleplay.projectbrazier.objects.items.ZoomItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -11,6 +13,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.Map;
 import java.util.function.Function;
 
 public class MedievalItems {
@@ -59,6 +62,11 @@ public class MedievalItems {
 		for(RegistryObject<Block> regObj : MedievalBlocks.BLOCKS.getEntries()){
 			BlockItem blockItem = new BlockItem(regObj.get(), new Item.Properties().group(MedievalCreativeTabs.decor()));
 			reg.register(blockItem.setRegistryName(regObj.getId()));
+		}
+
+		for(Map.Entry<IMaterial, RegistryObject<Block>> entry : MedievalBlocks.TOP_WOOD_PLATFORM.entrySet()){
+			BlockItem blockItem = new BlockItem(entry.getValue().get(), new Item.Properties().group(MedievalCreativeTabs.decor()));
+			reg.register(blockItem.setRegistryName(ProjectBrazier.MODID, entry.getKey().getTextProvider().apply("${material}_platform")));
 		}
 	}
 

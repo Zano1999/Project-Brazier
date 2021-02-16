@@ -20,6 +20,10 @@
 		{
 			"input": "projectbrazier:marg/models/block/wood_platform.json",
 			"output": "projectbrazier:models/block/${custom}_${material}_platform.json"
+		},
+		{
+			"input": "projectbrazier:marg/models/item/wood_platform.json",
+			"output": "projectbrazier:models/item/${material}_platform.json"
 		}
 	]
 }

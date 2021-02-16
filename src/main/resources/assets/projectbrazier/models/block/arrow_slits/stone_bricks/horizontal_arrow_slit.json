@@ -1,0 +1,34 @@
+{
+	"textures": {
+		"0": "block/stone_bricks",
+		"particle": "block/stone_bricks",
+		"h": "projectbrazier:block/arrow_slits/stone_bricks/horizontal_arrow_slit",
+		"s": "projectbrazier:block/arrow_slits/stone_bricks/arrow_slit_sides"
+	},
+	"elements": [
+		{
+			"from": [0, 9, 0],
+			"to": [16, 16, 2],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 7], "texture": "#h", "cullface": "north"},
+				"east": {"uv": [13, 0, 15, 7], "texture": "#0", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 7], "texture": "#h"},
+				"west": {"uv": [6, 0, 8, 7], "texture": "#0", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 2], "texture": "#s", "cullface": "up"},
+				"down": {"uv": [0, 12, 16, 14], "texture": "#s"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 7, 2],
+			"faces": {
+				"north": {"uv": [0, 9, 16, 16], "texture": "#h", "cullface": "north"},
+				"east": {"uv": [11, 9, 13, 16], "texture": "#0", "cullface": "east"},
+				"south": {"uv": [0, 9, 16, 16], "texture": "#h"},
+				"west": {"uv": [2, 9, 4, 16], "texture": "#0", "cullface": "west"},
+				"up": {"uv": [0, 4, 16, 6], "texture": "#s"},
+				"down": {"uv": [0, 2, 16, 4], "texture": "#s", "cullface": "down"}
+			}
+		}
+	]
+}

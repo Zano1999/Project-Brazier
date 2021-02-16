@@ -17,19 +17,19 @@ public class MedievalCreativeTabs {
 
 	public static ItemGroup food(){
 		if(FOOD == null)
-			FOOD = new SimpleItemGroup("food", () -> new ItemStack(Items.APPLE));
+			FOOD = new SimpleItemGroup("food", () -> new ItemStack(MedievalItems.HOPS.get()));
 		return FOOD;
 	}
 
 	public static ItemGroup misc(){
 		if(MISCELLANEOUS == null)
-			MISCELLANEOUS = new SimpleItemGroup("miscellaneous", () -> new ItemStack(Items.DIAMOND));
+			MISCELLANEOUS = new SimpleItemGroup("miscellaneous", () -> new ItemStack(MedievalItems.GOLD_COIN.get()));
 		return MISCELLANEOUS;
 	}
 
 	public static ItemGroup decor(){
 		if(DECORATION == null)
-			DECORATION = new SimpleItemGroup("decoration", () -> new ItemStack(Items.PUMPKIN_SEEDS));
+			DECORATION = new SimpleItemGroup("decoration", () -> new ItemStack(MedievalBlocks.IRON_BRAZIER_COAL.get()));
 		return DECORATION;
 	}
 

@@ -1,5 +1,4 @@
 {
-	"credit": "Made by JTK222",
 	"textures": {
 		"particle": "block/stone_bricks",
 		"bricks": "block/stone_bricks"
@@ -23,10 +22,10 @@
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 14]},
 			"faces": {
 				"east": {"uv": [0, 0, 10, 16], "texture": "#bricks", "cullface": "east"},
-				"south": {"uv": [0, 0, 6, 16], "texture": "#bricks"},
-				"west": {"uv": [3, 0, 13, 16], "texture": "#bricks", "cullface": "west"},
+				"south": {"uv": [0, 0, 6, 16], "texture": "#bricks", "cullface": "south"},
+				"west": {"uv": [3, 0, 13, 16], "texture": "#bricks"},
 				"up": {"uv": [6, 1, 16, 7], "rotation": 90, "texture": "#bricks", "cullface": "up"},
-				"down": {"uv": [16, 9, 6, 15], "rotation": 90, "texture": "#bricks", "cullface": "up"}
+				"down": {"uv": [16, 9, 6, 15], "rotation": 90, "texture": "#bricks", "cullface": "down"}
 			}
 		}
 	]

@@ -1,8 +1,18 @@
 {
 	"variants": {
-		"facing=north": {"model":  "projectbrazier:block/machicolations"},
-		"facing=east": {"model":  "projectbrazier:block/machicolations", "y": 90},
-		"facing=south": {"model":  "projectbrazier:block/machicolations", "y": 180},
-		"facing=west": {"model":  "projectbrazier:block/machicolations", "y": 270}
+		"facing=north,type=straight": {"model":  "projectbrazier:block/machicolations"},
+		"facing=east,type=straight": {"model":  "projectbrazier:block/machicolations", "y": 90},
+		"facing=south,type=straight": {"model":  "projectbrazier:block/machicolations", "y": 180},
+		"facing=west,type=straight": {"model":  "projectbrazier:block/machicolations", "y": 270},
+
+		"facing=north,type=outer_corner": {"model":  "projectbrazier:block/machicolations_outer_corner"},
+		"facing=east,type=outer_corner": {"model":  "projectbrazier:block/machicolations_outer_corner", "y": 90},
+		"facing=south,type=outer_corner": {"model":  "projectbrazier:block/machicolations_outer_corner", "y": 180},
+		"facing=west,type=outer_corner": {"model":  "projectbrazier:block/machicolations_outer_corner", "y": 270},
+
+		"facing=north,type=inner_corner": {"model":  "projectbrazier:block/machicolations_inner_corner"},
+		"facing=east,type=inner_corner": {"model":  "projectbrazier:block/machicolations_inner_corner", "y": 90},
+		"facing=south,type=inner_corner": {"model":  "projectbrazier:block/machicolations_inner_corner", "y": 180},
+		"facing=west,type=inner_corner": {"model":  "projectbrazier:block/machicolations_inner_corner", "y": 270}
 	}
 }

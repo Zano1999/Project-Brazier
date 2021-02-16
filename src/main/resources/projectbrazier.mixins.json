@@ -4,14 +4,11 @@
 	"compatibilityLevel": "JAVA_8",
 	"refmap": "projectbrazier.refmap.json",
 	"mixins": [
-		"CollisionMixin",
 		"BlockStateMixin"
 	],
 	"client": [
-		"ClientCommandMixin"
+		"ClientCommandMixin",
+		"ChunkRenderHook"
 	],
-	"injectors": {
-		"defaultRequire": 1
-	},
 	"minVersion": "0.8"
 }

@@ -1,8 +1,8 @@
 package net.dark_roleplay.projectbrazier.handler;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
-import net.dark_roleplay.projectbrazier.features.blocks.drawbridge.DrawbridgeAnchorTileEntity;
-import net.dark_roleplay.projectbrazier.features.tile_entities.SingleItemTileEntity;
+import net.dark_roleplay.projectbrazier.objects.blocks.drawbridge.DrawbridgeAnchorTileEntity;
+import net.dark_roleplay.projectbrazier.objects.tileentities.SingleItemTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;

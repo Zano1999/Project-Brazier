@@ -1,10 +1,11 @@
 package net.dark_roleplay.projectbrazier;
 
 import net.dark_roleplay.marg.api.materials.IMaterial;
-import net.dark_roleplay.projectbrazier.features.blocks.drawbridge.DrawbridgeAnchorTileEntityRenderer;
-import net.dark_roleplay.projectbrazier.features.model_loaders.axis_connected_models.AxisConnectedModel;
-import net.dark_roleplay.projectbrazier.features.model_loaders.emissive.EmissiveModel;
-import net.dark_roleplay.projectbrazier.features.model_loaders.simple_pane_conneted_model.SimplePaneConnectedModel;
+import net.dark_roleplay.projectbrazier.experiments.walking_gui.PassiveScreenHelper;
+import net.dark_roleplay.projectbrazier.objects.blocks.drawbridge.DrawbridgeAnchorTileEntityRenderer;
+import net.dark_roleplay.projectbrazier.objects.model_loaders.axis_connected_models.AxisConnectedModel;
+import net.dark_roleplay.projectbrazier.objects.model_loaders.emissive.EmissiveModel;
+import net.dark_roleplay.projectbrazier.objects.model_loaders.simple_pane_conneted_model.SimplePaneConnectedModel;
 import net.dark_roleplay.projectbrazier.handler.MedievalBlocks;
 import net.dark_roleplay.projectbrazier.handler.MedievalEntities;
 import net.dark_roleplay.projectbrazier.handler.MedievalKeybinds;
@@ -15,10 +16,8 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -37,6 +36,8 @@ public class ProjectBrazierClient {
 	public static void setupClientStuff(FMLClientSetupEvent event) {
 		MedievalKeybinds.registerKeybinds(event);
 		ProjectBrazierClient.registerRenderLayers();
+		//TODO Experimental
+		PassiveScreenHelper.editKeybinds();
 	}
 
 	public static void registerModelLoaders(ModelRegistryEvent event){

@@ -3,17 +3,19 @@ buildscript {
         maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
         mavenCentral()
-        maven { url "https://plugins.gradle.org/m2/" }
-        maven {url='https://dist.creeper.host/Sponge/maven'}
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'https://dist.creeper.host/Sponge/maven'}
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-        classpath "com.wynprice.cursemaven:CurseMaven:1.2.3"
+        classpath 'com.wynprice.cursemaven:CurseMaven:1.2.3'
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath 'com.github.wnameless.json:json-flattener:0.12.0'
     }
 }
 
 plugins {
+    id 'com.wynprice.cursemaven' version "2.1.5"
     id 'com.matthewprenger.cursegradle' version '1.4.0'
     id 'idea'
     id 'maven-publish'
@@ -33,17 +35,17 @@ archivesBaseName = "${modid}"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
-configurations {
-    apiCompile.extendsFrom(compile)
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 1, 'seconds'
+    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
 }
 
 sourceSets {
-    api
     main.resources.srcDirs += 'src/generated/resources'
-    main {
-        compileClasspath += sourceSets.api.output
-        runtimeClasspath += sourceSets.api.output
-    }
+}
+
+mixin {
+    add sourceSets.main, "${modid}.refmap.json"
 }
 
 minecraft {
@@ -56,11 +58,10 @@ minecraft {
             workingDirectory project.file('runs/client')
             arg "-mixin.config=" + modid + ".mixins.json"
 
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                projectbrazier {
                     source sourceSets.main
                 }
             }
@@ -70,11 +71,22 @@ minecraft {
             workingDirectory project.file('runs/server')
             arg "-mixin.config=" + modid + ".mixins.json"
 
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                projectbrazier {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('runs/datagen')
+
+            args '--mod', 'projectbrazier', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                projectbrazier {
                     source sourceSets.main
                 }
             }
@@ -83,7 +95,7 @@ minecraft {
 }
 
 repositories {
-    maven {url = "https://maven.dark-roleplay.net/"}
+   // maven {url = "https://maven.dark-roleplay.net/"}
     maven {url = "https://minecraft.curseforge.com/api/maven/"}
     mavenLocal()
 }
@@ -96,15 +108,15 @@ dependencies {
 
     ])
 
-    compileOnly(fg.deobf("net.dark_roleplay:marg:1.16.2-0.5.5:api"))
-    runtimeOnly(fg.deobf("net.dark_roleplay:marg:1.16.2-0.5.5"))
+    compileOnly(fg.deobf("net.dark_roleplay:marg:1.16.1-0.5.5-SNAPSHOT:api"))
+    runtimeOnly(fg.deobf("net.dark_roleplay:marg:1.16.1-0.5.5-SNAPSHOT"))
+
+    //runtimeOnly(fg.deobf("curse.maven:worldedit:3135187"))
 }
 
 jar {
     from sourceSets.main.output.classesDirs
     from sourceSets.main.output.resourcesDir
-    from sourceSets.api.output.resourcesDir
-    from sourceSets.api.output.classesDirs
 
     manifest {
         attributes([
@@ -128,22 +140,16 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
-    from sourceSets.api.allSource
-}
-
-task apiJar(type: Jar) {
-    classifier = 'api'
-    from sourceSets.api.output
 }
 
 artifacts {
-    archives apiJar
     archives sourcesJar
     archives javadocJar
 }
 
 import groovy.json.JsonSlurper
 import groovy.json.JsonOutput
+import com.github.wnameless.json.flattener.JsonFlattener
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {
@@ -157,6 +163,11 @@ processResources {
     }
 
     doLast {
+        //Flatten lang jsons
+        fileTree(dir: outputs.files.asPath, include: "**/lang/*.json").each{
+            File file -> file.text = JsonFlattener.flatten(JsonOutput.toJson(new JsonSlurper().parse(file)));
+        }
+
         // Minify json resources
         fileTree(dir: outputs.files.asPath, include: "**/*.json").each{
             File file -> file.text = JsonOutput.toJson(new JsonSlurper().parse(file));
@@ -201,7 +212,6 @@ publishing {
             version = project.version
 
             artifact reobfArtifact
-            artifact apiJar
             artifact sourcesJar
             artifact javadocJar
         }
@@ -215,8 +225,4 @@ publishing {
             }
         }
     }
-}
-
-mixin {
-    add sourceSets.main, "${modid}.refmap.json"
 }

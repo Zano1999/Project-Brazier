@@ -2,10 +2,9 @@ package net.dark_roleplay.projectbrazier.mixin;
 
 import com.mojang.brigadier.suggestion.Suggestion;
 import com.mojang.brigadier.suggestion.Suggestions;
-import net.dark_roleplay.projectbrazier.clientcommands.ClientCommands;
+import net.dark_roleplay.projectbrazier.experiments.clientcommands.ClientCommands;
 import net.minecraft.client.gui.CommandSuggestionHelper;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.multiplayer.ClientSuggestionProvider;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -26,7 +24,7 @@ public abstract class ClientCommandMixin {
 	private static int getLastWhitespace(String text){return 1;}
 
 	//Lnet/minecraft/client/multiplayer/ClientSuggestionProvider;handleResponse(ILcom/mojang/brigadier/suggestion/Suggestions;)V
-	
+
 	@Inject(
 			method="Lnet/minecraft/client/gui/CommandSuggestionHelper;getSuggestions(Lcom/mojang/brigadier/suggestion/Suggestions;)Ljava/util/List;",
 			locals = LocalCapture.CAPTURE_FAILSOFT,

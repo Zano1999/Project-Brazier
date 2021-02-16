@@ -1,0 +1,58 @@
+{
+	"textures": {
+		"0": "block/stone_bricks",
+		"particle": "block/stone_bricks",
+		"c": "projectbrazier:block/arrow_slits/stone_bricks/cross_arrow_slit",
+		"s": "projectbrazier:block/arrow_slits/stone_bricks/arrow_slit_sides"
+	},
+	"elements": [
+		{
+			"from": [9, 0, 0],
+			"to": [16, 7, 2],
+			"faces": {
+				"north": {"uv": [0, 9, 7, 16], "texture": "#c", "cullface": "north"},
+				"east": {"uv": [14, 9, 16, 16], "texture": "#0", "cullface": "east"},
+				"south": {"uv": [9, 9, 16, 16], "texture": "#c"},
+				"west": {"uv": [11, 9, 13, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 7, 2], "texture": "#s"},
+				"down": {"uv": [0, 12, 7, 14], "texture": "#s", "cullface": "down"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [7, 7, 2],
+			"faces": {
+				"north": {"uv": [9, 9, 16, 16], "texture": "#c", "cullface": "north"},
+				"east": {"uv": [4, 9, 6, 16], "texture": "#0"},
+				"south": {"uv": [0, 9, 7, 16], "texture": "#c"},
+				"west": {"uv": [1, 9, 3, 16], "texture": "#0", "cullface": "west"},
+				"up": {"uv": [0, 0, 7, 2], "texture": "#s"},
+				"down": {"uv": [9, 12, 16, 14], "texture": "#s", "cullface": "down"}
+			}
+		},
+		{
+			"from": [0, 9, 0],
+			"to": [7, 16, 2],
+			"faces": {
+				"north": {"uv": [9, 0, 16, 7], "texture": "#c", "cullface": "north"},
+				"east": {"uv": [10, 0, 12, 7], "texture": "#0"},
+				"south": {"uv": [0, 0, 7, 7], "texture": "#c"},
+				"west": {"uv": [2, 0, 4, 7], "texture": "#0", "cullface": "west"},
+				"up": {"uv": [9, 0, 16, 2], "texture": "#s", "cullface": "up"},
+				"down": {"uv": [0, 2, 7, 4], "texture": "#s"}
+			}
+		},
+		{
+			"from": [9, 9, 0],
+			"to": [16, 16, 2],
+			"faces": {
+				"north": {"uv": [0, 0, 7, 7], "texture": "#c", "cullface": "north"},
+				"east": {"uv": [13, 0, 15, 7], "texture": "#0", "cullface": "east"},
+				"south": {"uv": [9, 0, 16, 7], "texture": "#c"},
+				"west": {"uv": [8, 0, 10, 7], "texture": "#0"},
+				"up": {"uv": [0, 0, 7, 2], "texture": "#s", "cullface": "up"},
+				"down": {"uv": [9, 2, 16, 4], "texture": "#s"}
+			}
+		}
+	]
+}

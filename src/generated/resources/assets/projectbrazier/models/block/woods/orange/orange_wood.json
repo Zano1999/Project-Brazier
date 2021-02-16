@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "projectbrazier:block/woods/orange/orange_log",
+    "side": "projectbrazier:block/woods/orange/orange_log"
+  }
+}

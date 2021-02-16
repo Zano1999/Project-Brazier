@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "projectbrazier:block/apple/stem/apple_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "projectbrazier:block/apple/stem/apple_wood"
+    },
+    "axis=z": {
+      "model": "projectbrazier:block/apple/stem/apple_wood",
+      "x": 90
+    }
+  }
+}

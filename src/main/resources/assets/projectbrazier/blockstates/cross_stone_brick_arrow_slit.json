@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model":  "projectbrazier:block/arrow_slits/stone_bricks/cross_arrow_slit"},
+		"facing=east": {"model":  "projectbrazier:block/arrow_slits/stone_bricks/cross_arrow_slit", "y": 90},
+		"facing=south": {"model":  "projectbrazier:block/arrow_slits/stone_bricks/cross_arrow_slit", "y": 180},
+		"facing=west": {"model":  "projectbrazier:block/arrow_slits/stone_bricks/cross_arrow_slit", "y": 270}
+	}
+}

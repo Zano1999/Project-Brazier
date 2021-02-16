@@ -1,0 +1,90 @@
+{
+	"textures": {
+		"particle": "projectbrazier:block/stone_machicolations",
+		"machicolation": "projectbrazier:block/stone_machicolations"
+	},
+	"elements": [
+		{
+			"from": [0, 12, 0],
+			"to": [16, 16, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [10, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 4], "texture": "#machicolation", "cullface": "north"},
+				"east": {"uv": [0, 10, 6, 14], "texture": "#machicolation", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 4], "texture": "#machicolation"},
+				"west": {"uv": [0, 10, 6, 14], "texture": "#machicolation", "cullface": "west"},
+				"up": {"uv": [0, 4, 16, 10], "texture": "#machicolation", "cullface": "up"},
+				"down": {"uv": [0, 4, 16, 10], "texture": "#machicolation"}
+			}
+		},
+		{
+			"from": [10, 12, 6],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [10, 8, 18]},
+			"faces": {
+				"east": {"uv": [6, 0, 16, 4], "texture": "#machicolation", "cullface": "east"},
+				"south": {"uv": [0, 10, 6, 14], "texture": "#machicolation", "cullface": "south"},
+				"west": {"uv": [0, 0, 10, 4], "texture": "#machicolation"},
+				"up": {"uv": [0, 4, 10, 10], "rotation": 90, "texture": "#machicolation", "cullface": "up"},
+				"down": {"uv": [0, 4, 16, 10], "texture": "#machicolation"}
+			}
+		},
+		{
+			"from": [-2, 12, 14],
+			"to": [14.2, 15.999, 18],
+			"rotation": {"angle": 45, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 4], "texture": "#machicolation"},
+				"south": {"uv": [0, 0, 16, 4], "texture": "#machicolation"},
+				"west": {"uv": [1, 10, 5, 14], "texture": "#machicolation"},
+				"up": {"uv": [0, 5, 16, 9], "texture": "#machicolation"}
+			}
+		},
+		{
+			"from": [-2, 8.002, 14],
+			"to": [4, 12, 18],
+			"rotation": {"angle": 45, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [0, 0, 6, 4], "texture": "#machicolation"},
+				"south": {"uv": [10, 0, 16, 4], "texture": "#machicolation"},
+				"west": {"uv": [1, 10, 5, 14], "texture": "#machicolation"}
+			}
+		},
+		{
+			"from": [4, 8.002, 14],
+			"to": [20, 12, 18],
+			"rotation": {"angle": 45, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 4], "texture": "#machicolation"},
+				"east": {"uv": [1, 10, 5, 14], "texture": "#machicolation"},
+				"south": {"uv": [0, 0, 16, 4], "texture": "#machicolation"},
+				"up": {"uv": [0, 4, 16, 8], "texture": "#machicolation"},
+				"down": {"uv": [0, 4, 16, 8], "texture": "#machicolation"}
+			}
+		},
+		{
+			"from": [-2, 4, 14],
+			"to": [14, 8.002, 18],
+			"rotation": {"angle": 45, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 4], "texture": "#machicolation"},
+				"east": {"uv": [1, 10, 5, 14], "texture": "#machicolation"},
+				"south": {"uv": [0, 0, 16, 4], "texture": "#machicolation"},
+				"west": {"uv": [1, 10, 5, 14], "texture": "#machicolation"},
+				"down": {"uv": [0, 4, 16, 8], "texture": "#machicolation"}
+			}
+		},
+		{
+			"from": [-2, 0, 14],
+			"to": [10, 4, 18],
+			"rotation": {"angle": 45, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [0, 0, 12, 4], "texture": "#machicolation"},
+				"east": {"uv": [1, 10, 5, 14], "texture": "#machicolation"},
+				"south": {"uv": [4, 0, 16, 4], "texture": "#machicolation"},
+				"west": {"uv": [1, 10, 5, 14], "texture": "#machicolation"},
+				"down": {"uv": [4, 4, 16, 8], "texture": "#machicolation"}
+			}
+		}
+	]
+}
