@@ -1,10 +1,13 @@
 package net.dark_roleplay.projectbrazier;
 
+import net.dark_roleplay.marg.api.materials.IMaterial;
 import net.dark_roleplay.projectbrazier.experiments.decals.capability.CapabilityAttachListener;
 import net.dark_roleplay.projectbrazier.experiments.decals.capability.DecalChunk;
 import net.dark_roleplay.projectbrazier.experiments.decals.capability.DecalChunkStorage;
 import net.dark_roleplay.projectbrazier.experiments.decals.capability.DecalRegistry;
+import net.dark_roleplay.projectbrazier.features.blocks.barrel.BarrelBlock;
 import net.dark_roleplay.projectbrazier.handler.*;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.DebugChunkGenerator;
@@ -37,9 +40,9 @@ public class ProjectBrazier {
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ProjectBrazierClient::modConstructor);
 
         //Decals
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(DecalRegistry::registerRegistry);
-        MinecraftForge.EVENT_BUS.addGenericListener(Chunk.class, CapabilityAttachListener::attachChunkCapability);
-        CapabilityManager.INSTANCE.register(DecalChunk.class, new DecalChunkStorage(), DecalChunk::new);
+//        FMLJavaModLoadingContext.get().getModEventBus().addListener(DecalRegistry::registerRegistry);
+//        MinecraftForge.EVENT_BUS.addGenericListener(Chunk.class, CapabilityAttachListener::attachChunkCapability);
+//        CapabilityManager.INSTANCE.register(DecalChunk.class, new DecalChunkStorage(), () -> new DecalChunk(0, 256)); //TODO 1.17 update the default to new default heights.
     }
 
     public void hackyHackToByPassLoadingOrder(RegistryEvent.NewRegistry event){
@@ -54,11 +57,19 @@ public class ProjectBrazier {
 
         MedievalTileEntities.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         MedievalEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-//        MedievalContainers.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        MedievalContainers.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         MedievalSounds.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     public void setupCommonStuff(FMLCommonSetupEvent event) {
+        MedievalBlocks.planksOnly.forEach(material -> {
+            BarrelBlock openBarrel = (BarrelBlock) MedievalBlocks.OPEN_BARREL.get(material).get();
+            BarrelBlock closedBarrel = (BarrelBlock) MedievalBlocks.CLOSED_BARREL.get(material).get();
+
+            openBarrel.setOtherBlock(closedBarrel);
+            closedBarrel.setOtherBlock(openBarrel);
+        });
+
         DebugChunkGenerator.ALL_VALID_STATES.clear();
         DebugChunkGenerator.ALL_VALID_STATES.addAll(ForgeRegistries.BLOCKS.getValues().stream().filter(block -> block.getRegistryName().getNamespace().equals(MODID)).flatMap((p_236067_0_) -> {
             return p_236067_0_.getStateContainer().getValidStates().stream();

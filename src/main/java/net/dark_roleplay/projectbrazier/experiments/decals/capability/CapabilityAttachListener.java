@@ -18,22 +18,25 @@ public class CapabilityAttachListener {
 
 	private static final ResourceLocation DecalCapabilityKey = new ResourceLocation(ProjectBrazier.MODID, "decals");
 
-	@CapabilityInject(DecalChunk.class)
+//	@CapabilityInject(DecalChunk.class)
 	static Capability<DecalChunk> DECAL_CAPABILITY = null;
 
 	/**
 	 * Registered by {@link ProjectBrazier#ProjectBrazier() Constructor}
-	 * @param event
 	 */
 	public static void attachChunkCapability(AttachCapabilitiesEvent<Chunk> event){
-		event.addCapability(DecalCapabilityKey, new DecalChunkProvider());
+		//TODO 1.17 update this vor negative world heights
+		event.addCapability(DecalCapabilityKey, new DecalChunkProvider(0, event.getObject().getHeight()));
 	}
 
 	public static class DecalChunkProvider implements ICapabilitySerializable<CompoundNBT> {
 		//TODO Invalidate cap on chunk unload
-
 		private DecalChunk cap;
-		private final LazyOptional<DecalChunk> lazyCap = LazyOptional.of(() -> cap == null ? cap = new DecalChunk() : cap);
+		private final LazyOptional<DecalChunk> lazyCap;
+
+		public DecalChunkProvider(int worldMin, int worldMax){
+			lazyCap = LazyOptional.of(() -> cap == null ? cap = new DecalChunk(worldMin, worldMax) : cap);
+		}
 
 		@Nonnull
 		@Override

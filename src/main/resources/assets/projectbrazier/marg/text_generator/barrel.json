@@ -2,7 +2,8 @@
 	"generatorVersion": 0,
 	"customKeys": [
 		"open",
-		"closed"
+		"closed",
+		"flower"
 	],
 	"material": {
 		"type": "wood",

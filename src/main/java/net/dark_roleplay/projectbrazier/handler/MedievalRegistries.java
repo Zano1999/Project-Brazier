@@ -1,6 +1,8 @@
 package net.dark_roleplay.projectbrazier.handler;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
+import net.dark_roleplay.projectbrazier.experiments.decals.Decal;
+import net.dark_roleplay.projectbrazier.experiments.decals.capability.DecalRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.ContainerType;
@@ -11,7 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class MedievalRegistries {
-
+//	public static final DeferredRegister<Decal> DECALS = DeferredRegister.create(DecalRegistry.REGISTRY, ProjectBrazier.MODID);
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ProjectBrazier.MODID);
 	public static final DeferredRegister<Block> BLOCKS_NO_ITEMS = DeferredRegister.create(ForgeRegistries.BLOCKS, ProjectBrazier.MODID);
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ProjectBrazier.MODID);

@@ -1,18 +1,19 @@
 package net.dark_roleplay.projectbrazier;
 
 import net.dark_roleplay.marg.api.materials.IMaterial;
+import net.dark_roleplay.projectbrazier.experiments.BultinMixedModel.BuiltinMixedModel;
 import net.dark_roleplay.projectbrazier.experiments.walking_gui.PassiveScreenHelper;
-import net.dark_roleplay.projectbrazier.objects.blocks.drawbridge.DrawbridgeAnchorTileEntityRenderer;
-import net.dark_roleplay.projectbrazier.objects.model_loaders.axis_connected_models.AxisConnectedModel;
-import net.dark_roleplay.projectbrazier.objects.model_loaders.emissive.EmissiveModel;
-import net.dark_roleplay.projectbrazier.objects.model_loaders.simple_pane_conneted_model.SimplePaneConnectedModel;
-import net.dark_roleplay.projectbrazier.handler.MedievalBlocks;
-import net.dark_roleplay.projectbrazier.handler.MedievalEntities;
-import net.dark_roleplay.projectbrazier.handler.MedievalKeybinds;
-import net.dark_roleplay.projectbrazier.handler.MedievalTileEntities;
+import net.dark_roleplay.projectbrazier.features.blocks.barrel.BarrelTileEntityRenderer;
+import net.dark_roleplay.projectbrazier.features.blocks.drawbridge.DrawbridgeAnchorTileEntityRenderer;
+import net.dark_roleplay.projectbrazier.features.model_loaders.axis_connected_models.AxisConnectedModel;
+import net.dark_roleplay.projectbrazier.features.model_loaders.emissive.EmissiveModel;
+import net.dark_roleplay.projectbrazier.features.model_loaders.simple_pane_conneted_model.SimplePaneConnectedModel;
+import net.dark_roleplay.projectbrazier.features.screens.general_container.GeneralContainerScreen;
+import net.dark_roleplay.projectbrazier.handler.*;
 import net.dark_roleplay.projectbrazier.util.sitting.SittableEntity;
 import net.dark_roleplay.projectbrazier.util.sitting.SittableEntityRenderer;
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.util.ResourceLocation;
@@ -38,12 +39,15 @@ public class ProjectBrazierClient {
 		ProjectBrazierClient.registerRenderLayers();
 		//TODO Experimental
 		PassiveScreenHelper.editKeybinds();
+
+		ScreenManager.registerFactory(MedievalContainers.GENERAL_CONTAINER.get(), GeneralContainerScreen::new);
 	}
 
 	public static void registerModelLoaders(ModelRegistryEvent event){
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "simple_pane_connected_model"), new SimplePaneConnectedModel.Loader());
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "axis_connected_model"), new AxisConnectedModel.Loader());
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "emissive"), new EmissiveModel.Loader());
+		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "builtin_mixed"), new BuiltinMixedModel.Loader());
 	}
 
 	public static void registerRenderLayers(){
@@ -51,7 +55,11 @@ public class ProjectBrazierClient {
 		RenderTypeLookup.setRenderLayer(MedievalBlocks.IRON_BRAZIER_COAL.get(), layer -> layer == RenderType.getCutout() || layer == RenderType.getSolid());
 
 		//TODO Move to TER registration event?
+		for(RegistryObject<Block> b : MedievalBlocks.FLOWER_BUCKET.values())
+			RenderTypeLookup.setRenderLayer(b.get(), RenderType.getCutout());
+
 		ClientRegistry.bindTileEntityRenderer(MedievalTileEntities.DRAWBRODGE_ANCHOR.get(), DrawbridgeAnchorTileEntityRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(MedievalTileEntities.BARREL.get(), BarrelTileEntityRenderer::new);
 
 		RenderingRegistry.<SittableEntity>registerEntityRenderingHandler(MedievalEntities.SITTABLE.get(), SittableEntityRenderer::new);
 	}

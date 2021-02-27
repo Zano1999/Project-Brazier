@@ -3,10 +3,10 @@ package net.dark_roleplay.projectbrazier.handler;
 import net.dark_roleplay.marg.api.materials.IMaterial;
 import net.dark_roleplay.marg.api.materials.IMaterialCondition;
 import net.dark_roleplay.marg.api.materials.ItemMaterialCondition;
-import net.dark_roleplay.projectbrazier.objects.blocks.BlockCreators;
-import net.dark_roleplay.projectbrazier.objects.blocks.drawbridge.DrawbridgeAnchorBlock;
-import net.dark_roleplay.projectbrazier.objects.blocks.lattice_block.AxisLatticeBlock;
-import net.dark_roleplay.projectbrazier.objects.blocks.templates.HFacedDecoBlock;
+import net.dark_roleplay.projectbrazier.features.blocks.BlockCreators;
+import net.dark_roleplay.projectbrazier.features.blocks.drawbridge.DrawbridgeAnchorBlock;
+import net.dark_roleplay.projectbrazier.features.blocks.lattice_block.AxisLatticeBlock;
+import net.dark_roleplay.projectbrazier.features.blocks.templates.HFacedDecoBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.RotatedPillarBlock;
@@ -29,9 +29,9 @@ public class MedievalBlocks {
 	public static final DeferredRegister<Block> BLOCKS = MedievalRegistries.BLOCKS;
 	public static final DeferredRegister<Block> BLOCKS_NO_ITEMS = MedievalRegistries.BLOCKS_NO_ITEMS;
 
-	private static IMaterialCondition planksOnly = new ItemMaterialCondition("wood", "planks");
-	private static IMaterialCondition planksStrippedLogs = new ItemMaterialCondition("wood", "planks", "stripped_log");
-	private static IMaterialCondition logsOnly = new ItemMaterialCondition("wood", "log");
+	public static IMaterialCondition planksOnly = new ItemMaterialCondition("wood", "planks");
+	public static IMaterialCondition planksStrippedLogs = new ItemMaterialCondition("wood", "planks", "stripped_log");
+	public static IMaterialCondition logsOnly = new ItemMaterialCondition("wood", "log");
 
 	private static final Block.Properties wood = AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD);
 	private static final Block.Properties stoneProps = Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE);
@@ -81,6 +81,8 @@ public class MedievalBlocks {
 			C_STONE_BRICK_ARROW_SLIT	 = register("cross_stone_brick_arrow_slit", prop -> new HFacedDecoBlock(prop, "arrow_slits/stone_bricks/cross_arrow_slit"), stoneProps);
 
 	public static final Map<IMaterial, RegistryObject<Block>>
+			FLOWER_BUCKET					= register("${material}_flower_bucket", planksOnly, BlockCreators::createFlowerBucket),
+			FLOWER_BARREL					= register("${material}_flower_barrel", planksOnly, BlockCreators::createFlowerBarrel),
 			PLANK_CHAIR						= register("${material}_plank_chair", planksOnly, BlockCreators::createChair),
 			CHAIR								= register("${material}_solid_chair", planksOnly, BlockCreators::createChair),
 			ARMREST_CHAIR					= register("${material}_armrest_chair", planksOnly, BlockCreators::createChair),

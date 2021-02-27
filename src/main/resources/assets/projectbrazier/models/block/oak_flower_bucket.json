@@ -1,0 +1,9 @@
+{
+  "loader": "projectbrazier:builtin_mixed",
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "minecraft:block/glass"
+  }
+}
+
+

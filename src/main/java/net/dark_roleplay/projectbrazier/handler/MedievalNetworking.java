@@ -1,7 +1,7 @@
 package net.dark_roleplay.projectbrazier.handler;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
-import net.dark_roleplay.projectbrazier.objects.packets.SyncDrawbridgeState;
+import net.dark_roleplay.projectbrazier.features.packets.SyncDrawbridgeState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;

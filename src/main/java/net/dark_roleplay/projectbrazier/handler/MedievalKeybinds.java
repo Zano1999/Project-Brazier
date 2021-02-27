@@ -1,6 +1,6 @@
 package net.dark_roleplay.projectbrazier.handler;
 
-import net.dark_roleplay.projectbrazier.objects.items.ZoomItem;
+import net.dark_roleplay.projectbrazier.features.items.ZoomItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
