@@ -1,13 +1,13 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
         mavenCentral()
+        jcenter()
         maven { url 'https://plugins.gradle.org/m2/' }
-        maven { url 'https://dist.creeper.host/Sponge/maven'}
+        maven { url 'https://repo.spongepowered.org/maven'}
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
         classpath 'com.wynprice.cursemaven:CurseMaven:1.2.3'
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
         classpath 'com.github.wnameless.json:json-flattener:0.12.0'
@@ -15,7 +15,6 @@ buildscript {
 }
 
 plugins {
-    id 'com.wynprice.cursemaven' version "2.1.5"
     id 'com.matthewprenger.cursegradle' version '1.4.0'
     id 'idea'
     id 'maven-publish'
@@ -23,7 +22,6 @@ plugins {
 
 //The Plugin block only works for plugins in the gradle maven
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'com.wynprice.cursemaven'
 apply plugin: 'org.spongepowered.mixin'
 
 
@@ -33,16 +31,14 @@ version = "${mc_version}-${mod_version}"
 group = "net.dark_roleplay.${modid}"
 archivesBaseName = "${modid}"
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
 configurations.all {
     resolutionStrategy.cacheDynamicVersionsFor 1, 'seconds'
     resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
 }
 
-sourceSets {
-    main.resources.srcDirs += 'src/generated/resources'
-}
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 mixin {
     add sourceSets.main, "${modid}.refmap.json"
@@ -59,6 +55,8 @@ minecraft {
             arg "-mixin.config=" + modid + ".mixins.json"
 
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             mods {
                 projectbrazier {
@@ -72,6 +70,8 @@ minecraft {
             arg "-mixin.config=" + modid + ".mixins.json"
 
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             mods {
                 projectbrazier {
@@ -98,6 +98,7 @@ repositories {
    // maven {url = "https://maven.dark-roleplay.net/"}
     maven {url = "https://minecraft.curseforge.com/api/maven/"}
     mavenLocal()
+    maven{ url = "https://www.cursemaven.com/" }
 }
 
 dependencies {
@@ -108,8 +109,12 @@ dependencies {
 
     ])
 
-    compileOnly(fg.deobf("net.dark_roleplay:marg:1.16.1-0.5.5-SNAPSHOT:api"))
-    runtimeOnly(fg.deobf("net.dark_roleplay:marg:1.16.1-0.5.5-SNAPSHOT"))
+    implementation (fg.deobf("net.dark_roleplay:marg:1.16.5-0.6-SNAPSHOT"))
+
+    //Wood Mods
+//    implementation fg.deobf("curse.maven:byg-247560:3239941") //Oh the biomes you'll Go
+//    implementation fg.deobf("curse.maven:abundance-452345:3250108") //Abundance
+//    implementation fg.deobf("curse.maven:abundance-382216:3233486") //Abnormals COre
 
     //runtimeOnly(fg.deobf("curse.maven:worldedit:3135187"))
 }

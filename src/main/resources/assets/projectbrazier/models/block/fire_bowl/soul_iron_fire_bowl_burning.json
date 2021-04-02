@@ -1,0 +1,18 @@
+{
+	"loader": "forge:multi-layer",
+	"textures": {
+		"particle": "projectbrazier:block/iron_brazier"
+	},
+	"layers": {
+		"solid": {
+			"parent": "projectbrazier:block/fire_bowl/iron_fire_bowl"
+		},
+		"cutout": {
+			"loader": "projectbrazier:emissive",
+			"ambientocclusion": false,
+			"emissive": {
+				"parent": "projectbrazier:block/fire_bowl/soul_fire_bowl_coal_fire"
+			}
+		}
+	}
+}

@@ -1,5 +1,4 @@
 {
-	"loader": "projectbrazier:builtin_mixed",
 	"parent": "minecraft:block/block",
 	"textures": {
 		"dirt": "minecraft:block/dirt"

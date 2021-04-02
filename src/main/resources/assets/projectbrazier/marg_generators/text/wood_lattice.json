@@ -1,0 +1,38 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"planks"
+		]
+	},
+	"customs": [
+		"cross",
+		"dense_vertical",
+		"diamond",
+		"grid",
+		"vertical"
+	],
+	"tasks": [
+		{
+			"input": "projectbrazier:blockstates/generator/lattice.json",
+			"output": "projectbrazier:blockstates/${material}_${custom}_lattice.json"
+		},
+		{
+			"input": "projectbrazier:blockstates/generator/lattice_centered.json",
+			"output": "projectbrazier:blockstates/${material}_${custom}_lattice_centered.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/lattice.json",
+			"output": "projectbrazier:models/block/${material}_${custom}_lattice.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/lattice_centered.json",
+			"output": "projectbrazier:models/block/${material}_${custom}_lattice_centered.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/item/lattice.json",
+			"output": "projectbrazier:models/item/${material}_${custom}_lattice.json"
+		}
+	]
+}

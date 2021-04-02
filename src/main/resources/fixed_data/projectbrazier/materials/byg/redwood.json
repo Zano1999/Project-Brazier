@@ -1,0 +1,36 @@
+{
+	"materialType": "wood",
+	"requiredMod": "byg",
+	"name": "redwood",
+	"properties": {
+		"mapColor": "adobe",
+		"resistance": 3.0,
+		"hardness": 2.0,
+		"harvestLevel": 0,
+		"harvestTool": "axe"
+	},
+	"textures": {
+		"leaves": "byg:block/redwood_leaves",
+		"log": "byg:block/redwood_log",
+		"log_top": "byg:block/redwood_log_top",
+		"stripped_log": "byg:block/stripped_redwood_log",
+		"stripped_log_top": "byg:block/stripped_redwood_log_top",
+		"planks": "byg:block/redwood_planks"
+	},
+	"items": {
+		"log": "byg:redwood_log",
+		"wood": "byg:redwood_wood",
+		"stripped_log": "byg:stripped_redwood_log",
+		"stripped_wood": "byg:stripped_redwood_wood",
+		"planks": "byg:redwood_planks",
+		"leaves": "byg:redwood_leaves"
+	},
+	"blocks": {
+		"log": "byg:redwood_log",
+		"wood": "byg:redwood_wood",
+		"stripped_log": "byg:stripped_redwood_log",
+		"stripped_wood": "byg:stripped_redwood_wood",
+		"planks": "byg:redwood_planks",
+		"leaves": "byg:redwood_leaves"
+	}
+}

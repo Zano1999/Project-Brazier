@@ -1,0 +1,33 @@
+{
+	"materialType": "wood",
+	"requiredMod": "byg",
+	"name": "embur",
+	"properties": {
+		"mapColor": "adobe",
+		"resistance": 3.0,
+		"hardness": 2.0,
+		"harvestLevel": 0,
+		"harvestTool": "axe"
+	},
+	"textures": {
+		"log": "byg:block/embur_pedu",
+		"log_top": "byg:block/embur_pedu_top",
+		"stripped_log": "byg:block/stripped_embur_pedu",
+		"stripped_log_top": "byg:block/stripped_embur_pedu_top",
+		"planks": "byg:block/embur_planks"
+	},
+	"items": {
+		"log": "byg:embur_pedu",
+		"wood": "byg:embur_wood",
+		"stripped_log": "byg:stripped_embur_pedu",
+		"stripped_wood": "byg:stripped_embur_wood",
+		"planks": "byg:embur_planks"
+	},
+	"blocks": {
+		"log": "byg:embur_pedu",
+		"wood": "byg:embur_wood",
+		"stripped_log": "byg:stripped_embur_pedu",
+		"stripped_wood": "byg:stripped_embur_wood",
+		"planks": "byg:embur_planks"
+	}
+}

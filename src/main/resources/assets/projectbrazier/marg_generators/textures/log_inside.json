@@ -1,0 +1,33 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"log",
+			"stripped_log"
+		]
+	},
+	"requiredTextures": {
+		"inside_mask": "projectbrazier:generator/masks/log_inside"
+	},
+	"tasks": [
+		{
+			"inputType": "material",
+			"outputType": "LOCAL_CACHE",
+			"inputName": "log",
+			"outputName": "projectbrazier_${material}_log_inside",
+			"manipulations": [
+				{"type": "mask", "texture": "inside_mask"}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "stripped_log",
+			"outputName": "projectbrazier:block/${material}_log_inside",
+			"manipulations": [
+				{"type": "overlay", "cachedTexture": "projectbrazier_${material}_log_inside"}
+			]
+		}
+	]
+}

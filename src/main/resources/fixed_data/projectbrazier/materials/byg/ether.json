@@ -1,0 +1,36 @@
+{
+	"materialType": "wood",
+	"requiredMod": "byg",
+	"name": "ether",
+	"properties": {
+		"mapColor": "adobe",
+		"resistance": 3.0,
+		"hardness": 2.0,
+		"harvestLevel": 0,
+		"harvestTool": "axe"
+	},
+	"textures": {
+		"leaves": "byg:block/ether_leaves",
+		"log": "byg:block/ether_log",
+		"log_top": "byg:block/ether_log_top",
+		"stripped_log": "byg:block/stripped_ether_log",
+		"stripped_log_top": "byg:block/stripped_ether_log_top",
+		"planks": "byg:block/ether_planks"
+	},
+	"items": {
+		"log": "byg:ether_log",
+		"wood": "byg:ether_wood",
+		"stripped_log": "byg:stripped_ether_log",
+		"stripped_wood": "byg:stripped_ether_wood",
+		"planks": "byg:ether_planks",
+		"leaves": "byg:ether_leaves"
+	},
+	"blocks": {
+		"log": "byg:ether_log",
+		"wood": "byg:ether_wood",
+		"stripped_log": "byg:stripped_ether_log",
+		"stripped_wood": "byg:stripped_ether_wood",
+		"planks": "byg:ether_planks",
+		"leaves": "byg:ether_leaves"
+	}
+}

@@ -1,0 +1,48 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood"
+	},
+	"requiredTextures": {
+		"overlay": "projectbrazier:overlays/test",
+		"mask": "projectbrazier:masks/test"
+	},
+	"tasks": [
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "planks",
+			"outputName": "minecraft:block/${material}_rotation_test",
+			"manipulations": [
+				{
+					"type": "rotate",
+					"value": 1
+				}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "log",
+			"outputName": "minecraft:block/${material}_test",
+			"manipulations": [
+				{
+					"type": "overlay",
+					"texture": "overlay"
+				}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "log",
+			"outputName": "minecraft:block/${material}_test2",
+			"manipulations": [
+				{
+					"type": "mask",
+					"texture": "mask"
+				}
+			]
+		}
+	]
+}

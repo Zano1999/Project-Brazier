@@ -1,0 +1,36 @@
+{
+	"materialType": "wood",
+	"requiredMod": "byg",
+	"name": "ebony",
+	"properties": {
+		"mapColor": "adobe",
+		"resistance": 3.0,
+		"hardness": 2.0,
+		"harvestLevel": 0,
+		"harvestTool": "axe"
+	},
+	"textures": {
+		"leaves": "byg:block/ebony_leaves",
+		"log": "byg:block/ebony_log",
+		"log_top": "byg:block/ebony_log_top",
+		"stripped_log": "byg:block/stripped_ebony_log",
+		"stripped_log_top": "byg:block/stripped_ebony_log_top",
+		"planks": "byg:block/ebony_planks"
+	},
+	"items": {
+		"log": "byg:ebony_log",
+		"wood": "byg:ebony_wood",
+		"stripped_log": "byg:stripped_ebony_log",
+		"stripped_wood": "byg:stripped_ebony_wood",
+		"planks": "byg:ebony_planks",
+		"leaves": "byg:ebony_leaves"
+	},
+	"blocks": {
+		"log": "byg:ebony_log",
+		"wood": "byg:ebony_wood",
+		"stripped_log": "byg:stripped_ebony_log",
+		"stripped_wood": "byg:stripped_ebony_wood",
+		"planks": "byg:ebony_planks",
+		"leaves": "byg:ebony_leaves"
+	}
+}

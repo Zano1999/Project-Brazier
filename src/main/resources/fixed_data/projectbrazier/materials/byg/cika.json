@@ -1,0 +1,36 @@
+{
+	"materialType": "wood",
+	"requiredMod": "byg",
+	"name": "cika",
+	"properties": {
+		"mapColor": "adobe",
+		"resistance": 3.0,
+		"hardness": 2.0,
+		"harvestLevel": 0,
+		"harvestTool": "axe"
+	},
+	"textures": {
+		"leaves": "byg:block/cika_leaves",
+		"log": "byg:block/cika_log",
+		"log_top": "byg:block/cika_log_top",
+		"stripped_log": "byg:block/stripped_cika_log",
+		"stripped_log_top": "byg:block/stripped_cika_log_top",
+		"planks": "byg:block/cika_planks"
+	},
+	"items": {
+		"log": "byg:cika_log",
+		"wood": "byg:cika_wood",
+		"stripped_log": "byg:stripped_cika_log",
+		"stripped_wood": "byg:stripped_cika_wood",
+		"planks": "byg:cika_planks",
+		"leaves": "byg:cika_leaves"
+	},
+	"blocks": {
+		"log": "byg:cika_log",
+		"wood": "byg:cika_wood",
+		"stripped_log": "byg:stripped_cika_log",
+		"stripped_wood": "byg:stripped_cika_wood",
+		"planks": "byg:cika_planks",
+		"leaves": "byg:cika_leaves"
+	}
+}

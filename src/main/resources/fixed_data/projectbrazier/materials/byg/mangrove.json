@@ -1,0 +1,36 @@
+{
+	"materialType": "wood",
+	"requiredMod": "byg",
+	"name": "mangrove",
+	"properties": {
+		"mapColor": "adobe",
+		"resistance": 3.0,
+		"hardness": 2.0,
+		"harvestLevel": 0,
+		"harvestTool": "axe"
+	},
+	"textures": {
+		"leaves": "byg:block/mangrove_leaves",
+		"log": "byg:block/mangrove_log",
+		"log_top": "byg:block/mangrove_log_top",
+		"stripped_log": "byg:block/stripped_mangrove_log",
+		"stripped_log_top": "byg:block/stripped_mangrove_log_top",
+		"planks": "byg:block/mangrove_planks"
+	},
+	"items": {
+		"log": "byg:mangrove_log",
+		"wood": "byg:mangrove_wood",
+		"stripped_log": "byg:stripped_mangrove_log",
+		"stripped_wood": "byg:stripped_mangrove_wood",
+		"planks": "byg:mangrove_planks",
+		"leaves": "byg:mangrove_leaves"
+	},
+	"blocks": {
+		"log": "byg:mangrove_log",
+		"wood": "byg:mangrove_wood",
+		"stripped_log": "byg:stripped_mangrove_log",
+		"stripped_wood": "byg:stripped_mangrove_wood",
+		"planks": "byg:mangrove_planks",
+		"leaves": "byg:mangrove_leaves"
+	}
+}

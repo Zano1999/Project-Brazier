@@ -1,17 +1,18 @@
 package net.dark_roleplay.projectbrazier.handler;
 
-import net.dark_roleplay.marg.api.materials.IMaterial;
-import net.dark_roleplay.marg.api.materials.IMaterialCondition;
-import net.dark_roleplay.marg.api.materials.ItemMaterialCondition;
+import net.dark_roleplay.marg.common.material.MargMaterial;
+import net.dark_roleplay.marg.common.material.MaterialCondition;
 import net.dark_roleplay.projectbrazier.features.blocks.BlockCreators;
 import net.dark_roleplay.projectbrazier.features.blocks.drawbridge.DrawbridgeAnchorBlock;
 import net.dark_roleplay.projectbrazier.features.blocks.lattice_block.AxisLatticeBlock;
+import net.dark_roleplay.projectbrazier.features.blocks.roofs.RoofType;
 import net.dark_roleplay.projectbrazier.features.blocks.templates.HFacedDecoBlock;
+import net.dark_roleplay.projectbrazier.util.EnumRegistryObject;
+import net.dark_roleplay.projectbrazier.util.marg.ConditionHelper;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
@@ -22,6 +23,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -29,14 +31,15 @@ public class MedievalBlocks {
 	public static final DeferredRegister<Block> BLOCKS = MedievalRegistries.BLOCKS;
 	public static final DeferredRegister<Block> BLOCKS_NO_ITEMS = MedievalRegistries.BLOCKS_NO_ITEMS;
 
-	public static IMaterialCondition planksOnly = new ItemMaterialCondition("wood", "planks");
-	public static IMaterialCondition planksStrippedLogs = new ItemMaterialCondition("wood", "planks", "stripped_log");
-	public static IMaterialCondition logsOnly = new ItemMaterialCondition("wood", "log");
+	public static MaterialCondition planksOnly = ConditionHelper.createItemCondition("wood", "planks");
+	public static MaterialCondition planksStrippedLogs = ConditionHelper.createItemCondition("wood", "planks", "stripped_log");
+	public static MaterialCondition logsOnly = ConditionHelper.createItemCondition("wood", "log");
+	public static MaterialCondition logsStrippedLogs = ConditionHelper.createItemCondition("wood", "log", "stripped_log");
 
-	private static final Block.Properties wood = AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD);
-	private static final Block.Properties stoneProps = Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE);
-	private static final Block.Properties snowProps = Block.Properties.create(Material.SNOW).hardnessAndResistance(0.3F).sound(SoundType.SNOW);
-	private static final Block.Properties packedIceProps = Block.Properties.create(Material.PACKED_ICE).slipperiness(0.98F).hardnessAndResistance(0.5F).sound(SoundType.GLASS);
+	private static final Block.Properties wood = AbstractBlock.Properties.create(net.minecraft.block.material.Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD);
+	private static final Block.Properties stoneProps = Block.Properties.create(net.minecraft.block.material.Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE);
+	private static final Block.Properties snowProps = Block.Properties.create(net.minecraft.block.material.Material.SNOW).hardnessAndResistance(0.3F).sound(SoundType.SNOW);
+	private static final Block.Properties packedIceProps = Block.Properties.create(net.minecraft.block.material.Material.PACKED_ICE).slipperiness(0.98F).hardnessAndResistance(0.5F).sound(SoundType.GLASS);
 
 
 	public static final RegistryObject<Block>
@@ -52,6 +55,9 @@ public class MedievalBlocks {
 			GRANITE_PILLAR              = register("granite_pillar", RotatedPillarBlock::new, stoneProps),
 			SNOW_BRICKS             	 = register("snow_bricks", Block::new, snowProps),
 			IRON_BRAZIER_COAL				 = register("iron_brazier_coal", BlockCreators::createIronBrazier),
+			IRON_FIRE_BOWL			 		 = register("iron_fire_bowl", BlockCreators::createIronBrazier),
+			SOUL_IRON_BRAZIER_COAL		 = register("soul_iron_brazier_coal", BlockCreators::createIronBrazier),
+			SOUL_IRON_FIRE_BOWL			 = register("soul_iron_fire_bowl", BlockCreators::createIronBrazier),
 			JAIL_LATTICE          		 = register("jail_lattice", BlockCreators::createJailLattice),
 			JAIL_LATTICE_CENTERED       = registerNoItem("jail_lattice_centered", BlockCreators::createJailLatticeB),
 			NAIL          					 = register("nail", BlockCreators::createNail),
@@ -80,13 +86,18 @@ public class MedievalBlocks {
 			H_STONE_BRICK_ARROW_SLIT	 = register("vertical_stone_brick_arrow_slit", prop -> new HFacedDecoBlock(prop, "arrow_slits/stone_bricks/vertical_arrow_slit"), stoneProps),
 			C_STONE_BRICK_ARROW_SLIT	 = register("cross_stone_brick_arrow_slit", prop -> new HFacedDecoBlock(prop, "arrow_slits/stone_bricks/cross_arrow_slit"), stoneProps);
 
-	public static final Map<IMaterial, RegistryObject<Block>>
+	public static final EnumRegistryObject<RoofType, Block>
+			STRAIGHT_ROOFS					= registerRoof("%s_clay_shingle_roof", BlockCreators::createRoofBlock);
+
+	public static final Map<MargMaterial, RegistryObject<Block>>
 			FLOWER_BUCKET					= register("${material}_flower_bucket", planksOnly, BlockCreators::createFlowerBucket),
 			FLOWER_BARREL					= register("${material}_flower_barrel", planksOnly, BlockCreators::createFlowerBarrel),
 			PLANK_CHAIR						= register("${material}_plank_chair", planksOnly, BlockCreators::createChair),
 			CHAIR								= register("${material}_solid_chair", planksOnly, BlockCreators::createChair),
+			STOOL								= register("${material}_stool", planksOnly, BlockCreators::createStool),
 			ARMREST_CHAIR					= register("${material}_armrest_chair", planksOnly, BlockCreators::createChair),
-			LOG_CHAIR						= register("${material}_log_chair", logsOnly, BlockCreators::createChair),
+			LOG_CHAIR						= register("${material}_log_chair", logsStrippedLogs, BlockCreators::createLogChair),
+			FIREWOOD							= register("${material}_firewood", logsStrippedLogs, BlockCreators::createFirewood),
 			WOOD_LATTICE_1_C 				= registerNoItems("${material}_cross_lattice_centered", planksOnly, BlockCreators::createWoodWindowB),
 			WOOD_LATTICE_1 				= register("${material}_cross_lattice", planksOnly, wood -> BlockCreators.createWoodWindow(wood, WOOD_LATTICE_1_C)),
 			WOOD_LATTICE_2_C 				= registerNoItems("${material}_dense_vertical_lattice_centered", planksOnly, BlockCreators::createWoodWindowB),
@@ -103,7 +114,7 @@ public class MedievalBlocks {
 			BOTTOM_WOOD_PLATFORM 		= registerNoItems("bottom_${material}_platform", planksStrippedLogs, mat -> BlockCreators.createWoodPlatform(mat)),
 			TOP_WOOD_PLATFORM 			= registerNoItems("top_${material}_platform", planksStrippedLogs, mat -> BlockCreators.createWoodPlatform(mat, BOTTOM_WOOD_PLATFORM));
 
-	public static final Map<DyeColor, Map<IMaterial, RegistryObject<Block>>>
+	public static final Map<DyeColor, Map<MargMaterial, RegistryObject<Block>>>
 			POLSTERED_WOOD_BENCH			= registerInColors("${color}_polstered_${material}_bench", planksStrippedLogs, BlockCreators::createPolsteredWoodBench);
 
 	public static void postBlockRegistryCallback(RegistryEvent.Register<Item> event){
@@ -115,8 +126,8 @@ public class MedievalBlocks {
 		initLatticeHelper(WOOD_LATTICE_5_C, WOOD_LATTICE_5);
 	}
 
-	private static void initLatticeHelper(Map<IMaterial, RegistryObject<Block>> center, Map<IMaterial, RegistryObject<Block>> main){
-		for(Map.Entry<IMaterial, RegistryObject<Block>> entry : center.entrySet()){
+	private static void initLatticeHelper(Map<MargMaterial, RegistryObject<Block>> center, Map<MargMaterial, RegistryObject<Block>> main){
+		for(Map.Entry<MargMaterial, RegistryObject<Block>> entry : center.entrySet()){
 			AxisLatticeBlock centerBlock = (AxisLatticeBlock) entry.getValue().get();
 			centerBlock.initMainBlock(main.get(entry.getKey()));
 		}
@@ -134,16 +145,23 @@ public class MedievalBlocks {
 		return BLOCKS.register(name, () -> suplier.apply(props));
 	}
 
+	private static EnumRegistryObject<RoofType, Block> registerRoof(String name, Supplier<Block> suplier) {
+		EnumRegistryObject<RoofType, Block> regObj = new EnumRegistryObject<>(RoofType.class);
+		for(RoofType type : RoofType.values())
+			regObj.register(type, register(String.format(name, type.getTypeName()), suplier));
+		return regObj;
+	}
+
 	private static RegistryObject<Block> registerNoItem(String name, Function<Block.Properties, Block> suplier) {
 		return BLOCKS_NO_ITEMS.register(name, () -> suplier.apply(null));
 	}
 
-	private static Map<IMaterial, RegistryObject<Block>> register(String name, IMaterialCondition condition, Function<IMaterial, Block> suplier){
+	private static Map<MargMaterial, RegistryObject<Block>> register(String name, MaterialCondition condition, Function<MargMaterial, Block> suplier){
 		return register(BLOCKS, name, condition, suplier);
 	}
 
-	private static Map<DyeColor, Map<IMaterial, RegistryObject<Block>>> registerInColors(String name, IMaterialCondition condition, Function<IMaterial, Block> suplier){
-		Map<DyeColor, Map<IMaterial, RegistryObject<Block>>> blocks = new EnumMap<>(DyeColor.class);
+	private static Map<DyeColor, Map<MargMaterial, RegistryObject<Block>>> registerInColors(String name, MaterialCondition condition, Function<MargMaterial, Block> suplier){
+		Map<DyeColor, Map<MargMaterial, RegistryObject<Block>>> blocks = new EnumMap<>(DyeColor.class);
 
 		for(DyeColor color : DyeColor.values()){
 			blocks.put(color, register(BLOCKS, name.replace("${color}", color.getTranslationKey()), condition, suplier));
@@ -152,12 +170,12 @@ public class MedievalBlocks {
 		return blocks;
 	}
 
-	private static Map<IMaterial, RegistryObject<Block>> registerNoItems(String name, IMaterialCondition condition, Function<IMaterial, Block> suplier){
+	private static Map<MargMaterial, RegistryObject<Block>> registerNoItems(String name, MaterialCondition condition, Function<MargMaterial, Block> suplier){
 		return register(BLOCKS_NO_ITEMS, name, condition, suplier);
 	}
 
-	private static Map<IMaterial, RegistryObject<Block>> register(DeferredRegister<Block> registrerer, String name, IMaterialCondition condition, Function<IMaterial, Block> suplier){
-		Map<IMaterial, RegistryObject<Block>> blocks = new HashMap<>();
+	private static Map<MargMaterial, RegistryObject<Block>> register(DeferredRegister<Block> registrerer, String name, MaterialCondition condition, Function<MargMaterial, Block> suplier){
+		Map<MargMaterial, RegistryObject<Block>> blocks = new HashMap<>();
 
 		condition.forEach(material -> {
 			String registryName = material.getTextProvider().apply(name);

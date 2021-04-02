@@ -17,8 +17,7 @@ public class SittableEntity extends Entity {
 	public int blockPosX;
 	public int blockPosY;
 	public int blockPosZ;
-	
-	//TODO EntitySize is now a part of hte Entity Type
+
 	public SittableEntity(EntityType type, World world) {
 		super(type, world);
 		this.noClip = true;

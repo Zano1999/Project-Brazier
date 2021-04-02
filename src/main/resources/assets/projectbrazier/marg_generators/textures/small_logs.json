@@ -1,0 +1,53 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"log",
+			"log_top",
+			"stripped_log"
+		]
+	},
+	"requiredTextures": {
+		"top_log": "projectbrazier:generator/masks/small_top_log",
+		"small_log": "projectbrazier:generator/masks/small_cut_log"
+	},
+	"tasks": [
+		{
+			"inputType": "material",
+			"outputType": "LOCAL_CACHE",
+			"inputName": "log",
+			"outputName": "projectbrazier_small_${material}_log_top",
+			"manipulations": [
+				{"type": "mask", "texture": "top_log"}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "LOCAL_CACHE",
+			"inputName": "log",
+			"outputName": "projectbrazier_small_${material}_cut_log",
+			"manipulations": [
+				{"type": "mask", "texture": "small_log"}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "log_top",
+			"outputName": "projectbrazier:block/small_${material}_log_top",
+			"manipulations": [
+				{"type": "overlay", "cachedTexture": "projectbrazier_small_${material}_log_top"}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "stripped_log",
+			"outputName": "projectbrazier:block/small_${material}_cut_log",
+			"manipulations": [
+				{"type": "overlay", "cachedTexture": "projectbrazier_small_${material}_cut_log"}
+			]
+		}
+	]
+}

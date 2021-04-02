@@ -1,0 +1,31 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"log",
+			"log_top",
+			"stripped_log"
+		]
+	},
+	"customs": [
+		"0",
+		"1",
+		"2",
+		"3"
+	],
+	"tasks": [
+		{
+			"input": "projectbrazier:blockstates/generator/firewood.json",
+			"output": "projectbrazier:blockstates/${material}_firewood.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/firewood.json",
+			"output": "projectbrazier:models/block/${material}_firewood_${custom}.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/item/firewood.json",
+			"output": "projectbrazier:models/item/${material}_firewood.json"
+		}
+	]
+}

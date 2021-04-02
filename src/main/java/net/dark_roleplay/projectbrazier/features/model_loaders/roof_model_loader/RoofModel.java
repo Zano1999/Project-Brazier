@@ -1,38 +1,28 @@
 package net.dark_roleplay.projectbrazier.features.model_loaders.roof_model_loader;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.JsonOps;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import net.dark_roleplay.projectbrazier.features.model_loaders.roof_model_loader.util.RoofModelGenerator;
 import net.minecraft.client.renderer.model.*;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.resources.IResourceManager;
+import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.client.model.IModelConfiguration;
-import net.minecraftforge.client.model.IModelLoader;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 public class RoofModel implements IModelGeometry<RoofModel> {
 
-	private static final Codec<RoofModel> CODEC = RecordCodecBuilder.create(i -> i.group(
-			Codec.DOUBLE.optionalFieldOf("height", 16D).forGetter(RoofModel::getHeight),
-			Codec.DOUBLE.optionalFieldOf("width", 16D).forGetter(RoofModel::getWidth),
-			Codec.DOUBLE.optionalFieldOf("length", 16D).forGetter(RoofModel::getLength),
-			Codec.INT.optionalFieldOf("steps", 6).forGetter(RoofModel::getSteps),
-			Codec.DOUBLE.optionalFieldOf("verticalOffset", 16D).forGetter(RoofModel::getVerticalOffset)
-	).apply(i, RoofModel::new));
-
 	private final double height, width, length, verticalOffset;
 	private final int steps;
-	private Map<String, RenderMaterial> textures = new HashMap<>();
+	private Map<String, String> textures = new HashMap<>();
+	private Map<String, RenderMaterial> compiledTextures = new HashMap<>();
 
 	public RoofModel(double height, double width, double length, int steps, double verticalOffset) {
 		this.height = height;
@@ -63,36 +53,37 @@ public class RoofModel implements IModelGeometry<RoofModel> {
 	}
 
 	public void addTexture(String key, String value){
-		this.textures.put(key, new RenderMaterial(PlayerContainer.LOCATION_BLOCKS_TEXTURE, new ResourceLocation(value)));
-	}
-
-	@Override
-	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
-		return null;
+		this.textures.put(key, value);
 	}
 
 	@Override
 	public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
-		return null;
+		if(this.compiledTextures.isEmpty())
+			for(Map.Entry<String, String> texture : this.textures.entrySet())
+				this.compiledTextures.put(texture.getKey(), new RenderMaterial(AtlasTexture.LOCATION_BLOCKS_TEXTURE, new ResourceLocation(texture.getValue())));
+
+		return this.compiledTextures.values();
 	}
 
-	public static class Loader implements IModelLoader<RoofModel>{
+	@Override
+	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<RenderMaterial, TextureAtlasSprite> spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
+		Vector3f translation = modelTransform.getRotation().getTranslation();
+		Vector3f scale = modelTransform.getRotation().getScale();
+		Quaternion rotation = modelTransform.getRotation().getRotationLeft();
+		MatrixStack stack = new MatrixStack();
+		stack.scale(scale.getX(), scale.getY(), scale.getZ());
+		stack.translate(translation.getX(), translation.getY(), translation.getZ());
+		stack.rotate(rotation);
 
-		@Override
-		public void onResourceManagerReload(IResourceManager resourceManager) {
+		RoofModelGenerator generator = new RoofModelGenerator(width, height, steps, new Vector3f(0, (float)this.verticalOffset, 0), stack, spriteGetter, this.compiledTextures);
+		Map<Direction, List<BakedQuad>> model = new EnumMap<>(Direction.class);
+		for(Direction dir : Direction.values())
+			model.put(dir, new ArrayList());
 
-		}
-
-		@Override
-		public RoofModel read(JsonDeserializationContext deserializationContext, JsonObject modelContents) {
-			RoofModel model = CODEC.decode(JsonOps.INSTANCE, modelContents).getOrThrow(false, System.out::println).getFirst();
-
-			JsonObject textures = modelContents.get("textures").getAsJsonObject();
-			for(Map.Entry<String, JsonElement> entry : textures.entrySet()){
-				model.addTexture(entry.getKey(), entry.getValue().getAsString());
-			}
-			
-			return model;
-		}
+		return new SimpleBakedModel(
+				generator.getFull(),
+				model, false, owner.isSideLit(), owner.isShadedInGui(),
+				spriteGetter.apply(this.compiledTextures.get("particle")),
+				owner.getCameraTransforms(), ItemOverrideList.EMPTY);
 	}
 }

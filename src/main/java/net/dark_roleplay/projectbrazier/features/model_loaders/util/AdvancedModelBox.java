@@ -3,74 +3,72 @@ package net.dark_roleplay.projectbrazier.features.model_loaders.util;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.*;
 
 public abstract class AdvancedModelBox {
-	protected Vector3d pos;
-	protected Vector3d size;
-	protected Vector3d offsets;
+	protected Vector3f pos;
+	protected Vector3f size;
+	protected TransformationMatrix matrix;
 	protected TextureAtlasSprite sprite;
 
-	double[][][] rotMat;
+	protected Vector3f[] vertices;
 
-	public AdvancedModelBox(Vector3d pos, Vector3d size, Vector3d rot, TextureAtlasSprite sprite, Vector3d offsets) {
+	public AdvancedModelBox(Vector3f pos, Vector3f size, Vector3f offset, Matrix4f matrix, TextureAtlasSprite sprite) {
 		this.pos = pos;
 		this.size = size;
 		this.sprite = sprite;
-		this.offsets = new Vector3d(offsets.x / 16, offsets.y / 16, offsets.z / 16);
 
-		double cosX = Math.cos(rot.x), cosY = Math.cos(rot.y), cosZ = Math.cos(rot.z);
-		double sinX = Math.sin(rot.x), sinY = Math.sin(rot.y), sinZ = Math.sin(rot.z);
+		this.vertices = new Vector3f[8];
 
-		this.rotMat = new double[][][]{
-				{
-						{1, 0, 0},
-						{0, cosX, -sinX},
-						{0, sinX, cosX},
-				}, {
-				{cosY, 0, sinY},
-				{0, 1, 0},
-				{-sinY, 0, cosY}
-		}, {
-				{cosZ, -sinZ, 0},
-				{sinZ, cosZ, 0},
-				{0, 0, 1}
-		}
+		float x = pos.getX(), x2 = pos.getX() + size.getX();
+		float y = pos.getY(), y2 = pos.getY() + size.getY();
+		float z = pos.getZ(), z2 = pos.getZ() + size.getZ();
+
+		Vector4f[] tmpVectors = new Vector4f[]{
+				new Vector4f(x, y, z, 1f),
+				new Vector4f(x2, y, z, 1f),
+				new Vector4f(x2, y, z2, 1f),
+				new Vector4f(x, y, z2, 1f),
+				new Vector4f(x, y2, z, 1f),
+				new Vector4f(x2, y2, z, 1f),
+				new Vector4f(x2, y2, z2, 1f),
+				new Vector4f(x, y2, z2, 1f)
 		};
+
+		for (int i = 0; i < 8; i++) {
+			Vector4f tmp = tmpVectors[i];
+			tmp.transform(matrix);
+			this.vertices[i] = new Vector3f(tmp.getX() + offset.getX(), tmp.getY() + offset.getY(), tmp.getZ() + offset.getZ());
+		}
 	}
 
 	public abstract BakedQuad[] bake();
 
-	protected int[] generateVertexData(float u1, float v1, float u2, float v2, Vector3d... vertices) {
+	protected int[] generateVertexData(float u1, float v1, float u2, float v2, Vector3f... vertices) {
 		int[] data = new int[DefaultVertexFormats.BLOCK.getIntegerSize() * vertices.length];
 		int offset = 0;
 
+		Vector3f normalVec = vertices[1].copy();
+		Vector3f vecB = vertices[2].copy();
+		normalVec.sub(vertices[0]);
+		vecB.sub(vertices[0]);
+		normalVec.cross(vecB);
+
+		int normal = ((int) normalVec.getX()) << 24 | ((int) normalVec.getY()) << 16 | ((int) normalVec.getZ()) << 8;
+
 		float[][] uv = {{u1, v1}, {u2, v1}, {u2, v2}, {u1, v2}};
 		int i = 0;
-		for (Vector3d vertex : vertices) {
-			data[offset++] = Float.floatToIntBits((float) ((float) vertex.getX() * 0.0625F + this.offsets.x));
-			data[offset++] = Float.floatToIntBits((float) ((float) vertex.getY() * 0.0625F + this.offsets.y));
-			data[offset++] = Float.floatToIntBits((float) ((float) vertex.getZ() * 0.0625F + this.offsets.z));
+		for (Vector3f vertex : vertices) {
+			data[offset++] = Float.floatToIntBits(vertex.getX() * 0.0625F);
+			data[offset++] = Float.floatToIntBits(vertex.getY() * 0.0625F);
+			data[offset++] = Float.floatToIntBits(vertex.getZ() * 0.0625F);
 			data[offset++] = 0xFFFFFFFF;
 			data[offset++] = Float.floatToIntBits(uv[i][0]);
 			data[offset++] = Float.floatToIntBits(uv[i][1]);
 			data[offset++] = 0;
+			data[offset++] = normal;
 			i += 1;
 		}
 		return data;
-	}
-
-	protected Vector3d rotate(double x, double y, double z) {
-		double nX = 0, nY = 0, nZ = 0;
-		for (int i = 0; i < 3; i++) {
-			nX = (rotMat[i][0][0] * x) + (rotMat[i][0][1] * y) + (rotMat[i][0][2] * z);
-			nY = (rotMat[i][1][0] * x) + (rotMat[i][1][1] * y) + (rotMat[i][1][2] * z);
-			nZ = (rotMat[i][2][0] * x) + (rotMat[i][2][1] * y) + (rotMat[i][2][2] * z);
-			x = nX;
-			y = nY;
-			z = nZ;
-		}
-
-		return new Vector3d(x, y, z);
 	}
 }

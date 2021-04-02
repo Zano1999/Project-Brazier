@@ -1,8 +1,17 @@
 {
-	"item": {
-		"projectbrazier": {
-			"test": "Test",
-			"test2" : "Test 2"
-		}
-	}
+	"options.modelQuality.0": "Model Quality: Low - 1",
+	"options.modelQuality.1": "Model Quality: Low - 2",
+	"options.modelQuality.2": "Model Quality: Low - 3",
+	"options.modelQuality.3": "Model Quality: Low - 4",
+	"options.modelQuality.4": "Model Quality: Low - 5",
+	"options.modelQuality.5": "Model Quality: Medium - 1",
+	"options.modelQuality.6": "Model Quality: Medium - 2",
+	"options.modelQuality.7": "Model Quality: Medium - 3",
+	"options.modelQuality.8": "Model Quality: Medium - 4",
+	"options.modelQuality.9": "Model Quality: Medium - 5",
+	"options.modelQuality.10": "Model Quality: High - 1",
+	"options.modelQuality.11": "Model Quality: High - 2",
+	"options.modelQuality.12": "Model Quality: High - 3",
+	"options.modelQuality.13": "Model Quality: High - 4",
+	"options.modelQuality.14": "Model Quality: High - 5"
 }

@@ -1,19 +1,10 @@
 package net.dark_roleplay.projectbrazier;
 
-import net.dark_roleplay.marg.api.materials.IMaterial;
-import net.dark_roleplay.projectbrazier.experiments.decals.capability.CapabilityAttachListener;
-import net.dark_roleplay.projectbrazier.experiments.decals.capability.DecalChunk;
-import net.dark_roleplay.projectbrazier.experiments.decals.capability.DecalChunkStorage;
-import net.dark_roleplay.projectbrazier.experiments.decals.capability.DecalRegistry;
 import net.dark_roleplay.projectbrazier.features.blocks.barrel.BarrelBlock;
 import net.dark_roleplay.projectbrazier.handler.*;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.DebugChunkGenerator;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;

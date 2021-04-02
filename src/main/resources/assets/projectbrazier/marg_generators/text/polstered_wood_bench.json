@@ -1,0 +1,42 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"planks",
+			"stripped_log"
+		]
+	},
+	"customs": [
+		"black",
+		"blue",
+		"brown",
+		"cyan",
+		"gray",
+		"green",
+		"light_blue",
+		"light_gray",
+		"lime",
+		"magenta",
+		"orange",
+		"pink",
+		"purple",
+		"red",
+		"white",
+		"yellow"
+	],
+	"tasks": [
+		{
+			"input": "projectbrazier:blockstates/generator/polstered_wood_bench.json",
+			"output": "projectbrazier:blockstates/${custom}_polstered_${material}_bench.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/polstered_wood_bench.json",
+			"output": "projectbrazier:models/block/${custom}_polstered_${material}_bench.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/item/polstered_wood_bench.json",
+			"output": "projectbrazier:models/item/${custom}_polstered_${material}_bench.json"
+		}
+	]
+}

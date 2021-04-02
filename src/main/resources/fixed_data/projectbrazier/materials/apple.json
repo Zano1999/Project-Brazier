@@ -1,0 +1,35 @@
+{
+	"materialType": "wood",
+	"requiredMod": "projectbrazier",
+	"name": "apple",
+	"properties": {
+		"mapColor": "adobe",
+		"resistance": 3.0,
+		"hardness": 2.0,
+		"harvestLevel": 0,
+		"harvestTool": "axe"
+	},
+	"textures": {
+		"log": "projectbrazier:block/woods/apple/apple_log",
+		"log_top": "projectbrazier:block/woods/apple/apple_log_top",
+		"stripped_log": "projectbrazier:block/woods/apple/stripped_apple_log",
+		"stripped_log_top": "projectbrazier:block/woods/apple/stripped_apple_log_top",
+		"planks": "projectbrazier:block/woods/apple/apple_planks"
+	},
+	"items": {
+		"log": "projectbrazier:apple_log",
+		"wood": "projectbrazier:apple_wood",
+		"stripped_log": "projectbrazier:stripped_apple_log",
+		"stripped_wood": "projectbrazier:stripped_apple_wood",
+		"planks": "projectbrazier:apple_planks",
+		"leaves": "projectbrazier:apple_leaves"
+	},
+	"blocks": {
+		"log": "projectbrazier:apple_log",
+		"wood": "projectbrazier:apple_wood",
+		"stripped_log": "projectbrazier:stripped_apple_log",
+		"stripped_wood": "projectbrazier:stripped_apple_wood",
+		"planks": "projectbrazier:apple_planks",
+		"leaves": "projectbrazier:apple_leaves"
+	}
+}

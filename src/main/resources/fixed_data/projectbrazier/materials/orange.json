@@ -1,0 +1,35 @@
+{
+	"materialType": "wood",
+	"requiredMod": "projectbrazier",
+	"name": "orange",
+	"properties": {
+		"mapColor": "adobe",
+		"resistance": 3.0,
+		"hardness": 2.0,
+		"harvestLevel": 0,
+		"harvestTool": "axe"
+	},
+	"textures": {
+		"log": "projectbrazier:block/woods/orange/orange_log",
+		"log_top": "projectbrazier:block/woods/orange/orange_log_top",
+		"stripped_log": "projectbrazier:block/woods/orange/stripped_orange_log",
+		"stripped_log_top": "projectbrazier:block/woods/orange/stripped_orange_log_top",
+		"planks": "projectbrazier:block/woods/orange/orange_planks"
+	},
+	"items": {
+		"log": "projectbrazier:orange_log",
+		"wood": "projectbrazier:orange_wood",
+		"stripped_log": "projectbrazier:stripped_orange_log",
+		"stripped_wood": "projectbrazier:stripped_orange_wood",
+		"planks": "projectbrazier:orange_planks",
+		"leaves": "projectbrazier:orange_leaves"
+	},
+	"blocks": {
+		"log": "projectbrazier:orange_log",
+		"wood": "projectbrazier:orange_wood",
+		"stripped_log": "projectbrazier:stripped_orange_log",
+		"stripped_wood": "projectbrazier:stripped_orange_wood",
+		"planks": "projectbrazier:orange_planks",
+		"leaves": "projectbrazier:orange_leaves"
+	}
+}

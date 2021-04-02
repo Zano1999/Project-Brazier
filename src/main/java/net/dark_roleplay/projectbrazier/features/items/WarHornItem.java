@@ -1,8 +1,6 @@
 package net.dark_roleplay.projectbrazier.features.items;
 
-import net.dark_roleplay.projectbrazier.experiments.walking_gui.PassiveScreen;
 import net.dark_roleplay.projectbrazier.handler.MedievalSounds;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -30,11 +28,7 @@ public class WarHornItem extends Item {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-
-//		Minecraft.getInstance().displayGuiScreen(new PassiveScreen());
-
 		ItemStack item = player.getHeldItem(hand);
-		if(true) return ActionResult.resultSuccess(item);
 
 		if (world.isRemote()) return ActionResult.resultSuccess(item);
 		player.setActiveHand(hand);
@@ -56,7 +50,7 @@ public class WarHornItem extends Item {
 			for (ServerPlayerEntity receiver : ((ServerWorld) world).getPlayers()) {
 				double distance = receiver.getPositionVec().distanceTo(entity.getPositionVec());
 				if (distance > maxDistance) continue;
-				Vector3d sourcePos = receiver.getPositionVec().add(entity.getPositionVec().subtract(receiver.getPositionVec()).normalize().mul(10, 10, 10));
+				Vector3d sourcePos = receiver.getPositionVec().add(entity.getPositionVec().subtract(receiver.getPositionVec()).normalize().mul(6, 6, 6));
 
 				receiver.connection.sendPacket(new SPlaySoundEffectPacket(MedievalSounds.WAR_HORN.get(), SoundCategory.PLAYERS, sourcePos.x, sourcePos.y, sourcePos.z, (float) ((maxDistance - distance) / maxDistance) * 0.5F, 0.9F + world.getRandom().nextFloat() * 0.2F));
 			}

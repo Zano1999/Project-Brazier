@@ -1,0 +1,18 @@
+{
+	"loader": "projectbrazier:quality_model",
+	"10": {
+		"parent": "projectbrazier:block/firewood_${custom}",
+		"textures": {
+			"particle": "projectbrazier:block/${material}_log_inside",
+			"inside": "projectbrazier:block/${material}_log_inside",
+			"bark": "${texture%log}",
+			"top": "${texture%log_top}"
+		}
+	},
+	"0": {
+		"parent": "block/cube_all",
+		"textures": {
+			"all": "projectbrazier:wip"
+		}
+	}
+}

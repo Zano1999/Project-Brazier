@@ -1,6 +1,5 @@
 package net.dark_roleplay.projectbrazier.features.blocks.flowerpot;
 
-import net.dark_roleplay.projectbrazier.features.blocks.barrel.BarrelTileEntity;
 import net.dark_roleplay.projectbrazier.features.blocks.templates.DecoBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -36,7 +35,7 @@ public class FlowerContainerBlock extends DecoBlock {
 			flowerTileEntity.addFlower(heldItem);
 		}
 
-		world.notifyBlockUpdate(pos, state, state, 2);
+		world.notifyBlockUpdate(pos, state, state, 3);
 
 		return ActionResultType.SUCCESS;
 	}

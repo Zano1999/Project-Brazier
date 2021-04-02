@@ -1,0 +1,36 @@
+{
+	"materialType": "wood",
+	"requiredMod": "byg",
+	"name": "nightshade",
+	"properties": {
+		"mapColor": "adobe",
+		"resistance": 3.0,
+		"hardness": 2.0,
+		"harvestLevel": 0,
+		"harvestTool": "axe"
+	},
+	"textures": {
+		"leaves": "byg:block/nightshade_leaves",
+		"log": "byg:block/nightshade_log",
+		"log_top": "byg:block/nightshade_log_top",
+		"stripped_log": "byg:block/stripped_nightshade_log",
+		"stripped_log_top": "byg:block/stripped_nightshade_log_top",
+		"planks": "byg:block/nightshade_planks"
+	},
+	"items": {
+		"log": "byg:nightshade_log",
+		"wood": "byg:nightshade_wood",
+		"stripped_log": "byg:stripped_nightshade_log",
+		"stripped_wood": "byg:stripped_nightshade_wood",
+		"planks": "byg:nightshade_planks",
+		"leaves": "byg:nightshade_leaves"
+	},
+	"blocks": {
+		"log": "byg:nightshade_log",
+		"wood": "byg:nightshade_wood",
+		"stripped_log": "byg:stripped_nightshade_log",
+		"stripped_wood": "byg:stripped_nightshade_wood",
+		"planks": "byg:nightshade_planks",
+		"leaves": "byg:nightshade_leaves"
+	}
+}

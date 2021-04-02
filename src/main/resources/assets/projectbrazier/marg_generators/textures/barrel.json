@@ -1,0 +1,43 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"planks"
+		]
+	},
+	"requiredTextures": {
+		"side": "projectbrazier:generator/overlays/barrel_side",
+		"top": "projectbrazier:generator/overlays/barrel_top"
+	},
+	"tasks": [
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "planks",
+			"outputName": "projectbrazier:block/${material}_barrel_side",
+			"manipulations": [
+				{"type": "rotate", "value": 1},
+				{"type": "overlay", "texture":  "side"}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "planks",
+			"outputName": "projectbrazier:block/${material}_barrel_top",
+			"manipulations": [
+				{"type": "overlay", "texture":  "top"}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "planks",
+			"outputName": "projectbrazier:block/${material}_barrel_inside",
+			"manipulations": [
+				{"type": "rotate", "value": 1}
+			]
+		}
+	]
+}

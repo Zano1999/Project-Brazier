@@ -51,6 +51,7 @@ public class FlowerContainerTileEntity extends TileEntity {
 				copy.setCount(1);
 				flower.setFlower(copy);
 				stack.shrink(1);
+				this.markDirty();
 				break;
 			}
 		}
@@ -63,6 +64,7 @@ public class FlowerContainerTileEntity extends TileEntity {
 			if(flower.getFlower().isEmpty()) continue;
 			ItemStack stack = flower.getFlower();
 			flower.setFlower(ItemStack.EMPTY);
+			this.markDirty();
 			return stack;
 		}
 		return ItemStack.EMPTY;
@@ -81,7 +83,10 @@ public class FlowerContainerTileEntity extends TileEntity {
 		ListNBT flowers = compound.getList("flowers", Constants.NBT.TAG_COMPOUND);
 
 		for(int i = 0; i < flowers.size(); i++)
-			this.flowers.get(i).deserialize(flowers.getCompound(i));
+			if(!flowers.getCompound(i).isEmpty())
+				this.flowers.get(i).deserialize(flowers.getCompound(i));
+			else
+				this.flowers.get(i).setFlower(ItemStack.EMPTY);
 
 
 		this.requestModelDataUpdate();

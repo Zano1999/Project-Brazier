@@ -1,0 +1,33 @@
+{
+	"materialType": "wood",
+	"requiredMod": "byg",
+	"name": "bulbis",
+	"properties": {
+		"mapColor": "adobe",
+		"resistance": 3.0,
+		"hardness": 2.0,
+		"harvestLevel": 0,
+		"harvestTool": "axe"
+	},
+	"textures": {
+		"log": "byg:block/bulbis_stem",
+		"log_top": "byg:block/bulbis_stem_top",
+		"stripped_log": "byg:block/stripped_bulbis_stem",
+		"stripped_log_top": "byg:block/stripped_bulbis_stem_top",
+		"planks": "byg:block/bulbis_planks"
+	},
+	"items": {
+		"log": "byg:bulbis_stem",
+		"wood": "byg:bulbis_wood",
+		"stripped_log": "byg:stripped_bulbis_stem",
+		"stripped_wood": "byg:stripped_bulbis_wood",
+		"planks": "byg:bulbis_planks"
+	},
+	"blocks": {
+		"log": "byg:bulbis_stem",
+		"wood": "byg:bulbis_wood",
+		"stripped_log": "byg:stripped_bulbis_stem",
+		"stripped_wood": "byg:stripped_bulbis_wood",
+		"planks": "byg:bulbis_planks"
+	}
+}

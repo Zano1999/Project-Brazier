@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"burning=false": {"model":  "projectbrazier:block/brazier/iron_brazier"},
+		"burning=true": {"model":  "projectbrazier:block/brazier/soul_iron_brazier_burning"}
+	}
+}

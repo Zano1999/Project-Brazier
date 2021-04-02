@@ -1,0 +1,29 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"planks",
+			"stripped_log_top",
+			"stripped_log"
+		]
+	},
+	"customs": [
+		"top",
+		"bottom"
+	],
+	"tasks": [
+		{
+			"input": "projectbrazier:blockstates/generator/wood_platform.json",
+			"output": "projectbrazier:blockstates/${custom}_${material}_platform.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/wood_platform.json",
+			"output": "projectbrazier:models/block/${custom}_${material}_platform.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/item/wood_platform.json",
+			"output": "projectbrazier:models/item/${material}_platform.json"
+		}
+	]
+}

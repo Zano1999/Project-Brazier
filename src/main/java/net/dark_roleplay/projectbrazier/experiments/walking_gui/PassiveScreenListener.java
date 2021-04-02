@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.experiments.walking_gui;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
+import net.dark_roleplay.projectbrazier.experiments.immersive_screen.DebugImmersiveScreen;
 import net.dark_roleplay.projectbrazier.handler.MedievalKeybinds;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,7 +15,7 @@ public class PassiveScreenListener {
 	@SubscribeEvent
 	public static void keyInput(InputEvent.KeyInputEvent event){
 		if(MedievalKeybinds.EXP_PASSIVE_SCREEN.isKeyDown() && Minecraft.getInstance().currentScreen == null){
-			Minecraft.getInstance().displayGuiScreen(new PassiveScreen());
+			Minecraft.getInstance().displayGuiScreen(new DebugImmersiveScreen()); //PassiveScreen
 		}
 	}
 }

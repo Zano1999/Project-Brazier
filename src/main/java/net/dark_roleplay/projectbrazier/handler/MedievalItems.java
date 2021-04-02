@@ -1,6 +1,6 @@
 package net.dark_roleplay.projectbrazier.handler;
 
-import net.dark_roleplay.marg.api.materials.IMaterial;
+import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
 import net.dark_roleplay.projectbrazier.experiments.data_props.ItemPropertyLoader;
 import net.dark_roleplay.projectbrazier.features.items.WarHornItem;
@@ -64,7 +64,7 @@ public class MedievalItems {
 			reg.register(blockItem.setRegistryName(regObj.getId()));
 		}
 
-		for(Map.Entry<IMaterial, RegistryObject<Block>> entry : MedievalBlocks.TOP_WOOD_PLATFORM.entrySet()){
+		for(Map.Entry<MargMaterial, RegistryObject<Block>> entry : MedievalBlocks.TOP_WOOD_PLATFORM.entrySet()){
 			BlockItem blockItem = new BlockItem(entry.getValue().get(), new Item.Properties().group(MedievalCreativeTabs.decor()));
 			reg.register(blockItem.setRegistryName(ProjectBrazier.MODID, entry.getKey().getTextProvider().apply("${material}_platform")));
 		}

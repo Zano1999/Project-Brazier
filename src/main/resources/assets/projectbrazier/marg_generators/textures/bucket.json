@@ -1,0 +1,24 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"planks"
+		]
+	},
+	"requiredTextures": {
+		"side": "projectbrazier:generator/overlays/bucket_side"
+	},
+	"tasks": [
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "planks",
+			"outputName": "projectbrazier:block/${material}_bucket_side",
+			"manipulations": [
+				{"type": "rotate", "value": 1},
+				{"type": "overlay", "texture":  "side"}
+			]
+		}
+	]
+}

@@ -1,0 +1,36 @@
+{
+	"materialType": "wood",
+	"requiredMod": "byg",
+	"name": "cypress",
+	"properties": {
+		"mapColor": "adobe",
+		"resistance": 3.0,
+		"hardness": 2.0,
+		"harvestLevel": 0,
+		"harvestTool": "axe"
+	},
+	"textures": {
+		"leaves": "byg:block/cypress_leaves",
+		"log": "byg:block/cypress_log",
+		"log_top": "byg:block/cypress_log_top",
+		"stripped_log": "byg:block/stripped_cypress_log",
+		"stripped_log_top": "byg:block/stripped_cypress_log_top",
+		"planks": "byg:block/cypress_planks"
+	},
+	"items": {
+		"log": "byg:cypress_log",
+		"wood": "byg:cypress_wood",
+		"stripped_log": "byg:stripped_cypress_log",
+		"stripped_wood": "byg:stripped_cypress_wood",
+		"planks": "byg:cypress_planks",
+		"leaves": "byg:cypress_leaves"
+	},
+	"blocks": {
+		"log": "byg:cypress_log",
+		"wood": "byg:cypress_wood",
+		"stripped_log": "byg:stripped_cypress_log",
+		"stripped_wood": "byg:stripped_cypress_wood",
+		"planks": "byg:cypress_planks",
+		"leaves": "byg:cypress_leaves"
+	}
+}

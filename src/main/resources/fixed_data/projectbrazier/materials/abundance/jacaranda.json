@@ -1,0 +1,36 @@
+{
+	"materialType": "wood",
+	"requiredMod": "abundance",
+	"name": "jacaranda",
+	"properties": {
+		"mapColor": "adobe",
+		"resistance": 3.0,
+		"hardness": 2.0,
+		"harvestLevel": 0,
+		"harvestTool": "axe"
+	},
+	"textures": {
+		"leaves": "abundance:block/jacaranda_leaves",
+		"log": "abundance:block/jacaranda_log",
+		"log_top": "abundance:block/jacaranda_log_top",
+		"stripped_log": "abundance:block/stripped_jacaranda_log",
+		"stripped_log_top": "abundance:block/stripped_jacaranda_log_top",
+		"planks": "abundance:block/jacaranda_planks"
+	},
+	"items": {
+		"log": "abundance:jacaranda_log",
+		"wood": "abundance:jacaranda_wood",
+		"stripped_log": "abundance:stripped_jacaranda_log",
+		"stripped_wood": "abundance:stripped_jacaranda_wood",
+		"planks": "abundance:jacaranda_planks",
+		"leaves": "abundance:jacaranda_leaves"
+	},
+	"blocks": {
+		"log": "abundance:jacaranda_log",
+		"wood": "abundance:jacaranda_wood",
+		"stripped_log": "abundance:stripped_jacaranda_log",
+		"stripped_wood": "abundance:stripped_jacaranda_wood",
+		"planks": "abundance:jacaranda_planks",
+		"leaves": "abundance:jacaranda_leaves"
+	}
+}

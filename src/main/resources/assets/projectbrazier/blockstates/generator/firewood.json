@@ -1,0 +1,16 @@
+{
+	"variants": {
+		"axis=x": [
+			{"model": "projectbrazier:block/${material}_firewood_0"},
+			{"model": "projectbrazier:block/${material}_firewood_1"},
+			{"model": "projectbrazier:block/${material}_firewood_2"},
+			{"model": "projectbrazier:block/${material}_firewood_3"}
+		],
+		"axis=z": [
+			{"model": "projectbrazier:block/${material}_firewood_0", "y":  90},
+			{"model": "projectbrazier:block/${material}_firewood_1", "y":  90},
+			{"model": "projectbrazier:block/${material}_firewood_2", "y":  90},
+			{"model": "projectbrazier:block/${material}_firewood_3", "y":  90}
+		]
+	}
+}

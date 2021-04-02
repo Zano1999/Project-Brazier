@@ -1,16 +1,14 @@
 package net.dark_roleplay.projectbrazier.features.model_loaders.roof_model_loader.util;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import net.dark_roleplay.projectbrazier.features.model_loaders.util.AdvancedModelBox;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.BakedQuad;
+import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraft.util.math.vector.Vector3f;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -23,80 +21,98 @@ public class RoofModelGenerator {
 	List<AdvancedModelBox> leftBottomRim = new ArrayList<>();
 	List<AdvancedModelBox> rightBottomRim = new ArrayList<>();
 
+	Vector3f offset;
+	int shingleCount;
+	float actualHeight;
+	float actualDepth;
+	float unrotatedLength;
 	double singleLength;
 	double singleLengthPlank;
 	double angle;
 	double angle2;
-	Vector3d offset;
 	double sqrtC;
 
-	public RoofModelGenerator(double a, double b, int steps, Vector3d offset){
-		double sqrC = a * a + b * b;
+	public RoofModelGenerator(double depth, double height, int shingleCount, Vector3f offset, MatrixStack matrixStack, Function<RenderMaterial, TextureAtlasSprite> spriteGetter, Map<String, RenderMaterial> textures) {
+		double sqrC = depth * depth + height * height;
 		this.sqrtC = Math.sqrt(sqrC);
-		this.singleLengthPlank = sqrtC / steps;
-		this.angle2 = Math.atan(b/a);
+		this.singleLengthPlank = sqrtC / shingleCount;
+		this.angle2 = Math.atan(height / depth);
 
 		this.offset = offset;
-		this.singleLength = Math.sqrt(sqrC - (steps * steps)) / steps;
-		this.angle = Math.atan(b/a) - Math.atan(steps/(steps * singleLength)) ;
+		this.actualDepth = (float) depth;
+		this.actualHeight = (float) height;
+		this.shingleCount = shingleCount;
+		this.unrotatedLength = (float)Math.sqrt(sqrC - (shingleCount * shingleCount));
+		this.singleLength = unrotatedLength / shingleCount;
+		this.angle = Math.atan(height / depth) - Math.atan(shingleCount / (shingleCount * singleLength));
 
-		Function<ResourceLocation, TextureAtlasSprite> textureGetter = Minecraft.getInstance().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE);
-		TextureAtlasSprite roofTile = textureGetter.apply(new ResourceLocation("drpmedieval:block/shingle_roofs/oak_shingles"));
-		TextureAtlasSprite plank = textureGetter.apply(new ResourceLocation("drpmedieval:block/shingle_roofs/planks_treated_wood"));
+		TextureAtlasSprite roofTile = spriteGetter.apply(textures.get("roof_shingle"));
+		TextureAtlasSprite plank = spriteGetter.apply(textures.get("bottom"));
 
 		//Setup fullBoxes
-		setupBox(fullBoxes, 16, 0, steps, roofTile, plank);
-		setupBox(leftRim, 8, 8, steps, roofTile, plank);
-		setupBox(rightRim, 8, 0, steps, roofTile, plank);
-		setupBox(bottomRim, 16, 0, (int) Math.ceil(steps/2F), roofTile, plank);
-		setupBox(leftBottomRim, 8, 8, (int) Math.ceil(steps/2F), roofTile, plank);
-		setupBox(rightBottomRim, 8, 0, (int) Math.ceil(steps/2F), roofTile, plank);
+
+		matrixStack.rotate(Vector3f.XP.rotation((float) angle));
+
+		Matrix4f matrix = matrixStack.getLast().getMatrix();
+		setupBox(fullBoxes, 16, 0, shingleCount, matrix, roofTile, plank);
+		setupBox(leftRim, 8, 8, shingleCount, matrix, roofTile, plank);
+		setupBox(rightRim, 8, 0, shingleCount, matrix, roofTile, plank);
+		setupBox(bottomRim, 16, 0, (int) Math.ceil(shingleCount / 2F), matrix, roofTile, plank);
+		setupBox(leftBottomRim, 8, 8, (int) Math.ceil(shingleCount / 2F), matrix, roofTile, plank);
+		setupBox(rightBottomRim, 8, 0, (int) Math.ceil(shingleCount / 2F), matrix, roofTile, plank);
 	}
 
-	public List<BakedQuad> getFull(){
+	public List<BakedQuad> getFull() {
 		return fullBoxes.stream().map(box -> box.bake()).flatMap(quads -> Arrays.stream(quads)).collect(Collectors.toList());
 	}
 
-	public List<BakedQuad> getLeftRim(){
+	public List<BakedQuad> getLeftRim() {
 		return leftRim.stream().map(box -> box.bake()).flatMap(quads -> Arrays.stream(quads)).collect(Collectors.toList());
 	}
 
-	public List<BakedQuad> getRightRim(){
+	public List<BakedQuad> getRightRim() {
 		return rightRim.stream().map(box -> box.bake()).flatMap(quads -> Arrays.stream(quads)).collect(Collectors.toList());
 	}
 
-	public List<BakedQuad> getBottomRim(){
+	public List<BakedQuad> getBottomRim() {
 		return bottomRim.stream().map(box -> box.bake()).flatMap(quads -> Arrays.stream(quads)).collect(Collectors.toList());
 	}
 
-	public List<BakedQuad> getLeftBottomRim(){
+	public List<BakedQuad> getLeftBottomRim() {
 		return leftBottomRim.stream().map(box -> box.bake()).flatMap(quads -> Arrays.stream(quads)).collect(Collectors.toList());
 	}
 
-	public List<BakedQuad> getRightBottomRim(){
+	public List<BakedQuad> getRightBottomRim() {
 		return rightBottomRim.stream().map(box -> box.bake()).flatMap(quads -> Arrays.stream(quads)).collect(Collectors.toList());
 	}
-	
-	private void setupBox(List<AdvancedModelBox> cubes,
-								 float width, float offsetX, int height,
-								 TextureAtlasSprite roofTile, TextureAtlasSprite plank){
 
-		for(int i = 0; i < height; i++){
+	private void setupBox(List<AdvancedModelBox> cubes,
+								 float width, float offsetX, int height, Matrix4f matrix,
+								 TextureAtlasSprite roofTile, TextureAtlasSprite plank) {
+
+		float halfHeight = height/2f - 1;
+		float halfLength = (float)(unrotatedLength/2);
+		Vector3f offset = new Vector3f(8, this.actualHeight/2, this.actualDepth/2F);
+		offset.add(this.offset);
+
+		for (int i = 0; i < height; i++) {
 			cubes.add(new RoofTileBox(
-					new Vector3d(offsetX,  -i -1, i * singleLength),
-					new Vector3d(width, 1, singleLength),
-					new Vector3d(angle, 0,0),
-					roofTile,
+					new Vector3f(offsetX - 8, -i + halfHeight, (float) (i * singleLength) - halfLength),
+					new Vector3f(width, 1, (float) singleLength),
 					offset,
+					(float) angle,
+					matrix,
+					roofTile,
 					i
 			));
 		}
-		cubes.add(new RoofBottomBox(
-				new Vector3d(offsetX, -1, 0),
-				new Vector3d(width, 1, singleLengthPlank * height),
-				new Vector3d(angle2, 0, 0),
-				plank,
-				offset
-		));
+//		cubes.add(new RoofBottomBox(
+//				new Vector3d(offsetX, -1, 0),
+//				new Vector3d(width, 1, singleLengthPlank * height),
+//				angle,
+//				matrix,
+//				plank,
+//				offset
+//		));
 	}
 }

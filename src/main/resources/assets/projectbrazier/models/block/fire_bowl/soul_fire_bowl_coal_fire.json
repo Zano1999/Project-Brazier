@@ -1,0 +1,7 @@
+{
+	"parent": "projectbrazier:block/fire_bowl/fire_bowl_coal_fire",
+	"textures": {
+		"embers": "projectbrazier:block/soul_coal_embers",
+		"fire": "block/soul_campfire_fire"
+	}
+}

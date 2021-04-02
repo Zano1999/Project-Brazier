@@ -1,0 +1,23 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"planks"
+		]
+	},
+	"tasks": [
+		{
+			"input": "projectbrazier:blockstates/generator/flower_bucket.json",
+			"output": "projectbrazier:blockstates/${material}_flower_bucket.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/flower_bucket.json",
+			"output": "projectbrazier:models/item/${material}_flower_bucket.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/flower_bucket.json",
+			"output": "projectbrazier:models/block/${material}_flower_bucket.json"
+		}
+	]
+}
