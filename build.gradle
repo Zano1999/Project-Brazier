@@ -175,7 +175,7 @@ processResources {
 
         // Minify json resources
         fileTree(dir: outputs.files.asPath, include: "**/*.json").each{
-            File file -> file.text = JsonOutput.toJson(new JsonSlurper().parse(file));
+            File file -> file.text = JsonOutput.toJson(new JsonSlurper().parse(file))
         }
 
         // Minify pngs resources

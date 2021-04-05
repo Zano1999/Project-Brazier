@@ -132,7 +132,7 @@ public class BlockCreators {
 				Block.Properties.create(Material.ANVIL, MaterialColor.IRON)
 						.hardnessAndResistance(5.0F, 1200.0F)
 						.sound(SoundType.ANVIL).notSolid();
-		return new HangUpItemBlock(properties, "hanging_horn", 10);
+		return new HangUpItemBlock(properties, "hanging_spyglass", 10);
 	}
 
 	public static Block createMachicolations(){
