@@ -60,11 +60,6 @@ public class ProjectBrazier {
             openBarrel.setOtherBlock(closedBarrel);
             closedBarrel.setOtherBlock(openBarrel);
         });
-
-        DebugChunkGenerator.ALL_VALID_STATES.clear();
-        DebugChunkGenerator.ALL_VALID_STATES.addAll(ForgeRegistries.BLOCKS.getValues().stream().filter(block -> block.getRegistryName().getNamespace().equals(MODID)).flatMap((p_236067_0_) -> {
-            return p_236067_0_.getStateContainer().getValidStates().stream();
-        }).collect(Collectors.toList()));
     }
 
     public void setupServerStuff(FMLDedicatedServerSetupEvent event) {
