@@ -1,0 +1,9 @@
+{
+	"parent": "projectbrazier:block/spyglass/templates/hanging_spyglass2_mirrored",
+	"textures": {
+		"particle": "projectbrazier:item/spyglass/silver_spyglass_model",
+		"metal": "projectbrazier:block/nail",
+		"leather": "projectbrazier:block/leather",
+		"spyglass": "projectbrazier:item/spyglass/silver_spyglass_model"
+	}
+}
