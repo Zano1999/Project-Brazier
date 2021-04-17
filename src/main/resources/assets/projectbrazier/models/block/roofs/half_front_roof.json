@@ -7,5 +7,6 @@
 	},
 	"height": 16,
 	"width": 8,
-	"steps": 5
+	"steps": 5,
+	"horizontalOffset": 8
 }

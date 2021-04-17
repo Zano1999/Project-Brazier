@@ -5,7 +5,7 @@
 		"roof_shingle": "projectbrazier:block/roofs/shingles",
 		"bottom": "projectbrazier:block/roofs/shingles"
 	},
-	"height": 16,
 	"width": 8,
-	"steps": 5
+	"steps": 5,
+	"tileOffset": 1
 }

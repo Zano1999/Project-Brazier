@@ -1,6 +1,6 @@
 package net.dark_roleplay.projectbrazier.util.sitting;
 
-import net.dark_roleplay.projectbrazier.handler.MedievalEntities;
+import net.dark_roleplay.projectbrazier.feature.registrars.BrazierEntities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -29,7 +29,7 @@ public class SittingUtil {
 
 	private static boolean sitDownPlayer(ServerWorld world, double x, double y, double z, PlayerEntity player, Direction facing, Direction initFacing, double heightOffset){
 		if (!checkForExistingEntity(world, x, y, z, player) && !world.isRemote){
-			SittableEntity chairEntity = new SittableEntity(MedievalEntities.SITTABLE.get(), world, x, y, z, heightOffset);
+			SittableEntity chairEntity = new SittableEntity(BrazierEntities.SITTABLE.get(), world, x, y, z, heightOffset);
 
 			if(facing != null)
 				chairEntity.setRotation(facing);

@@ -1,7 +1,7 @@
 package net.dark_roleplay.projectbrazier.datagen.woods;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
-import net.dark_roleplay.projectbrazier.handler.MedievalBlocks;
+import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -33,18 +33,18 @@ public class WoodDataGenerator extends BlockStateProvider {
 	@Override
 	protected void registerStatesAndModels() {
 		generateWoods("apple", new WoodGeneratorData(
-				MedievalBlocks.APPLE_LOG,
-				MedievalBlocks.STRIPPED_APPLE_LOG,
-				MedievalBlocks.APPLE_PLANK,
-				MedievalBlocks.APPLE_WOOD,
-				MedievalBlocks.STRIPPED_APPLE_WOOD
+				BrazierBlocks.APPLE_LOG,
+				BrazierBlocks.STRIPPED_APPLE_LOG,
+				BrazierBlocks.APPLE_PLANK,
+				BrazierBlocks.APPLE_WOOD,
+				BrazierBlocks.STRIPPED_APPLE_WOOD
 		));
 		generateWoods("orange", new WoodGeneratorData(
-				MedievalBlocks.ORANGE_LOG,
-				MedievalBlocks.STRIPPED_ORANGE_LOG,
-				MedievalBlocks.ORANGE_PLANK,
-				MedievalBlocks.ORANGE_WOOD,
-				MedievalBlocks.STRIPPED_ORANGE_WOOD
+				BrazierBlocks.ORANGE_LOG,
+				BrazierBlocks.STRIPPED_ORANGE_LOG,
+				BrazierBlocks.ORANGE_PLANK,
+				BrazierBlocks.ORANGE_WOOD,
+				BrazierBlocks.STRIPPED_ORANGE_WOOD
 		));
 	}
 

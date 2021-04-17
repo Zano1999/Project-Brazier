@@ -3,6 +3,7 @@ package net.dark_roleplay.projectbrazier.util;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import java.util.Collection;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -25,5 +26,9 @@ public class EnumRegistryObject<E extends Enum<E>, T extends IForgeRegistryEntry
 	public T get(E key){
 		RegistryObject<T> val = objects.get(key);
 		return val == null ? null : val.get();
+	}
+
+	public Collection<RegistryObject<T>> values(){
+		return objects.values();
 	}
 }

@@ -1,0 +1,32 @@
+{
+	"textures": {
+		"rope": "projectbrazier:block/rope/rope",
+		"rope_knot": "projectbrazier:block/rope/rope_knot"
+	},
+	"elements": [
+		{
+			"from": [6, 4, 6],
+			"to": [10, 8, 10],
+			"faces": {
+				"north": {"uv": [5, 0, 9, 4], "texture": "#rope"},
+				"east": {"uv": [8, 0, 12, 4], "texture": "#rope"},
+				"south": {"uv": [11, 0, 15, 4], "texture": "#rope"},
+				"west": {"uv": [5, 0, 9, 4], "texture": "#rope"},
+				"up": {"uv": [6, 6, 10, 10], "texture": "#rope_knot"},
+				"down": {"uv": [6, 6, 10, 10], "texture": "#rope_knot"}
+			}
+		},
+		{
+			"from": [7, 2, 7],
+			"to": [9, 16, 9],
+			"faces": {
+				"north": {"uv": [2, 0, 4, 14], "texture": "#rope"},
+				"east": {"uv": [0, 0, 2, 14], "texture": "#rope"},
+				"south": {"uv": [6, 0, 8, 14], "texture": "#rope"},
+				"west": {"uv": [4, 0, 6, 14], "texture": "#rope"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "#rope_knot", "cullface": "up"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#rope_knot"}
+			}
+		}
+	]
+}

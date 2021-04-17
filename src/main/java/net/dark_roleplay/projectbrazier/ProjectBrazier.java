@@ -1,19 +1,16 @@
 package net.dark_roleplay.projectbrazier;
 
-import net.dark_roleplay.projectbrazier.features.blocks.barrel.BarrelBlock;
-import net.dark_roleplay.projectbrazier.handler.*;
+import net.dark_roleplay.projectbrazier.feature.registrars.*;
+import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorRegistrar;
 import net.minecraft.item.Item;
-import net.minecraft.world.gen.DebugChunkGenerator;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.stream.Collectors;
 
 @Mod(ProjectBrazier.MODID)
 public class ProjectBrazier {
@@ -22,7 +19,7 @@ public class ProjectBrazier {
 
 
     public ProjectBrazier() {
-        MedievalNetworking.registerPackets();
+        BrazierPackets.registerPackets();
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::hackyHackToByPassLoadingOrder);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommonStuff);
@@ -30,6 +27,8 @@ public class ProjectBrazier {
 
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ProjectBrazierClient::modConstructor);
 
+
+        DecorRegistrar.register();
         //Decals
 //        FMLJavaModLoadingContext.get().getModEventBus().addListener(DecalRegistry::registerRegistry);
 //        MinecraftForge.EVENT_BUS.addGenericListener(Chunk.class, CapabilityAttachListener::attachChunkCapability);
@@ -37,31 +36,36 @@ public class ProjectBrazier {
     }
 
     public void hackyHackToByPassLoadingOrder(RegistryEvent.NewRegistry event){
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        MedievalBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MedievalBlocks.BLOCKS_NO_ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        BrazierBlocks.preRegistry();
+        BrazierBlockEntities.preRegistry();
+        BrazierItems.preRegistry();
+        BrazierContainers.preRegistry();
+        BrazierEntities.preRegistry();
+        BrazierSounds.preRegistry();
 
-        MedievalItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        BrazierRegistries.BLOCKS.register(modEventBus);
+        modEventBus.addListener(BrazierBlocks::postRegistry);
 
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, MedievalItems::registerItemBlocks);
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, MedievalBlocks::postBlockRegistryCallback);
+        BrazierRegistries.BLOCKS_NO_ITEMS.register(modEventBus);
+        modEventBus.addListener(BrazierBlockEntities::postRegistry);
 
-        MedievalTileEntities.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MedievalEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MedievalContainers.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MedievalSounds.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        BrazierRegistries.ITEMS.register(modEventBus);
+        modEventBus.addGenericListener(Item.class, BrazierItems::registerItemBlocks);
+        modEventBus.addListener(BrazierItems::postRegistry);
+
+        BrazierRegistries.CONTAINERS.register(modEventBus);
+        modEventBus.addListener(BrazierContainers::postRegistry);
+
+        BrazierRegistries.ENTITIES.register(modEventBus);
+        modEventBus.addListener(BrazierEntities::postRegistry);
+
+        BrazierRegistries.SOUNDS.register(modEventBus);
+        modEventBus.addListener(BrazierSounds::postRegistry);
     }
 
-    public void setupCommonStuff(FMLCommonSetupEvent event) {
-        MedievalBlocks.planksOnly.forEach(material -> {
-            BarrelBlock openBarrel = (BarrelBlock) MedievalBlocks.OPEN_BARREL.get(material).get();
-            BarrelBlock closedBarrel = (BarrelBlock) MedievalBlocks.CLOSED_BARREL.get(material).get();
+    public void setupCommonStuff(FMLCommonSetupEvent event) {}
 
-            openBarrel.setOtherBlock(closedBarrel);
-            closedBarrel.setOtherBlock(openBarrel);
-        });
-    }
-
-    public void setupServerStuff(FMLDedicatedServerSetupEvent event) {
-    }
+    public void setupServerStuff(FMLDedicatedServerSetupEvent event) {}
 }

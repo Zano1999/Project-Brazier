@@ -7,5 +7,6 @@
 	},
 	"height": 8,
 	"verticalOffset": 8,
-	"steps": 5
+	"steps": 5,
+	"tileOffset": 1
 }

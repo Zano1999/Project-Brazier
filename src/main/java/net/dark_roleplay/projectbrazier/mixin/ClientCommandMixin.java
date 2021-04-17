@@ -2,7 +2,7 @@ package net.dark_roleplay.projectbrazier.mixin;
 
 import com.mojang.brigadier.suggestion.Suggestion;
 import com.mojang.brigadier.suggestion.Suggestions;
-import net.dark_roleplay.projectbrazier.experiments.clientcommands.ClientCommands;
+import net.dark_roleplay.projectbrazier.experimental_features.clientcommands.ClientCommands;
 import net.minecraft.client.gui.CommandSuggestionHelper;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import org.spongepowered.asm.mixin.Mixin;
