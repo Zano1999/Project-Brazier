@@ -19,14 +19,23 @@ public class ProjectBrazier {
 
 
     public ProjectBrazier() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         BrazierPackets.registerPackets();
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::hackyHackToByPassLoadingOrder);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommonStuff);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupServerStuff);
+        modEventBus.addListener(this::hackyHackToByPassLoadingOrder);
+        modEventBus.addListener(this::setupCommonStuff);
+        modEventBus.addListener(this::setupServerStuff);
 
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ProjectBrazierClient::modConstructor);
 
+
+        BrazierRegistries.BLOCKS.register(modEventBus);
+        BrazierRegistries.BLOCK_ENTITIES.register(modEventBus);
+        BrazierRegistries.BLOCKS_NO_ITEMS.register(modEventBus);
+        BrazierRegistries.ITEMS.register(modEventBus);
+        BrazierRegistries.CONTAINERS.register(modEventBus);
+        BrazierRegistries.ENTITIES.register(modEventBus);
+        BrazierRegistries.SOUNDS.register(modEventBus);
 
         DecorRegistrar.register();
         //Decals
@@ -44,14 +53,6 @@ public class ProjectBrazier {
         BrazierContainers.preRegistry();
         BrazierEntities.preRegistry();
         BrazierSounds.preRegistry();
-
-        BrazierRegistries.BLOCKS.register(modEventBus);
-        BrazierRegistries.BLOCK_ENTITIES.register(modEventBus);
-        BrazierRegistries.BLOCKS_NO_ITEMS.register(modEventBus);
-        BrazierRegistries.ITEMS.register(modEventBus);
-        BrazierRegistries.CONTAINERS.register(modEventBus);
-        BrazierRegistries.ENTITIES.register(modEventBus);
-        BrazierRegistries.SOUNDS.register(modEventBus);
 
         modEventBus.addListener(BrazierBlocks::postRegistry);
         modEventBus.addListener(BrazierBlockEntities::postRegistry);
