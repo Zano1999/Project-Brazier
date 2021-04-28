@@ -14,7 +14,7 @@ public class BrazierBlockEntities extends Registrar {
 			SINGLE_ITEM_STORAGE = registerBlockEntity("hanging_item", HangingItemBlockEntity::new, BrazierBlocks.HANGING_HORN, BrazierBlocks.HANGING_SILVER_SPYGLASS , BrazierBlocks.HANGING_GOLD_SPYGLASS);
 
 	public static final RegistryObject<TileEntityType<BarrelBlockEntity>>
-			BARREL_BLOCK_ENTITY 	= registerBlockEntity("barrel", BarrelBlockEntity::new, BrazierBlocks.OPEN_BARRELS.values(), BrazierBlocks.CLOSED_BARRELS.values());
+			BARREL_BLOCK_ENTITY = registerBlockEntity("barrel", BarrelBlockEntity::new, BrazierBlocks.OPEN_BARRELS.values(), BrazierBlocks.CLOSED_BARRELS.values());
 
 	public static final RegistryObject<TileEntityType<DrawbridgeAnchorTileEntity>>
 			DRAWBRODGE_ANCHOR = registerBlockEntity("drawbridge_anchor", DrawbridgeAnchorTileEntity::new, BrazierBlocks.DRAWBRIDGE_ANCHOR);

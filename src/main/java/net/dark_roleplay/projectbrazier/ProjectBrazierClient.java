@@ -2,6 +2,7 @@ package net.dark_roleplay.projectbrazier;
 
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.BuiltinMixedModel;
+import net.dark_roleplay.projectbrazier.experimental_features.crafting.screens.CraftingScreen;
 import net.dark_roleplay.projectbrazier.experimental_features.walking_gui.PassiveScreenHelper;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlocks;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierContainers;
@@ -49,6 +50,7 @@ public class ProjectBrazierClient {
 		PassiveScreenHelper.editKeybinds();
 
 		ScreenManager.registerFactory(BrazierContainers.GENERAL_CONTAINER.get(), GeneralContainerScreen::new);
+		ScreenManager.registerFactory(BrazierContainers.CRAFTING_PLAYER_CONTAINER.get(), CraftingScreen::new);
 	}
 
 	public static void registerModelLoaders(ModelRegistryEvent event){

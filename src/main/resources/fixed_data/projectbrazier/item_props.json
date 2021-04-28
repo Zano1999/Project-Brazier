@@ -204,5 +204,8 @@
 			"Hunger": 4,
 			"Saturation": 0.3
 		}
+	},
+	"decor_test": {
+		"ItemGroup": "misc"
 	}
 }

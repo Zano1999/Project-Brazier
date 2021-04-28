@@ -1,27 +1,23 @@
-# eclipse
-bin
+# Gradle
+.gradle/
+bin/
+build/
+
+#Eclipse
+*.classpath
+*.project
+*.prefs
 *.launch
-.settings
-.metadata
-.classpath
-.project
 
-# idea
-out
-*.ipr
-*.iws
-*.iml
-.idea
+# General
+run/
 
-# gradle
-build
-.gradle
+# Annotation Processing
+/.apt_generated_tests/
+/Users/
+.factorypath
+runs/
 
-# other
-eclipse
-run
+out/
 
-# Files from Forge MDK
-forge*changelog.txt
-runs
-runs
+.idea/

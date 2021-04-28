@@ -46,22 +46,19 @@ public class ProjectBrazier {
         BrazierSounds.preRegistry();
 
         BrazierRegistries.BLOCKS.register(modEventBus);
-        modEventBus.addListener(BrazierBlocks::postRegistry);
-
+        BrazierRegistries.BLOCK_ENTITIES.register(modEventBus);
         BrazierRegistries.BLOCKS_NO_ITEMS.register(modEventBus);
-        modEventBus.addListener(BrazierBlockEntities::postRegistry);
-
         BrazierRegistries.ITEMS.register(modEventBus);
+        BrazierRegistries.CONTAINERS.register(modEventBus);
+        BrazierRegistries.ENTITIES.register(modEventBus);
+        BrazierRegistries.SOUNDS.register(modEventBus);
+
+        modEventBus.addListener(BrazierBlocks::postRegistry);
+        modEventBus.addListener(BrazierBlockEntities::postRegistry);
         modEventBus.addGenericListener(Item.class, BrazierItems::registerItemBlocks);
         modEventBus.addListener(BrazierItems::postRegistry);
-
-        BrazierRegistries.CONTAINERS.register(modEventBus);
         modEventBus.addListener(BrazierContainers::postRegistry);
-
-        BrazierRegistries.ENTITIES.register(modEventBus);
         modEventBus.addListener(BrazierEntities::postRegistry);
-
-        BrazierRegistries.SOUNDS.register(modEventBus);
         modEventBus.addListener(BrazierSounds::postRegistry);
     }
 

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Mixin(DebugChunkGenerator.class)
 public class DebugChunkGeneratorCallback {
 
-	@Inject(method = "initValidStates", at = @At("RETURN"))
+	@Inject(method = "initValidStates", at = @At("RETURN"), remap=false)
 	private static void onInitValidStates(CallbackInfo ci) {
 		DebugChunkGenerator.ALL_VALID_STATES.clear();
 		DebugChunkGenerator.ALL_VALID_STATES.addAll(ForgeRegistries.BLOCKS.getValues().stream().filter(block -> block.getRegistryName().getNamespace().equals(ProjectBrazier.MODID)).flatMap((p_236067_0_) -> {

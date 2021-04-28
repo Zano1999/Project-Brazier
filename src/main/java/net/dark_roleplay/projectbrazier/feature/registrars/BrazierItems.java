@@ -2,11 +2,12 @@ package net.dark_roleplay.projectbrazier.feature.registrars;
 
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
+import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorItem;
+import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorRegistrar;
 import net.dark_roleplay.projectbrazier.feature.blocks.HangingItemBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.NailBlock;
 import net.dark_roleplay.projectbrazier.feature.items.SpyglassItem;
 import net.dark_roleplay.projectbrazier.feature.items.WarHornItem;
-import net.dark_roleplay.projectbrazier.handler.MedievalBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -53,7 +54,8 @@ public class BrazierItems extends Registrar {
 			YELLOW_PEAR = registerItem("yellow_pear"),
 			BONE_WAR_HORN = registerItem("bone_war_horn", WarHornItem::new),
 			GOLD_SPYGLASS = registerItem("gold_spyglass", SpyglassItem::new),
-			SILVER_SPYGLASS = registerItem("silver_spyglass", SpyglassItem::new);
+			SILVER_SPYGLASS = registerItem("silver_spyglass", SpyglassItem::new),
+			DECOR_TEST	= registerItem("decor_test", DecorItem::new);
 
 	public static void registerItemBlocks(RegistryEvent.Register<Item> event){
 		IForgeRegistry<Item> reg = event.getRegistry();
@@ -74,5 +76,7 @@ public class BrazierItems extends Registrar {
 		NailBlock.HANGABLE_ITEMS.put(BONE_WAR_HORN.get(), (HangingItemBlock) BrazierBlocks.HANGING_HORN.get());
 		NailBlock.HANGABLE_ITEMS.put(SILVER_SPYGLASS.get(), (HangingItemBlock) BrazierBlocks.HANGING_SILVER_SPYGLASS.get());
 		NailBlock.HANGABLE_ITEMS.put(GOLD_SPYGLASS.get(), (HangingItemBlock) BrazierBlocks.HANGING_GOLD_SPYGLASS.get());
+
+		((DecorItem)DECOR_TEST.get()).setDecor(DecorRegistrar.TEST);
 	}
 }

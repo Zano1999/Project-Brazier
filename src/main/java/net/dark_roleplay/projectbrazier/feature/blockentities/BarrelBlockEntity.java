@@ -35,7 +35,6 @@ public class BarrelBlockEntity extends TileEntity implements INamedContainerProv
 	private LazyOptional<ItemStackHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler == null ? itemHandler = createInventory() : itemHandler);
 	private LazyOptional<FluidTank> lazyFluidHandler =  LazyOptional.of(() ->  fluidHandler == null ? fluidHandler = createFluidTank() : fluidHandler);
 
-	//TODO Add TE TYPE
 	public BarrelBlockEntity() {
 		super(BrazierBlockEntities.BARREL_BLOCK_ENTITY.get());
 	}

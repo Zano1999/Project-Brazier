@@ -1,233 +1,51 @@
-buildscript {
-    repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        mavenCentral()
-        jcenter()
-        maven { url 'https://plugins.gradle.org/m2/' }
-        maven { url 'https://repo.spongepowered.org/maven'}
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
-        classpath 'com.wynprice.cursemaven:CurseMaven:1.2.3'
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-        classpath 'com.github.wnameless.json:json-flattener:0.12.0'
-    }
-}
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply from: 'gradle/property_helper.gradle'
+apply from: 'gradle/property_loader.gradle'
 
-plugins {
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
-    id 'idea'
-    id 'maven-publish'
-}
+// Load mod related properties
+ext.modName = getRequiredString('mod_name')
+ext.modAuthor = getRequiredString('mod_author')
+ext.modId = getRequiredString('mod_id')
+ext.modCredits = getDefaultString('mod_credits', ext.modAuthor)
+ext.modDescription = getOptionalString('mod_description')
+ext.modChangelog = getOptionalString('mod_changelog')
+ext.modHomepage = getOptionalString('mod_homepage')
+ext.modSource = getOptionalString('mod_source')
+ext.modIssues = getOptionalString('mod_issues')
 
-//The Plugin block only works for plugins in the gradle maven
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.spongepowered.mixin'
+// Load Minecraft specific properties
+ext.mcVersion = getRequiredString('minecraft_version')
 
+// Load build-time modules
+//apply from: 'gradle/build_number.gradle'
+apply from: 'gradle/common_manifest.gradle'
+apply from: 'gradle/common_artifacts.gradle'
+apply from: 'gradle/forge.gradle'
+apply from: 'gradle/minify_jsons.gradle'
+//apply from: 'gradle/git_changelog.gradle'
 
-def MOD_VERSION = '0.5';
+// Load publishing modules
+//apply from: 'gradle/maven.gradle'
+//apply from: 'gradle/signing.gradle'
+//apply from: 'gradle/curseforge.gradle'
+//apply from: 'gradle/version_checker.gradle'
 
-version = "${mc_version}-${mod_version}"
-group = "net.dark_roleplay.${modid}"
-archivesBaseName = "${modid}"
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
-
-configurations.all {
-    resolutionStrategy.cacheDynamicVersionsFor 1, 'seconds'
-    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
-}
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-mixin {
-    add sourceSets.main, "${modid}.refmap.json"
-}
-
-minecraft {
-    mappings channel: 'snapshot', version: "${mapping}-${mcp_version}"
-
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    runs {
-        client {
-            workingDirectory project.file('runs/client')
-            arg "-mixin.config=" + modid + ".mixins.json"
-
-            property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-            mods {
-                projectbrazier {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('runs/server')
-            arg "-mixin.config=" + modid + ".mixins.json"
-
-            property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-            mods {
-                projectbrazier {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('runs/datagen')
-
-            args '--mod', 'projectbrazier', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            mods {
-                projectbrazier {
-                    source sourceSets.main
-                }
-            }
+// IntelliJ Project Import
+// The Mixin annotation process does not have an obfuscation source when running through the IntelliJ compiler,
+// thus we have to prevent it from being activated as part of importing this Gradle project into IntelliJ.
+if (System.getProperty("idea.sync.active") == "true") {
+    afterEvaluate {
+        tasks.withType(JavaCompile).all {
+            it.options.annotationProcessorPath = files()
         }
     }
 }
 
-repositories {
-   // maven {url = "https://maven.dark-roleplay.net/"}
-    maven {url = "https://minecraft.curseforge.com/api/maven/"}
+repositories{
     mavenLocal()
-    maven{ url = "https://www.cursemaven.com/" }
 }
 
-dependencies {
-    minecraft([
-            group   : 'net.minecraftforge',
-            name    : 'forge',
-            version : "${mc_version}-${forge_version}"
-
-    ])
-
+dependencies{
     implementation (fg.deobf("net.dark_roleplay:marg:1.16.5-0.6-SNAPSHOT"))
-
-    //Wood Mods
-//    implementation fg.deobf("curse.maven:byg-247560:3239941") //Oh the biomes you'll Go
-//    implementation fg.deobf("curse.maven:abundance-452345:3250108") //Abundance
-//    implementation fg.deobf("curse.maven:abundance-382216:3233486") //Abnormals COre
-
-    //runtimeOnly(fg.deobf("curse.maven:worldedit:3135187"))
-}
-
-jar {
-    from sourceSets.main.output.classesDirs
-    from sourceSets.main.output.resourcesDir
-
-    manifest {
-        attributes([
-            "Specification-Title": "${modid}",
-            "Specification-Vendor": "Dark Roleplay",
-            "Specification-Version": "1",
-            "Implementation-Title": "Project Brazier",
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor": "Dark Roleplay",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-            "MixinConfigs": "${modid}.mixins.json"
-        ])
-    }
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-}
-
-import groovy.json.JsonSlurper
-import groovy.json.JsonOutput
-import com.github.wnameless.json.flattener.JsonFlattener
-
-processResources {
-    from(sourceSets.main.resources.srcDirs) {
-        include 'META-INF/mods.toml'
-
-        expand 'version': project.version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'META-INF/mods.toml'
-    }
-
-    doLast {
-        //Flatten lang jsons
-        fileTree(dir: outputs.files.asPath, include: "**/lang/*.json").each{
-            File file -> file.text = JsonFlattener.flatten(JsonOutput.toJson(new JsonSlurper().parse(file)));
-        }
-
-        // Minify json resources
-        fileTree(dir: outputs.files.asPath, include: "**/*.json").each{
-            File file -> file.text = JsonOutput.toJson(new JsonSlurper().parse(file))
-        }
-
-        // Minify pngs resources
-
-        fileTree(dir: outputs.files.asPath, include: "**/*.png").each {
-            File file ->
-                def proc = ('pingo -quiet -strip -auto ' + file).execute();
-                proc.waitFor();
-        }
-    }
-}
-
-//curseforge {
-//    apiKey = System.getenv('CURSE_API_KEY') // This should really be in a gradle.properties file
-//    project {
-//        id = '238326'
-//        changelog = file('changelog.txt') // A file can also be set using: changelog = file('changelog.txt')
-//        releaseType = 'alpha'
-//        mainArtifact(jar) {
-//            displayName = "DRP Medieval - ${MC_VERSION} - v${MOD_VERSION} Alpha"
-//            relations {
-//                requiredDependency 'marg'
-//            }
-//        }
-//    }
-//}
-
-def reobfFile = file("$buildDir/reobfJar/output.jar")
-def reobfArtifact = artifacts.add('default', reobfFile) {
-    type 'jar'
-    builtBy 'reobfJar'
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId = project.group
-            artifactId = project.archivesBaseName
-            version = project.version
-
-            artifact reobfArtifact
-            artifact sourcesJar
-            artifact javadocJar
-        }
-    }
-    repositories {
-        maven {
-            url System.getenv('MVN_REPO')
-            credentials {
-                username System.getenv('MVN_USER')
-                password System.getenv('MVN_PASSWORD')
-            }
-        }
-    }
 }

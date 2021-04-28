@@ -1,16 +1,25 @@
 package net.dark_roleplay.projectbrazier.experimental_features.decorator.capability;
 
-import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorRegistrar;
-import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorState;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.common.util.INBTSerializable;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
+import java.util.TreeMap;
 
-public class DecorContainer {
-	private Set<DecorState> STATES = new HashSet<>();
+public class DecorContainer implements INBTSerializable<CompoundNBT> {
+	private Map<Integer, DecorChunk> DECOR_CHUNKS = new TreeMap<>();
 
-	public DecorState getDecor(int yPos){
-		return new DecorState(DecorRegistrar.TEST, new Vector3d(0, 0, 0), Vector3d.ZERO);
+	public DecorChunk getDecorChunk(int chunkY){
+		return DECOR_CHUNKS.computeIfAbsent(chunkY, y -> new DecorChunk(y));
+	}
+
+	@Override
+	public CompoundNBT serializeNBT() {
+		return null;
+	}
+
+	@Override
+	public void deserializeNBT(CompoundNBT nbt) {
+
 	}
 }
