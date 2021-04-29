@@ -31,8 +31,8 @@ public class BrazierBlocks extends Registrar {
 
 
 	public static final MaterialRegistryObject<Block>
-			OPEN_BARRELS = registerBlock("${material}_open_barrel", BARREL_CON, (mat, prop) -> new BarrelBlock(mat, prop, "open_barrel", true), Registrar::MARG_WOOD, true),
-			CLOSED_BARRELS = registerBlock("${material}_closed_barrel", BARREL_CON, (mat, prop) -> new BarrelBlock(mat, prop, "closed_barrel", false), Registrar::MARG_WOOD, true),
+			OPEN_BARRELS = registerBlock("${material}_open_barrel", BARREL_CON, (mat, prop) -> new BarrelBlock(mat, prop, "open_barrel", false), Registrar::MARG_WOOD, true),
+			CLOSED_BARRELS = registerBlock("${material}_closed_barrel", BARREL_CON, (mat, prop) -> new BarrelBlock(mat, prop, "closed_barrel", true), Registrar::MARG_WOOD, true),
 			FLOWER_BARRELS = registerBlock("${material}_flower_barrel", BARREL_CON, (mat, prop) -> new FlowerContainerBlock(prop, "closed_barrel"), Registrar::MARG_WOOD, true),
 			FLOWER_BUCKET = registerBlock("${material}_flower_bucket", WOOD_BUCKET_CON, (mat, prop) -> new FlowerContainerBlock(prop, "flower_bucket"), Registrar::MARG_WOOD, true),
 			PLANK_CHAIR = registerBlock("${material}_plank_chair", WOOD_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "simple_chair"), Registrar::MARG_WOOD, true),

@@ -1,12 +1,16 @@
 package net.dark_roleplay.projectbrazier;
 
+import net.dark_roleplay.projectbrazier.feature.blockentities.HangingItemBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.registrars.*;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorRegistrar;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
@@ -17,10 +21,18 @@ public class ProjectBrazier {
 
     public static final String MODID = "projectbrazier";
 
-
     public ProjectBrazier() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
         BrazierPackets.registerPackets();
+
+        BrazierRegistries.BLOCKS.register(modEventBus);
+        BrazierRegistries.BLOCKS_NO_ITEMS.register(modEventBus);
+        BrazierRegistries.BLOCK_ENTITIES.register(modEventBus);
+        BrazierRegistries.ITEMS.register(modEventBus);
+        BrazierRegistries.CONTAINERS.register(modEventBus);
+        BrazierRegistries.ENTITIES.register(modEventBus);
+        BrazierRegistries.SOUNDS.register(modEventBus);
 
         modEventBus.addListener(this::hackyHackToByPassLoadingOrder);
         modEventBus.addListener(this::setupCommonStuff);
@@ -28,14 +40,6 @@ public class ProjectBrazier {
 
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ProjectBrazierClient::modConstructor);
 
-
-        BrazierRegistries.BLOCKS.register(modEventBus);
-        BrazierRegistries.BLOCK_ENTITIES.register(modEventBus);
-        BrazierRegistries.BLOCKS_NO_ITEMS.register(modEventBus);
-        BrazierRegistries.ITEMS.register(modEventBus);
-        BrazierRegistries.CONTAINERS.register(modEventBus);
-        BrazierRegistries.ENTITIES.register(modEventBus);
-        BrazierRegistries.SOUNDS.register(modEventBus);
 
         DecorRegistrar.register();
         //Decals
