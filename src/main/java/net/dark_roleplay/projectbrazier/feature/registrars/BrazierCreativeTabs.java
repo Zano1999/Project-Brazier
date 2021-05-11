@@ -15,9 +15,11 @@ public class BrazierCreativeTabs {
 	public static ItemGroup DECORATION = null;
 
 	public static ItemGroup food(){
-		if(FOOD == null)
-			FOOD = new SimpleItemGroup("food", () -> new ItemStack(BrazierItems.HOPS.get()));
-		return FOOD;
+		return misc();
+
+//		if(FOOD == null)
+//			FOOD = new SimpleItemGroup("food", () -> new ItemStack(BrazierItems.HOPS.get()));
+//		return FOOD;
 	}
 
 	public static ItemGroup misc(){

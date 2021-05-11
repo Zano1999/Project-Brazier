@@ -1,14 +1,11 @@
 package net.dark_roleplay.projectbrazier.experimental_features.decorator.packets;
 
-import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorRegistrar;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.capability.DecorChunk;
-import net.dark_roleplay.projectbrazier.experimental_features.decorator.capability.DecorContainer;
-import net.minecraft.client.Minecraft;
+import net.dark_roleplay.projectbrazier.experimental_features.decorator.listeners.DecorClientListeners;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.common.util.LazyOptional;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -26,6 +23,18 @@ public class DecorInitSyncPacket {
 		this.dimensionName = dimensionName;
 		this.decor = decor;
 		this.chunkPos = chunkPos;
+	}
+
+	public ResourceLocation getDimensionName() {
+		return dimensionName;
+	}
+
+	public DecorChunk getDecor() {
+		return decor;
+	}
+
+	public BlockPos getChunkPos() {
+		return chunkPos;
 	}
 
 	public static void encode(DecorInitSyncPacket pkt, PacketBuffer buffer){
@@ -47,11 +56,7 @@ public class DecorInitSyncPacket {
 
 	public static void handle(DecorInitSyncPacket pkt, Supplier<NetworkEvent.Context> ctxSupplier) {
 		ctxSupplier.get().enqueueWork(() -> {
-			Chunk chunk = Minecraft.getInstance().world.getChunk(pkt.chunkPos.getX() >> 4, pkt.chunkPos.getZ() >> 4);
-			LazyOptional<DecorContainer> capability = chunk.getCapability(DecorRegistrar.DECOR);
-			capability.ifPresent(decorCon -> {
-				decorCon.setDecorChunk(pkt.chunkPos.getY() >> 4, pkt.decor);
-			});
+			DecorClientListeners.SCHEDULED_PACKETS.put(new ChunkPos(pkt.chunkPos.getX() >> 4, pkt.chunkPos.getZ() >> 4), pkt);
 
 			ctxSupplier.get().setPacketHandled(true);
 		});

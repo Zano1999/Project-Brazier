@@ -40,6 +40,7 @@ public class DecorRegistrar {
 
 	public static void registerDecor(RegistryEvent.Register<Decor> event){
 		event.getRegistry().register(TEST = new Decor().setRegistryName("book_1"));
+		event.getRegistry().register(new Decor().setRegistryName("paper_pile_1"));
 	}
 
 	public static void attachCapability(AttachCapabilitiesEvent<Chunk> event){

@@ -13,8 +13,8 @@ import java.util.TreeMap;
 public class DecorContainer implements INBTSerializable<ListNBT> {
 	private Map<Integer, DecorChunk> DECOR_CHUNKS = new TreeMap<>();
 
-	public DecorChunk getDecorChunk(int chunkY){
-		return DECOR_CHUNKS.computeIfAbsent(chunkY, y -> new DecorChunk(y));
+	public DecorChunk getDecorChunk(int chunkY, boolean create){
+		return create ? DECOR_CHUNKS.computeIfAbsent(chunkY, y -> new DecorChunk(y)) : DECOR_CHUNKS.get(chunkY);
 	}
 
 	public void setDecorChunk(int y, DecorChunk chunk){

@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.experimental_features.decals.capability;
+package net.dark_roleplay.projectbrazier.experimental_features.decals;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
 import net.dark_roleplay.projectbrazier.experimental_features.decals.Decal;

@@ -17,8 +17,7 @@ import net.minecraftforge.fml.network.NetworkDirection;
 import java.util.Collection;
 
 @Mod.EventBusSubscriber(modid = ProjectBrazier.MODID)
-public class ChunkWatchListener {
-	//ChunkWatchEvent.Watch
+public class DecorListeners {
 
 	@SubscribeEvent
 	public static void mouseScroll(ChunkWatchEvent.Watch event) {

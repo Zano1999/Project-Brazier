@@ -2,7 +2,7 @@ package net.dark_roleplay.projectbrazier.experimental_features.walking_gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.dark_roleplay.projectbrazier.experimental_features.raytrace.RayTraceTestScreen;
-import net.dark_roleplay.projectbrazier.feature.registrars.BrazierKeybinds;
+import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybinds;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;

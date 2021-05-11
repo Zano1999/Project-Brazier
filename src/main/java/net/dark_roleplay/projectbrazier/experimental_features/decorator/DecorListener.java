@@ -39,7 +39,8 @@ public class DecorListener {
 
 		LazyOptional<DecorContainer> capability = chunkCache.chunks[chunkX][chunkY].getCapability(DecorRegistrar.DECOR);
 		capability.ifPresent(decorCon -> {
-			DecorChunk decChunk = decorCon.getDecorChunk(pos.getY()/16);
+			DecorChunk decChunk = decorCon.getDecorChunk(pos.getY() >> 4, false);
+			if(decChunk == null) return;
 
 			stack.push();
 			for(DecorState decor : decChunk.getDecors()) {

@@ -1,0 +1,4 @@
+{
+	"parent": "projectbrazier:block/candle_holders/empty_wall_candle_holder",
+	"gui_light": "front"
+}
