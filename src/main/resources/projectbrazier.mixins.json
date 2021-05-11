@@ -8,7 +8,6 @@
 		"DebugChunkGeneratorCallback"
 	],
 	"client": [
-		"ClientCommandMixin",
 		"ChunkRenderHook"
 	],
 	"minVersion": "0.8"
