@@ -10,9 +10,10 @@ license="ARR"
 	#updateJSONURL="https://dark-roleplay.net/files/versions/drpmedieval/drpmedieval-1.13.2.json" #optional
 	displayURL="https://dark-roleplay.net/"
 	#logoFile="examplemod.png" #optional
-	credits="Lead Programmer: JTK222, Jr. Programmer: 0Mr_X0, Artists: Rolfaal & Kanno (https://twitter.com/lKanno_)"
+	credits="Developer Team: JTK222, 0Mr_X0, Artists: Rolfaal & Kanno (https://twitter.com/lKanno_), Beta Testers: Dunkelzwerg11, BluryFace, Lord Kittin, 0Mr_X0"
 	authors=["JTK222", "0Mr_X0", "Rolfaal", "Kanno"]
 	description='''Project Brazier is the continuation of the Dark Roleplay Medieval mod.'''
+	itemIcon="projectbrazier:iron_brazier_coal"
 
 [modproperties.projectbrazier]
     margMaterialFiles=[
