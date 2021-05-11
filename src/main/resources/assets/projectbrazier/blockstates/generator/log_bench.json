@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model":  "projectbrazier:block/${material}_log_bench"},
+		"facing=east": {"model":  "projectbrazier:block/${material}_log_bench", "y":90},
+		"facing=south": {"model":  "projectbrazier:block/${material}_log_bench", "y":180},
+		"facing=west": {"model":  "projectbrazier:block/${material}_log_bench", "y":270}
+	}
+}

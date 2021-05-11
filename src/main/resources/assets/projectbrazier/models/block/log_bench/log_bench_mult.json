@@ -1,0 +1,48 @@
+{
+	"parent": "minecraft:blocks/block",
+	"textures": {
+		"0": "block/stripped_spruce_log_top",
+		"1": "block/spruce_log",
+		"3": "block/stripped_spruce_log",
+		"4": "projectbrazier:block/small_spruce_cut_log",
+		"5": "projectbrazier:block/small_spruce_log_top",
+		"particle": "block/stripped_spruce_log_top"
+	},
+	"elements": [
+		{
+			"from": [0, 1, 1],
+			"to": [16, 8, 15],
+			"faces": {
+				"north": {"uv": [0, 0, 7, 16], "rotation": 90, "texture": "#1"},
+				"east": {"uv": [1, 8, 15, 15], "texture": "#5"},
+				"south": {"uv": [8, 0, 15, 16], "rotation": 90, "texture": "#1"},
+				"west": {"uv": [1, 8, 15, 15], "texture": "#5"},
+				"up": {"uv": [1, 0, 15, 16], "rotation": 90, "texture": "#4"},
+				"down": {"uv": [1, 0, 15, 16], "rotation": 90, "texture": "#1"}
+			}
+		},
+		{
+			"from": [0, 8, 13],
+			"to": [16, 16, 15],
+			"faces": {
+				"north": {"uv": [1, 0, 9, 16], "rotation": 90, "texture": "#4"},
+				"east": {"uv": [1, 1, 3, 9], "texture": "#5"},
+				"south": {"uv": [8, 0, 16, 16], "rotation": 90, "texture": "#1"},
+				"west": {"uv": [13, 1, 15, 9], "texture": "#5"},
+				"up": {"uv": [13, 0, 15, 16], "rotation": 90, "texture": "#1"}
+			}
+		},
+		{
+			"from": [6.5, 0, 0],
+			"to": [9.5, 3, 16],
+			"faces": {
+				"north": {"uv": [6.5, 6.5, 9.5, 9.5], "texture": "#0"},
+				"east": {"uv": [9.5, 0, 6.5, 16], "rotation": 90, "texture": "#3"},
+				"south": {"uv": [6.5, 6.5, 9.5, 9.5], "texture": "#0"},
+				"west": {"uv": [9.5, 0, 6.5, 16], "rotation": 270, "texture": "#3"},
+				"up": {"uv": [6.5, 0, 9.5, 16], "texture": "#3"},
+				"down": {"uv": [9.5, 0, 6.5, 16], "texture": "#3"}
+			}
+		}
+	]
+}

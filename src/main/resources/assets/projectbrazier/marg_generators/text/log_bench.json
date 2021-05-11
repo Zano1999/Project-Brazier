@@ -1,0 +1,26 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"log",
+			"log_top",
+			"stripped_log",
+			"stripped_log_top"
+		]
+	},
+	"tasks": [
+		{
+			"input": "projectbrazier:blockstates/generator/log_bench.json",
+			"output": "projectbrazier:blockstates/${material}_log_bench.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/log_bench.json",
+			"output": "projectbrazier:models/item/${material}_log_bench.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/log_bench.json",
+			"output": "projectbrazier:models/block/${material}_log_bench.json"
+		}
+	]
+}
