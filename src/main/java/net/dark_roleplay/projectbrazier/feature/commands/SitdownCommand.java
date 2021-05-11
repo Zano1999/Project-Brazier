@@ -19,6 +19,7 @@ public class SitdownCommand {
 	public static final LiteralArgumentBuilder<CommandSource> SITDOWN =
 			Commands.literal("sitdown")
 					.then(Commands.argument("target", EntityArgument.entities())
+							.requires(source -> source.hasPermissionLevel(2))
 							.then(Commands.argument("position", Vec3Argument.vec3())
 									.executes((context) -> sitDown(context, true, true, false))
 							).executes((context) -> sitDown(context, true, false, false))
