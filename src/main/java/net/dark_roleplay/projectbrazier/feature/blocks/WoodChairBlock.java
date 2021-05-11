@@ -85,7 +85,7 @@ public class WoodChairBlock extends HFacedDecoBlock {
 //		System.out.println(endTime);
 
 //		CraftingHelper.openCraftingScreen(player);
-		SittingUtil.sitOnBlockWithRotation(world, pos, player, state.get(HORIZONTAL_FACING), state.get(HORIZONTAL_FACING), 0.2F, state);
+		SittingUtil.sitOnBlockWithRotation(world, pos, player, state.get(HORIZONTAL_FACING), state.get(HORIZONTAL_FACING), -0.3F, state);
 
 		return ActionResultType.SUCCESS;
 	}
