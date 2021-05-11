@@ -1,9 +1,9 @@
-package net.dark_roleplay.projectbrazier.feature.listeners;
+package net.dark_roleplay.projectbrazier.feature_client.listeners;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
 import net.dark_roleplay.projectbrazier.feature.items.SpyglassItem;
 import net.dark_roleplay.projectbrazier.feature_client.screens.SpyglassOverlay;
-import net.dark_roleplay.projectbrazier.feature.registrars.BrazierKeybinds;
+import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybinds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.test.TestCommand;
@@ -29,15 +29,12 @@ public class SpyglassListeners {
 
 	private static boolean initSmoothCamera = false;
 
-	@SubscribeEvent
-	public static void registerCommand(RegisterCommandsEvent event){
-		TestCommand.register(event.getDispatcher());
-	}
+	private static boolean isZoomActive = false;
 
 	@SubscribeEvent
 	public static void mouseScroll(InputEvent.MouseScrollEvent event){
 		SpyglassItem spyglassItem = getHeldZoomItem();
-		if(spyglassItem != null && activateZoom()){
+		if(isZoomActive()){
 			double scroll = event.getScrollDelta();
 			if(scroll > 0){
 				increaseZoom(spyglassItem);
@@ -51,7 +48,7 @@ public class SpyglassListeners {
 	@SubscribeEvent
 	public static void updateFov(EntityViewRenderEvent.FOVModifier event) {
 		SpyglassItem spyglassItem = getHeldZoomItem();
-		if(spyglassItem != null && (zoom > 0 || deltaTimeEnd > System.currentTimeMillis())){
+		if(spyglassItem != null && (isZoomActive() || deltaTimeEnd > System.currentTimeMillis())){
 			event.setFOV(getNewFOV());
 		}else if(zoom > 0){
 			resetZoom();
@@ -62,14 +59,14 @@ public class SpyglassListeners {
 	@SubscribeEvent
 	public static void GameOverlay(RenderGameOverlayEvent.Pre event){
 		if(event.getType() != RenderGameOverlayEvent.ElementType.ALL) return;
-		if(zoom > 0){
+		if(isZoomActive() || deltaTimeEnd > System.currentTimeMillis()){
 			SpyglassOverlay.INSTANCE.render(event.getMatrixStack(), 0, 0, 0);
 		}
 	}
 
 	@SubscribeEvent
 	public static void GameOverlay(RenderHandEvent event){
-		if(zoom > 0){
+		if(isZoomActive()){
 			event.setCanceled(true);
 		}
 	}
@@ -91,8 +88,24 @@ public class SpyglassListeners {
 		}
 	}
 
-	private static boolean activateZoom(){
-		return Minecraft.getInstance().player.isCrouching() || BrazierKeybinds.ACTIVATE_ZOOM_ALT.isKeyDown();
+	private static boolean isZoomActive(){
+		return isZoomActive = isZoomActive && getHeldZoomItem() != null;
+	}
+
+	public static void toogleZoom(){
+		SpyglassItem spyglass;
+		if((spyglass = getHeldZoomItem()) != null) {
+			if(isZoomActive){
+				isZoomActive = false;
+				prevZoom = zoom;
+				zoom = 0;
+				updateLerpHelpers(spyglass);
+				resetZoom();
+			}else{
+				isZoomActive = true;
+				increaseZoom(spyglass);
+			}
+		}
 	}
 
 	public static void increaseZoom(SpyglassItem spyglassItem){
@@ -144,6 +157,10 @@ public class SpyglassListeners {
 		ItemStack stack = Minecraft.getInstance().player.getHeldItemMainhand();
 		if(stack.getItem() instanceof SpyglassItem)
 			return (SpyglassItem) stack.getItem();
+		stack = Minecraft.getInstance().player.getHeldItemOffhand();
+		if(stack.getItem() instanceof SpyglassItem)
+			return (SpyglassItem) stack.getItem();
+
 		return null;
 	}
 
