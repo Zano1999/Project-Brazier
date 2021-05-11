@@ -1,9 +1,14 @@
 package net.dark_roleplay.projectbrazier.util.sitting;
 
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierEntities;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3i;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
@@ -11,61 +16,57 @@ import java.util.List;
 
 public class SittingUtil {
 
-	public static boolean sitOnBlock(ServerWorld world, double x, double y, double z, PlayerEntity player, double heightOffset){
-		return sitDownPlayer(world, x, y, z, player, null, null, heightOffset);
+	public static boolean sitOnBlock(World world, Vector3i pos, Entity entity, double heightOffset, BlockState state){
+		return sitDownEntity(world, new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5), entity, null, null, heightOffset, state);
 	}
 
-	public static boolean sitOnBlockWithRotation(ServerWorld world, double x, double y, double z, PlayerEntity player, Direction facing, double heightOffset){
-		return sitDownPlayer(world, x, y, z, player, facing, null, heightOffset);
+	public static boolean sitOnBlockWithRotation(World world, Vector3i pos, Entity entity, Direction facing, double heightOffset, BlockState state){
+		return sitDownEntity(world, new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5), entity, facing, null, heightOffset, state);
 	}
 
-	public static boolean sitOnBlock(ServerWorld world, double x, double y, double z, PlayerEntity player, Direction initFacing, double heightOffset){
-		return sitDownPlayer(world, x, y, z, player, null, initFacing, heightOffset);
+	public static boolean sitOnBlock(World world, Vector3i pos, Entity entity, Direction initFacing, double heightOffset, BlockState state){
+		return sitDownEntity(world, new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5), entity, null, initFacing, heightOffset, state);
 	}
 
-	public static boolean sitOnBlockWithRotation(ServerWorld world, double x, double y, double z, PlayerEntity player, Direction facing, Direction initFacing, double heightOffset){
-		return sitDownPlayer(world, x, y, z, player, facing, initFacing, heightOffset);
+	public static boolean sitOnBlockWithRotation(World world, Vector3i pos, Entity entity, Direction facing, Direction initFacing, double heightOffset, BlockState state){
+		return sitDownEntity(world, new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5), entity, facing, initFacing, heightOffset, state);
 	}
 
-	private static boolean sitDownPlayer(ServerWorld world, double x, double y, double z, PlayerEntity player, Direction facing, Direction initFacing, double heightOffset){
-		if (!checkForExistingEntity(world, x, y, z, player) && !world.isRemote){
-			SittableEntity chairEntity = new SittableEntity(BrazierEntities.SITTABLE.get(), world, x, y, z, heightOffset);
+	public static boolean sitDownEntity(World world, Vector3d pos, Entity entity, Direction facing, Direction initFacing, double heightOffset, BlockState state){
+		if(world.isRemote()) return false;
 
-			if(facing != null)
-				chairEntity.setRotation(facing);
-
-			if(initFacing != null){
-				player.prevRotationYaw = initFacing.getHorizontalAngle();
-				player.rotationYaw = initFacing.getHorizontalAngle();
+		if(state != null && entity instanceof PlayerEntity){
+			if(entity.getPositionVec().squareDistanceTo(new Vector3d(pos.getX(), pos.getY(), pos.getZ())) > 9){
+				((PlayerEntity)entity).sendStatusMessage(new TranslationTextComponent("interaction.projectbrazier.chair_to_far", state.getBlock().getTranslatedName()), true);
+				return false;
 			}
 
-			world.summonEntity(chairEntity);
-			player.startRiding(chairEntity);
-
-			return true;
-		}
-		return false;
-	}
-
-	public static boolean checkForExistingEntity(World world, double x, double y, double z, PlayerEntity player){
-		List<SittableEntity> listEMB = world.getEntitiesWithinAABB(SittableEntity.class, new AxisAlignedBB(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D).expand(1D, 1D, 1D));
-		for (SittableEntity mount : listEMB){
-			if (mount.blockPosX == x && mount.blockPosY == y && mount.blockPosZ == z){
-				if (!mount.isBeingRidden()){
-					player.startRiding(mount);
-				}
-				return true;
+			if(isSomeoneSitting(world, pos)){
+				((PlayerEntity)entity).sendStatusMessage(new TranslationTextComponent("interaction.projectbrazier.chair_occupied", state.getBlock().getTranslatedName()), true);
+				return false;
 			}
 		}
-		return false;
+
+		SittableEntity chairEntity = new SittableEntity(BrazierEntities.SITTABLE.get(), world, pos.getX(), pos.getY(), pos.getZ(), heightOffset, state != null);
+
+		if(facing != null)
+			chairEntity.setRotation(facing);
+
+		if(initFacing != null){
+			entity.prevRotationYaw = initFacing.getHorizontalAngle();
+			entity.rotationYaw = initFacing.getHorizontalAngle();
+		}
+
+		((ServerWorld) world).summonEntity(chairEntity);
+		entity.startRiding(chairEntity);
+
+		return true;
 	}
 	
-	public static boolean isSomeoneSitting(World world, double x, double y, double z){
-		List<SittableEntity> listEMB = world.getEntitiesWithinAABB(SittableEntity.class, new AxisAlignedBB(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D).expand(1D, 1D, 1D));
+	public static boolean isSomeoneSitting(World world, Vector3d pos){
+		List<SittableEntity> listEMB = world.getEntitiesWithinAABB(SittableEntity.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1.0D, pos.getY() + 1.0D, pos.getZ() + 1.0D));
 		for (SittableEntity mount : listEMB){
-			if (mount.blockPosX == x && mount.blockPosY == y && mount.blockPosZ == z){
-				return mount.isBeingRidden();
-			}
+			return mount.isBeingRidden();
 		}
 		return false;
 	}

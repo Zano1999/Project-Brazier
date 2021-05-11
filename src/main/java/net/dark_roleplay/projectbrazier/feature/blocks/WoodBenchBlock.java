@@ -37,24 +37,19 @@ public class WoodBenchBlock extends HAxisDecoBlock {
 	@Deprecated
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		if(player.getPositionVec().squareDistanceTo(new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5)) < 4) {
-			if(!world.isRemote()){
-				Direction.Axis axis = state.get(HORIZONTAL_AXIS);
+		Direction.Axis axis = state.get(HORIZONTAL_AXIS);
 
-				Direction facing = null;
+		Direction facing = null;
 
-				float yaw = player.getRotationYawHead();
+		float yaw = player.getRotationYawHead();
 
-				if(axis == Direction.Axis.Z && yaw > 0 && yaw< 180) facing = Direction.WEST;
-				else if(axis == Direction.Axis.Z) facing = Direction.EAST;
-				else if(axis == Direction.Axis.X && yaw > -90 && yaw < 90) facing = Direction.SOUTH;
-				else if(axis == Direction.Axis.X) facing = Direction.NORTH;
+		if(axis == Direction.Axis.Z && yaw > 0 && yaw< 180) facing = Direction.WEST;
+		else if(axis == Direction.Axis.Z) facing = Direction.EAST;
+		else if(axis == Direction.Axis.X && yaw > -90 && yaw < 90) facing = Direction.SOUTH;
+		else if(axis == Direction.Axis.X) facing = Direction.NORTH;
 
-				SittingUtil.sitOnBlock((ServerWorld) world, pos.getX(), pos.getY(), pos.getZ(), player, facing, 0.32F);
-			}
-		}else {
-			player.sendStatusMessage(new TranslationTextComponent("interaction.drpmedieval.chair.to_far", state.getBlock().getTranslatedName()), true);
-		}
+		SittingUtil.sitOnBlock(world, pos, player, facing, -0.18F, state);
+
 		return ActionResultType.SUCCESS;
 	}
 
