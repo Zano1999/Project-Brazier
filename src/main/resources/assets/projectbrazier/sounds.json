@@ -1,6 +1,6 @@
 {
 	"war_horn":{
-		"subtitle": "projectbrazier.sounds.war_horn",
+		"subtitle": "subtitles.projectbrazier.war_horn",
 		"sounds": [ "projectbrazier:item/war_horn_0" ]
 	}
 }

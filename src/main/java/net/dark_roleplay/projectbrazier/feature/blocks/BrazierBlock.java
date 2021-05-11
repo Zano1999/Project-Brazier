@@ -1,8 +1,11 @@
 package net.dark_roleplay.projectbrazier.feature.blocks;
 
+import net.dark_roleplay.projectbrazier.feature.blocks.templates.DecoBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -11,22 +14,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
-public class BrazierBlock extends Block {
+public class BrazierBlock extends DecoBlock {
 
 	public static final BooleanProperty BURNING = BooleanProperty.create("burning");
 
-	public BrazierBlock(Properties props) {
-		super(props);
+	private final int fireDamage;
+
+	public BrazierBlock(Properties props, int fireDamage, String shape) {
+		super(props, shape);
+		this.fireDamage = fireDamage;
 	}
 
 	@Override
@@ -42,6 +45,15 @@ public class BrazierBlock extends Block {
 	@Override
 	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
 		return state.get(BURNING) ? 15 : 0;
+	}
+
+	@Override
+	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+		if (!entityIn.isImmuneToFire() && state.get(BURNING) && entityIn instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entityIn)) {
+			entityIn.attackEntityFrom(DamageSource.IN_FIRE, (float)this.fireDamage);
+		}
+
+		super.onEntityCollision(state, worldIn, pos, entityIn);
 	}
 
 	@Override

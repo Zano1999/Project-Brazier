@@ -1,0 +1,11 @@
+{
+	"parent": "projectbrazier:block/log_bench/log_bench_single",
+	"textures": {
+		"0": "${texture%stripped_log_top}",
+		"1": "${texture%log}",
+		"3": "${texture%stripped_log}",
+		"4": "projectbrazier:block/small_${material}_cut_log",
+		"5": "projectbrazier:block/small_${material}_log_top",
+		"particle": "projectbrazier:block/small_${material}_cut_log"
+	}
+}

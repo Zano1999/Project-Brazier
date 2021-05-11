@@ -1,6 +1,8 @@
 package net.dark_roleplay.projectbrazier.experimental_features.roofs;
 
-public enum RoofType {
+import net.minecraft.util.IStringSerializable;
+
+public enum RoofType implements IStringSerializable {
 	FULL("full", true),
 	HALF_TOP("half_top", true),
 	HALF_BOTTOM("half_bottom", true),
@@ -23,5 +25,10 @@ public enum RoofType {
 
 	public boolean doesGenerateCorners() {
 		return generateCorners;
+	}
+
+	@Override
+	public String getString() {
+		return typeName;
 	}
 }

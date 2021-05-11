@@ -19,6 +19,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
@@ -30,7 +31,6 @@ import javax.annotation.Nullable;
 public class HangingItemBlock extends WallHFacedDecoBlock {
 
 	public static final BooleanProperty HIDDEN_LEVER = BrazierStateProperties.HIDDEN_LEVER;
-
 
 	private final int power;
 
@@ -53,6 +53,11 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 	@Override
 	public boolean hasTileEntity(BlockState state) {
 		return true;
+	}
+
+	@Override
+	public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player){
+		return this.getItemStack(world, pos, state);
 	}
 
 	@Override
@@ -132,7 +137,7 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 		return handler.insertItem(0, stack, false);
 	}
 
-	public ItemStack getItemStack(World world, BlockPos pos, BlockState state){
+	public ItemStack getItemStack(IBlockReader world, BlockPos pos, BlockState state){
 		TileEntity te = world.getTileEntity(pos);
 		if(!(te instanceof HangingItemBlockEntity)) return ItemStack.EMPTY;
 

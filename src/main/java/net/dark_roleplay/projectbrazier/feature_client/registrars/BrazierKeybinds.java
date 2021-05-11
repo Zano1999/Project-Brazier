@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.feature.registrars;
+package net.dark_roleplay.projectbrazier.feature_client.registrars;
 
 import net.dark_roleplay.projectbrazier.feature.items.SpyglassItem;
 import net.minecraft.client.Minecraft;
@@ -18,7 +18,6 @@ public class BrazierKeybinds {
 
 	public static KeyBinding EXP_PASSIVE_SCREEN = new KeyBinding("keybind.drpmedieval.experimental.activate", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_ALT, "drpmedieval.gameplay");
 
-
 	public enum KeyConflicts implements IKeyConflictContext {
 		ZOOM_ITEM{
 			@Override
@@ -35,6 +34,6 @@ public class BrazierKeybinds {
 		ClientRegistry.registerKeyBinding(ACTIVATE_ZOOM_ALT);
 
 		//TODO Experimental!
-		ClientRegistry.registerKeyBinding(EXP_PASSIVE_SCREEN);
+//		ClientRegistry.registerKeyBinding(EXP_PASSIVE_SCREEN);
 	}
 }
