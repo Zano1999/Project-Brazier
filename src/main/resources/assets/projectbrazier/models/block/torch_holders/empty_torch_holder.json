@@ -1,0 +1,45 @@
+{
+	"textures": {
+		"particle": "projectbrazier:block/torch_holder",
+		"metal": "projectbrazier:block/torch_holder"
+	},
+	"elements": [
+		{
+			"from": [6.5, 6, 15],
+			"to": [9.5, 8, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-0.5, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 3, 2], "texture": "#metal"},
+				"east": {"uv": [0, 0, 1, 2], "texture": "#metal"},
+				"south": {"uv": [0, 0, 3, 2], "texture": "#metal", "cullface": "south"},
+				"west": {"uv": [0, 0, 1, 2], "texture": "#metal"},
+				"up": {"uv": [0, 0, 3, 1], "texture": "#metal"},
+				"down": {"uv": [0, 0, 3, 1], "texture": "#metal"}
+			}
+		},
+		{
+			"from": [7, 6.5, 13.5],
+			"to": [9, 7.5, 15],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 7.33333, 12.83333]},
+			"faces": {
+				"east": {"uv": [0, 0, 1.5, 1], "texture": "#metal"},
+				"west": {"uv": [0, 0, 1.5, 1], "texture": "#metal"},
+				"up": {"uv": [0, 0, 2, 1.5], "texture": "#metal"},
+				"down": {"uv": [0, 0, 2, 1.5], "texture": "#metal"}
+			}
+		},
+		{
+			"from": [6, 5, 10],
+			"to": [10, 7, 14],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 6.5, 12]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 2], "texture": "#metal"},
+				"east": {"uv": [0, 0, 4, 2], "texture": "#metal"},
+				"south": {"uv": [0, 0, 4, 2], "texture": "#metal"},
+				"west": {"uv": [0, 0, 4, 2], "texture": "#metal"},
+				"up": {"uv": [12, 12, 16, 16], "texture": "#metal"},
+				"down": {"uv": [12, 12, 16, 16], "texture": "#metal"}
+			}
+		}
+	]
+}

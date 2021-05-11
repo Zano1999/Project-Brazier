@@ -2,7 +2,9 @@ package net.dark_roleplay.projectbrazier.feature.registrars;
 
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.marg.common.material.MaterialCondition;
+import net.dark_roleplay.projectbrazier.experimental_features.roofs.RoofCornerBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.*;
+import net.dark_roleplay.projectbrazier.feature.blocks.templates.DecoBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.HAxisDecoBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.HFacedDecoBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.WallHFacedDecoBlock;
@@ -16,6 +18,7 @@ import net.dark_roleplay.projectbrazier.util.marg.ConditionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.item.DyeColor;
+import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
@@ -38,12 +41,13 @@ public class BrazierBlocks extends Registrar {
 			PLANK_CHAIR = registerBlock("${material}_plank_chair", WOOD_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "simple_chair"), Registrar::MARG_WOOD, true),
 			CHAIR = registerBlock("${material}_solid_chair", WOOD_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "simple_chair"), Registrar::MARG_WOOD, true),
 			STOOL = registerBlock("${material}_stool", WOOD_CHAIR_CON, (mat, prop) -> new WoodStoolBlock(prop, "stool"), Registrar::MARG_WOOD, true),
-			ARMREST_CHAIR = registerBlock("${material}_armrest_chair", WOOD_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "simple_chair"), Registrar::MARG_WOOD, true),
+			ARMREST_CHAIR = registerBlock("${material}_armrest_chair", WOOD_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "armrest_chair"), Registrar::MARG_WOOD, true),
 			LOG_CHAIR = registerBlock("${material}_log_chair", WOOD_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "log_chair"), Registrar::MARG_WOOD, true),
 			FIREWOOD = registerBlock("${material}_firewood", FIREWOOD_CON, (mat, prop) -> new HAxisDecoBlock(prop, "full_block"), Registrar::MARG_WOOD, true),
 			WOOD_BENCH = registerBlock("${material}_bench", LOG_CHAIR_CON, (mat, prop) -> new WoodBenchBlock(prop, "default_wood_bench", "positive_wood_bench", "negative_wood_bench", "centered_wood_bench"), Registrar::MARG_WOOD, true),
+			LOG_BENCH = registerBlock("${material}_log_bench", LOG_CHAIR_CON, (mat, prop) -> new LogBenchBlock(prop, "log_bench_single", "log_bench_multi"), Registrar::MARG_WOOD, true),
 			BOTTOM_WOOD_PLATFORM = registerBlock("bottom_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new HAxisDecoBlock(prop, "bottom_wood_platform"), Registrar::MARG_WOOD, false),
-			TOP_WOOD_PLATFORM = registerBlock("top_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new PlatformBlock(prop, "bottom_wood_platform"), Registrar::MARG_WOOD, false);
+			TOP_WOOD_PLATFORM = registerBlock("top_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new PlatformBlock(prop, "top_wood_platform"), Registrar::MARG_WOOD, false);
 
 	public static final MaterialRegistryObject<FacedLatticeBlock>
 			WOOD_LATTICE_1 = registerBlock("${material}_cross_lattice", WOOD_LATTICE_CON, (mat, prop) -> new FacedLatticeBlock(prop, "lattice"), Registrar::MARG_WOOD, true),
@@ -86,12 +90,17 @@ public class BrazierBlocks extends Registrar {
 			HANGING_HORN = registerBlock("hanging_bone_horn", (prop) -> new HangingItemBlock(prop, "hanging_horn", 6), Registrar.METAL, false),
 			HANGING_SILVER_SPYGLASS = registerBlock("hanging_silver_spyglass", (prop) -> new HangingItemBlock(prop, "hanging_spyglass", 12), Registrar.METAL, false),
 			HANGING_GOLD_SPYGLASS = registerBlock("hanging_gold_spyglass", (prop) -> new HangingItemBlock(prop, "hanging_spyglass", 14), Registrar.METAL, false),
-			IRON_BRAZIER_COAL = registerBlock("iron_brazier_coal", BrazierBlock::new, Registrar.METAL, true),
-			IRON_FIRE_BOWL = registerBlock("iron_fire_bowl", BrazierBlock::new, Registrar.METAL, true),
-			SOUL_IRON_BRAZIER_COAL = registerBlock("soul_iron_brazier_coal", BrazierBlock::new, Registrar.METAL, true),
-			SOUL_IRON_FIRE_BOWL = registerBlock("soul_iron_fire_bowl", BrazierBlock::new, Registrar.METAL, true),
-			EMPTY_WALL_CANDLE_HOLDER = registerBlock("empty_wall_candle_holder", prop -> new WallHFacedDecoBlock(prop, "full_block"), Registrar.METAL, false),
-			WALL_CANDLE_HOLDER = registerBlock("wall_candle_holder", prop -> new WallHFacedDecoBlock(prop, "full_block"), Registrar.METAL, false),
+			IRON_BRAZIER_COAL = registerBlock("iron_brazier_coal", (prop) -> new BrazierBlock(prop, 1, "brazier"), Registrar.METAL, true),
+			IRON_FIRE_BOWL = registerBlock("iron_fire_bowl", (prop) -> new BrazierBlock(prop, 1, "fire_bowl"), Registrar.METAL, true),
+			SOUL_IRON_BRAZIER_COAL = registerBlock("soul_iron_brazier_coal", (prop) -> new BrazierBlock(prop, 2, "brazier"), Registrar.METAL, true),
+			SOUL_IRON_FIRE_BOWL = registerBlock("soul_iron_fire_bowl", (prop) -> new BrazierBlock(prop, 2, "fire_bowl"), Registrar.METAL, true),
+			EMPTY_CANDLE_HOLDER = registerBlock("empty_candle_holder", (prop) -> new DecoBlock(prop, "empty_candle_holder"), Registrar.METAL, true),
+			CANDLE_HOLDER = registerBlock("candle_holder", (prop) -> new DecoBlock(prop, "candle_holder"), Registrar.METAL, true),
+			EMPTY_WALL_CANDLE_HOLDER = registerBlock("empty_wall_candle_holder", prop -> new EmptyWallBurningBlock(prop, "empty_wall_candle_holder"), Registrar.METAL, true),
+			WALL_CANDLE_HOLDER = registerBlock("wall_candle_holder", prop -> new WallBurningBlock(prop, "wall_candle_holder", 15), Registrar.METAL, true),
+			EMPTY_WALL_TORCH_HOLDER = registerBlock("empty_wall_torch_holder", prop -> new EmptyWallBurningBlock(prop, "empty_torch_holder"), Registrar.METAL, true),
+			WALL_TORCH_HOLDER = registerBlock("wall_torch_holder", prop -> new WallBurningBlock(prop, "torch_holder", 15), Registrar.METAL, true),
+			WALL_SOUL_TORCH_HOLDER = registerBlock("wall_soul_torch_holder", prop -> new WallBurningBlock(prop, "torch_holder", 10), Registrar.METAL, true),
 			JAIL_LATTICE_CENTERED = registerBlock("jail_lattice_centered", prop -> new AxisLatticeBlock(prop, "lattice_centered"), Registrar.METAL, false),
 			JAIL_LATTICE = registerBlock("jail_lattice", prop -> new FacedLatticeBlock(prop, "lattice"), Registrar.METAL, true),
 			APPLE_PLANK = registerBlock("apple_planks", Block::new, Registrar.WOOD, true),
@@ -106,15 +115,24 @@ public class BrazierBlocks extends Registrar {
 			STRIPPED_ORANGE_WOOD = registerBlock("stripped_orange_wood", RotatedPillarBlock::new, Registrar.WOOD, true);
 
 	//Experimental
-	public static final RegistryObject<Block>
-			DRAWBRIDGE_ANCHOR = registerBlock("drawbridge_anchor", DrawbridgeAnchorBlock::new, Registrar.STONE_SOLID, false);
-
-	public static final EnumRegistryObject<RoofType, Block>
-			STRAIGHT_ROOFS	= registerBlock("%s_clay_shingle_roof", RoofType.class, prop -> new RoofBlock(prop, "placeholder"), Registrar.STONE, true);
+//	public static final RegistryObject<Block>
+//			DRAWBRIDGE_ANCHOR = registerBlock("drawbridge_anchor", DrawbridgeAnchorBlock::new, Registrar.STONE_SOLID, false);
+//
+//	public static final EnumRegistryObject<RoofType, Block>
+//			STRAIGHT_ROOFS	= registerBlock("%s_clay_shingle_roof", RoofType.class, prop -> new RoofBlock(prop, "placeholder"), Registrar.STONE, false),
+//			INNER_CORNER_ROOFS	= registerBlock("inner_corner_%s_clay_shingle_roof", RoofType.class, type -> type.doesGenerateCorners(), prop -> new RoofCornerBlock(prop, "placeholder"), Registrar.STONE, false),
+//			OUTER_CORNER_ROOFS	= registerBlock("outer_corner_%s_clay_shingle_roof", RoofType.class, type -> type.doesGenerateCorners(), prop -> new RoofCornerBlock(prop, "placeholder"), Registrar.STONE, false);
 
 	public static void preRegistry(){}
 
 	public static void postRegistry(FMLCommonSetupEvent event) {
+		EmptyWallBurningBlock emptyTorchHolder = (EmptyWallBurningBlock) EMPTY_WALL_TORCH_HOLDER.get();
+		emptyTorchHolder.addItem(Items.TORCH, WALL_TORCH_HOLDER.get());
+		emptyTorchHolder.addItem(Items.SOUL_TORCH, WALL_SOUL_TORCH_HOLDER.get());
+
+		EmptyWallBurningBlock candleHolder = (EmptyWallBurningBlock) EMPTY_WALL_CANDLE_HOLDER.get();
+		candleHolder.addItem(Items.TORCH, WALL_CANDLE_HOLDER.get());
+
 		((FacedLatticeBlock)JAIL_LATTICE.get()).initOtherBlock(JAIL_LATTICE_CENTERED.get());
 		((AxisLatticeBlock)JAIL_LATTICE_CENTERED.get()).initOtherBlock(JAIL_LATTICE.get());
 

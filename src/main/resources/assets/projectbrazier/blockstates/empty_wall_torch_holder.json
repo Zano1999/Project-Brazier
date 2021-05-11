@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model":  "projectbrazier:block/torch_holders/empty_torch_holder"},
+		"facing=east": {"model":  "projectbrazier:block/torch_holders/empty_torch_holder", "y": 90},
+		"facing=south": {"model":  "projectbrazier:block/torch_holders/empty_torch_holder", "y": 180},
+		"facing=west": {"model":  "projectbrazier:block/torch_holders/empty_torch_holder", "y": 270}
+	}
+}

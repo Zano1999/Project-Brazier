@@ -1,0 +1,6 @@
+{
+	"parent": "projectbrazier:block/torch_holders/torch_holder",
+	"textures": {
+		"torch": "minecraft:block/torch"
+	}
+}

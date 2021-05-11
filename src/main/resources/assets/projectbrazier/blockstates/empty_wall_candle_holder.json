@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"facing=north": {"model":  "projectbrazier:block/candle_holders/empty_candle_holder"},
-		"facing=east": {"model":  "projectbrazier:block/candle_holders/empty_candle_holder", "y": 90},
-		"facing=south": {"model":  "projectbrazier:block/candle_holders/empty_candle_holder", "y": 180},
-		"facing=west": {"model":  "projectbrazier:block/candle_holders/empty_candle_holder", "y": 270}
+		"facing=north": {"model":  "projectbrazier:block/candle_holders/empty_wall_candle_holder"},
+		"facing=east": {"model":  "projectbrazier:block/candle_holders/empty_wall_candle_holder", "y": 90},
+		"facing=south": {"model":  "projectbrazier:block/candle_holders/empty_wall_candle_holder", "y": 180},
+		"facing=west": {"model":  "projectbrazier:block/candle_holders/empty_wall_candle_holder", "y": 270}
 	}
 }

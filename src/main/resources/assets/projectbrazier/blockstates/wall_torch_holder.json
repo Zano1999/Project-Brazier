@@ -1,0 +1,12 @@
+{
+	"variants": {
+		"burning=false,facing=north": {"model":  "projectbrazier:block/torch_holders/torch_holder"},
+		"burning=false,facing=east": {"model":  "projectbrazier:block/torch_holders/torch_holder", "y": 90},
+		"burning=false,facing=south": {"model":  "projectbrazier:block/torch_holders/torch_holder", "y": 180},
+		"burning=false,facing=west": {"model":  "projectbrazier:block/torch_holders/torch_holder", "y": 270},
+		"burning=true,facing=north": {"model":  "projectbrazier:block/torch_holders/burning_torch_holder"},
+		"burning=true,facing=east": {"model":  "projectbrazier:block/torch_holders/burning_torch_holder", "y": 90},
+		"burning=true,facing=south": {"model":  "projectbrazier:block/torch_holders/burning_torch_holder", "y": 180},
+		"burning=true,facing=west": {"model":  "projectbrazier:block/torch_holders/burning_torch_holder", "y": 270}
+	}
+}

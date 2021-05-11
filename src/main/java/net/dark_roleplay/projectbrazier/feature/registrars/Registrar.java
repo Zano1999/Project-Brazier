@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -51,9 +52,14 @@ public class Registrar {
 	}
 
 	protected static <T extends Enum<T>, B extends Block> EnumRegistryObject<T, B> registerBlock(String name, Class<T> clazz, Function<AbstractBlock.Properties, B> supplier, AbstractBlock.Properties props, boolean registerItem) {
+		return registerBlock(name, clazz, type -> true, supplier, props, registerItem);
+	}
+
+	protected static <T extends Enum<T>, B extends Block> EnumRegistryObject<T, B> registerBlock(String name, Class<T> clazz, Predicate<T> filter, Function<AbstractBlock.Properties, B> supplier, AbstractBlock.Properties props, boolean registerItem) {
 		EnumRegistryObject<T, B> regObj = new EnumRegistryObject<>(clazz);
 		for (T type : clazz.getEnumConstants())
-			regObj.register(type, registerBlock(String.format(name, type.name().toLowerCase(Locale.ROOT)), supplier, props, registerItem));
+			if(filter.test(type))
+				regObj.register(type, registerBlock(String.format(name, type.name().toLowerCase(Locale.ROOT)), supplier, props, registerItem));
 		return regObj;
 	}
 
@@ -142,6 +148,13 @@ public class Registrar {
 			AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.IRON)
 					.hardnessAndResistance(5.0F, 1200.0F)
 					.sound(SoundType.ANVIL)
+					.notSolid();
+
+	protected static AbstractBlock.Properties METAL_GLOW =
+			AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.IRON)
+					.hardnessAndResistance(5.0F, 1200.0F)
+					.sound(SoundType.ANVIL)
+					.setLightLevel(state -> 15)
 					.notSolid();
 
 	protected static AbstractBlock.Properties METAL_SOLID =
