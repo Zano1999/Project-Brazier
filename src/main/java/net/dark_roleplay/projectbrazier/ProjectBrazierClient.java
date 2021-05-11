@@ -4,18 +4,20 @@ import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.BuiltinMixedModel;
 import net.dark_roleplay.projectbrazier.experimental_features.crafting.screens.CraftingScreen;
 import net.dark_roleplay.projectbrazier.experimental_features.walking_gui.PassiveScreenHelper;
+import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlocks;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierContainers;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierEntities;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorClientListener;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorListener;
+import net.dark_roleplay.projectbrazier.feature_client.blockentityrenderers.BarrelBlockEntityRenderer;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.axis_connected_models.AxisConnectedModel;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.emissive.EmissiveModel;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.quality_model.QualityModelLoader;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.roof_model_loader.RoofModelLoader;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.simple_pane_conneted_model.SimplePaneConnectedModel;
 import net.dark_roleplay.projectbrazier.feature_client.screens.GeneralContainerScreen;
-import net.dark_roleplay.projectbrazier.feature.registrars.BrazierKeybinds;
+import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybinds;
 import net.dark_roleplay.projectbrazier.util.sitting.SittableEntity;
 import net.dark_roleplay.projectbrazier.util.sitting.SittableEntityRenderer;
 import net.minecraft.block.Block;
@@ -27,6 +29,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -74,7 +77,7 @@ public class ProjectBrazierClient {
 			RenderTypeLookup.setRenderLayer(b.get(), RenderType.getCutout());
 
 //		ClientRegistry.bindTileEntityRenderer(BrazierBlockEntities.DRAWBRODGE_ANCHOR.get(), DrawbridgeAnchorTileEntityRenderer::new);
-//		ClientRegistry.bindTileEntityRenderer(BarrelRegistrar.BARREL_BLOCK_ENTITY.get(), BarrelBlockEntityRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(BrazierBlockEntities.BARREL_BLOCK_ENTITY.get(), BarrelBlockEntityRenderer::new);
 
 		RenderingRegistry.<SittableEntity>registerEntityRenderingHandler(BrazierEntities.SITTABLE.get(), SittableEntityRenderer::new);
 	}
