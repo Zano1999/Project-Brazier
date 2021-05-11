@@ -7,6 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -25,6 +26,8 @@ public class ProjectBrazier {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         BrazierPackets.registerPackets();
+
+        MinecraftForge.EVENT_BUS.addListener(BrazierCommands::registerCommands);
 
         BrazierRegistries.BLOCKS.register(modEventBus);
         BrazierRegistries.BLOCKS_NO_ITEMS.register(modEventBus);
