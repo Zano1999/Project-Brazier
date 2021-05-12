@@ -1,0 +1,9 @@
+{
+	"parent": "projectbrazier:block/log_chair",
+	"textures": {
+		"particle": "${texture%stripped_log}",
+		"log": "${texture%stripped_log}",
+		"inner_log": "${texture%stripped_log}",
+		"top_log": "${texture%stripped_log_top}"
+	}
+}

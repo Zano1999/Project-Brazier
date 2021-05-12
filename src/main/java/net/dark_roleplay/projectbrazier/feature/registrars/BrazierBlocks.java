@@ -28,7 +28,8 @@ public class BrazierBlocks extends Registrar {
 	public static final MaterialCondition BARREL_CON = ConditionHelper.createItemCondition("wood", "planks");
 	public static final MaterialCondition WOOD_BUCKET_CON = ConditionHelper.createItemCondition("wood", "planks");
 	public static final MaterialCondition WOOD_CHAIR_CON = ConditionHelper.createItemCondition("wood", "planks");
-	public static final MaterialCondition LOG_CHAIR_CON = ConditionHelper.createItemCondition("wood", "planks", "stripped_log");
+	public static final MaterialCondition LOG_CHAIR_CON = ConditionHelper.createItemCondition("wood", "stripped_log", "log");
+	public static final MaterialCondition STRIPPED_LOG_CHAIR_CON = ConditionHelper.createItemCondition("wood", "stripped_log");
 	public static final MaterialCondition FIREWOOD_CON = ConditionHelper.createItemCondition("wood", "planks", "stripped_log");
 	public static final MaterialCondition WOOD_PLATFORM_CON = ConditionHelper.createItemCondition("wood", "planks", "stripped_log");
 
@@ -42,10 +43,12 @@ public class BrazierBlocks extends Registrar {
 			CHAIR = registerBlock("${material}_solid_chair", WOOD_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "simple_chair"), Registrar::MARG_WOOD, true),
 			STOOL = registerBlock("${material}_stool", WOOD_CHAIR_CON, (mat, prop) -> new WoodStoolBlock(prop, "stool"), Registrar::MARG_WOOD, true),
 			ARMREST_CHAIR = registerBlock("${material}_armrest_chair", WOOD_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "armrest_chair"), Registrar::MARG_WOOD, true),
-			LOG_CHAIR = registerBlock("${material}_log_chair", WOOD_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "log_chair"), Registrar::MARG_WOOD, true),
 			FIREWOOD = registerBlock("${material}_firewood", FIREWOOD_CON, (mat, prop) -> new HAxisDecoBlock(prop, "full_block"), Registrar::MARG_WOOD, true),
-			WOOD_BENCH = registerBlock("${material}_bench", LOG_CHAIR_CON, (mat, prop) -> new WoodBenchBlock(prop, "default_wood_bench", "positive_wood_bench", "negative_wood_bench", "centered_wood_bench"), Registrar::MARG_WOOD, true),
+			WOOD_BENCH = registerBlock("${material}_bench", WOOD_CHAIR_CON, (mat, prop) -> new WoodBenchBlock(prop, "default_wood_bench", "positive_wood_bench", "negative_wood_bench", "centered_wood_bench"), Registrar::MARG_WOOD, true),
+			LOG_CHAIR = registerBlock("${material}_log_chair", LOG_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "log_chair"), Registrar::MARG_WOOD, true),
 			LOG_BENCH = registerBlock("${material}_log_bench", LOG_CHAIR_CON, (mat, prop) -> new LogBenchBlock(prop, "log_bench_single", "log_bench_multi"), Registrar::MARG_WOOD, true),
+			STRIPPED_LOG_CHAIR = registerBlock("stripped_${material}_log_chair", STRIPPED_LOG_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "log_chair"), Registrar::MARG_WOOD, true),
+			STRIPPED_LOG_BENCH = registerBlock("stripped_${material}_log_bench", STRIPPED_LOG_CHAIR_CON, (mat, prop) -> new LogBenchBlock(prop, "log_bench_single", "log_bench_multi"), Registrar::MARG_WOOD, true),
 			BOTTOM_WOOD_PLATFORM = registerBlock("bottom_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new HAxisDecoBlock(prop, "bottom_wood_platform"), Registrar::MARG_WOOD, false),
 			TOP_WOOD_PLATFORM = registerBlock("top_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new PlatformBlock(prop, "top_wood_platform"), Registrar::MARG_WOOD, false);
 

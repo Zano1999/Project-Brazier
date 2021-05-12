@@ -52,12 +52,42 @@ public enum AxisConnectionType {
 		if ((flag = state.hasProperty(BlockStateProperties.HORIZONTAL_AXIS)) || state.hasProperty(BlockStateProperties.AXIS)) {
 			Direction.Axis axis = flag ? state.get(BlockStateProperties.HORIZONTAL_AXIS) : state.get(BlockStateProperties.AXIS);
 			return getConnections(world, pos, state, axis);
+		}else if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+			return getConnections(world, pos, state, state.get(BlockStateProperties.HORIZONTAL_FACING));
 		}
 		return AxisConnectionType.DEFAULT;
 	}
 
 	public static AxisConnectionType getConnections(@Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, Direction.Axis axis){
 		AxisConnectionType type = AxisConnectionType.DEFAULT;
+
+		switch (axis) {
+			case X:
+				if(world.getBlockState(pos.east()) == state)
+					type = type.addPositive();
+				if(world.getBlockState(pos.west()) == state)
+					type = type.addNegative();
+				break;
+			case Y:
+				if(world.getBlockState(pos.up()) == state)
+					type = type.addPositive();
+				if(world.getBlockState(pos.down()) == state)
+					type = type.addNegative();
+				break;
+			case Z:
+				if(world.getBlockState(pos.south()) == state)
+					type = type.addPositive();
+				if(world.getBlockState(pos.north()) == state)
+					type = type.addNegative();
+				break;
+		}
+
+		return type;
+	}
+
+	public static AxisConnectionType getConnections(@Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, Direction facing){
+		AxisConnectionType type = AxisConnectionType.DEFAULT;
+		Direction.Axis axis = facing.rotateY().getAxis();
 
 		switch (axis) {
 			case X:

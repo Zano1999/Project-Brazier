@@ -1,7 +1,7 @@
 {
-	"parent": "projectbrazier:block/${custom}_chair",
+	"parent": "projectbrazier:block/log_chair",
 	"textures": {
-		"particle": "${texture%planks}",
+		"particle": "${texture%log}",
 		"log": "${texture%log}",
 		"inner_log": "projectbrazier:block/small_${material}_cut_log",
 		"top_log": "projectbrazier:block/small_${material}_log_top"

@@ -7,21 +7,18 @@
 			"log_top"
 		]
 	},
-	"customs": [
-		"log"
-	],
 	"tasks": [
 		{
-			"input": "projectbrazier:blockstates/generator/chair.json",
-			"output": "projectbrazier:blockstates/${material}_${custom}_chair.json"
+			"input": "projectbrazier:blockstates/generator/log_chair.json",
+			"output": "projectbrazier:blockstates/${material}_log_chair.json"
 		},
 		{
 			"input": "projectbrazier:models/generator/block/log_chair.json",
-			"output": "projectbrazier:models/block/${material}_${custom}_chair.json"
+			"output": "projectbrazier:models/block/${material}_log_chair.json"
 		},
 		{
 			"input": "projectbrazier:models/generator/block/log_chair.json",
-			"output": "projectbrazier:models/item/${material}_${custom}_chair.json"
+			"output": "projectbrazier:models/item/${material}_log_chair.json"
 		}
 	]
 }

@@ -1,5 +1,5 @@
 {
-	"parent": "minecraft:block/block",
+	"parent": "minecraft:blocks/block",
 	"elements": [
 		{
 			"from": [0, 1, 1],
@@ -25,20 +25,8 @@
 			}
 		},
 		{
-			"from": [1, 0, 0],
-			"to": [4, 3, 16],
-			"faces": {
-				"north": {"uv": [6.5, 6.5, 9.5, 9.5], "texture": "#log_top"},
-				"east": {"uv": [9.5, 0, 6.5, 16], "rotation": 90, "texture": "#stripped_log"},
-				"south": {"uv": [6.5, 6.5, 9.5, 9.5], "texture": "#log_top"},
-				"west": {"uv": [9.5, 0, 6.5, 16], "rotation": 270, "texture": "#stripped_log"},
-				"up": {"uv": [6.5, 0, 9.5, 16], "texture": "#stripped_log"},
-				"down": {"uv": [9.5, 0, 6.5, 16], "texture": "#stripped_log"}
-			}
-		},
-		{
-			"from": [12, 0, 0],
-			"to": [15, 3, 16],
+			"from": [6.5, 0, 0],
+			"to": [9.5, 3, 16],
 			"faces": {
 				"north": {"uv": [6.5, 6.5, 9.5, 9.5], "texture": "#log_top"},
 				"east": {"uv": [9.5, 0, 6.5, 16], "rotation": 90, "texture": "#stripped_log"},

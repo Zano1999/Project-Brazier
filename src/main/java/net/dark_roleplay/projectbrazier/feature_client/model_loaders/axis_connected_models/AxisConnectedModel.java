@@ -34,11 +34,12 @@ public class AxisConnectedModel implements IModelGeometry {
 
 	@Override
 	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
-		IBakedModel singleBaked = this.defaultModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation);
-		IBakedModel leftBaked = this.positiveModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation);
-		return new ConnectedBakedModel(singleBaked, leftBaked,
-				this.negativeModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
-				this.centeredModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation));
+		return new ConnectedBakedModel(
+				this.defaultModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
+				this.positiveModel == null ? null : this.positiveModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
+				this.negativeModel == null ? null : this.negativeModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
+				this.centeredModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation)
+		);
 	}
 
 	@Override
@@ -46,8 +47,8 @@ public class AxisConnectedModel implements IModelGeometry {
 		Set<RenderMaterial> textures = new HashSet<>();
 
 		textures.addAll(defaultModel.getTextures(modelGetter, missingTextureErrors));
-		textures.addAll(positiveModel.getTextures(modelGetter, missingTextureErrors));
-		textures.addAll(negativeModel.getTextures(modelGetter, missingTextureErrors));
+		if(positiveModel != null) textures.addAll(positiveModel.getTextures(modelGetter, missingTextureErrors));
+		if(negativeModel != null) textures.addAll(negativeModel.getTextures(modelGetter, missingTextureErrors));
 		textures.addAll(centeredModel.getTextures(modelGetter, missingTextureErrors));
 
 		return textures;
@@ -59,8 +60,8 @@ public class AxisConnectedModel implements IModelGeometry {
 
 		public ConnectedBakedModel(IBakedModel defaultModel, IBakedModel positiveModel, IBakedModel negativeModel, IBakedModel centeredModel) {
 			super(defaultModel);
-			this.positiveModel = positiveModel;
-			this.negativeModel = negativeModel;
+			this.positiveModel = positiveModel == null ? centeredModel : positiveModel;
+			this.negativeModel = negativeModel == null ? centeredModel : positiveModel;
 			this.centeredModel = centeredModel;
 		}
 
@@ -112,6 +113,14 @@ public class AxisConnectedModel implements IModelGeometry {
 			if(modelContents.has("centered")){
 				centeredModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"centered"), BlockModel.class);
 			}
+
+			if(modelContents.has("single")){
+				defaultModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"single"), BlockModel.class);
+			}
+			if(modelContents.has("multi")){
+				centeredModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"multi"), BlockModel.class);
+			}
+
 			return new AxisConnectedModel(defaultModel, positiveModel, negativeModel, centeredModel);
 		}
 	}

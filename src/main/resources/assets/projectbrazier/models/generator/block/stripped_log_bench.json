@@ -1,0 +1,23 @@
+{
+	"loader": "projectbrazier:axis_connected_model",
+	"single": {
+		"parent": "projectbrazier:block/log_bench/log_bench_single",
+		"textures": {
+			"log_top": "${texture%stripped_log_top}",
+			"bark": "${texture%stripped_log}",
+			"stripped_log": "${texture%stripped_log}",
+			"cut_log": "${texture%stripped_log}",
+			"particle": "${texture%stripped_log}"
+		}
+	},
+	"multi": {
+		"parent": "projectbrazier:block/log_bench/log_bench_multi",
+		"textures": {
+			"log_top": "${texture%stripped_log_top}",
+			"bark": "${texture%stripped_log}",
+			"stripped_log": "${texture%stripped_log}",
+			"cut_log": "${texture%stripped_log}",
+			"particle": "${texture%stripped_log}"
+		}
+	}
+}

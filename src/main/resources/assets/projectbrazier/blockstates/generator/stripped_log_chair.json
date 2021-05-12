@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model":  "projectbrazier:block/stripped_${material}_log_chair"},
+		"facing=east": {"model":  "projectbrazier:block/stripped_${material}_log_chair", "y":90},
+		"facing=south": {"model":  "projectbrazier:block/stripped_${material}_log_chair", "y":180},
+		"facing=west": {"model":  "projectbrazier:block/stripped_${material}_log_chair", "y":270}
+	}
+}

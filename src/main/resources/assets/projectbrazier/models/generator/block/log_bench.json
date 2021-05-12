@@ -1,11 +1,23 @@
 {
-	"parent": "projectbrazier:block/log_bench/log_bench_single",
-	"textures": {
-		"0": "${texture%stripped_log_top}",
-		"1": "${texture%log}",
-		"3": "${texture%stripped_log}",
-		"4": "projectbrazier:block/small_${material}_cut_log",
-		"5": "projectbrazier:block/small_${material}_log_top",
-		"particle": "projectbrazier:block/small_${material}_cut_log"
+	"loader": "projectbrazier:axis_connected_model",
+	"single": {
+		"parent": "projectbrazier:block/log_bench/log_bench_single",
+		"textures": {
+			"log_top": "projectbrazier:block/small_${material}_log_top",
+			"bark": "${texture%log}",
+			"stripped_log": "${texture%stripped_log}",
+			"cut_log": "projectbrazier:block/small_${material}_cut_log",
+			"particle": "projectbrazier:block/small_${material}_cut_log"
+		}
+	},
+	"multi": {
+		"parent": "projectbrazier:block/log_bench/log_bench_multi",
+		"textures": {
+			"log_top": "projectbrazier:block/small_${material}_log_top",
+			"bark": "${texture%log}",
+			"stripped_log": "${texture%stripped_log}",
+			"cut_log": "projectbrazier:block/small_${material}_cut_log",
+			"particle": "projectbrazier:block/small_${material}_cut_log"
+		}
 	}
 }
