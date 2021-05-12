@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
+import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -30,7 +31,7 @@ public class AxisLatticeBlock extends Block {
 		this.shapes = new AxisVoxelShape(VoxelShapeLoader.getVoxelShape(shapeName), true);
 	}
 
-	public void initOtherBlock(Block otherBlock){
+	public void initOtherBlock(Block otherBlock) {
 		this.otherBlock = otherBlock;
 	}
 
@@ -47,7 +48,7 @@ public class AxisLatticeBlock extends Block {
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
 		Direction.Axis currentAxis = state.get(AXIS);
-		if(currentAxis != Direction.Axis.Y);
+		if (currentAxis != Direction.Axis.Y) ;
 		Direction newDir = rot.rotate(currentAxis == Direction.Axis.X ? Direction.EAST : Direction.NORTH);
 		return state.with(AXIS, newDir.getAxis());
 	}
@@ -63,5 +64,10 @@ public class AxisLatticeBlock extends Block {
 		}
 
 		return this.item.delegate.get(); //Forge: Vanilla caches the items, update with registry replacements.
+	}
+
+	@Override
+	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
+		return false;
 	}
 }

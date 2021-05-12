@@ -67,7 +67,8 @@ public class WallBurningBlock extends WallHFacedDecoBlock {
 		}else{
 			if(heldItem.getItem() == Items.FLINT_AND_STEEL){
 				if(world.isRemote()) return ActionResultType.SUCCESS;
-				heldItem.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) (player));
+				if(!player.isCreative())
+					heldItem.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) (player));
 				world.setBlockState(pos, state.with(BURNING, true));
 				world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.PLAYERS, 1f, 1f);
 				return ActionResultType.SUCCESS;

@@ -3,6 +3,7 @@ package net.dark_roleplay.projectbrazier.feature.blocks.templates;
 import net.dark_roleplay.projectbrazier.util.json.VoxelShapeLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.pathfinding.PathType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -20,5 +21,10 @@ public class DecoBlock extends Block {
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return shape;
+	}
+
+	@Override
+	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
+		return false;
 	}
 }

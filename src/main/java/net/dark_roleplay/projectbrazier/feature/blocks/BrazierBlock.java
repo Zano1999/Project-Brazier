@@ -74,7 +74,8 @@ public class BrazierBlock extends DecoBlock {
 		if(state.get(BURNING)){
 			if(heldItem.getToolTypes().contains(ToolType.SHOVEL)){
 				if(world.isRemote()) return ActionResultType.SUCCESS;
-				heldItem.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) (player));
+				if(!player.isCreative())
+					heldItem.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) (player));
 				world.setBlockState(pos, state.with(BURNING, false));
 				world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.8f, 2f);
 				return ActionResultType.SUCCESS;
@@ -82,7 +83,8 @@ public class BrazierBlock extends DecoBlock {
 		}else{
 			if(heldItem.getItem() == Items.FLINT_AND_STEEL){
 				if(world.isRemote()) return ActionResultType.SUCCESS;
-				heldItem.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) (player));
+				if(!player.isCreative())
+					heldItem.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) (player));
 				world.setBlockState(pos, state.with(BURNING, true));
 				world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.PLAYERS, 1f, 1f);
 				return ActionResultType.SUCCESS;

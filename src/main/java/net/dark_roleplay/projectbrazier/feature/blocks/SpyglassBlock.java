@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Mirror;
@@ -55,5 +56,10 @@ public class SpyglassBlock extends Block {
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
+	}
+
+	@Override
+	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
+		return false;
 	}
 }

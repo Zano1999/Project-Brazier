@@ -5,6 +5,7 @@ import net.dark_roleplay.projectbrazier.util.json.VoxelShapeLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -49,5 +50,10 @@ public class HFacedDecoBlock extends Block {
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HORIZONTAL_FACING);
+	}
+
+	@Override
+	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
+		return false;
 	}
 }
