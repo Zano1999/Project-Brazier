@@ -64,7 +64,7 @@ public class SittingUtil {
 	}
 	
 	public static boolean isSomeoneSitting(World world, Vector3d pos){
-		List<SittableEntity> listEMB = world.getEntitiesWithinAABB(SittableEntity.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1.0D, pos.getY() + 1.0D, pos.getZ() + 1.0D));
+		List<SittableEntity> listEMB = world.getEntitiesWithinAABB(SittableEntity.class, new AxisAlignedBB((int)pos.getX(), (int)pos.getY(), (int)pos.getZ(), (int)pos.getX() + 1.0D, (int)pos.getY() + 1.0D, (int)pos.getZ() + 1.0D));
 		for (SittableEntity mount : listEMB){
 			return mount.isBeingRidden();
 		}

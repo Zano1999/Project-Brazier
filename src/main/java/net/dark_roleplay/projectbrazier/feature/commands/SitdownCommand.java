@@ -31,11 +31,13 @@ public class SitdownCommand {
 
 		if (targets != null)
 			for (Entity entity : targets)
-				SittingUtil.sitDownEntity(entity.getEntityWorld(), targetPos == null ? entity.getPositionVec() : targetPos, entity, null, null, 0, null);
+				if(!entity.isPassenger())
+					SittingUtil.sitDownEntity(entity.getEntityWorld(), targetPos == null ? entity.getPositionVec() : targetPos, entity, null, null, 0, null);
 
 		if(!hasEntity){
 			PlayerEntity player = context.getSource().asPlayer();
-			SittingUtil.sitDownEntity(player.getEntityWorld(), targetPos == null ? player.getPositionVec() : targetPos, player, null, null, 0, null);
+			if(!player.isPassenger())
+				SittingUtil.sitDownEntity(player.getEntityWorld(), targetPos == null ? player.getPositionVec() : targetPos, player, null, null, 0, null);
 		}
 
 		return 1;

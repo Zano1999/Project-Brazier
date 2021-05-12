@@ -16,8 +16,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-import java.util.Arrays;
-
 public class SittableEntity extends Entity {
 
 	private BlockState requiredBlock;
