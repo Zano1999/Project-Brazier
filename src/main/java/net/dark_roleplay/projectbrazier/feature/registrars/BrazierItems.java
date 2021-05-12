@@ -57,8 +57,8 @@ public class BrazierItems extends Registrar {
 			SILVER_SPYGLASS = registerItem("silver_spyglass", SpyglassItem::new);
 
 	//Experimental Items
-	public static final RegistryObject<Item>
-			DECOR_TEST	= registerItem("decor_test", DecorItem::new);
+//	public static final RegistryObject<Item>
+//			DECOR_TEST	= registerItem("decor_test", DecorItem::new);
 
 	public static void registerItemBlocks(RegistryEvent.Register<Item> event){
 		IForgeRegistry<Item> reg = event.getRegistry();
@@ -80,6 +80,6 @@ public class BrazierItems extends Registrar {
 		NailBlock.HANGABLE_ITEMS.put(SILVER_SPYGLASS.get(), (HangingItemBlock) BrazierBlocks.HANGING_SILVER_SPYGLASS.get());
 		NailBlock.HANGABLE_ITEMS.put(GOLD_SPYGLASS.get(), (HangingItemBlock) BrazierBlocks.HANGING_GOLD_SPYGLASS.get());
 
-		((DecorItem)DECOR_TEST.get()).setDecor(DecorRegistrar.TEST);
+//		((DecorItem)DECOR_TEST.get()).setDecor(DecorRegistrar.TEST);
 	}
 }
