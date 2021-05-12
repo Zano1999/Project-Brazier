@@ -55,8 +55,8 @@ license="ARR"
 	hasMargAssets=true
 
 dependencies.projectbrazier = [
-    {modid="forge", mandatory=true, versionRange="[28.1,)", ordering="NONE",side="BOTH"},
-    {modid="marg", mandatory=true, versionRange="[1.14.4-0.3,)", ordering="BEFORE",side="BOTH"}
+	{modid="forge", mandatory=true, versionRange="[36,)", ordering="NONE",side="BOTH"},
+	{modid="marg", mandatory=true, versionRange="[1.16.5-0.6,)", ordering="AFTER",side="BOTH"}
 ]
 
 
