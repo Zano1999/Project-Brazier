@@ -6,8 +6,10 @@ import net.dark_roleplay.projectbrazier.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
+import net.minecraft.util.math.vector.Vector2f;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
 
@@ -32,6 +34,21 @@ public class RayTraceTestScreen extends Screen {
 	}
 
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+//		Vector2f testPos = RenderUtils.worldToScreenSpace(new Vector3d(1, 5, 1), partialTicks);
+		Vector2f testPos = RayTraceWorldRender.screenPoint;
+
+		float revertGuiScale = (float) (1/Minecraft.getInstance().getMainWindow().getGuiScaleFactor());
+
+		matrixStack.scale(revertGuiScale, revertGuiScale, revertGuiScale);
+
+		int screenWidth = Minecraft.getInstance().getMainWindow().getWidth() / 2;
+		int screenHeight = Minecraft.getInstance().getMainWindow().getHeight() / 2;
+
+		int posX = (int) testPos.x + screenWidth;
+		int posY = (int) -testPos.y + screenHeight;
+		fill(matrixStack, posX, posY, posX + 10, posY + 10, 0xFFFFFFFF);
+		fill(matrixStack, 0, 0, 1, 1, 0xFFFFFFFF);
+
 		Vector3d cameraCenter = RenderUtils.getCameraPos();
 
 		Pair<Vector3d, Vector3d> ray = RenderUtils.screenToWorldSpaceRay(partialTicks);

@@ -23,8 +23,8 @@ public class PassiveScreen  extends RayTraceTestScreen {
 
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
-		if(!BrazierKeybinds.EXP_PASSIVE_SCREEN.isKeyDown())
-			PassiveScreen.this.closeScreen();
+//		if(!BrazierKeybinds.EXP_PASSIVE_SCREEN.isKeyDown())
+//			PassiveScreen.this.closeScreen();
 	}
 
 
