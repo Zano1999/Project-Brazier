@@ -1,0 +1,9 @@
+{
+	"parent": "projectbrazier:block/hollow_log",
+	"textures": {
+		"particle": "${texture%stripped_log}",
+		"inside": "${texture%stripped_log}",
+		"bark": "${texture%stripped_log}",
+		"top": "projectbrazier:block/stripped_hollow_${material}_log"
+	}
+}

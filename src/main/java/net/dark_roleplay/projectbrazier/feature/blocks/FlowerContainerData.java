@@ -26,6 +26,10 @@ public class FlowerContainerData {
 		this.flower = flower;
 	}
 
+	public void setPlacement(Vector3i placement){
+		this.placement = placement;
+	}
+
 	public Vector3i getPlacement() {
 		return placement;
 	}
@@ -34,7 +38,7 @@ public class FlowerContainerData {
 		CompoundNBT nbt = new CompoundNBT();
 		if(!flower.isEmpty()){
 			nbt.put("stack", flower.write(new CompoundNBT()));
-			nbt.putInt("pos", (placement.getX() & 0xFF << 16) | (placement.getY() & 0xFF << 8) | (placement.getZ() & 0xFF));
+			nbt.putLong("pos", ((placement.getX() & 0xFFF) << 24) | ((placement.getY() & 0xFFF) << 12) | ((placement.getZ()) & 0xFFF));
 		}
 		return nbt;
 	}
@@ -42,7 +46,7 @@ public class FlowerContainerData {
 	public void deserialize(CompoundNBT nbt){
 		if(!nbt.contains("stack")) return;
 		this.flower = ItemStack.read(nbt.getCompound("stack"));
-		int pos = nbt.getInt("pos");
-		this.placement = new Vector3i(pos >> 16 & 0xFF, pos >> 8 & 0xFF, pos & 0xFF);
+		long pos = nbt.getLong("pos");
+		this.placement = new Vector3i(pos >> 24 & 0xFFF, pos >> 12 & 0xFFF, pos & 0xFFF);
 	}
 }

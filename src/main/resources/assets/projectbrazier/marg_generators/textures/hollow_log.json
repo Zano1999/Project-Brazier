@@ -1,0 +1,33 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"log_top",
+			"stripped_log_top"
+		]
+	},
+	"requiredTextures": {
+		"top_mask": "projectbrazier:generator/masks/hollow_log"
+	},
+	"tasks": [
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "log_top",
+			"outputName": "projectbrazier:block/hollow_${material}_log",
+			"manipulations": [
+				{"type": "mask", "texture": "top_mask"}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "stripped_log_top",
+			"outputName": "projectbrazier:block/stripped_hollow_${material}_log",
+			"manipulations": [
+				{"type": "mask", "texture": "top_mask"}
+			]
+		}
+	]
+}

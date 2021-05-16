@@ -205,6 +205,9 @@
 			"Saturation": 0.3
 		}
 	},
+	"cauliflower_seeds": {
+		"ItemGroup": "misc"
+	},
 	"decor_test": {
 		"ItemGroup": "misc"
 	}

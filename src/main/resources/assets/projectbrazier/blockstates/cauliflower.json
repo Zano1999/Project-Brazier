@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "age=0": {"model": "projectbrazier:block/cauliflower/cauliflower_0"},
+        "age=1": {"model": "projectbrazier:block/cauliflower/cauliflower_1"},
+        "age=2": {"model": "projectbrazier:block/cauliflower/cauliflower_2"},
+        "age=3": {"model": "projectbrazier:block/cauliflower/cauliflower_3"},
+        "age=4": {"model": "projectbrazier:block/cauliflower/cauliflower_4"},
+        "age=5": {"model": "projectbrazier:block/cauliflower/cauliflower_5"}
+    }
+}

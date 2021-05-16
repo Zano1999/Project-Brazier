@@ -28,7 +28,7 @@ public class FacedDecoBlock extends Block{
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return new FacedVoxelShape(VoxelShapeLoader.getVoxelShape("jail_lattice")).get(state.get(FACING));
+		return shapes.get(state.get(FACING));
 	}
 
 	@Override

@@ -1,0 +1,24 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"stripped_log",
+			"stripped_log_top"
+		]
+	},
+	"tasks": [
+		{
+			"input": "projectbrazier:blockstates/generator/stripped_hollow_log.json",
+			"output": "projectbrazier:blockstates/stripped_hollow_${material}_log.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/stripped_hollow_log.json",
+			"output": "projectbrazier:models/block/stripped_hollow_${material}_log.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/stripped_hollow_log.json",
+			"output": "projectbrazier:models/item/stripped_hollow_${material}_log.json"
+		}
+	]
+}

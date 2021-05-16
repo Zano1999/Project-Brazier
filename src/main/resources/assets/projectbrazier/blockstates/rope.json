@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "end=true,facing=north": {"model": "projectbrazier:block/rope/rope_end_sided"},
+        "end=true,facing=east": {"model": "projectbrazier:block/rope/rope_end_sided", "y":90},
+        "end=true,facing=south": {"model": "projectbrazier:block/rope/rope_end_sided", "y":180},
+        "end=true,facing=west": {"model": "projectbrazier:block/rope/rope_end_sided", "y":270},
+        "end=false,facing=north": {"model": "projectbrazier:block/rope/rope_sided"},
+        "end=false,facing=east": {"model": "projectbrazier:block/rope/rope_sided", "y":90},
+        "end=false,facing=south": {"model": "projectbrazier:block/rope/rope_sided", "y":180},
+        "end=false,facing=west": {"model": "projectbrazier:block/rope/rope_sided", "y":270}
+    }
+}

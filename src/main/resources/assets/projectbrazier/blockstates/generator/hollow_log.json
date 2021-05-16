@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"axis=y": {"model": "projectbrazier:block/hollow_${material}_log"},
+		"axis=z": {"model": "projectbrazier:block/hollow_${material}_log", "x":90},
+		"axis=x": {"model": "projectbrazier:block/hollow_${material}_log", "x":90, "y":90}
+	}
+}

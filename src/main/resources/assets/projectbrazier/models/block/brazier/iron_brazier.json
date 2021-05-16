@@ -1,8 +1,8 @@
 {
 	"textures": {
 		"0": "projectbrazier:block/iron_brazier",
-		"particle": "projectbrazier:block/iron_brazier",
-		"coal": "block/coal_block"
+		"coal": "block/coal_block",
+		"particle": "projectbrazier:block/iron_brazier"
 	},
 	"elements": [
 		{

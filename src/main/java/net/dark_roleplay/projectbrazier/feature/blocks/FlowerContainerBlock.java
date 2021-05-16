@@ -10,6 +10,8 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -33,7 +35,9 @@ public class FlowerContainerBlock extends DecoBlock {
 			if(!stack.isEmpty())
 				player.addItemStackToInventory(stack);
 		}else {
-			flowerTileEntity.addFlower(heldItem);
+			Vector3d hitPos = hit.getHitVec();
+			Vector3i offsetPos = new Vector3i((int)Math.round((hitPos.getX() - pos.getX()) * 16), (int)Math.round((hitPos.getY() - pos.getY()) * 16), (int)Math.round((hitPos.getZ() - pos.getZ()) * 16));
+			flowerTileEntity.addFlower(heldItem, offsetPos);
 		}
 
 		world.notifyBlockUpdate(pos, state, state, 3);

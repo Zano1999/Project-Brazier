@@ -2,6 +2,7 @@
 	"parent": "projectbrazier:block/brazier/iron_brazier_coal_fire",
 	"textures": {
 		"fire": "block/soul_campfire_fire",
-		"embers": "projectbrazier:block/soul_coal_embers"
+		"embers": "projectbrazier:block/soul_coal_embers",
+		"particle": "projectbrazier:block/iron_brazier"
 	}
 }

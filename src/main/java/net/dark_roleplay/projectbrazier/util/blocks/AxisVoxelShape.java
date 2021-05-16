@@ -20,8 +20,7 @@ public class AxisVoxelShape {
 		this.y = VoxelShapeHelper.rotateShape(VoxelShapeHelper.rotateShape(shape, Direction.EAST), Direction.UP);
 	}
 
-
-		public VoxelShape get(Direction.Axis axis){
+	public VoxelShape get(Direction.Axis axis){
 		switch(axis){
 			case X:
 				return this.x;

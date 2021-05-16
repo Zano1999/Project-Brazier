@@ -1,6 +1,6 @@
 {
 	"loader": "projectbrazier:quality_model",
-	"10": {
+	"2": {
 		"parent": "projectbrazier:block/firewood_${custom}",
 		"textures": {
 			"particle": "projectbrazier:block/${material}_log_inside",

@@ -1,7 +1,8 @@
 {
 	"textures": {
 		"rope": "projectbrazier:block/rope/rope",
-		"rope_knot": "projectbrazier:block/rope/rope_knot"
+		"rope_knot": "projectbrazier:block/rope/rope_knot",
+		"particle": "projectbrazier:block/rope/rope"
 	},
 	"elements": [
 		{

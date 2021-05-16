@@ -19,7 +19,7 @@
 		},
 		{
 			"input": "projectbrazier:models/generator/block/log_bench.json",
-			"output": "projectbrazier:models/block/log_benches/${material}_log_bench.json"
+			"output": "projectbrazier:models/block/${material}_log_bench.json"
 		}
 	]
 }

@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "dropped=true,facing=north": {"model": "projectbrazier:block/rope/rope_anchor_dropped"},
+        "dropped=true,facing=east": {"model": "projectbrazier:block/rope/rope_anchor_dropped", "y":90},
+        "dropped=true,facing=south": {"model": "projectbrazier:block/rope/rope_anchor_dropped", "y":180},
+        "dropped=true,facing=west": {"model": "projectbrazier:block/rope/rope_anchor_dropped", "y":270},
+        "dropped=false": {"model": "projectbrazier:block/rope/rope_anchor_piled"}
+    }
+}

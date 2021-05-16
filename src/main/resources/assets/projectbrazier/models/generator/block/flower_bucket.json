@@ -1,4 +1,5 @@
 {
+	"loader": "projectbrazier:builtin_mixed",
 	"parent": "projectbrazier:block/flower_bucket",
 	"textures": {
 		"particle": "projectbrazier:block/${material}_bucket_side",
