@@ -1,28 +1,52 @@
 {
 	"variants": {
-		"facing=north": [
+		"facing=north,hidden_lever=false": [
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass"},
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass_mirrored"},
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass2"},
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass2_mirrored"}
 		],
-		"facing=east": [
+		"facing=east,hidden_lever=false": [
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass", "y": 90},
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass_mirrored", "y": 90},
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass2", "y": 90},
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass2_mirrored", "y": 90}
 		],
-		"facing=south": [
+		"facing=south,hidden_lever=false": [
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass", "y": 180},
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass_mirrored", "y": 180},
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass2", "y": 180},
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass2_mirrored", "y": 180}
 		],
-		"facing=west": [
+		"facing=west,hidden_lever=false": [
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass", "y": 270},
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass_mirrored", "y": 270},
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass2", "y": 270},
 			{"model":  "projectbrazier:block/spyglass/hanging_silver_spyglass2_mirrored", "y": 270}
+		],
+		"facing=north,hidden_lever=true": [
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass"},
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass_mirrored"},
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass2"},
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass2_mirrored"}
+		],
+		"facing=east,hidden_lever=true": [
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass", "y": 90},
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass_mirrored", "y": 90},
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass2", "y": 90},
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass2_mirrored", "y": 90}
+		],
+		"facing=south,hidden_lever=true": [
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass", "y": 180},
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass_mirrored", "y": 180},
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass2", "y": 180},
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass2_mirrored", "y": 180}
+		],
+		"facing=west,hidden_lever=true": [
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass", "y": 270},
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass_mirrored", "y": 270},
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass2", "y": 270},
+			{"model":  "projectbrazier:block/spyglass/hidden_lever/hanging_silver_spyglass2_mirrored", "y": 270}
 		]
 	}
 }

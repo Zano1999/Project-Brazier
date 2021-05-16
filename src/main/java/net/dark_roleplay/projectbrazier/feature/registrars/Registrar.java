@@ -186,5 +186,19 @@ public class Registrar {
 					.hardnessAndResistance(1.5F, 6.0F)
 					.sound(SoundType.PLANT)
 					.notSolid();
+
+	public static AbstractBlock.Properties CROP =
+			AbstractBlock.Properties
+					.create(Material.PLANTS)
+					.doesNotBlockMovement()
+					.tickRandomly()
+					.zeroHardnessAndResistance()
+					.sound(SoundType.CROP);
+
+	public static AbstractBlock.Properties ROPE =
+			AbstractBlock.Properties
+					.create(Material.WOOL, MaterialColor.SNOW)
+					.hardnessAndResistance(0.8F)
+					.sound(SoundType.CLOTH);
 	//endregion
 }

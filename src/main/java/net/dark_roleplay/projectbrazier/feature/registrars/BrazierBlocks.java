@@ -2,17 +2,9 @@ package net.dark_roleplay.projectbrazier.feature.registrars;
 
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.marg.common.material.MaterialCondition;
-import net.dark_roleplay.projectbrazier.experimental_features.roofs.RoofCornerBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.*;
-import net.dark_roleplay.projectbrazier.feature.blocks.templates.DecoBlock;
-import net.dark_roleplay.projectbrazier.feature.blocks.templates.HAxisDecoBlock;
-import net.dark_roleplay.projectbrazier.feature.blocks.templates.HFacedDecoBlock;
-import net.dark_roleplay.projectbrazier.feature.blocks.templates.WallHFacedDecoBlock;
-import net.dark_roleplay.projectbrazier.experimental_features.drawbridges.DrawbridgeAnchorBlock;
-import net.dark_roleplay.projectbrazier.experimental_features.roofs.RoofBlock;
-import net.dark_roleplay.projectbrazier.experimental_features.roofs.RoofType;
+import net.dark_roleplay.projectbrazier.feature.blocks.templates.*;
 import net.dark_roleplay.projectbrazier.util.EnumMaterialRegistryObject;
-import net.dark_roleplay.projectbrazier.util.EnumRegistryObject;
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.marg.ConditionHelper;
 import net.minecraft.block.Block;
@@ -34,6 +26,10 @@ public class BrazierBlocks extends Registrar {
 	public static final MaterialCondition WOOD_PLATFORM_CON = ConditionHelper.createItemCondition("wood", "planks", "stripped_log");
 
 
+	public static final MaterialCondition LOG_CON = ConditionHelper.createItemCondition("wood", "log");
+	public static final MaterialCondition STRIPPED_LOG_CON = ConditionHelper.createItemCondition("wood", "stripped_log");
+
+
 	public static final MaterialRegistryObject<Block>
 			OPEN_BARRELS = registerBlock("${material}_open_barrel", BARREL_CON, (mat, prop) -> new BarrelBlock(mat, prop, "open_barrel", false), Registrar::MARG_WOOD, true),
 			CLOSED_BARRELS = registerBlock("${material}_closed_barrel", BARREL_CON, (mat, prop) -> new BarrelBlock(mat, prop, "closed_barrel", true), Registrar::MARG_WOOD, true),
@@ -50,7 +46,9 @@ public class BrazierBlocks extends Registrar {
 			STRIPPED_LOG_CHAIR = registerBlock("stripped_${material}_log_chair", STRIPPED_LOG_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "log_chair"), Registrar::MARG_WOOD, true),
 			STRIPPED_LOG_BENCH = registerBlock("stripped_${material}_log_bench", STRIPPED_LOG_CHAIR_CON, (mat, prop) -> new LogBenchBlock(prop, "log_bench_single", "log_bench_multi"), Registrar::MARG_WOOD, true),
 			BOTTOM_WOOD_PLATFORM = registerBlock("bottom_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new HAxisDecoBlock(prop, "bottom_wood_platform"), Registrar::MARG_WOOD, false),
-			TOP_WOOD_PLATFORM = registerBlock("top_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new PlatformBlock(prop, "top_wood_platform"), Registrar::MARG_WOOD, false);
+			TOP_WOOD_PLATFORM = registerBlock("top_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new PlatformBlock(prop, "top_wood_platform"), Registrar::MARG_WOOD, false),
+			HOLLOW_LOG = registerBlock("hollow_${material}_log", LOG_CON, (mat, prop) -> new AxisDecoBlock(prop, "hollow_log"), Registrar::MARG_WOOD, true),
+			STRIPPED_HOLLOW_LOG = registerBlock("stripped_hollow_${material}_log", STRIPPED_LOG_CON, (mat, prop) -> new AxisDecoBlock(prop, "hollow_log"), Registrar::MARG_WOOD, true);
 
 	public static final MaterialRegistryObject<FacedLatticeBlock>
 			WOOD_LATTICE_1 = registerBlock("${material}_cross_lattice", WOOD_LATTICE_CON, (mat, prop) -> new FacedLatticeBlock(prop, "lattice"), Registrar::MARG_WOOD, true),
@@ -72,20 +70,20 @@ public class BrazierBlocks extends Registrar {
 
 	public static final RegistryObject<Block>
 			HOOF_FUNGUS = registerBlock("hoof_fungus", WallFungiBlock::new, Registrar.PLANT_FUNGI, true),
-			ANDESITE_BRICKS = registerBlock("andesite_bricks", Block::new, Registrar.STONE, true),
-			DIORITE_BRICKS = registerBlock("diorite_bricks", Block::new, Registrar.STONE, true),
-			GRANITE_BRICKS = registerBlock("granite_bricks", Block::new, Registrar.STONE, true),
-			ANDESITE_PILLAR = registerBlock("andesite_pillar", RotatedPillarBlock::new, Registrar.STONE, true),
-			DIORITE_PILLAR = registerBlock("diorite_pillar", RotatedPillarBlock::new, Registrar.STONE, true),
-			GRANITE_PILLAR = registerBlock("granite_pillar", RotatedPillarBlock::new, Registrar.STONE, true),
+			ANDESITE_BRICKS = registerBlock("andesite_bricks", Block::new, Registrar.STONE_SOLID, true),
+			DIORITE_BRICKS = registerBlock("diorite_bricks", Block::new, Registrar.STONE_SOLID, true),
+			GRANITE_BRICKS = registerBlock("granite_bricks", Block::new, Registrar.STONE_SOLID, true),
+			ANDESITE_PILLAR = registerBlock("andesite_pillar", RotatedPillarBlock::new, Registrar.STONE_SOLID, true),
+			DIORITE_PILLAR = registerBlock("diorite_pillar", RotatedPillarBlock::new, Registrar.STONE_SOLID, true),
+			GRANITE_PILLAR = registerBlock("granite_pillar", RotatedPillarBlock::new, Registrar.STONE_SOLID, true),
 			SNOW_BRICKS = registerBlock("snow_bricks", Block::new, Registrar.SNOW_SOLID, true),
 			STONE_MACHICOLATIONS = registerBlock("stone_machicolations", prop -> new MachicolationBlock(prop, "machicolations"), Registrar.STONE, true),
 			STONE_CRENELLATIONS = registerBlock("stone_crenellations", prop -> new MachicolationBlock(prop, "crenellations"), Registrar.STONE, true),
-			RIVERSTONE = registerBlock("riverstone", Block::new, Registrar.STONE, true),
-			LARGE_RIVERSTONE = registerBlock("large_riverstone", Block::new, Registrar.STONE, true),
-			DARK_LARGE_RIVERSTONE = registerBlock("dark_large_riverstone", Block::new, Registrar.STONE, true),
-			COLORFUL_COBBLESTONE = registerBlock("colorful_cobblestone", Block::new, Registrar.STONE, true),
-			PALE_COLORFUL_COBBLESTONE = registerBlock("pale_colorful_cobblestone", Block::new, Registrar.STONE, true),
+			RIVERSTONE = registerBlock("riverstone", Block::new, Registrar.STONE_SOLID, true),
+			LARGE_RIVERSTONE = registerBlock("large_riverstone", Block::new, Registrar.STONE_SOLID, true),
+			DARK_LARGE_RIVERSTONE = registerBlock("dark_large_riverstone", Block::new, Registrar.STONE_SOLID, true),
+			COLORFUL_COBBLESTONE = registerBlock("colorful_cobblestone", Block::new, Registrar.STONE_SOLID, true),
+			PALE_COLORFUL_COBBLESTONE = registerBlock("pale_colorful_cobblestone", Block::new, Registrar.STONE_SOLID, true),
 			V_STONE_BRICK_ARROW_SLIT = registerBlock("horizontal_stone_brick_arrow_slit", prop -> new HFacedDecoBlock(prop, "arrow_slits/stone_bricks/horizontal_arrow_slit"), Registrar.STONE, true),
 			H_STONE_BRICK_ARROW_SLIT = registerBlock("vertical_stone_brick_arrow_slit", prop -> new HFacedDecoBlock(prop, "arrow_slits/stone_bricks/vertical_arrow_slit"), Registrar.STONE, true),
 			C_STONE_BRICK_ARROW_SLIT = registerBlock("cross_stone_brick_arrow_slit", prop -> new HFacedDecoBlock(prop, "arrow_slits/stone_bricks/cross_arrow_slit"), Registrar.STONE, true),
@@ -106,16 +104,19 @@ public class BrazierBlocks extends Registrar {
 			WALL_SOUL_TORCH_HOLDER = registerBlock("wall_soul_torch_holder", prop -> new WallBurningBlock(prop, "torch_holder", 10), Registrar.METAL, true),
 			JAIL_LATTICE_CENTERED = registerBlock("jail_lattice_centered", prop -> new AxisLatticeBlock(prop, "lattice_centered"), Registrar.METAL, false),
 			JAIL_LATTICE = registerBlock("jail_lattice", prop -> new FacedLatticeBlock(prop, "lattice"), Registrar.METAL, true),
-			APPLE_PLANK = registerBlock("apple_planks", Block::new, Registrar.WOOD, true),
-			APPLE_LOG = registerBlock("apple_log", RotatedPillarBlock::new, Registrar.WOOD, true),
-			STRIPPED_APPLE_LOG = registerBlock("stripped_apple_log", RotatedPillarBlock::new, Registrar.WOOD, true),
-			APPLE_WOOD = registerBlock("apple_wood", RotatedPillarBlock::new, Registrar.WOOD, true),
-			STRIPPED_APPLE_WOOD = registerBlock("stripped_apple_wood", RotatedPillarBlock::new, Registrar.WOOD, true),
-			ORANGE_PLANK = registerBlock("orange_planks", Block::new, Registrar.WOOD, true),
-			ORANGE_LOG = registerBlock("orange_log", RotatedPillarBlock::new, Registrar.WOOD, true),
-			STRIPPED_ORANGE_LOG = registerBlock("stripped_orange_log", RotatedPillarBlock::new, Registrar.WOOD, true),
-			ORANGE_WOOD = registerBlock("orange_wood", RotatedPillarBlock::new, Registrar.WOOD, true),
-			STRIPPED_ORANGE_WOOD = registerBlock("stripped_orange_wood", RotatedPillarBlock::new, Registrar.WOOD, true);
+			APPLE_PLANK = registerBlock("apple_planks", Block::new, Registrar.WOOD_SOLID, true),
+			APPLE_LOG = registerBlock("apple_log", RotatedPillarBlock::new, Registrar.WOOD_SOLID, true),
+			STRIPPED_APPLE_LOG = registerBlock("stripped_apple_log", RotatedPillarBlock::new, Registrar.WOOD_SOLID, true),
+			APPLE_WOOD = registerBlock("apple_wood", RotatedPillarBlock::new, Registrar.WOOD_SOLID, true),
+			STRIPPED_APPLE_WOOD = registerBlock("stripped_apple_wood", RotatedPillarBlock::new, Registrar.WOOD_SOLID, true),
+			ORANGE_PLANK = registerBlock("orange_planks", Block::new, Registrar.WOOD_SOLID, true),
+			ORANGE_LOG = registerBlock("orange_log", RotatedPillarBlock::new, Registrar.WOOD_SOLID, true),
+			STRIPPED_ORANGE_LOG = registerBlock("stripped_orange_log", RotatedPillarBlock::new, Registrar.WOOD_SOLID, true),
+			ORANGE_WOOD = registerBlock("orange_wood", RotatedPillarBlock::new, Registrar.WOOD_SOLID, true),
+			STRIPPED_ORANGE_WOOD = registerBlock("stripped_orange_wood", RotatedPillarBlock::new, Registrar.WOOD_SOLID, true),
+			CAULIFLOWER = registerBlock("cauliflower", CauliflowerBlock::new, Registrar.CROP, false),
+			ROPE_ANCHOR = registerBlock("rope_anchor", prop -> new RopeAnchorBlock(prop, "rope_anchor", "dropped_rope_anchor"), Registrar.ROPE, true),
+			ROPE = registerBlock("rope", prop -> new RopeBlock(prop, "rope", "rope_end"), Registrar.ROPE, false);
 
 	//Experimental
 //	public static final RegistryObject<Block>

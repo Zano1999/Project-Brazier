@@ -16,6 +16,8 @@ public class BrazierKeybinds {
 	public static KeyBinding DEC_ZOOM_ALT = new KeyBinding("keybind.drpmedieval.zoom.decrease", KeyConflicts.ZOOM_ITEM, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_PAGE_DOWN, "drpmedieval.gameplay");
 	public static KeyBinding ACTIVATE_ZOOM_ALT = new KeyBinding("keybind.drpmedieval.zoom.activate", KeyConflicts.ZOOM_ITEM, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_ALT, "drpmedieval.gameplay");
 
+	public static KeyBinding TER_ACTION = new KeyBinding("keybind.drpmedieval.tertiary_action", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_C, "drpmedieval.gameplay");
+
 	public static KeyBinding EXP_PASSIVE_SCREEN = new KeyBinding("keybind.drpmedieval.experimental.activate", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_ALT, "drpmedieval.gameplay");
 
 	public enum KeyConflicts implements IKeyConflictContext {
@@ -32,6 +34,7 @@ public class BrazierKeybinds {
 		ClientRegistry.registerKeyBinding(INC_ZOOM_ALT);
 		ClientRegistry.registerKeyBinding(DEC_ZOOM_ALT);
 		ClientRegistry.registerKeyBinding(ACTIVATE_ZOOM_ALT);
+		ClientRegistry.registerKeyBinding(TER_ACTION);
 
 		//TODO Experimental!
 //		ClientRegistry.registerKeyBinding(EXP_PASSIVE_SCREEN);

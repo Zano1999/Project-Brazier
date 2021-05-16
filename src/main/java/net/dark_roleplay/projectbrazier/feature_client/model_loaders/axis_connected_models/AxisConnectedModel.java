@@ -25,10 +25,10 @@ public class AxisConnectedModel implements IModelGeometry {
 
 	IUnbakedModel defaultModel, positiveModel, negativeModel, centeredModel;
 
-	public AxisConnectedModel(IUnbakedModel defaultModel, IUnbakedModel positiveModel, IUnbakedModel right, IUnbakedModel centeredModel){
+	public AxisConnectedModel(IUnbakedModel defaultModel, IUnbakedModel positiveModel, IUnbakedModel negativeModel, IUnbakedModel centeredModel){
 		this.defaultModel = defaultModel;
 		this.positiveModel = positiveModel;
-		this.negativeModel = right;
+		this.negativeModel = negativeModel;
 		this.centeredModel = centeredModel;
 	}
 
@@ -61,7 +61,7 @@ public class AxisConnectedModel implements IModelGeometry {
 		public ConnectedBakedModel(IBakedModel defaultModel, IBakedModel positiveModel, IBakedModel negativeModel, IBakedModel centeredModel) {
 			super(defaultModel);
 			this.positiveModel = positiveModel == null ? centeredModel : positiveModel;
-			this.negativeModel = negativeModel == null ? centeredModel : positiveModel;
+			this.negativeModel = negativeModel == null ? centeredModel : negativeModel;
 			this.centeredModel = centeredModel;
 		}
 

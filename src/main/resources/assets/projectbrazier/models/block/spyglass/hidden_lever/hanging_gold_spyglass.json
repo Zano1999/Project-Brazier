@@ -1,0 +1,9 @@
+{
+	"parent": "projectbrazier:block/spyglass/templates/hanging_spyglass_hidden_lever",
+	"textures": {
+		"particle": "projectbrazier:item/spyglass/gold_spyglass_model",
+		"metal": "projectbrazier:block/nail",
+		"leather": "projectbrazier:block/leather",
+		"spyglass": "projectbrazier:item/spyglass/gold_spyglass_model"
+	}
+}

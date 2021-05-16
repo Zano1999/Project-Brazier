@@ -3,6 +3,7 @@ package net.dark_roleplay.projectbrazier;
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.BuiltinMixedModel;
 import net.dark_roleplay.projectbrazier.experimental_features.crafting.screens.CraftingScreen;
+import net.dark_roleplay.projectbrazier.feature.mechanics.tertiary_interactions.TertiaryInteractionListener;
 import net.dark_roleplay.projectbrazier.experimental_features.walking_gui.PassiveScreenHelper;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlocks;
@@ -18,6 +19,7 @@ import net.dark_roleplay.projectbrazier.feature_client.model_loaders.roof_model_
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.simple_pane_conneted_model.SimplePaneConnectedModel;
 import net.dark_roleplay.projectbrazier.feature_client.screens.GeneralContainerScreen;
 import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybinds;
+import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.sitting.SittableEntity;
 import net.dark_roleplay.projectbrazier.util.sitting.SittableEntityRenderer;
 import net.minecraft.block.Block;
@@ -34,6 +36,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class ProjectBrazierClient {
@@ -44,6 +47,9 @@ public class ProjectBrazierClient {
 		MinecraftForge.EVENT_BUS.addListener(DecorListener::bakeChunk);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(DecorClientListener::registerModels);
 
+		MinecraftForge.EVENT_BUS.addListener(TertiaryInteractionListener::renderBlockOverlay);
+		MinecraftForge.EVENT_BUS.addListener(TertiaryInteractionListener::renderGameOverlay);
+		MinecraftForge.EVENT_BUS.addListener(TertiaryInteractionListener::renderWorldLastEvent);
 	}
 
 	public static void setupClientStuff(FMLClientSetupEvent event) {
@@ -66,16 +72,37 @@ public class ProjectBrazierClient {
 	}
 
 	public static void registerRenderLayers(){
+		RenderTypeLookup.setRenderLayer(BrazierBlocks.CAULIFLOWER.get(), RenderType.getCutoutMipped());
 		RenderTypeLookup.setRenderLayer(BrazierBlocks.HANGING_HORN.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(BrazierBlocks.IRON_BRAZIER_COAL.get(), layer -> layer == RenderType.getCutout() || layer == RenderType.getSolid());
 		RenderTypeLookup.setRenderLayer(BrazierBlocks.IRON_FIRE_BOWL.get(), layer -> layer == RenderType.getCutout() || layer == RenderType.getSolid());
 		RenderTypeLookup.setRenderLayer(BrazierBlocks.SOUL_IRON_BRAZIER_COAL.get(), layer -> layer == RenderType.getCutout() || layer == RenderType.getSolid());
 		RenderTypeLookup.setRenderLayer(BrazierBlocks.SOUL_IRON_FIRE_BOWL.get(), layer -> layer == RenderType.getCutout() || layer == RenderType.getSolid());
 
-		//TODO Move to TER registration event?
-		for(RegistryObject<Block> b : BrazierBlocks.FLOWER_BUCKET.values())
-			RenderTypeLookup.setRenderLayer(b.get(), RenderType.getCutout());
+		MaterialRegistryObject[] cutouts = {
+				BrazierBlocks.FLOWER_BARRELS,
+				BrazierBlocks.FLOWER_BUCKET,
+				BrazierBlocks.HOLLOW_LOG,
+				BrazierBlocks.STRIPPED_HOLLOW_LOG,
+				BrazierBlocks.WOOD_LATTICE_1,
+				BrazierBlocks.WOOD_LATTICE_1_C,
+				BrazierBlocks.WOOD_LATTICE_2,
+				BrazierBlocks.WOOD_LATTICE_2_C,
+				BrazierBlocks.WOOD_LATTICE_3,
+				BrazierBlocks.WOOD_LATTICE_3_C,
+				BrazierBlocks.WOOD_LATTICE_4,
+				BrazierBlocks.WOOD_LATTICE_4_C,
+				BrazierBlocks.WOOD_LATTICE_5,
+				BrazierBlocks.WOOD_LATTICE_5_C
+		};
 
+		Arrays.stream(cutouts)
+				.flatMap(b -> b.values().stream())
+				.map(b -> ((RegistryObject<? extends Block>)b).get())
+				.forEach(b -> RenderTypeLookup.setRenderLayer((Block) b, RenderType.getCutoutMipped()));
+
+
+		//TODO Move to TER registration event?
 //		ClientRegistry.bindTileEntityRenderer(BrazierBlockEntities.DRAWBRODGE_ANCHOR.get(), DrawbridgeAnchorTileEntityRenderer::new);
 		ClientRegistry.bindTileEntityRenderer(BrazierBlockEntities.BARREL_BLOCK_ENTITY.get(), BarrelBlockEntityRenderer::new);
 

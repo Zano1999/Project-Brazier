@@ -9,8 +9,11 @@ import net.dark_roleplay.projectbrazier.feature.blocks.NailBlock;
 import net.dark_roleplay.projectbrazier.feature.items.SpyglassItem;
 import net.dark_roleplay.projectbrazier.feature.items.WarHornItem;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -34,7 +37,7 @@ public class BrazierItems extends Registrar {
 //			BELL_PEPPER = registerItem("bell_pepper"),
 //			BLUEBERRIES = registerItem("blueberries"),
 //			BUTTER = registerItem("butter"),
-//			CAULIFLOWER = registerItem("cauliflower"),
+			CAULIFLOWER = registerItem("cauliflower"),
 //			EGGPLANT = registerItem("eggplant"),
 //			GARLIC = registerItem("garlic"),
 //			GREEN_APPLE = registerItem("green_apple"),
@@ -54,7 +57,8 @@ public class BrazierItems extends Registrar {
 //			YELLOW_PEAR = registerItem("yellow_pear"),
 			BONE_WAR_HORN = registerItem("bone_war_horn", WarHornItem::new),
 			GOLD_SPYGLASS = registerItem("gold_spyglass", SpyglassItem::new),
-			SILVER_SPYGLASS = registerItem("silver_spyglass", SpyglassItem::new);
+			SILVER_SPYGLASS = registerItem("silver_spyglass", SpyglassItem::new),
+			CAULIFLOWER_SEEDS = registerItem("cauliflower_seeds", prop -> new BlockNamedItem(BrazierBlocks.CAULIFLOWER.get(), prop));
 
 	//Experimental Items
 //	public static final RegistryObject<Item>

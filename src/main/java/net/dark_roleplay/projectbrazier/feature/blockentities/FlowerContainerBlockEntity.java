@@ -6,13 +6,16 @@ import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.I
 import net.dark_roleplay.projectbrazier.feature.blocks.FlowerContainerData;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
 import net.dark_roleplay.projectbrazier.feature_client.blocks.CFlowerContainerHelper;
+import net.dark_roleplay.projectbrazier.util.blocks.ChunkRenderUtils;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.DistExecutor;
@@ -45,13 +48,14 @@ public class FlowerContainerBlockEntity extends TileEntity {
 		return ImmutableList.copyOf(flowers);
 	}
 
-	public ItemStack addFlower(ItemStack stack){
+	public ItemStack addFlower(ItemStack stack, Vector3i offset){
 		for(int i = 0; i < flowers.size(); i++){
 			FlowerContainerData flower = flowers.get(i);
 			if(flower.getFlower().isEmpty()){
 				ItemStack copy = stack.copy();
 				copy.setCount(1);
 				flower.setFlower(copy);
+				flower.setPlacement(offset);
 				stack.shrink(1);
 				this.markDirty();
 				break;
@@ -123,6 +127,9 @@ public class FlowerContainerBlockEntity extends TileEntity {
 	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt){
 		this.read(null, pkt.getNbtCompound());
+		requestModelDataUpdate();
+		if(this.getWorld().isRemote())
+			ChunkRenderUtils.rerenderChunk((ClientWorld) this.getWorld(), this.getPos());
 	}
 	//endregion
 

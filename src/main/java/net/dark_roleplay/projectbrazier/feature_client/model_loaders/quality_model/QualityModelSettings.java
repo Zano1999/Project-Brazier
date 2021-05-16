@@ -15,10 +15,10 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = ProjectBrazier.MODID)
 public class QualityModelSettings {
 
-	public static int MAX_MODEL_QUALITY = 14;
+	public static int MAX_MODEL_QUALITY = 4;
 
-	public static int MODEL_QUALITY = 10;
-	public static int TEMP_MODEL_QUALITY = 10;
+	public static int MODEL_QUALITY = 2;
+	public static int TEMP_MODEL_QUALITY = 2;
 
 	public static final SliderPercentageOption MODEL_QUALITY_SETTING = new SliderPercentageOption("options.modelQuality", 0, MAX_MODEL_QUALITY, 1.0F,
 			(settings) -> (double) MODEL_QUALITY,

@@ -1,11 +1,18 @@
 {
 	"loader": "projectbrazier:simple_pane_connected_model",
 	"textures": {
+		"lattice": "projectbrazier:block/lattices/${material}_lattice_${custom}",
 		"particle": "${texture%planks}",
 		"wood": "${texture%planks}"
 	},
 	"base": {
-		"parent": "projectbrazier:block/lattices/${custom}/centered"
+		"loader": "projectbrazier:quality_model",
+		"2": {
+			"parent": "projectbrazier:block/lattices/${custom}/centered"
+		},
+		"0": {
+			"parent": "projectbrazier:block/lattices/centered_lr"
+		}
 	},
 	"primary": {
 		"positive": {

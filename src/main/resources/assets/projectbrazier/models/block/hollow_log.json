@@ -1,0 +1,55 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"particle": "block/stripped_spruce_log",
+		"inside": "block/stripped_spruce_log",
+		"bark": "block/spruce_log",
+		"top": "block/spruce_log_top"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 2],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#bark", "cullface": "north"},
+				"east": {"uv": [14, 0, 16, 16], "texture": "#bark", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#inside"},
+				"west": {"uv": [0, 0, 2, 16], "texture": "#bark", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 2], "texture": "#top", "cullface": "up"},
+				"down": {"uv": [0, 14, 16, 16], "texture": "#top", "cullface": "down"}
+			}
+		},
+		{
+			"from": [0, 0, 14],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#inside"},
+				"east": {"uv": [0, 0, 2, 16], "texture": "#bark", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#bark", "cullface": "south"},
+				"west": {"uv": [14, 0, 16, 16], "texture": "#bark", "cullface": "west"},
+				"up": {"uv": [0, 14, 16, 16], "texture": "#top", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 2], "texture": "#top", "cullface": "down"}
+			}
+		},
+		{
+			"from": [0, 0, 2],
+			"to": [2, 16, 14],
+			"faces": {
+				"east": {"uv": [2, 0, 14, 16], "texture": "#inside"},
+				"west": {"uv": [2, 0, 14, 16], "texture": "#bark", "cullface": "west"},
+				"up": {"uv": [0, 2, 2, 14], "texture": "#top", "cullface": "up"},
+				"down": {"uv": [0, 2, 2, 14], "texture": "#top", "cullface": "down"}
+			}
+		},
+		{
+			"from": [14, 0, 2],
+			"to": [16, 16, 14],
+			"faces": {
+				"east": {"uv": [2, 0, 14, 16], "texture": "#bark", "cullface": "east"},
+				"west": {"uv": [2, 0, 14, 16], "texture": "#inside"},
+				"up": {"uv": [14, 2, 16, 14], "texture": "#top", "cullface": "up"},
+				"down": {"uv": [14, 2, 16, 14], "texture": "#top", "cullface": "down"}
+			}
+		}
+	]
+}

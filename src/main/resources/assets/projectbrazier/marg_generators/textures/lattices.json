@@ -1,0 +1,63 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"planks"
+		]
+	},
+	"requiredTextures": {
+		"cross": "projectbrazier:generator/masks/lattice_cross",
+		"diamond": "projectbrazier:generator/masks/lattice_diamond",
+		"dense_vertical": "projectbrazier:generator/masks/lattice_dense_vertical",
+		"grid": "projectbrazier:generator/masks/lattice_grid",
+		"vertical": "projectbrazier:generator/masks/lattice_vertical"
+	},
+	"tasks": [
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "planks",
+			"outputName": "projectbrazier:block/lattices/${material}_lattice_diamond",
+			"manipulations": [
+				{"type": "mask", "texture":  "diamond"}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "planks",
+			"outputName": "projectbrazier:block/lattices/${material}_lattice_dense_vertical",
+			"manipulations": [
+				{"type": "mask", "texture":  "dense_vertical"}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "planks",
+			"outputName": "projectbrazier:block/lattices/${material}_lattice_grid",
+			"manipulations": [
+				{"type": "mask", "texture":  "grid"}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "planks",
+			"outputName": "projectbrazier:block/lattices/${material}_lattice_vertical",
+			"manipulations": [
+				{"type": "mask", "texture":  "vertical"}
+			]
+		},
+		{
+			"inputType": "material",
+			"outputType": "FILE",
+			"inputName": "planks",
+			"outputName": "projectbrazier:block/lattices/${material}_lattice_cross",
+			"manipulations": [
+				{"type": "mask", "texture":  "cross"}
+			]
+		}
+	]
+}
