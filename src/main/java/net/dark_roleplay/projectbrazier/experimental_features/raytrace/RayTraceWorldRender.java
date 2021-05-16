@@ -21,7 +21,6 @@ import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = ProjectBrazier.MODID, value = Dist.CLIENT)
 public class RayTraceWorldRender {
-	public static Vector2f screenPoint = new Vector2f(0, 0);
 
 	public static final RenderTypeBuffers renderBuffers = new RenderTypeBuffers();
 	private static final IRenderTypeBuffer.Impl renderBuffer = renderBuffers.getBufferSource();
@@ -29,8 +28,6 @@ public class RayTraceWorldRender {
 
 	@SubscribeEvent
 	public static void debugRenderCollisions(RenderWorldLastEvent event){
-		screenPoint = RenderUtils.worldToScreenSpace(new Vector3d(1, 5, 1), event.getPartialTicks());
-
 		if(RayTraceTestScreen.hitPoint == null) return;
 
 		Vector3d vec = Minecraft.getInstance().getRenderManager().info.getProjectedView();

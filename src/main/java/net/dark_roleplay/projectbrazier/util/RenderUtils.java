@@ -2,6 +2,7 @@ package net.dark_roleplay.projectbrazier.util;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.GameRenderer;
@@ -72,34 +73,33 @@ public class RenderUtils {
 		return Pair.of(rayOrigin3, ray);
 	}
 
-	public static Vector2f worldToScreenSpace(Vector3d worldPos, float partialTicks){
-		Vector3f newWorldPos = new Vector3f(getCameraPos().subtract(worldPos));
+	public static Pair<Vector2f, Boolean> worldToScreenSpace(Vector3d worldPos, float partialTicks, boolean useScaledGuiSize){
+		Minecraft mc = Minecraft.getInstance();
+		Vector3d cameraPos = getCameraPos();
 
-		Quaternion rotation = RenderUtils.getRenderInfo().getRotation().copy();
+		Vector3f newWorldPos = new Vector3f((float) (worldPos.x - cameraPos.x), (float)(worldPos.y - cameraPos.y), (float)(worldPos.z - cameraPos.z));
+
+		Quaternion rotation = getRenderInfo().getRotation().copy();
 		rotation.conjugate();
 		newWorldPos.transform(rotation);
 
-		if (Minecraft.getInstance().gameSettings.viewBobbing && getRenderInfo().getRenderViewEntity() instanceof PlayerEntity) {
+		if (mc.gameSettings.viewBobbing && getRenderInfo().getRenderViewEntity() instanceof PlayerEntity) {
 			PlayerEntity playerentity = (PlayerEntity) getRenderInfo().getRenderViewEntity();
 			float f = playerentity.distanceWalkedModified - playerentity.prevDistanceWalkedModified;
 			float f1 = -(playerentity.distanceWalkedModified + f * partialTicks);
 			float f2 = MathHelper.lerp(partialTicks, playerentity.prevCameraYaw, playerentity.cameraYaw);
 
-			Quaternion rotA = Vector3f.ZP.rotationDegrees(MathHelper.sin(f1 * (float)Math.PI) * f2 * 3.0F);
-			Quaternion rotB = Vector3f.XP.rotationDegrees(Math.abs(MathHelper.cos(f1 * (float)Math.PI - 0.2F) * f2) * 5.0F);
-			rotB.conjugate();
-			rotA.conjugate();
-
-			newWorldPos.transform(rotB);
-			newWorldPos.transform(rotA);
-
-			newWorldPos.add(new Vector3f(MathHelper.sin(f1 * (float)Math.PI) * f2 * 0.5F, Math.abs(MathHelper.cos(f1 * (float)Math.PI) * f2), 0.0F));
-
+			newWorldPos.transform(Vector3f.XN.rotationDegrees(Math.abs(MathHelper.cos(f1 * (float)Math.PI - 0.2F) * f2) * 5.0F));
+			newWorldPos.transform(Vector3f.ZN.rotationDegrees(MathHelper.sin(f1 * (float)Math.PI) * f2 * 3.0F));
+			newWorldPos.add(new Vector3f(-MathHelper.sin(f1 * (float)Math.PI) * f2 * 0.5F, -Math.abs(MathHelper.cos(f1 * (float)Math.PI) * f2), 0.0F));
 		}
 
-		float half_height = (float) Minecraft.getInstance().getMainWindow().getHeight() / 2;
-		float scale_factor = half_height / (newWorldPos.getZ() * (float) Math.tan(Math.toRadians(Minecraft.getInstance().gameRenderer.getFOVModifier(getRenderInfo(),partialTicks, true)  / 2)));
+		float half_height = (float) (useScaledGuiSize ? mc.getMainWindow().getScaledHeight() : mc.getMainWindow().getHeight()) / 2;
+		float scale_factor = half_height / (newWorldPos.getZ() * (float) Math.tan(Math.toRadians(mc.gameRenderer.getFOVModifier(getRenderInfo(), partialTicks, true)  / 2)));
 
-		return new Vector2f(-newWorldPos.getX() * scale_factor, newWorldPos.getY() * scale_factor);
+		int screenWidth = useScaledGuiSize ? mc.getMainWindow().getScaledWidth() : mc.getMainWindow().getWidth();
+		int screenHeight = useScaledGuiSize ? mc.getMainWindow().getScaledHeight() : mc.getMainWindow().getHeight();
+
+		return Pair.of(new Vector2f((-newWorldPos.getX() * scale_factor) + screenWidth/2F, (-newWorldPos.getY() * scale_factor) + screenHeight/2F), newWorldPos.getZ() > 0);
 	}
 }

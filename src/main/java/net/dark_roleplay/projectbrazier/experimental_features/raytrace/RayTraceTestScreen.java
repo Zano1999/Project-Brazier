@@ -34,20 +34,20 @@ public class RayTraceTestScreen extends Screen {
 	}
 
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-//		Vector2f testPos = RenderUtils.worldToScreenSpace(new Vector3d(1, 5, 1), partialTicks);
-		Vector2f testPos = RayTraceWorldRender.screenPoint;
-
-		float revertGuiScale = (float) (1/Minecraft.getInstance().getMainWindow().getGuiScaleFactor());
-
-		matrixStack.scale(revertGuiScale, revertGuiScale, revertGuiScale);
-
-		int screenWidth = Minecraft.getInstance().getMainWindow().getWidth() / 2;
-		int screenHeight = Minecraft.getInstance().getMainWindow().getHeight() / 2;
-
-		int posX = (int) testPos.x + screenWidth;
-		int posY = (int) -testPos.y + screenHeight;
-		fill(matrixStack, posX, posY, posX + 10, posY + 10, 0xFFFFFFFF);
-		fill(matrixStack, 0, 0, 1, 1, 0xFFFFFFFF);
+//		Vector2f testPos = RenderUtils.worldToScreenSpace(new Vector3d(187, 6, -299), partialTicks);
+////		Vector2f testPos = RayTraceWorldRender.screenPoint;
+//
+//		float revertGuiScale = (float) (1/Minecraft.getInstance().getMainWindow().getGuiScaleFactor());
+//
+//		matrixStack.scale(revertGuiScale, revertGuiScale, revertGuiScale);
+//
+//		int screenWidth = Minecraft.getInstance().getMainWindow().getWidth() / 2;
+//		int screenHeight = Minecraft.getInstance().getMainWindow().getHeight() / 2;
+//
+//		int posX = (int) testPos.x + screenWidth;
+//		int posY = (int) -testPos.y + screenHeight;
+//		fill(matrixStack, posX, posY, posX + 10, posY + 10, 0xFFFFFFFF);
+//		fill(matrixStack, 0, 0, 1, 1, 0xFFFFFFFF);
 
 		Vector3d cameraCenter = RenderUtils.getCameraPos();
 
