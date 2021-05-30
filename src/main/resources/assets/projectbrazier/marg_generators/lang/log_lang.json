@@ -1,0 +1,14 @@
+{
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"log"
+		]
+	},
+	"langEntries": {
+		"block.projectbrazier.${material}_log_bench": "lang_gen.projectbrazier.log_bench",
+		"block.projectbrazier.${material}_log_chair": "lang_gen.projectbrazier.log_chair",
+		"block.projectbrazier.${material}_firewood": "lang_gen.projectbrazier.firewood",
+		"block.projectbrazier.hollow_${material}_log": "lang_gen.projectbrazier.hollow_log"
+	}
+}

@@ -8,13 +8,18 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.fml.client.gui.GuiUtils;
 
 public class GeneralContainerScreen extends ContainerScreen<GeneralContainer> {
 
-	private static final ResourceLocation BACKGROUND = new ResourceLocation(ProjectBrazier.MODID, "textures/screen/general_storage.png");
+	private static final ResourceLocation BACKGROUND = new ResourceLocation(ProjectBrazier.MODID, "textures/screen/generic_container.png");
 
-	public GeneralContainerScreen(GeneralContainer inventorySlotsIn, PlayerInventory playerInventory, ITextComponent title) {
-		super(inventorySlotsIn, playerInventory, title);
+	public GeneralContainerScreen(GeneralContainer container, PlayerInventory playerInventory, ITextComponent title) {
+		super(container, playerInventory, title);
+		this.ySize = (int) (112 + (Math.ceil(container.getTESlotCount()/9F) * 18));
+
+		//this.titleY = 0;
+		this.playerInventoryTitleY = (int) (19 + (Math.ceil(container.getTESlotCount()/9F) * 18));
 	}
 
 	@Override
@@ -29,11 +34,10 @@ public class GeneralContainerScreen extends ContainerScreen<GeneralContainer> {
 		int posX = (this.width - this.xSize) / 2;
 		int posY = (this.height - this.ySize) / 2;
 
-//		ModularGui_Drawer.drawBackground(posX, posY, this.xSize, this.ySize);
+		GuiUtils.drawContinuousTexturedBox(matrixStack, BACKGROUND, posX, posY, 0, 0, this.xSize, this.ySize, 128, 128, 10, 0);
 
-		this.minecraft.getTextureManager().bindTexture(BACKGROUND);
 		for (Slot slot : this.getContainer().inventorySlots) {
-			this.blit(matrixStack, (posX + slot.xPos) - 1, (posY + slot.yPos) - 1, 0, 238, 18, 18);
+			this.blit(matrixStack, (posX + slot.xPos) - 1, (posY + slot.yPos) - 1, 128, 0, 18, 18);
 
 		}
 	}

@@ -41,10 +41,11 @@ public class CFlowerContainerData extends FlowerContainerData implements IQuadPr
 	public List<BakedQuad> getQuads(@Nullable BlockState teState, @Nullable Direction side, @Nonnull Random rand) {
 		if (this.flower.isEmpty()) return null;
 		if (quads == null) {
+			Item item = flower.getItem();
+			if(!(item instanceof BlockItem)) return new ArrayList<>();
+
 			quads = new EnumMap(Direction.class);
 			nullQuads = new ArrayList<>();
-
-			Item item = flower.getItem();
 
 			BlockItem block = (BlockItem) item;
 			BlockState[] states = {block.getBlock().getDefaultState(), null};

@@ -1,4 +1,5 @@
 {
+	"parent": "projectbrazier:item/templates/slit_template",
 	"textures": {
 		"0": "block/stone_bricks",
 		"particle": "block/stone_bricks",

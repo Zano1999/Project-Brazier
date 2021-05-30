@@ -1,0 +1,13 @@
+{
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"stripped_log"
+		]
+	},
+	"langEntries": {
+		"block.projectbrazier.stripped_${material}_log_bench": "lang_gen.projectbrazier.stripped_log_bench",
+		"block.projectbrazier.stripped_${material}_log_chair": "lang_gen.projectbrazier.stripped_log_chair",
+		"block.projectbrazier.stripped_hollow_${material}_log": "lang_gen.projectbrazier.stripped_hollow_log"
+	}
+}

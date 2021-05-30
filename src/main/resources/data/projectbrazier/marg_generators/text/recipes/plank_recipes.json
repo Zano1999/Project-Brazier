@@ -1,0 +1,51 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"planks"
+		]
+	},
+	"tasks": [
+		{
+			"input": "projectbrazier:recipe_generators/plank_chair.json",
+			"output": "projectbrazier:recipes/chairs/${material}_plank_chair.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/solid_chair.json",
+			"output": "projectbrazier:recipes/chairs/${material}_solid_chair.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/armrest_chair.json",
+			"output": "projectbrazier:recipes/chairs/${material}_armrest_chair.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/bench.json",
+			"output": "projectbrazier:recipes/benches/${material}_bench.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/stool.json",
+			"output": "projectbrazier:recipes/chairs/${material}_stool.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/barrel.json",
+			"output": "projectbrazier:recipes/barrels/${material}_open_barrel.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/closed_barrel.json",
+			"output": "projectbrazier:recipes/barrels/${material}_closed_barrel.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/flower_barrel.json",
+			"output": "projectbrazier:recipes/barrels/${material}_flower_barrel.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/flower_bucket.json",
+			"output": "projectbrazier:recipes/buckets/${material}_flower_bucket.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/platform.json",
+			"output": "projectbrazier:recipes/${material}_platform.json"
+		}
+	]
+}

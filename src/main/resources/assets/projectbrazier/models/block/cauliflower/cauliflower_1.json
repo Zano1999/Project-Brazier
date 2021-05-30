@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "projectbrazier:block/cross_crop",
   "textures": {
     "cross": "projectbrazier:block/cauliflower/cauliflower_1"
   }

@@ -1,0 +1,6 @@
+{
+  "parent": "projectbrazier:block/cross_crop",
+  "textures": {
+    "cross": "projectbrazier:block/white_cabbage/white_cabbage_2"
+  }
+}

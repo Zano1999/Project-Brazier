@@ -1,0 +1,23 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"stripped_log"
+		]
+	},
+	"tasks": [
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/stripped_hollow_log.json",
+			"output": "projectbrazier:loot_tables/blocks/stripped_hollow_${material}_log.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/stripped_log_bench.json",
+			"output": "projectbrazier:loot_tables/blocks/stripped_${material}_log_bench.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/stripped_log_chair.json",
+			"output": "projectbrazier:loot_tables/blocks/stripped_${material}_log_chair.json"
+		}
+	]
+}

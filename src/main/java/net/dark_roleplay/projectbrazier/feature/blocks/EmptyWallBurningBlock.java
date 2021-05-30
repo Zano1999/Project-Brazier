@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature.blocks;
 
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.WallHFacedDecoBlock;
+import net.dark_roleplay.projectbrazier.util.blocks.IDisplayTicker;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,9 +12,12 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class EmptyWallBurningBlock extends WallHFacedDecoBlock {
 

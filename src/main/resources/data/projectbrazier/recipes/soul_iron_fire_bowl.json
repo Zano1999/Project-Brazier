@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "soul_fire_bowl",
+	"pattern": [
+		"   ",
+		" Z ",
+		"XXX"
+	],
+	"key": {
+		"X": {
+			"item": "minecraft:iron_ingot"
+		},
+		"Z": {
+			"item": "minecraft:soul_sand"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:soul_iron_fire_bowl",
+		"count": 1
+	}
+}

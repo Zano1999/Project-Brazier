@@ -30,7 +30,7 @@ public class ScreenTexture extends AbstractGui {
 
 	public void render(MatrixStack stack, int posX, int posY){
 		wrapper.bind();
-		this.blit(stack, posX, posY, width, height, x1, y1, x2, y2, totalX, totalY);
+		this.blit(stack, posX, posY, width, height, x1, y1, width, height, totalX, totalY);
 	}
 
 	public void renderSegmented(MatrixStack stack, int posX, int posY, int width, int height){

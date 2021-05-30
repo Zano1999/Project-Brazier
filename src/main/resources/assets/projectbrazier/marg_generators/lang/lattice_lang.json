@@ -1,0 +1,18 @@
+{
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"planks"
+		]
+	},
+	"customs": [
+		"cross",
+		"vertical",
+		"dense_vertical",
+		"diamond",
+		"grid"
+	],
+	"langEntries": {
+		"block.projectbrazier.${material}_${custom}_lattice": "lang_gen.projectbrazier.lattice"
+	}
+},

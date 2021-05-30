@@ -4,8 +4,10 @@ import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorItem;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorRegistrar;
+import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItem;
 import net.dark_roleplay.projectbrazier.feature.blocks.HangingItemBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.NailBlock;
+import net.dark_roleplay.projectbrazier.feature.items.PlantSeedsItem;
 import net.dark_roleplay.projectbrazier.feature.items.SpyglassItem;
 import net.dark_roleplay.projectbrazier.feature.items.WarHornItem;
 import net.minecraft.block.Block;
@@ -38,6 +40,7 @@ public class BrazierItems extends Registrar {
 //			BLUEBERRIES = registerItem("blueberries"),
 //			BUTTER = registerItem("butter"),
 			CAULIFLOWER = registerItem("cauliflower"),
+			WHITE_CABBAGE = registerItem("white_cabbage"),
 //			EGGPLANT = registerItem("eggplant"),
 //			GARLIC = registerItem("garlic"),
 //			GREEN_APPLE = registerItem("green_apple"),
@@ -58,7 +61,13 @@ public class BrazierItems extends Registrar {
 			BONE_WAR_HORN = registerItem("bone_war_horn", WarHornItem::new),
 			GOLD_SPYGLASS = registerItem("gold_spyglass", SpyglassItem::new),
 			SILVER_SPYGLASS = registerItem("silver_spyglass", SpyglassItem::new),
-			CAULIFLOWER_SEEDS = registerItem("cauliflower_seeds", prop -> new BlockNamedItem(BrazierBlocks.CAULIFLOWER.get(), prop));
+			CAULIFLOWER_SEEDS = registerItem("cauliflower_seeds", prop -> new PlantSeedsItem(BrazierBlocks.CAULIFLOWER.get(), prop)),
+			WHITE_CABBAGE_SEEDS = registerItem("white_cabbage_seeds", prop -> new PlantSeedsItem(BrazierBlocks.WHITE_CABBAGE.get(), prop)),
+			STONE_ARROW_SLIT = registerItem("stone_arrow_slit", prop -> new SelectiveBlockItem(new Block[]{
+					BrazierBlocks.V_STONE_BRICK_ARROW_SLIT.get(),
+					BrazierBlocks.H_STONE_BRICK_ARROW_SLIT.get(),
+					BrazierBlocks.C_STONE_BRICK_ARROW_SLIT.get()
+			}, prop));
 
 	//Experimental Items
 //	public static final RegistryObject<Item>
@@ -84,6 +93,13 @@ public class BrazierItems extends Registrar {
 		NailBlock.HANGABLE_ITEMS.put(SILVER_SPYGLASS.get(), (HangingItemBlock) BrazierBlocks.HANGING_SILVER_SPYGLASS.get());
 		NailBlock.HANGABLE_ITEMS.put(GOLD_SPYGLASS.get(), (HangingItemBlock) BrazierBlocks.HANGING_GOLD_SPYGLASS.get());
 
-//		((DecorItem)DECOR_TEST.get()).setDecor(DecorRegistrar.TEST);
+
+		Item.BLOCK_TO_ITEM.put(BrazierBlocks.C_STONE_BRICK_ARROW_SLIT.get(), BrazierItems.STONE_ARROW_SLIT.get());
+		Item.BLOCK_TO_ITEM.put(BrazierBlocks.H_STONE_BRICK_ARROW_SLIT.get(), BrazierItems.STONE_ARROW_SLIT.get());
+		Item.BLOCK_TO_ITEM.put(BrazierBlocks.V_STONE_BRICK_ARROW_SLIT.get(), BrazierItems.STONE_ARROW_SLIT.get());
+
+		Item.BLOCK_TO_ITEM.put(BrazierBlocks.HANGING_GOLD_SPYGLASS.get(), BrazierBlocks.NAIL.get().asItem());
+		Item.BLOCK_TO_ITEM.put(BrazierBlocks.HANGING_SILVER_SPYGLASS.get(), BrazierBlocks.NAIL.get().asItem());
+		Item.BLOCK_TO_ITEM.put(BrazierBlocks.HANGING_HORN.get(), BrazierBlocks.NAIL.get().asItem());
 	}
 }

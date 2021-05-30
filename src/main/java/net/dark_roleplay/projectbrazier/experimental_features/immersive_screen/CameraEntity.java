@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class CameraEntity extends Entity {
-	public CameraEntity(EntityType type, World worldIn) {
+	public CameraEntity(EntityType<CameraEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
 

@@ -1,0 +1,33 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"planks"
+		]
+	},
+	"customs": [
+		"black",
+		"blue",
+		"brown",
+		"cyan",
+		"gray",
+		"green",
+		"light_blue",
+		"light_gray",
+		"lime",
+		"magenta",
+		"orange",
+		"pink",
+		"purple",
+		"red",
+		"white",
+		"yellow"
+	],
+	"tasks": [
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/polstered_bench.json",
+			"output": "projectbrazier:loot_tables/blocks/${custom}_polstered_${material}_bench.json"
+		}
+	]
+}

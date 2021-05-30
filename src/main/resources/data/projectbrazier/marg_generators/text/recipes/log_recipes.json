@@ -1,0 +1,27 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"log"
+		]
+	},
+	"tasks": [
+		{
+			"input": "projectbrazier:recipe_generators/hollow_log.json",
+			"output": "projectbrazier:recipes/hollow_log/hollow_${material}_log.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/firewood.json",
+			"output": "projectbrazier:recipes/firewood/${material}_firewood.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/log_bench.json",
+			"output": "projectbrazier:recipes/benches/${material}_log_bench.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/log_chair.json",
+			"output": "projectbrazier:recipes/chairs/${material}_log_chair.json"
+		}
+	]
+}

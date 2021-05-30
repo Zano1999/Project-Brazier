@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[28,)" #mandatory
+loaderVersion="[32,)" #mandatory
 issueTrackerURL="http://my.issue.tracker/" #optional
 license="ARR"
 
@@ -9,8 +9,8 @@ license="ARR"
 	displayName="Project Brazier"
 	#updateJSONURL="https://dark-roleplay.net/files/versions/drpmedieval/drpmedieval-1.13.2.json" #optional
 	displayURL="https://dark-roleplay.net/"
-	#logoFile="examplemod.png" #optional
-	credits="Developer Team: JTK222, 0Mr_X0, Artists: Rolfaal & Kanno (https://twitter.com/lKanno_), Beta Testers: Dunkelzwerg11, BluryFace, Lord Kittin, 0Mr_X0"
+	logoFile="project_brazier_logo.png" #optional
+	credits="\nDeveloper Team:\nJTK222, 0Mr_X0\n Artists:\nRolfaal & Kanno (https://twitter.com/lKanno_)\n Beta Testers:\nDunkelzwerg11, BluryFace, Lord Kittin, 0Mr_X0"
 	authors=["JTK222", "0Mr_X0", "Rolfaal", "Kanno"]
 	description='''Project Brazier is the continuation of the Dark Roleplay Medieval mod.'''
 	itemIcon="projectbrazier:iron_brazier_coal"
@@ -19,37 +19,6 @@ license="ARR"
     margMaterialFiles=[
         "fixed_data/projectbrazier/materials/apple.json",
         "fixed_data/projectbrazier/materials/orange.json",
-
-		"fixed_data/projectbrazier/materials/abundance/jacaranda.json",
-		"fixed_data/projectbrazier/materials/abundance/redbud.json",
-
-		"fixed_data/projectbrazier/materials/byg/aspen.json",
-		"fixed_data/projectbrazier/materials/byg/baobab.json",
-		"fixed_data/projectbrazier/materials/byg/bulbis.json",
-		"fixed_data/projectbrazier/materials/byg/cherry.json",
-		"fixed_data/projectbrazier/materials/byg/cika.json",
-		"fixed_data/projectbrazier/materials/byg/cypress.json",
-		"fixed_data/projectbrazier/materials/byg/ebony.json",
-		"fixed_data/projectbrazier/materials/byg/ether.json",
-		"fixed_data/projectbrazier/materials/byg/fir.json",
-		"fixed_data/projectbrazier/materials/byg/holly.json",
-		"fixed_data/projectbrazier/materials/byg/lament.json",
-		"fixed_data/projectbrazier/materials/byg/mahogany.json",
-		"fixed_data/projectbrazier/materials/byg/mangrove.json",
-		"fixed_data/projectbrazier/materials/byg/palm.json",
-		"fixed_data/projectbrazier/materials/byg/pine.json",
-		"fixed_data/projectbrazier/materials/byg/rainbow_eucalyptus.json",
-		"fixed_data/projectbrazier/materials/byg/redwood.json",
-		"fixed_data/projectbrazier/materials/byg/willow.json",
-		"fixed_data/projectbrazier/materials/byg/jacaranda.json",
-		"fixed_data/projectbrazier/materials/byg/maple.json",
-		"fixed_data/projectbrazier/materials/byg/nightshade.json",
-		"fixed_data/projectbrazier/materials/byg/skyris.json",
-		"fixed_data/projectbrazier/materials/byg/witch_hazel.json",
-		"fixed_data/projectbrazier/materials/byg/zelkova.json",
-		"fixed_data/projectbrazier/materials/byg/sythian.json",
-		"fixed_data/projectbrazier/materials/byg/imparius.json",
-		"fixed_data/projectbrazier/materials/byg/embur.json"
     ]
 	hasMargDatas=true
 	hasMargAssets=true

@@ -3,12 +3,11 @@ package net.dark_roleplay.projectbrazier;
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.BuiltinMixedModel;
 import net.dark_roleplay.projectbrazier.experimental_features.crafting.screens.CraftingScreen;
-import net.dark_roleplay.projectbrazier.feature.mechanics.tertiary_interactions.TertiaryInteractionListener;
+import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItem;
+import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItemListeners;
+import net.dark_roleplay.projectbrazier.feature.registrars.*;
+import net.dark_roleplay.projectbrazier.feature_client.listeners.TertiaryInteractionListener;
 import net.dark_roleplay.projectbrazier.experimental_features.walking_gui.PassiveScreenHelper;
-import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
-import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlocks;
-import net.dark_roleplay.projectbrazier.feature.registrars.BrazierContainers;
-import net.dark_roleplay.projectbrazier.feature.registrars.BrazierEntities;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorClientListener;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorListener;
 import net.dark_roleplay.projectbrazier.feature_client.blockentityrenderers.BarrelBlockEntityRenderer;
@@ -26,6 +25,9 @@ import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
@@ -50,6 +52,10 @@ public class ProjectBrazierClient {
 		MinecraftForge.EVENT_BUS.addListener(TertiaryInteractionListener::renderBlockOverlay);
 		MinecraftForge.EVENT_BUS.addListener(TertiaryInteractionListener::renderGameOverlay);
 		MinecraftForge.EVENT_BUS.addListener(TertiaryInteractionListener::renderWorldLastEvent);
+
+		MinecraftForge.EVENT_BUS.addListener(SelectiveBlockItemListeners::renderGameOverlay);
+		MinecraftForge.EVENT_BUS.addListener(SelectiveBlockItemListeners::keyInput);
+		MinecraftForge.EVENT_BUS.addListener(SelectiveBlockItemListeners::mouseScroll);
 	}
 
 	public static void setupClientStuff(FMLClientSetupEvent event) {
@@ -69,10 +75,13 @@ public class ProjectBrazierClient {
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "axis_connected_model"), new AxisConnectedModel.Loader());
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "emissive"), new EmissiveModel.Loader());
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "builtin_mixed"), new BuiltinMixedModel.Loader());
+
+		registerItemOverrides();
 	}
 
 	public static void registerRenderLayers(){
 		RenderTypeLookup.setRenderLayer(BrazierBlocks.CAULIFLOWER.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(BrazierBlocks.WHITE_CABBAGE.get(), RenderType.getCutoutMipped());
 		RenderTypeLookup.setRenderLayer(BrazierBlocks.HANGING_HORN.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(BrazierBlocks.IRON_BRAZIER_COAL.get(), layer -> layer == RenderType.getCutout() || layer == RenderType.getSolid());
 		RenderTypeLookup.setRenderLayer(BrazierBlocks.IRON_FIRE_BOWL.get(), layer -> layer == RenderType.getCutout() || layer == RenderType.getSolid());
@@ -101,7 +110,6 @@ public class ProjectBrazierClient {
 				.map(b -> ((RegistryObject<? extends Block>)b).get())
 				.forEach(b -> RenderTypeLookup.setRenderLayer((Block) b, RenderType.getCutoutMipped()));
 
-
 		//TODO Move to TER registration event?
 //		ClientRegistry.bindTileEntityRenderer(BrazierBlockEntities.DRAWBRODGE_ANCHOR.get(), DrawbridgeAnchorTileEntityRenderer::new);
 		ClientRegistry.bindTileEntityRenderer(BrazierBlockEntities.BARREL_BLOCK_ENTITY.get(), BarrelBlockEntityRenderer::new);
@@ -124,6 +132,12 @@ public class ProjectBrazierClient {
 	}
 
 	public static void registerItemOverrides(){
+		ItemModelsProperties.registerProperty(BrazierItems.STONE_ARROW_SLIT.get(), new ResourceLocation(ProjectBrazier.MODID, "variant"), (stack, world, entity) -> {
+			if (entity != null && entity instanceof PlayerEntity)
+				return ((SelectiveBlockItem)stack.getItem()).getCurrentIndex(((PlayerEntity) entity).getGameProfile());
+			return 0;
+		});
+
 //		MedievalItems.TIMBERING_NOTES.get().addPropertyOverride(new ResourceLocation(ProjectBrazier.MODID, "positions"), (stack, world, entity) -> {
 //			CompoundNBT nbt = stack.getOrCreateTag();
 //			float res = 0;

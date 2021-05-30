@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "${item%log}"
+	},
+	"result": "projectbrazier:hollow_${material}_log",
+	"group": "projectbrazier:hollow_logs",
+	"count": 1
+}

@@ -3,21 +3,30 @@ package net.dark_roleplay.projectbrazier.feature.blocks;
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.feature.blockentities.BarrelBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.DecoBlock;
+import net.dark_roleplay.projectbrazier.util.CapabilityUtil;
+import net.dark_roleplay.projectbrazier.util.capabilities.ItemHandlerUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootContext;
+import net.minecraft.loot.LootParameters;
+import net.minecraft.tileentity.ShulkerBoxTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidStack;
@@ -27,16 +36,23 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.List;
 import java.util.Optional;
 
 public class BarrelBlock extends DecoBlock {
 	private boolean isClosed;
 	private Block otherBlock;
+	private MargMaterial material;
+	private Item plankItem;
+	public static final ResourceLocation CONTENTS = new ResourceLocation("contents");
 
 	public BarrelBlock(MargMaterial material, Properties properties, String voxelShape, boolean isClosed) {
 		super(properties, voxelShape);
 		this.isClosed = isClosed;
+		this.material = material;
 	}
 
 	public void setOtherBlock(Block block){
@@ -119,8 +135,18 @@ public class BarrelBlock extends DecoBlock {
 	private ActionResultType closeBarrel(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit){
 		if(this.isClosed) return ActionResultType.PASS;
 
+		if(this.plankItem == null){
+			String plankItemName = this.material.getItems().get("planks");
+			if(plankItemName == null)
+				return ActionResultType.PASS;
+
+			this.plankItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(plankItemName));
+			if(this.plankItem == null)
+				this.plankItem = Items.BEDROCK;
+		}
 		ItemStack heldItem = player.getHeldItem(hand);
-		if(heldItem.getItem() == Items.APPLE) {
+
+		if(heldItem.getItem() == this.plankItem) {
 			if(!player.isCreative())
 				heldItem.shrink(1);
 			world.setBlockState(pos, otherBlock.getDefaultState());
@@ -130,12 +156,32 @@ public class BarrelBlock extends DecoBlock {
 		return ActionResultType.PASS;
 	}
 
-	@Deprecated
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	@Override
+	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.hasTileEntity() && ((newState.getBlock() != this && newState.getBlock() != otherBlock)  || !newState.hasTileEntity())) {
-			worldIn.removeTileEntity(pos);
+			//if(!isClosed)
+				ItemHandlerUtil.dropContainerItems(world, pos);
+
+			world.removeTileEntity(pos);
 		}
 	}
+
+//	@Override
+//	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+//		if(!this.isClosed) return super.getDrops(state, builder);
+//		TileEntity tileentity = builder.get(LootParameters.BLOCK_ENTITY);
+//		if(tileentity instanceof BarrelBlockEntity){
+//			ItemStackHandler inv = ((BarrelBlockEntity) tileentity).getItemHandler();
+//			if(inv == null) return super.getDrops(state, builder);
+//
+//			builder = builder.withDynamicDrop(CONTENTS, (context, stackConsumer) -> {
+//				for(int i = 0; i < inv.getSlots(); i++)
+//					stackConsumer.accept(inv.getStackInSlot(i));
+//			});
+//		}
+//
+//		return super.getDrops(state, builder);
+//	}
 
 	@Override
 	public boolean hasTileEntity(BlockState state) {

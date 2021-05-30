@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "minecraft:andesite"
+	},
+	"result": "projectbrazier:andesite_bricks",
+	"group": "projectbrazier:andesite_bricks",
+	"count": 1
+}

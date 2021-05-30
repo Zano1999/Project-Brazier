@@ -9,7 +9,7 @@ import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid= ProjectBrazier.MODID, value = Dist.CLIENT)
+//@Mod.EventBusSubscriber(modid= ProjectBrazier.MODID, value = Dist.CLIENT)
 public class PassiveScreenListener {
 
 	@SubscribeEvent

@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "minecraft:stone_bricks"
+	},
+	"result": "projectbrazier:stone_arrow_slit",
+	"group": "projectbrazier:stone_arrow_slit",
+	"count": 2
+}

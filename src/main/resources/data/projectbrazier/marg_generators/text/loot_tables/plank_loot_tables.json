@@ -1,0 +1,51 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"planks"
+		]
+	},
+	"tasks": [
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/open_barrel.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_open_barrel.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/closed_barrel.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_closed_barrel.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/flower_barrel.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_flower_barrel.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/armrest_chair.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_armrest_chair.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/plank_chair.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_plank_chair.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/solid_chair.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_solid_chair.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/bench.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_bench.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/flower_bucket.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_flower_bucket.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/platform.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_platform.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/stool.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_stool.json"
+		}
+	]
+}

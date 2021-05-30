@@ -1,0 +1,6 @@
+{
+  "parent": "projectbrazier:block/cross_crop",
+  "textures": {
+    "cross": "projectbrazier:block/cauliflower/cauliflower_6"
+  }
+}

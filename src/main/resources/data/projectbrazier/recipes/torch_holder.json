@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "minecraft:iron_ingot"
+	},
+	"result": "projectbrazier:empty_wall_torch_holder",
+	"group": "projectbrazier:torch_holder",
+	"count": 1
+}

@@ -4,11 +4,15 @@ import net.dark_roleplay.projectbrazier.feature.blocks.templates.WallHFacedDecoB
 import net.dark_roleplay.projectbrazier.feature.blockentities.HangingItemBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlocks;
+import net.dark_roleplay.projectbrazier.util.CapabilityUtil;
 import net.dark_roleplay.projectbrazier.util.Inventories;
 import net.dark_roleplay.projectbrazier.util.blocks.BrazierStateProperties;
+import net.dark_roleplay.projectbrazier.util.capabilities.ItemHandlerUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
@@ -100,13 +104,16 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 	}
 
 	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
+		if (!state.isIn(newState.getBlock()))
+			ItemHandlerUtil.dropContainerItems(world, pos);
+
 		if (!isMoving && state.getBlock() != newState.getBlock()) {
 			if (state.get(HIDDEN_LEVER)) {
-				this.updateNeighbors(state, worldIn, pos);
+				this.updateNeighbors(state, world, pos);
 			}
 
-			super.onReplaced(state, worldIn, pos, newState, isMoving);
+			super.onReplaced(state, world, pos, newState, isMoving);
 		}
 	}
 

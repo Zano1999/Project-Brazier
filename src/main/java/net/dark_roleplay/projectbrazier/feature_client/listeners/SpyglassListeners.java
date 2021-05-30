@@ -88,7 +88,7 @@ public class SpyglassListeners {
 		}
 	}
 
-	private static boolean isZoomActive(){
+	public static boolean isZoomActive(){
 		return isZoomActive = isZoomActive && getHeldZoomItem() != null;
 	}
 

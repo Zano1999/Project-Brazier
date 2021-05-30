@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "projectbrazier:item/empty_wall_torch_holder"
+	}
+}

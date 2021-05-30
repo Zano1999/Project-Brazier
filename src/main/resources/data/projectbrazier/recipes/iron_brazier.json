@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "brazier",
+	"pattern": [
+		"   ",
+		"XZX",
+		" X "
+	],
+	"key": {
+		"X": {
+			"item": "minecraft:iron_ingot"
+		},
+		"Z": {
+			"item": "minecraft:coal"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:iron_brazier",
+		"count": 1
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "minecraft:diorite"
+	},
+	"result": "projectbrazier:diorite_pillar",
+	"group": "projectbrazier:diorite_pillar",
+	"count": 1
+}

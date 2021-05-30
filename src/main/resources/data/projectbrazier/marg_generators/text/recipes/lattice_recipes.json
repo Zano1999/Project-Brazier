@@ -1,0 +1,22 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"planks"
+		]
+	},
+	"customs": [
+		"cross",
+		"dense_vertical",
+		"vertical",
+		"grid",
+		"diamond"
+	],
+	"tasks": [
+		{
+			"input": "projectbrazier:recipe_generators/lattice.json",
+			"output": "projectbrazier:recipes/lattices/${material}_${custom}_lattice.json"
+		}
+	]
+}

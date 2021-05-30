@@ -46,6 +46,13 @@
 			"Saturation": 0.3
 		}
 	},
+	"white_cabbage": {
+		"ItemGroup": "food",
+		"Food": {
+			"Hunger": 6,
+			"Saturation": 0.3
+		}
+	},
 	"copper_coin": {
 		"ItemGroup": "misc",
 		"MaxCount": 50
@@ -208,7 +215,16 @@
 	"cauliflower_seeds": {
 		"ItemGroup": "misc"
 	},
+	"white_cabbage_seeds": {
+		"ItemGroup": "misc"
+	},
+	"white_cabbage": {
+		"ItemGroup": "misc"
+	},
 	"decor_test": {
 		"ItemGroup": "misc"
+	},
+	"stone_arrow_slit": {
+		"ItemGroup": "deco"
 	}
 }

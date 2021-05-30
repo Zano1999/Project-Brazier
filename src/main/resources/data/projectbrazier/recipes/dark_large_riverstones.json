@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "minecraft:cobblestone"
+	},
+	"result": "projectbrazier:dark_large_riverstone",
+	"group": "projectbrazier:dark_large_riverstone",
+	"count": 1
+}

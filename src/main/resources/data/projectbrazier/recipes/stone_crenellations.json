@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "minecraft:stone_bricks"
+	},
+	"result": "projectbrazier:stone_crenellations",
+	"group": "projectbrazier:stone_crenellations",
+	"count": 1
+}

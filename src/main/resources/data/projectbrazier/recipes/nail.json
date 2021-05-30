@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "minecraft:iron_ingot"
+	},
+	"result": "projectbrazier:nail",
+	"group": "projectbrazier:nail",
+	"count": 1
+}

@@ -30,7 +30,7 @@ public class SittableEntity extends Entity {
 		this.requiredBlock = Blocks.AIR.getDefaultState();
 	}
 
-	public SittableEntity(EntityType type, World world, double x, double y, double z, double yOffset, boolean requireBlock) {
+	public SittableEntity(EntityType<SittableEntity> type, World world, double x, double y, double z, double yOffset, boolean requireBlock) {
 		this(type, world);
 		setPosition(x, y + yOffset, z);
 		if (requireBlock)

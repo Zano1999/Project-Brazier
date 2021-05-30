@@ -1,0 +1,27 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"log"
+		]
+	},
+	"tasks": [
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/firewood.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_firewood.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/hollow_log.json",
+			"output": "projectbrazier:loot_tables/blocks/hollow_${material}_log.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/log_bench.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_log_bench.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/log_chair.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_log_chair.json"
+		}
+	]
+}

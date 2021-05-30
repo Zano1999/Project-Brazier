@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "minecraft:cobblestone"
+	},
+	"result": "projectbrazier:pale_colorful_cobblestone",
+	"group": "projectbrazier:pale_colorful_cobblestone",
+	"count": 1
+}

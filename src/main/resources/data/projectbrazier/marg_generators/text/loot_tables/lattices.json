@@ -1,0 +1,26 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"planks"
+		]
+	},
+	"customs": [
+		"cross",
+		"vertical",
+		"dense_vertical",
+		"diamond",
+		"grid"
+	],
+	"tasks": [
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/lattice.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_${custom}_lattice.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/lattice.json",
+			"output": "projectbrazier:loot_tables/blocks/${material}_${custom}_lattice_centered.json"
+		}
+	]
+}

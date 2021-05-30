@@ -2,6 +2,7 @@ package net.dark_roleplay.projectbrazier.feature.blocks;
 
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.WallHFacedDecoBlock;
 import net.dark_roleplay.projectbrazier.util.Inventories;
+import net.dark_roleplay.projectbrazier.util.blocks.IDisplayTicker;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -21,20 +22,26 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.Random;
 
 public class WallBurningBlock extends WallHFacedDecoBlock {
 
 	public static final BooleanProperty BURNING = BooleanProperty.create("burning");
+	private final IDisplayTicker displayTicker;
 
 	private Item replacementItem;
 	private Block emptyWallBlock;
 
 	private final int burningLightLevel;
 
-	public WallBurningBlock(Properties props, String shapeName, int burningLightLevel) {
+	public WallBurningBlock(Properties props, String shapeName, int burningLightLevel, IDisplayTicker displayTicker) {
 		super(props, shapeName);
 		this.burningLightLevel = burningLightLevel;
 		this.setDefaultState(this.getDefaultState().with(BURNING, false));
+		this.displayTicker = displayTicker;
 	}
 
 	public void setItem(Item replacementItem, Block emptyBlock){
@@ -90,5 +97,10 @@ public class WallBurningBlock extends WallHFacedDecoBlock {
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
 		builder.add(BURNING);
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(BlockState state, World world, BlockPos pos, Random rand) {
+		this.displayTicker.animateTick(state, world, pos, rand);
 	}
 }

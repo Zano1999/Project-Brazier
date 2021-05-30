@@ -18,9 +18,12 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSidedProvider;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.server.ServerLifecycleHooks;
 
 import java.util.List;
 import java.util.Map;
@@ -46,7 +49,6 @@ public class CollisionListener {
 	public static class ServerCollisions{
 		@SubscribeEvent
 		public static void onServerTick(TickEvent.ServerTickEvent event){
-			if(Minecraft.getInstance().world == null) return;
 			for(Map.Entry<TileEntity, VoxelShape> entry : COLLISIONS.entrySet())
 				handleCollision(entry.getKey().getWorld(), entry.getValue());
 		}

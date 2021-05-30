@@ -21,6 +21,7 @@ public class GeneralContainer extends Container {
 
 	protected final BlockPos worldPos;
 	private int[] inventories;
+	private int teSlots;
 
 	public GeneralContainer(int windowId, PlayerInventory playerInventory, PacketBuffer extraData) {
 		this(windowId, playerInventory, playerInventory.player.getEntityWorld(), extraData.readBlockPos());
@@ -32,14 +33,8 @@ public class GeneralContainer extends Container {
 		TileEntity te = world.getTileEntity(pos);
 		LazyOptional<IItemHandler> optionalInventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
-		for(int x = 0; x < 9; x++ )
-			this.addSlot(new Slot(playerInventory, x, 8 + x * 18, 142));
-
-		executeGrid(9, 27, (x, y) -> {
-			this.addSlot(new Slot(playerInventory, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
-		});
-
 		optionalInventory.ifPresent((handler) -> {
+			this.teSlots = handler.getSlots();
 			inventories =  new int[]{9, 27, handler.getSlots() };
 
 			executeGrid(9, handler.getSlots(), (x, y) -> {
@@ -47,9 +42,22 @@ public class GeneralContainer extends Container {
 			});
 		});
 
+		int yOffset = (int) (30 + (Math.ceil(teSlots/9F) * 18));
+
+		for(int x = 0; x < 9; x++ )
+			this.addSlot(new Slot(playerInventory, x, 8 + x * 18, yOffset + 56));
+
+		executeGrid(9, 27, (x, y) -> {
+			this.addSlot(new Slot(playerInventory, x + y * 9 + 9, 8 + x * 18, yOffset + y * 18));
+		});
+
 		if(inventories == null)
 			inventories =  new int[]{9, 27};
 
+	}
+
+	public int getTESlotCount(){
+		return this.teSlots;
 	}
 
 	@Override

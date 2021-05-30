@@ -167,4 +167,8 @@ public class BarrelBlockEntity extends TileEntity implements INamedContainerProv
 	}
 	//endregion
 
+
+	public ItemStackHandler getItemHandler() {
+		return itemHandler;
+	}
 }

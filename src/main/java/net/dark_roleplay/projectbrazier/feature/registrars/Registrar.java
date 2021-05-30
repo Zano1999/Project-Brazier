@@ -147,20 +147,20 @@ public class Registrar {
 	protected static AbstractBlock.Properties METAL =
 			AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.IRON)
 					.hardnessAndResistance(5.0F, 1200.0F)
-					.sound(SoundType.ANVIL)
+					.sound(SoundType.METAL)
 					.notSolid();
 
 	protected static AbstractBlock.Properties METAL_GLOW =
 			AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.IRON)
 					.hardnessAndResistance(5.0F, 1200.0F)
-					.sound(SoundType.ANVIL)
+					.sound(SoundType.METAL)
 					.setLightLevel(state -> 15)
 					.notSolid();
 
 	protected static AbstractBlock.Properties METAL_SOLID =
 			AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.IRON)
 					.hardnessAndResistance(5.0F, 1200.0F)
-					.sound(SoundType.ANVIL);
+					.sound(SoundType.METAL);
 
 	protected static AbstractBlock.Properties STONE =
 			AbstractBlock.Properties.

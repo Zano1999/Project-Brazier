@@ -1,0 +1,20 @@
+{
+	"material": {
+		"materialType": "wood",
+		"items": [
+			"planks"
+		]
+	},
+	"langEntries": {
+		"block.projectbrazier.${material}_open_barrel": "lang_gen.projectbrazier.open_barrel",
+		"block.projectbrazier.${material}_closed_barrel": "lang_gen.projectbrazier.closed_barrel",
+		"block.projectbrazier.${material}_flower_barrel": "lang_gen.projectbrazier.flower_barrel",
+		"block.projectbrazier.${material}_armrest_chair": "lang_gen.projectbrazier.armrest_chair",
+		"block.projectbrazier.${material}_plank_chair": "lang_gen.projectbrazier.plank_chair",
+		"block.projectbrazier.${material}_solid_chair": "lang_gen.projectbrazier.solid_chair",
+		"block.projectbrazier.${material}_bench": "lang_gen.projectbrazier.bench",
+		"block.projectbrazier.${material}_flower_bucket": "lang_gen.projectbrazier.flower_bucket",
+		"block.projectbrazier.top_${material}_platform": "lang_gen.projectbrazier.platform",
+		"block.projectbrazier.${material}_stool": "lang_gen.projectbrazier.stool"
+	}
+}

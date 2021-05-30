@@ -1,4 +1,6 @@
 {
-	"parent": "projectbrazier:block/candle_holders/wall_candle_holder",
-	"gui_light": "front"
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "projectbrazier:item/wall_candle_holder"
+	}
 }
