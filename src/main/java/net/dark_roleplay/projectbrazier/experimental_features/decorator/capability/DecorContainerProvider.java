@@ -23,7 +23,7 @@ public class DecorContainerProvider implements ICapabilitySerializable<CompoundN
 	@Nonnull
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-		return cap == DecorRegistrar.DECOR ? (LazyOptional<T>) lazyCap : null;
+		return cap == DecorRegistrar.DECOR ? (LazyOptional<T>) lazyCap : LazyOptional.empty();
 	}
 
 	@Override
