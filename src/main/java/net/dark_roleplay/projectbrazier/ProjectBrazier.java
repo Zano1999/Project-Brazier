@@ -1,17 +1,14 @@
 package net.dark_roleplay.projectbrazier;
 
-import net.dark_roleplay.projectbrazier.feature.blockentities.HangingItemBlockEntity;
-import net.dark_roleplay.projectbrazier.feature.registrars.*;
+import net.dark_roleplay.projectbrazier.experimental_features.decals.DecalRegistry;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorRegistrar;
-import net.minecraft.block.Blocks;
+import net.dark_roleplay.projectbrazier.feature.registrars.*;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
@@ -45,11 +42,7 @@ public class ProjectBrazier {
 
 
         DecorRegistrar.register();
-        //Decals
-//        FMLJavaModLoadingContext.get().getModEventBus().addListener(DecalRegistry::registerRegistry);
-//        MinecraftForge.EVENT_BUS.addGenericListener(Chunk.class, CapabilityAttachListener::attachChunkCapability);
-//        CapabilityManager.INSTANCE.register(DecalChunk.class, new DecalChunkStorage(), () -> new DecalChunk(0, 256)); //TODO 1.17 update the default to new default heights.
-    }
+        DecalRegistry.register(); }
 
     public void hackyHackToByPassLoadingOrder(RegistryEvent.NewRegistry event){
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

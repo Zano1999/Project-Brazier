@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.experimental_features.decals;
+package net.dark_roleplay.projectbrazier.experimental_features.decals.decal;
 
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Util;

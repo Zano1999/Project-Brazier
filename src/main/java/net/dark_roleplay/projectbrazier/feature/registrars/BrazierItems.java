@@ -2,6 +2,7 @@ package net.dark_roleplay.projectbrazier.feature.registrars;
 
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
+import net.dark_roleplay.projectbrazier.experimental_features.decals.DecalItem;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorItem;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorRegistrar;
 import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItem;
@@ -72,6 +73,9 @@ public class BrazierItems extends Registrar {
 	//Experimental Items
 //	public static final RegistryObject<Item>
 //			DECOR_TEST	= registerItem("decor_test", DecorItem::new);
+	public static final RegistryObject<Item>
+			DECAL_TEST = registerItem("decal_test", () -> new DecalItem(De);
+
 
 	public static void registerItemBlocks(RegistryEvent.Register<Item> event){
 		IForgeRegistry<Item> reg = event.getRegistry();

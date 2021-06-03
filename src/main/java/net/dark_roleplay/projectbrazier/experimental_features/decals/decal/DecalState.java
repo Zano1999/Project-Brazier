@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.experimental_features.decals;
+package net.dark_roleplay.projectbrazier.experimental_features.decals.decal;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
