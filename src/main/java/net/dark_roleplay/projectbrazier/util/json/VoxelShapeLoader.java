@@ -62,7 +62,7 @@ public class VoxelShapeLoader {
 			return Stream.concat(
 					this.boxes.stream().map(data -> VoxelShapes.create(data[0], data[1], data[2], data[3], data[4], data[5])),
 					subShapes.stream().map(shape -> shape.compile())
-			).reduce((a, b) -> VoxelShapes.combineAndSimplify(a, b, function)).orElseGet(VoxelShapes::fullCube);
+			).reduce((a, b) -> VoxelShapes.combineAndSimplify(a, b, function)).orElseGet(VoxelShapes::empty);
 		}
 	}
 

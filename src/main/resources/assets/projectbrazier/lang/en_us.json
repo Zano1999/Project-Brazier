@@ -104,6 +104,7 @@
 	"lang_gen.projectbrazier.platform": "${material} Platform",
 	"lang_gen.projectbrazier.stool": "${material} Stool",
 	"lang_gen.projectbrazier.lattice": "${material} ${custom} Stool",
+	"lang_gen.projectbrazier.solid_table": "Solid ${material} Table",
 
 	"marg.customs.black": "Black",
 	"marg.customs.blue": "Blue",

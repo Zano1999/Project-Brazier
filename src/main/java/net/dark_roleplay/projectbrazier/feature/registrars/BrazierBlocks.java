@@ -28,6 +28,7 @@ public class BrazierBlocks extends Registrar {
 	public static final MaterialCondition FIREWOOD_CON = ConditionHelper.createItemCondition("wood", "planks", "stripped_log");
 	public static final MaterialCondition WOOD_PLATFORM_CON = ConditionHelper.createItemCondition("wood", "planks", "stripped_log");
 
+	public static final MaterialCondition SOLID_TABLE_CON = ConditionHelper.createItemCondition("wood", "planks", "stripped_log");
 
 	public static final MaterialCondition LOG_CON = ConditionHelper.createItemCondition("wood", "log");
 	public static final MaterialCondition STRIPPED_LOG_CON = ConditionHelper.createItemCondition("wood", "stripped_log");
@@ -53,7 +54,8 @@ public class BrazierBlocks extends Registrar {
 			BOTTOM_WOOD_PLATFORM = registerBlock("bottom_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new HAxisDecoBlock(prop, "bottom_wood_platform"), Registrar::MARG_WOOD, false),
 			TOP_WOOD_PLATFORM = registerBlock("top_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new PlatformBlock(prop, "top_wood_platform"), Registrar::MARG_WOOD, false),
 			HOLLOW_LOG = registerBlock("hollow_${material}_log", STRIPPED_LOG_CON, (mat, prop) -> new AxisDecoBlock(prop, "hollow_log"), Registrar::MARG_WOOD, true),
-			STRIPPED_HOLLOW_LOG = registerBlock("stripped_hollow_${material}_log", STRIPPED_LOG_CON, (mat, prop) -> new AxisDecoBlock(prop, "hollow_log"), Registrar::MARG_WOOD, true);
+			STRIPPED_HOLLOW_LOG = registerBlock("stripped_hollow_${material}_log", STRIPPED_LOG_CON, (mat, prop) -> new AxisDecoBlock(prop, "hollow_log"), Registrar::MARG_WOOD, true),
+			SOLID_TABLE = registerBlock("solid_${material}_table", SOLID_TABLE_CON, (mat, prop) -> new PaneConnectedBlock(prop, "solid_table"), Registrar::MARG_WOOD, true);
 
 	public static final MaterialRegistryObject<FacedLatticeBlock>
 			WOOD_LATTICE_1 = registerBlock("${material}_cross_lattice", WOOD_LATTICE_CON, (mat, prop) -> new FacedLatticeBlock(prop, "lattice"), Registrar::MARG_WOOD, true),

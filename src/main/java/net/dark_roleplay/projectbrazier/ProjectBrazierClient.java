@@ -13,8 +13,9 @@ import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorLis
 import net.dark_roleplay.projectbrazier.feature_client.blockentityrenderers.BarrelBlockEntityRenderer;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.axis_connected_models.AxisConnectedModel;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.emissive.EmissiveModel;
+import net.dark_roleplay.projectbrazier.feature_client.model_loaders.pane_connected_model.PaneCornerModel;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.quality_model.QualityModelLoader;
-import net.dark_roleplay.projectbrazier.feature_client.model_loaders.roof_model_loader.RoofModelLoader;
+import net.dark_roleplay.projectbrazier.feature_client.model_loaders.block_specific.roof_model_loader.RoofModelLoader;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.simple_pane_conneted_model.SimplePaneConnectedModel;
 import net.dark_roleplay.projectbrazier.feature_client.screens.GeneralContainerScreen;
 import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybinds;
@@ -27,7 +28,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
@@ -69,12 +69,14 @@ public class ProjectBrazierClient {
 	}
 
 	public static void registerModelLoaders(ModelRegistryEvent event){
-		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "roof"), new RoofModelLoader());
+		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "emissive"), new EmissiveModel.Loader());
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "quality_model"), new QualityModelLoader());
+
+		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "roof"), new RoofModelLoader());
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "simple_pane_connected_model"), new SimplePaneConnectedModel.Loader());
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "axis_connected_model"), new AxisConnectedModel.Loader());
-		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "emissive"), new EmissiveModel.Loader());
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "builtin_mixed"), new BuiltinMixedModel.Loader());
+		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "pane_corner_model"), new PaneCornerModel.Loader());
 
 		registerItemOverrides();
 	}

@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.feature_client.model_loaders.roof_model_loader.util;
+package net.dark_roleplay.projectbrazier.feature_client.model_loaders.block_specific.roof_model_loader.util;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.util.AdvancedModelBox;
