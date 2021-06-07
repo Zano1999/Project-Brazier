@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.feature_client.model_loaders.roof_model_loader.util;
+package net.dark_roleplay.projectbrazier.feature_client.model_loaders.block_specific.roof_model_loader.util;
 
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.util.AdvancedModelBox;
 import net.minecraft.client.renderer.model.BakedQuad;

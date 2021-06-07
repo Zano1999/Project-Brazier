@@ -1,0 +1,20 @@
+{
+	"textures": {
+		"0": "block/spruce_planks",
+		"particle": "block/spruce_planks"
+	},
+	"elements": [
+		{
+			"name": "vertical_4",
+			"from": [1.5, 12, 8],
+			"to": [2.5, 14, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, -16]},
+			"faces": {
+				"east": {"uv": [0, 0, 8, 2], "texture": "#0"},
+				"south": {"uv": [15, 0, 16, 2], "texture": "#0", "cullface": "east"},
+				"west": {"uv": [0, 0, 8, 2], "texture": "#0"},
+				"down": {"uv": [0, 2, 8, 3], "rotation": 90, "texture": "#0"}
+			}
+		}
+	]
+}

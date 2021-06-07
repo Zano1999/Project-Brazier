@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.feature_client.model_loaders.roof_model_loader;
+package net.dark_roleplay.projectbrazier.feature_client.model_loaders.block_specific.roof_model_loader;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
