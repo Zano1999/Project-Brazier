@@ -1,0 +1,34 @@
+{
+	"loader": "projectbrazier:pane_corner_model",
+	"textures": {
+		"0": "${texture%planks}",
+		"particle": "${texture%planks}"
+	},
+	"unconditional": {
+		"parent": "projectbrazier:block/tables/solid_plate"
+	},
+	"inner_corner": [
+		{"parent": "projectbrazier:block/tables/inner_corner_1"},
+		{"parent": "projectbrazier:block/tables/inner_corner_2"},
+		{"parent": "projectbrazier:block/tables/inner_corner_3"},
+		{"parent": "projectbrazier:block/tables/inner_corner_4"}
+	],
+	"outer_corner": [
+		{"parent": "projectbrazier:block/tables/outer_corner_1"},
+		{"parent": "projectbrazier:block/tables/outer_corner_2"},
+		{"parent": "projectbrazier:block/tables/outer_corner_3"},
+		{"parent": "projectbrazier:block/tables/outer_corner_4"}
+	],
+	"horizontal": [
+		{"parent": "projectbrazier:block/tables/horizontal_1"},
+		{"parent": "projectbrazier:block/tables/horizontal_2"},
+		{"parent": "projectbrazier:block/tables/horizontal_3"},
+		{"parent": "projectbrazier:block/tables/horizontal_4"}
+	],
+	"vertical": [
+		{"parent": "projectbrazier:block/tables/vertical_1"},
+		{"parent": "projectbrazier:block/tables/vertical_2"},
+		{"parent": "projectbrazier:block/tables/vertical_3"},
+		{"parent": "projectbrazier:block/tables/vertical_4"}
+	]
+}

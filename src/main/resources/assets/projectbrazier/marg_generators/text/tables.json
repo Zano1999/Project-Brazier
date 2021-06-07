@@ -1,0 +1,23 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"planks"
+		]
+	},
+	"tasks": [
+		{
+			"input": "projectbrazier:blockstates/generator/solid_table.json",
+			"output": "projectbrazier:blockstates/solid_${material}_table.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/solid_table.json",
+			"output": "projectbrazier:models/block/solid_${material}_table.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/item/solid_table.json",
+			"output": "projectbrazier:models/item/solid_${material}_table.json"
+		}
+	]
+}
