@@ -23,6 +23,8 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -124,12 +126,11 @@ public class SelectiveBlockItem extends Item {
 		return new TranslationTextComponent(this.getTranslationKey(stack));
 	}
 
-
 	@Override
-	public String getTranslationKey() {
-		return Minecraft.getInstance().player == null ? this.blocks[0].getTranslationKey() : this.getCurrentBlock(Minecraft.getInstance().player.getGameProfile()).getTranslationKey();
+	@OnlyIn(Dist.CLIENT)
+	public ITextComponent getName() {
+		return new TranslationTextComponent(Minecraft.getInstance().player == null ? this.blocks[0].getTranslationKey() : this.getCurrentBlock(Minecraft.getInstance().player.getGameProfile()).getTranslationKey());
 	}
-
 
 	protected boolean onBlockPlaced(BlockPos pos, World worldIn, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
 		return true; //setTileEntityNBT(worldIn, player, pos, stack);
