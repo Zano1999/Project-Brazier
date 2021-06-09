@@ -1,6 +1,7 @@
 {
 	"required": true,
 	"package": "net.dark_roleplay.projectbrazier.mixin",
+	"plugin": "net.dark_roleplay.projectbrazier.mixin_helper.OptifineCompatMixinPlugin",
 	"compatibilityLevel": "JAVA_8",
 	"refmap": "projectbrazier.refmap.json",
 	"mixins": [
@@ -8,7 +9,7 @@
 		"DebugChunkGeneratorCallback"
 	],
 	"client": [
-		"ChunkRenderHook"
+		"NOFChunkRenderHook"
 	],
 	"minVersion": "0.8"
 }
