@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature_client.model_loaders.quality_model;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
+import net.dark_roleplay.projectbrazier.util.OptifineCompat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.VideoSettingsScreen;
 import net.minecraft.client.settings.SliderPercentageOption;
@@ -10,13 +11,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = ProjectBrazier.MODID)
 public class QualityModelSettings {
 
 	public static int MAX_MODEL_QUALITY = 4;
-
 	public static int MODEL_QUALITY = 2;
 	public static int TEMP_MODEL_QUALITY = 2;
 
@@ -28,6 +29,8 @@ public class QualityModelSettings {
 	@SubscribeEvent
 	public static void optionsScreenOpen(GuiScreenEvent.InitGuiEvent.Post event){
 		if(!(event.getGui() instanceof VideoSettingsScreen)) return;
+
+		if(OptifineCompat.isOFLoaded()) return;
 
 		VideoSettingsScreen screen = (VideoSettingsScreen) event.getGui();
 		screen.optionsRowList.addOption(MODEL_QUALITY_SETTING);
