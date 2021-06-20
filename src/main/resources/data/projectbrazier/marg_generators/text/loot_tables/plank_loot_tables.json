@@ -50,6 +50,10 @@
 		{
 			"input": "projectbrazier:loot_table_generators/blocks/stool.json",
 			"output": "projectbrazier:loot_tables/blocks/${material}_stool.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/solid_table.json",
+			"output": "projectbrazier:loot_tables/blocks/solid_${material}_table.json"
 		}
 	]
 }

@@ -46,6 +46,10 @@
 		{
 			"input": "projectbrazier:recipe_generators/platform.json",
 			"output": "projectbrazier:recipes/${material}_platform.json"
+		},
+		{
+			"input": "projectbrazier:recipe_generators/table.json",
+			"output": "projectbrazier:recipes/solid_${material}_table.json"
 		}
 	]
 }
