@@ -24,6 +24,14 @@
 		{
 			"input": "projectbrazier:models/generator/item/wood_platform.json",
 			"output": "projectbrazier:models/item/${material}_platform.json"
+		},
+		{
+			"input": "projectbrazier:blockstates/generator/wood_platform_stairs.json",
+			"output": "projectbrazier:blockstates/${custom}_${material}_platform_stairs.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/wood_platform_stairs.json",
+			"output": "projectbrazier:models/block/${custom}_${material}_platform_stairs.json"
 		}
 	]
 }

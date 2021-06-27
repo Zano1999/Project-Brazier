@@ -48,6 +48,14 @@
 			"output": "projectbrazier:loot_tables/blocks/bottom_${material}_platform.json"
 		},
 		{
+			"input": "projectbrazier:loot_table_generators/blocks/platform.json",
+			"output": "projectbrazier:loot_tables/blocks/top_${material}_platform_stairs.json"
+		},
+		{
+			"input": "projectbrazier:loot_table_generators/blocks/platform.json",
+			"output": "projectbrazier:loot_tables/blocks/bottom_${material}_platform_stairs.json"
+		},
+		{
 			"input": "projectbrazier:loot_table_generators/blocks/stool.json",
 			"output": "projectbrazier:loot_tables/blocks/${material}_stool.json"
 		},

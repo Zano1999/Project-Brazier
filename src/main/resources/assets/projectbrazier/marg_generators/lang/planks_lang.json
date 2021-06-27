@@ -16,6 +16,8 @@
 		"block.projectbrazier.${material}_flower_bucket": "lang_gen.projectbrazier.flower_bucket",
 		"block.projectbrazier.top_${material}_platform": "lang_gen.projectbrazier.platform",
 		"block.projectbrazier.bottom_${material}_platform": "lang_gen.projectbrazier.platform",
+		"block.projectbrazier.top_${material}_platform_stairs": "lang_gen.projectbrazier.platform",
+		"block.projectbrazier.bottom_${material}_platform_stairs": "lang_gen.projectbrazier.platform",
 		"block.projectbrazier.${material}_stool": "lang_gen.projectbrazier.stool",
 		"block.projectbrazier.solid_${material}_table": "lang_gen.projectbrazier.solid_table"
 	}
