@@ -9,7 +9,7 @@
 				"east": {"uv": [5, 5, 11, 11], "texture": "#log_top"},
 				"south": {"uv": [6, 0, 9, 16], "rotation": 90, "texture": "#log_side"},
 				"west": {"uv": [5, 5, 11, 11], "texture": "#log_top"},
-				"down": {"uv": [3, 0, 6, 16], "texture": "#log_side"}
+				"down": {"uv": [0, 3, 16, 6], "texture": "#log_side"}
 			}
 		},
 		{
