@@ -52,7 +52,9 @@ public class BrazierBlocks extends Registrar {
 			STRIPPED_LOG_CHAIR = registerBlock("stripped_${material}_log_chair", STRIPPED_LOG_CHAIR_CON, (mat, prop) -> new WoodChairBlock(prop, "log_chair"), Registrar::MARG_WOOD, true),
 			STRIPPED_LOG_BENCH = registerBlock("stripped_${material}_log_bench", STRIPPED_LOG_CHAIR_CON, (mat, prop) -> new LogBenchBlock(prop, "log_bench_single", "log_bench_multi"), Registrar::MARG_WOOD, true),
 			BOTTOM_WOOD_PLATFORM = registerBlock("bottom_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new HAxisDecoBlock(prop, "bottom_wood_platform"), Registrar::MARG_WOOD, false),
-			TOP_WOOD_PLATFORM = registerBlock("top_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new PlatformBlock(prop, "top_wood_platform"), Registrar::MARG_WOOD, false),
+			TOP_WOOD_PLATFORM = registerBlock("top_${material}_platform", WOOD_PLATFORM_CON, (mat, prop) -> new HAxisDecoBlock(prop, "top_wood_platform"), Registrar::MARG_WOOD, false),
+			BOTTOM_WOOD_PLATFORM_STAIRS = registerBlock("bottom_${material}_platform_stairs", WOOD_PLATFORM_CON, (mat, prop) -> new HFacedDecoBlock(prop, "bottom_wood_platform_stairs"), Registrar::MARG_WOOD, false),
+			TOP_WOOD_PLATFORM_STAIRS = registerBlock("top_${material}_platform_stairs", WOOD_PLATFORM_CON, (mat, prop) -> new HFacedDecoBlock(prop, "top_wood_platform_stairs"), Registrar::MARG_WOOD, false),
 			HOLLOW_LOG = registerBlock("hollow_${material}_log", STRIPPED_LOG_CON, (mat, prop) -> new AxisDecoBlock(prop, "hollow_log"), Registrar::MARG_WOOD, true),
 			STRIPPED_HOLLOW_LOG = registerBlock("stripped_hollow_${material}_log", STRIPPED_LOG_CON, (mat, prop) -> new AxisDecoBlock(prop, "hollow_log"), Registrar::MARG_WOOD, true),
 			SOLID_TABLE = registerBlock("solid_${material}_table", SOLID_TABLE_CON, (mat, prop) -> new PaneConnectedBlock(prop, "solid_table"), Registrar::MARG_WOOD, true);
@@ -175,10 +177,6 @@ public class BrazierBlocks extends Registrar {
 			BarrelBlock closedBarrel = (BarrelBlock) CLOSED_BARRELS.get(material);
 			openBarrel.setOtherBlock(closedBarrel);
 			closedBarrel.setOtherBlock(openBarrel);
-		}
-
-		for(MargMaterial material : WOOD_PLATFORM_CON) {
-			((PlatformBlock) TOP_WOOD_PLATFORM.get(material)).initOtherBlock(BOTTOM_WOOD_PLATFORM.get(material));
 		}
 	}
 }
