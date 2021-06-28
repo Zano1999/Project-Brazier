@@ -1,0 +1,23 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"planks",
+			"stripped_log_top",
+			"stripped_log"
+		]
+	},
+	"requiredTextures": {
+		"platform": "projectbrazier:generator/wood_platform"
+	},
+	"tasks": [
+		{
+			"inputType": "generator",
+			"outputType": "FILE",
+			"inputName": "platform",
+			"outputName": "projectbrazier:screen/selective_item_blocks/${material}_platform",
+			"manipulations": []
+		}
+	]
+}

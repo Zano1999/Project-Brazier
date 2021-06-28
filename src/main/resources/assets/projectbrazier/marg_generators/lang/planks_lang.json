@@ -19,6 +19,7 @@
 		"block.projectbrazier.top_${material}_platform_stairs": "lang_gen.projectbrazier.platform",
 		"block.projectbrazier.bottom_${material}_platform_stairs": "lang_gen.projectbrazier.platform",
 		"block.projectbrazier.${material}_stool": "lang_gen.projectbrazier.stool",
-		"block.projectbrazier.solid_${material}_table": "lang_gen.projectbrazier.solid_table"
+		"block.projectbrazier.solid_${material}_table": "lang_gen.projectbrazier.solid_table",
+		"item.projectbrazier.${material}_platform": "lang_gen.projectbrazier.platform"
 	}
 }
