@@ -1,0 +1,9 @@
+{
+	"parent": "projectbrazier:block/${custom}_wood_platform_stairs",
+	"textures": {
+		"log_top": "${texture%stripped_log_top}",
+		"log_side": "${texture%stripped_log}",
+		"planks": "${texture%planks}",
+		"particle": "${texture%planks}"
+	}
+}

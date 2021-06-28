@@ -32,9 +32,9 @@ import java.util.WeakHashMap;
 
 public class SelectiveBlockItem extends Item {
 
-	private Map<GameProfile, Integer> PLAYER_SELECTED = new WeakHashMap<>();
+	protected final Map<GameProfile, Integer> PLAYER_SELECTED = new WeakHashMap<>();
 
-	Block[] blocks;
+	protected Block[] blocks;
 
 	public SelectiveBlockItem(Block[] blocks, Properties builder) {
 		super(builder);

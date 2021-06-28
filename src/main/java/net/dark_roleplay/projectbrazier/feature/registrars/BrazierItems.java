@@ -8,6 +8,7 @@ import net.dark_roleplay.projectbrazier.experimental_features.selective_item_blo
 import net.dark_roleplay.projectbrazier.feature.blocks.HangingItemBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.NailBlock;
 import net.dark_roleplay.projectbrazier.feature.items.PlantSeedsItem;
+import net.dark_roleplay.projectbrazier.feature.items.PlatformBlockItem;
 import net.dark_roleplay.projectbrazier.feature.items.SpyglassItem;
 import net.dark_roleplay.projectbrazier.feature.items.WarHornItem;
 import net.minecraft.block.Block;
@@ -81,8 +82,19 @@ public class BrazierItems extends Registrar {
 		}
 
 		for(MargMaterial material : BrazierBlocks.WOOD_PLATFORM_CON){
-			BlockItem blockItem = new BlockItem(BrazierBlocks.TOP_WOOD_PLATFORM.get(material), new Item.Properties().group(BrazierCreativeTabs.decor()));
+			PlatformBlockItem blockItem = new PlatformBlockItem(new Block[]{
+					BrazierBlocks.TOP_WOOD_PLATFORM.get(material),
+					BrazierBlocks.TOP_WOOD_PLATFORM_STAIRS.get(material)
+			},new Block[]{
+					BrazierBlocks.BOTTOM_WOOD_PLATFORM.get(material),
+					BrazierBlocks.BOTTOM_WOOD_PLATFORM_STAIRS.get(material)
+			}, new Item.Properties().group(BrazierCreativeTabs.decor()));
 			reg.register(blockItem.setRegistryName(ProjectBrazier.MODID, material.getTextProvider().apply("${material}_platform")));
+
+			Item.BLOCK_TO_ITEM.put(BrazierBlocks.TOP_WOOD_PLATFORM.get(material), blockItem);
+			Item.BLOCK_TO_ITEM.put(BrazierBlocks.BOTTOM_WOOD_PLATFORM.get(material), blockItem);
+			Item.BLOCK_TO_ITEM.put(BrazierBlocks.TOP_WOOD_PLATFORM_STAIRS.get(material), blockItem);
+			Item.BLOCK_TO_ITEM.put(BrazierBlocks.BOTTOM_WOOD_PLATFORM_STAIRS.get(material), blockItem);
 		}
 	}
 
@@ -92,7 +104,6 @@ public class BrazierItems extends Registrar {
 		NailBlock.HANGABLE_ITEMS.put(BONE_WAR_HORN.get(), (HangingItemBlock) BrazierBlocks.HANGING_HORN.get());
 		NailBlock.HANGABLE_ITEMS.put(SILVER_SPYGLASS.get(), (HangingItemBlock) BrazierBlocks.HANGING_SILVER_SPYGLASS.get());
 		NailBlock.HANGABLE_ITEMS.put(GOLD_SPYGLASS.get(), (HangingItemBlock) BrazierBlocks.HANGING_GOLD_SPYGLASS.get());
-
 
 		Item.BLOCK_TO_ITEM.put(BrazierBlocks.C_STONE_BRICK_ARROW_SLIT.get(), BrazierItems.STONE_ARROW_SLIT.get());
 		Item.BLOCK_TO_ITEM.put(BrazierBlocks.H_STONE_BRICK_ARROW_SLIT.get(), BrazierItems.STONE_ARROW_SLIT.get());
