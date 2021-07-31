@@ -3,14 +3,15 @@ package net.dark_roleplay.projectbrazier.feature.registrars;
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.marg.common.material.MaterialCondition;
 import net.dark_roleplay.projectbrazier.feature.blocks.*;
+import net.dark_roleplay.projectbrazier.feature.blocks.BarrelBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.crops.AgedCropBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.*;
 import net.dark_roleplay.projectbrazier.feature_client.blocks.DisplayTickers;
 import net.dark_roleplay.projectbrazier.util.EnumMaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.marg.ConditionHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.RotatedPillarBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
@@ -132,7 +133,8 @@ public class BrazierBlocks extends Registrar {
 				public int getMaxAge() { return 7; }
 			}, Registrar.CROP, false),
 			ROPE_ANCHOR = registerBlock("rope_anchor", prop -> new RopeAnchorBlock(prop, "rope_anchor", "dropped_rope_anchor"), Registrar.ROPE, true),
-			ROPE = registerBlock("rope", prop -> new RopeBlock(prop, "rope", "rope_end"), Registrar.ROPE, false);
+			ROPE = registerBlock("rope", prop -> new RopeBlock(prop, "rope", "rope_end"), Registrar.ROPE, false),
+			GLIMMERTAIL = registerBlock("glimmertail", TallGrassBlock::new, AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT), true);
 
 	//Experimental
 //	public static final RegistryObject<Block>

@@ -1,0 +1,18 @@
+{
+	"loader": "projectbrazier:emissive",
+	"ambientocclusion": false,
+	"emissive": {
+		"parent": "minecraft:block/tinted_cross",
+		"textures": {
+			"blockLight": 2,
+			"skyLight": 0,
+			"cross": "projectbrazier:block/glimmertail_emissive"
+		}
+	},
+	"nonEmissive": {
+		"parent": "minecraft:block/tinted_cross",
+		"textures": {
+			"cross": "projectbrazier:block/glimmertail"
+		}
+	}
+}
