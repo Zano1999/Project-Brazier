@@ -44,8 +44,10 @@ if (System.getProperty("idea.sync.active") == "true") {
 
 repositories{
     mavenLocal()
+    maven {url = "https://maven.dark-roleplay.net/"}
 }
 
 dependencies{
+    implementation (fg.deobf("net.dark_roleplay.clientcommands:clientcommands-1.16.5:1.1"))
     implementation (fg.deobf("net.dark_roleplay.marg:marg-1.16.5:0.6.1"))
 }
