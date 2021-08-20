@@ -6,6 +6,8 @@ import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.B
 import net.dark_roleplay.projectbrazier.experimental_features.crafting.screens.CraftingScreen;
 import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItem;
 import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItemListeners;
+import net.dark_roleplay.projectbrazier.experimental_features.zipline.ZiplineEntity;
+import net.dark_roleplay.projectbrazier.experimental_features.zipline.ZiplineEntityRenderer;
 import net.dark_roleplay.projectbrazier.feature.registrars.*;
 import net.dark_roleplay.projectbrazier.feature_client.listeners.TertiaryInteractionListener;
 import net.dark_roleplay.projectbrazier.experimental_features.walking_gui.PassiveScreenHelper;
@@ -125,6 +127,8 @@ public class ProjectBrazierClient {
 		ClientRegistry.bindTileEntityRenderer(BrazierBlockEntities.BARREL_BLOCK_ENTITY.get(), BarrelBlockEntityRenderer::new);
 
 		RenderingRegistry.<SittableEntity>registerEntityRenderingHandler(BrazierEntities.SITTABLE.get(), SittableEntityRenderer::new);
+		RenderingRegistry.<ZiplineEntity>registerEntityRenderingHandler(BrazierEntities.ZIPLINE.get(), ZiplineEntityRenderer::new);
+
 	}
 
 	private static void setRenderLayer(RenderType type, Map<MargMaterial, RegistryObject<Block>>... materialBlockObjects){

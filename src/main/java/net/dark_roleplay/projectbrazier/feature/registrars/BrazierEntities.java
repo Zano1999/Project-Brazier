@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature.registrars;
 
 import net.dark_roleplay.projectbrazier.experimental_features.immersive_screen.CameraEntity;
+import net.dark_roleplay.projectbrazier.experimental_features.zipline.ZiplineEntity;
 import net.dark_roleplay.projectbrazier.util.sitting.SittableEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -23,6 +24,14 @@ public class BrazierEntities extends Registrar {
 							.setShouldReceiveVelocityUpdates(false)
 							.size(0.5F, 0.001F)
 							.build("sittable")
+			);
+
+	public static final RegistryObject<EntityType<ZiplineEntity>> ZIPLINE =
+			registerEntity("zipline",
+					() -> EntityType.Builder.<ZiplineEntity>create(ZiplineEntity::new, EntityClassification.MISC)
+							.disableSummoning()
+							.size(0.5F, 0.5F)
+							.build("zipline")
 			);
 
 	public static void preRegistry(){}

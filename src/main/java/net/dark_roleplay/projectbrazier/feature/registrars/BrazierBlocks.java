@@ -2,6 +2,7 @@ package net.dark_roleplay.projectbrazier.feature.registrars;
 
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.marg.common.material.MaterialCondition;
+import net.dark_roleplay.projectbrazier.experimental_features.zipline.ZiplineStarterBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.*;
 import net.dark_roleplay.projectbrazier.feature.blocks.BarrelBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.crops.AgedCropBlock;
@@ -137,7 +138,8 @@ public class BrazierBlocks extends Registrar {
 			GLIMMERTAIL = registerBlock("glimmertail", TallGrassBlock::new, AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT), true);
 
 	//Experimental
-//	public static final RegistryObject<Block>
+	public static final RegistryObject<Block>
+			ZIPLINE_STARTER = registerBlock("zipline_starter", ZiplineStarterBlock::new, Registrar.METAL, false);
 //			DRAWBRIDGE_ANCHOR = registerBlock("drawbridge_anchor", DrawbridgeAnchorBlock::new, Registrar.STONE_SOLID, false);
 //
 //	public static final EnumRegistryObject<RoofType, Block>
