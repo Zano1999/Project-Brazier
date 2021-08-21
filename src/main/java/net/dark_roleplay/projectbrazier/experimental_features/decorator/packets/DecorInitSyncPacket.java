@@ -14,15 +14,15 @@ import java.util.function.Supplier;
 public class DecorInitSyncPacket {
 
 	private ResourceLocation dimensionName;
-	private DecorChunk decor;
 	private BlockPos chunkPos;
+	private DecorChunk decor;
 
 	public DecorInitSyncPacket(){}
 
 	public DecorInitSyncPacket(ResourceLocation dimensionName, DecorChunk decor, BlockPos chunkPos) {
 		this.dimensionName = dimensionName;
-		this.decor = decor;
 		this.chunkPos = chunkPos;
+		this.decor = decor;
 	}
 
 	public ResourceLocation getDimensionName() {

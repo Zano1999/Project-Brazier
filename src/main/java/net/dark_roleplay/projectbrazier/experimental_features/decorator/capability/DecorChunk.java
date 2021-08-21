@@ -17,15 +17,19 @@ import java.util.Set;
 
 public class DecorChunk implements INBTSerializable<CompoundNBT> {
 
-	private int yCoordinate;
+	private int y;
 	private Set<DecorState> STATES = new HashSet<>();
 
 	public DecorChunk(int y){
-		this.yCoordinate = y;
+		this.y = y;
 	}
 
 	public void addDecor(DecorState decor){
 		STATES.add(decor);
+	}
+
+	public void removeDecor(DecorState decor) {
+		STATES.remove(decor);
 	}
 
 	@Override
@@ -46,9 +50,10 @@ public class DecorChunk implements INBTSerializable<CompoundNBT> {
 		for(Decor decor : palette)
 			paletteTag.add(StringNBT.valueOf(decor.getRegistryName().toString()));
 
+		chunk.putInt("y", this.y);
+
 		chunk.put("palette", paletteTag);
 		chunk.put("states", states);
-		chunk.putInt("verticalPos", this.yCoordinate);
 
 		return chunk;
 	}
@@ -61,7 +66,7 @@ public class DecorChunk implements INBTSerializable<CompoundNBT> {
 		for(int i = 0; i < paletteTag.size(); i ++)
 			palette.add(DecorRegistrar.REGISTRY.getValue(new ResourceLocation(paletteTag.getString(i))));
 
-		this.yCoordinate = nbt.getInt("verticalPos");
+		this.y = nbt.getInt("y");
 
 		ListNBT statesTag = nbt.getList("states", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < statesTag.size(); i++){
@@ -76,7 +81,7 @@ public class DecorChunk implements INBTSerializable<CompoundNBT> {
 		return STATES;
 	}
 
-	public int getVertical() {
-		return yCoordinate;
+	public int getY() {
+		return y;
 	}
 }

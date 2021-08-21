@@ -18,7 +18,11 @@ public class DecorContainerProvider implements ICapabilitySerializable<CompoundN
 	public static final ResourceLocation NAME = new ResourceLocation(ProjectBrazier.MODID, "decor_container");
 
 	private DecorContainer cap;
-	private final LazyOptional<DecorContainer> lazyCap = LazyOptional.of(() -> cap == null ? cap = new DecorContainer() : cap);
+	private final LazyOptional<DecorContainer> lazyCap;
+
+	public DecorContainerProvider(){
+		lazyCap = LazyOptional.of(() -> cap == null ? cap = new DecorContainer() : cap);
+	}
 
 	@Nonnull
 	@Override

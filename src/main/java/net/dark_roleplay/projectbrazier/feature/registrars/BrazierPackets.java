@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature.registrars;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
+import net.dark_roleplay.projectbrazier.experimental_features.decorator.packets.DecorBreakPacket;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.packets.DecorInitSyncPacket;
 import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItemPacket;
 import net.dark_roleplay.projectbrazier.feature.packets.TertiaryInteractionPacket;
@@ -26,5 +27,6 @@ public class BrazierPackets {
 		CHANNEL.registerMessage(1, DecorInitSyncPacket.class, DecorInitSyncPacket::encode, DecorInitSyncPacket::decode, DecorInitSyncPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		CHANNEL.registerMessage(2, TertiaryInteractionPacket.class, TertiaryInteractionPacket::encode, TertiaryInteractionPacket::decode, TertiaryInteractionPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
 		CHANNEL.registerMessage(3, SelectiveBlockItemPacket.class, SelectiveBlockItemPacket::encode, SelectiveBlockItemPacket::decode, SelectiveBlockItemPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
+		CHANNEL.registerMessage(4, DecorBreakPacket.class, DecorBreakPacket::encode, DecorBreakPacket::decode, DecorBreakPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
 	}
 }

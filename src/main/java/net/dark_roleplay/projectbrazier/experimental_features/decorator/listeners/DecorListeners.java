@@ -30,7 +30,7 @@ public class DecorListeners {
 						new DecorInitSyncPacket(
 								event.getWorld().getDimensionKey().getRegistryName(),
 								decorChunk,
-								new BlockPos(chunk.getPos().x << 4, decorChunk.getVertical() << 4, chunk.getPos().z << 4)
+								new BlockPos(chunk.getPos().x << 4, decorChunk.getY() << 4, chunk.getPos().z << 4)
 						),
 						event.getPlayer().connection.getNetworkManager(),
 						NetworkDirection.PLAY_TO_CLIENT);

@@ -226,5 +226,10 @@
 	},
 	"stone_arrow_slit": {
 		"ItemGroup": "deco"
+	},
+	"wooden_mallet": {
+		"ItemGroup": "misc",
+		"MaxCount": 1,
+		"MaxDamage": 128
 	}
 }

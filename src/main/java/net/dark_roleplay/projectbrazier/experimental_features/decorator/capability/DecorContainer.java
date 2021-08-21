@@ -3,7 +3,6 @@ package net.dark_roleplay.projectbrazier.experimental_features.decorator.capabil
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.INBTSerializable;
 
 import java.util.Collection;
@@ -40,7 +39,7 @@ public class DecorContainer implements INBTSerializable<ListNBT> {
 		for(INBT compound : nbt){
 			DecorChunk chunk = new DecorChunk(0);
 			chunk.deserializeNBT((CompoundNBT) compound);
-			DECOR_CHUNKS.put(chunk.getVertical(), chunk);
+			DECOR_CHUNKS.put(chunk.getY(), chunk);
 		}
 	}
 }

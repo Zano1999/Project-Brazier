@@ -1,25 +1,24 @@
 package net.dark_roleplay.projectbrazier;
 
-import com.google.common.eventbus.EventBus;
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.BuiltinMixedModel;
 import net.dark_roleplay.projectbrazier.experimental_features.crafting.screens.CraftingScreen;
-import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItem;
-import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItemListeners;
-import net.dark_roleplay.projectbrazier.feature.registrars.*;
-import net.dark_roleplay.projectbrazier.feature_client.listeners.TertiaryInteractionListener;
-import net.dark_roleplay.projectbrazier.experimental_features.walking_gui.PassiveScreenHelper;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorClientListener;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorListener;
+import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItem;
+import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItemListeners;
+import net.dark_roleplay.projectbrazier.experimental_features.walking_gui.PassiveScreenHelper;
+import net.dark_roleplay.projectbrazier.feature.registrars.*;
 import net.dark_roleplay.projectbrazier.feature_client.blockentityrenderers.BarrelBlockEntityRenderer;
+import net.dark_roleplay.projectbrazier.feature_client.listeners.TertiaryInteractionListener;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.axis_connected_models.AxisConnectedModel;
+import net.dark_roleplay.projectbrazier.feature_client.model_loaders.block_specific.roof_model_loader.RoofModelLoader;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.emissive.EmissiveModel;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.pane_connected_model.PaneCornerModel;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.quality_model.QualityModelLoader;
-import net.dark_roleplay.projectbrazier.feature_client.model_loaders.block_specific.roof_model_loader.RoofModelLoader;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.simple_pane_conneted_model.SimplePaneConnectedModel;
-import net.dark_roleplay.projectbrazier.feature_client.screens.GeneralContainerScreen;
 import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybinds;
+import net.dark_roleplay.projectbrazier.feature_client.screens.GeneralContainerScreen;
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.sitting.SittableEntity;
 import net.dark_roleplay.projectbrazier.util.sitting.SittableEntityRenderer;
@@ -39,7 +38,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -51,7 +49,10 @@ public class ProjectBrazierClient {
 	public static void modConstructor(){
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(ProjectBrazierClient::setupClientStuff);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(ProjectBrazierClient::registerModelLoaders);
+
 		MinecraftForge.EVENT_BUS.addListener(DecorListener::bakeChunk);
+		MinecraftForge.EVENT_BUS.addListener(DecorListener::clientTick);
+
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(DecorClientListener::registerModels);
 
 		MinecraftForge.EVENT_BUS.addListener(TertiaryInteractionListener::renderBlockOverlay);
