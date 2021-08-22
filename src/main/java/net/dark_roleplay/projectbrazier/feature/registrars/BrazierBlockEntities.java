@@ -1,5 +1,6 @@
 package net.dark_roleplay.projectbrazier.feature.registrars;
 
+import net.dark_roleplay.projectbrazier.experimental_features.zipline.ZiplineBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.blockentities.BarrelBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.blockentities.FlowerContainerBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.blockentities.HangingItemBlockEntity;
@@ -21,6 +22,9 @@ public class BrazierBlockEntities extends Registrar {
 
 	public static final RegistryObject<TileEntityType<FlowerContainerBlockEntity>>
 			FLOWER_CONTAINER = registerBlockEntity("flower_container", FlowerContainerBlockEntity::new, BrazierBlocks.FLOWER_BUCKET.values(), BrazierBlocks.FLOWER_BARRELS.values());
+
+	public static final RegistryObject<TileEntityType<ZiplineBlockEntity>>
+			ZIPLINE = registerBlockEntity("zipline", ZiplineBlockEntity::new, BrazierBlocks.ZIPLINE_STARTER);
 
 
 	public static void preRegistry(){}

@@ -1,13 +1,22 @@
 package net.dark_roleplay.projectbrazier.experimental_features.zipline;
 
+import net.dark_roleplay.projectbrazier.util.NBTUtil2;
+import net.dark_roleplay.projectbrazier.util.VectorUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.network.datasync.IDataSerializer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.Rotations;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,8 +26,30 @@ import org.lwjgl.system.MathUtil;
 
 public class ZiplineEntity extends Entity {
 
+	public static final IDataSerializer<Vector3f> VECTOR = new IDataSerializer<Vector3f>() {
+		public void write(PacketBuffer buf, Vector3f value) {
+			buf.writeFloat(value.getX());
+			buf.writeFloat(value.getY());
+			buf.writeFloat(value.getZ());
+		}
 
-	Vector3d bezierStart, bezierEnd, bezierMid;
+		public Vector3f read(PacketBuffer buf) {
+			return new Vector3f(buf.readFloat(), buf.readFloat(), buf.readFloat());
+		}
+
+		public Vector3f copyValue(Vector3f value) {
+			return new Vector3f(value.getX(), value.getY(), value.getZ());
+		}
+	};
+
+	static{
+		DataSerializers.registerSerializer(VECTOR);
+	}
+
+	private static final DataParameter<Vector3f> START = EntityDataManager.createKey(ZiplineEntity.class, VECTOR);
+	private static final DataParameter<Vector3f> END = EntityDataManager.createKey(ZiplineEntity.class, VECTOR);
+	private static final DataParameter<Vector3f> MID = EntityDataManager.createKey(ZiplineEntity.class, VECTOR);
+
 	double[] LUT;
 
 	float accel = 0.01F;
@@ -26,31 +57,36 @@ public class ZiplineEntity extends Entity {
 	double dist = 0F;
 
 	public ZiplineEntity(EntityType<?> type, World world) {
-		this(type, world, new Vector3d(350, 75, 0), new Vector3d(400, 60, 10), new Vector3d(375, 50, 5));
+		this(type, world, new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), new Vector3f(0, 0, 0));
 	}
 
-	public ZiplineEntity(EntityType<?> type, World world, Vector3d start, Vector3d end, Vector3d mid) {
+	public ZiplineEntity(EntityType<?> type, World world, Vector3f start, Vector3f end, Vector3f mid) {
 		super(type, world);
+
+		start.add(0, -3, 0);
+		end.add(0, -3, 0);
+		mid.add(0, -3, 0);
+
+		this.setBezierStart(start);
+		this.setBezierEnd(end);
+		this.setBezierMid(mid);
 
 		long millisStart = System.currentTimeMillis();
 
-		this.bezierStart = start.add(0, -3, 0);
-		this.bezierEnd = end.add(0, -3, 0);
-		this.bezierMid = mid.add(0, -3, 0);
 
-		this.rotationYaw = (float) (Math.atan2(bezierEnd.z - bezierStart.z, bezierEnd.x - bezierStart.x) * 180/Math.PI) - 90;
+		this.rotationYaw = (float) (Math.atan2(end.getZ() - start.getZ(), end.getX() - start.getX()) * 180/Math.PI) - 90;
 		this.prevRotationYaw = rotationYaw;
 
-		this.setPosition(bezierStart.x, bezierStart.y, bezierStart.z);
+		this.setPosition(start.getX(), start.getY(), start.getZ());
 
 		int steps = 100;
 		LUT = new double[steps + 1];
 		double currentDistance = 0;
-		Vector3d currentPos = bezierStart;
+		Vector3f currentPos = start;
 		LUT[0] = 0;
 		for(int i = 1; i <= steps; i++){
-			Vector3d bezierPos = getBezierPos(bezierStart, bezierEnd, bezierMid, ((float)i)/steps);
-			currentDistance += currentPos.distanceTo(bezierPos);
+			Vector3f bezierPos = getBezierPos(start, end, mid, ((float)i)/steps);
+			currentDistance += VectorUtils.getDistance(currentPos, bezierPos);
 			currentPos = bezierPos;
 			LUT[i] = currentDistance;
 		}
@@ -60,22 +96,27 @@ public class ZiplineEntity extends Entity {
 
 	@Override
 	protected void registerData() {
-
+		this.dataManager.register(START, new Vector3f(0, 0, 0));
+		this.dataManager.register(END, new Vector3f(0, 0, 0));
+		this.dataManager.register(MID, new Vector3f(0, 0, 0));
 	}
 
 	@Override
 	protected void readAdditional(CompoundNBT compound) {
-
+		compound.put("start", NBTUtil2.writeVector3f(this.getBezierStart()));
+		compound.put("end", NBTUtil2.writeVector3f(this.getBezierEnd()));
+		compound.put("mid", NBTUtil2.writeVector3f(this.getBezierMid()));
 	}
 
 	@Override
 	protected void writeAdditional(CompoundNBT compound) {
-
+		this.setBezierMid(NBTUtil2.readVector3f(compound.getCompound("start")));
+		this.setBezierEnd(NBTUtil2.readVector3f(compound.getCompound("end")));
+		this.setBezierMid(NBTUtil2.readVector3f(compound.getCompound("mid")));
 	}
 
 	@Override
-	public boolean shouldRiderSit()
-	{
+	public boolean shouldRiderSit() {
 		return false;
 	}
 
@@ -104,16 +145,16 @@ public class ZiplineEntity extends Entity {
 
 		double progress = distToT(LUT, dist);
 
-		if(progress >= 1F){
+		if(progress >= 1F && !this.getEntityWorld().isRemote){
 			this.remove();
 		}
 
-		Vector3d newPos = getBezierPos(bezierStart, bezierEnd, bezierMid, progress);
+		Vector3f newPos = getBezierPos(this.getBezierStart(), this.getBezierEnd(), this.getBezierMid(), progress);
 		//Handle actual movement, client & server side
 		if (!this.world.isRemote) {
-			this.setPosition(newPos.x, newPos.y, newPos.z);
+			this.setPosition(newPos.getX(), newPos.getY(), newPos.getZ());
 		} else {
-			this.setRawPosition(newPos.x, newPos.y, newPos.z);
+			this.setRawPosition(newPos.getX(), newPos.getY(), newPos.getZ());
 		}
 
 		if (!this.getEntityWorld().isRemote && !this.isBeingRidden()) this.remove();
@@ -129,16 +170,9 @@ public class ZiplineEntity extends Entity {
 		super.removePassenger(passenger);
 
 		double progress = distToT(LUT, this.dist + this.speed);
-		passenger.setMotion(getBezierPos(bezierStart, bezierEnd, bezierMid, progress).subtract(this.getPositionVec()).mul(50, 1, 50));
+//		passenger.setMotion(VectorUtils.subtract(getBezierPos(bezierStart, bezierEnd, bezierMid, progress), this.getPositionVec()).m(50, 1, 50));
 	}
 
-	private static Vector3d lerpVector(Vector3d a, Vector3d b, double pct){
-		return new Vector3d(
-				MathHelper.lerp(pct, a.x, b.x),
-				MathHelper.lerp(pct, a.y, b.y),
-				MathHelper.lerp(pct, a.z, b.z)
-		);
-	}
 
 	public static double distToT(double[] lut, double distance){
 		double arcLength = lut[lut.length -1];
@@ -152,9 +186,33 @@ public class ZiplineEntity extends Entity {
 		return distance/arcLength; //distance is outside bezier curve
 	}
 
-	public static Vector3d getBezierPos(Vector3d bezierStart, Vector3d bezierEnd, Vector3d bezierMid, double progress){
-		Vector3d a = lerpVector(bezierStart, bezierMid, progress);
-		Vector3d b = lerpVector(bezierMid, bezierEnd, progress);
-		return lerpVector(a, b, progress);
+	public static Vector3f getBezierPos(Vector3f bezierStart, Vector3f bezierEnd, Vector3f bezierMid, double progress){
+		Vector3f a = VectorUtils.lerpVector(bezierStart, bezierMid, progress);
+		Vector3f b = VectorUtils.lerpVector(bezierMid, bezierEnd, progress);
+		return VectorUtils.lerpVector(a, b, progress);
+	}
+
+	public Vector3f getBezierStart() {
+		return this.dataManager.get(START);
+	}
+
+	public Vector3f getBezierEnd() {
+		return this.dataManager.get(END);
+	}
+
+	public Vector3f getBezierMid() {
+		return this.dataManager.get(MID);
+	}
+
+	public void setBezierStart(Vector3f bezierStart) {
+		this.dataManager.set(START, bezierStart);
+	}
+
+	public void setBezierEnd(Vector3f bezierEnd) {
+		this.dataManager.set(END, bezierEnd);
+	}
+
+	public void setBezierMid(Vector3f bezierMid) {
+		this.dataManager.set(MID, bezierMid);
 	}
 }

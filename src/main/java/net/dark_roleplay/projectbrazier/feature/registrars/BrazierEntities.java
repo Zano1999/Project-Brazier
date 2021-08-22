@@ -30,6 +30,7 @@ public class BrazierEntities extends Registrar {
 			registerEntity("zipline",
 					() -> EntityType.Builder.<ZiplineEntity>create(ZiplineEntity::new, EntityClassification.MISC)
 							.disableSummoning()
+							.setUpdateInterval(10)
 							.size(0.5F, 0.5F)
 							.build("zipline")
 			);
