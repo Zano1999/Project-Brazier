@@ -43,6 +43,10 @@ if (System.getProperty("idea.sync.active") == "true") {
 }
 
 repositories{
+    maven {
+        name = 'Dark Roleplay Maven'
+        url = 'https://maven.dark-roleplay.net'
+    }
     mavenLocal()
 }
 

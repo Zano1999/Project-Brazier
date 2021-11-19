@@ -1,8 +1,0 @@
-{
-	"variants": {
-		"facing=south": {"model":  "projectbrazier:block/roofs/full_roof"},
-		"facing=west": {"model":  "projectbrazier:block/roofs/full_roof", "y": 90},
-		"facing=north": {"model":  "projectbrazier:block/roofs/full_roof", "y": 180},
-		"facing=east": {"model":  "projectbrazier:block/roofs/full_roof", "y": 270}
-	}
-}

@@ -1,8 +1,0 @@
-{
-	"loader": "projectbrazier:roof",
-	"textures": {
-		"particle": "projectbrazier:block/roofs/shingles",
-		"roof_shingle": "projectbrazier:block/roofs/shingles",
-		"bottom": "projectbrazier:block/roofs/shingles"
-	}
-}

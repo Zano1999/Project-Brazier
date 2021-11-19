@@ -1,0 +1,11 @@
+{
+	"loader": "forge:obj",
+	"model": "projectbrazier:models/obj/block/roofs/steep_roof_bottom.obj",
+	"flip-v": true,
+	"diffuseLighting": true,
+	"textures": {
+		"particle": "projectbrazier:block/roofs/shingles",
+		"shingles": "projectbrazier:block/roofs/shingles",
+		"wood": "projectbrazier:block/roofs/planks_treated_wood"
+	}
+}

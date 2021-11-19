@@ -43,7 +43,11 @@ public class Registrar {
 	protected static <T extends Enum<T>, B extends Block> EnumMaterialRegistryObject<T, B> registerBlock(String name, Class<T> clazz, MaterialCondition condition, Function<AbstractBlock.Properties, B> supplier, Function<MargMaterial, AbstractBlock.Properties> propertyFactory, boolean registerItem) {
 		EnumMaterialRegistryObject<T, B> regObj = new EnumMaterialRegistryObject<>(clazz);
 		for (T type : clazz.getEnumConstants()) {
-			String enumizedName = String.format(name, type.name().toLowerCase(Locale.ROOT));
+			String enumizedName = "";
+			if(type instanceof IFancyNamer)
+				enumizedName = ((IFancyNamer) type).processFancyName(name);
+			else
+				enumizedName = String.format(name, type.name().toLowerCase(Locale.ROOT));
 			for (MargMaterial material : condition) {
 				regObj.register(type, material, registerBlock(material.getTextProvider().apply(enumizedName), supplier, propertyFactory.apply(material),registerItem));
 			}
@@ -59,7 +63,11 @@ public class Registrar {
 		EnumRegistryObject<T, B> regObj = new EnumRegistryObject<>(clazz);
 		for (T type : clazz.getEnumConstants())
 			if(filter.test(type))
-				regObj.register(type, registerBlock(String.format(name, type.name().toLowerCase(Locale.ROOT)), supplier, props, registerItem));
+				if(type instanceof IFancyNamer)
+					regObj.register(type, registerBlock(((IFancyNamer) type).processFancyName(name), supplier, props, registerItem));
+				else
+					regObj.register(type, registerBlock(String.format(name, type.name().toLowerCase(Locale.ROOT)), supplier, props, registerItem));
+
 		return regObj;
 	}
 

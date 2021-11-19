@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=south": {"model":  "projectbrazier:block/roofs/shallow_roof_top"},
+		"facing=west": {"model":  "projectbrazier:block/roofs/shallow_roof_top", "y": 90},
+		"facing=north": {"model":  "projectbrazier:block/roofs/shallow_roof_top", "y": 180},
+		"facing=east": {"model":  "projectbrazier:block/roofs/shallow_roof_top", "y": 270}
+	}
+}

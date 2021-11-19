@@ -2,12 +2,16 @@ package net.dark_roleplay.projectbrazier.feature.registrars;
 
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.marg.common.material.MaterialCondition;
+import net.dark_roleplay.projectbrazier.experimental_features.roofs.RoofBlock;
+import net.dark_roleplay.projectbrazier.experimental_features.roofs.RoofCornerBlock;
+import net.dark_roleplay.projectbrazier.experimental_features.roofs.RoofType;
 import net.dark_roleplay.projectbrazier.feature.blocks.*;
 import net.dark_roleplay.projectbrazier.feature.blocks.BarrelBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.crops.AgedCropBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.*;
 import net.dark_roleplay.projectbrazier.feature_client.blocks.DisplayTickers;
 import net.dark_roleplay.projectbrazier.util.EnumMaterialRegistryObject;
+import net.dark_roleplay.projectbrazier.util.EnumRegistryObject;
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.marg.ConditionHelper;
 import net.minecraft.block.*;
@@ -140,10 +144,10 @@ public class BrazierBlocks extends Registrar {
 //	public static final RegistryObject<Block>
 //			DRAWBRIDGE_ANCHOR = registerBlock("drawbridge_anchor", DrawbridgeAnchorBlock::new, Registrar.STONE_SOLID, false);
 //
-//	public static final EnumRegistryObject<RoofType, Block>
-//			STRAIGHT_ROOFS	= registerBlock("%s_clay_shingle_roof", RoofType.class, prop -> new RoofBlock(prop, "placeholder"), Registrar.STONE, false),
-//			INNER_CORNER_ROOFS	= registerBlock("inner_corner_%s_clay_shingle_roof", RoofType.class, type -> type.doesGenerateCorners(), prop -> new RoofCornerBlock(prop, "placeholder"), Registrar.STONE, false),
-//			OUTER_CORNER_ROOFS	= registerBlock("outer_corner_%s_clay_shingle_roof", RoofType.class, type -> type.doesGenerateCorners(), prop -> new RoofCornerBlock(prop, "placeholder"), Registrar.STONE, false);
+	public static final EnumRegistryObject<RoofType, Block>
+			STRAIGHT_ROOFS	= registerBlock("clay_shingle_roof", RoofType.class, prop -> new RoofBlock(prop, "placeholder"), Registrar.STONE, false);
+			//INNER_CORNER_ROOFS	= registerBlock("inner_corner_%s_clay_shingle_roof", RoofType.class, type -> type.doesGenerateCorners(), prop -> new RoofCornerBlock(prop, "placeholder"), Registrar.STONE, false),
+			//OUTER_CORNER_ROOFS	= registerBlock("outer_corner_%s_clay_shingle_roof", RoofType.class, type -> type.doesGenerateCorners(), prop -> new RoofCornerBlock(prop, "placeholder"), Registrar.STONE, false);
 
 	public static void preRegistry(){}
 
