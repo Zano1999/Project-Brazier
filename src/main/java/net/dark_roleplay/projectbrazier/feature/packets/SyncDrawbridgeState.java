@@ -20,7 +20,7 @@ public class SyncDrawbridgeState {
 	public SyncDrawbridgeState(DrawbridgeAnchorTileEntity te){
 		this.state = te.getMovementState();
 		this.angle = te.getAngle();
-		this.pos = te.getPos();
+		this.pos = te.getBlockPos();
 	}
 
 	public static void encode(SyncDrawbridgeState pkt, PacketBuffer buffer){
@@ -41,7 +41,7 @@ public class SyncDrawbridgeState {
 	public static void handle(SyncDrawbridgeState pkt, Supplier<NetworkEvent.Context> ctxSupplier){
 		NetworkEvent.Context ctx = ctxSupplier.get();
 		ctx.enqueueWork(() -> {
-			TileEntity te = Minecraft.getInstance().world.getTileEntity(pkt.pos);
+			TileEntity te = Minecraft.getInstance().level.getBlockEntity(pkt.pos);
 			if(te != null && te instanceof DrawbridgeAnchorTileEntity){
 				DrawbridgeAnchorTileEntity anchorTe = (DrawbridgeAnchorTileEntity) te;
 				anchorTe.setAngle(pkt.angle);

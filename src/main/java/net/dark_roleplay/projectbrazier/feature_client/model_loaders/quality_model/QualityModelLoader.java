@@ -18,7 +18,7 @@ public class QualityModelLoader implements IModelLoader {
 
 	@Override
 	public IModelGeometry read(JsonDeserializationContext deserializationContext, JsonObject modelContents) {
-		JsonObject textures = JSONUtils.getJsonObject(modelContents, "textures", null);
+		JsonObject textures = JSONUtils.getAsJsonObject(modelContents, "textures", null);
 
 		for (int i = QualityModelSettings.MODEL_QUALITY; i >= 0 && i <= QualityModelSettings.MAX_MODEL_QUALITY; i--)
 			if (modelContents.has("" + i))

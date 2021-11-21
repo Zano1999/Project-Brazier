@@ -17,6 +17,8 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class FacedLatticeBlock extends Block {
 
 	protected static final DirectionProperty FACING = BlockStateProperties.FACING;
@@ -35,76 +37,76 @@ public class FacedLatticeBlock extends Block {
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return shapes.get(state.get(FACING));
+		return shapes.get(state.getValue(FACING));
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		double hitX = context.getHitVec().getX() - context.getPos().getX();
-		double hitY = context.getHitVec().getY() - context.getPos().getY();
-		double hitZ = context.getHitVec().getZ() - context.getPos().getZ();
+		double hitX = context.getClickLocation().x() - context.getClickedPos().getX();
+		double hitY = context.getClickLocation().y() - context.getClickedPos().getY();
+		double hitZ = context.getClickLocation().z() - context.getClickedPos().getZ();
 
-		Direction.Axis playerAxis = context.getPlacementHorizontalFacing().getAxis();
+		Direction.Axis playerAxis = context.getHorizontalDirection().getAxis();
 
-		if (context.getFace().getAxis() == Direction.Axis.Y) {
+		if (context.getClickedFace().getAxis() == Direction.Axis.Y) {
 			if (hitX > 0.75 && playerAxis == Direction.Axis.X) {
-				return this.getDefaultState().with(FACING, Direction.EAST);
+				return this.defaultBlockState().setValue(FACING, Direction.EAST);
 			} else if (hitX < 0.25 && playerAxis == Direction.Axis.X) {
-				return this.getDefaultState().with(FACING, Direction.WEST);
+				return this.defaultBlockState().setValue(FACING, Direction.WEST);
 			} else if (hitZ > 0.75 && playerAxis == Direction.Axis.Z) {
-				return this.getDefaultState().with(FACING, Direction.SOUTH);
+				return this.defaultBlockState().setValue(FACING, Direction.SOUTH);
 			} else if (hitZ < 0.25 && playerAxis == Direction.Axis.Z) {
-				return this.getDefaultState().with(FACING, Direction.NORTH);
+				return this.defaultBlockState().setValue(FACING, Direction.NORTH);
 			} else {
-				return this.otherBlock.getDefaultState().with(AxisLatticeBlock.AXIS, context.getPlacementHorizontalFacing().getAxis());
+				return this.otherBlock.defaultBlockState().setValue(AxisLatticeBlock.AXIS, context.getHorizontalDirection().getAxis());
 			}
-		} else if (context.getFace().getAxis() == Direction.Axis.Z) {
+		} else if (context.getClickedFace().getAxis() == Direction.Axis.Z) {
 			if (hitY > 0.75) {
-				return this.getDefaultState().with(FACING, Direction.UP);
+				return this.defaultBlockState().setValue(FACING, Direction.UP);
 			} else if (hitY < 0.25) {
-				return this.getDefaultState().with(FACING, Direction.DOWN);
+				return this.defaultBlockState().setValue(FACING, Direction.DOWN);
 			}
 			if (hitX > 0.75) {
-				return this.getDefaultState().with(FACING, Direction.EAST);
+				return this.defaultBlockState().setValue(FACING, Direction.EAST);
 			} else if (hitX < 0.25) {
-				return this.getDefaultState().with(FACING, Direction.WEST);
+				return this.defaultBlockState().setValue(FACING, Direction.WEST);
 			} else {
-				return this.otherBlock.getDefaultState().with(AxisLatticeBlock.AXIS, Direction.Axis.Y);
+				return this.otherBlock.defaultBlockState().setValue(AxisLatticeBlock.AXIS, Direction.Axis.Y);
 			}
-		} else if (context.getFace().getAxis() == Direction.Axis.X) {
+		} else if (context.getClickedFace().getAxis() == Direction.Axis.X) {
 			if (hitY > 0.75) {
-				return this.getDefaultState().with(FACING, Direction.UP);
+				return this.defaultBlockState().setValue(FACING, Direction.UP);
 			} else if (hitY < 0.25) {
-				return this.getDefaultState().with(FACING, Direction.DOWN);
+				return this.defaultBlockState().setValue(FACING, Direction.DOWN);
 			} else if (hitZ > 0.75) {
-				return this.getDefaultState().with(FACING, Direction.SOUTH);
+				return this.defaultBlockState().setValue(FACING, Direction.SOUTH);
 			} else if (hitZ < 0.25) {
-				return this.getDefaultState().with(FACING, Direction.NORTH);
+				return this.defaultBlockState().setValue(FACING, Direction.NORTH);
 			} else {
-				return this.otherBlock.getDefaultState().with(AxisLatticeBlock.AXIS, Direction.Axis.Y);
+				return this.otherBlock.defaultBlockState().setValue(AxisLatticeBlock.AXIS, Direction.Axis.Y);
 			}
 		}
 
-		return this.getDefaultState().with(FACING, Direction.UP);
+		return this.defaultBlockState().setValue(FACING, Direction.UP);
 	}
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.with(FACING, rot.rotate(state.get(FACING)));
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
 
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
 		return false;
 	}
 }

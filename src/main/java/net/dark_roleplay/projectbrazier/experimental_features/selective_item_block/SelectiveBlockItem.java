@@ -30,6 +30,8 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import net.minecraft.item.Item.Properties;
+
 public class SelectiveBlockItem extends Item {
 
 	protected final Map<GameProfile, Integer> PLAYER_SELECTED = new WeakHashMap<>();
@@ -42,9 +44,9 @@ public class SelectiveBlockItem extends Item {
 	}
 
 	@Override
-	public ActionResultType onItemUse(ItemUseContext context) {
+	public ActionResultType useOn(ItemUseContext context) {
 		ActionResultType actionresulttype = this.tryPlace(new BlockItemUseContext(context));
-		return !actionresulttype.isSuccessOrConsume() && this.isFood() ? this.onItemRightClick(context.getWorld(), context.getPlayer(), context.getHand()).getType() : actionresulttype;
+		return !actionresulttype.consumesAction() && this.isEdible() ? this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult() : actionresulttype;
 	}
 
 	public ActionResultType tryPlace(BlockItemUseContext context) {
@@ -61,16 +63,16 @@ public class SelectiveBlockItem extends Item {
 				} else if (!this.placeBlock(blockitemusecontext, blockstate)) {
 					return ActionResultType.FAIL;
 				} else {
-					BlockPos blockpos = blockitemusecontext.getPos();
-					World world = blockitemusecontext.getWorld();
+					BlockPos blockpos = blockitemusecontext.getClickedPos();
+					World world = blockitemusecontext.getLevel();
 					PlayerEntity playerentity = blockitemusecontext.getPlayer();
-					ItemStack itemstack = blockitemusecontext.getItem();
+					ItemStack itemstack = blockitemusecontext.getItemInHand();
 					BlockState blockstate1 = world.getBlockState(blockpos);
 					Block block = blockstate1.getBlock();
 					if (block == blockstate.getBlock()) {
 						blockstate1 = this.getStateFromItem(blockpos, world, itemstack, blockstate1);
 						this.onBlockPlaced(blockpos, world, playerentity, itemstack, blockstate1);
-						block.onBlockPlacedBy(world, blockpos, blockstate1, playerentity, itemstack);
+						block.setPlacedBy(world, blockpos, blockstate1, playerentity, itemstack);
 						if (playerentity instanceof ServerPlayerEntity) {
 							CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity)playerentity, blockpos, itemstack);
 						}
@@ -78,11 +80,11 @@ public class SelectiveBlockItem extends Item {
 
 					SoundType soundtype = blockstate1.getSoundType(world, blockpos, context.getPlayer());
 					world.playSound(playerentity, blockpos, this.getPlaceSound(blockstate1, world, blockpos, context.getPlayer()), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-					if (playerentity == null || !playerentity.abilities.isCreativeMode) {
+					if (playerentity == null || !playerentity.abilities.instabuild) {
 						itemstack.shrink(1);
 					}
 
-					return ActionResultType.func_233537_a_(world.isRemote);
+					return ActionResultType.sidedSuccess(world.isClientSide);
 				}
 			}
 		}
@@ -95,8 +97,8 @@ public class SelectiveBlockItem extends Item {
 
 	protected boolean canPlace(BlockItemUseContext context, BlockState state) {
 		PlayerEntity playerentity = context.getPlayer();
-		ISelectionContext iselectioncontext = playerentity == null ? ISelectionContext.dummy() : ISelectionContext.forEntity(playerentity);
-		return (state.isValidPosition(context.getWorld(), context.getPos())) && context.getWorld().placedBlockCollides(state, context.getPos(), iselectioncontext);
+		ISelectionContext iselectioncontext = playerentity == null ? ISelectionContext.empty() : ISelectionContext.of(playerentity);
+		return (state.canSurvive(context.getLevel(), context.getClickedPos())) && context.getLevel().isUnobstructed(state, context.getClickedPos(), iselectioncontext);
 	}
 
 	private BlockState getStateFromItem(BlockPos pos, World world, ItemStack itemStack, BlockState state) {
@@ -104,32 +106,32 @@ public class SelectiveBlockItem extends Item {
 		CompoundNBT compoundnbt = itemStack.getTag();
 		if (compoundnbt != null) {
 			CompoundNBT compoundnbt1 = compoundnbt.getCompound("BlockStateTag");
-			StateContainer<Block, BlockState> statecontainer = state.getBlock().getStateContainer();
+			StateContainer<Block, BlockState> statecontainer = state.getBlock().getStateDefinition();
 
-			for(String s : compoundnbt1.keySet()) {
+			for(String s : compoundnbt1.getAllKeys()) {
 				Property<?> property = statecontainer.getProperty(s);
 				if (property != null) {
-					String s1 = compoundnbt1.get(s).getString();
+					String s1 = compoundnbt1.get(s).getAsString();
 					blockstate = setValueByString(blockstate, property, s1);
 				}
 			}
 		}
 
 		if (blockstate != state) {
-			world.setBlockState(pos, blockstate, 2);
+			world.setBlock(pos, blockstate, 2);
 		}
 
 		return blockstate;
 	}
 
-	public ITextComponent getDisplayName(ItemStack stack) {
-		return new TranslationTextComponent(this.getTranslationKey(stack));
+	public ITextComponent getName(ItemStack stack) {
+		return new TranslationTextComponent(this.getDescriptionId(stack));
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public ITextComponent getName() {
-		return new TranslationTextComponent(Minecraft.getInstance().player == null ? this.blocks[0].getTranslationKey() : this.getCurrentBlock(Minecraft.getInstance().player.getGameProfile()).getTranslationKey());
+	public ITextComponent getDescription() {
+		return new TranslationTextComponent(Minecraft.getInstance().player == null ? this.blocks[0].getDescriptionId() : this.getCurrentBlock(Minecraft.getInstance().player.getGameProfile()).getDescriptionId());
 	}
 
 	protected boolean onBlockPlaced(BlockPos pos, World worldIn, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
@@ -137,11 +139,11 @@ public class SelectiveBlockItem extends Item {
 	}
 
 	private static <T extends Comparable<T>> BlockState setValueByString(BlockState state, Property<T> property, String value) {
-		return property.parseValue(value).map(parsedValue -> state.with(property, parsedValue)).orElse(state);
+		return property.getValue(value).map(parsedValue -> state.setValue(property, parsedValue)).orElse(state);
 	}
 
 	protected boolean placeBlock(BlockItemUseContext context, BlockState state) {
-		return context.getWorld().setBlockState(context.getPos(), state, 11);
+		return context.getLevel().setBlock(context.getClickedPos(), state, 11);
 	}
 
 	protected SoundEvent getPlaceSound(BlockState state, World world, BlockPos pos, PlayerEntity entity) {
@@ -165,11 +167,11 @@ public class SelectiveBlockItem extends Item {
 	}
 
 	public static SelectiveBlockItem getHeldSelectiveBlockItem(PlayerEntity player){
-		Item item = player.getHeldItemMainhand().getItem();
+		Item item = player.getMainHandItem().getItem();
 		if(item instanceof SelectiveBlockItem)
 			return (SelectiveBlockItem) item;
 
-		item = player.getHeldItemOffhand().getItem();
+		item = player.getOffhandItem().getItem();
 		if(item instanceof SelectiveBlockItem)
 			return (SelectiveBlockItem) item;
 

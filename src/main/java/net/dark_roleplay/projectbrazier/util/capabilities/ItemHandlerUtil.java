@@ -11,13 +11,13 @@ import net.minecraftforge.items.IItemHandler;
 public class ItemHandlerUtil {
 
 	public static void dropContainerItems(World world, BlockPos pos) {
-		TileEntity tileEntity = world.getTileEntity(pos);
+		TileEntity tileEntity = world.getBlockEntity(pos);
 		if(tileEntity == null) return;
 
 		LazyOptional<IItemHandler> inventory = CapabilityUtil.getInventory(world, pos);
 		inventory.ifPresent(inv -> {
 			for(int i = 0; i < inv.getSlots(); i++)
-				InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inv.getStackInSlot(i));
+				InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inv.getStackInSlot(i));
 		});
 	}
 }

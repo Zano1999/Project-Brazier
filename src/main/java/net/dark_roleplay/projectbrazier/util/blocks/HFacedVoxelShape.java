@@ -26,7 +26,7 @@ public class HFacedVoxelShape {
 			case WEST:
 				return this.west;
 			default:
-				return VoxelShapes.fullCube();
+				return VoxelShapes.block();
 		}
 	}
 }

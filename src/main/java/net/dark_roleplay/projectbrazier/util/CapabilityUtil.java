@@ -12,7 +12,7 @@ import java.util.Optional;
 public class CapabilityUtil {
 
 	public static LazyOptional<IItemHandler> getInventory(World world, BlockPos pos){
-		TileEntity te = world.getTileEntity(pos);
+		TileEntity te = world.getBlockEntity(pos);
 		return te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 	}
 }

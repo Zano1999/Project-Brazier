@@ -41,13 +41,13 @@ public class TertiaryInteractionListener extends AbstractGui {
 	public static void renderWorldLastEvent(RenderWorldLastEvent event){
 		if(rayTraceResult == null || rayTraceResult.getType() != RayTraceResult.Type.BLOCK) return;
 
-		BlockState state = Minecraft.getInstance().world.getBlockState(rayTraceResult.getPos());
+		BlockState state = Minecraft.getInstance().level.getBlockState(rayTraceResult.getBlockPos());
 		if(!(state.getBlock() instanceof ITertiaryInteractor)) return;
 
 		ITertiaryInteractor block = (ITertiaryInteractor) state.getBlock();
-		if(!block.hasInteraction(Minecraft.getInstance().world, rayTraceResult.getPos(), state, Minecraft.getInstance().player)) return;
+		if(!block.hasInteraction(Minecraft.getInstance().level, rayTraceResult.getBlockPos(), state, Minecraft.getInstance().player)) return;
 
-		Vector3d hitBlock = new Vector3d(rayTraceResult.getPos().getX() + 0.5, rayTraceResult.getPos().getY() + 0.5, rayTraceResult.getPos().getZ() + 0.5);
+		Vector3d hitBlock = new Vector3d(rayTraceResult.getBlockPos().getX() + 0.5, rayTraceResult.getBlockPos().getY() + 0.5, rayTraceResult.getBlockPos().getZ() + 0.5);
 		tertiaryScreenPos = RenderUtils.worldToScreenSpace(hitBlock, event.getPartialTicks(), true);
 
 		if(tertiaryScreenPos.getSecond())
@@ -64,13 +64,13 @@ public class TertiaryInteractionListener extends AbstractGui {
 	public static void renderGameOverlay(RenderGameOverlayEvent.Pre event) {
 		if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) return;
 		if(hadSuccess){
-			World world = Minecraft.getInstance().world;
-			BlockPos pos = rayTraceResult.getPos();
+			World world = Minecraft.getInstance().level;
+			BlockPos pos = rayTraceResult.getBlockPos();
 			BlockState state = world.getBlockState(pos);
 			if(!(state.getBlock() instanceof ITertiaryInteractor)) return;
 			ITertiaryInteractor block = (ITertiaryInteractor) state.getBlock();
 
-			FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
+			FontRenderer fontRenderer = Minecraft.getInstance().font;
 
 			Vector2f screenPos = tertiaryScreenPos.getFirst();
 			int posX = (int) screenPos.x;
@@ -78,16 +78,16 @@ public class TertiaryInteractionListener extends AbstractGui {
 
 			drawCenteredString(event.getMatrixStack(), fontRenderer, block.getInteractionTooltip(world, pos, state, Minecraft.getInstance().player), posX, posY - 9, 0xFFFFFFFF);
 
-			int width = fontRenderer.getStringPropertyWidth(BrazierKeybinds.TER_ACTION.func_238171_j_()) + 7;
-			if(Minecraft.getInstance().world.getGameTime() % 30 > 15) {
+			int width = fontRenderer.width(BrazierKeybinds.TER_ACTION.getTranslatedKeyMessage()) + 7;
+			if(Minecraft.getInstance().level.getGameTime() % 30 > 15) {
 				TextureList.KEYBOARD_BUTTON.renderSegmented(event.getMatrixStack(), posX - (width / 2), posY + 1, width, 13);
-				fontRenderer.func_243248_b(event.getMatrixStack(), BrazierKeybinds.TER_ACTION.func_238171_j_(), posX - (width/2) + 4, posY + 3, 0xFFFFFFFF);
+				fontRenderer.draw(event.getMatrixStack(), BrazierKeybinds.TER_ACTION.getTranslatedKeyMessage(), posX - (width/2) + 4, posY + 3, 0xFFFFFFFF);
 			}else {
 				TextureList.KEYBOARD_BUTTON_PRESSED.renderSegmented(event.getMatrixStack(), posX - (width / 2), posY + 1, width, 13);
-				fontRenderer.func_243248_b(event.getMatrixStack(), BrazierKeybinds.TER_ACTION.func_238171_j_(), posX - (width/2) + 4, posY + 4, 0xFFFFFFFF);
+				fontRenderer.draw(event.getMatrixStack(), BrazierKeybinds.TER_ACTION.getTranslatedKeyMessage(), posX - (width/2) + 4, posY + 4, 0xFFFFFFFF);
 			}
 
-			if(BrazierKeybinds.TER_ACTION.isKeyDown()){
+			if(BrazierKeybinds.TER_ACTION.isDown()){
 				if(!wasButtonPressed){
 					pressStart = System.currentTimeMillis();
 					wasButtonPressed = true;

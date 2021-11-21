@@ -45,8 +45,8 @@ public class BarrelBlockEntity extends TileEntity implements INamedContainerProv
 
 	//region (De-)Serialization
 	@Override
-	public void read(BlockState state, CompoundNBT compound) {
-		super.read(state, compound);
+	public void load(BlockState state, CompoundNBT compound) {
+		super.load(state, compound);
 		if (compound.contains("fluids")) {
 			this.storageType = BarrelStorageType.FLUID;
 			if(this.fluidHandler == null)
@@ -63,8 +63,8 @@ public class BarrelBlockEntity extends TileEntity implements INamedContainerProv
 	}
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		super.write(compound);
+	public CompoundNBT save(CompoundNBT compound) {
+		super.save(compound);
 		switch(this.storageType) {
 			case FLUID:
 				if(this.fluidHandler != null)
@@ -85,18 +85,18 @@ public class BarrelBlockEntity extends TileEntity implements INamedContainerProv
 	@Override
 	@Nullable
 	public SUpdateTileEntityPacket getUpdatePacket() {
-		return new SUpdateTileEntityPacket(this.getPos(), 1, this.write(new CompoundNBT()));
+		return new SUpdateTileEntityPacket(this.getBlockPos(), 1, this.save(new CompoundNBT()));
 	}
 
 	@Override
 	public CompoundNBT getUpdateTag() {
-		return this.write(new CompoundNBT());
+		return this.save(new CompoundNBT());
 	}
 
 
 	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt){
-		this.read(null, pkt.getNbtCompound());
+		this.load(null, pkt.getTag());
 	}
 
 	//endregion
@@ -126,7 +126,7 @@ public class BarrelBlockEntity extends TileEntity implements INamedContainerProv
 					}
 					BarrelBlockEntity.this.storageType = BarrelStorageType.NONE;
 				}
-				BarrelBlockEntity.this.markDirty();
+				BarrelBlockEntity.this.setChanged();
 			}
 		};
 	}
@@ -140,17 +140,17 @@ public class BarrelBlockEntity extends TileEntity implements INamedContainerProv
 				else if(BarrelBlockEntity.this.storageType != BarrelStorageType.FLUID){
 					BarrelBlockEntity.this.storageType = BarrelStorageType.FLUID;
 				}
-				BarrelBlockEntity.this.markDirty();
-				BlockState state = BarrelBlockEntity.this.world.getBlockState(BarrelBlockEntity.this.getPos());
-				BarrelBlockEntity.this.world.notifyBlockUpdate(BarrelBlockEntity.this.getPos(), state, state, 3);
+				BarrelBlockEntity.this.setChanged();
+				BlockState state = BarrelBlockEntity.this.level.getBlockState(BarrelBlockEntity.this.getBlockPos());
+				BarrelBlockEntity.this.level.sendBlockUpdated(BarrelBlockEntity.this.getBlockPos(), state, state, 3);
 			}
 		};
 	}
 
 	//Invalidate Capabilities
 	@Override
-	public void remove() {
-		super.remove();
+	public void setRemoved() {
+		super.setRemoved();
 		lazyItemHandler.invalidate();
 		lazyFluidHandler.invalidate();
 	}
@@ -163,7 +163,7 @@ public class BarrelBlockEntity extends TileEntity implements INamedContainerProv
 	@Nullable
 	@Override
 	public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity player) {
-		return new GeneralContainer(id, playerInventory, this.world, this.pos);
+		return new GeneralContainer(id, playerInventory, this.level, this.worldPosition);
 	}
 	//endregion
 

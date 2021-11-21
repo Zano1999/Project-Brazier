@@ -31,12 +31,12 @@ public class BuiltinMixedModel implements IModelGeometry<BuiltinMixedModel> {
 
 	@Override
 	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<RenderMaterial, TextureAtlasSprite>  spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
-		return new BuiltinMixedBakedModel(originalModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation));
+		return new BuiltinMixedBakedModel(originalModel.bake(bakery, spriteGetter, modelTransform, modelLocation));
 	}
 
 	@Override
 	public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function<ResourceLocation, IUnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
-		return originalModel.getTextures(modelGetter, missingTextureErrors);
+		return originalModel.getMaterials(modelGetter, missingTextureErrors);
 	}
 
 	public static class BuiltinMixedBakedModel extends BakedModelWrapper {

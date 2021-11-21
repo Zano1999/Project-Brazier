@@ -18,6 +18,8 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import net.minecraft.item.Item.Properties;
+
 public class WarHornItem extends Item {
 
 	public WarHornItem(Properties properties) {
@@ -27,47 +29,47 @@ public class WarHornItem extends Item {
 	protected static int maxDistance = 512;
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-		ItemStack item = player.getHeldItem(hand);
+	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+		ItemStack item = player.getItemInHand(hand);
 
-		if (world.isRemote()) return ActionResult.resultSuccess(item);
-		player.setActiveHand(hand);
+		if (world.isClientSide()) return ActionResult.success(item);
+		player.startUsingItem(hand);
 
-		return ActionResult.resultSuccess(item);
+		return ActionResult.success(item);
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity entity) {
+	public ItemStack finishUsingItem(ItemStack stack, World world, LivingEntity entity) {
 		if (!(world instanceof ServerWorld)) return stack;
 		PlayerEntity player = entity instanceof PlayerEntity ? (PlayerEntity) entity : null;
 
-		if (entity.areEyesInFluid(FluidTags.WATER)) {
-			Vector3d spawnPoint = entity.getPositionVec().add(0, entity.getEyeHeight(), 0).add(entity.getLookVec().mul(0.5F, 0.5F, 0.5F));
-			((ServerWorld) world).spawnParticle(ParticleTypes.BUBBLE, spawnPoint.x, spawnPoint.y, spawnPoint.z, 8, 0.05, 0, 0.05, 0.005);
-			world.playSound(null, entity.getPosition(), SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundCategory.PLAYERS, 1, 1);
-			entity.setAir(Math.max(0, entity.getAir() - 90));
+		if (entity.isEyeInFluid(FluidTags.WATER)) {
+			Vector3d spawnPoint = entity.position().add(0, entity.getEyeHeight(), 0).add(entity.getLookAngle().multiply(0.5F, 0.5F, 0.5F));
+			((ServerWorld) world).sendParticles(ParticleTypes.BUBBLE, spawnPoint.x, spawnPoint.y, spawnPoint.z, 8, 0.05, 0, 0.05, 0.005);
+			world.playSound(null, entity.blockPosition(), SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundCategory.PLAYERS, 1, 1);
+			entity.setAirSupply(Math.max(0, entity.getAirSupply() - 90));
 		} else {
-			for (ServerPlayerEntity receiver : ((ServerWorld) world).getPlayers()) {
-				double distance = receiver.getPositionVec().distanceTo(entity.getPositionVec());
+			for (ServerPlayerEntity receiver : ((ServerWorld) world).players()) {
+				double distance = receiver.position().distanceTo(entity.position());
 				if (distance > maxDistance) continue;
-				Vector3d sourcePos = receiver.getPositionVec().add(entity.getPositionVec().subtract(receiver.getPositionVec()).normalize().mul(6, 6, 6));
+				Vector3d sourcePos = receiver.position().add(entity.position().subtract(receiver.position()).normalize().multiply(6, 6, 6));
 
-				receiver.connection.sendPacket(new SPlaySoundEffectPacket(BrazierSounds.WAR_HORN.get(), SoundCategory.PLAYERS, sourcePos.x, sourcePos.y, sourcePos.z, (float) ((maxDistance - distance) / maxDistance) * 0.5F, 0.9F + world.getRandom().nextFloat() * 0.2F));
+				receiver.connection.send(new SPlaySoundEffectPacket(BrazierSounds.WAR_HORN.get(), SoundCategory.PLAYERS, sourcePos.x, sourcePos.y, sourcePos.z, (float) ((maxDistance - distance) / maxDistance) * 0.5F, 0.9F + world.getRandom().nextFloat() * 0.2F));
 			}
 		}
 
 		if (player != null)
-			player.getCooldownTracker().setCooldown(stack.getItem(), 120);
+			player.getCooldowns().addCooldown(stack.getItem(), 120);
 
-		stack.damageItem(1, entity, breaker -> {
-			world.playSound(null, breaker.getPosition(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1, 1);
+		stack.hurtAndBreak(1, entity, breaker -> {
+			world.playSound(null, breaker.blockPosition(), SoundEvents.ITEM_BREAK, SoundCategory.PLAYERS, 1, 1);
 		});
 
 		return stack;
 	}
 
 	@Override
-	public UseAction getUseAction(ItemStack stack) {
+	public UseAction getUseAnimation(ItemStack stack) {
 		return UseAction.BOW;
 	}
 

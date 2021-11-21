@@ -20,12 +20,12 @@ public class RayTraceTestScreen extends Screen {
 
 	public RayTraceTestScreen() {
 		super(new StringTextComponent("Debuuuug"));
-		Vector3d source = Minecraft.getInstance().player.getPositionVec();
+		Vector3d source = Minecraft.getInstance().player.position();
 		hitPoint = new Vector3d(source.x, source.y, source.z);
 	}
 
 	public void init(){
-		this.addListener(new IGuiEventListener() {
+		this.addWidget(new IGuiEventListener() {
 			@Override
 			public boolean mouseReleased(double mouseX, double mouseY, int button) {
 				return clicked(button, traceResult);
@@ -55,12 +55,12 @@ public class RayTraceTestScreen extends Screen {
 
 		RayTraceContext rtc = new RayTraceContext(
 				cameraCenter.add(ray.getFirst()),
-				cameraCenter.add(ray.getFirst().add(ray.getSecond().mul(15, 15, 15))),
+				cameraCenter.add(ray.getFirst().add(ray.getSecond().multiply(15, 15, 15))),
 				RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, null);
 
-		traceResult = Minecraft.getInstance().world.rayTraceBlocks(rtc);
+		traceResult = Minecraft.getInstance().level.clip(rtc);
 
-		hitPoint = traceResult.getHitVec();
+		hitPoint = traceResult.getLocation();
 	}
 
 	public boolean clicked(int mouseButton, BlockRayTraceResult hit){ return false; }

@@ -20,13 +20,13 @@ public class VoxelShapeLoader {
 			if(token == JsonToken.BEGIN_ARRAY){
 				return new ShapeData(IBooleanFunction.OR, reader).compile();
 			}else if(token == JsonToken.BEGIN_OBJECT){
-				return VoxelShapes.fullCube();
+				return VoxelShapes.block();
 			}
 		}catch(Exception e){
 			System.out.println(name);
 			e.printStackTrace();
 		}
-		return VoxelShapes.fullCube();
+		return VoxelShapes.block();
 	}
 
 	private static class ShapeData{
@@ -60,9 +60,9 @@ public class VoxelShapeLoader {
 
 		public VoxelShape compile(){
 			return Stream.concat(
-					this.boxes.stream().map(data -> VoxelShapes.create(data[0], data[1], data[2], data[3], data[4], data[5])),
+					this.boxes.stream().map(data -> VoxelShapes.box(data[0], data[1], data[2], data[3], data[4], data[5])),
 					subShapes.stream().map(shape -> shape.compile())
-			).reduce((a, b) -> VoxelShapes.combineAndSimplify(a, b, function)).orElseGet(VoxelShapes::empty);
+			).reduce((a, b) -> VoxelShapes.join(a, b, function)).orElseGet(VoxelShapes::empty);
 		}
 	}
 

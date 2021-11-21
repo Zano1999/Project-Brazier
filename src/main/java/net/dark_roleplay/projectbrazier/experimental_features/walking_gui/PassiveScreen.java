@@ -18,7 +18,7 @@ public class PassiveScreen  extends RayTraceTestScreen {
 
 	public void init() {
 		super.init();
-		KeyBinding.updateKeyBindState();
+		KeyBinding.setAll();
 	}
 
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {

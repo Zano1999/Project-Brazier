@@ -118,11 +118,11 @@ public class Registrar {
 	}
 
 	private static <T extends TileEntity> TileEntityType<T> createType(Supplier<T> supplier, RegistryObject<Block>... blocks) {
-		return TileEntityType.Builder.create(supplier, Arrays.stream(blocks).map(ro -> ro.get()).collect(Collectors.toList()).toArray(new Block[blocks.length])).build(null);
+		return TileEntityType.Builder.of(supplier, Arrays.stream(blocks).map(ro -> ro.get()).collect(Collectors.toList()).toArray(new Block[blocks.length])).build(null);
 	}
 
 	private static <T extends TileEntity> TileEntityType<T> createType(Supplier<T> supplier, Collection<RegistryObject<Block>>... blocks) {
-		return TileEntityType.Builder.create(supplier, Arrays.stream(blocks).flatMap(col -> col.stream()).map(RegistryObject::get).toArray(i -> new Block[i])).build(null);
+		return TileEntityType.Builder.of(supplier, Arrays.stream(blocks).flatMap(col -> col.stream()).map(RegistryObject::get).toArray(i -> new Block[i])).build(null);
 	}
 	//endregion
 
@@ -136,77 +136,77 @@ public class Registrar {
 
 	//region AbstractBlock.Properties
 	protected static Block.Properties MARG_WOOD(MargMaterial material) {
-		return AbstractBlock.Properties.create(Material.WOOD, material.getProperties().getMapColor())
-				.hardnessAndResistance(2.0F, 3.0F)
-				.sound(SoundType.WOOD).notSolid();
+		return AbstractBlock.Properties.of(Material.WOOD, material.getProperties().getMapColor())
+				.strength(2.0F, 3.0F)
+				.sound(SoundType.WOOD).noOcclusion();
 	}
 
 	protected static final AbstractBlock.Properties WOOD =
-			AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD)
-					.hardnessAndResistance(2.0F, 3.0F)
+			AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD)
+					.strength(2.0F, 3.0F)
 					.sound(SoundType.WOOD)
-					.notSolid();
+					.noOcclusion();
 
 	protected static final AbstractBlock.Properties WOOD_SOLID =
-			AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD)
-					.hardnessAndResistance(2.0F, 3.0F)
+			AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD)
+					.strength(2.0F, 3.0F)
 					.sound(SoundType.WOOD);
 
 	protected static AbstractBlock.Properties METAL =
-			AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.IRON)
-					.hardnessAndResistance(5.0F, 1200.0F)
+			AbstractBlock.Properties.of(Material.HEAVY_METAL, MaterialColor.METAL)
+					.strength(5.0F, 1200.0F)
 					.sound(SoundType.METAL)
-					.notSolid();
+					.noOcclusion();
 
 	protected static AbstractBlock.Properties METAL_GLOW =
-			AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.IRON)
-					.hardnessAndResistance(5.0F, 1200.0F)
+			AbstractBlock.Properties.of(Material.HEAVY_METAL, MaterialColor.METAL)
+					.strength(5.0F, 1200.0F)
 					.sound(SoundType.METAL)
-					.setLightLevel(state -> 15)
-					.notSolid();
+					.lightLevel(state -> 15)
+					.noOcclusion();
 
 	protected static AbstractBlock.Properties METAL_SOLID =
-			AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.IRON)
-					.hardnessAndResistance(5.0F, 1200.0F)
+			AbstractBlock.Properties.of(Material.HEAVY_METAL, MaterialColor.METAL)
+					.strength(5.0F, 1200.0F)
 					.sound(SoundType.METAL);
 
 	protected static AbstractBlock.Properties STONE =
 			AbstractBlock.Properties.
-					create(Material.ROCK, MaterialColor.STONE)
-					.hardnessAndResistance(1.5F, 6.0F)
+					of(Material.STONE, MaterialColor.STONE)
+					.strength(1.5F, 6.0F)
 					.sound(SoundType.STONE)
-					.notSolid();
+					.noOcclusion();
 
 	protected static AbstractBlock.Properties STONE_SOLID =
 			AbstractBlock.Properties.
-					create(Material.ROCK, MaterialColor.STONE)
-					.hardnessAndResistance(1.5F, 6.0F)
+					of(Material.STONE, MaterialColor.STONE)
+					.strength(1.5F, 6.0F)
 					.sound(SoundType.STONE);
 
 	protected static final AbstractBlock.Properties SNOW_SOLID =
-			Block.Properties.create(Material.SNOW)
-					.hardnessAndResistance(0.3F)
+			Block.Properties.of(Material.TOP_SNOW)
+					.strength(0.3F)
 					.sound(SoundType.SNOW);
 
 	protected static AbstractBlock.Properties PLANT_FUNGI =
 			AbstractBlock.Properties.
-					create(Material.PLANTS, MaterialColor.WOOD)
-					.hardnessAndResistance(1.5F, 6.0F)
-					.sound(SoundType.PLANT)
-					.notSolid();
+					of(Material.PLANT, MaterialColor.WOOD)
+					.strength(1.5F, 6.0F)
+					.sound(SoundType.GRASS)
+					.noOcclusion();
 
 	public static AbstractBlock.Properties CROP =
 			AbstractBlock.Properties
-					.create(Material.PLANTS)
-					.doesNotBlockMovement()
-					.tickRandomly()
-					.zeroHardnessAndResistance()
+					.of(Material.PLANT)
+					.noCollission()
+					.randomTicks()
+					.instabreak()
 					.sound(SoundType.CROP);
 
 	public static AbstractBlock.Properties ROPE =
 			AbstractBlock.Properties
-					.create(Material.WOOL, MaterialColor.SNOW)
-					.hardnessAndResistance(0.8F)
-					.sound(SoundType.CLOTH);
+					.of(Material.WOOL, MaterialColor.SNOW)
+					.strength(0.8F)
+					.sound(SoundType.WOOL);
 	//endregion
 }

@@ -19,6 +19,8 @@ import net.minecraft.world.World;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class NailBlock extends WallHFacedDecoBlock {
 
 	public static final Map<Item, HangingItemBlock> HANGABLE_ITEMS = new HashMap<>();
@@ -32,27 +34,27 @@ public class NailBlock extends WallHFacedDecoBlock {
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		BlockState mainState = super.getStateForPlacement(context);
-		return mainState != null ? mainState.with(HIDDEN_LEVER, false) : null;
+		return mainState != null ? mainState.setValue(HIDDEN_LEVER, false) : null;
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		super.fillStateContainer(builder);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
 		builder.add(HIDDEN_LEVER);
 	}
 
 	@Deprecated
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		ItemStack held = player.getHeldItem(hand);
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+		ItemStack held = player.getItemInHand(hand);
 
 		HangingItemBlock replacement = getReplacement(held.getItem());
 		if(replacement == null) return ActionResultType.PASS;
-		if(world.isRemote()) return ActionResultType.SUCCESS;
+		if(world.isClientSide()) return ActionResultType.SUCCESS;
 
-		BlockState state2 = replacement.getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(HIDDEN_LEVER, state.get(HIDDEN_LEVER));
+		BlockState state2 = replacement.defaultBlockState().setValue(HORIZONTAL_FACING, state.getValue(HORIZONTAL_FACING)).setValue(HIDDEN_LEVER, state.getValue(HIDDEN_LEVER));
 
-		world.setBlockState(pos, state2);
+		world.setBlockAndUpdate(pos, state2);
 		replacement.updateNeighbors(state2, world, pos);
 
 		ItemStack newStack = null;
@@ -61,7 +63,7 @@ public class NailBlock extends WallHFacedDecoBlock {
 
 		if (!player.isCreative()){
 			if(newStack == null) held.shrink(1);
-			else player.setHeldItem(hand, newStack );
+			else player.setItemInHand(hand, newStack );
 		}
 
 		return ActionResultType.SUCCESS;

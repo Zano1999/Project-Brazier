@@ -32,6 +32,8 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class HangingItemBlock extends WallHFacedDecoBlock {
 
 	public static final BooleanProperty HIDDEN_LEVER = BrazierStateProperties.HIDDEN_LEVER;
@@ -45,12 +47,12 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return super.getStateForPlacement(context).with(HIDDEN_LEVER, false);
+		return super.getStateForPlacement(context).setValue(HIDDEN_LEVER, false);
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		super.fillStateContainer(builder);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
 		builder.add(HIDDEN_LEVER);
 	}
 
@@ -66,7 +68,7 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 
 	@Override
 	@Deprecated
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		if(player.isCreative()){
 			setItemStack(world, pos, state, ItemStack.EMPTY);
 			return ActionResultType.SUCCESS;
@@ -81,20 +83,20 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 	}
 
 	@Deprecated
-	public boolean canProvidePower(BlockState state) {
-		return state.get(HIDDEN_LEVER);
+	public boolean isSignalSource(BlockState state) {
+		return state.getValue(HIDDEN_LEVER);
 	}
 
 	@Override
 	@Deprecated
-	public int getWeakPower(BlockState state, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		return !this.canProvidePower(state) ? 0 : power;
+	public int getSignal(BlockState state, IBlockReader blockAccess, BlockPos pos, Direction side) {
+		return !this.isSignalSource(state) ? 0 : power;
 	}
 
 	@Override
 	@Deprecated
-	public int getStrongPower(BlockState state, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		return !this.canProvidePower(state) ? 0 : (state.get(HORIZONTAL_FACING) == side) ? power : 0;
+	public int getDirectSignal(BlockState state, IBlockReader blockAccess, BlockPos pos, Direction side) {
+		return !this.isSignalSource(state) ? 0 : (state.getValue(HORIZONTAL_FACING) == side) ? power : 0;
 	}
 
 	@Nullable
@@ -104,26 +106,26 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 	}
 
 	@Override
-	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.isIn(newState.getBlock()))
+	public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
+		if (!state.is(newState.getBlock()))
 			ItemHandlerUtil.dropContainerItems(world, pos);
 
 		if (!isMoving && state.getBlock() != newState.getBlock()) {
-			if (state.get(HIDDEN_LEVER)) {
+			if (state.getValue(HIDDEN_LEVER)) {
 				this.updateNeighbors(state, world, pos);
 			}
 
-			super.onReplaced(state, world, pos, newState, isMoving);
+			super.onRemove(state, world, pos, newState, isMoving);
 		}
 	}
 
 	public void updateNeighbors(BlockState state, World world, BlockPos pos) {
-		world.notifyNeighborsOfStateChange(pos, this);
-		world.notifyNeighborsOfStateChange(pos.offset(state.get(HORIZONTAL_FACING).getOpposite()), this);
+		world.updateNeighborsAt(pos, this);
+		world.updateNeighborsAt(pos.relative(state.getValue(HORIZONTAL_FACING).getOpposite()), this);
 	}
 
 	public ItemStack setItemStack(World world, BlockPos pos, BlockState state, ItemStack stack){
-		TileEntity te = world.getTileEntity(pos);
+		TileEntity te = world.getBlockEntity(pos);
 		if(!(te instanceof HangingItemBlockEntity)) return stack;
 
 		LazyOptional<IItemHandler> inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
@@ -135,9 +137,9 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 		ItemStack old = handler.getStackInSlot(0);
 
 		if(stack.isEmpty()){
-			BlockState state2 = BrazierBlocks.NAIL.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING)).with(HIDDEN_LEVER, state.get(HIDDEN_LEVER));
+			BlockState state2 = BrazierBlocks.NAIL.get().defaultBlockState().setValue(HORIZONTAL_FACING, state.getValue(HORIZONTAL_FACING)).setValue(HIDDEN_LEVER, state.getValue(HIDDEN_LEVER));
 
-			world.setBlockState(pos, state2);
+			world.setBlockAndUpdate(pos, state2);
 			return old;
 		}
 
@@ -145,7 +147,7 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 	}
 
 	public ItemStack getItemStack(IBlockReader world, BlockPos pos, BlockState state){
-		TileEntity te = world.getTileEntity(pos);
+		TileEntity te = world.getBlockEntity(pos);
 		if(!(te instanceof HangingItemBlockEntity)) return ItemStack.EMPTY;
 
 		LazyOptional<IItemHandler> inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);

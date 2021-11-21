@@ -15,6 +15,8 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class HAxisDecoBlock extends Block {
 
 	protected static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS;
@@ -28,23 +30,23 @@ public class HAxisDecoBlock extends Block {
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(HORIZONTAL_AXIS, context.getPlacementHorizontalFacing().rotateY().getAxis());
+		return this.defaultBlockState().setValue(HORIZONTAL_AXIS, context.getHorizontalDirection().getClockWise().getAxis());
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return shapes.get(state.get(HORIZONTAL_AXIS));
+		return shapes.get(state.getValue(HORIZONTAL_AXIS));
 	}
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		Direction.Axis currentAxis = state.get(HORIZONTAL_AXIS);
+		Direction.Axis currentAxis = state.getValue(HORIZONTAL_AXIS);
 		Direction newDir = rot.rotate(currentAxis == Direction.Axis.X ? Direction.EAST : Direction.NORTH);
-		return state.with(HORIZONTAL_AXIS, newDir.getAxis());
+		return state.setValue(HORIZONTAL_AXIS, newDir.getAxis());
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HORIZONTAL_AXIS);
 	}
 }

@@ -35,7 +35,7 @@ public enum RoofType implements IStringSerializable, IFancyNamer {
 	}
 
 	@Override
-	public String getString() {
+	public String getSerializedName() {
 		return typeName;
 	}
 }

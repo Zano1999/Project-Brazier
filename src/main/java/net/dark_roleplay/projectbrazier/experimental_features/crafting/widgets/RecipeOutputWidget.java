@@ -48,7 +48,7 @@ public class RecipeOutputWidget extends NestedWidget {
 
 	@Override
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-		Minecraft.getInstance().getTextureManager().bindTexture(WIDGETS);
+		Minecraft.getInstance().getTextureManager().bind(WIDGETS);
 
 		this.blit(matrixStack, this.posX, this.posY, 0, 16, 138, 72);
 

@@ -34,7 +34,7 @@ public class TertiaryInteractionPacket {
 	public static void handle(TertiaryInteractionPacket pkt, Supplier<NetworkEvent.Context> ctxSupplier) {
 		ctxSupplier.get().enqueueWork(() -> {
 			ServerPlayerEntity player = ctxSupplier.get().getSender();
-			World world = player.getServerWorld();
+			World world = player.getLevel();
 			BlockState state = world.getBlockState(pkt.pos);
 			if(state.getBlock() instanceof ITertiaryInteractor){
 				ITertiaryInteractor block = (ITertiaryInteractor) state.getBlock();

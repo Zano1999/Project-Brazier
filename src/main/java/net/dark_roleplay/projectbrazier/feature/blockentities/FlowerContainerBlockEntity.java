@@ -57,7 +57,7 @@ public class FlowerContainerBlockEntity extends TileEntity {
 				flower.setFlower(copy);
 				flower.setPlacement(offset);
 				stack.shrink(1);
-				this.markDirty();
+				this.setChanged();
 				break;
 			}
 		}
@@ -70,7 +70,7 @@ public class FlowerContainerBlockEntity extends TileEntity {
 			if(flower.getFlower().isEmpty()) continue;
 			ItemStack stack = flower.getFlower();
 			flower.setFlower(ItemStack.EMPTY);
-			this.markDirty();
+			this.setChanged();
 			return stack;
 		}
 		return ItemStack.EMPTY;
@@ -82,8 +82,8 @@ public class FlowerContainerBlockEntity extends TileEntity {
 
 	//region (De-)Serialization
 	@Override
-	public void read(BlockState state, CompoundNBT compound) {
-		super.read(state, compound);
+	public void load(BlockState state, CompoundNBT compound) {
+		super.load(state, compound);
 
 		if(!compound.contains("flowers")) return;
 		ListNBT flowers = compound.getList("flowers", Constants.NBT.TAG_COMPOUND);
@@ -99,8 +99,8 @@ public class FlowerContainerBlockEntity extends TileEntity {
 	}
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		super.write(compound);
+	public CompoundNBT save(CompoundNBT compound) {
+		super.save(compound);
 
 		ListNBT flowers = new ListNBT();
 		for(FlowerContainerData flower : this.getFlowerData())
@@ -115,21 +115,21 @@ public class FlowerContainerBlockEntity extends TileEntity {
 	@Override
 	@Nullable
 	public SUpdateTileEntityPacket getUpdatePacket() {
-		return new SUpdateTileEntityPacket(this.getPos(), 1, this.write(new CompoundNBT()));
+		return new SUpdateTileEntityPacket(this.getBlockPos(), 1, this.save(new CompoundNBT()));
 	}
 
 	@Override
 	public CompoundNBT getUpdateTag() {
-		return this.write(new CompoundNBT());
+		return this.save(new CompoundNBT());
 	}
 
 
 	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt){
-		this.read(null, pkt.getNbtCompound());
+		this.load(null, pkt.getTag());
 		requestModelDataUpdate();
-		if(this.getWorld().isRemote())
-			ChunkRenderUtils.rerenderChunk((ClientWorld) this.getWorld(), this.getPos());
+		if(this.getLevel().isClientSide())
+			ChunkRenderUtils.rerenderChunk((ClientWorld) this.getLevel(), this.getBlockPos());
 	}
 	//endregion
 

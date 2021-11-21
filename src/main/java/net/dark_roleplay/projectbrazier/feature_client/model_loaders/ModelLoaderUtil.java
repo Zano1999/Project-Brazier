@@ -12,9 +12,9 @@ import java.util.Map;
 public class ModelLoaderUtil {
 
 	public static IUnbakedModel loadModelWithTextures(JsonDeserializationContext deserCtx, JsonObject base, String subModelName, JsonObject textures){
-		JsonObject subModelJson = JSONUtils.getJsonObject(base, subModelName);
+		JsonObject subModelJson = JSONUtils.getAsJsonObject(base, subModelName);
 		if(textures != null){
-			JsonObject subModelTextures = JSONUtils.getJsonObject(base, "textures", new JsonObject());
+			JsonObject subModelTextures = JSONUtils.getAsJsonObject(base, "textures", new JsonObject());
 			for(Map.Entry<String, JsonElement> entry : textures.entrySet())
 				subModelTextures.add(entry.getKey(), entry.getValue());
 

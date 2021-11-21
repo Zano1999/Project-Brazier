@@ -77,7 +77,7 @@ public class BrazierItems extends Registrar {
 	public static void registerItemBlocks(RegistryEvent.Register<Item> event){
 		IForgeRegistry<Item> reg = event.getRegistry();
 		for(RegistryObject<Block> regObj : BrazierRegistries.BLOCKS.getEntries()){
-			BlockItem blockItem = new BlockItem(regObj.get(), new Item.Properties().group(BrazierCreativeTabs.decor()));
+			BlockItem blockItem = new BlockItem(regObj.get(), new Item.Properties().tab(BrazierCreativeTabs.decor()));
 			reg.register(blockItem.setRegistryName(regObj.getId()));
 		}
 
@@ -88,13 +88,13 @@ public class BrazierItems extends Registrar {
 			},new Block[]{
 					BrazierBlocks.BOTTOM_WOOD_PLATFORM.get(material),
 					BrazierBlocks.BOTTOM_WOOD_PLATFORM_STAIRS.get(material)
-			}, new Item.Properties().group(BrazierCreativeTabs.decor()));
+			}, new Item.Properties().tab(BrazierCreativeTabs.decor()));
 			reg.register(blockItem.setRegistryName(ProjectBrazier.MODID, material.getTextProvider().apply("${material}_platform")));
 
-			Item.BLOCK_TO_ITEM.put(BrazierBlocks.TOP_WOOD_PLATFORM.get(material), blockItem);
-			Item.BLOCK_TO_ITEM.put(BrazierBlocks.BOTTOM_WOOD_PLATFORM.get(material), blockItem);
-			Item.BLOCK_TO_ITEM.put(BrazierBlocks.TOP_WOOD_PLATFORM_STAIRS.get(material), blockItem);
-			Item.BLOCK_TO_ITEM.put(BrazierBlocks.BOTTOM_WOOD_PLATFORM_STAIRS.get(material), blockItem);
+			Item.BY_BLOCK.put(BrazierBlocks.TOP_WOOD_PLATFORM.get(material), blockItem);
+			Item.BY_BLOCK.put(BrazierBlocks.BOTTOM_WOOD_PLATFORM.get(material), blockItem);
+			Item.BY_BLOCK.put(BrazierBlocks.TOP_WOOD_PLATFORM_STAIRS.get(material), blockItem);
+			Item.BY_BLOCK.put(BrazierBlocks.BOTTOM_WOOD_PLATFORM_STAIRS.get(material), blockItem);
 		}
 	}
 
@@ -105,12 +105,12 @@ public class BrazierItems extends Registrar {
 		NailBlock.HANGABLE_ITEMS.put(SILVER_SPYGLASS.get(), (HangingItemBlock) BrazierBlocks.HANGING_SILVER_SPYGLASS.get());
 		NailBlock.HANGABLE_ITEMS.put(GOLD_SPYGLASS.get(), (HangingItemBlock) BrazierBlocks.HANGING_GOLD_SPYGLASS.get());
 
-		Item.BLOCK_TO_ITEM.put(BrazierBlocks.C_STONE_BRICK_ARROW_SLIT.get(), BrazierItems.STONE_ARROW_SLIT.get());
-		Item.BLOCK_TO_ITEM.put(BrazierBlocks.H_STONE_BRICK_ARROW_SLIT.get(), BrazierItems.STONE_ARROW_SLIT.get());
-		Item.BLOCK_TO_ITEM.put(BrazierBlocks.V_STONE_BRICK_ARROW_SLIT.get(), BrazierItems.STONE_ARROW_SLIT.get());
+		Item.BY_BLOCK.put(BrazierBlocks.C_STONE_BRICK_ARROW_SLIT.get(), BrazierItems.STONE_ARROW_SLIT.get());
+		Item.BY_BLOCK.put(BrazierBlocks.H_STONE_BRICK_ARROW_SLIT.get(), BrazierItems.STONE_ARROW_SLIT.get());
+		Item.BY_BLOCK.put(BrazierBlocks.V_STONE_BRICK_ARROW_SLIT.get(), BrazierItems.STONE_ARROW_SLIT.get());
 
-		Item.BLOCK_TO_ITEM.put(BrazierBlocks.HANGING_GOLD_SPYGLASS.get(), BrazierBlocks.NAIL.get().asItem());
-		Item.BLOCK_TO_ITEM.put(BrazierBlocks.HANGING_SILVER_SPYGLASS.get(), BrazierBlocks.NAIL.get().asItem());
-		Item.BLOCK_TO_ITEM.put(BrazierBlocks.HANGING_HORN.get(), BrazierBlocks.NAIL.get().asItem());
+		Item.BY_BLOCK.put(BrazierBlocks.HANGING_GOLD_SPYGLASS.get(), BrazierBlocks.NAIL.get().asItem());
+		Item.BY_BLOCK.put(BrazierBlocks.HANGING_SILVER_SPYGLASS.get(), BrazierBlocks.NAIL.get().asItem());
+		Item.BY_BLOCK.put(BrazierBlocks.HANGING_HORN.get(), BrazierBlocks.NAIL.get().asItem());
 	}
 }

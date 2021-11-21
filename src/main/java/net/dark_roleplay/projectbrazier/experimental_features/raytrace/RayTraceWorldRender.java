@@ -23,27 +23,27 @@ import java.util.function.Supplier;
 public class RayTraceWorldRender {
 
 	public static final RenderTypeBuffers renderBuffers = new RenderTypeBuffers();
-	private static final IRenderTypeBuffer.Impl renderBuffer = renderBuffers.getBufferSource();
-	private static final Supplier<IVertexBuilder> linesWithCullAndDepth = () -> renderBuffer.getBuffer(RenderType.getLines());
+	private static final IRenderTypeBuffer.Impl renderBuffer = renderBuffers.bufferSource();
+	private static final Supplier<IVertexBuilder> linesWithCullAndDepth = () -> renderBuffer.getBuffer(RenderType.lines());
 
 	@SubscribeEvent
 	public static void debugRenderCollisions(RenderWorldLastEvent event){
 		if(RayTraceTestScreen.hitPoint == null) return;
 
-		Vector3d vec = Minecraft.getInstance().getRenderManager().info.getProjectedView();
+		Vector3d vec = Minecraft.getInstance().getEntityRenderDispatcher().camera.getPosition();
 		MatrixStack matrix = event.getMatrixStack();
-		matrix.push();
+		matrix.pushPose();
 		matrix.translate(-vec.x, -vec.y, -vec.z);
 
 		for(float f = 0.005F; f < 0.025F; f+=0.005F)
-		WorldRenderer.drawBoundingBox(
+		WorldRenderer.renderLineBox(
 				matrix, linesWithCullAndDepth.get(),
 				new AxisAlignedBB(
 						RayTraceTestScreen.hitPoint.add(-f, -f, -f),
 						RayTraceTestScreen.hitPoint.add(f, f, f)
 				), 1F, 0F, 0F, 1F);
 
-		matrix.pop();
-		renderBuffer.finish();
+		matrix.popPose();
+		renderBuffer.endBatch();
 	}
 }

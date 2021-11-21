@@ -25,7 +25,7 @@ public class CapabilityAttachListener {
 	 */
 	public static void attachChunkCapability(AttachCapabilitiesEvent<Chunk> event){
 		//TODO 1.17 update this vor negative world heights
-		event.addCapability(DecalCapabilityKey, new DecalChunkProvider(0, event.getObject().getHeight()));
+		event.addCapability(DecalCapabilityKey, new DecalChunkProvider(0, event.getObject().getMaxBuildHeight()));
 	}
 
 	public static class DecalChunkProvider implements ICapabilitySerializable<CompoundNBT> {

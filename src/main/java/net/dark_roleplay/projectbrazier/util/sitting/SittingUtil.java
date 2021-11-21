@@ -33,40 +33,40 @@ public class SittingUtil {
 	}
 
 	public static boolean sitDownEntity(World world, Vector3d pos, Entity entity, Direction facing, Direction initFacing, double heightOffset, BlockState state){
-		if(world.isRemote()) return false;
+		if(world.isClientSide()) return false;
 
 		if(state != null && entity instanceof PlayerEntity){
-			if(entity.getPositionVec().squareDistanceTo(new Vector3d(pos.getX(), pos.getY(), pos.getZ())) > 9){
-				((PlayerEntity)entity).sendStatusMessage(new TranslationTextComponent("interaction.projectbrazier.chair_to_far", state.getBlock().getTranslatedName()), true);
+			if(entity.position().distanceToSqr(new Vector3d(pos.x(), pos.y(), pos.z())) > 9){
+				((PlayerEntity)entity).displayClientMessage(new TranslationTextComponent("interaction.projectbrazier.chair_to_far", state.getBlock().getName()), true);
 				return false;
 			}
 
 			if(isSomeoneSitting(world, pos)){
-				((PlayerEntity)entity).sendStatusMessage(new TranslationTextComponent("interaction.projectbrazier.chair_occupied", state.getBlock().getTranslatedName()), true);
+				((PlayerEntity)entity).displayClientMessage(new TranslationTextComponent("interaction.projectbrazier.chair_occupied", state.getBlock().getName()), true);
 				return false;
 			}
 		}
 
-		SittableEntity chairEntity = new SittableEntity(BrazierEntities.SITTABLE.get(), world, pos.getX(), pos.getY(), pos.getZ(), heightOffset, state != null);
+		SittableEntity chairEntity = new SittableEntity(BrazierEntities.SITTABLE.get(), world, pos.x(), pos.y(), pos.z(), heightOffset, state != null);
 
 		if(facing != null)
 			chairEntity.setRotation(facing);
 
 		if(initFacing != null){
-			entity.prevRotationYaw = initFacing.getHorizontalAngle();
-			entity.rotationYaw = initFacing.getHorizontalAngle();
+			entity.yRotO = initFacing.toYRot();
+			entity.yRot = initFacing.toYRot();
 		}
 
-		((ServerWorld) world).summonEntity(chairEntity);
+		((ServerWorld) world).addWithUUID(chairEntity);
 		entity.startRiding(chairEntity);
 
 		return true;
 	}
 	
 	public static boolean isSomeoneSitting(World world, Vector3d pos){
-		List<SittableEntity> listEMB = world.getEntitiesWithinAABB(SittableEntity.class, new AxisAlignedBB((int)pos.getX(), (int)pos.getY(), (int)pos.getZ(), (int)pos.getX() + 1.0D, (int)pos.getY() + 1.0D, (int)pos.getZ() + 1.0D));
+		List<SittableEntity> listEMB = world.getEntitiesOfClass(SittableEntity.class, new AxisAlignedBB((int)pos.x(), (int)pos.y(), (int)pos.z(), (int)pos.x() + 1.0D, (int)pos.y() + 1.0D, (int)pos.z() + 1.0D));
 		for (SittableEntity mount : listEMB){
-			return mount.isBeingRidden();
+			return mount.isVehicle();
 		}
 		return false;
 	}

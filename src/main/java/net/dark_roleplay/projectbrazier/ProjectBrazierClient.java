@@ -71,8 +71,8 @@ public class ProjectBrazierClient {
 		//TODO Experimental
 		PassiveScreenHelper.editKeybinds();
 
-		ScreenManager.registerFactory(BrazierContainers.GENERAL_CONTAINER.get(), GeneralContainerScreen::new);
-		ScreenManager.registerFactory(BrazierContainers.CRAFTING_PLAYER_CONTAINER.get(), CraftingScreen::new);
+		ScreenManager.register(BrazierContainers.GENERAL_CONTAINER.get(), GeneralContainerScreen::new);
+		ScreenManager.register(BrazierContainers.CRAFTING_PLAYER_CONTAINER.get(), CraftingScreen::new);
 	}
 
 	public static void registerModelLoaders(ModelRegistryEvent event){
@@ -89,14 +89,14 @@ public class ProjectBrazierClient {
 	}
 
 	public static void registerRenderLayers(){
-		RenderTypeLookup.setRenderLayer(BrazierBlocks.GLIMMERTAIL.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(BrazierBlocks.CAULIFLOWER.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(BrazierBlocks.WHITE_CABBAGE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(BrazierBlocks.HANGING_HORN.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(BrazierBlocks.IRON_BRAZIER_COAL.get(), layer -> layer == RenderType.getCutout() || layer == RenderType.getSolid());
-		RenderTypeLookup.setRenderLayer(BrazierBlocks.IRON_FIRE_BOWL.get(), layer -> layer == RenderType.getCutout() || layer == RenderType.getSolid());
-		RenderTypeLookup.setRenderLayer(BrazierBlocks.SOUL_IRON_BRAZIER_COAL.get(), layer -> layer == RenderType.getCutout() || layer == RenderType.getSolid());
-		RenderTypeLookup.setRenderLayer(BrazierBlocks.SOUL_IRON_FIRE_BOWL.get(), layer -> layer == RenderType.getCutout() || layer == RenderType.getSolid());
+		RenderTypeLookup.setRenderLayer(BrazierBlocks.GLIMMERTAIL.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(BrazierBlocks.CAULIFLOWER.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(BrazierBlocks.WHITE_CABBAGE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(BrazierBlocks.HANGING_HORN.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(BrazierBlocks.IRON_BRAZIER_COAL.get(), layer -> layer == RenderType.cutout() || layer == RenderType.solid());
+		RenderTypeLookup.setRenderLayer(BrazierBlocks.IRON_FIRE_BOWL.get(), layer -> layer == RenderType.cutout() || layer == RenderType.solid());
+		RenderTypeLookup.setRenderLayer(BrazierBlocks.SOUL_IRON_BRAZIER_COAL.get(), layer -> layer == RenderType.cutout() || layer == RenderType.solid());
+		RenderTypeLookup.setRenderLayer(BrazierBlocks.SOUL_IRON_FIRE_BOWL.get(), layer -> layer == RenderType.cutout() || layer == RenderType.solid());
 
 		MaterialRegistryObject[] cutouts = {
 				BrazierBlocks.FLOWER_BARRELS,
@@ -118,7 +118,7 @@ public class ProjectBrazierClient {
 		Arrays.stream(cutouts)
 				.flatMap(b -> b.values().stream())
 				.map(b -> ((RegistryObject<? extends Block>)b).get())
-				.forEach(b -> RenderTypeLookup.setRenderLayer((Block) b, RenderType.getCutoutMipped()));
+				.forEach(b -> RenderTypeLookup.setRenderLayer((Block) b, RenderType.cutoutMipped()));
 
 		//TODO Move to TER registration event?
 //		ClientRegistry.bindTileEntityRenderer(BrazierBlockEntities.DRAWBRODGE_ANCHOR.get(), DrawbridgeAnchorTileEntityRenderer::new);
@@ -142,7 +142,7 @@ public class ProjectBrazierClient {
 	}
 
 	public static void registerItemOverrides(){
-		ItemModelsProperties.registerProperty(BrazierItems.STONE_ARROW_SLIT.get(), new ResourceLocation(ProjectBrazier.MODID, "variant"), (stack, world, entity) -> {
+		ItemModelsProperties.register(BrazierItems.STONE_ARROW_SLIT.get(), new ResourceLocation(ProjectBrazier.MODID, "variant"), (stack, world, entity) -> {
 			if (entity != null && entity instanceof PlayerEntity)
 				return ((SelectiveBlockItem)stack.getItem()).getCurrentIndex(((PlayerEntity) entity).getGameProfile());
 			return 0;
@@ -160,7 +160,7 @@ public class ProjectBrazierClient {
 
 	public static void registerBlockColors(ColorHandlerEvent.Block event){
 		event.getBlockColors().register(
-				(state, reader, pos, color) -> reader != null && pos != null ? BiomeColors.getGrassColor(reader, pos) : GrassColors.get(0.5D, 1.0D),
+				(state, reader, pos, color) -> reader != null && pos != null ? BiomeColors.getAverageGrassColor(reader, pos) : GrassColors.get(0.5D, 1.0D),
 				BrazierBlocks.GLIMMERTAIL.get());
 	}
 }

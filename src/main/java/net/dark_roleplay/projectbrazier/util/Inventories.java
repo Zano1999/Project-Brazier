@@ -7,12 +7,12 @@ import net.minecraft.util.Hand;
 public class Inventories {
 
 	public static ItemStack givePlayerItem(PlayerEntity player, ItemStack stack, Hand hand, boolean dropOnGround){
-		if(player.getHeldItem(hand).isEmpty()) {
-			player.setHeldItem(hand, stack);
+		if(player.getItemInHand(hand).isEmpty()) {
+			player.setItemInHand(hand, stack);
 			return ItemStack.EMPTY;
 		}else{
-			if(!player.addItemStackToInventory(stack)){
-				player.dropItem(stack, false);
+			if(!player.addItem(stack)){
+				player.drop(stack, false);
 			}
 			return ItemStack.EMPTY;
 		}

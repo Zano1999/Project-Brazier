@@ -53,15 +53,15 @@ public class RoofModelGenerator {
 
 		//Setup fullBoxes
 
-		matrixStack.push();
-		matrixStack.rotate(Vector3f.XP.rotation((float) angle));
-		Matrix4f matrix = matrixStack.getLast().getMatrix();
-		matrixStack.pop();
+		matrixStack.pushPose();
+		matrixStack.mulPose(Vector3f.XP.rotation((float) angle));
+		Matrix4f matrix = matrixStack.last().pose();
+		matrixStack.popPose();
 
-		matrixStack.push();
-		matrixStack.rotate(Vector3f.XP.rotation((float) angle2));
-		Matrix4f matrix2 = matrixStack.getLast().getMatrix();
-		matrixStack.pop();
+		matrixStack.pushPose();
+		matrixStack.mulPose(Vector3f.XP.rotation((float) angle2));
+		Matrix4f matrix2 = matrixStack.last().pose();
+		matrixStack.popPose();
 
 		setupBox(fullBoxes, 16, 0, shingleCount, matrix, matrix2, roofTile, plank);
 		setupBox(leftRim, 8, 8, shingleCount, matrix, matrix2, roofTile, plank);

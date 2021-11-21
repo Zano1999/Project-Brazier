@@ -10,9 +10,9 @@ public enum PaneCornerType {
 	NONE, HORZIONTAL, VERTICAL, INNER_CORNER, OUTER_CORNER;
 
 	public static PaneCornerType getCornerType(IBlockReader world, BlockPos pos, BlockState state, Direction dir){
-		boolean front = world.getBlockState(pos.offset(dir)) == state;
-		boolean right = world.getBlockState(pos.offset(dir.rotateYCCW())) == state;
-		boolean diagonal = front && right && world.getBlockState(pos.offset(dir).offset(dir.rotateYCCW())) == state;
+		boolean front = world.getBlockState(pos.relative(dir)) == state;
+		boolean right = world.getBlockState(pos.relative(dir.getCounterClockWise())) == state;
+		boolean diagonal = front && right && world.getBlockState(pos.relative(dir).relative(dir.getCounterClockWise())) == state;
 
 		return diagonal ? PaneCornerType.NONE :
 				front && right ? PaneCornerType.OUTER_CORNER :

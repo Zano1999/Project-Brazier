@@ -57,7 +57,7 @@ public class DecalChunk {
 			return (position.getX() & 0xFF << 24) |
 					(position.getY() & 0xFF << 16) |
 					(position.getZ() & 0xFF << 8) |
-					(direction.getIndex());
+					(direction.get3DDataValue());
 		}
 	}
 }

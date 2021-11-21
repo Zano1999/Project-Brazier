@@ -11,7 +11,7 @@ public class SittableEntityRenderer extends EntityRenderer<SittableEntity> {
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(SittableEntity entity) {
+	public ResourceLocation getTextureLocation(SittableEntity entity) {
 		return null;
 	}
 

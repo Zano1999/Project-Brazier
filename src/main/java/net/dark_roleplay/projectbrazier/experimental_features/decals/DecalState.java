@@ -7,7 +7,7 @@ import net.minecraft.state.StateHolder;
 
 public class DecalState extends StateHolder<Decal, DecalState> {
 
-//	public static final Codec<DecalState> CODEC = func_235897_a_(DecalRegistry.REGISTRY, Decal::getDefaultState).stable();
+//	public static final Codec<DecalState> CODEC = codec(DecalRegistry.REGISTRY, Decal::getDefaultState).stable();
 
 
 	protected DecalState(Decal decal, ImmutableMap<Property<?>, Comparable<?>> properties, MapCodec<DecalState> codec) {

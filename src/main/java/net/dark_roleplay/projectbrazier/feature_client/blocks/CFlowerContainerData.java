@@ -48,19 +48,19 @@ public class CFlowerContainerData extends FlowerContainerData implements IQuadPr
 			nullQuads = new ArrayList<>();
 
 			BlockItem block = (BlockItem) item;
-			BlockState[] states = {block.getBlock().getDefaultState(), null};
+			BlockState[] states = {block.getBlock().defaultBlockState(), null};
 			Vector3i offset = this.placement;
 
 			if(states[0].hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF)){
-				DoubleBlockHalf sourceHalf = states[0].get(BlockStateProperties.DOUBLE_BLOCK_HALF);
-				states[1] = states[0].with(BlockStateProperties.DOUBLE_BLOCK_HALF, sourceHalf == DoubleBlockHalf.LOWER ? DoubleBlockHalf.UPPER : DoubleBlockHalf.LOWER);
+				DoubleBlockHalf sourceHalf = states[0].getValue(BlockStateProperties.DOUBLE_BLOCK_HALF);
+				states[1] = states[0].setValue(BlockStateProperties.DOUBLE_BLOCK_HALF, sourceHalf == DoubleBlockHalf.LOWER ? DoubleBlockHalf.UPPER : DoubleBlockHalf.LOWER);
 			}
 
-			BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRendererDispatcher();
+			BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
 
 			for(BlockState state : states) {
 				if(state == null) continue;
-				IBakedModel cachedModel = blockrendererdispatcher.getModelForState(state);
+				IBakedModel cachedModel = blockrendererdispatcher.getBlockModel(state);
 
 				for (Direction dir : Direction.values()) {
 					List<BakedQuad> facedQuads = quads.computeIfAbsent(dir, key -> new ArrayList<BakedQuad>());
@@ -73,7 +73,7 @@ public class CFlowerContainerData extends FlowerContainerData implements IQuadPr
 				for(BakedQuad quad : quads)
 					nullQuads.add(translateQuad(quad, offset));
 
-				offset = offset.up(16);
+				offset = offset.above(16);
 			}
 		}
 
@@ -84,7 +84,7 @@ public class CFlowerContainerData extends FlowerContainerData implements IQuadPr
 	}
 
 	private BakedQuad translateQuad(BakedQuad quad, Vector3i offset){
-		int[] vertexData = quad.getVertexData();
+		int[] vertexData = quad.getVertices();
 		int[] newVertexData = new int[vertexData.length];
 		VertexFormat format = DefaultVertexFormats.BLOCK;
 		float offsetX = offset.getX() * 0.0625F - 0.5F + 0.03125F;
@@ -98,6 +98,6 @@ public class CFlowerContainerData extends FlowerContainerData implements IQuadPr
 			for(int j = 3; j < format.getIntegerSize(); j++)
 				newVertexData[i + j] = vertexData[i + j];
 		}
-		return new BakedQuad(newVertexData, quad.getTintIndex(), quad.getFace(), quad.getSprite(), false);
+		return new BakedQuad(newVertexData, quad.getTintIndex(), quad.getDirection(), quad.getSprite(), false);
 	}
 }

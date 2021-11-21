@@ -36,9 +36,9 @@ public class EmissiveModel implements IModelGeometry {
 	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
 		ImmutableMap.Builder<String, IBakedModel> builder = ImmutableMap.builder();
 		if(this.nonEmissiveModel != null)
-			builder.put("non_emissive", this.nonEmissiveModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation));
+			builder.put("non_emissive", this.nonEmissiveModel.bake(bakery, spriteGetter, modelTransform, modelLocation));
 
-		IBakedModel preEmissiveBakedModel = this.emissiveModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation);
+		IBakedModel preEmissiveBakedModel = this.emissiveModel.bake(bakery, spriteGetter, modelTransform, modelLocation);
 		if(preEmissiveBakedModel instanceof SimpleBakedModel){
 			List<BakedQuad> quads = transformQuads(preEmissiveBakedModel.getQuads(null, null, null, EmptyModelData.INSTANCE), this.skyLight, this.blockLight);
 			Map<Direction, List<BakedQuad>> faceQuads = new EnumMap<>(Direction.class);
@@ -49,11 +49,11 @@ public class EmissiveModel implements IModelGeometry {
 
 			builder.put("emissive",new SimpleBakedModel(
 					quads, faceQuads,
-					preEmissiveBakedModel.isAmbientOcclusion(),
-					preEmissiveBakedModel.isSideLit(),
+					preEmissiveBakedModel.useAmbientOcclusion(),
+					preEmissiveBakedModel.usesBlockLight(),
 					preEmissiveBakedModel.isGui3d(),
-					preEmissiveBakedModel.getParticleTexture(),
-					preEmissiveBakedModel.getItemCameraTransforms(),
+					preEmissiveBakedModel.getParticleIcon(),
+					preEmissiveBakedModel.getTransforms(),
 					preEmissiveBakedModel.getOverrides()
 			));
 		}
@@ -63,9 +63,9 @@ public class EmissiveModel implements IModelGeometry {
 	@Override
 	public Collection<Material> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
 		Set<Material> textures = new HashSet<>();
-		textures.addAll(emissiveModel.getTextures(modelGetter, missingTextureErrors));
+		textures.addAll(emissiveModel.getMaterials(modelGetter, missingTextureErrors));
 		if(nonEmissiveModel != null)
-		textures.addAll(nonEmissiveModel.getTextures(modelGetter, missingTextureErrors));
+		textures.addAll(nonEmissiveModel.getMaterials(modelGetter, missingTextureErrors));
 		return textures;
 	}
 
@@ -78,13 +78,13 @@ public class EmissiveModel implements IModelGeometry {
 		public IModelGeometry read(JsonDeserializationContext deserializationContext, JsonObject modelContents) {
 			IUnbakedModel nonEmissive = null, emissive = null;
 			if(modelContents.has("nonEmissive")){
-				nonEmissive = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"nonEmissive"), BlockModel.class);
+				nonEmissive = deserializationContext.deserialize(JSONUtils.getAsJsonObject(modelContents,"nonEmissive"), BlockModel.class);
 			}
 			if(modelContents.has("emissive")){
-				emissive = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"emissive"), BlockModel.class);
+				emissive = deserializationContext.deserialize(JSONUtils.getAsJsonObject(modelContents,"emissive"), BlockModel.class);
 			}
-			int skyLight = JSONUtils.getInt(modelContents, "skyLight", 15);
-			int blockLight = JSONUtils.getInt(modelContents, "blockLight", 15);
+			int skyLight = JSONUtils.getAsInt(modelContents, "skyLight", 15);
+			int blockLight = JSONUtils.getAsInt(modelContents, "blockLight", 15);
 
 			return new EmissiveModel(emissive, nonEmissive, skyLight, blockLight);
 		}
@@ -101,7 +101,7 @@ public class EmissiveModel implements IModelGeometry {
 	}
 
 	private static BakedQuad transformQuad(BakedQuad quad, int light) {
-		int[] vertexData = quad.getVertexData().clone();
+		int[] vertexData = quad.getVertices().clone();
 
 		// Set lighting to light value on all vertices
 		vertexData[6] = light;
@@ -109,13 +109,13 @@ public class EmissiveModel implements IModelGeometry {
 		vertexData[6 + 8 + 8] = light;
 		vertexData[6 + 8 + 8 + 8] = light;
 
-		//func_239287_f_ -> shouldApplyDiffuseLighting
+		//isShade -> shouldApplyDiffuseLighting
 		return new BakedQuad(
 				vertexData,
 				quad.getTintIndex(),
-				quad.getFace(),
+				quad.getDirection(),
 				quad.getSprite(),
-				quad.applyDiffuseLighting()
+				quad.isShade()
 		);
 	}
 }

@@ -22,8 +22,8 @@ public class CraftingScreen extends NestableContainerScreen<CraftingScreenPlayer
 
 	public CraftingScreen(CraftingScreenPlayerContainer screenContainer, PlayerInventory inv, ITextComponent title) {
 		super(screenContainer, inv, title);
-		this.xSize = 322;
-		this.ySize = 166;
+		this.imageWidth = 322;
+		this.imageHeight = 166;
 	}
 
 	@Override
@@ -34,10 +34,10 @@ public class CraftingScreen extends NestableContainerScreen<CraftingScreenPlayer
 		RecipeOutputWidget recipeDisplay;
 
 		if(hasWorkstation){
-			this.addChild(recipeDisplay = new RecipeOutputWidget(this.guiLeft + 153, this.guiTop + 7));
+			this.addChild(recipeDisplay = new RecipeOutputWidget(this.leftPos + 153, this.topPos + 7));
 			//TODO Add 2 station buttons
 		}else{
-			this.addChild(recipeDisplay = new RecipeOutputWidget(this.guiLeft + 153 + 11, this.guiTop + 7));
+			this.addChild(recipeDisplay = new RecipeOutputWidget(this.leftPos + 153 + 11, this.topPos + 7));
 		}
 
 //		recipeDisplay.setRecipe(new RecipeBuilder()
@@ -73,26 +73,26 @@ public class CraftingScreen extends NestableContainerScreen<CraftingScreenPlayer
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(matrixStack);
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
-		this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+		this.renderTooltip(matrixStack, mouseX, mouseY);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
+	protected void renderBg(MatrixStack matrixStack, float partialTicks, int x, int y) {
 
 
-		this.minecraft.getTextureManager().bindTexture(BACKGROUND);
-		this.blit(matrixStack, this.guiLeft, this.guiTop, this.xSize, this.ySize, 0, 0, 322, 166, 322, 166);
+		this.minecraft.getTextureManager().bind(BACKGROUND);
+		this.blit(matrixStack, this.leftPos, this.topPos, this.imageWidth, this.imageHeight, 0, 0, 322, 166, 322, 166);
 
-		this.minecraft.getTextureManager().bindTexture(WIDGETS);
-		for (Slot slot : this.getContainer().inventorySlots) {
-			this.blit(matrixStack, (this.guiLeft + slot.xPos) - 1, (this.guiTop + slot.yPos) - 1, 166, 0, 18, 18);
+		this.minecraft.getTextureManager().bind(WIDGETS);
+		for (Slot slot : this.getMenu().slots) {
+			this.blit(matrixStack, (this.leftPos + slot.x) - 1, (this.topPos + slot.y) - 1, 166, 0, 18, 18);
 		}
 
-		super.drawGuiContainerBackgroundLayer(matrixStack, partialTicks, x, y);
+		super.renderBg(matrixStack, partialTicks, x, y);
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
+	protected void renderLabels(MatrixStack matrixStack, int x, int y) {
 
 	}
 }

@@ -50,67 +50,67 @@ public class CollisionListener {
 		@SubscribeEvent
 		public static void onServerTick(TickEvent.ServerTickEvent event){
 			for(Map.Entry<TileEntity, VoxelShape> entry : COLLISIONS.entrySet())
-				handleCollision(entry.getKey().getWorld(), entry.getValue());
+				handleCollision(entry.getKey().getLevel(), entry.getValue());
 		}
 	}
 
 	@Mod.EventBusSubscriber(modid = ProjectBrazier.MODID, value = Dist.CLIENT)
 	public static class ClientCollisions{
 		public static final RenderTypeBuffers renderBuffers = new RenderTypeBuffers();
-		private static final IRenderTypeBuffer.Impl renderBuffer = renderBuffers.getBufferSource();
-		private static final Supplier<IVertexBuilder> linesWithCullAndDepth = () -> renderBuffer.getBuffer(RenderType.getLines());
+		private static final IRenderTypeBuffer.Impl renderBuffer = renderBuffers.bufferSource();
+		private static final Supplier<IVertexBuilder> linesWithCullAndDepth = () -> renderBuffer.getBuffer(RenderType.lines());
 
 		@SubscribeEvent
 		public static void onWorldTick(TickEvent.WorldTickEvent event){
 			for(Map.Entry<TileEntity, VoxelShape> entry : COLLISIONS.entrySet())
-				handleCollision(entry.getKey().getWorld(), entry.getValue());
+				handleCollision(entry.getKey().getLevel(), entry.getValue());
 		}
 
 		@SubscribeEvent
 		public static void debugRenderCollisions(RenderWorldLastEvent event){
-			Vector3d vec = Minecraft.getInstance().getRenderManager().info.getProjectedView();
+			Vector3d vec = Minecraft.getInstance().getEntityRenderDispatcher().camera.getPosition();
 			MatrixStack matrix = event.getMatrixStack();
-			matrix.push();
+			matrix.pushPose();
 			matrix.translate(-vec.x, -vec.y, -vec.z);
 			for(VoxelShape entry : COLLISIONS.values()){
-				WorldRenderer.drawBoundingBox(matrix, linesWithCullAndDepth.get(), entry.getBoundingBox(), 1F, 1F, 0F, 1F);
+				WorldRenderer.renderLineBox(matrix, linesWithCullAndDepth.get(), entry.bounds(), 1F, 1F, 0F, 1F);
 			}
-			matrix.pop();
-			renderBuffer.finish();
+			matrix.popPose();
+			renderBuffer.endBatch();
 		}
 	}
 
 	public static void handleCollision(World world, VoxelShape shape){
-		AxisAlignedBB scanArea = shape.getBoundingBox().grow(1);
+		AxisAlignedBB scanArea = shape.bounds().inflate(1);
 
-		List<Entity> entitiesWithinAABB = world.getEntitiesWithinAABB(Entity.class, scanArea, target -> !target.noClip);
+		List<Entity> entitiesWithinAABB = world.getEntitiesOfClass(Entity.class, scanArea, target -> !target.noPhysics);
 		//TODO Skip remote client players
 		ReuseableStream<VoxelShape> collisionShapes = new ReuseableStream<>(Stream.of(shape));
 
 		for (Entity entity : entitiesWithinAABB) {
-			Vector3d prevPosition = new Vector3d(entity.prevPosX, entity.prevPosY, entity.prevPosZ);
-			Vector3d entityPosition = entity.getPositionVec();
+			Vector3d prevPosition = new Vector3d(entity.xo, entity.yo, entity.zo);
+			Vector3d entityPosition = entity.position();
 
 			Vector3d prevMotion = entityPosition.subtract(prevPosition);
-			Vector3d entityMotion = entity.getMotion();
+			Vector3d entityMotion = entity.getDeltaMovement();
 
 			AxisAlignedBB entityBounds = entity.getBoundingBox();
-			AxisAlignedBB prevEntityBounds = entity.getBoundingBox().offset(prevMotion.inverse());
+			AxisAlignedBB prevEntityBounds = entity.getBoundingBox().move(prevMotion.reverse());
 
 			Vector3d allowedMotion = Vector3d.ZERO;
 
-			allowedMotion = Entity.collideBoundingBox(prevMotion, prevEntityBounds, collisionShapes);
+			allowedMotion = Entity.collideBoundingBoxLegacy(prevMotion, prevEntityBounds, collisionShapes);
 
 			//Handle previousMotion
-			if (allowedMotion.lengthSquared() > 1.0E-7D) {
-				entity.setBoundingBox(entityBounds = prevEntityBounds.offset(allowedMotion));
-				entity.resetPositionToBB();
+			if (allowedMotion.lengthSqr() > 1.0E-7D) {
+				entity.setBoundingBox(entityBounds = prevEntityBounds.move(allowedMotion));
+				entity.setLocationFromBoundingbox();
 			}
 
 			//handleNextMotion
 
-			allowedMotion = Entity.collideBoundingBox(entityMotion, entityBounds, collisionShapes);
-			entity.setMotion(allowedMotion);
+			allowedMotion = Entity.collideBoundingBoxLegacy(entityMotion, entityBounds, collisionShapes);
+			entity.setDeltaMovement(allowedMotion);
 			if(allowedMotion.y == 0 ){
 				entity.setOnGround(true);
 				//				if(entity instanceof ServerPlayerEntity)

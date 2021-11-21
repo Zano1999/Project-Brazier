@@ -28,7 +28,7 @@ public class BlockPosUtil {
         for (int y = 0; y < height; y ++) {
             for (int z = 0; z < length; z++) {
                 for(int x = 0; x < width; x++) {
-                    consumer.accept(mutable, offset.setPos(x, y, z));
+                    consumer.accept(mutable, offset.set(x, y, z));
                     mutable.move(1, 0, 0);
                 }
                 mutable.move(-width, 0, 1);

@@ -20,6 +20,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class WoodBenchBlock extends HAxisDecoBlock {
 
 	protected final AxisVoxelShape positiveShapes;
@@ -36,12 +38,12 @@ public class WoodBenchBlock extends HAxisDecoBlock {
 
 	@Deprecated
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		Direction.Axis axis = state.get(HORIZONTAL_AXIS);
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+		Direction.Axis axis = state.getValue(HORIZONTAL_AXIS);
 
 		Direction facing = null;
 
-		float yaw = player.getRotationYawHead();
+		float yaw = player.getYHeadRot();
 
 		if(axis == Direction.Axis.Z && yaw > 0 && yaw< 180) facing = Direction.WEST;
 		else if(axis == Direction.Axis.Z) facing = Direction.EAST;
@@ -55,8 +57,8 @@ public class WoodBenchBlock extends HAxisDecoBlock {
 
 	@Override
 	@Deprecated
-	public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return shapes.get(state.get(HORIZONTAL_AXIS));
+	public VoxelShape getOcclusionShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return shapes.get(state.getValue(HORIZONTAL_AXIS));
 	}
 
 	//TODO Optimize getRaytraceShape
@@ -65,15 +67,15 @@ public class WoodBenchBlock extends HAxisDecoBlock {
 		AxisConnectionType type = AxisConnectionType.getConnections(world, pos, state);
 		switch(type){
 			case DEFAULT:
-				return shapes.get(state.get(HORIZONTAL_AXIS));
+				return shapes.get(state.getValue(HORIZONTAL_AXIS));
 			case POSITIVE:
-				return positiveShapes.get(state.get(HORIZONTAL_AXIS));
+				return positiveShapes.get(state.getValue(HORIZONTAL_AXIS));
 			case NEGATIVE:
-				return negativeShapes.get(state.get(HORIZONTAL_AXIS));
+				return negativeShapes.get(state.getValue(HORIZONTAL_AXIS));
 			case CENTERED:
-				return centeredShapes.get(state.get(HORIZONTAL_AXIS));
+				return centeredShapes.get(state.getValue(HORIZONTAL_AXIS));
 		}
 
-		return shapes.get(state.get(HORIZONTAL_AXIS));
+		return shapes.get(state.getValue(HORIZONTAL_AXIS));
 	}
 }

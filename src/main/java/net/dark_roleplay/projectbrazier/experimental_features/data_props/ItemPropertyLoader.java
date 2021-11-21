@@ -39,27 +39,27 @@ public class ItemPropertyLoader {
     private static Item.Properties loadProp(JsonObject propObj){
         Item.Properties prop = new Item.Properties();
 
-        prop.maxStackSize(JSONUtils.getInt(propObj, "MaxCount", 64));
+        prop.stacksTo(JSONUtils.getAsInt(propObj, "MaxCount", 64));
 
         if(propObj.has("MaxDamage"))
-            prop.maxDamage(JSONUtils.getInt(propObj, "MaxDamage"));
+            prop.durability(JSONUtils.getAsInt(propObj, "MaxDamage"));
 
         if(propObj.has("ItemGroup"))
-            prop.group(BrazierCreativeTabs.getGroupFromName(JSONUtils.getString(propObj, "ItemGroup")));
+            prop.tab(BrazierCreativeTabs.getGroupFromName(JSONUtils.getAsString(propObj, "ItemGroup")));
 
         if(propObj.has("Food"))
-            prop.food(loadFood(JSONUtils.getJsonObject(propObj, "Food")));
+            prop.food(loadFood(JSONUtils.getAsJsonObject(propObj, "Food")));
 
         return prop;
     }
 
     private static Food loadFood(JsonObject foodObj){
         Food.Builder builder = new Food.Builder();
-        builder.hunger(JSONUtils.getInt(foodObj, "Hunger"));
-        builder.saturation(JSONUtils.getFloat(foodObj, "Saturation"));
-        if(JSONUtils.getBoolean(foodObj, "IsMeat", false)) builder.meat();
-        if(JSONUtils.getBoolean(foodObj, "FastEat", false)) builder.fastToEat();
-        if(JSONUtils.getBoolean(foodObj, "AlwaysEdible", false)) builder.setAlwaysEdible();
+        builder.nutrition(JSONUtils.getAsInt(foodObj, "Hunger"));
+        builder.saturationMod(JSONUtils.getAsFloat(foodObj, "Saturation"));
+        if(JSONUtils.getAsBoolean(foodObj, "IsMeat", false)) builder.meat();
+        if(JSONUtils.getAsBoolean(foodObj, "FastEat", false)) builder.fast();
+        if(JSONUtils.getAsBoolean(foodObj, "AlwaysEdible", false)) builder.alwaysEat();
         return builder.build();
     }
 }

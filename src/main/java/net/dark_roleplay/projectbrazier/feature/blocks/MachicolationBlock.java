@@ -15,6 +15,8 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class MachicolationBlock extends HFacedDecoBlock {
 
 	public static final EnumProperty<MachicolationType> TYPE = EnumProperty.create("type", MachicolationType.class);
@@ -31,53 +33,53 @@ public class MachicolationBlock extends HFacedDecoBlock {
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		MachicolationType type = state.get(TYPE);
+		MachicolationType type = state.getValue(TYPE);
 		return type == MachicolationType.STRAIGHT ?
-				shapes.get(state.get(HORIZONTAL_FACING)) :
+				shapes.get(state.getValue(HORIZONTAL_FACING)) :
 					type == MachicolationType.OUTER_CORNER ?
-							outerShapes.get(state.get(HORIZONTAL_FACING)) :
-							innerShapes.get(state.get(HORIZONTAL_FACING));
+							outerShapes.get(state.getValue(HORIZONTAL_FACING)) :
+							innerShapes.get(state.getValue(HORIZONTAL_FACING));
 	}
 
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		super.fillStateContainer(builder);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
 		builder.add(TYPE);
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		Direction direction = context.getPlacementHorizontalFacing().getOpposite();
-		BlockPos pos = context.getPos();
-		World world = context.getWorld();
+		Direction direction = context.getHorizontalDirection().getOpposite();
+		BlockPos pos = context.getClickedPos();
+		World world = context.getLevel();
 
 		BlockState sourceState = null;
-		if(!context.getPlayer().isCrouching() && (sourceState = world.getBlockState(pos.down())).getBlock() instanceof MachicolationBlock){
-			return this.getDefaultState().with(HORIZONTAL_FACING, sourceState.get(HORIZONTAL_FACING)).with(TYPE, sourceState.get(TYPE));
+		if(!context.getPlayer().isCrouching() && (sourceState = world.getBlockState(pos.below())).getBlock() instanceof MachicolationBlock){
+			return this.defaultBlockState().setValue(HORIZONTAL_FACING, sourceState.getValue(HORIZONTAL_FACING)).setValue(TYPE, sourceState.getValue(TYPE));
 		}
 
 		MachicolationType type = MachicolationType.STRAIGHT;
 		if(!context.getPlayer().isCrouching()) {
 			BlockState other;
-			if ((other = world.getBlockState(pos.offset(direction))).getBlock() == this.getBlock()) {
-				if (other.get(HORIZONTAL_FACING) == direction.rotateY()) {
+			if ((other = world.getBlockState(pos.relative(direction))).getBlock() == this.getBlock()) {
+				if (other.getValue(HORIZONTAL_FACING) == direction.getClockWise()) {
 					type = MachicolationType.INNER_CORNER;
-				} else if (other.get(HORIZONTAL_FACING) == direction.rotateYCCW()) {
+				} else if (other.getValue(HORIZONTAL_FACING) == direction.getCounterClockWise()) {
 					type = MachicolationType.INNER_CORNER;
-					direction = direction.rotateYCCW();
+					direction = direction.getCounterClockWise();
 				}
-			} else if ((other = world.getBlockState(pos.offset(direction.getOpposite()))).getBlock() == this.getBlock()) {
-				if (other.get(HORIZONTAL_FACING) == direction.rotateYCCW()) {
+			} else if ((other = world.getBlockState(pos.relative(direction.getOpposite()))).getBlock() == this.getBlock()) {
+				if (other.getValue(HORIZONTAL_FACING) == direction.getCounterClockWise()) {
 					type = MachicolationType.OUTER_CORNER;
-					direction = direction.rotateYCCW();
-				} else if (other.get(HORIZONTAL_FACING) == direction.rotateY()) {
+					direction = direction.getCounterClockWise();
+				} else if (other.getValue(HORIZONTAL_FACING) == direction.getClockWise()) {
 					type = MachicolationType.OUTER_CORNER;
 				}
 			}
 		}
 
-		return this.getDefaultState().with(HORIZONTAL_FACING, direction).with(TYPE, type);
+		return this.defaultBlockState().setValue(HORIZONTAL_FACING, direction).setValue(TYPE, type);
 	}
 
 }

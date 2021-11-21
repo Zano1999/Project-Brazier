@@ -11,7 +11,7 @@ public class GhostRenderType extends RenderType {
 	private static Map<RenderType, RenderType> remappedTypes = new IdentityHashMap<>();
 
 	GhostRenderType(RenderType original) {
-		super(original.toString() + "_place_preview", original.getVertexFormat(), original.getDrawMode(), original.getBufferSize(), original.isUseDelegate(), true, () -> {
+		super(original.toString() + "_place_preview", original.format(), original.mode(), original.bufferSize(), original.affectsCrumbling(), true, () -> {
 			original.setupRenderState();
 			RenderSystem.disableDepthTest();
 			RenderSystem.enableBlend();

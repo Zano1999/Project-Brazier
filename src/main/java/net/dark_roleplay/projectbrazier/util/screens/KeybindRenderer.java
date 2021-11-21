@@ -34,8 +34,8 @@ public class KeybindRenderer {
 	}
 
 	public static int getKeybindWidth(KeyBinding keybind, FontRenderer fontRenderer){
-		if(SPECIAL_KEYS.containsKey(keybind.getKey().getKeyCode())) return 13;
-		return fontRenderer.getStringPropertyWidth(keybind.func_238171_j_()) + 7;
+		if(SPECIAL_KEYS.containsKey(keybind.getKey().getValue())) return 13;
+		return fontRenderer.width(keybind.getTranslatedKeyMessage()) + 7;
 	}
 
 	public static void renderKeybind(KeyBinding keybind, MatrixStack matrix, FontRenderer fontRenderer, int posX, int posY, boolean centered){
@@ -43,21 +43,21 @@ public class KeybindRenderer {
 		ScreenTexture down = TextureList.KEYBOARD_BUTTON_PRESSED;
 
 		boolean isSpecialKey = false;
-		ScreenTexture[] textures = SPECIAL_KEYS.get(keybind.getKey().getKeyCode());
+		ScreenTexture[] textures = SPECIAL_KEYS.get(keybind.getKey().getValue());
 		if(textures != null){
 			up = textures[0];
 			down = textures[1];
 			isSpecialKey = true;
 		}
 
-		boolean isPressed = Minecraft.getInstance().world.getGameTime() % 30 > 15;
+		boolean isPressed = Minecraft.getInstance().level.getGameTime() % 30 > 15;
 		if(isSpecialKey){
 			if(isPressed) up.render(matrix, posX, posY);
 			else down.render(matrix, posX, posY);
 		}else{
-			int width = fontRenderer.getStringPropertyWidth(keybind.func_238171_j_()) + 7;
+			int width = fontRenderer.width(keybind.getTranslatedKeyMessage()) + 7;
 			(isPressed ? TextureList.KEYBOARD_BUTTON_PRESSED : TextureList.KEYBOARD_BUTTON).renderSegmented(matrix, posX - (centered ? (width / 2) : 0), posY, width, 13);
-			fontRenderer.func_243248_b(matrix, keybind.func_238171_j_(), posX - (centered ? (width / 2) : 0) + 4, posY + ((isPressed ? 3 : 2)), 0xFFFFFFFF);
+			fontRenderer.draw(matrix, keybind.getTranslatedKeyMessage(), posX - (centered ? (width / 2) : 0) + 4, posY + ((isPressed ? 3 : 2)), 0xFFFFFFFF);
 		}
 	}
 }

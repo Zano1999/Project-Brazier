@@ -18,7 +18,7 @@ public class HangingItemBlockEntity extends TileEntity {
 	private final ItemStackHandler inventory = new ItemStackHandler(1){
 		@Override
 		public void onContentsChanged(int slot){
-			HangingItemBlockEntity.this.markDirty();
+			HangingItemBlockEntity.this.setChanged();
 		}
 	};
 	private final LazyOptional<ItemStackHandler> lazyInventory = LazyOptional.of(() -> inventory);
@@ -29,15 +29,15 @@ public class HangingItemBlockEntity extends TileEntity {
 
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		compound = super.write(compound);
+	public CompoundNBT save(CompoundNBT compound) {
+		compound = super.save(compound);
 		compound.put("inventory", this.inventory.serializeNBT());
 		return compound;
 	}
 
 	@Override
-	public void read(BlockState state, CompoundNBT compound) {
-		super.read(state, compound);
+	public void load(BlockState state, CompoundNBT compound) {
+		super.load(state, compound);
 		if(compound.contains("inventory"))
 			this.inventory.deserializeNBT( compound.getCompound("inventory"));
 	}

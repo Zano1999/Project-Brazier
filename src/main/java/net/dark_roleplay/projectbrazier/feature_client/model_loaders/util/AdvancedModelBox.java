@@ -20,9 +20,9 @@ public abstract class AdvancedModelBox {
 
 		this.vertices = new Vector3f[8];
 
-		float x = pos.getX(), x2 = pos.getX() + size.getX();
-		float y = pos.getY(), y2 = pos.getY() + size.getY();
-		float z = pos.getZ(), z2 = pos.getZ() + size.getZ();
+		float x = pos.x(), x2 = pos.x() + size.x();
+		float y = pos.y(), y2 = pos.y() + size.y();
+		float z = pos.z(), z2 = pos.z() + size.z();
 
 		Vector4f[] tmpVectors = new Vector4f[]{
 				new Vector4f(x, y, z, 1f),
@@ -38,7 +38,7 @@ public abstract class AdvancedModelBox {
 		for (int i = 0; i < 8; i++) {
 			Vector4f tmp = tmpVectors[i];
 			tmp.transform(matrix);
-			this.vertices[i] = new Vector3f(tmp.getX() + offset.getX(), tmp.getY() + offset.getY(), tmp.getZ() + offset.getZ());
+			this.vertices[i] = new Vector3f(tmp.x() + offset.x(), tmp.y() + offset.y(), tmp.z() + offset.z());
 		}
 	}
 
@@ -54,14 +54,14 @@ public abstract class AdvancedModelBox {
 		vecB.sub(vertices[0]);
 		normalVec.cross(vecB);
 
-		int normal = ((int) normalVec.getX()) << 24 | ((int) normalVec.getY()) << 16 | ((int) normalVec.getZ()) << 8;
+		int normal = ((int) normalVec.x()) << 24 | ((int) normalVec.y()) << 16 | ((int) normalVec.z()) << 8;
 
 		float[][] uv = {{u1, v1}, {u2, v1}, {u2, v2}, {u1, v2}};
 		int i = 0;
 		for (Vector3f vertex : vertices) {
-			data[offset++] = Float.floatToIntBits(vertex.getX() * 0.0625F);
-			data[offset++] = Float.floatToIntBits(vertex.getY() * 0.0625F);
-			data[offset++] = Float.floatToIntBits(vertex.getZ() * 0.0625F);
+			data[offset++] = Float.floatToIntBits(vertex.x() * 0.0625F);
+			data[offset++] = Float.floatToIntBits(vertex.y() * 0.0625F);
+			data[offset++] = Float.floatToIntBits(vertex.z() * 0.0625F);
 			data[offset++] = 0xFFFFFFFF;
 			data[offset++] = Float.floatToIntBits(uv[i][0]);
 			data[offset++] = Float.floatToIntBits(uv[i][1]);

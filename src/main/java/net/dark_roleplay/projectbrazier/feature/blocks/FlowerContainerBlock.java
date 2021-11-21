@@ -28,6 +28,8 @@ import net.minecraftforge.common.ForgeTagHandler;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class FlowerContainerBlock extends DecoBlock {
 
 	private static Tags.IOptionalNamedTag<Item> POT_PLANTS = ForgeTagHandler.createOptionalTag(ForgeRegistries.ITEMS, new ResourceLocation(ProjectBrazier.MODID, "pot_plant"));
@@ -39,25 +41,25 @@ public class FlowerContainerBlock extends DecoBlock {
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		if(world.isRemote()) return ActionResultType.SUCCESS;
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+		if(world.isClientSide()) return ActionResultType.SUCCESS;
 
-		TileEntity tileEntity = world.getTileEntity(pos);
+		TileEntity tileEntity = world.getBlockEntity(pos);
 		if(!(tileEntity instanceof FlowerContainerBlockEntity)) return ActionResultType.FAIL;
 		FlowerContainerBlockEntity flowerTileEntity = (FlowerContainerBlockEntity) tileEntity;
 
-		ItemStack heldItem = player.getHeldItem(hand);
+		ItemStack heldItem = player.getItemInHand(hand);
 		if(heldItem.isEmpty()){
 			ItemStack stack = flowerTileEntity.removeFlower();
 			if(!stack.isEmpty())
-				player.addItemStackToInventory(stack);
+				player.addItem(stack);
 		}else {
 			if(heldItem.getItem() instanceof BlockItem && (ItemTags.FLOWERS.contains(heldItem.getItem()) || POT_PLANTS.contains(heldItem.getItem()))) {
-				Vector3d hitPos = hit.getHitVec();
-				Vector3i offsetPos = new Vector3i((int) Math.floor((hitPos.getX() - pos.getX()) * 16), (int) Math.floor((hitPos.getY() - pos.getY()) * 16), (int) Math.floor((hitPos.getZ() - pos.getZ()) * 16));
+				Vector3d hitPos = hit.getLocation();
+				Vector3i offsetPos = new Vector3i((int) Math.floor((hitPos.x() - pos.getX()) * 16), (int) Math.floor((hitPos.y() - pos.getY()) * 16), (int) Math.floor((hitPos.z() - pos.getZ()) * 16));
 
 				boolean isValid = false;
-				for(AxisAlignedBB aabb : allowedPlacementArea.toBoundingBoxList())
+				for(AxisAlignedBB aabb : allowedPlacementArea.toAabbs())
 					isValid |= aabb.contains(offsetPos.getX() / 16F, offsetPos.getY() / 16F, offsetPos.getZ() / 16F);
 
 				if(isValid)
@@ -65,26 +67,26 @@ public class FlowerContainerBlock extends DecoBlock {
 			}
 		}
 
-		world.notifyBlockUpdate(pos, state, state, 3);
+		world.sendBlockUpdated(pos, state, state, 3);
 
 		return ActionResultType.SUCCESS;
 	}
 
 	@Override
-	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
 		if(state != newState) {
-			TileEntity te = world.getTileEntity(pos);
+			TileEntity te = world.getBlockEntity(pos);
 			if(te != null && te instanceof FlowerContainerBlockEntity){
 				FlowerContainerBlockEntity flowerTe = (FlowerContainerBlockEntity) te;
 				ItemStack stack = flowerTe.removeFlower();
 				while(!stack.isEmpty()) {
-					InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+					InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
 					stack = flowerTe.removeFlower();
 				}
 			}
-			world.removeTileEntity(pos);
+			world.removeBlockEntity(pos);
 		}
-		super.onReplaced(state, world, pos, newState, isMoving);
+		super.onRemove(state, world, pos, newState, isMoving);
 	}
 
 	@Override

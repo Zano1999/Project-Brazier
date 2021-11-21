@@ -15,20 +15,20 @@ public class CameraEntity extends Entity {
 	}
 
 	public void setup(Vector3d pos, Vector3f rotation){
-		this.setPositionAndRotation(pos.getX(), pos.getY(), pos.getZ(), rotation.getX(), rotation.getY());
+		this.absMoveTo(pos.x(), pos.y(), pos.z(), rotation.x(), rotation.y());
 	}
 
 	@Override
-	protected void registerData() {}
+	protected void defineSynchedData() {}
 
 	@Override
-	protected void readAdditional(CompoundNBT compound) {}
+	protected void readAdditionalSaveData(CompoundNBT compound) {}
 
 	@Override
-	protected void writeAdditional(CompoundNBT compound) {}
+	protected void addAdditionalSaveData(CompoundNBT compound) {}
 
 	@Override
-	public IPacket<?> createSpawnPacket() {
+	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

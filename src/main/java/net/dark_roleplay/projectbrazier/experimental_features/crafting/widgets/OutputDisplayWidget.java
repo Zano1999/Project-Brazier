@@ -46,19 +46,19 @@ public class OutputDisplayWidget extends NestedWidget {
 
 	@Override
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-		Minecraft.getInstance().getTextureManager().bindTexture(WIDGETS);
+		Minecraft.getInstance().getTextureManager().bind(WIDGETS);
 		if(isLarge) {
 			this.blit(matrixStack, this.posX + offsetX, this.posY + offsetY, 219, 219, 37, 37);
 
 //			GlStateManager.pushMatrix();
 //			GlStateManager.translated(this.posX + offsetX + 2, this.posY + offsetY + 2, 0);
 //			GlStateManager.scaled(2, 2, 2);
-			Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(item, this.posX + offsetX + 10, this.posY + offsetY + 10);
+			Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(item, this.posX + offsetX + 10, this.posY + offsetY + 10);
 //			GlStateManager.popMatrix();
-			Minecraft.getInstance().getItemRenderer().renderItemOverlays(Minecraft.getInstance().fontRenderer, item, this.posX + offsetX + 18, this.posY + offsetY + 18);
+			Minecraft.getInstance().getItemRenderer().renderGuiItemDecorations(Minecraft.getInstance().font, item, this.posX + offsetX + 18, this.posY + offsetY + 18);
 		}else {
 			this.blit(matrixStack, this.posX + offsetX, this.posY + offsetY, offsetX > 0 ? 236 : 235, row >= 1 ? 199 : 198, offsetX > 0 ? 20 : 21, row >= 1 ? 20 : 21);
-			Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(item, this.posX + offsetX + (offsetX > 0 ? 1 : 2), this.posY + offsetY + (row >= 1 ? 1 : 2));
+			Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(item, this.posX + offsetX + (offsetX > 0 ? 1 : 2), this.posY + offsetY + (row >= 1 ? 1 : 2));
 		}
 	}
 }

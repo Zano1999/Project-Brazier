@@ -16,6 +16,8 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class RopeBlock extends HFacedDecoBlock {
 
 	protected final HFacedVoxelShape droppedShapes;
@@ -29,19 +31,19 @@ public class RopeBlock extends HFacedDecoBlock {
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return state.get(IS_END) ? droppedShapes.get(state.get(HORIZONTAL_FACING)) : shapes.get(state.get(HORIZONTAL_FACING));
+		return state.getValue(IS_END) ? droppedShapes.get(state.getValue(HORIZONTAL_FACING)) : shapes.get(state.getValue(HORIZONTAL_FACING));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		super.fillStateContainer(builder);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
 		builder.add(IS_END);
 	}
 
-	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
 		if(facing == Direction.UP && facingState.isAir(world, facingPos)){
-			if(world.getBlockState(facingPos.offset(state.get(HORIZONTAL_FACING).getOpposite())).getBlock() != BrazierBlocks.ROPE_ANCHOR.get())
-				return Blocks.AIR.getDefaultState();
+			if(world.getBlockState(facingPos.relative(state.getValue(HORIZONTAL_FACING).getOpposite())).getBlock() != BrazierBlocks.ROPE_ANCHOR.get())
+				return Blocks.AIR.defaultBlockState();
 		}
 
 		return state;

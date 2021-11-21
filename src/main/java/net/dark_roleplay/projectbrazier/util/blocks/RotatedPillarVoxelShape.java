@@ -23,7 +23,7 @@ public class RotatedPillarVoxelShape {
 			case Y:
 				return this.y;
 			default:
-				return VoxelShapes.fullCube();
+				return VoxelShapes.block();
 		}
 	}
 }

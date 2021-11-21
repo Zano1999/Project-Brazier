@@ -12,7 +12,7 @@ public class PassiveScreenHelper {
 		IKeyConflictContext ctx = new IKeyConflictContext() {
 			@Override
 			public boolean isActive() {
-				return KeyConflictContext.IN_GAME.isActive() || Minecraft.getInstance().currentScreen instanceof PassiveScreen ;
+				return KeyConflictContext.IN_GAME.isActive() || Minecraft.getInstance().screen instanceof PassiveScreen ;
 			}
 
 			@Override
@@ -21,15 +21,15 @@ public class PassiveScreenHelper {
 			}
 		};
 
-		GameSettings setting = Minecraft.getInstance().gameSettings;
+		GameSettings setting = Minecraft.getInstance().options;
 
-		setting.keyBindForward.setKeyConflictContext(ctx);
-		setting.keyBindLeft.setKeyConflictContext(ctx);
-		setting.keyBindBack.setKeyConflictContext(ctx);
-		setting.keyBindRight.setKeyConflictContext(ctx);
-		setting.keyBindJump.setKeyConflictContext(ctx);
-		setting.keyBindSneak.setKeyConflictContext(ctx);
-		setting.keyBindSprint.setKeyConflictContext(ctx);
-		setting.keyBindAttack.setKeyConflictContext(ctx);
+		setting.keyUp.setKeyConflictContext(ctx);
+		setting.keyLeft.setKeyConflictContext(ctx);
+		setting.keyDown.setKeyConflictContext(ctx);
+		setting.keyRight.setKeyConflictContext(ctx);
+		setting.keyJump.setKeyConflictContext(ctx);
+		setting.keyShift.setKeyConflictContext(ctx);
+		setting.keySprint.setKeyConflictContext(ctx);
+		setting.keyAttack.setKeyConflictContext(ctx);
 	}
 }

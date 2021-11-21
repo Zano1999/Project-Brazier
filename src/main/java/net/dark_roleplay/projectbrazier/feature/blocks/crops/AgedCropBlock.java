@@ -13,16 +13,18 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public abstract class AgedCropBlock extends CropsBlock {
 
 	private static final IntegerProperty[] AGES = {
-			BlockStateProperties.AGE_0_1,
-			BlockStateProperties.AGE_0_2,
-			BlockStateProperties.AGE_0_3,
+			BlockStateProperties.AGE_1,
+			BlockStateProperties.AGE_2,
+			BlockStateProperties.AGE_3,
 			IntegerProperty.create("age", 0, 4), //AGE_0_4
-			BlockStateProperties.AGE_0_5,
+			BlockStateProperties.AGE_5,
 			IntegerProperty.create("age", 0, 6), //AGE_0_6
-			BlockStateProperties.AGE_0_7,
+			BlockStateProperties.AGE_7,
 			IntegerProperty.create("age", 0, 8)  //AGE_0_8
 	};
 
@@ -34,7 +36,7 @@ public abstract class AgedCropBlock extends CropsBlock {
 	}
 
 	@Override
-	protected IItemProvider getSeedsItem() {
+	protected IItemProvider getBaseSeedId() {
 		return seeds.get();
 	}
 
@@ -44,7 +46,7 @@ public abstract class AgedCropBlock extends CropsBlock {
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(this.getAgeProperty());
 	}
 

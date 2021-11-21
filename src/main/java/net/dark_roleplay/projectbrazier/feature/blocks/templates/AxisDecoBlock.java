@@ -16,6 +16,8 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class AxisDecoBlock extends Block {
 
 	protected static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
@@ -29,23 +31,23 @@ public class AxisDecoBlock extends Block {
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(AXIS, context.getFace().getAxis());
+		return this.defaultBlockState().setValue(AXIS, context.getClickedFace().getAxis());
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return shapes.get(state.get(AXIS));
+		return shapes.get(state.getValue(AXIS));
 	}
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		Direction.Axis currentAxis = state.get(AXIS);
+		Direction.Axis currentAxis = state.getValue(AXIS);
 		Direction newDir = rot.rotate(currentAxis == Direction.Axis.X ? Direction.EAST : Direction.NORTH);
-		return state.with(AXIS, newDir.getAxis());
+		return state.setValue(AXIS, newDir.getAxis());
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(AXIS);
 	}
 }

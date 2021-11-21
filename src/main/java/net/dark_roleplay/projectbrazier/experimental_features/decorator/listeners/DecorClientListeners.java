@@ -24,7 +24,7 @@ public class DecorClientListeners {
 	public static void chunkLoad(ChunkEvent.Load event){
 		DecorInitSyncPacket packet = SCHEDULED_PACKETS.remove(event.getChunk().getPos());
 		if(packet != null){
-			Chunk chunk = Minecraft.getInstance().world.getChunk(packet.getChunkPos().getX() >> 4, packet.getChunkPos().getZ() >> 4);
+			Chunk chunk = Minecraft.getInstance().level.getChunk(packet.getChunkPos().getX() >> 4, packet.getChunkPos().getZ() >> 4);
 			LazyOptional<DecorContainer> capability = chunk.getCapability(DecorRegistrar.DECOR);
 			capability.ifPresent(decorCon -> {
 				decorCon.setDecorChunk(packet.getChunkPos().getY() >> 4, packet.getDecor());

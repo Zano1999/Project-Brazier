@@ -40,7 +40,7 @@ public class DecorInitSyncPacket {
 	public static void encode(DecorInitSyncPacket pkt, PacketBuffer buffer){
 		buffer.writeResourceLocation(pkt.dimensionName);
 		buffer.writeBlockPos(pkt.chunkPos);
-		buffer.writeCompoundTag(pkt.decor.serializeNBT());
+		buffer.writeNbt(pkt.decor.serializeNBT());
 	}
 
 	public static DecorInitSyncPacket decode(PacketBuffer buffer){
@@ -49,7 +49,7 @@ public class DecorInitSyncPacket {
 		pkt.dimensionName = buffer.readResourceLocation();
 		pkt.chunkPos = buffer.readBlockPos();
 		pkt.decor = new DecorChunk(pkt.chunkPos.getY() >> 4);
-		pkt.decor.deserializeNBT(buffer.readCompoundTag());
+		pkt.decor.deserializeNBT(buffer.readNbt());
 
 		return pkt;
 	}

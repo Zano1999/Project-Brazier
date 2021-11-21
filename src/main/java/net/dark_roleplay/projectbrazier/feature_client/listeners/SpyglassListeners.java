@@ -73,14 +73,14 @@ public class SpyglassListeners {
 
 	@SubscribeEvent
 	public static void keyInput(InputEvent.KeyInputEvent event){
-		if(BrazierKeybinds.INC_ZOOM_ALT.getKeyConflictContext().isActive() && BrazierKeybinds.INC_ZOOM_ALT.isPressed()){
+		if(BrazierKeybinds.INC_ZOOM_ALT.getKeyConflictContext().isActive() && BrazierKeybinds.INC_ZOOM_ALT.consumeClick()){
 			SpyglassItem spyglassItem = getHeldZoomItem();
 			if(spyglassItem != null){
 				increaseZoom(spyglassItem);
 			}
 		}
 
-		if(BrazierKeybinds.DEC_ZOOM_ALT.getKeyConflictContext().isActive() && BrazierKeybinds.DEC_ZOOM_ALT.isPressed()){
+		if(BrazierKeybinds.DEC_ZOOM_ALT.getKeyConflictContext().isActive() && BrazierKeybinds.DEC_ZOOM_ALT.consumeClick()){
 			SpyglassItem spyglassItem = getHeldZoomItem();
 			if(spyglassItem != null){
 				decreaseZoom(spyglassItem);
@@ -146,18 +146,18 @@ public class SpyglassListeners {
 				prevFOV = targetFOV;
 			}
 		}else{
-			prevFOV = Minecraft.getInstance().gameSettings.fov;
+			prevFOV = Minecraft.getInstance().options.fov;
 		}
 		if(zoom > 0) targetFOV = spyglassItem.getZoomFOVs()[zoom - 1];
-		else targetFOV = Minecraft.getInstance().gameSettings.fov;
+		else targetFOV = Minecraft.getInstance().options.fov;
 		deltaTimeEnd = System.currentTimeMillis() + 250;
 	}
 
 	private static SpyglassItem getHeldZoomItem(){
-		ItemStack stack = Minecraft.getInstance().player.getHeldItemMainhand();
+		ItemStack stack = Minecraft.getInstance().player.getMainHandItem();
 		if(stack.getItem() instanceof SpyglassItem)
 			return (SpyglassItem) stack.getItem();
-		stack = Minecraft.getInstance().player.getHeldItemOffhand();
+		stack = Minecraft.getInstance().player.getOffhandItem();
 		if(stack.getItem() instanceof SpyglassItem)
 			return (SpyglassItem) stack.getItem();
 
@@ -165,11 +165,11 @@ public class SpyglassListeners {
 	}
 
 	private static void setupZoom(){
-		initSmoothCamera = Minecraft.getInstance().gameSettings.smoothCamera;
-		Minecraft.getInstance().gameSettings.smoothCamera = true;
+		initSmoothCamera = Minecraft.getInstance().options.smoothCamera;
+		Minecraft.getInstance().options.smoothCamera = true;
 	}
 
 	private static void resetZoom(){
-		Minecraft.getInstance().gameSettings.smoothCamera = initSmoothCamera;
+		Minecraft.getInstance().options.smoothCamera = initSmoothCamera;
 	}
 }

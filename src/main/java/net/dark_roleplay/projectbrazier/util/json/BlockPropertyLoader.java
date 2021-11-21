@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 public class BlockPropertyLoader {
 
 	public static Block.Properties properties(String name){
-		Block.Properties props = Block.Properties.create(null, (MaterialColor) null);
+		Block.Properties props = Block.Properties.of(null, (MaterialColor) null);
 		if(name != null) {
 			try (JsonReader reader = new JsonReader(new InputStreamReader(BlockPropertyLoader.class.getClassLoader().getResourceAsStream("fixed_data/projectbrazier/properties/block/" + name + ".json")))) {
 				reader.beginObject();
@@ -49,47 +49,47 @@ public class BlockPropertyLoader {
 	private static Material getMaterialFromName(String name){
 		switch(name.toUpperCase()){
 			case "AIR": return Material.AIR;
-			case "STRUCTURE_VOID": return Material.STRUCTURE_VOID;
+			case "STRUCTURE_VOID": return Material.STRUCTURAL_AIR;
 			case "PORTAL": return Material.PORTAL;
-			case "CARPET": return Material.CARPET;
-			case "PLANTS": return Material.PLANTS;
-			case "OCEAN_PLANT": return Material.OCEAN_PLANT;
-			case "TALL_PLANTS": return Material.TALL_PLANTS;
-			case "SEA_GRASS": return Material.SEA_GRASS;
+			case "CARPET": return Material.CLOTH_DECORATION;
+			case "PLANTS": return Material.PLANT;
+			case "OCEAN_PLANT": return Material.WATER_PLANT;
+			case "TALL_PLANTS": return Material.REPLACEABLE_PLANT;
+			case "SEA_GRASS": return Material.REPLACEABLE_WATER_PLANT;
 			case "WATER": return Material.WATER;
 			case "BUBBLE_COLUMN": return Material.BUBBLE_COLUMN;
-			case "SNOW": return Material.SNOW;
+			case "SNOW": return Material.TOP_SNOW;
 			case "FIRE": return Material.FIRE;
 			case "WEB": return Material.WEB;
-			case "REDSTONE_LIGHT": return Material.REDSTONE_LIGHT;
+			case "REDSTONE_LIGHT": return Material.BUILDABLE_GLASS;
 			case "CLAY": return Material.CLAY;
-			case "EARTH": return Material.EARTH;
-			case "ORGANIC": return Material.ORGANIC;
-			case "PACKED_ICE": return Material.PACKED_ICE;
+			case "EARTH": return Material.DIRT;
+			case "ORGANIC": return Material.GRASS;
+			case "PACKED_ICE": return Material.ICE_SOLID;
 			case "SAND": return Material.SAND;
 			case "SPONGE": return Material.SPONGE;
-			case "SHULKER": return Material.SHULKER;
+			case "SHULKER": return Material.SHULKER_SHELL;
 			case "WOOD": return Material.WOOD;
 			case "BAMBOO_SAPLING": return Material.BAMBOO_SAPLING;
 			case "BAMBOO": return Material.BAMBOO;
 			case "WOOL": return Material.WOOL;
-			case "TNT": return Material.TNT;
+			case "TNT": return Material.EXPLOSIVE;
 			case "LEAVES": return Material.LEAVES;
 			case "GLASS": return Material.GLASS;
 			case "ICE": return Material.ICE;
 			case "CACTUS": return Material.CACTUS;
-			case "ROCK": return Material.ROCK;
-			case "IRON": return Material.IRON;
-			case "SNOW_BLOCK": return Material.SNOW_BLOCK;
-			case "ANVIL": return Material.ANVIL;
+			case "ROCK": return Material.STONE;
+			case "IRON": return Material.METAL;
+			case "SNOW_BLOCK": return Material.SNOW;
+			case "ANVIL": return Material.HEAVY_METAL;
 			case "BARRIER": return Material.BARRIER;
 			case "PISTON": return Material.PISTON;
 			case "CORAL": return Material.CORAL;
-			case "GOURD": return Material.GOURD;
-			case "DRAGON_EGG": return Material.DRAGON_EGG;
+			case "GOURD": return Material.VEGETABLE;
+			case "DRAGON_EGG": return Material.EGG;
 			case "CAKE": return Material.CAKE;
 			case "MISCELLANEOUS":
-			default: return Material.MISCELLANEOUS;
+			default: return Material.DECORATION;
 		}
 	}
 

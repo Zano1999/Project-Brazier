@@ -10,18 +10,18 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 public class BrazierEntities extends Registrar {
 
 	public static final RegistryObject<EntityType<CameraEntity>> CAMERA =
-			registerEntity("camera", () -> EntityType.Builder.create(CameraEntity::new, EntityClassification.MISC)
-					.disableSummoning()
+			registerEntity("camera", () -> EntityType.Builder.of(CameraEntity::new, EntityClassification.MISC)
+					.noSummon()
 					.setShouldReceiveVelocityUpdates(false)
-					.size(0.5F, 0.001F)
+					.sized(0.5F, 0.001F)
 					.build("camera"));
 
 	public static final RegistryObject<EntityType<SittableEntity>> SITTABLE =
 			registerEntity("sittable",
-					() -> EntityType.Builder.<SittableEntity>create(SittableEntity::new, EntityClassification.MISC)
-							.disableSummoning()
+					() -> EntityType.Builder.<SittableEntity>of(SittableEntity::new, EntityClassification.MISC)
+							.noSummon()
 							.setShouldReceiveVelocityUpdates(false)
-							.size(0.5F, 0.001F)
+							.sized(0.5F, 0.001F)
 							.build("sittable")
 			);
 

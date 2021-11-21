@@ -12,7 +12,7 @@ public class Decal extends ForgeRegistryEntry<Decal> {
 	public Decal(){
 		StateContainer.Builder<Decal, DecalState> builder = new StateContainer.Builder<>(this);
 		this.fillStateContainer(builder);
-		this.stateContainer = builder.func_235882_a_(Decal::getDefaultState, DecalState::new);
+		this.stateContainer = builder.create(Decal::getDefaultState, DecalState::new);
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Decal, DecalState> builder) {}
@@ -23,7 +23,7 @@ public class Decal extends ForgeRegistryEntry<Decal> {
 
 
 	public String getTranslationKey() {
-		return Util.makeTranslationKey("decal", this.getRegistryName());
+		return Util.makeDescriptionId("decal", this.getRegistryName());
 	}
 
 }

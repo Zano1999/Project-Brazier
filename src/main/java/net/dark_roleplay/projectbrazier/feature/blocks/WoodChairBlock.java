@@ -30,6 +30,8 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.stream.Collectors;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class WoodChairBlock extends HFacedDecoBlock {
 	public WoodChairBlock(Properties props, String shapeName) {
 		super(props, shapeName);
@@ -37,7 +39,7 @@ public class WoodChairBlock extends HFacedDecoBlock {
 
 	@Deprecated
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		//TODO Revert Debug Changes
 //		if (world.isRemote()) return ActionResultType.SUCCESS;
 //
@@ -85,7 +87,7 @@ public class WoodChairBlock extends HFacedDecoBlock {
 //		System.out.println(endTime);
 
 //		CraftingHelper.openCraftingScreen(player);
-		SittingUtil.sitOnBlockWithRotation(world, pos, player, state.get(HORIZONTAL_FACING), state.get(HORIZONTAL_FACING), -0.3F, state);
+		SittingUtil.sitOnBlockWithRotation(world, pos, player, state.getValue(HORIZONTAL_FACING), state.getValue(HORIZONTAL_FACING), -0.3F, state);
 
 		return ActionResultType.SUCCESS;
 	}

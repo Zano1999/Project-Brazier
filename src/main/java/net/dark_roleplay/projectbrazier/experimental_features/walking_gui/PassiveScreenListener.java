@@ -14,8 +14,8 @@ public class PassiveScreenListener {
 
 	@SubscribeEvent
 	public static void keyInput(InputEvent.KeyInputEvent event){
-		if(BrazierKeybinds.EXP_PASSIVE_SCREEN.isKeyDown() && Minecraft.getInstance().currentScreen == null){
-			Minecraft.getInstance().displayGuiScreen(new PassiveScreen()); //PassiveScreen
+		if(BrazierKeybinds.EXP_PASSIVE_SCREEN.isDown() && Minecraft.getInstance().screen == null){
+			Minecraft.getInstance().setScreen(new PassiveScreen()); //PassiveScreen
 		}
 	}
 }

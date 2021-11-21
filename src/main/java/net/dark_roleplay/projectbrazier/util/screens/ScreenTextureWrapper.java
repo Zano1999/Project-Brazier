@@ -19,6 +19,6 @@ public class ScreenTextureWrapper {
 	}
 
 	public void bind(){
-		Minecraft.getInstance().getTextureManager().bindTexture(textureLocation);
+		Minecraft.getInstance().getTextureManager().bind(textureLocation);
 	}
 }

@@ -23,7 +23,7 @@ public class NestedWidget extends FocusableGui implements IRenderable {
 	}
 
 	@Override
-	public List<? extends IGuiEventListener> getEventListeners() {
+	public List<? extends IGuiEventListener> children() {
 		return listeners;
 	}
 

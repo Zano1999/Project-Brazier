@@ -9,6 +9,8 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class DecoBlock extends Block {
 
 	protected final VoxelShape shape;
@@ -24,7 +26,7 @@ public class DecoBlock extends Block {
 	}
 
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
 		return false;
 	}
 }

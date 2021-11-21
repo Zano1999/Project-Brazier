@@ -35,10 +35,10 @@ public class AxisConnectedModel implements IModelGeometry {
 	@Override
 	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
 		return new ConnectedBakedModel(
-				this.defaultModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
-				this.positiveModel == null ? null : this.positiveModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
-				this.negativeModel == null ? null : this.negativeModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
-				this.centeredModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation)
+				this.defaultModel.bake(bakery, spriteGetter, modelTransform, modelLocation),
+				this.positiveModel == null ? null : this.positiveModel.bake(bakery, spriteGetter, modelTransform, modelLocation),
+				this.negativeModel == null ? null : this.negativeModel.bake(bakery, spriteGetter, modelTransform, modelLocation),
+				this.centeredModel.bake(bakery, spriteGetter, modelTransform, modelLocation)
 		);
 	}
 
@@ -46,10 +46,10 @@ public class AxisConnectedModel implements IModelGeometry {
 	public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
 		Set<RenderMaterial> textures = new HashSet<>();
 
-		textures.addAll(defaultModel.getTextures(modelGetter, missingTextureErrors));
-		if(positiveModel != null) textures.addAll(positiveModel.getTextures(modelGetter, missingTextureErrors));
-		if(negativeModel != null) textures.addAll(negativeModel.getTextures(modelGetter, missingTextureErrors));
-		textures.addAll(centeredModel.getTextures(modelGetter, missingTextureErrors));
+		textures.addAll(defaultModel.getMaterials(modelGetter, missingTextureErrors));
+		if(positiveModel != null) textures.addAll(positiveModel.getMaterials(modelGetter, missingTextureErrors));
+		if(negativeModel != null) textures.addAll(negativeModel.getMaterials(modelGetter, missingTextureErrors));
+		textures.addAll(centeredModel.getMaterials(modelGetter, missingTextureErrors));
 
 		return textures;
 	}
@@ -102,23 +102,23 @@ public class AxisConnectedModel implements IModelGeometry {
 		public IModelGeometry read(JsonDeserializationContext deserializationContext, JsonObject modelContents) {
 			IUnbakedModel defaultModel = null, positiveModel = null, negativeModel = null, centeredModel = null;
 			if(modelContents.has("default")){
-				defaultModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"default"), BlockModel.class);
+				defaultModel = deserializationContext.deserialize(JSONUtils.getAsJsonObject(modelContents,"default"), BlockModel.class);
 			}
 			if(modelContents.has("positive")){
-				positiveModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"positive"), BlockModel.class);
+				positiveModel = deserializationContext.deserialize(JSONUtils.getAsJsonObject(modelContents,"positive"), BlockModel.class);
 			}
 			if(modelContents.has("negative")){
-				negativeModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"negative"), BlockModel.class);
+				negativeModel = deserializationContext.deserialize(JSONUtils.getAsJsonObject(modelContents,"negative"), BlockModel.class);
 			}
 			if(modelContents.has("centered")){
-				centeredModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"centered"), BlockModel.class);
+				centeredModel = deserializationContext.deserialize(JSONUtils.getAsJsonObject(modelContents,"centered"), BlockModel.class);
 			}
 
 			if(modelContents.has("single")){
-				defaultModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"single"), BlockModel.class);
+				defaultModel = deserializationContext.deserialize(JSONUtils.getAsJsonObject(modelContents,"single"), BlockModel.class);
 			}
 			if(modelContents.has("multi")){
-				centeredModel = deserializationContext.deserialize(JSONUtils.getJsonObject(modelContents,"multi"), BlockModel.class);
+				centeredModel = deserializationContext.deserialize(JSONUtils.getAsJsonObject(modelContents,"multi"), BlockModel.class);
 			}
 
 			return new AxisConnectedModel(defaultModel, positiveModel, negativeModel, centeredModel);

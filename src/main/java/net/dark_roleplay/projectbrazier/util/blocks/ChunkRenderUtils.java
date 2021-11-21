@@ -6,6 +6,6 @@ import net.minecraft.util.math.BlockPos;
 public class ChunkRenderUtils {
 
 	public static void rerenderChunk(ClientWorld world, BlockPos pos){
-		world.markSurroundingsForRerender(pos.getX() >> 4, pos.getY() >> 4, pos.getZ() >> 4);
+		world.setSectionDirtyWithNeighbors(pos.getX() >> 4, pos.getY() >> 4, pos.getZ() >> 4);
 	}
 }

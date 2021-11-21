@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class EmptyWallBurningBlock extends WallHFacedDecoBlock {
 
 	private Map<Item, Block> replacements = new HashMap<>();
@@ -34,16 +36,16 @@ public class EmptyWallBurningBlock extends WallHFacedDecoBlock {
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 
-		ItemStack heldItem = player.getHeldItem(hand);
+		ItemStack heldItem = player.getItemInHand(hand);
 		Block replacement = replacements.get(heldItem.getItem());
 
 		if(replacement == null) return ActionResultType.PASS;
-		if(world.isRemote) return ActionResultType.SUCCESS;
+		if(world.isClientSide) return ActionResultType.SUCCESS;
 
-		BlockState newState = replacement.getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING));
-		world.setBlockState(pos, newState);
+		BlockState newState = replacement.defaultBlockState().setValue(HORIZONTAL_FACING, state.getValue(HORIZONTAL_FACING));
+		world.setBlockAndUpdate(pos, newState);
 		if(!player.isCreative())
 			heldItem.shrink(1);
 		return ActionResultType.SUCCESS;

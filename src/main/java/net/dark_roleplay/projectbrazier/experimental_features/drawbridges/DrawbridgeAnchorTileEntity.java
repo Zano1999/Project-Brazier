@@ -35,29 +35,29 @@ public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableT
 	private Direction facing;
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		compound = super.write(compound);
+	public CompoundNBT save(CompoundNBT compound) {
+		compound = super.save(compound);
 
 		CompoundNBT bridgeComp = new CompoundNBT();
 		bridgeComp.putInt("width", width);
 		bridgeComp.putInt("height", height);
 		bridgeComp.putFloat("angle", angle);
 		bridgeComp.putInt("state", movementState.getID());
-		bridgeComp.putInt("facing", facing.getIndex());
+		bridgeComp.putInt("facing", facing.get3DDataValue());
 		compound.put("bridgeData", bridgeComp);
 
 		return compound;
 	}
 
 	@Override
-	public void read(BlockState state, CompoundNBT compound) {
-		super.read(state, compound);
+	public void load(BlockState state, CompoundNBT compound) {
+		super.load(state, compound);
 
 		CompoundNBT bridgeComp = compound.getCompound("bridgeData");
 		width = bridgeComp.getInt("width");
 		height = bridgeComp.getInt("height");
 		angle = bridgeComp.getInt("angle");
-		facing = Direction.byIndex(bridgeComp.getInt("facing"));
+		facing = Direction.from3DDataValue(bridgeComp.getInt("facing"));
 		prevAngle = angle;
 		movementState = State.getFromID(bridgeComp.getInt("state"));
 	}
@@ -70,7 +70,7 @@ public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableT
 
 	@Override
 	public CompoundNBT getUpdateTag() {
-		return write(new CompoundNBT());
+		return save(new CompoundNBT());
 	}
 
 	public void startLowering() {
@@ -95,9 +95,9 @@ public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableT
 		else
 			removeCollisionBox();
 
-		if (!this.getWorld().isRemote)
-			for (PlayerEntity player : this.getWorld().getPlayers()) {
-				BrazierPackets.CHANNEL.sendTo(pkt, ((ServerPlayerEntity) player).connection.getNetworkManager(), NetworkDirection.PLAY_TO_CLIENT);
+		if (!this.getLevel().isClientSide)
+			for (PlayerEntity player : this.getLevel().players()) {
+				BrazierPackets.CHANNEL.sendTo(pkt, ((ServerPlayerEntity) player).connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
 			}
 	}
 
@@ -127,8 +127,8 @@ public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableT
 	}
 
 	@Override
-	public void remove() {
-		super.remove();
+	public void setRemoved() {
+		super.setRemoved();
 		removeCollisionBox();
 	}
 
@@ -148,14 +148,14 @@ public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableT
 		if (angle < 1) {
 			CollisionListener.addCollision(this,
 					VoxelShapeHelper.rotateShape(
-							VoxelShapes.create(1, 0.0625 * 10.5F, +1, width + 1, 1 - 0.09375, -height + 1), facing)
-							.withOffset(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ()
+							VoxelShapes.box(1, 0.0625 * 10.5F, +1, width + 1, 1 - 0.09375, -height + 1), facing)
+							.move(this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ()
 							));
 		} else if (angle >= 1) {
 			CollisionListener.addCollision(this,
 					VoxelShapeHelper.rotateShape(
-							VoxelShapes.create(1, 0, 1 - 0.34375, width + 1, height, 1), facing)
-							.withOffset(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ()
+							VoxelShapes.box(1, 0, 1 - 0.34375, width + 1, height, 1), facing)
+							.move(this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ()
 							));
 		}
 	}

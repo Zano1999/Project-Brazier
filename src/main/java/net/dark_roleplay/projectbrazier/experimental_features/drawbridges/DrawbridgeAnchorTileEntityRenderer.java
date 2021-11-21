@@ -50,29 +50,29 @@ public class DrawbridgeAnchorTileEntityRenderer extends TileEntityRenderer<Drawb
 		}
 		initDrawbridgeModels();
 
-		IVertexBuilder vBuffer = buffer.getBuffer(RenderType.getSolid());
+		IVertexBuilder vBuffer = buffer.getBuffer(RenderType.solid());
 
-		Direction dir = te.getBlockState().get(DrawbridgeAnchorBlock.HORIZONTAL_FACING);
-		Direction dirRY = dir.rotateY();
+		Direction dir = te.getBlockState().getValue(DrawbridgeAnchorBlock.HORIZONTAL_FACING);
+		Direction dirRY = dir.getClockWise();
 
-		matrixStack.push();
+		matrixStack.pushPose();
 		matrixStack.translate(0.5F, 0.5F, 0.5F);
-		matrixStack.rotate(dirRY.toVector3f().rotationDegrees(MathHelper.lerp(partialTicks, te.getPrevAngle(), te.getAngle())));
+		matrixStack.mulPose(dirRY.step().rotationDegrees(MathHelper.lerp(partialTicks, te.getPrevAngle(), te.getAngle())));
 
-		BlockPos.Mutable pos2 = new BlockPos.Mutable(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
+		BlockPos.Mutable pos2 = new BlockPos.Mutable(te.getBlockPos().getX(), te.getBlockPos().getY(), te.getBlockPos().getZ());
 
 		switch(dir){
 			case EAST:
-				matrixStack.rotate(Vector3f.YP.rotationDegrees(270));
+				matrixStack.mulPose(Vector3f.YP.rotationDegrees(270));
 				break;
 			case SOUTH:
-				matrixStack.rotate(Vector3f.YP.rotationDegrees(180));
+				matrixStack.mulPose(Vector3f.YP.rotationDegrees(180));
 				break;
 			case WEST:
-				matrixStack.rotate(Vector3f.YP.rotationDegrees(90));
+				matrixStack.mulPose(Vector3f.YP.rotationDegrees(90));
 				break;
 			case NORTH:
-				matrixStack.rotate(Vector3f.YP.rotationDegrees(0));
+				matrixStack.mulPose(Vector3f.YP.rotationDegrees(0));
 				break;
 		}
 		matrixStack.translate(-0.5F, -0.5F, -0.5F);
@@ -106,8 +106,8 @@ public class DrawbridgeAnchorTileEntityRenderer extends TileEntityRenderer<Drawb
 				}
 
 
-				Minecraft.getInstance().getBlockRendererDispatcher().getBlockModelRenderer()
-						.renderModel(te.getWorld(), model, Blocks.OAK_PLANKS.getDefaultState(), pos2, matrixStack, vBuffer, false, te.getWorld().getRandom(), 0L, combinedLight, EmptyModelData.INSTANCE);
+				Minecraft.getInstance().getBlockRenderer().getModelRenderer()
+						.renderModel(te.getLevel(), model, Blocks.OAK_PLANKS.defaultBlockState(), pos2, matrixStack, vBuffer, false, te.getLevel().getRandom(), 0L, combinedLight, EmptyModelData.INSTANCE);
 
 				matrixStack.translate(0, 0, -1);
 				pos2.move(dir);
@@ -117,14 +117,14 @@ public class DrawbridgeAnchorTileEntityRenderer extends TileEntityRenderer<Drawb
 		}
 
 
-		matrixStack.pop();
+		matrixStack.popPose();
 
 		//Minecraft.getInstance().getBlockRendererDispatcher().getBlockModelRenderer().renderModel(tileEntity.getWorld(), planksModel, tileEntity.getBlockState(), tileEntity.getPos(), buffer, true, tileEntity.getWorld().getRandom(), 0L, EmptyModelData.INSTANCE);
 
 	}
 
 	@Override
-	public boolean isGlobalRenderer(DrawbridgeAnchorTileEntity te) {
+	public boolean shouldRenderOffScreen(DrawbridgeAnchorTileEntity te) {
 		return true;
 	}
 }

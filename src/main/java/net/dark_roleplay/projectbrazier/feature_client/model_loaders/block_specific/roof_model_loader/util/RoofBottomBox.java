@@ -19,11 +19,11 @@ public class RoofBottomBox extends AdvancedModelBox {
 	public BakedQuad[] bake(){
 		List<BakedQuad> quads = new ArrayList<>();
 
-		float minU = sprite.getMinU(), maxU = sprite.getMaxU();
-		float minV = sprite.getMinV(), maxV = sprite.getMaxV();
+		float minU = sprite.getU0(), maxU = sprite.getU1();
+		float minV = sprite.getV0(), maxV = sprite.getV1();
 
-		float uS = (sprite.getMaxU() - sprite.getMinU()) / 16;
-		float vS = (sprite.getMaxV() - sprite.getMinV()) / 16;
+		float uS = (sprite.getU1() - sprite.getU0()) / 16;
+		float vS = (sprite.getV1() - sprite.getV0()) / 16;
 
 		quads.add(new BakedQuad(generateVertexData(minU, minV, maxU, maxV, vertices[0], vertices[1], vertices[2], vertices[3]), 0, Direction.DOWN, sprite, false));
 

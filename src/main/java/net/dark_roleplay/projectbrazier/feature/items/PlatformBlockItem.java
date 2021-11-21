@@ -7,6 +7,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItemUseContext;
 
+import net.minecraft.item.Item.Properties;
+
 public class PlatformBlockItem extends SelectiveBlockItem {
 
 	protected Block[] bottomBlocks;
@@ -18,7 +20,7 @@ public class PlatformBlockItem extends SelectiveBlockItem {
 
 	@Override
 	protected BlockState getStateForPlacement(BlockItemUseContext context) {
-		double hitY = context.getHitVec().getY() - context.getPos().getY();
+		double hitY = context.getClickLocation().y() - context.getClickedPos().getY();
 		BlockState blockstate;
 		if(hitY > 0.5F)
 			blockstate = getCurrentBlock(context.getPlayer().getGameProfile()).getStateForPlacement(context);

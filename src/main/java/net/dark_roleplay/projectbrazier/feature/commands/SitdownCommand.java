@@ -19,7 +19,7 @@ public class SitdownCommand {
 	public static final LiteralArgumentBuilder<CommandSource> SITDOWN =
 			Commands.literal("sitdown")
 					.then(Commands.argument("target", EntityArgument.entities())
-							.requires(source -> source.hasPermissionLevel(2))
+							.requires(source -> source.hasPermission(2))
 							.then(Commands.argument("position", Vec3Argument.vec3())
 									.executes((context) -> sitDown(context, true, true, false))
 							).executes((context) -> sitDown(context, true, false, false))
@@ -32,12 +32,12 @@ public class SitdownCommand {
 		if (targets != null)
 			for (Entity entity : targets)
 				if(!entity.isPassenger())
-					SittingUtil.sitDownEntity(entity.getEntityWorld(), targetPos == null ? entity.getPositionVec() : targetPos, entity, null, null, 0, null);
+					SittingUtil.sitDownEntity(entity.getCommandSenderWorld(), targetPos == null ? entity.position() : targetPos, entity, null, null, 0, null);
 
 		if(!hasEntity){
-			PlayerEntity player = context.getSource().asPlayer();
+			PlayerEntity player = context.getSource().getPlayerOrException();
 			if(!player.isPassenger())
-				SittingUtil.sitDownEntity(player.getEntityWorld(), targetPos == null ? player.getPositionVec() : targetPos, player, null, null, 0, null);
+				SittingUtil.sitDownEntity(player.getCommandSenderWorld(), targetPos == null ? player.position() : targetPos, player, null, null, 0, null);
 		}
 
 		return 1;

@@ -36,7 +36,7 @@ public class ImmersiveScreenListeners {
 	}
 
 	private static ImmersiveScreen getScreen(){
-		Screen scr = Minecraft.getInstance().currentScreen;
+		Screen scr = Minecraft.getInstance().screen;
 		if(scr == null || !(scr instanceof ImmersiveScreen)) return null;
 		return (ImmersiveScreen) scr;
 	}

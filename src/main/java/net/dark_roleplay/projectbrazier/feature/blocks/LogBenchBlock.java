@@ -16,6 +16,8 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class LogBenchBlock extends HFacedDecoBlock {
 
 	protected final HFacedVoxelShape connectedShape;
@@ -27,26 +29,26 @@ public class LogBenchBlock extends HFacedDecoBlock {
 
 	@Deprecated
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		SittingUtil.sitOnBlockWithRotation(world, pos, player, state.get(HORIZONTAL_FACING), state.get(HORIZONTAL_FACING), -0.25F, state);
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+		SittingUtil.sitOnBlockWithRotation(world, pos, player, state.getValue(HORIZONTAL_FACING), state.getValue(HORIZONTAL_FACING), -0.25F, state);
 		return ActionResultType.SUCCESS;
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
-		return isSingle(world, pos, state) ? shapes.get(state.get(HORIZONTAL_FACING)) : connectedShape.get(state.get(HORIZONTAL_FACING));
+		return isSingle(world, pos, state) ? shapes.get(state.getValue(HORIZONTAL_FACING)) : connectedShape.get(state.getValue(HORIZONTAL_FACING));
 	}
 
 	private boolean isSingle(IBlockReader world, BlockPos pos, BlockState state){
-		Direction facing = state.get(HORIZONTAL_FACING);
+		Direction facing = state.getValue(HORIZONTAL_FACING);
 		BlockState otherState =
-				world.getBlockState(pos.offset(facing.rotateY()));
-		if(otherState.getBlock() == this && otherState.get(HORIZONTAL_FACING) == facing)
+				world.getBlockState(pos.relative(facing.getClockWise()));
+		if(otherState.getBlock() == this && otherState.getValue(HORIZONTAL_FACING) == facing)
 			return false;
 
 		otherState =
-				world.getBlockState(pos.offset(facing.rotateYCCW()));
+				world.getBlockState(pos.relative(facing.getCounterClockWise()));
 
-		return !(otherState.getBlock() == this && otherState.get(HORIZONTAL_FACING) == facing);
+		return !(otherState.getBlock() == this && otherState.getValue(HORIZONTAL_FACING) == facing);
 	}
 }

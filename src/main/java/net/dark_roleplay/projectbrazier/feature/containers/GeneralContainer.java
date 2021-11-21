@@ -24,13 +24,13 @@ public class GeneralContainer extends Container {
 	private int teSlots;
 
 	public GeneralContainer(int windowId, PlayerInventory playerInventory, PacketBuffer extraData) {
-		this(windowId, playerInventory, playerInventory.player.getEntityWorld(), extraData.readBlockPos());
+		this(windowId, playerInventory, playerInventory.player.getCommandSenderWorld(), extraData.readBlockPos());
 	}
 
 	public GeneralContainer(int windowId, PlayerInventory playerInventory, World world, BlockPos pos) {
 		super(BrazierContainers.GENERAL_CONTAINER.get(), windowId);
 		this.worldPos = pos;
-		TileEntity te = world.getTileEntity(pos);
+		TileEntity te = world.getBlockEntity(pos);
 		LazyOptional<IItemHandler> optionalInventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
 		optionalInventory.ifPresent((handler) -> {
@@ -61,18 +61,18 @@ public class GeneralContainer extends Container {
 	}
 
 	@Override
-	public boolean canInteractWith(PlayerEntity player) {
-		return this.worldPos.withinDistance(player.getPositionVec(), 5);
+	public boolean stillValid(PlayerEntity player) {
+		return this.worldPos.closerThan(player.position(), 5);
 	}
 
 	//TODO Properly Implement Shift Clicking
 	@Override
-	public ItemStack transferStackInSlot(PlayerEntity player, int index) {
+	public ItemStack quickMoveStack(PlayerEntity player, int index) {
 		ItemStack result =  ItemStack.EMPTY;
-		Slot slot = this.inventorySlots.get(index);
+		Slot slot = this.slots.get(index);
 
-		if (slot == null || !slot.getHasStack()) return result;
-		ItemStack stack = slot.getStack();
+		if (slot == null || !slot.hasItem()) return result;
+		ItemStack stack = slot.getItem();
 		result = stack.copy();
 
 		int inventoryID = 0;
@@ -81,20 +81,20 @@ public class GeneralContainer extends Container {
 
 		//TRY to insert into container first
 		if(inventoryID != 2)
-			this.mergeItemStack(stack, 36, 36 + inventories[2], false);
+			this.moveItemStackTo(stack, 36, 36 + inventories[2], false);
 
 		boolean merged = false;
 		for(int i = 0, j = 0; i < inventories.length && !stack.isEmpty(); j += inventories[i], i++){
 			if(i == inventoryID) continue;
-			merged |= this.mergeItemStack(stack, j, j + inventories[i], false);
+			merged |= this.moveItemStackTo(stack, j, j + inventories[i], false);
 		}
 		if(!merged) return ItemStack.EMPTY;
 
-		slot.onSlotChange(stack, result);
+		slot.onQuickCraft(stack, result);
 
 		if(stack.isEmpty())
-			slot.putStack(ItemStack.EMPTY);
-		else slot.onSlotChanged();
+			slot.set(ItemStack.EMPTY);
+		else slot.setChanged();
 
 		if(stack.getCount() == result.getCount())
 			return ItemStack.EMPTY;

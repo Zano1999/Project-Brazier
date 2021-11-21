@@ -39,20 +39,20 @@ public class BarrelBlockEntityRenderer extends TileEntityRenderer <BarrelBlockEn
 		int content = fluid.getAmount();
 
 		ResourceLocation fluidTexture = fluid.getFluid().getAttributes().getStillTexture(fluid);
-		TextureAtlasSprite fluidSprite = Minecraft.getInstance().getModelManager().getAtlasTexture(PlayerContainer.LOCATION_BLOCKS_TEXTURE).getSprite(fluidTexture);
+		TextureAtlasSprite fluidSprite = Minecraft.getInstance().getModelManager().getAtlas(PlayerContainer.BLOCK_ATLAS).getSprite(fluidTexture);
 
-		IVertexBuilder builder = buffer.getBuffer(RenderType.getTranslucentMovingBlock());
+		IVertexBuilder builder = buffer.getBuffer(RenderType.translucentMovingBlock());
 
-		createQuad(matrix.getLast().getMatrix(), builder, MathHelper.lerp(content/maxCapacity, 0.125F, 0.875F), fluidSprite, combinedLight, fluid.getFluid().getAttributes().getColor());
+		createQuad(matrix.last().pose(), builder, MathHelper.lerp(content/maxCapacity, 0.125F, 0.875F), fluidSprite, combinedLight, fluid.getFluid().getAttributes().getColor());
 	}
 
 	private void createQuad(Matrix4f matrix, IVertexBuilder builder, float verticalOffset, TextureAtlasSprite sprite, int light, int color){
 		int r = color >> 16 & 0xFF;
 		int g = color >> 8 & 0xFF;
 		int b = color & 0xFF;
-		builder.pos(matrix, 0.125F, verticalOffset, 0.875F).color(r, g, b, 255).tex(sprite.getInterpolatedU(0), sprite.getInterpolatedV(0)).lightmap(light).normal(0, 1F, 0).endVertex();
-		builder.pos(matrix, 0.875F, verticalOffset, 0.875F).color(r, g, b, 255).tex(sprite.getInterpolatedU(16), sprite.getInterpolatedV(0)).lightmap(light).normal(0, 1F, 0).endVertex();
-		builder.pos(matrix, 0.875F, verticalOffset, 0.125F).color(r, g, b, 255).tex(sprite.getInterpolatedU(16), sprite.getInterpolatedV(16)).lightmap(light).normal(0, 1F, 0).endVertex();
-		builder.pos(matrix, 0.125F, verticalOffset, 0.125F).color(r, g, b, 255).tex(sprite.getInterpolatedU(0), sprite.getInterpolatedV(16)).lightmap(light).normal(0, 1F, 0).endVertex();
+		builder.vertex(matrix, 0.125F, verticalOffset, 0.875F).color(r, g, b, 255).uv(sprite.getU(0), sprite.getV(0)).uv2(light).normal(0, 1F, 0).endVertex();
+		builder.vertex(matrix, 0.875F, verticalOffset, 0.875F).color(r, g, b, 255).uv(sprite.getU(16), sprite.getV(0)).uv2(light).normal(0, 1F, 0).endVertex();
+		builder.vertex(matrix, 0.875F, verticalOffset, 0.125F).color(r, g, b, 255).uv(sprite.getU(16), sprite.getV(16)).uv2(light).normal(0, 1F, 0).endVertex();
+		builder.vertex(matrix, 0.125F, verticalOffset, 0.125F).color(r, g, b, 255).uv(sprite.getU(0), sprite.getV(16)).uv2(light).normal(0, 1F, 0).endVertex();
 	}
 }

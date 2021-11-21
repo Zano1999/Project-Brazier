@@ -32,7 +32,7 @@ public class FacedVoxelShape {
 			case DOWN:
 				return this.down;
 			default:
-				return VoxelShapes.fullCube();
+				return VoxelShapes.block();
 		}
 	}
 }

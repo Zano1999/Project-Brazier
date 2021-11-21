@@ -24,7 +24,7 @@ public class NOFChunkRenderHook {
 
 	@Inject(
 			method = "compile(FFFLnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher$CompiledChunk;Lnet/minecraft/client/renderer/RegionRenderCacheBuilder;)Ljava/util/Set;",
-			at = @At(value="INVOKE", target="Lnet/minecraft/client/Minecraft;getBlockRendererDispatcher()Lnet/minecraft/client/renderer/BlockRendererDispatcher;", ordinal = 0)
+			at = @At(value="INVOKE", target="Lnet/minecraft/client/Minecraft;getBlockRenderer()Lnet/minecraft/client/renderer/BlockRendererDispatcher;", ordinal = 0)
 			, locals = LocalCapture.CAPTURE_FAILEXCEPTION
 	)
 	private void compileChunk(
@@ -37,7 +37,7 @@ public class NOFChunkRenderHook {
 			VisGraph visgraph, Set set, ChunkRenderCache chunkrendercache,
 			MatrixStack matrixstack, Random random
 	) {
-		BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRendererDispatcher();
+		BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
 		ChunkBakeEvent event = new ChunkBakeEvent(compiledChunkIn, builderIn, matrixstack, random, blockrendererdispatcher, chunkrendercache, blockpos);
 		MinecraftForge.EVENT_BUS.post(event);
 	}

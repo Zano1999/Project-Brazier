@@ -6,6 +6,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class RoofCornerBlock extends HFacedDecoBlock {
 
 	public static final EnumProperty<RoofType> SEC_TYPE = EnumProperty.create("sec_type", RoofType.class, type -> type.doesGenerateCorners());
@@ -15,8 +17,8 @@ public class RoofCornerBlock extends HFacedDecoBlock {
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		super.fillStateContainer(builder);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
 		builder.add(SEC_TYPE);
 	}
 }

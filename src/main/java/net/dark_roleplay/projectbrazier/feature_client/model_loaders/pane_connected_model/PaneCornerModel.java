@@ -36,7 +36,7 @@ public class PaneCornerModel implements IModelGeometry<PaneCornerModel> {
 	@Override
 	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<RenderMaterial, TextureAtlasSprite> spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
 		return new PaneCornerBakedModel(
-				this.unconditional.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
+				this.unconditional.bake(bakery, spriteGetter, modelTransform, modelLocation),
 				bake(inner_corner, bakery, spriteGetter, modelTransform, modelLocation),
 				bake(outer_corner, bakery, spriteGetter, modelTransform, modelLocation),
 				bake(horizontal, bakery, spriteGetter, modelTransform, modelLocation),
@@ -49,7 +49,7 @@ public class PaneCornerModel implements IModelGeometry<PaneCornerModel> {
 		if(input == null) return null;
 		IBakedModel[] output = new IBakedModel[input.length];
 		for(int i = 0; i < input.length; i++)
-			output[i] = input[i].bakeModel(bakery, spriteGetter, modelTransform, modelLocation);
+			output[i] = input[i].bake(bakery, spriteGetter, modelTransform, modelLocation);
 
 		return output;
 	}
@@ -58,14 +58,14 @@ public class PaneCornerModel implements IModelGeometry<PaneCornerModel> {
 	public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function<ResourceLocation, IUnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
 		Set<RenderMaterial> textures = new HashSet<>();
 
-		textures.addAll(unconditional.getTextures(modelGetter, missingTextureErrors));
+		textures.addAll(unconditional.getMaterials(modelGetter, missingTextureErrors));
 		for(int i = 0; i < 4; i++){
-			textures.addAll(inner_corner[i].getTextures(modelGetter, missingTextureErrors));
-			textures.addAll(outer_corner[i].getTextures(modelGetter, missingTextureErrors));
-			textures.addAll(horizontal[i].getTextures(modelGetter, missingTextureErrors));
-			textures.addAll(vertical[i].getTextures(modelGetter, missingTextureErrors));
+			textures.addAll(inner_corner[i].getMaterials(modelGetter, missingTextureErrors));
+			textures.addAll(outer_corner[i].getMaterials(modelGetter, missingTextureErrors));
+			textures.addAll(horizontal[i].getMaterials(modelGetter, missingTextureErrors));
+			textures.addAll(vertical[i].getMaterials(modelGetter, missingTextureErrors));
 			if(none != null)
-				textures.addAll(none[i].getTextures(modelGetter, missingTextureErrors));
+				textures.addAll(none[i].getMaterials(modelGetter, missingTextureErrors));
 		}
 
 		return textures;
@@ -80,15 +80,15 @@ public class PaneCornerModel implements IModelGeometry<PaneCornerModel> {
 			IUnbakedModel unconditional;
 			IUnbakedModel[] inner_corner, outer_corner, horizontal, vertical, none = null;
 
-			JsonObject textures = JSONUtils.getJsonObject(modelContents, "textures", null);
+			JsonObject textures = JSONUtils.getAsJsonObject(modelContents, "textures", null);
 
 			unconditional = loadSubModel(deserCtx, modelContents, "unconditional", textures);
-			inner_corner = loadSubModel(deserCtx, JSONUtils.getJsonArray(modelContents, "inner_corner"), textures);
-			outer_corner = loadSubModel(deserCtx, JSONUtils.getJsonArray(modelContents, "outer_corner"), textures);
-			horizontal = loadSubModel(deserCtx, JSONUtils.getJsonArray(modelContents, "horizontal"), textures);
-			vertical = loadSubModel(deserCtx, JSONUtils.getJsonArray(modelContents, "vertical"), textures);
+			inner_corner = loadSubModel(deserCtx, JSONUtils.getAsJsonArray(modelContents, "inner_corner"), textures);
+			outer_corner = loadSubModel(deserCtx, JSONUtils.getAsJsonArray(modelContents, "outer_corner"), textures);
+			horizontal = loadSubModel(deserCtx, JSONUtils.getAsJsonArray(modelContents, "horizontal"), textures);
+			vertical = loadSubModel(deserCtx, JSONUtils.getAsJsonArray(modelContents, "vertical"), textures);
 			if(modelContents.has("none"))
-				none = loadSubModel(deserCtx, JSONUtils.getJsonArray(modelContents, "none"), textures);
+				none = loadSubModel(deserCtx, JSONUtils.getAsJsonArray(modelContents, "none"), textures);
 
 			return new PaneCornerModel(unconditional, inner_corner, outer_corner, horizontal, vertical, none);
 		}
@@ -98,7 +98,7 @@ public class PaneCornerModel implements IModelGeometry<PaneCornerModel> {
 			for(int i = 0; i < result.length; i++){
 				JsonObject subModelJson = base.get(i).getAsJsonObject();
 				if(textures != null){
-					JsonObject subModelTextures = JSONUtils.getJsonObject(subModelJson, "textures", new JsonObject());
+					JsonObject subModelTextures = JSONUtils.getAsJsonObject(subModelJson, "textures", new JsonObject());
 					for(Map.Entry<String, JsonElement> entry : textures.entrySet())
 						subModelTextures.add(entry.getKey(), entry.getValue());
 
@@ -110,9 +110,9 @@ public class PaneCornerModel implements IModelGeometry<PaneCornerModel> {
 		}
 
 		private IUnbakedModel loadSubModel(JsonDeserializationContext deserCtx, JsonObject base, String subModelName, JsonObject textures){
-			JsonObject subModelJson = JSONUtils.getJsonObject(base, subModelName);
+			JsonObject subModelJson = JSONUtils.getAsJsonObject(base, subModelName);
 			if(textures != null){
-				JsonObject subModelTextures = JSONUtils.getJsonObject(subModelJson, "textures", new JsonObject());
+				JsonObject subModelTextures = JSONUtils.getAsJsonObject(subModelJson, "textures", new JsonObject());
 				for(Map.Entry<String, JsonElement> entry : textures.entrySet())
 					subModelTextures.add(entry.getKey(), entry.getValue());
 

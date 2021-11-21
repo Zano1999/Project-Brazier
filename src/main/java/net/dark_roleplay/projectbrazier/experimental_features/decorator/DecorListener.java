@@ -23,36 +23,36 @@ public class DecorListener {
 
 	public static void markChunkDirty(World w, BlockPos pos){
 		ClientWorld world = (ClientWorld) w;
-		Minecraft.getInstance().worldRenderer.markForRerender(pos.getX() >> 4, pos.getY() >> 4, pos.getZ() >> 4);
+		Minecraft.getInstance().levelRenderer.setSectionDirty(pos.getX() >> 4, pos.getY() >> 4, pos.getZ() >> 4);
 	}
 
 	public static void bakeChunk(ChunkBakeEvent event){
 //		if(true) return;
 		MatrixStack stack = event.getMatrixstack();
 		BlockPos pos = event.getPos();
-		BufferBuilder buffer = event.getBuffer(RenderType.getCutout());
+		BufferBuilder buffer = event.getBuffer(RenderType.cutout());
 		BlockRendererDispatcher renderDispatcher = event.getRenderDispatcher();
 
 		ChunkRenderCache chunkCache = event.getChunkCache();
-		int chunkX = (pos.getX() >> 4) - chunkCache.chunkStartX;
-		int chunkY = (pos.getZ() >> 4) - chunkCache.chunkStartZ;
+		int chunkX = (pos.getX() >> 4) - chunkCache.centerX;
+		int chunkY = (pos.getZ() >> 4) - chunkCache.centerZ;
 
 		LazyOptional<DecorContainer> capability = chunkCache.chunks[chunkX][chunkY].getCapability(DecorRegistrar.DECOR);
 		capability.ifPresent(decorCon -> {
 			DecorChunk decChunk = decorCon.getDecorChunk(pos.getY() >> 4, false);
 			if(decChunk == null) return;
 
-			stack.push();
+			stack.pushPose();
 			for(DecorState decor : decChunk.getDecors()) {
 				if (decor == null) return;
 				Vector3d decorPos = decor.getPosition();
-				stack.translate(decorPos.getX(), decorPos.getY(), decorPos.getZ());
+				stack.translate(decorPos.x(), decorPos.y(), decorPos.z());
 
-				renderDispatcher.getBlockModelRenderer().renderModel(
+				renderDispatcher.getModelRenderer().renderModel(
 						event.getChunkCache(),
 						Minecraft.getInstance().getModelManager().getModel(decor.getDecor().getModelLocation()),
-						Blocks.GLASS.getDefaultState(),
-						pos.add(decorPos.getX(), decorPos.getY(), decorPos.getZ()),
+						Blocks.GLASS.defaultBlockState(),
+						pos.offset(decorPos.x(), decorPos.y(), decorPos.z()),
 						stack,
 						buffer,
 						true,
@@ -62,9 +62,9 @@ public class DecorListener {
 						EmptyModelData.INSTANCE
 				);
 
-				stack.translate(-decor.getPosition().getX(), -decor.getPosition().getY(), -decor.getPosition().getZ());
+				stack.translate(-decor.getPosition().x(), -decor.getPosition().y(), -decor.getPosition().z());
 			}
-			stack.pop();
+			stack.popPose();
 		});
 	}
 }

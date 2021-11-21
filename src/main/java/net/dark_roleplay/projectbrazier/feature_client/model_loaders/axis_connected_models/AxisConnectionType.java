@@ -46,14 +46,14 @@ public enum AxisConnectionType {
 	}
 
 
-	//func_235901_b_ -> has
+	//hasProperty -> has
 	public static AxisConnectionType getConnections(@Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull BlockState state){
 		boolean flag = false;
 		if ((flag = state.hasProperty(BlockStateProperties.HORIZONTAL_AXIS)) || state.hasProperty(BlockStateProperties.AXIS)) {
-			Direction.Axis axis = flag ? state.get(BlockStateProperties.HORIZONTAL_AXIS) : state.get(BlockStateProperties.AXIS);
+			Direction.Axis axis = flag ? state.getValue(BlockStateProperties.HORIZONTAL_AXIS) : state.getValue(BlockStateProperties.AXIS);
 			return getConnections(world, pos, state, axis);
 		}else if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
-			return getConnections(world, pos, state, state.get(BlockStateProperties.HORIZONTAL_FACING));
+			return getConnections(world, pos, state, state.getValue(BlockStateProperties.HORIZONTAL_FACING));
 		}
 		return AxisConnectionType.DEFAULT;
 	}
@@ -69,9 +69,9 @@ public enum AxisConnectionType {
 					type = type.addNegative();
 				break;
 			case Y:
-				if(world.getBlockState(pos.up()) == state)
+				if(world.getBlockState(pos.above()) == state)
 					type = type.addPositive();
-				if(world.getBlockState(pos.down()) == state)
+				if(world.getBlockState(pos.below()) == state)
 					type = type.addNegative();
 				break;
 			case Z:
@@ -87,7 +87,7 @@ public enum AxisConnectionType {
 
 	public static AxisConnectionType getConnections(@Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, Direction facing){
 		AxisConnectionType type = AxisConnectionType.DEFAULT;
-		Direction.Axis axis = facing.rotateY().getAxis();
+		Direction.Axis axis = facing.getClockWise().getAxis();
 
 		switch (axis) {
 			case X:
@@ -97,9 +97,9 @@ public enum AxisConnectionType {
 					type = type.addNegative();
 				break;
 			case Y:
-				if(world.getBlockState(pos.up()) == state)
+				if(world.getBlockState(pos.above()) == state)
 					type = type.addPositive();
-				if(world.getBlockState(pos.down()) == state)
+				if(world.getBlockState(pos.below()) == state)
 					type = type.addNegative();
 				break;
 			case Z:

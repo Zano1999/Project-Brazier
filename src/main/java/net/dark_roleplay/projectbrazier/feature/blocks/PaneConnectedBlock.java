@@ -37,7 +37,7 @@ public class PaneConnectedBlock extends Block {
 
 		for(int i = 0; i < 4; i++){
 			PaneCornerType type = PaneCornerType.getCornerType(world, pos, state, ORDERED_HORIZONTALS[i]);
-			shape = VoxelShapes.combineAndSimplify(shape, getQuadsForTypeAndIndex(type, i), IBooleanFunction.OR);
+			shape = VoxelShapes.join(shape, getQuadsForTypeAndIndex(type, i), IBooleanFunction.OR);
 		}
 
 		return shape;

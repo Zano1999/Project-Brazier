@@ -21,8 +21,8 @@ public class DisplayTickers {
 	}
 
 	private static void animatedTypedTorchHolder(BlockState state, World world, BlockPos pos, Random rand, IParticleData data){
-		if(!state.get(WallBurningBlock.BURNING)) return;
-		Direction dir = state.get(BlockStateProperties.HORIZONTAL_FACING);
+		if(!state.getValue(WallBurningBlock.BURNING)) return;
+		Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
 		Direction dirOpp = dir.getOpposite();
 
 		double x = pos.getX() + 0.5F;
@@ -33,13 +33,13 @@ public class DisplayTickers {
 		double d1 = 0.3125D;
 		double d2 = 0.125D;
 
-		world.addParticle(ParticleTypes.SMOKE, x + d0 * (double)dirOpp.getXOffset(), y + d1, z + d2 * (double)dirOpp.getZOffset(), 0.0D, 0.0D, 0.0D);
-		world.addParticle(data, x + d0 * (double)dirOpp.getXOffset(), y + d1, z + d2 * (double)dirOpp.getZOffset(), 0.0D, 0.0D, 0.0D);
+		world.addParticle(ParticleTypes.SMOKE, x + d0 * (double)dirOpp.getStepX(), y + d1, z + d2 * (double)dirOpp.getStepZ(), 0.0D, 0.0D, 0.0D);
+		world.addParticle(data, x + d0 * (double)dirOpp.getStepX(), y + d1, z + d2 * (double)dirOpp.getStepZ(), 0.0D, 0.0D, 0.0D);
 	}
 
 	public static void animatedWallCandleHolder(BlockState state, World world, BlockPos pos, Random rand){
-		if(!state.get(WallBurningBlock.BURNING)) return;
-		Direction dir = state.get(BlockStateProperties.HORIZONTAL_FACING);
+		if(!state.getValue(WallBurningBlock.BURNING)) return;
+		Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
 		Direction dirOpp = dir.getOpposite();
 
 		double x = pos.getX() + 0.5F;
@@ -51,12 +51,12 @@ public class DisplayTickers {
 		double d2 = 0.28125D;
 
 		if(rand.nextInt(10) == 0)
-			world.addParticle(ParticleTypes.SMOKE, x + d0 * (double)dirOpp.getXOffset(), y + d1, z + d2 * (double)dirOpp.getZOffset(), 0.0D, 0.0D, 0.0D);
-		world.addParticle(ParticleTypes.FLAME, x + d0 * (double)dirOpp.getXOffset(), y + d1, z + d2 * (double)dirOpp.getZOffset(), 0.0D, 0.0D, 0.0D);
+			world.addParticle(ParticleTypes.SMOKE, x + d0 * (double)dirOpp.getStepX(), y + d1, z + d2 * (double)dirOpp.getStepZ(), 0.0D, 0.0D, 0.0D);
+		world.addParticle(ParticleTypes.FLAME, x + d0 * (double)dirOpp.getStepX(), y + d1, z + d2 * (double)dirOpp.getStepZ(), 0.0D, 0.0D, 0.0D);
 	}
 
 	public static void animatedCandleHolder(BlockState state, World world, BlockPos pos, Random rand){
-		if(!state.get(WallBurningBlock.BURNING)) return;
+		if(!state.getValue(WallBurningBlock.BURNING)) return;
 
 		double x = pos.getX() + 0.5F;
 		double y = pos.getY() + 0.5F;

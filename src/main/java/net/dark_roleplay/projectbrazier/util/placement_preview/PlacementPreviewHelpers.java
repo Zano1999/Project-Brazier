@@ -25,15 +25,15 @@ public class PlacementPreviewHelpers {
 	public static void preview(RenderWorldLastEvent event) {
 
 		Minecraft mc = Minecraft.getInstance();
-		if (mc.objectMouseOver instanceof BlockRayTraceResult && mc.objectMouseOver.getType() != RayTraceResult.Type.MISS) {
-			BlockRayTraceResult rayTrace = (BlockRayTraceResult) mc.objectMouseOver;
+		if (mc.hitResult instanceof BlockRayTraceResult && mc.hitResult.getType() != RayTraceResult.Type.MISS) {
+			BlockRayTraceResult rayTrace = (BlockRayTraceResult) mc.hitResult;
 			PlayerEntity player = mc.player;
-			ItemStack held = player.getHeldItemMainhand();
+			ItemStack held = player.getMainHandItem();
 			if (held.getItem() instanceof BlockItem) {
 				BlockItem theBlockItem = (BlockItem) held.getItem();
 
 				if (renderBuffer == null) {
-					renderBuffer = initRenderBuffer(mc.getRenderTypeBuffers().getBufferSource());
+					renderBuffer = initRenderBuffer(mc.renderBuffers().bufferSource());
 				}
 //				MatrixStack transforms = event.getMatrixStack();
 //				Vec3d projVec = mc.getRenderManager().info.getProjectedView();
@@ -72,8 +72,8 @@ public class PlacementPreviewHelpers {
 	}
 
 	private static IRenderTypeBuffer.Impl initRenderBuffer(IRenderTypeBuffer.Impl original) {
-		BufferBuilder fallback = ObfuscationReflectionHelper.getPrivateValue(IRenderTypeBuffer.Impl.class, original, "field_228457_a_");
-		Map<RenderType, BufferBuilder> layerBuffers = ObfuscationReflectionHelper.getPrivateValue(IRenderTypeBuffer.Impl.class, original, "field_228458_b_");
+		BufferBuilder fallback = ObfuscationReflectionHelper.getPrivateValue(IRenderTypeBuffer.Impl.class, original, "builder");
+		Map<RenderType, BufferBuilder> layerBuffers = ObfuscationReflectionHelper.getPrivateValue(IRenderTypeBuffer.Impl.class, original, "fixedBuffers");
 		Map<RenderType, BufferBuilder> remapped = new HashMap<>();
 		for (Map.Entry<RenderType, BufferBuilder> e : layerBuffers.entrySet()) {
 			remapped.put(GhostRenderType.remap(e.getKey()), e.getValue());

@@ -48,13 +48,13 @@ public class DecorState{
 	public CompoundNBT serialize() {
 		CompoundNBT tag = new CompoundNBT();
 
-		tag.putDouble("posX", position.getX());
-		tag.putDouble("posY", position.getY());
-		tag.putDouble("posZ", position.getZ());
+		tag.putDouble("posX", position.x());
+		tag.putDouble("posY", position.y());
+		tag.putDouble("posZ", position.z());
 
-		tag.putDouble("rotX", rotation.getX());
-		tag.putDouble("rotY", rotation.getY());
-		tag.putDouble("rotZ", rotation.getZ());
+		tag.putDouble("rotX", rotation.x());
+		tag.putDouble("rotY", rotation.y());
+		tag.putDouble("rotZ", rotation.z());
 		return tag;
 	}
 

@@ -26,7 +26,7 @@ public class NestableContainerScreen<T extends Container> extends ContainerScree
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+	protected void renderBg(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
 		for(IRenderable child : renderChildren) child.render(matrixStack, mouseX, mouseY, partialTicks);
 	}
 

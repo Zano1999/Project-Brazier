@@ -36,7 +36,7 @@ public class BrazierStateProperties {
 		}
 
 		@Override
-		public String getString() {
+		public String getSerializedName() {
 			return name;
 		}
 

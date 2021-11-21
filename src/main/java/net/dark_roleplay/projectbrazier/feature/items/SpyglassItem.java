@@ -8,6 +8,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
+import net.minecraft.item.Item.Properties;
+
 public class SpyglassItem extends Item {
 
 	protected int[] zoomFOVs = new int[]{50, 30, 10};
@@ -25,11 +27,11 @@ public class SpyglassItem extends Item {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-		ItemStack itemstack = player.getHeldItem(hand);
-		if(world.isRemote){
+	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+		ItemStack itemstack = player.getItemInHand(hand);
+		if(world.isClientSide){
 			SpyglassListeners.toogleZoom();
 		}
-		return ActionResult.resultConsume(itemstack);
+		return ActionResult.consume(itemstack);
 	}
 }

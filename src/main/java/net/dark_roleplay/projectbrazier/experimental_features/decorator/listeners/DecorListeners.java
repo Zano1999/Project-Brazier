@@ -28,11 +28,11 @@ public class DecorListeners {
 			for (DecorChunk decorChunk : subchunks)
 				BrazierPackets.CHANNEL.sendTo(
 						new DecorInitSyncPacket(
-								event.getWorld().getDimensionKey().getRegistryName(),
+								event.getWorld().dimension().getRegistryName(),
 								decorChunk,
 								new BlockPos(chunk.getPos().x << 4, decorChunk.getVertical() << 4, chunk.getPos().z << 4)
 						),
-						event.getPlayer().connection.getNetworkManager(),
+						event.getPlayer().connection.getConnection(),
 						NetworkDirection.PLAY_TO_CLIENT);
 		});
 	}

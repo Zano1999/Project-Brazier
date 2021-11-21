@@ -29,7 +29,7 @@ public class AxisVoxelShape {
 			case Y:
 				return this.y;
 			default:
-				return VoxelShapes.fullCube();
+				return VoxelShapes.block();
 		}
 	}
 }

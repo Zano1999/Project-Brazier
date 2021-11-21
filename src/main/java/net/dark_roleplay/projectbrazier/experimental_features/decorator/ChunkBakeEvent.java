@@ -35,15 +35,15 @@ public class ChunkBakeEvent extends Event {
 	}
 
 	private void enableRenderType(BufferBuilder buffer, RenderType type){
-		if(compiledChunks.layersStarted.add(type))
+		if(compiledChunks.hasLayer.add(type))
 			buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
 
-		compiledChunks.empty = false;
-		compiledChunks.layersUsed.add(type);
+		compiledChunks.isCompletelyEmpty = false;
+		compiledChunks.hasBlocks.add(type);
 	}
 
 	public BufferBuilder getBuffer(RenderType type){
-		BufferBuilder buffer = bufferProvider.getBuilder(type);
+		BufferBuilder buffer = bufferProvider.builder(type);
 		enableRenderType(buffer, type);
 		return buffer;
 	}

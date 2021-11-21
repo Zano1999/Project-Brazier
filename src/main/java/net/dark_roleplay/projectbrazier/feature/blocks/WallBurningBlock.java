@@ -27,6 +27,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class WallBurningBlock extends WallHFacedDecoBlock {
 
 	public static final BooleanProperty BURNING = BooleanProperty.create("burning");
@@ -40,7 +42,7 @@ public class WallBurningBlock extends WallHFacedDecoBlock {
 	public WallBurningBlock(Properties props, String shapeName, int burningLightLevel, IDisplayTicker displayTicker) {
 		super(props, shapeName);
 		this.burningLightLevel = burningLightLevel;
-		this.setDefaultState(this.getDefaultState().with(BURNING, false));
+		this.registerDefaultState(this.defaultBlockState().setValue(BURNING, false));
 		this.displayTicker = displayTicker;
 	}
 
@@ -51,38 +53,38 @@ public class WallBurningBlock extends WallHFacedDecoBlock {
 
 	@Override
 	@Deprecated
-	public void onProjectileCollision(World world, BlockState state, BlockRayTraceResult hit, ProjectileEntity projectile) {
-		if(!world.isRemote() && projectile.isBurning()){
-			Entity owner = projectile.func_234616_v_();
+	public void onProjectileHit(World world, BlockState state, BlockRayTraceResult hit, ProjectileEntity projectile) {
+		if(!world.isClientSide() && projectile.isOnFire()){
+			Entity owner = projectile.getOwner();
 			//Check if mob griefing is active
 			boolean flag = owner == null || owner instanceof PlayerEntity || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(world, owner);
-			if (flag && !state.get(BURNING))
-				world.setBlockState(hit.getPos(), state.with(BURNING, true), 3);
+			if (flag && !state.getValue(BURNING))
+				world.setBlock(hit.getBlockPos(), state.setValue(BURNING, true), 3);
 		}
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		ItemStack heldItem = player.getHeldItem(hand);
-		if(state.get(BURNING)){
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+		ItemStack heldItem = player.getItemInHand(hand);
+		if(state.getValue(BURNING)){
 			if(player.isCrouching()){
-				if(world.isRemote()) return ActionResultType.SUCCESS;
-				world.setBlockState(pos, state.with(BURNING, false));
-				world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.8f, 2f);
+				if(world.isClientSide()) return ActionResultType.SUCCESS;
+				world.setBlockAndUpdate(pos, state.setValue(BURNING, false));
+				world.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.8f, 2f);
 				return ActionResultType.SUCCESS;
 			}
 		}else{
 			if(heldItem.getItem() == Items.FLINT_AND_STEEL){
-				if(world.isRemote()) return ActionResultType.SUCCESS;
+				if(world.isClientSide()) return ActionResultType.SUCCESS;
 				if(!player.isCreative())
-					heldItem.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) (player));
-				world.setBlockState(pos, state.with(BURNING, true));
-				world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.PLAYERS, 1f, 1f);
+					heldItem.hurt(1, player.getRandom(), (ServerPlayerEntity) (player));
+				world.setBlockAndUpdate(pos, state.setValue(BURNING, true));
+				world.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundCategory.PLAYERS, 1f, 1f);
 				return ActionResultType.SUCCESS;
 			}else if(player.isCrouching()){
 				Inventories.givePlayerItem(player, new ItemStack(this.replacementItem), hand, true);
-				BlockState newState = emptyWallBlock.getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING));
-				world.setBlockState(pos, newState);
+				BlockState newState = emptyWallBlock.defaultBlockState().setValue(HORIZONTAL_FACING, state.getValue(HORIZONTAL_FACING));
+				world.setBlockAndUpdate(pos, newState);
 			}
 		}
 		return ActionResultType.PASS;
@@ -90,12 +92,12 @@ public class WallBurningBlock extends WallHFacedDecoBlock {
 
 	@Override
 	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-		return state.get(BURNING) ? burningLightLevel : 0;
+		return state.getValue(BURNING) ? burningLightLevel : 0;
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		super.fillStateContainer(builder);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
 		builder.add(BURNING);
 	}
 

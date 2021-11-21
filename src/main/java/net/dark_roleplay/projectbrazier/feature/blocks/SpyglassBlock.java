@@ -17,6 +17,8 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class SpyglassBlock extends Block {
 
 	public static final EnumProperty<BrazierStateProperties.MultiFacing> FACING = BrazierStateProperties.MULTI_FACING;
@@ -33,33 +35,33 @@ public class SpyglassBlock extends Block {
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return state.get(FACING).isAngled() ? shapesRotated.get(state.get(FACING).toDirection()) : shapesNormal.get(state.get(FACING).toDirection());
+		return state.getValue(FACING).isAngled() ? shapesRotated.get(state.getValue(FACING).toDirection()) : shapesNormal.get(state.getValue(FACING).toDirection());
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		PlayerEntity player = context.getPlayer();
-		if(player == null) return this.getDefaultState();
-		return this.getDefaultState().with(FACING, BrazierStateProperties.MultiFacing.byAngle(player.getRotationYawHead()));
+		if(player == null) return this.defaultBlockState();
+		return this.defaultBlockState().setValue(FACING, BrazierStateProperties.MultiFacing.byAngle(player.getYHeadRot()));
 	}
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.with(FACING, state.get(FACING).rotate(rot));
+		return state.setValue(FACING, state.getValue(FACING).rotate(rot));
 	}
 
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirror) {
-		return state.with(FACING, state.get(FACING).mirror(mirror));
+		return state.setValue(FACING, state.getValue(FACING).mirror(mirror));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
 
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
 		return false;
 	}
 }

@@ -69,7 +69,7 @@ public class RoofModel implements IModelGeometry<RoofModel> {
 	public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
 		if(this.compiledTextures.isEmpty())
 			for(Map.Entry<String, String> texture : this.textures.entrySet())
-				this.compiledTextures.put(texture.getKey(), new RenderMaterial(AtlasTexture.LOCATION_BLOCKS_TEXTURE, new ResourceLocation(texture.getValue())));
+				this.compiledTextures.put(texture.getKey(), new RenderMaterial(AtlasTexture.LOCATION_BLOCKS, new ResourceLocation(texture.getValue())));
 
 		return this.compiledTextures.values();
 	}
@@ -78,11 +78,11 @@ public class RoofModel implements IModelGeometry<RoofModel> {
 	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<RenderMaterial, TextureAtlasSprite> spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
 		Vector3f translation = modelTransform.getRotation().getTranslation();
 		Vector3f scale = modelTransform.getRotation().getScale();
-		Quaternion rotation = modelTransform.getRotation().getRotationLeft();
+		Quaternion rotation = modelTransform.getRotation().getLeftRotation();
 		MatrixStack stack = new MatrixStack();
-		stack.scale(scale.getX(), scale.getY(), scale.getZ());
-		stack.translate(translation.getX(), translation.getY(), translation.getZ());
-		stack.rotate(rotation);
+		stack.scale(scale.x(), scale.y(), scale.z());
+		stack.translate(translation.x(), translation.y(), translation.z());
+		stack.mulPose(rotation);
 
 		RoofModelGenerator generator = new RoofModelGenerator(width, height, steps, new Vector3f(0, this.verticalOffset, this.horizontalOffset), this.tileOffset, stack, spriteGetter, this.compiledTextures);
 		Map<Direction, List<BakedQuad>> model = new EnumMap<>(Direction.class);

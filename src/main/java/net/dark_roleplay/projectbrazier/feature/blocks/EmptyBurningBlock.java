@@ -30,16 +30,16 @@ public class EmptyBurningBlock extends DecoBlock{
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 
-		ItemStack heldItem = player.getHeldItem(hand);
+		ItemStack heldItem = player.getItemInHand(hand);
 		Block replacement = replacements.get(heldItem.getItem());
 
 		if(replacement == null) return ActionResultType.PASS;
-		if(world.isRemote) return ActionResultType.SUCCESS;
+		if(world.isClientSide) return ActionResultType.SUCCESS;
 
-		BlockState newState = replacement.getDefaultState();
-		world.setBlockState(pos, newState);
+		BlockState newState = replacement.defaultBlockState();
+		world.setBlockAndUpdate(pos, newState);
 		if(!player.isCreative())
 			heldItem.shrink(1);
 		return ActionResultType.SUCCESS;

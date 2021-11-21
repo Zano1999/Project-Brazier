@@ -18,11 +18,11 @@ public class ModelWrapper implements IModelGeometry {
 
 	@Override
 	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
-		return this.model.bakeModel(bakery, spriteGetter, modelTransform, modelLocation);
+		return this.model.bake(bakery, spriteGetter, modelTransform, modelLocation);
 	}
 
 	@Override
 	public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
-		return model.getTextures(modelGetter, missingTextureErrors);
+		return model.getMaterials(modelGetter, missingTextureErrors);
 	}
 }

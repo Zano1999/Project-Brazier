@@ -22,11 +22,11 @@ public class SpyglassOverlay extends AbstractGui implements IRenderable {
 
 	@Override
 	public void render(MatrixStack matrix, int mouseX, int mouseY, float delta) {
-		MainWindow window = Minecraft.getInstance().getMainWindow();
-		int width = window.getScaledWidth();
-		int height = window.getScaledHeight();
+		MainWindow window = Minecraft.getInstance().getWindow();
+		int width = window.getGuiScaledWidth();
+		int height = window.getGuiScaledHeight();
 
-		Minecraft.getInstance().getTextureManager().bindTexture(SPYGLASS_OVERLAY);
+		Minecraft.getInstance().getTextureManager().bind(SPYGLASS_OVERLAY);
 
 		int halfWidth = 0;
 		int halfHeight = 0;
@@ -65,14 +65,14 @@ public class SpyglassOverlay extends AbstractGui implements IRenderable {
 	}
 
 	protected static void innerBlitBlend(MatrixStack matrix, int p_innerBlit_0_, int p_innerBlit_1_, int p_innerBlit_2_, int p_innerBlit_3_, int p_innerBlit_4_, float p_innerBlit_5_, float p_innerBlit_6_, float p_innerBlit_7_, float p_innerBlit_8_) {
-		Matrix4f matr = matrix.getLast().getMatrix();
-		BufferBuilder bufferbuilder = Tessellator.getInstance().getBuffer();
+		Matrix4f matr = matrix.last().pose();
+		BufferBuilder bufferbuilder = Tessellator.getInstance().getBuilder();
 		bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-		bufferbuilder.pos(matr, (float) p_innerBlit_0_, (float) p_innerBlit_3_, (float) p_innerBlit_4_).tex(p_innerBlit_5_, p_innerBlit_8_).endVertex();
-		bufferbuilder.pos(matr, (float) p_innerBlit_1_, (float) p_innerBlit_3_, (float) p_innerBlit_4_).tex(p_innerBlit_6_, p_innerBlit_8_).endVertex();
-		bufferbuilder.pos(matr, (float) p_innerBlit_1_, (float) p_innerBlit_2_, (float) p_innerBlit_4_).tex(p_innerBlit_6_, p_innerBlit_7_).endVertex();
-		bufferbuilder.pos(matr, (float) p_innerBlit_0_, (float) p_innerBlit_2_, (float) p_innerBlit_4_).tex(p_innerBlit_5_, p_innerBlit_7_).endVertex();
-		bufferbuilder.finishDrawing();
-		WorldVertexBufferUploader.draw(bufferbuilder);
+		bufferbuilder.vertex(matr, (float) p_innerBlit_0_, (float) p_innerBlit_3_, (float) p_innerBlit_4_).uv(p_innerBlit_5_, p_innerBlit_8_).endVertex();
+		bufferbuilder.vertex(matr, (float) p_innerBlit_1_, (float) p_innerBlit_3_, (float) p_innerBlit_4_).uv(p_innerBlit_6_, p_innerBlit_8_).endVertex();
+		bufferbuilder.vertex(matr, (float) p_innerBlit_1_, (float) p_innerBlit_2_, (float) p_innerBlit_4_).uv(p_innerBlit_6_, p_innerBlit_7_).endVertex();
+		bufferbuilder.vertex(matr, (float) p_innerBlit_0_, (float) p_innerBlit_2_, (float) p_innerBlit_4_).uv(p_innerBlit_5_, p_innerBlit_7_).endVertex();
+		bufferbuilder.end();
+		WorldVertexBufferUploader.end(bufferbuilder);
 	}
 }

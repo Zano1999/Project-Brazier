@@ -7,6 +7,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.IPlantable;
 
+import net.minecraft.item.Item.Properties;
+
 public class PlantSeedsItem extends BlockNamedItem implements IPlantable {
 
 	public PlantSeedsItem(Block blockIn, Properties properties) {
@@ -15,6 +17,6 @@ public class PlantSeedsItem extends BlockNamedItem implements IPlantable {
 
 	@Override
 	public BlockState getPlant(IBlockReader world, BlockPos pos) {
-		return this.getBlock().getDefaultState();
+		return this.getBlock().defaultBlockState();
 	}
 }

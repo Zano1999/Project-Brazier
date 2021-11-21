@@ -36,17 +36,17 @@ public class SelectiveBlockItemListeners extends AbstractGui {
 		if(item == null) return;
 
 		int index = item.getCurrentIndex(profile);
-		int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
-		int height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+		int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+		int height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
 
 		MatrixStack matrixStack = event.getMatrixStack();
 
 		int xOffset = (width - 30);
 		int yOffset = (height-70)/2;
 
-		GlStateManager.enableBlend();
+		GlStateManager._enableBlend();
 		TextureList.SELECTIVE_BLOCK_ITEMS.render(matrixStack, xOffset, yOffset);
-		GlStateManager.disableBlend();
+		GlStateManager._disableBlend();
 
 		ScreenTexture[][] selectiveTextures = createTexturesForItem(item);//SELECTIVE_TEXTURES.computeIfAbsent(item, SelectiveBlockItemListeners::createTexturesForItem);
 
@@ -59,10 +59,10 @@ public class SelectiveBlockItemListeners extends AbstractGui {
 
 		//TODO Render keybinds
 
-		KeybindRenderer.renderKeybind(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_PREV.getKeyBinding(), matrixStack, Minecraft.getInstance().fontRenderer,
-				xOffset + 7 - (KeybindRenderer.getKeybindWidth(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_PREV.getKeyBinding(), Minecraft.getInstance().fontRenderer)), yOffset + 6, false);
-		KeybindRenderer.renderKeybind(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_NEXT.getKeyBinding(), matrixStack, Minecraft.getInstance().fontRenderer,
-				xOffset + 7 - (KeybindRenderer.getKeybindWidth(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_NEXT.getKeyBinding(), Minecraft.getInstance().fontRenderer)), yOffset + 51, false);
+		KeybindRenderer.renderKeybind(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_PREV.getKeyBinding(), matrixStack, Minecraft.getInstance().font,
+				xOffset + 7 - (KeybindRenderer.getKeybindWidth(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_PREV.getKeyBinding(), Minecraft.getInstance().font)), yOffset + 6, false);
+		KeybindRenderer.renderKeybind(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_NEXT.getKeyBinding(), matrixStack, Minecraft.getInstance().font,
+				xOffset + 7 - (KeybindRenderer.getKeybindWidth(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_NEXT.getKeyBinding(), Minecraft.getInstance().font)), yOffset + 51, false);
 
 	}
 
@@ -72,7 +72,7 @@ public class SelectiveBlockItemListeners extends AbstractGui {
 		SelectiveBlockItem item = SelectiveBlockItem.getHeldSelectiveBlockItem(Minecraft.getInstance().player);
 		if(item == null) return;
 
-		int index = 0 - (BrazierKeybinds.SELECTIVE_BLOCK_ITEM_PREV.isPressed() ? 1 : 0) + (BrazierKeybinds.SELECTIVE_BLOCK_ITEM_NEXT.isPressed() ? 1 : 0);
+		int index = 0 - (BrazierKeybinds.SELECTIVE_BLOCK_ITEM_PREV.consumeClick() ? 1 : 0) + (BrazierKeybinds.SELECTIVE_BLOCK_ITEM_NEXT.consumeClick() ? 1 : 0);
 
 		if(index != 0){
 			index = changeIndex(item, index);
@@ -83,7 +83,7 @@ public class SelectiveBlockItemListeners extends AbstractGui {
 	@SubscribeEvent
 	public static void mouseScroll(InputEvent.MouseScrollEvent event){
 		if(Minecraft.getInstance().player == null) return;
-		if(!Minecraft.getInstance().gameSettings.keyBindSneak.isKeyDown()) return;
+		if(!Minecraft.getInstance().options.keyShift.isDown()) return;
 
 		SelectiveBlockItem item = SelectiveBlockItem.getHeldSelectiveBlockItem(Minecraft.getInstance().player);
 		if(item == null) return;

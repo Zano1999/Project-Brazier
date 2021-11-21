@@ -44,7 +44,7 @@ public class BrazierCreativeTabs {
 		}
 
 		@OnlyIn(Dist.CLIENT)
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return icon.get();
 		}
 	}

@@ -33,13 +33,13 @@ public class QualityModelSettings {
 		if(OptifineCompat.isOFLoaded()) return;
 
 		VideoSettingsScreen screen = (VideoSettingsScreen) event.getGui();
-		screen.optionsRowList.addOption(MODEL_QUALITY_SETTING);
+		screen.list.addBig(MODEL_QUALITY_SETTING);
 	}
 
 	@SubscribeEvent
 	public static void optionsScreenClose(GuiOpenEvent event){
 		if(TEMP_MODEL_QUALITY != MODEL_QUALITY){
-			Minecraft.getInstance().scheduleResourcesRefresh();
+			Minecraft.getInstance().delayTextureReload();
 			MODEL_QUALITY = TEMP_MODEL_QUALITY;
 		}
 	}

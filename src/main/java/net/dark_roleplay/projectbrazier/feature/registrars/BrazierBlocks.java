@@ -138,7 +138,7 @@ public class BrazierBlocks extends Registrar {
 			}, Registrar.CROP, false),
 			ROPE_ANCHOR = registerBlock("rope_anchor", prop -> new RopeAnchorBlock(prop, "rope_anchor", "dropped_rope_anchor"), Registrar.ROPE, true),
 			ROPE = registerBlock("rope", prop -> new RopeBlock(prop, "rope", "rope_end"), Registrar.ROPE, false),
-			GLIMMERTAIL = registerBlock("glimmertail", TallGrassBlock::new, AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT), true);
+			GLIMMERTAIL = registerBlock("glimmertail", TallGrassBlock::new, AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS), true);
 
 	//Experimental
 //	public static final RegistryObject<Block>

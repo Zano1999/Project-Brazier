@@ -22,9 +22,9 @@ public abstract class ImmersiveScreen extends Screen {
 
 		this.cameraPos = cameraPos;
 		this.cameraRotation = cameraRotation;
-		CameraEntity cameraEntity = BrazierEntities.CAMERA.get().create(Minecraft.getInstance().world);
+		CameraEntity cameraEntity = BrazierEntities.CAMERA.get().create(Minecraft.getInstance().level);
 		cameraEntity.setup(cameraPos, cameraRotation);
-		Minecraft.getInstance().setRenderViewEntity(cameraEntity);
+		Minecraft.getInstance().setCameraEntity(cameraEntity);
 	}
 
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
@@ -47,7 +47,7 @@ public abstract class ImmersiveScreen extends Screen {
 	}
 
 	@Override
-	public void onClose() {
-		Minecraft.getInstance().setRenderViewEntity(null);
+	public void removed() {
+		Minecraft.getInstance().setCameraEntity(null);
 	}
 }

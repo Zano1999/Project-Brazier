@@ -39,11 +39,11 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 	@Override
 	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
 		return new ConnectedBakedModel(
-				this.baseModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
-				this.priPosModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
-				this.priNegModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
-				this.secPosModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation),
-				this.secNegModel.bakeModel(bakery, spriteGetter, modelTransform, modelLocation));
+				this.baseModel.bake(bakery, spriteGetter, modelTransform, modelLocation),
+				this.priPosModel.bake(bakery, spriteGetter, modelTransform, modelLocation),
+				this.priNegModel.bake(bakery, spriteGetter, modelTransform, modelLocation),
+				this.secPosModel.bake(bakery, spriteGetter, modelTransform, modelLocation),
+				this.secNegModel.bake(bakery, spriteGetter, modelTransform, modelLocation));
 	}
 
 	@Override
@@ -51,11 +51,11 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 
 		Set<RenderMaterial> textures = new HashSet<>();
 
-		textures.addAll(baseModel.getTextures(modelGetter, missingTextureErrors));
-		textures.addAll(priPosModel.getTextures(modelGetter, missingTextureErrors));
-		textures.addAll(priNegModel.getTextures(modelGetter, missingTextureErrors));
-		textures.addAll(secPosModel.getTextures(modelGetter, missingTextureErrors));
-		textures.addAll(secNegModel.getTextures(modelGetter, missingTextureErrors));
+		textures.addAll(baseModel.getMaterials(modelGetter, missingTextureErrors));
+		textures.addAll(priPosModel.getMaterials(modelGetter, missingTextureErrors));
+		textures.addAll(priNegModel.getMaterials(modelGetter, missingTextureErrors));
+		textures.addAll(secPosModel.getMaterials(modelGetter, missingTextureErrors));
+		textures.addAll(secNegModel.getMaterials(modelGetter, missingTextureErrors));
 
 		return textures;
 	}
@@ -73,12 +73,12 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 		}
 
 
-		//func_235901_b_ -> BlockState#has
+		//hasProperty -> BlockState#has
 		@Nonnull
 		@Override
 		public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
-			Direction facing = state.hasProperty(BlockStateProperties.HORIZONTAL_FACING) ? state.get(BlockStateProperties.HORIZONTAL_FACING) :
-					state.hasProperty(BlockStateProperties.FACING) ? state.get(BlockStateProperties.FACING) : null;
+			Direction facing = state.hasProperty(BlockStateProperties.HORIZONTAL_FACING) ? state.getValue(BlockStateProperties.HORIZONTAL_FACING) :
+					state.hasProperty(BlockStateProperties.FACING) ? state.getValue(BlockStateProperties.FACING) : null;
 			boolean flag = facing == Direction.NORTH || facing == Direction.EAST || facing == Direction.UP || facing == Direction.DOWN;
 			boolean flag2 = facing == Direction.DOWN;
 
@@ -104,7 +104,7 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 			return this.originalModel.getQuads(state, side, rand, extraData);
 		}
 
-		// func_235901_b_ -> BlockState#has
+		// hasProperty -> BlockState#has
 		@Nonnull
 		@Override
 		public IModelData getModelData(@Nonnull IBlockDisplayReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull IModelData tileData) {
@@ -117,11 +117,11 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 					state.hasProperty(BlockStateProperties.FACING)
 			) {
 				Direction.Axis axis = flag ?
-						state.get(BlockStateProperties.HORIZONTAL_AXIS) :
+						state.getValue(BlockStateProperties.HORIZONTAL_AXIS) :
 						flag2 ?
-								state.get(BlockStateProperties.AXIS) :
-								flag3 ? state.get(BlockStateProperties.HORIZONTAL_FACING).getAxis() :
-										state.get(BlockStateProperties.FACING).getAxis();
+								state.getValue(BlockStateProperties.AXIS) :
+								flag3 ? state.getValue(BlockStateProperties.HORIZONTAL_FACING).getAxis() :
+										state.getValue(BlockStateProperties.FACING).getAxis();
 
 				switch(axis){
 					case X:
@@ -151,10 +151,10 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 		public IModelGeometry read(JsonDeserializationContext deserCtx, JsonObject modelContents) {
 			IUnbakedModel baseModel, priPosModel, priNegModel, secPosModel, secNegModel;
 
-			JsonObject textures = JSONUtils.getJsonObject(modelContents, "textures", null);
+			JsonObject textures = JSONUtils.getAsJsonObject(modelContents, "textures", null);
 
-			JsonObject primarySubContents = JSONUtils.getJsonObject(modelContents, "primary");
-			JsonObject secondarySubContents = JSONUtils.getJsonObject(modelContents, "secondary");
+			JsonObject primarySubContents = JSONUtils.getAsJsonObject(modelContents, "primary");
+			JsonObject secondarySubContents = JSONUtils.getAsJsonObject(modelContents, "secondary");
 
 			baseModel = loadSubModel(deserCtx, modelContents, "base", textures);
 			priPosModel = loadSubModel(deserCtx, primarySubContents, "positive", textures);
@@ -166,9 +166,9 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 		}
 
 		private IUnbakedModel loadSubModel(JsonDeserializationContext deserCtx, JsonObject base, String subModelName, JsonObject textures){
-			JsonObject subModelJson = JSONUtils.getJsonObject(base, subModelName);
+			JsonObject subModelJson = JSONUtils.getAsJsonObject(base, subModelName);
 			if(textures != null){
-				JsonObject subModelTextures = JSONUtils.getJsonObject(base, "textures", new JsonObject());
+				JsonObject subModelTextures = JSONUtils.getAsJsonObject(base, "textures", new JsonObject());
 				for(Map.Entry<String, JsonElement> entry : textures.entrySet())
 					subModelTextures.add(entry.getKey(), entry.getValue());
 

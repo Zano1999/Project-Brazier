@@ -13,6 +13,8 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class WoodStoolBlock extends DecoBlock {
 	public WoodStoolBlock(Properties properties, String shapeName) {
 		super(properties, shapeName);
@@ -20,7 +22,7 @@ public class WoodStoolBlock extends DecoBlock {
 
 	@Deprecated
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		SittingUtil.sitOnBlock(world, pos, player, -0.3F, state);
 		return ActionResultType.SUCCESS;
 	}
