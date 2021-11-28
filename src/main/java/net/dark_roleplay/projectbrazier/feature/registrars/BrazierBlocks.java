@@ -138,14 +138,14 @@ public class BrazierBlocks extends Registrar {
 			}, Registrar.CROP, false),
 			ROPE_ANCHOR = registerBlock("rope_anchor", prop -> new RopeAnchorBlock(prop, "rope_anchor", "dropped_rope_anchor"), Registrar.ROPE, true),
 			ROPE = registerBlock("rope", prop -> new RopeBlock(prop, "rope", "rope_end"), Registrar.ROPE, false),
-			GLIMMERTAIL = registerBlock("glimmertail", TallGrassBlock::new, AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS), true);
+			GLIMMERTAIL = registerBlock("glimmertail", TallGrassBlock::new, AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS), false);
 
 	//Experimental
 //	public static final RegistryObject<Block>
 //			DRAWBRIDGE_ANCHOR = registerBlock("drawbridge_anchor", DrawbridgeAnchorBlock::new, Registrar.STONE_SOLID, false);
 //
-	public static final EnumRegistryObject<RoofType, Block>
-			STRAIGHT_ROOFS	= registerBlock("clay_shingle_roof", RoofType.class, prop -> new RoofBlock(prop, "placeholder"), Registrar.STONE, false);
+	//public static final EnumRegistryObject<RoofType, Block>
+			//STRAIGHT_ROOFS	= registerBlock("clay_shingle_roof", RoofType.class, prop -> new RoofBlock(prop, "placeholder"), Registrar.STONE, false);
 			//INNER_CORNER_ROOFS	= registerBlock("inner_corner_%s_clay_shingle_roof", RoofType.class, type -> type.doesGenerateCorners(), prop -> new RoofCornerBlock(prop, "placeholder"), Registrar.STONE, false),
 			//OUTER_CORNER_ROOFS	= registerBlock("outer_corner_%s_clay_shingle_roof", RoofType.class, type -> type.doesGenerateCorners(), prop -> new RoofCornerBlock(prop, "placeholder"), Registrar.STONE, false);
 

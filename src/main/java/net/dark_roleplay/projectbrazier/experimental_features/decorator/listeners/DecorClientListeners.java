@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = ProjectBrazier.MODID, value = Dist.CLIENT)
+//@Mod.EventBusSubscriber(modid = ProjectBrazier.MODID, value = Dist.CLIENT)
 public class DecorClientListeners {
 	public static final Map<ChunkPos, DecorInitSyncPacket> SCHEDULED_PACKETS = new HashMap<>();
 
