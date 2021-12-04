@@ -1,0 +1,10 @@
+repositories{
+    maven {
+        name = 'Dark Roleplay Maven'
+        url = 'https://maven.dark-roleplay.net'
+    }
+}
+
+dependencies{
+    implementation (fg.deobf("net.dark_roleplay.marg:marg-1.18:0.7"))
+}

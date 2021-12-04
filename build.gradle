@@ -1,55 +1,54 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply from: 'gradle/property_helper.gradle'
-apply from: 'gradle/property_loader.gradle'
+applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/property_helper.gradle");
 
-// Load mod related properties
-ext.modName = getRequiredString('mod_name')
-ext.modAuthor = getRequiredString('mod_author')
-ext.modId = getRequiredString('mod_id')
-ext.modCredits = getDefaultString('mod_credits', ext.modAuthor)
-ext.modDescription = getOptionalString('mod_description')
-ext.modChangelog = getOptionalString('mod_changelog')
-ext.modHomepage = getOptionalString('mod_homepage')
-ext.modSource = getOptionalString('mod_source')
-ext.modIssues = getOptionalString('mod_issues')
-
-// Load Minecraft specific properties
-ext.mcVersion = getRequiredString('minecraft_version')
-
-// Load build-time modules
-//apply from: 'gradle/build_number.gradle'
-apply from: 'gradle/common_manifest.gradle'
-apply from: 'gradle/common_artifacts.gradle'
-apply from: 'gradle/forge.gradle'
-apply from: 'gradle/minify_jsons.gradle'
-//apply from: 'gradle/git_changelog.gradle'
-
-// Load publishing modules
-//apply from: 'gradle/maven.gradle'
-//apply from: 'gradle/signing.gradle'
-apply from: 'gradle/curseforge.gradle'
-//apply from: 'gradle/version_checker.gradle'
-
-// IntelliJ Project Import
-// The Mixin annotation process does not have an obfuscation source when running through the IntelliJ compiler,
-// thus we have to prevent it from being activated as part of importing this Gradle project into IntelliJ.
-if (System.getProperty("idea.sync.active") == "true") {
-    afterEvaluate {
-        tasks.withType(JavaCompile).all {
-            it.options.annotationProcessorPath = files()
+buildscript {
+    repositories {
+        maven {
+            name = 'Official Forge Maven'
+            url = 'https://maven.minecraftforge.net'
         }
+        maven {
+            name = 'Sponge Maven'
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
+        }
+
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 
-repositories{
-    maven {
-        name = 'Dark Roleplay Maven'
-        url = 'https://maven.dark-roleplay.net'
-    }
-    mavenLocal()
-}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
+apply plugin: 'org.spongepowered.mixin'
 
-dependencies{
-    implementation (fg.deobf("net.dark_roleplay.marg:marg-1.16.5:0.6.2"))
+applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/forge.gradle");
+applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/common_manifest.gradle");
+applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/common_artifacts.gradle");
+applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/maven_publish.gradle");
+applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/minify_resources.gradle");
+applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/curseforge.gradle");
+
+//If dependencies.gradle exists, apply it
+def dependenciesFile = new File('./dependencies.gradle')
+if(dependenciesFile.exists())
+    apply from: dependenciesFile
+
+//Downloads and caches
+def applyRemote(String url){
+    mkdir("./gradle/remote_script_cache/")
+    def remoteFile = new File('./gradle/remote_script_cache/' + url.md5() + '.gradle')
+
+    def shouldDownload = !remoteFile.exists() || remoteFile.lastModified() < (System.currentTimeMillis() - 3.6e+9)
+    if(shouldDownload)
+        try(def out = new BufferedOutputStream(new FileOutputStream(remoteFile, false))){
+            out << new URL(url).openStream();
+        }
+
+    if(!remoteFile.exists())
+        throw new GradleException('Was unable to fetch "' + url + '" and couldn\'t find file in cache.\n Build is being aborted!')
+
+    apply from: remoteFile
 }

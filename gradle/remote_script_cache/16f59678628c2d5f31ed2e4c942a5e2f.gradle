@@ -1,0 +1,53 @@
+buildscript {
+	repositories {
+		maven { 
+			url 'https://plugins.gradle.org/m2/'
+		}
+	}
+	
+	dependencies {
+		classpath group: 'gradle.plugin.com.matthewprenger', name: 'CurseGradle', version: '1.4.0'
+	}
+}
+
+apply plugin: com.matthewprenger.cursegradle.CurseGradlePlugin
+
+curseforge {
+	if (project.hasProperty('curse_project') && project.hasProperty('curse_auth')) {
+		apiKey = findProperty('curse_auth')
+		project {
+			id = "${curse_project}"
+			releaseType = getDefaultString('curse_release_type', 'alpha')
+			changelog = project.ext.modChangelog
+			changelogType = 'markdown'
+			if (project.hasProperty('curse_versions')) {
+				for (String version : getOptionalString('curse_versions').split(', ')) {
+					addGameVersion version
+				}
+			}
+
+			mainArtifact(jar) {
+				if (project.hasProperty('curse_requirements') || project.hasProperty('curse_optionals')) {
+					relations {
+						if (project.hasProperty('curse_requirements')) {
+							for (String req : project.findProperty('curse_requirements').split(', ')) {
+								requiredLibrary req
+							}
+						}
+				
+						if (project.hasProperty('curse_optionals')) {
+							for (String req : project.findProperty('curse_optionals').split(', ')) {
+								optionalLibrary req
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	else {
+	
+			project.logger.lifecycle('Skipping CurseForge module. No auth info provided.')
+	}
+}

@@ -1,3 +1,18 @@
+// Load mod related properties
+ext.modName = getRequiredString('mod_name')
+ext.modAuthor = getRequiredString('mod_author')
+ext.modId = getRequiredString('mod_id')
+ext.modCredits = getOptionalString('mod_credits')
+ext.modDescription = getOptionalString('mod_description')
+ext.modChangelog = getOptionalString('mod_changelog')
+ext.modHomepage = getOptionalString('mod_homepage')
+ext.modSource = getOptionalString('mod_source')
+ext.modIssues = getOptionalString('mod_issues')
+//ext.modLicense = getDefaultProperty('mod_license', 'All Rights Reserved')
+
+// Load Minecraft specific properties
+ext.mcVersion = getRequiredString('minecraft_version')
+
 def String getString(name, defaultValue, warn = false) {
 
     return getProperty(name, defaultValue, warn).toString()
