@@ -5,19 +5,19 @@ import com.mojang.datafixers.util.Pair;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierEntities;
 import net.dark_roleplay.projectbrazier.util.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.text.ITextComponent;
 
 public abstract class ImmersiveScreen extends Screen {
 
-	protected Vector3d cameraPos;
+	protected Vec3 cameraPos;
 	protected Vector3f cameraRotation;
-	protected Pair<Vector3d, Vector3d> raytrace;
+	protected Pair<Vec3, Vec3> raytrace;
 
-	protected ImmersiveScreen(ITextComponent title, Vector3d cameraPos, Vector3f cameraRotation) {
+	protected ImmersiveScreen(TextComponent title, Vec3 cameraPos, Vector3f cameraRotation) {
 		super(title);
 
 		this.cameraPos = cameraPos;
@@ -34,7 +34,7 @@ public abstract class ImmersiveScreen extends Screen {
 
 	public abstract void renderInWorld(WorldRenderer context, MatrixStack matrixStack, float partialTicks);
 
-	public Vector3d getCameraPos() {
+	public Vec3 getCameraPos() {
 		return cameraPos;
 	}
 
@@ -42,7 +42,7 @@ public abstract class ImmersiveScreen extends Screen {
 		return cameraRotation;
 	}
 
-	public Pair<Vector3d, Vector3d> getRaytrace() {
+	public Pair<Vec3, Vec3> getRaytrace() {
 		return raytrace;
 	}
 

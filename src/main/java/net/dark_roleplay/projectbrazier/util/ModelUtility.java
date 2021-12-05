@@ -5,9 +5,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.math.vector.Vector2f;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.model.pipeline.BakedQuadBuilder;
 
 public class ModelUtility {
@@ -59,13 +59,13 @@ public class ModelUtility {
 	}
 
 	public static class Vertex {
-		private Vector3d pos;
+		private Vec3 pos;
 		private int color;
 		private Vector2f texUV;
 		private Vector2f lightUV;
-		private Vector3d normal;
+		private Vec3 normal;
 
-		public Vertex(Vector3d pos, int color, Vector2f texUV, Vector2f lightUV, Vector3d normal) {
+		public Vertex(Vec3 pos, int color, Vector2f texUV, Vector2f lightUV, Vec3 normal) {
 			this.pos = pos;
 			this.color = color;
 			this.texUV = texUV;
@@ -73,7 +73,7 @@ public class ModelUtility {
 			this.normal = normal;
 		}
 
-		public Vector3d getPos() {
+		public Vec3 getPos() {
 			return pos;
 		}
 
@@ -89,7 +89,7 @@ public class ModelUtility {
 			return lightUV;
 		}
 
-		public Vector3d getNormal() {
+		public Vec3 getNormal() {
 			return normal;
 		}
 	}

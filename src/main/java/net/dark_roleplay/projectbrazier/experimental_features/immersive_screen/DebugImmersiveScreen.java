@@ -7,22 +7,22 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 public class DebugImmersiveScreen extends ImmersiveScreen {
 
 	private final IRenderTypeBuffer.Impl bufferSource;
 
 	public DebugImmersiveScreen() {
-		super(new StringTextComponent("Debuuug"), new Vector3d(23.5, 57, 29.5), new Vector3f(0, 0, 0));
+		super(new StringTextComponent("Debuuug"), new Vec3(23.5, 57, 29.5), new Vector3f(0, 0, 0));
 
 		bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
 	}
@@ -31,15 +31,15 @@ public class DebugImmersiveScreen extends ImmersiveScreen {
 	public void renderInWorld(WorldRenderer context, MatrixStack matrixStack, float partialTicks) {
 		if (this.raytrace == null) return;
 
-		Vector3d cameraPos = RenderUtils.getCameraPos();
+		Vec3 cameraPos = RenderUtils.getCameraPos();
 
 		RayTraceContext rtc = new RayTraceContext(
 				cameraPos.add(this.raytrace.getFirst()),
 				cameraPos.add(this.raytrace.getFirst().add(this.raytrace.getSecond().multiply(30, 30, 30))),
 				RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, null);
 
-		BlockRayTraceResult rtcResult = Minecraft.getInstance().level.clip(rtc);
-		Vector3d hitPoint = rtcResult.getLocation();
+		BlockHitResult rtcResult = Minecraft.getInstance().level.clip(rtc);
+		Vec3 hitPoint = rtcResult.getLocation();
 
 		matrixStack.pushPose();
 		matrixStack.translate(hitPoint.x() - cameraPos.x - 0.5, hitPoint.y() - cameraPos.y - 0.5, hitPoint.z() - cameraPos.z);
@@ -48,7 +48,7 @@ public class DebugImmersiveScreen extends ImmersiveScreen {
 //		ItemStack itemStackIn, ItemCameraTransforms.TransformType transformTypeIn, boolean leftHand, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn, IBakedModel modelIn
 		ItemStack test = Items.DIAMOND_SWORD.getDefaultInstance();
 
-		World world = Minecraft.getInstance().level;
+		Level world = Minecraft.getInstance().level;
 		int combinedLight = WorldRenderer.getLightColor(world, new BlockPos(hitPoint).relative(rtcResult.getDirection()));
 
 		IBakedModel ibakedmodel = itemRenderer.getModel(test, null, null);

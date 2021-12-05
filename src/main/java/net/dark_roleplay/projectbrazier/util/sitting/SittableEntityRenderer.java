@@ -3,7 +3,7 @@ package net.dark_roleplay.projectbrazier.util.sitting;
 import net.minecraft.client.renderer.culling.ClippingHelper;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public class SittableEntityRenderer extends EntityRenderer<SittableEntity> {
 	public SittableEntityRenderer(EntityRendererManager renderManager) {

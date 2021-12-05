@@ -1,7 +1,7 @@
 package net.dark_roleplay.projectbrazier.experimental_features.drawbridges;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;

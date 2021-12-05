@@ -6,7 +6,7 @@ import net.dark_roleplay.projectbrazier.experimental_features.decorator.capabili
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.capability.DecorContainer;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.packets.DecorInitSyncPacket;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierPackets;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.world.ChunkWatchEvent;

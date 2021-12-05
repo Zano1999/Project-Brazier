@@ -1,8 +1,8 @@
 package net.dark_roleplay.projectbrazier.experimental_features.decorator.capability;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.ListNBT;
+import net.minecraft.nbt.ListTag;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.INBTSerializable;
 
@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class DecorContainer implements INBTSerializable<ListNBT> {
+public class DecorContainer implements INBTSerializable<ListTag> {
 	private Map<Integer, DecorChunk> DECOR_CHUNKS = new TreeMap<>();
 
 	public DecorChunk getDecorChunk(int chunkY, boolean create){
@@ -26,8 +26,8 @@ public class DecorContainer implements INBTSerializable<ListNBT> {
 	}
 
 	@Override
-	public ListNBT serializeNBT() {
-		ListNBT chunks = new ListNBT();
+	public ListTag serializeNBT() {
+		ListTag chunks = new ListTag();
 
 		for(DecorChunk chunk : DECOR_CHUNKS.values())
 			chunks.add(chunk.serializeNBT());
@@ -36,10 +36,10 @@ public class DecorContainer implements INBTSerializable<ListNBT> {
 	}
 
 	@Override
-	public void deserializeNBT(ListNBT nbt) {
+	public void deserializeNBT(ListTag nbt) {
 		for(INBT compound : nbt){
 			DecorChunk chunk = new DecorChunk(0);
-			chunk.deserializeNBT((CompoundNBT) compound);
+			chunk.deserializeNBT((CompoundTag) compound);
 			DECOR_CHUNKS.put(chunk.getVertical(), chunk);
 		}
 	}

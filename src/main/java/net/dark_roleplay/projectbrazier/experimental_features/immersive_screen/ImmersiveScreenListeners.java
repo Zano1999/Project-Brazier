@@ -2,8 +2,8 @@ package net.dark_roleplay.projectbrazier.experimental_features.immersive_screen;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
@@ -26,7 +26,7 @@ public class ImmersiveScreenListeners {
 		ImmersiveScreen scr = getScreen();
 		if(scr == null) return;
 
-		Vector3d newCameraPos = scr.getCameraPos();
+		Vec3 newCameraPos = scr.getCameraPos();
 		Vector3f cameraRotation = scr.getCameraRotation();
 
 //		event.getInfo().setPosition(newCameraPos.getX(), newCameraPos.getY(), newCameraPos.getZ());

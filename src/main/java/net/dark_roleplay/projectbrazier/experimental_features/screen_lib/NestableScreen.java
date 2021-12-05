@@ -4,8 +4,8 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.IRenderable;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.TextComponent;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class NestableScreen extends Screen {
 
 	protected final List<IRenderable> renderChildren = Lists.newArrayList();
 
-	protected NestableScreen(ITextComponent titleIn) {
+	protected NestableScreen(TextComponent titleIn) {
 		super(titleIn);
 	}
 

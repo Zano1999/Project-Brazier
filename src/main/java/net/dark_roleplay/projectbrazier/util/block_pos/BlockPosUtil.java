@@ -1,6 +1,6 @@
 package net.dark_roleplay.projectbrazier.util.block_pos;
 
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 
 import java.util.function.BiConsumer;
 

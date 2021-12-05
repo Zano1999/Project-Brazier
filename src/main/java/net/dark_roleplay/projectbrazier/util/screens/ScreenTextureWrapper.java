@@ -1,7 +1,7 @@
 package net.dark_roleplay.projectbrazier.util.screens;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public class ScreenTextureWrapper {
 

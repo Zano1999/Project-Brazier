@@ -1,6 +1,6 @@
 package net.dark_roleplay.projectbrazier.util;
 
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.Collection;

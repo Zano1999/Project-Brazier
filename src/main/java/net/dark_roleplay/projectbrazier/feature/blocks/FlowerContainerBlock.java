@@ -3,32 +3,29 @@ package net.dark_roleplay.projectbrazier.feature.blocks;
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
 import net.dark_roleplay.projectbrazier.feature.blockentities.FlowerContainerBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.DecoBlock;
-import net.dark_roleplay.projectbrazier.util.capabilities.ItemHandlerUtil;
 import net.dark_roleplay.projectbrazier.util.json.VoxelShapeLoader;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Vector3i;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.core.Vec3i;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraftforge.common.ForgeTagHandler;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class FlowerContainerBlock extends DecoBlock {
 
@@ -41,11 +38,11 @@ public class FlowerContainerBlock extends DecoBlock {
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		if(world.isClientSide()) return ActionResultType.SUCCESS;
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if(world.isClientSide()) return InteractionResult.SUCCESS;
 
-		TileEntity tileEntity = world.getBlockEntity(pos);
-		if(!(tileEntity instanceof FlowerContainerBlockEntity)) return ActionResultType.FAIL;
+		BlockEntity tileEntity = world.getBlockEntity(pos);
+		if(!(tileEntity instanceof FlowerContainerBlockEntity)) return InteractionResult.FAIL;
 		FlowerContainerBlockEntity flowerTileEntity = (FlowerContainerBlockEntity) tileEntity;
 
 		ItemStack heldItem = player.getItemInHand(hand);
@@ -55,11 +52,11 @@ public class FlowerContainerBlock extends DecoBlock {
 				player.addItem(stack);
 		}else {
 			if(heldItem.getItem() instanceof BlockItem && (ItemTags.FLOWERS.contains(heldItem.getItem()) || POT_PLANTS.contains(heldItem.getItem()))) {
-				Vector3d hitPos = hit.getLocation();
-				Vector3i offsetPos = new Vector3i((int) Math.floor((hitPos.x() - pos.getX()) * 16), (int) Math.floor((hitPos.y() - pos.getY()) * 16), (int) Math.floor((hitPos.z() - pos.getZ()) * 16));
+				Vec3 hitPos = hit.getLocation();
+				Vec3i offsetPos = new Vec3i((int) Math.floor((hitPos.x() - pos.getX()) * 16), (int) Math.floor((hitPos.y() - pos.getY()) * 16), (int) Math.floor((hitPos.z() - pos.getZ()) * 16));
 
 				boolean isValid = false;
-				for(AxisAlignedBB aabb : allowedPlacementArea.toAabbs())
+				for(AABB aabb : allowedPlacementArea.toAabbs())
 					isValid |= aabb.contains(offsetPos.getX() / 16F, offsetPos.getY() / 16F, offsetPos.getZ() / 16F);
 
 				if(isValid)
@@ -69,13 +66,13 @@ public class FlowerContainerBlock extends DecoBlock {
 
 		world.sendBlockUpdated(pos, state, state, 3);
 
-		return ActionResultType.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override
-	public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
 		if(state != newState) {
-			TileEntity te = world.getBlockEntity(pos);
+			BlockEntity te = world.getBlockEntity(pos);
 			if(te != null && te instanceof FlowerContainerBlockEntity){
 				FlowerContainerBlockEntity flowerTe = (FlowerContainerBlockEntity) te;
 				ItemStack stack = flowerTe.removeFlower();
@@ -95,7 +92,7 @@ public class FlowerContainerBlock extends DecoBlock {
 	}
 
 	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+	public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
 		return new FlowerContainerBlockEntity();
 	}
 }

@@ -2,7 +2,8 @@ package net.dark_roleplay.projectbrazier.feature_client.blocks;
 
 import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.IQuadProvider;
 import net.dark_roleplay.projectbrazier.feature.blocks.FlowerContainerData;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
@@ -10,14 +11,13 @@ import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.math.vector.Vector3i;
+import net.minecraft.core.Vec3i;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -25,14 +25,13 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class CFlowerContainerData extends FlowerContainerData implements IQuadProvider {
 	private EnumMap<Direction, List<BakedQuad>> quads;
 	private List<BakedQuad> nullQuads;
 
 	@Override
-	public void deserialize(CompoundNBT nbt) {
+	public void deserialize(CompoundTag nbt) {
 		super.deserialize(nbt);
 		quads = null;
 		nullQuads = null;
@@ -49,7 +48,7 @@ public class CFlowerContainerData extends FlowerContainerData implements IQuadPr
 
 			BlockItem block = (BlockItem) item;
 			BlockState[] states = {block.getBlock().defaultBlockState(), null};
-			Vector3i offset = this.placement;
+			Vec3i offset = this.placement;
 
 			if(states[0].hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF)){
 				DoubleBlockHalf sourceHalf = states[0].getValue(BlockStateProperties.DOUBLE_BLOCK_HALF);
@@ -83,7 +82,7 @@ public class CFlowerContainerData extends FlowerContainerData implements IQuadPr
 		return quads.get(side);
 	}
 
-	private BakedQuad translateQuad(BakedQuad quad, Vector3i offset){
+	private BakedQuad translateQuad(BakedQuad quad, Vec3i offset){
 		int[] vertexData = quad.getVertices();
 		int[] newVertexData = new int[vertexData.length];
 		VertexFormat format = DefaultVertexFormats.BLOCK;

@@ -2,11 +2,11 @@ package net.dark_roleplay.projectbrazier.experimental_features.decorator.packets
 
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.capability.DecorChunk;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.listeners.DecorClientListeners;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -37,13 +37,13 @@ public class DecorInitSyncPacket {
 		return chunkPos;
 	}
 
-	public static void encode(DecorInitSyncPacket pkt, PacketBuffer buffer){
+	public static void encode(DecorInitSyncPacket pkt, FriendlyByteBuf buffer){
 		buffer.writeResourceLocation(pkt.dimensionName);
 		buffer.writeBlockPos(pkt.chunkPos);
 		buffer.writeNbt(pkt.decor.serializeNBT());
 	}
 
-	public static DecorInitSyncPacket decode(PacketBuffer buffer){
+	public static DecorInitSyncPacket decode(FriendlyByteBuf buffer){
 		DecorInitSyncPacket pkt = new DecorInitSyncPacket();
 
 		pkt.dimensionName = buffer.readResourceLocation();

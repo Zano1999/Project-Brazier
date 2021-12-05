@@ -2,18 +2,13 @@ package net.dark_roleplay.projectbrazier.feature.blocks;
 
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.DecoBlock;
 import net.dark_roleplay.projectbrazier.util.sitting.SittingUtil;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
 
 public class WoodStoolBlock extends DecoBlock {
 	public WoodStoolBlock(Properties properties, String shapeName) {
@@ -22,8 +17,8 @@ public class WoodStoolBlock extends DecoBlock {
 
 	@Deprecated
 	@Override
-	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		SittingUtil.sitOnBlock(world, pos, player, -0.3F, state);
-		return ActionResultType.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 }

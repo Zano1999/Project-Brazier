@@ -1,8 +1,7 @@
 package net.dark_roleplay.projectbrazier.experimental_features.decals;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
-import net.dark_roleplay.projectbrazier.experimental_features.decals.Decal;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;

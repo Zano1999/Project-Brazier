@@ -2,23 +2,23 @@ package net.dark_roleplay.projectbrazier.feature.registrars;
 
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.marg.common.material.MaterialCondition;
-import net.dark_roleplay.projectbrazier.experimental_features.roofs.RoofBlock;
-import net.dark_roleplay.projectbrazier.experimental_features.roofs.RoofCornerBlock;
-import net.dark_roleplay.projectbrazier.experimental_features.roofs.RoofType;
 import net.dark_roleplay.projectbrazier.feature.blocks.*;
 import net.dark_roleplay.projectbrazier.feature.blocks.BarrelBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.crops.AgedCropBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.*;
 import net.dark_roleplay.projectbrazier.feature_client.blocks.DisplayTickers;
 import net.dark_roleplay.projectbrazier.util.EnumMaterialRegistryObject;
-import net.dark_roleplay.projectbrazier.util.EnumRegistryObject;
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.marg.ConditionHelper;
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Items;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.TallGrassBlock;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 public class BrazierBlocks extends Registrar {
@@ -138,7 +138,7 @@ public class BrazierBlocks extends Registrar {
 			}, Registrar.CROP, false),
 			ROPE_ANCHOR = registerBlock("rope_anchor", prop -> new RopeAnchorBlock(prop, "rope_anchor", "dropped_rope_anchor"), Registrar.ROPE, true),
 			ROPE = registerBlock("rope", prop -> new RopeBlock(prop, "rope", "rope_end"), Registrar.ROPE, false),
-			GLIMMERTAIL = registerBlock("glimmertail", TallGrassBlock::new, AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS), false);
+			GLIMMERTAIL = registerBlock("glimmertail", TallGrassBlock::new, BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS), false);
 
 	//Experimental
 //	public static final RegistryObject<Block>

@@ -8,8 +8,8 @@ import net.minecraft.client.renderer.RegionRenderCacheBuilder;
 import net.minecraft.client.renderer.chunk.ChunkRenderCache;
 import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
 import net.minecraft.client.renderer.chunk.VisGraph;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,7 +31,7 @@ public class NOFChunkRenderHook {
 			float xIn, float yIn, float zIn,
 			ChunkRenderDispatcher.CompiledChunk compiledChunkIn,
 			RegionRenderCacheBuilder builderIn,
-			CallbackInfoReturnable<Set<TileEntity>> info,
+			CallbackInfoReturnable<Set<BlockEntity>> info,
 			//All the locals :raised-hands:
 			int i, BlockPos blockpos, BlockPos blockpos1,
 			VisGraph visgraph, Set set, ChunkRenderCache chunkrendercache,

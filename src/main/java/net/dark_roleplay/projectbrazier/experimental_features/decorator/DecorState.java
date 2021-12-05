@@ -1,21 +1,21 @@
 package net.dark_roleplay.projectbrazier.experimental_features.decorator;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.phys.Vec3;
 
 public class DecorState{
 
 	private Decor decor;
-	private Vector3d position;
-	private Vector3d rotation;
+	private Vec3 position;
+	private Vec3 rotation;
 
 	public DecorState(Decor decor){
 		this.decor = decor;
-		this.position = new Vector3d(0, 0, 0);
-		this.rotation = new Vector3d(0, 0, 0);
+		this.position = new Vec3(0, 0, 0);
+		this.rotation = new Vec3(0, 0, 0);
 	}
 
-	public DecorState(Decor decor, Vector3d position, Vector3d rotation) {
+	public DecorState(Decor decor, Vec3 position, Vec3 rotation) {
 		this(decor);
 		this.position = position;
 		this.rotation = rotation;
@@ -25,11 +25,11 @@ public class DecorState{
 		return decor;
 	}
 
-	public Vector3d getPosition() {
+	public Vec3 getPosition() {
 		return position;
 	}
 
-	public Vector3d getRotation() {
+	public Vec3 getRotation() {
 		return rotation;
 	}
 
@@ -37,16 +37,16 @@ public class DecorState{
 		this.decor = decor;
 	}
 
-	public void setPosition(Vector3d position) {
+	public void setPosition(Vec3 position) {
 		this.position = position;
 	}
 
-	public void setRotation(Vector3d rotation) {
+	public void setRotation(Vec3 rotation) {
 		this.rotation = rotation;
 	}
 
-	public CompoundNBT serialize() {
-		CompoundNBT tag = new CompoundNBT();
+	public CompoundTag serialize() {
+		CompoundTag tag = new CompoundTag();
 
 		tag.putDouble("posX", position.x());
 		tag.putDouble("posY", position.y());
@@ -58,8 +58,8 @@ public class DecorState{
 		return tag;
 	}
 
-	public void deserialize(CompoundNBT tag) {
-		this.setPosition(new Vector3d(tag.getDouble("posX"), tag.getDouble("posY"), tag.getDouble("posZ")));
-		this.setRotation(new Vector3d(tag.getDouble("rotX"), tag.getDouble("rotY"), tag.getDouble("rotZ")));
+	public void deserialize(CompoundTag tag) {
+		this.setPosition(new Vec3(tag.getDouble("posX"), tag.getDouble("posY"), tag.getDouble("posZ")));
+		this.setRotation(new Vec3(tag.getDouble("rotX"), tag.getDouble("rotY"), tag.getDouble("rotZ")));
 	}
 }

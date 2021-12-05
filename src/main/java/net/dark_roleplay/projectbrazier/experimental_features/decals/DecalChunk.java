@@ -1,7 +1,5 @@
 package net.dark_roleplay.projectbrazier.experimental_features.decals;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.palette.IPalette;
 import net.minecraft.util.palette.IdentityPalette;
 

@@ -1,15 +1,15 @@
 package net.dark_roleplay.projectbrazier.feature.containers;
 
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierContainers;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -23,14 +23,14 @@ public class GeneralContainer extends Container {
 	private int[] inventories;
 	private int teSlots;
 
-	public GeneralContainer(int windowId, PlayerInventory playerInventory, PacketBuffer extraData) {
+	public GeneralContainer(int windowId, Inventory playerInventory, FriendlyByteBuf extraData) {
 		this(windowId, playerInventory, playerInventory.player.getCommandSenderWorld(), extraData.readBlockPos());
 	}
 
-	public GeneralContainer(int windowId, PlayerInventory playerInventory, World world, BlockPos pos) {
+	public GeneralContainer(int windowId, Inventory playerInventory, Level world, BlockPos pos) {
 		super(BrazierContainers.GENERAL_CONTAINER.get(), windowId);
 		this.worldPos = pos;
-		TileEntity te = world.getBlockEntity(pos);
+		BlockEntity te = world.getBlockEntity(pos);
 		LazyOptional<IItemHandler> optionalInventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
 		optionalInventory.ifPresent((handler) -> {
@@ -61,13 +61,13 @@ public class GeneralContainer extends Container {
 	}
 
 	@Override
-	public boolean stillValid(PlayerEntity player) {
+	public boolean stillValid(Player player) {
 		return this.worldPos.closerThan(player.position(), 5);
 	}
 
 	//TODO Properly Implement Shift Clicking
 	@Override
-	public ItemStack quickMoveStack(PlayerEntity player, int index) {
+	public ItemStack quickMoveStack(Player player, int index) {
 		ItemStack result =  ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);
 

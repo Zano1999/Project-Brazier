@@ -1,12 +1,12 @@
 package net.dark_roleplay.projectbrazier.feature.packets;
 
 import net.dark_roleplay.projectbrazier.feature.mechanics.tertiary_interactions.ITertiaryInteractor;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -20,11 +20,11 @@ public class TertiaryInteractionPacket {
 		this.pos = pos;
 	}
 
-	public static void encode(TertiaryInteractionPacket pkt, PacketBuffer buffer){
+	public static void encode(TertiaryInteractionPacket pkt, FriendlyByteBuf buffer){
 		buffer.writeBlockPos(pkt.pos);
 	}
 
-	public static TertiaryInteractionPacket decode(PacketBuffer buffer){
+	public static TertiaryInteractionPacket decode(FriendlyByteBuf buffer){
 		TertiaryInteractionPacket pkt = new TertiaryInteractionPacket();
 		pkt.pos = buffer.readBlockPos();
 
@@ -33,8 +33,8 @@ public class TertiaryInteractionPacket {
 
 	public static void handle(TertiaryInteractionPacket pkt, Supplier<NetworkEvent.Context> ctxSupplier) {
 		ctxSupplier.get().enqueueWork(() -> {
-			ServerPlayerEntity player = ctxSupplier.get().getSender();
-			World world = player.getLevel();
+			ServerPlayer player = ctxSupplier.get().getSender();
+			Level world = player.getLevel();
 			BlockState state = world.getBlockState(pkt.pos);
 			if(state.getBlock() instanceof ITertiaryInteractor){
 				ITertiaryInteractor block = (ITertiaryInteractor) state.getBlock();

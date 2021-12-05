@@ -3,8 +3,8 @@ package net.dark_roleplay.projectbrazier.experimental_features.decals.capability
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.dark_roleplay.projectbrazier.experimental_features.decals.DecalState;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 
 import javax.annotation.Nullable;
 

@@ -5,15 +5,14 @@ import net.dark_roleplay.projectbrazier.feature.items.SpyglassItem;
 import net.dark_roleplay.projectbrazier.feature_client.screens.SpyglassOverlay;
 import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybinds;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.test.TestCommand;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -131,7 +130,7 @@ public class SpyglassListeners {
 
 	private static double getNewFOV(){
 		if(deltaTimeEnd > System.currentTimeMillis()){
-			return MathHelper.lerp(1F - ((deltaTimeEnd - System.currentTimeMillis()) / 250F), prevFOV, targetFOV);
+			return Mth.lerp(1F - ((deltaTimeEnd - System.currentTimeMillis()) / 250F), prevFOV, targetFOV);
 		}else{
 			return targetFOV;
 		}
@@ -141,7 +140,7 @@ public class SpyglassListeners {
 		if(prevZoom != 0) {
 			if(deltaTimeEnd > System.currentTimeMillis()) {
 				float delta = 1F - ((deltaTimeEnd - System.currentTimeMillis()) / 250F);
-				prevFOV = MathHelper.lerp(delta, prevFOV, targetFOV);
+				prevFOV = Mth.lerp(delta, prevFOV, targetFOV);
 			}else{
 				prevFOV = targetFOV;
 			}

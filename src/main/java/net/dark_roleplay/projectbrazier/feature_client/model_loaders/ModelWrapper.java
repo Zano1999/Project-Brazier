@@ -1,7 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature_client.model_loaders;
 
 import net.minecraft.client.renderer.model.*;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
 

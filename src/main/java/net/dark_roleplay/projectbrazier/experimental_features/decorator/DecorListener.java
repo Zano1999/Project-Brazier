@@ -3,26 +3,26 @@ package net.dark_roleplay.projectbrazier.experimental_features.decorator;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.capability.DecorChunk;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.capability.DecorContainer;
-import net.minecraft.block.Blocks;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.chunk.ChunkRenderCache;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.model.data.EmptyModelData;
 import net.minecraftforge.common.util.LazyOptional;
 
 public class DecorListener {
 
-	public static void markChunkDirty(World w, BlockPos pos){
-		ClientWorld world = (ClientWorld) w;
+	public static void markChunkDirty(Level w, BlockPos pos){
+		ClientLevel world = (ClientLevel) w;
 		Minecraft.getInstance().levelRenderer.setSectionDirty(pos.getX() >> 4, pos.getY() >> 4, pos.getZ() >> 4);
 	}
 
@@ -45,7 +45,7 @@ public class DecorListener {
 			stack.pushPose();
 			for(DecorState decor : decChunk.getDecors()) {
 				if (decor == null) return;
-				Vector3d decorPos = decor.getPosition();
+				Vec3 decorPos = decor.getPosition();
 				stack.translate(decorPos.x(), decorPos.y(), decorPos.z());
 
 				renderDispatcher.getModelRenderer().renderModel(

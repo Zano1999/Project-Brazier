@@ -8,9 +8,9 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.command.arguments.Vec3Argument;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Collection;
 
@@ -27,7 +27,7 @@ public class SitdownCommand {
 
 	private static int sitDown(CommandContext<CommandSource> context, boolean hasEntity, boolean hasPos, boolean hasDirection) throws CommandSyntaxException {
 		Collection<? extends Entity> targets = hasEntity ? EntityArgument.getEntities(context, "target") : null;
-		Vector3d targetPos = hasPos ? Vec3Argument.getVec3(context, "position") : null;
+		Vec3 targetPos = hasPos ? Vec3Argument.getVec3(context, "position") : null;
 
 		if (targets != null)
 			for (Entity entity : targets)
@@ -35,7 +35,7 @@ public class SitdownCommand {
 					SittingUtil.sitDownEntity(entity.getCommandSenderWorld(), targetPos == null ? entity.position() : targetPos, entity, null, null, 0, null);
 
 		if(!hasEntity){
-			PlayerEntity player = context.getSource().getPlayerOrException();
+			Player player = context.getSource().getPlayerOrException();
 			if(!player.isPassenger())
 				SittingUtil.sitDownEntity(player.getCommandSenderWorld(), targetPos == null ? player.position() : targetPos, player, null, null, 0, null);
 		}

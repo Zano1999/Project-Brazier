@@ -1,11 +1,11 @@
 package net.dark_roleplay.projectbrazier.experimental_features.crafting.containers;
 
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierContainers;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.Slot;
 
 import java.util.function.BiConsumer;
 
@@ -14,11 +14,11 @@ public class CraftingScreenPlayerContainer extends Container {
 	private int slotsOffsetX = 154, slotsOffsetY = 84;
 
 
-	public CraftingScreenPlayerContainer(int windowId, PlayerInventory inv, PacketBuffer buffer){
+	public CraftingScreenPlayerContainer(int windowId, Inventory inv, FriendlyByteBuf buffer){
 		this(windowId, inv);
 	}
 
-	public CraftingScreenPlayerContainer(int windowId, PlayerInventory inv){
+	public CraftingScreenPlayerContainer(int windowId, Inventory inv){
 		super(BrazierContainers.CRAFTING_PLAYER_CONTAINER.get(), windowId);
 
 		for(int x = 0; x < 9; x++ )
@@ -30,7 +30,7 @@ public class CraftingScreenPlayerContainer extends Container {
 	}
 
 	@Override
-	public boolean stillValid(PlayerEntity player) {
+	public boolean stillValid(Player player) {
 		return true;
 	}
 

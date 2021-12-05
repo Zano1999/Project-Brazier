@@ -1,10 +1,10 @@
 package net.dark_roleplay.projectbrazier.feature_client.model_loaders.axis_connected_models;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import javax.annotation.Nonnull;
 
@@ -47,7 +47,7 @@ public enum AxisConnectionType {
 
 
 	//hasProperty -> has
-	public static AxisConnectionType getConnections(@Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull BlockState state){
+	public static AxisConnectionType getConnections(@Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull BlockState state){
 		boolean flag = false;
 		if ((flag = state.hasProperty(BlockStateProperties.HORIZONTAL_AXIS)) || state.hasProperty(BlockStateProperties.AXIS)) {
 			Direction.Axis axis = flag ? state.getValue(BlockStateProperties.HORIZONTAL_AXIS) : state.getValue(BlockStateProperties.AXIS);
@@ -58,7 +58,7 @@ public enum AxisConnectionType {
 		return AxisConnectionType.DEFAULT;
 	}
 
-	public static AxisConnectionType getConnections(@Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, Direction.Axis axis){
+	public static AxisConnectionType getConnections(@Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull BlockState state, Direction.Axis axis){
 		AxisConnectionType type = AxisConnectionType.DEFAULT;
 
 		switch (axis) {
@@ -85,7 +85,7 @@ public enum AxisConnectionType {
 		return type;
 	}
 
-	public static AxisConnectionType getConnections(@Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, Direction facing){
+	public static AxisConnectionType getConnections(@Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull BlockState state, Direction facing){
 		AxisConnectionType type = AxisConnectionType.DEFAULT;
 		Direction.Axis axis = facing.getClockWise().getAxis();
 

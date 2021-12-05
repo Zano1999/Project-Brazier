@@ -5,25 +5,23 @@ import net.dark_roleplay.projectbrazier.feature.blocks.templates.HFacedDecoBlock
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlocks;
 import net.dark_roleplay.projectbrazier.util.blocks.HFacedVoxelShape;
 import net.dark_roleplay.projectbrazier.util.json.VoxelShapeLoader;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class RopeAnchorBlock extends HFacedDecoBlock implements ITertiaryInteractor {
 
@@ -38,23 +36,23 @@ public class RopeAnchorBlock extends HFacedDecoBlock implements ITertiaryInterac
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		return state.getValue(IS_DROPPED) ? droppedShapes.get(state.getValue(HORIZONTAL_FACING)) : shapes.get(state.getValue(HORIZONTAL_FACING));
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
 		builder.add(IS_DROPPED);
 	}
 
 	@Override
-	public boolean hasInteraction(IBlockReader world, BlockPos pos, BlockState state, PlayerEntity palyer) {
+	public boolean hasInteraction(BlockGetter world, BlockPos pos, BlockState state, Player palyer) {
 		return true;
 	}
 
 	@Override
-	public void executeInteraction(World world, BlockPos pos, BlockState state, PlayerEntity palyer) {
+	public void executeInteraction(Level world, BlockPos pos, BlockState state, Player palyer) {
 		boolean isDropped = state.getValue(IS_DROPPED);
 		Direction dir = state.getValue(HORIZONTAL_FACING);
 
@@ -91,14 +89,14 @@ public class RopeAnchorBlock extends HFacedDecoBlock implements ITertiaryInterac
 	}
 
 	@Override
-	public ITextComponent getInteractionTooltip(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+	public TextComponent getInteractionTooltip(Level world, BlockPos pos, BlockState state, Player player) {
 		return state.getValue(IS_DROPPED) ?
-				new TranslationTextComponent("interaction.projectbrazier.rope_anchor.pull_up") :
-				new TranslationTextComponent("interaction.projectbrazier.rope_anchor.drop");
+				new TranslatableComponent("interaction.projectbrazier.rope_anchor.pull_up") :
+				new TranslatableComponent("interaction.projectbrazier.rope_anchor.drop");
 	}
 
 	@Override
-	public int getDurationInMS(World world, BlockPos pos, BlockState state) {
+	public int getDurationInMS(Level world, BlockPos pos, BlockState state) {
 		return state.getValue(IS_DROPPED) ? 750 : 500;
 	}
 }

@@ -1,10 +1,10 @@
 package net.dark_roleplay.projectbrazier.util.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,6 +39,6 @@ public final class VoxelShapeHelper {
 
 		});
 
-		return rotatedShapes.stream().reduce((v1, v2) -> {return VoxelShapes.join(v1, v2, IBooleanFunction.OR);}).get();
+		return rotatedShapes.stream().reduce((v1, v2) -> {return Shapes.join(v1, v2, BooleanOp.OR);}).get();
 	}
 }

@@ -3,8 +3,8 @@ package net.dark_roleplay.projectbrazier.feature.registrars;
 import net.dark_roleplay.projectbrazier.experimental_features.immersive_screen.CameraEntity;
 import net.dark_roleplay.projectbrazier.util.sitting.SittableEntity;
 import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.entity.EntityType;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 public class BrazierEntities extends Registrar {

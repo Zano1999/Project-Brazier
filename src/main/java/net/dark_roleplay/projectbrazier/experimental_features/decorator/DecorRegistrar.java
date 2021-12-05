@@ -4,7 +4,7 @@ import net.dark_roleplay.projectbrazier.ProjectBrazier;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.capability.DecorContainer;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.capability.DecorContainerProvider;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.capability.DecorContainerStorage;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;

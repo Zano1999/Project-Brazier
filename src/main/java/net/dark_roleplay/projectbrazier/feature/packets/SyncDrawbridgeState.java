@@ -2,10 +2,10 @@ package net.dark_roleplay.projectbrazier.feature.packets;
 
 import net.dark_roleplay.projectbrazier.experimental_features.drawbridges.DrawbridgeAnchorTileEntity;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -23,13 +23,13 @@ public class SyncDrawbridgeState {
 		this.pos = te.getBlockPos();
 	}
 
-	public static void encode(SyncDrawbridgeState pkt, PacketBuffer buffer){
+	public static void encode(SyncDrawbridgeState pkt, FriendlyByteBuf buffer){
 		buffer.writeBlockPos(pkt.pos);
 		buffer.writeFloat(pkt.angle);
 		buffer.writeInt(pkt.state.getID());
 	}
 
-	public static SyncDrawbridgeState decode(PacketBuffer buffer){
+	public static SyncDrawbridgeState decode(FriendlyByteBuf buffer){
 		SyncDrawbridgeState pkt = new SyncDrawbridgeState();
 		pkt.pos = buffer.readBlockPos();
 		pkt.angle = buffer.readFloat();
@@ -41,7 +41,7 @@ public class SyncDrawbridgeState {
 	public static void handle(SyncDrawbridgeState pkt, Supplier<NetworkEvent.Context> ctxSupplier){
 		NetworkEvent.Context ctx = ctxSupplier.get();
 		ctx.enqueueWork(() -> {
-			TileEntity te = Minecraft.getInstance().level.getBlockEntity(pkt.pos);
+			BlockEntity te = Minecraft.getInstance().level.getBlockEntity(pkt.pos);
 			if(te != null && te instanceof DrawbridgeAnchorTileEntity){
 				DrawbridgeAnchorTileEntity anchorTe = (DrawbridgeAnchorTileEntity) te;
 				anchorTe.setAngle(pkt.angle);

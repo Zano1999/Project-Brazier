@@ -1,17 +1,17 @@
 package net.dark_roleplay.projectbrazier.util.capabilities;
 
 import net.dark_roleplay.projectbrazier.util.CapabilityUtil;
+import net.minecraft.core.BlockPos;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 
 public class ItemHandlerUtil {
 
-	public static void dropContainerItems(World world, BlockPos pos) {
-		TileEntity tileEntity = world.getBlockEntity(pos);
+	public static void dropContainerItems(Level world, BlockPos pos) {
+		BlockEntity tileEntity = world.getBlockEntity(pos);
 		if(tileEntity == null) return;
 
 		LazyOptional<IItemHandler> inventory = CapabilityUtil.getInventory(world, pos);

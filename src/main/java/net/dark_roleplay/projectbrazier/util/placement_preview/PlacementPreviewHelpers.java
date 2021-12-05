@@ -5,11 +5,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -25,9 +25,9 @@ public class PlacementPreviewHelpers {
 	public static void preview(RenderWorldLastEvent event) {
 
 		Minecraft mc = Minecraft.getInstance();
-		if (mc.hitResult instanceof BlockRayTraceResult && mc.hitResult.getType() != RayTraceResult.Type.MISS) {
-			BlockRayTraceResult rayTrace = (BlockRayTraceResult) mc.hitResult;
-			PlayerEntity player = mc.player;
+		if (mc.hitResult instanceof BlockHitResult && mc.hitResult.getType() != HitResult.Type.MISS) {
+			BlockHitResult rayTrace = (BlockHitResult) mc.hitResult;
+			Player player = mc.player;
 			ItemStack held = player.getMainHandItem();
 			if (held.getItem() instanceof BlockItem) {
 				BlockItem theBlockItem = (BlockItem) held.getItem();

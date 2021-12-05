@@ -1,26 +1,26 @@
 package net.dark_roleplay.projectbrazier.feature_client.blocks;
 
 import net.dark_roleplay.projectbrazier.feature.blocks.WallBurningBlock;
-import net.minecraft.block.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.Direction;
 import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.Level;
 
 import java.util.Random;
 
 public class DisplayTickers {
-	public static void animateSoulTorchHolder(BlockState state, World world, BlockPos pos, Random rand){
+	public static void animateSoulTorchHolder(BlockState state, Level world, BlockPos pos, Random rand){
 		animatedTypedTorchHolder(state, world, pos, rand, ParticleTypes.SOUL_FIRE_FLAME);
 	}
 
-	public static void animateTorchHolder(BlockState state, World world, BlockPos pos, Random rand){
+	public static void animateTorchHolder(BlockState state, Level world, BlockPos pos, Random rand){
 		animatedTypedTorchHolder(state, world, pos, rand, ParticleTypes.FLAME);
 	}
 
-	private static void animatedTypedTorchHolder(BlockState state, World world, BlockPos pos, Random rand, IParticleData data){
+	private static void animatedTypedTorchHolder(BlockState state, Level world, BlockPos pos, Random rand, IParticleData data){
 		if(!state.getValue(WallBurningBlock.BURNING)) return;
 		Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
 		Direction dirOpp = dir.getOpposite();
@@ -37,7 +37,7 @@ public class DisplayTickers {
 		world.addParticle(data, x + d0 * (double)dirOpp.getStepX(), y + d1, z + d2 * (double)dirOpp.getStepZ(), 0.0D, 0.0D, 0.0D);
 	}
 
-	public static void animatedWallCandleHolder(BlockState state, World world, BlockPos pos, Random rand){
+	public static void animatedWallCandleHolder(BlockState state, Level world, BlockPos pos, Random rand){
 		if(!state.getValue(WallBurningBlock.BURNING)) return;
 		Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
 		Direction dirOpp = dir.getOpposite();
@@ -55,7 +55,7 @@ public class DisplayTickers {
 		world.addParticle(ParticleTypes.FLAME, x + d0 * (double)dirOpp.getStepX(), y + d1, z + d2 * (double)dirOpp.getStepZ(), 0.0D, 0.0D, 0.0D);
 	}
 
-	public static void animatedCandleHolder(BlockState state, World world, BlockPos pos, Random rand){
+	public static void animatedCandleHolder(BlockState state, Level world, BlockPos pos, Random rand){
 		if(!state.getValue(WallBurningBlock.BURNING)) return;
 
 		double x = pos.getX() + 0.5F;

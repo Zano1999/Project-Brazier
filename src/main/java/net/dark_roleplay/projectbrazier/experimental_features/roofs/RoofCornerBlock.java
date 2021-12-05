@@ -1,12 +1,10 @@
 package net.dark_roleplay.projectbrazier.experimental_features.roofs;
 
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.HFacedDecoBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer;
-
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
 
 public class RoofCornerBlock extends HFacedDecoBlock {
 
@@ -17,7 +15,7 @@ public class RoofCornerBlock extends HFacedDecoBlock {
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
 		builder.add(SEC_TYPE);
 	}

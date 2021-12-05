@@ -5,14 +5,14 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ActiveRenderInfo;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.util.math.vector.*;
+import net.minecraft.world.phys.Vec3;
 
 public class RenderUtils {
 
-	public static Vector3d getCameraPos(){
+	public static Vec3 getCameraPos(){
 		return Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
 	}
 
@@ -44,7 +44,7 @@ public class RenderUtils {
 		return projectionMatrix;
 	}
 
-	public static Pair<Vector3d, Vector3d> screenToWorldSpaceRay(float partialTicks){
+	public static Pair<Vec3, Vec3> screenToWorldSpaceRay(float partialTicks){
 		double sWidth = Minecraft.getInstance().getWindow().getScreenWidth();
 		double sHeight = Minecraft.getInstance().getWindow().getScreenHeight();
 		double mouseX = Minecraft.getInstance().mouseHandler.xpos();
@@ -66,16 +66,16 @@ public class RenderUtils {
 			throw new IllegalArgumentException("Received invalid Projection View Matrix, this shouldn't happen!");
 		rayEnd.perspectiveDivide();
 
-		Vector3d rayOrigin3 = new Vector3d(rayOrigin.x(), rayOrigin.y(), rayOrigin.z());
-		Vector3d rayEnd3 = new Vector3d(rayEnd.x(), rayEnd.y(), rayEnd.z());
-		Vector3d ray = rayEnd3.subtract(rayOrigin3).normalize().reverse();
+		Vec3 rayOrigin3 = new Vec3(rayOrigin.x(), rayOrigin.y(), rayOrigin.z());
+		Vec3 rayEnd3 = new Vec3(rayEnd.x(), rayEnd.y(), rayEnd.z());
+		Vec3 ray = rayEnd3.subtract(rayOrigin3).normalize().reverse();
 
 		return Pair.of(rayOrigin3, ray);
 	}
 
-	public static Pair<Vector2f, Boolean> worldToScreenSpace(Vector3d worldPos, float partialTicks, boolean useScaledGuiSize){
+	public static Pair<Vector2f, Boolean> worldToScreenSpace(Vec3 worldPos, float partialTicks, boolean useScaledGuiSize){
 		Minecraft mc = Minecraft.getInstance();
-		Vector3d cameraPos = getCameraPos();
+		Vec3 cameraPos = getCameraPos();
 
 		Vector3f newWorldPos = new Vector3f((float) (worldPos.x - cameraPos.x), (float)(worldPos.y - cameraPos.y), (float)(worldPos.z - cameraPos.z));
 
@@ -83,15 +83,15 @@ public class RenderUtils {
 		rotation.conj();
 		newWorldPos.transform(rotation);
 
-		if (mc.options.bobView && getRenderInfo().getEntity() instanceof PlayerEntity) {
-			PlayerEntity playerentity = (PlayerEntity) getRenderInfo().getEntity();
+		if (mc.options.bobView && getRenderInfo().getEntity() instanceof Player) {
+			Player playerentity = (Player) getRenderInfo().getEntity();
 			float f = playerentity.walkDist - playerentity.walkDistO;
 			float f1 = -(playerentity.walkDist + f * partialTicks);
-			float f2 = MathHelper.lerp(partialTicks, playerentity.oBob, playerentity.bob);
+			float f2 = Mth.lerp(partialTicks, playerentity.oBob, playerentity.bob);
 
-			newWorldPos.transform(Vector3f.XN.rotationDegrees(Math.abs(MathHelper.cos(f1 * (float)Math.PI - 0.2F) * f2) * 5.0F));
-			newWorldPos.transform(Vector3f.ZN.rotationDegrees(MathHelper.sin(f1 * (float)Math.PI) * f2 * 3.0F));
-			newWorldPos.add(new Vector3f(-MathHelper.sin(f1 * (float)Math.PI) * f2 * 0.5F, -Math.abs(MathHelper.cos(f1 * (float)Math.PI) * f2), 0.0F));
+			newWorldPos.transform(Vector3f.XN.rotationDegrees(Math.abs(Mth.cos(f1 * (float)Math.PI - 0.2F) * f2) * 5.0F));
+			newWorldPos.transform(Vector3f.ZN.rotationDegrees(Mth.sin(f1 * (float)Math.PI) * f2 * 3.0F));
+			newWorldPos.add(new Vector3f(-Mth.sin(f1 * (float)Math.PI) * f2 * 0.5F, -Math.abs(Mth.cos(f1 * (float)Math.PI) * f2), 0.0F));
 		}
 
 		float half_height = (float) (useScaledGuiSize ? mc.getWindow().getGuiScaledHeight() : mc.getWindow().getScreenHeight()) / 2;

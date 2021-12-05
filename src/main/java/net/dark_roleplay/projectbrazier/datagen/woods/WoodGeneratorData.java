@@ -1,7 +1,7 @@
 package net.dark_roleplay.projectbrazier.datagen.woods;
 
-import net.minecraft.block.Block;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.RegistryObject;
 
 public class WoodGeneratorData {
 	public final Block LOG;

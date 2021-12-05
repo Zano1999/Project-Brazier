@@ -5,23 +5,22 @@ import com.mojang.datafixers.util.Pair;
 import net.dark_roleplay.projectbrazier.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.IGuiEventListener;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.vector.Vector2f;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.util.text.StringTextComponent;
 
 public class RayTraceTestScreen extends Screen {
 
-	protected BlockRayTraceResult traceResult;
-	public static Vector3d hitPoint;
+	protected BlockHitResult traceResult;
+	public static Vec3 hitPoint;
 
 	public RayTraceTestScreen() {
 		super(new StringTextComponent("Debuuuug"));
-		Vector3d source = Minecraft.getInstance().player.position();
-		hitPoint = new Vector3d(source.x, source.y, source.z);
+		Vec3 source = Minecraft.getInstance().player.position();
+		hitPoint = new Vec3(source.x, source.y, source.z);
 	}
 
 	public void init(){
@@ -49,9 +48,9 @@ public class RayTraceTestScreen extends Screen {
 //		fill(matrixStack, posX, posY, posX + 10, posY + 10, 0xFFFFFFFF);
 //		fill(matrixStack, 0, 0, 1, 1, 0xFFFFFFFF);
 
-		Vector3d cameraCenter = RenderUtils.getCameraPos();
+		Vec3 cameraCenter = RenderUtils.getCameraPos();
 
-		Pair<Vector3d, Vector3d> ray = RenderUtils.screenToWorldSpaceRay(partialTicks);
+		Pair<Vec3, Vec3> ray = RenderUtils.screenToWorldSpaceRay(partialTicks);
 
 		RayTraceContext rtc = new RayTraceContext(
 				cameraCenter.add(ray.getFirst()),
@@ -63,5 +62,5 @@ public class RayTraceTestScreen extends Screen {
 		hitPoint = traceResult.getLocation();
 	}
 
-	public boolean clicked(int mouseButton, BlockRayTraceResult hit){ return false; }
+	public boolean clicked(int mouseButton, BlockHitResult hit){ return false; }
 }

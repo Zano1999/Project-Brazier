@@ -1,8 +1,8 @@
 package net.dark_roleplay.projectbrazier.util.blocks;
 
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class AxisVoxelShape {
 
@@ -29,7 +29,7 @@ public class AxisVoxelShape {
 			case Y:
 				return this.y;
 			default:
-				return VoxelShapes.block();
+				return Shapes.block();
 		}
 	}
 }

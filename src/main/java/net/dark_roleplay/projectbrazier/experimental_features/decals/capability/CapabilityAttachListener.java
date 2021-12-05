@@ -1,9 +1,9 @@
 package net.dark_roleplay.projectbrazier.experimental_features.decals.capability;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
@@ -28,7 +28,7 @@ public class CapabilityAttachListener {
 		event.addCapability(DecalCapabilityKey, new DecalChunkProvider(0, event.getObject().getMaxBuildHeight()));
 	}
 
-	public static class DecalChunkProvider implements ICapabilitySerializable<CompoundNBT> {
+	public static class DecalChunkProvider implements ICapabilitySerializable<CompoundTag> {
 		//TODO Invalidate cap on chunk unload
 		private DecalChunk cap;
 		private final LazyOptional<DecalChunk> lazyCap;
@@ -47,13 +47,13 @@ public class CapabilityAttachListener {
 		}
 
 		@Override
-		public CompoundNBT serializeNBT() {
-			if (cap == null) return new CompoundNBT();
-			return (CompoundNBT) DECAL_CAPABILITY.writeNBT(cap, null);
+		public CompoundTag serializeNBT() {
+			if (cap == null) return new CompoundTag();
+			return (CompoundTag) DECAL_CAPABILITY.writeNBT(cap, null);
 		}
 
 		@Override
-		public void deserializeNBT(CompoundNBT nbt) {
+		public void deserializeNBT(CompoundTag nbt) {
 			if (nbt.isEmpty()) return;
 			cap = DECAL_CAPABILITY.getDefaultInstance();
 			DECAL_CAPABILITY.readNBT(cap, null, nbt);

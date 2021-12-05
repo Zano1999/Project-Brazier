@@ -1,6 +1,6 @@
 package net.dark_roleplay.projectbrazier.experimental_features.decorator;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class Decor extends ForgeRegistryEntry<Decor>{

@@ -1,36 +1,36 @@
 package net.dark_roleplay.projectbrazier.util.sitting;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.Direction;
 import net.minecraft.entity.*;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.IPacket;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.util.TransportationHelper;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 
 public class SittableEntity extends Entity {
 
 	private BlockState requiredBlock;
 
-	public SittableEntity(EntityType type, World world) {
+	public SittableEntity(EntityType type, Level world) {
 		super(type, world);
 		this.noPhysics = true;
 		this.requiredBlock = Blocks.AIR.defaultBlockState();
 	}
 
-	public SittableEntity(EntityType<SittableEntity> type, World world, double x, double y, double z, double yOffset, boolean requireBlock) {
+	public SittableEntity(EntityType<SittableEntity> type, Level world, double x, double y, double z, double yOffset, boolean requireBlock) {
 		this(type, world);
 		setPos(x, y + yOffset, z);
 		if (requireBlock)
@@ -62,17 +62,17 @@ public class SittableEntity extends Entity {
 	protected void applyYawToEntity(Entity entityToUpdate) {
 		if (this.xRot < 89 || this.xRot > 91) return;
 		entityToUpdate.setYBodyRot(this.yRot);
-		float f = MathHelper.wrapDegrees(entityToUpdate.yRot - this.yRot);
-		float f1 = MathHelper.clamp(f, -105.0F, 105.0F);
+		float f = Mth.wrapDegrees(entityToUpdate.yRot - this.yRot);
+		float f1 = Mth.clamp(f, -105.0F, 105.0F);
 		entityToUpdate.yRotO += f1 - f;
 		entityToUpdate.yRot += f1 - f;
 		entityToUpdate.setYHeadRot(entityToUpdate.yRot);
 	}
 
 	@Override
-	protected Vector3d limitPistonMovement(Vector3d pos) {
-		Vector3d val = limitPistonMovement(pos);
-		if(val != Vector3d.ZERO)
+	protected Vec3 limitPistonMovement(Vec3 pos) {
+		Vec3 val = limitPistonMovement(pos);
+		if(val != Vec3.ZERO)
 			this.remove();
 		return val;
 	}
@@ -93,12 +93,12 @@ public class SittableEntity extends Entity {
 	}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundNBT compound) {
+	protected void readAdditionalSaveData(CompoundTag compound) {
 		NBTUtil.readBlockState(compound.getCompound("requiredBlock"));
 	}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundNBT compound) {
+	protected void addAdditionalSaveData(CompoundTag compound) {
 		compound.put("requiredBlock", NBTUtil.writeBlockState(this.requiredBlock));
 	}
 
@@ -115,8 +115,8 @@ public class SittableEntity extends Entity {
 	}
 
 	@Override
-	public Vector3d getDismountLocationForPassenger(LivingEntity rider) {
-		World world = this.getCommandSenderWorld();
+	public Vec3 getDismountLocationForPassenger(LivingEntity rider) {
+		Level world = this.getCommandSenderWorld();
 		BlockPos pos = this.blockPosition();
 		BlockState stateAtPos = world.getBlockState(pos);
 
@@ -140,13 +140,13 @@ public class SittableEntity extends Entity {
 				isValidDismountPosition(world, testPos.setWithOffset(pos, dir.getCounterClockWise()), rider) ||
 				isValidDismountPosition(world, testPos.setWithOffset(pos, dir.getOpposite()), rider)
 		)){
-			return new Vector3d(testPos.getX() + 0.5, testPos.getY() + 0.5, testPos.getZ() + 0.5);
+			return new Vec3(testPos.getX() + 0.5, testPos.getY() + 0.5, testPos.getZ() + 0.5);
 		}
 
-		return new Vector3d(this.getX(), this.getBoundingBox().maxY + 1, this.getZ());
+		return new Vec3(this.getX(), this.getBoundingBox().maxY + 1, this.getZ());
 	}
 
-	private boolean isValidDismountPosition(World world, BlockPos pos, Entity entity){
+	private boolean isValidDismountPosition(Level world, BlockPos pos, Entity entity){
 		return world.getBlockState(pos).isAir(world, pos) && world.getBlockState(pos.below()).entityCanStandOnFace(world, pos, entity, Direction.UP);
 	}
 }

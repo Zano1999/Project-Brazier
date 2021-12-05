@@ -1,8 +1,8 @@
 package net.dark_roleplay.projectbrazier.util.blocks;
 
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
 
 public class HFacedVoxelShape {
 
@@ -26,7 +26,7 @@ public class HFacedVoxelShape {
 			case WEST:
 				return this.west;
 			default:
-				return VoxelShapes.block();
+				return Shapes.block();
 		}
 	}
 }

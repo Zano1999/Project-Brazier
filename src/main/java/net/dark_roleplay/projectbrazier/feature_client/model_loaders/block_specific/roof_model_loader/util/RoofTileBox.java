@@ -3,7 +3,7 @@ package net.dark_roleplay.projectbrazier.feature_client.model_loaders.block_spec
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.util.AdvancedModelBox;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
 import net.minecraft.util.math.vector.*;
 
 import java.util.ArrayList;

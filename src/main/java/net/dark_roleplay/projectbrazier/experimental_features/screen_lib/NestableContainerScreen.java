@@ -5,9 +5,9 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.IRenderable;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.Container;
+import net.minecraft.network.chat.TextComponent;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class NestableContainerScreen<T extends Container> extends ContainerScree
 
 	protected final List<IRenderable> renderChildren = Lists.newArrayList();
 
-	protected NestableContainerScreen(T screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+	protected NestableContainerScreen(T screenContainer, Inventory inv, TextComponent titleIn) {
 		super(screenContainer, inv, titleIn);
 	}
 

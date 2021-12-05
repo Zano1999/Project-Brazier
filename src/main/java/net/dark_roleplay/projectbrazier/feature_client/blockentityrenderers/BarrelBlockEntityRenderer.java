@@ -11,8 +11,8 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -43,7 +43,7 @@ public class BarrelBlockEntityRenderer extends TileEntityRenderer <BarrelBlockEn
 
 		IVertexBuilder builder = buffer.getBuffer(RenderType.translucentMovingBlock());
 
-		createQuad(matrix.last().pose(), builder, MathHelper.lerp(content/maxCapacity, 0.125F, 0.875F), fluidSprite, combinedLight, fluid.getFluid().getAttributes().getColor());
+		createQuad(matrix.last().pose(), builder, Mth.lerp(content/maxCapacity, 0.125F, 0.875F), fluidSprite, combinedLight, fluid.getFluid().getAttributes().getColor());
 	}
 
 	private void createQuad(Matrix4f matrix, IVertexBuilder builder, float verticalOffset, TextureAtlasSprite sprite, int light, int color){

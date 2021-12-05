@@ -1,13 +1,13 @@
 package net.dark_roleplay.projectbrazier.util.blocks;
 
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.util.Direction;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.util.StringRepresentable;
 
 public class BrazierStateProperties {
 
@@ -15,7 +15,7 @@ public class BrazierStateProperties {
 	public static final BooleanProperty HIDDEN_LEVER = BooleanProperty.create("hidden_lever");
 
 
-	public enum MultiFacing implements IStringSerializable {
+	public enum MultiFacing implements StringRepresentable {
 		NORTH("north", false, Direction.NORTH),
 		NORTH_EAST("north_east", true, Direction.NORTH),
 		EAST("east", false, Direction.EAST),
@@ -49,7 +49,7 @@ public class BrazierStateProperties {
 		}
 
 		public static MultiFacing byAngle(float angle){
-			return values()[MathHelper.floor(angle / 45.0D + 0.5D) & 7];
+			return values()[Mth.floor(angle / 45.0D + 0.5D) & 7];
 		}
 
 		public MultiFacing rotate(Rotation rot){

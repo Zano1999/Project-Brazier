@@ -6,8 +6,8 @@ import net.dark_roleplay.projectbrazier.experimental_features.crafting.recipes.R
 import net.dark_roleplay.projectbrazier.experimental_features.screen_lib.NestedWidget;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.button.ImageButton;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;

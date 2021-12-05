@@ -1,20 +1,20 @@
 package net.dark_roleplay.projectbrazier.experimental_features.immersive_screen;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.IPacket;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.network.NetworkHooks;
 
 public class CameraEntity extends Entity {
-	public CameraEntity(EntityType<CameraEntity> type, World worldIn) {
+	public CameraEntity(EntityType<CameraEntity> type, Level worldIn) {
 		super(type, worldIn);
 	}
 
-	public void setup(Vector3d pos, Vector3f rotation){
+	public void setup(Vec3 pos, Vector3f rotation){
 		this.absMoveTo(pos.x(), pos.y(), pos.z(), rotation.x(), rotation.y());
 	}
 
@@ -22,10 +22,10 @@ public class CameraEntity extends Entity {
 	protected void defineSynchedData() {}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundNBT compound) {}
+	protected void readAdditionalSaveData(CompoundTag compound) {}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundNBT compound) {}
+	protected void addAdditionalSaveData(CompoundTag compound) {}
 
 	@Override
 	public IPacket<?> getAddEntityPacket() {

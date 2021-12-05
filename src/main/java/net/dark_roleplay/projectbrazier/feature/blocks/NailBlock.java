@@ -2,24 +2,22 @@ package net.dark_roleplay.projectbrazier.feature.blocks;
 
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.WallHFacedDecoBlock;
 import net.dark_roleplay.projectbrazier.util.blocks.BrazierStateProperties;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class NailBlock extends WallHFacedDecoBlock {
 
@@ -32,25 +30,25 @@ public class NailBlock extends WallHFacedDecoBlock {
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockState mainState = super.getStateForPlacement(context);
 		return mainState != null ? mainState.setValue(HIDDEN_LEVER, false) : null;
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
 		builder.add(HIDDEN_LEVER);
 	}
 
 	@Deprecated
 	@Override
-	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		ItemStack held = player.getItemInHand(hand);
 
 		HangingItemBlock replacement = getReplacement(held.getItem());
-		if(replacement == null) return ActionResultType.PASS;
-		if(world.isClientSide()) return ActionResultType.SUCCESS;
+		if(replacement == null) return InteractionResult.PASS;
+		if(world.isClientSide()) return InteractionResult.SUCCESS;
 
 		BlockState state2 = replacement.defaultBlockState().setValue(HORIZONTAL_FACING, state.getValue(HORIZONTAL_FACING)).setValue(HIDDEN_LEVER, state.getValue(HIDDEN_LEVER));
 
@@ -66,7 +64,7 @@ public class NailBlock extends WallHFacedDecoBlock {
 			else player.setItemInHand(hand, newStack );
 		}
 
-		return ActionResultType.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 
 	public static HangingItemBlock getReplacement(Item item) {

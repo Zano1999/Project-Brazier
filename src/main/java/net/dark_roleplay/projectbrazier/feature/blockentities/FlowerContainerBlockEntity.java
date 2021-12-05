@@ -7,15 +7,15 @@ import net.dark_roleplay.projectbrazier.feature.blocks.FlowerContainerData;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
 import net.dark_roleplay.projectbrazier.feature_client.blocks.CFlowerContainerHelper;
 import net.dark_roleplay.projectbrazier.util.blocks.ChunkRenderUtils;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.vector.Vector3i;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.Vec3i;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.network.Connection;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.DistExecutor;
@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlowerContainerBlockEntity extends TileEntity {
+public class FlowerContainerBlockEntity extends BlockEntity {
 
 	protected final int flowerCount;
 	protected List<FlowerContainerData> flowers;
@@ -48,7 +48,7 @@ public class FlowerContainerBlockEntity extends TileEntity {
 		return ImmutableList.copyOf(flowers);
 	}
 
-	public ItemStack addFlower(ItemStack stack, Vector3i offset){
+	public ItemStack addFlower(ItemStack stack, Vec3i offset){
 		for(int i = 0; i < flowers.size(); i++){
 			FlowerContainerData flower = flowers.get(i);
 			if(flower.getFlower().isEmpty()){
@@ -82,11 +82,11 @@ public class FlowerContainerBlockEntity extends TileEntity {
 
 	//region (De-)Serialization
 	@Override
-	public void load(BlockState state, CompoundNBT compound) {
+	public void load(BlockState state, CompoundTag compound) {
 		super.load(state, compound);
 
 		if(!compound.contains("flowers")) return;
-		ListNBT flowers = compound.getList("flowers", Constants.NBT.TAG_COMPOUND);
+		ListTag flowers = compound.getList("flowers", Constants.NBT.TAG_COMPOUND);
 
 		for(int i = 0; i < flowers.size(); i++)
 			if(!flowers.getCompound(i).isEmpty())
@@ -99,10 +99,10 @@ public class FlowerContainerBlockEntity extends TileEntity {
 	}
 
 	@Override
-	public CompoundNBT save(CompoundNBT compound) {
+	public CompoundTag save(CompoundTag compound) {
 		super.save(compound);
 
-		ListNBT flowers = new ListNBT();
+		ListTag flowers = new ListTag();
 		for(FlowerContainerData flower : this.getFlowerData())
 			flowers.add(flower.serialize());
 
@@ -114,22 +114,22 @@ public class FlowerContainerBlockEntity extends TileEntity {
 	//region Server -> Client Sync
 	@Override
 	@Nullable
-	public SUpdateTileEntityPacket getUpdatePacket() {
-		return new SUpdateTileEntityPacket(this.getBlockPos(), 1, this.save(new CompoundNBT()));
+	public ClientboundBlockEntityDataPacket getUpdatePacket() {
+		return new ClientboundBlockEntityDataPacket(this.getBlockPos(), 1, this.save(new CompoundTag()));
 	}
 
 	@Override
-	public CompoundNBT getUpdateTag() {
-		return this.save(new CompoundNBT());
+	public CompoundTag getUpdateTag() {
+		return this.save(new CompoundTag());
 	}
 
 
 	@Override
-	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt){
+	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt){
 		this.load(null, pkt.getTag());
 		requestModelDataUpdate();
 		if(this.getLevel().isClientSide())
-			ChunkRenderUtils.rerenderChunk((ClientWorld) this.getLevel(), this.getBlockPos());
+			ChunkRenderUtils.rerenderChunk((ClientLevel) this.getLevel(), this.getBlockPos());
 	}
 	//endregion
 

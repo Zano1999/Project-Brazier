@@ -1,6 +1,5 @@
 package net.dark_roleplay.projectbrazier;
 
-import com.google.common.eventbus.EventBus;
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.BuiltinMixedModel;
 import net.dark_roleplay.projectbrazier.experimental_features.crafting.screens.CraftingScreen;
@@ -23,23 +22,22 @@ import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybind
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.sitting.SittableEntity;
 import net.dark_roleplay.projectbrazier.util.sitting.SittableEntityRenderer;
-import net.minecraft.block.Block;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.GrassColors;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -143,8 +141,8 @@ public class ProjectBrazierClient {
 
 	public static void registerItemOverrides(){
 		ItemModelsProperties.register(BrazierItems.STONE_ARROW_SLIT.get(), new ResourceLocation(ProjectBrazier.MODID, "variant"), (stack, world, entity) -> {
-			if (entity != null && entity instanceof PlayerEntity)
-				return ((SelectiveBlockItem)stack.getItem()).getCurrentIndex(((PlayerEntity) entity).getGameProfile());
+			if (entity != null && entity instanceof Player)
+				return ((SelectiveBlockItem)stack.getItem()).getCurrentIndex(((Player) entity).getGameProfile());
 			return 0;
 		});
 

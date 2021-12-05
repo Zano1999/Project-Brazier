@@ -4,35 +4,32 @@ import net.dark_roleplay.projectbrazier.feature.blocks.templates.WallHFacedDecoB
 import net.dark_roleplay.projectbrazier.feature.blockentities.HangingItemBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlocks;
-import net.dark_roleplay.projectbrazier.util.CapabilityUtil;
 import net.dark_roleplay.projectbrazier.util.Inventories;
 import net.dark_roleplay.projectbrazier.util.blocks.BrazierStateProperties;
 import net.dark_roleplay.projectbrazier.util.capabilities.ItemHandlerUtil;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class HangingItemBlock extends WallHFacedDecoBlock {
 
@@ -46,12 +43,12 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return super.getStateForPlacement(context).setValue(HIDDEN_LEVER, false);
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
 		builder.add(HIDDEN_LEVER);
 	}
@@ -62,24 +59,24 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 	}
 
 	@Override
-	public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player){
+	public ItemStack getPickBlock(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player){
 		return this.getItemStack(world, pos, state);
 	}
 
 	@Override
 	@Deprecated
-	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if(player.isCreative()){
 			setItemStack(world, pos, state, ItemStack.EMPTY);
-			return ActionResultType.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
 
 		ItemStack result = Inventories.givePlayerItem(player, getItemStack(world, pos, state), hand, true);
 		if(result.isEmpty()){
 			setItemStack(world, pos, state, ItemStack.EMPTY);
-			return ActionResultType.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
-		return ActionResultType.PASS;
+		return InteractionResult.PASS;
 	}
 
 	@Deprecated
@@ -89,24 +86,24 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 
 	@Override
 	@Deprecated
-	public int getSignal(BlockState state, IBlockReader blockAccess, BlockPos pos, Direction side) {
+	public int getSignal(BlockState state, BlockGetter blockAccess, BlockPos pos, Direction side) {
 		return !this.isSignalSource(state) ? 0 : power;
 	}
 
 	@Override
 	@Deprecated
-	public int getDirectSignal(BlockState state, IBlockReader blockAccess, BlockPos pos, Direction side) {
+	public int getDirectSignal(BlockState state, BlockGetter blockAccess, BlockPos pos, Direction side) {
 		return !this.isSignalSource(state) ? 0 : (state.getValue(HORIZONTAL_FACING) == side) ? power : 0;
 	}
 
 	@Nullable
 	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+	public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
 		return BrazierBlockEntities.SINGLE_ITEM_STORAGE.get().create();
 	}
 
 	@Override
-	public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock()))
 			ItemHandlerUtil.dropContainerItems(world, pos);
 
@@ -119,13 +116,13 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 		}
 	}
 
-	public void updateNeighbors(BlockState state, World world, BlockPos pos) {
+	public void updateNeighbors(BlockState state, Level world, BlockPos pos) {
 		world.updateNeighborsAt(pos, this);
 		world.updateNeighborsAt(pos.relative(state.getValue(HORIZONTAL_FACING).getOpposite()), this);
 	}
 
-	public ItemStack setItemStack(World world, BlockPos pos, BlockState state, ItemStack stack){
-		TileEntity te = world.getBlockEntity(pos);
+	public ItemStack setItemStack(Level world, BlockPos pos, BlockState state, ItemStack stack){
+		BlockEntity te = world.getBlockEntity(pos);
 		if(!(te instanceof HangingItemBlockEntity)) return stack;
 
 		LazyOptional<IItemHandler> inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
@@ -146,8 +143,8 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 		return handler.insertItem(0, stack, false);
 	}
 
-	public ItemStack getItemStack(IBlockReader world, BlockPos pos, BlockState state){
-		TileEntity te = world.getBlockEntity(pos);
+	public ItemStack getItemStack(BlockGetter world, BlockPos pos, BlockState state){
+		BlockEntity te = world.getBlockEntity(pos);
 		if(!(te instanceof HangingItemBlockEntity)) return ItemStack.EMPTY;
 
 		LazyOptional<IItemHandler> inventory = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);

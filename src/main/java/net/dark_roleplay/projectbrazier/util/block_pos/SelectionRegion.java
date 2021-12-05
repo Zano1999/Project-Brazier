@@ -1,11 +1,11 @@
 package net.dark_roleplay.projectbrazier.util.block_pos;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NBTUtil;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.INBTSerializable;
 
-public class SelectionRegion implements INBTSerializable<CompoundNBT> {
+public class SelectionRegion implements INBTSerializable<CompoundTag> {
 
     private BlockPos start;
     private BlockPos target;
@@ -73,8 +73,8 @@ public class SelectionRegion implements INBTSerializable<CompoundNBT> {
     }
 
     @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT tag = new CompoundNBT();
+    public CompoundTag serializeNBT() {
+        CompoundTag tag = new CompoundTag();
 
         if(this.start != null)
             tag.put("S", NBTUtil.writeBlockPos(this.start));
@@ -85,7 +85,7 @@ public class SelectionRegion implements INBTSerializable<CompoundNBT> {
     }
 
     @Override
-    public void deserializeNBT(CompoundNBT nbt) {
+    public void deserializeNBT(CompoundTag nbt) {
         if(nbt.contains("S"))
             this.start = NBTUtil.readBlockPos(nbt.getCompound("S"));
         if(nbt.contains("T"))

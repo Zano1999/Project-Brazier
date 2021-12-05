@@ -5,7 +5,7 @@ import net.dark_roleplay.projectbrazier.experimental_features.decorator.packets.
 import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItemPacket;
 import net.dark_roleplay.projectbrazier.feature.packets.TertiaryInteractionPacket;
 import net.dark_roleplay.projectbrazier.feature.packets.SyncDrawbridgeState;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;

@@ -5,22 +5,17 @@ import net.dark_roleplay.projectbrazier.feature_client.model_loaders.axis_connec
 import net.dark_roleplay.projectbrazier.util.blocks.AxisVoxelShape;
 import net.dark_roleplay.projectbrazier.util.json.VoxelShapeLoader;
 import net.dark_roleplay.projectbrazier.util.sitting.SittingUtil;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 
 public class WoodBenchBlock extends HAxisDecoBlock {
 
@@ -38,7 +33,7 @@ public class WoodBenchBlock extends HAxisDecoBlock {
 
 	@Deprecated
 	@Override
-	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		Direction.Axis axis = state.getValue(HORIZONTAL_AXIS);
 
 		Direction facing = null;
@@ -52,18 +47,18 @@ public class WoodBenchBlock extends HAxisDecoBlock {
 
 		SittingUtil.sitOnBlock(world, pos, player, facing, -0.18F, state);
 
-		return ActionResultType.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override
 	@Deprecated
-	public VoxelShape getOcclusionShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	public VoxelShape getOcclusionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
 		return shapes.get(state.getValue(HORIZONTAL_AXIS));
 	}
 
 	//TODO Optimize getRaytraceShape
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		AxisConnectionType type = AxisConnectionType.getConnections(world, pos, state);
 		switch(type){
 			case DEFAULT:

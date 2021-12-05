@@ -2,15 +2,14 @@ package net.dark_roleplay.projectbrazier.experimental_features.walking_gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.dark_roleplay.projectbrazier.experimental_features.raytrace.RayTraceTestScreen;
-import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybinds;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class PassiveScreen  extends RayTraceTestScreen {
 
-	public static Vector3d hitPoint;
+	public static Vec3 hitPoint;
 
 	public PassiveScreen(){
 		this.passEvents = true;
@@ -33,8 +32,8 @@ public class PassiveScreen  extends RayTraceTestScreen {
 	}
 
 
-	public boolean clicked(int mouseButton, BlockRayTraceResult hit){
-		if(hit.getType() == RayTraceResult.Type.BLOCK){
+	public boolean clicked(int mouseButton, BlockHitResult hit){
+		if(hit.getType() == HitResult.Type.BLOCK){
 			return true;
 		}
 		return false;

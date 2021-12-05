@@ -4,17 +4,17 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
 import net.dark_roleplay.projectbrazier.feature.containers.GeneralContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
 public class GeneralContainerScreen extends ContainerScreen<GeneralContainer> {
 
 	private static final ResourceLocation BACKGROUND = new ResourceLocation(ProjectBrazier.MODID, "textures/screen/generic_container.png");
 
-	public GeneralContainerScreen(GeneralContainer container, PlayerInventory playerInventory, ITextComponent title) {
+	public GeneralContainerScreen(GeneralContainer container, Inventory playerInventory, TextComponent title) {
 		super(container, playerInventory, title);
 		this.imageHeight = (int) (112 + (Math.ceil(container.getTESlotCount()/9F) * 18));
 

@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierCreativeTabs;
 import net.minecraft.item.Food;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import net.minecraft.util.JSONUtils;
 
 import java.io.BufferedReader;

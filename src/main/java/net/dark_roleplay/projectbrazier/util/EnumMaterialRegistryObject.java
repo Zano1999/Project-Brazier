@@ -1,7 +1,7 @@
 package net.dark_roleplay.projectbrazier.util;
 
 import net.dark_roleplay.marg.common.material.MargMaterial;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.EnumMap;

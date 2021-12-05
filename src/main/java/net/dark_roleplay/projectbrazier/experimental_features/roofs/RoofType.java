@@ -1,9 +1,9 @@
 package net.dark_roleplay.projectbrazier.experimental_features.roofs;
 
 import net.dark_roleplay.projectbrazier.feature.registrars.IFancyNamer;
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.StringRepresentable;
 
-public enum RoofType implements IStringSerializable, IFancyNamer {
+public enum RoofType implements StringRepresentable, IFancyNamer {
 	NORMAL("normal", "%s", true),
 	SHALLOW_TOP("shallow_top", "shallow_%s_top", true),
 	SHALLOW_BOTTOM("shallow_bottom", "shallow_%s_bottom", true),

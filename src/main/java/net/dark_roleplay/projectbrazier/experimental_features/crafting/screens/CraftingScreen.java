@@ -3,24 +3,23 @@ package net.dark_roleplay.projectbrazier.experimental_features.crafting.screens;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
 import net.dark_roleplay.projectbrazier.experimental_features.crafting.containers.CraftingScreenPlayerContainer;
-import net.dark_roleplay.projectbrazier.experimental_features.crafting.recipes.Recipe;
 import net.dark_roleplay.projectbrazier.experimental_features.crafting.recipes.RecipeBuilder;
 import net.dark_roleplay.projectbrazier.experimental_features.crafting.widgets.RecipeOutputWidget;
 import net.dark_roleplay.projectbrazier.experimental_features.screen_lib.NestableContainerScreen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 
 public class CraftingScreen extends NestableContainerScreen<CraftingScreenPlayerContainer> {
 
 	private static final ResourceLocation BACKGROUND = new ResourceLocation(ProjectBrazier.MODID, "textures/screen/crafting/crafting_background.png");
 	private static final ResourceLocation WIDGETS = new ResourceLocation(ProjectBrazier.MODID, "textures/screen/crafting/crafting_widgets.png");
 
-	public CraftingScreen(CraftingScreenPlayerContainer screenContainer, PlayerInventory inv, ITextComponent title) {
+	public CraftingScreen(CraftingScreenPlayerContainer screenContainer, Inventory inv, TextComponent title) {
 		super(screenContainer, inv, title);
 		this.imageWidth = 322;
 		this.imageHeight = 166;

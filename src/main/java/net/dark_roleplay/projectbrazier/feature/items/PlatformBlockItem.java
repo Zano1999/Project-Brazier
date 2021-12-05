@@ -2,12 +2,9 @@ package net.dark_roleplay.projectbrazier.feature.items;
 
 import com.mojang.authlib.GameProfile;
 import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItem;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.BlockItemUseContext;
-
-import net.minecraft.item.Item.Properties;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.context.BlockPlaceContext;
 
 public class PlatformBlockItem extends SelectiveBlockItem {
 
@@ -19,7 +16,7 @@ public class PlatformBlockItem extends SelectiveBlockItem {
 	}
 
 	@Override
-	protected BlockState getStateForPlacement(BlockItemUseContext context) {
+	protected BlockState getStateForPlacement(BlockPlaceContext context) {
 		double hitY = context.getClickLocation().y() - context.getClickedPos().getY();
 		BlockState blockstate;
 		if(hitY > 0.5F)

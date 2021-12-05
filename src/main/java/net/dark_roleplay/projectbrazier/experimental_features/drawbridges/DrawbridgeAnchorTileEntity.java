@@ -5,20 +5,20 @@ import net.dark_roleplay.projectbrazier.feature.packets.SyncDrawbridgeState;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierPackets;
 import net.dark_roleplay.projectbrazier.util.blocks.VoxelShapeHelper;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.Direction;
 import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
 
-public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableTileEntity {
+public class DrawbridgeAnchorTileEntity extends BlockEntity implements ITickableTileEntity {
 
 	public DrawbridgeAnchorTileEntity(){
 		super(BrazierBlockEntities.DRAWBRODGE_ANCHOR.get());
@@ -35,10 +35,10 @@ public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableT
 	private Direction facing;
 
 	@Override
-	public CompoundNBT save(CompoundNBT compound) {
+	public CompoundTag save(CompoundTag compound) {
 		compound = super.save(compound);
 
-		CompoundNBT bridgeComp = new CompoundNBT();
+		CompoundTag bridgeComp = new CompoundTag();
 		bridgeComp.putInt("width", width);
 		bridgeComp.putInt("height", height);
 		bridgeComp.putFloat("angle", angle);
@@ -50,10 +50,10 @@ public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableT
 	}
 
 	@Override
-	public void load(BlockState state, CompoundNBT compound) {
+	public void load(BlockState state, CompoundTag compound) {
 		super.load(state, compound);
 
-		CompoundNBT bridgeComp = compound.getCompound("bridgeData");
+		CompoundTag bridgeComp = compound.getCompound("bridgeData");
 		width = bridgeComp.getInt("width");
 		height = bridgeComp.getInt("height");
 		angle = bridgeComp.getInt("angle");
@@ -64,13 +64,13 @@ public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableT
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public AxisAlignedBB getRenderBoundingBox() {
+	public AABB getRenderBoundingBox() {
 		return INFINITE_EXTENT_AABB;
 	}
 
 	@Override
-	public CompoundNBT getUpdateTag() {
-		return save(new CompoundNBT());
+	public CompoundTag getUpdateTag() {
+		return save(new CompoundTag());
 	}
 
 	public void startLowering() {
@@ -96,8 +96,8 @@ public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableT
 			removeCollisionBox();
 
 		if (!this.getLevel().isClientSide)
-			for (PlayerEntity player : this.getLevel().players()) {
-				BrazierPackets.CHANNEL.sendTo(pkt, ((ServerPlayerEntity) player).connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+			for (Player player : this.getLevel().players()) {
+				BrazierPackets.CHANNEL.sendTo(pkt, ((ServerPlayer) player).connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
 			}
 	}
 
@@ -148,13 +148,13 @@ public class DrawbridgeAnchorTileEntity extends TileEntity implements ITickableT
 		if (angle < 1) {
 			CollisionListener.addCollision(this,
 					VoxelShapeHelper.rotateShape(
-							VoxelShapes.box(1, 0.0625 * 10.5F, +1, width + 1, 1 - 0.09375, -height + 1), facing)
+							Shapes.box(1, 0.0625 * 10.5F, +1, width + 1, 1 - 0.09375, -height + 1), facing)
 							.move(this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ()
 							));
 		} else if (angle >= 1) {
 			CollisionListener.addCollision(this,
 					VoxelShapeHelper.rotateShape(
-							VoxelShapes.box(1, 0, 1 - 0.34375, width + 1, height, 1), facing)
+							Shapes.box(1, 0, 1 - 0.34375, width + 1, height, 1), facing)
 							.move(this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ()
 							));
 		}
