@@ -1,7 +1,7 @@
 package net.dark_roleplay.projectbrazier.experimental_features.selective_item_block;
 
 import com.mojang.authlib.GameProfile;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierPackets;
@@ -11,7 +11,7 @@ import net.dark_roleplay.projectbrazier.util.screens.ScreenTexture;
 import net.dark_roleplay.projectbrazier.util.screens.ScreenTextureWrapper;
 import net.dark_roleplay.projectbrazier.util.screens.TextureList;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.widget.list.KeyBindingList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.InputEvent;
@@ -21,7 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SelectiveBlockItemListeners extends AbstractGui {
+public class SelectiveBlockItemListeners extends GuiComponent {
 
 	private static Map<SelectiveBlockItem, ScreenTexture[][]> SELECTIVE_TEXTURES = new HashMap<>();
 
@@ -38,7 +38,7 @@ public class SelectiveBlockItemListeners extends AbstractGui {
 		int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
 		int height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
 
-		MatrixStack matrixStack = event.getMatrixStack();
+		PoseStack matrixStack = event.getMatrixStack();
 
 		int xOffset = (width - 30);
 		int yOffset = (height-70)/2;

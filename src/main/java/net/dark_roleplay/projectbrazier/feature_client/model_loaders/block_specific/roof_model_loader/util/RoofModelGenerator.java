@@ -1,12 +1,12 @@
 package net.dark_roleplay.projectbrazier.feature_client.model_loaders.block_specific.roof_model_loader.util;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.util.AdvancedModelBox;
-import net.minecraft.client.renderer.model.BakedQuad;
-import net.minecraft.client.renderer.model.RenderMaterial;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.client.resources.model.Material;
 
 import java.util.*;
 import java.util.function.Function;
@@ -33,7 +33,7 @@ public class RoofModelGenerator {
 	double sqrtC;
 	int tileOffset;
 
-	public RoofModelGenerator(double depth, double height, int shingleCount, Vector3f offset, int tileOffset, MatrixStack matrixStack, Function<RenderMaterial, TextureAtlasSprite> spriteGetter, Map<String, RenderMaterial> textures) {
+	public RoofModelGenerator(double depth, double height, int shingleCount, Vector3f offset, int tileOffset, PoseStack matrixStack, Function<Material, TextureAtlasSprite> spriteGetter, Map<String, Material> textures) {
 		double sqrC = depth * depth + height * height;
 		this.sqrtC = Math.sqrt(sqrC);
 		this.singleLengthPlank = sqrtC / shingleCount;

@@ -2,7 +2,7 @@ package net.dark_roleplay.projectbrazier.util.block_pos;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NBTUtil;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraftforge.common.util.INBTSerializable;
 
 public class SelectionRegion implements INBTSerializable<CompoundTag> {
@@ -77,9 +77,9 @@ public class SelectionRegion implements INBTSerializable<CompoundTag> {
         CompoundTag tag = new CompoundTag();
 
         if(this.start != null)
-            tag.put("S", NBTUtil.writeBlockPos(this.start));
+            tag.put("S", NbtUtils.writeBlockPos(this.start));
         if(this.target != null)
-            tag.put("T", NBTUtil.writeBlockPos(this.target));
+            tag.put("T", NbtUtils.writeBlockPos(this.target));
 
         return tag;
     }
@@ -87,9 +87,9 @@ public class SelectionRegion implements INBTSerializable<CompoundTag> {
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         if(nbt.contains("S"))
-            this.start = NBTUtil.readBlockPos(nbt.getCompound("S"));
+            this.start = NbtUtils.readBlockPos(nbt.getCompound("S"));
         if(nbt.contains("T"))
-            this.target = NBTUtil.readBlockPos(nbt.getCompound("T"));
+            this.target = NbtUtils.readBlockPos(nbt.getCompound("T"));
 
         this.calcSize();
     }

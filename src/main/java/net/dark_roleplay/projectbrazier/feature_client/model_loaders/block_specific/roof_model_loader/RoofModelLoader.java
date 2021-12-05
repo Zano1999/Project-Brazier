@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.resources.IResourceManager;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraftforge.client.model.IModelLoader;
 
 import java.util.Map;
@@ -24,7 +24,7 @@ public class RoofModelLoader implements IModelLoader<RoofModel> {
 	).apply(i, RoofModel::new));
 
 	@Override
-	public void onResourceManagerReload(IResourceManager resourceManager) {}
+	public void onResourceManagerReload(ResourceManager resourceManager) {}
 
 	@Override
 	public RoofModel read(JsonDeserializationContext deserializationContext, JsonObject modelContents) {

@@ -6,9 +6,9 @@ import net.dark_roleplay.projectbrazier.experimental_features.selective_item_blo
 import net.dark_roleplay.projectbrazier.feature.packets.TertiaryInteractionPacket;
 import net.dark_roleplay.projectbrazier.feature.packets.SyncDrawbridgeState;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.network.NetworkDirection;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.Optional;
 

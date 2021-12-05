@@ -1,10 +1,9 @@
 package net.dark_roleplay.projectbrazier.util.screens;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybinds;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.client.gui.Font;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.HashMap;
@@ -33,12 +32,12 @@ public class KeybindRenderer {
 		});
 	}
 
-	public static int getKeybindWidth(KeyBinding keybind, FontRenderer fontRenderer){
+	public static int getKeybindWidth(KeyMapping keybind, Font fontRenderer){
 		if(SPECIAL_KEYS.containsKey(keybind.getKey().getValue())) return 13;
 		return fontRenderer.width(keybind.getTranslatedKeyMessage()) + 7;
 	}
 
-	public static void renderKeybind(KeyBinding keybind, MatrixStack matrix, FontRenderer fontRenderer, int posX, int posY, boolean centered){
+	public static void renderKeybind(KeyMapping keybind, PoseStack matrix, Font fontRenderer, int posX, int posY, boolean centered){
 		ScreenTexture up = TextureList.KEYBOARD_BUTTON;
 		ScreenTexture down = TextureList.KEYBOARD_BUTTON_PRESSED;
 

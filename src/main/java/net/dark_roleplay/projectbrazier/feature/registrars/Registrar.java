@@ -6,6 +6,7 @@ import net.dark_roleplay.projectbrazier.experimental_features.data_props.ItemPro
 import net.dark_roleplay.projectbrazier.util.EnumMaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.EnumRegistryObject;
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.SoundType;
@@ -102,26 +103,26 @@ public class Registrar {
 
 	//region Containers
 
-	protected static <T extends Container> RegistryObject<MenuType<T>> registerContainer(String name, IContainerFactory<T> factory) {
+	protected static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerContainer(String name, IContainerFactory<T> factory) {
 		return BrazierRegistries.CONTAINERS.register(name, () -> new MenuType<>(factory));
 	}
 
 	//endregion
 
 	//region TileEntityTypes
-	protected static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registerBlockEntity(String name, Supplier<T> supplier, RegistryObject<Block>... blocks) {
+	protected static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registerBlockEntity(String name, BlockEntityType.BlockEntitySupplier<T> supplier, RegistryObject<Block>... blocks) {
 		return BrazierRegistries.BLOCK_ENTITIES.register(name, () -> createType(supplier, blocks));
 	}
 
-	protected static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registerBlockEntity(String name, Supplier<T> supplier, Collection<RegistryObject<Block>>... blocks) {
+	protected static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registerBlockEntity(String name, BlockEntityType.BlockEntitySupplier<T> supplier, Collection<RegistryObject<Block>>... blocks) {
 		return BrazierRegistries.BLOCK_ENTITIES.register(name, () -> createType(supplier, blocks));
 	}
 
-	private static <T extends BlockEntity> BlockEntityType<T> createType(Supplier<T> supplier, RegistryObject<Block>... blocks) {
+	private static <T extends BlockEntity> BlockEntityType<T> createType(BlockEntityType.BlockEntitySupplier<T> supplier, RegistryObject<Block>... blocks) {
 		return BlockEntityType.Builder.of(supplier, Arrays.stream(blocks).map(ro -> ro.get()).collect(Collectors.toList()).toArray(new Block[blocks.length])).build(null);
 	}
 
-	private static <T extends BlockEntity> BlockEntityType<T> createType(Supplier<T> supplier, Collection<RegistryObject<Block>>... blocks) {
+	private static <T extends BlockEntity> BlockEntityType<T> createType(BlockEntityType.BlockEntitySupplier<T> supplier, Collection<RegistryObject<Block>>... blocks) {
 		return BlockEntityType.Builder.of(supplier, Arrays.stream(blocks).flatMap(col -> col.stream()).map(RegistryObject::get).toArray(i -> new Block[i])).build(null);
 	}
 	//endregion

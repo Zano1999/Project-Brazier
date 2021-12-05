@@ -1,18 +1,18 @@
 package net.dark_roleplay.projectbrazier.feature.blocks.crops;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.block.CropsBlock;
-import net.minecraft.state.IntegerProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraftforge.registries.RegistryObject;
 
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
-public abstract class AgedCropBlock extends CropsBlock {
+public abstract class AgedCropBlock extends CropBlock {
 
 	private static final IntegerProperty[] AGES = {
 			BlockStateProperties.AGE_1,
@@ -33,7 +33,7 @@ public abstract class AgedCropBlock extends CropsBlock {
 	}
 
 	@Override
-	protected IItemProvider getBaseSeedId() {
+	protected ItemLike getBaseSeedId() {
 		return seeds.get();
 	}
 

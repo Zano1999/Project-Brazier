@@ -2,10 +2,10 @@ package net.dark_roleplay.projectbrazier.feature_client.blocks;
 
 import net.dark_roleplay.projectbrazier.feature.blocks.WallBurningBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.Direction;
-import net.minecraft.particles.IParticleData;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.Level;
 
@@ -20,7 +20,7 @@ public class DisplayTickers {
 		animatedTypedTorchHolder(state, world, pos, rand, ParticleTypes.FLAME);
 	}
 
-	private static void animatedTypedTorchHolder(BlockState state, Level world, BlockPos pos, Random rand, IParticleData data){
+	private static void animatedTypedTorchHolder(BlockState state, Level world, BlockPos pos, Random rand, ParticleOptions data){
 		if(!state.getValue(WallBurningBlock.BURNING)) return;
 		Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
 		Direction dirOpp = dir.getOpposite();

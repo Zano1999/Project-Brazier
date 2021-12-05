@@ -1,14 +1,15 @@
 package net.dark_roleplay.projectbrazier.feature_client.model_loaders.util;
 
-import net.minecraft.client.renderer.model.BakedQuad;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
+import com.mojang.math.Vector4f;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.math.vector.*;
 
 public abstract class AdvancedModelBox {
 	protected Vector3f pos;
 	protected Vector3f size;
-	protected TransformationMatrix matrix;
 	protected TextureAtlasSprite sprite;
 
 	protected Vector3f[] vertices;
@@ -45,7 +46,7 @@ public abstract class AdvancedModelBox {
 	public abstract BakedQuad[] bake();
 
 	protected int[] generateVertexData(float u1, float v1, float u2, float v2, Vector3f... vertices) {
-		int[] data = new int[DefaultVertexFormats.BLOCK.getIntegerSize() * vertices.length];
+		int[] data = new int[DefaultVertexFormat.BLOCK.getIntegerSize() * vertices.length];
 		int offset = 0;
 
 		Vector3f normalVec = vertices[1].copy();

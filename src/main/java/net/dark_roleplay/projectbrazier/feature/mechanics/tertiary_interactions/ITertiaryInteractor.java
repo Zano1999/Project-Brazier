@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature.mechanics.tertiary_interactions;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -12,7 +13,7 @@ public interface ITertiaryInteractor {
 
 	void executeInteraction(Level world, BlockPos pos, BlockState state, Player palyer);
 
-	TextComponent getInteractionTooltip(Level world, BlockPos pos, BlockState state, Player player);
+	Component getInteractionTooltip(Level world, BlockPos pos, BlockState state, Player player);
 
 	int getDurationInMS(Level world, BlockPos pos, BlockState state);
 }

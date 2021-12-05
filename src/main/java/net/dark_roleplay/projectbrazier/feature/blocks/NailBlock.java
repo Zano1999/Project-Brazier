@@ -56,7 +56,7 @@ public class NailBlock extends WallHFacedDecoBlock {
 		replacement.updateNeighbors(state2, world, pos);
 
 		ItemStack newStack = null;
-		if(state2.hasTileEntity())
+		if(state2.hasBlockEntity())
 			newStack = replacement.setItemStack(world, pos, state, held.copy());
 
 		if (!player.isCreative()){

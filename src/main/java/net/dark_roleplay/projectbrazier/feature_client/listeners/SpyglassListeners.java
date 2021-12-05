@@ -7,7 +7,6 @@ import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybind
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.test.TestCommand;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.InputEvent;
@@ -45,7 +44,7 @@ public class SpyglassListeners {
 	}
 
 	@SubscribeEvent
-	public static void updateFov(EntityViewRenderEvent.FOVModifier event) {
+	public static void updateFov(EntityViewRenderEvent.FieldOfView event) {
 		SpyglassItem spyglassItem = getHeldZoomItem();
 		if(spyglassItem != null && (isZoomActive() || deltaTimeEnd > System.currentTimeMillis())){
 			event.setFOV(getNewFOV());

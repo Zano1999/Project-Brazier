@@ -1,13 +1,15 @@
 package net.dark_roleplay.projectbrazier.util;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.client.MainWindow;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
+import com.mojang.math.Vector4f;
+import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.util.math.vector.*;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
 public class RenderUtils {
@@ -16,16 +18,16 @@ public class RenderUtils {
 		return Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
 	}
 
-	public static ActiveRenderInfo getRenderInfo(){
+	public static Camera getRenderInfo(){
 		return Minecraft.getInstance().gameRenderer.getMainCamera();
 	}
 
 	public static Matrix4f getProjectionMatrix(float partialTicks){
-		return Minecraft.getInstance().gameRenderer.getProjectionMatrix(getRenderInfo(), partialTicks, true);
+		return Minecraft.getInstance().gameRenderer.getProjectionMatrix(partialTicks);
 	}
 
 	public static Matrix4f getViewMatrix(){
-		ActiveRenderInfo renderInfo = getRenderInfo();
+		Camera renderInfo = getRenderInfo();
 		Vector3f up = renderInfo.getUpVector();
 		Vector3f forward = renderInfo.getLookVector();
 		Vector3f right = new Vector3f(-1, 0, 0); //No getter available, calculate ourself
@@ -73,7 +75,7 @@ public class RenderUtils {
 		return Pair.of(rayOrigin3, ray);
 	}
 
-	public static Pair<Vector2f, Boolean> worldToScreenSpace(Vec3 worldPos, float partialTicks, boolean useScaledGuiSize){
+	public static Pair<Vec2, Boolean> worldToScreenSpace(Vec3 worldPos, float partialTicks, boolean useScaledGuiSize){
 		Minecraft mc = Minecraft.getInstance();
 		Vec3 cameraPos = getCameraPos();
 
@@ -94,12 +96,12 @@ public class RenderUtils {
 			newWorldPos.add(new Vector3f(-Mth.sin(f1 * (float)Math.PI) * f2 * 0.5F, -Math.abs(Mth.cos(f1 * (float)Math.PI) * f2), 0.0F));
 		}
 
-		float half_height = (float) (useScaledGuiSize ? mc.getWindow().getGuiScaledHeight() : mc.getWindow().getScreenHeight()) / 2;
-		float scale_factor = half_height / (newWorldPos.z() * (float) Math.tan(Math.toRadians(mc.gameRenderer.getFov(getRenderInfo(), partialTicks, true)  / 2)));
+		float half_height = (float) (useScaledGuiSize ? mc.getWindow().getGuiScaledHeight() : mc.getWindow().getScreenHeight()) / 2;//TODO Fix this
+		float scale_factor = half_height / (newWorldPos.z() * (float) Math.tan(Math.toRadians(70)));//mc.gameRenderer..getFov(getRenderInfo(), partialTicks, true)  / 2)));
 
 		int screenWidth = useScaledGuiSize ? mc.getWindow().getGuiScaledWidth() : mc.getWindow().getScreenWidth();
 		int screenHeight = useScaledGuiSize ? mc.getWindow().getGuiScaledHeight() : mc.getWindow().getScreenHeight();
 
-		return Pair.of(new Vector2f((-newWorldPos.x() * scale_factor) + screenWidth/2F, (-newWorldPos.y() * scale_factor) + screenHeight/2F), newWorldPos.z() > 0);
+		return Pair.of(new Vec2((-newWorldPos.x() * scale_factor) + screenWidth/2F, (-newWorldPos.y() * scale_factor) + screenHeight/2F), newWorldPos.z() > 0);
 	}
 }

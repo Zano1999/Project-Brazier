@@ -1,9 +1,9 @@
 package net.dark_roleplay.projectbrazier.mixin;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.ChunkBakeEvent;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.RegionRenderCacheBuilder;
 import net.minecraft.client.renderer.chunk.ChunkRenderCache;
 import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
@@ -35,9 +35,9 @@ public class NOFChunkRenderHook {
 			//All the locals :raised-hands:
 			int i, BlockPos blockpos, BlockPos blockpos1,
 			VisGraph visgraph, Set set, ChunkRenderCache chunkrendercache,
-			MatrixStack matrixstack, Random random
+			PoseStack matrixstack, Random random
 	) {
-		BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
+		BlockRenderDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
 		ChunkBakeEvent event = new ChunkBakeEvent(compiledChunkIn, builderIn, matrixstack, random, blockrendererdispatcher, chunkrendercache, blockpos);
 		MinecraftForge.EVENT_BUS.post(event);
 	}

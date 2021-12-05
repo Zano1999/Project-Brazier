@@ -55,12 +55,15 @@ public class BlockPropertyLoader {
 			case "PLANTS": return Material.PLANT;
 			case "OCEAN_PLANT": return Material.WATER_PLANT;
 			case "TALL_PLANTS": return Material.REPLACEABLE_PLANT;
+			case "REPLACEABLE_FIREPROOF_PLANT": return Material.REPLACEABLE_FIREPROOF_PLANT;
 			case "SEA_GRASS": return Material.REPLACEABLE_WATER_PLANT;
 			case "WATER": return Material.WATER;
 			case "BUBBLE_COLUMN": return Material.BUBBLE_COLUMN;
+			case "LAVA": return Material.LAVA;
 			case "SNOW": return Material.TOP_SNOW;
 			case "FIRE": return Material.FIRE;
 			case "WEB": return Material.WEB;
+			case "SCULK": return Material.SCULK;
 			case "REDSTONE_LIGHT": return Material.BUILDABLE_GLASS;
 			case "CLAY": return Material.CLAY;
 			case "EARTH": return Material.DIRT;
@@ -70,6 +73,7 @@ public class BlockPropertyLoader {
 			case "SPONGE": return Material.SPONGE;
 			case "SHULKER": return Material.SHULKER_SHELL;
 			case "WOOD": return Material.WOOD;
+			case "NETHER_WOOD": return Material.NETHER_WOOD;
 			case "BAMBOO_SAPLING": return Material.BAMBOO_SAPLING;
 			case "BAMBOO": return Material.BAMBOO;
 			case "WOOL": return Material.WOOL;
@@ -84,10 +88,12 @@ public class BlockPropertyLoader {
 			case "ANVIL": return Material.HEAVY_METAL;
 			case "BARRIER": return Material.BARRIER;
 			case "PISTON": return Material.PISTON;
-			case "CORAL": return Material.CORAL;
+			case "MOSS": return Material.MOSS;
 			case "GOURD": return Material.VEGETABLE;
 			case "DRAGON_EGG": return Material.EGG;
 			case "CAKE": return Material.CAKE;
+			case "AMETHYST": return Material.AMETHYST;
+			case "POWDER_SNOW": return Material.POWDER_SNOW;
 			case "MISCELLANEOUS":
 			default: return Material.DECORATION;
 		}

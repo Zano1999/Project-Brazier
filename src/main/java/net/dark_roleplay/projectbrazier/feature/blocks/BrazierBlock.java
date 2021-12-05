@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
@@ -22,7 +23,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.ToolType;
 
 public class BrazierBlock extends DecoBlock {
 
@@ -46,7 +46,7 @@ public class BrazierBlock extends DecoBlock {
 	}
 
 	@Override
-	public int getLightValue(BlockState state, BlockGetter world, BlockPos pos) {
+	public int getLightBlock(BlockState state, BlockGetter world, BlockPos pos) {
 		return state.getValue(BURNING) ? 15 : 0;
 	}
 
@@ -75,14 +75,15 @@ public class BrazierBlock extends DecoBlock {
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		ItemStack heldItem = player.getItemInHand(hand);
 		if(state.getValue(BURNING)){
-			if(heldItem.getToolTypes().contains(ToolType.SHOVEL)){
+			//TODO Update tool types
+			//if(heldItem.getToolTypes().contains(ToolType.SHOVEL)){
 				if(world.isClientSide()) return InteractionResult.SUCCESS;
 				if(!player.isCreative())
 					heldItem.hurt(1, player.getRandom(), (ServerPlayer) (player));
 				world.setBlockAndUpdate(pos, state.setValue(BURNING, false));
 				world.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.8f, 2f);
 				return InteractionResult.SUCCESS;
-			}
+			//}
 		}else{
 			if(heldItem.getItem() == Items.FLINT_AND_STEEL){
 				if(world.isClientSide()) return InteractionResult.SUCCESS;

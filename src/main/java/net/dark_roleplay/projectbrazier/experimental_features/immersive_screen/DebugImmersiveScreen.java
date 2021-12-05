@@ -1,11 +1,11 @@
 package net.dark_roleplay.projectbrazier.experimental_features.immersive_screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.dark_roleplay.projectbrazier.util.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -19,7 +19,7 @@ import net.minecraft.world.level.Level;
 
 public class DebugImmersiveScreen extends ImmersiveScreen {
 
-	private final IRenderTypeBuffer.Impl bufferSource;
+	private final MultiBufferSource.Impl bufferSource;
 
 	public DebugImmersiveScreen() {
 		super(new StringTextComponent("Debuuug"), new Vec3(23.5, 57, 29.5), new Vector3f(0, 0, 0));
@@ -28,7 +28,7 @@ public class DebugImmersiveScreen extends ImmersiveScreen {
 	}
 
 	@Override
-	public void renderInWorld(WorldRenderer context, MatrixStack matrixStack, float partialTicks) {
+	public void renderInWorld(WorldRenderer context, PoseStack matrixStack, float partialTicks) {
 		if (this.raytrace == null) return;
 
 		Vec3 cameraPos = RenderUtils.getCameraPos();
@@ -51,7 +51,7 @@ public class DebugImmersiveScreen extends ImmersiveScreen {
 		Level world = Minecraft.getInstance().level;
 		int combinedLight = WorldRenderer.getLightColor(world, new BlockPos(hitPoint).relative(rtcResult.getDirection()));
 
-		IBakedModel ibakedmodel = itemRenderer.getModel(test, null, null);
+		BakedModel ibakedmodel = itemRenderer.getModel(test, null, null);
 		Minecraft.getInstance().getItemRenderer().render(
 				test, ItemCameraTransforms.TransformType.NONE, false,
 				matrixStack, bufferSource, combinedLight, combinedLight, ibakedmodel

@@ -18,8 +18,8 @@ public class BlockPosUtil {
     public static void walkRegion(BlockPos startIn, BlockPos targetIn, BiConsumer<BlockPos, BlockPos> consumer){
         BlockPos start = getMin(startIn, targetIn);
         BlockPos target = getMax(startIn, targetIn);
-        BlockPos.Mutable mutable = new BlockPos.Mutable(start.getX(), start.getY(), start.getZ());
-        BlockPos.Mutable offset = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos(start.getX(), start.getY(), start.getZ());
+        BlockPos.MutableBlockPos offset = new BlockPos.MutableBlockPos();
 
         int width = target.getX() - start.getX() + 1;
         int height = target.getY() - start.getY() + 1;

@@ -31,7 +31,6 @@ public class WallHFacedDecoBlock extends HFacedDecoBlock {
 		return facing.getOpposite() == state.getValue(HORIZONTAL_FACING) && !state.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
-	@Override
 	@Deprecated
 	public boolean canSurvive(BlockState state, BlockGetter world, BlockPos pos) {
 		Direction direction = state.getValue(HORIZONTAL_FACING);

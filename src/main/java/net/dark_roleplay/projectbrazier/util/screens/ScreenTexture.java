@@ -1,9 +1,9 @@
 package net.dark_roleplay.projectbrazier.util.screens;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.gui.AbstractGui;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiComponent;
 
-public class ScreenTexture extends AbstractGui {
+public class ScreenTexture extends GuiComponent {
 	private final ScreenTextureWrapper wrapper;
 
 	private final int width, height;
@@ -28,12 +28,12 @@ public class ScreenTexture extends AbstractGui {
 		this.height = y2 - y1;
 	}
 
-	public void render(MatrixStack stack, int posX, int posY){
+	public void render(PoseStack stack, int posX, int posY){
 		wrapper.bind();
 		this.blit(stack, posX, posY, width, height, x1, y1, width, height, totalX, totalY);
 	}
 
-	public void renderSegmented(MatrixStack stack, int posX, int posY, int width, int height){
+	public void renderSegmented(PoseStack stack, int posX, int posY, int width, int height){
 		wrapper.bind();
 		int centerMaxX = width - this.slice3Width;
 		int centerMaxY = height - this.slice3Height;

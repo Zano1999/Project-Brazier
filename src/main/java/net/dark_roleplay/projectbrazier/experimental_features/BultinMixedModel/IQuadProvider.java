@@ -1,7 +1,7 @@
 package net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel;
 
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.client.renderer.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.core.Direction;
 
 import javax.annotation.Nonnull;

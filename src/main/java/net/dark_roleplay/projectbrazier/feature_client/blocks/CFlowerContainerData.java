@@ -1,23 +1,22 @@
 package net.dark_roleplay.projectbrazier.feature_client.blocks;
 
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.IQuadProvider;
 import net.dark_roleplay.projectbrazier.feature.blocks.FlowerContainerData;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockRendererDispatcher;
-import net.minecraft.client.renderer.model.BakedQuad;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.core.Vec3i;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -55,11 +54,11 @@ public class CFlowerContainerData extends FlowerContainerData implements IQuadPr
 				states[1] = states[0].setValue(BlockStateProperties.DOUBLE_BLOCK_HALF, sourceHalf == DoubleBlockHalf.LOWER ? DoubleBlockHalf.UPPER : DoubleBlockHalf.LOWER);
 			}
 
-			BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
+			BlockRenderDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
 
 			for(BlockState state : states) {
 				if(state == null) continue;
-				IBakedModel cachedModel = blockrendererdispatcher.getBlockModel(state);
+				BakedModel cachedModel = blockrendererdispatcher.getBlockModel(state);
 
 				for (Direction dir : Direction.values()) {
 					List<BakedQuad> facedQuads = quads.computeIfAbsent(dir, key -> new ArrayList<BakedQuad>());
@@ -85,7 +84,7 @@ public class CFlowerContainerData extends FlowerContainerData implements IQuadPr
 	private BakedQuad translateQuad(BakedQuad quad, Vec3i offset){
 		int[] vertexData = quad.getVertices();
 		int[] newVertexData = new int[vertexData.length];
-		VertexFormat format = DefaultVertexFormats.BLOCK;
+		VertexFormat format = DefaultVertexFormat.BLOCK;
 		float offsetX = offset.getX() * 0.0625F - 0.5F + 0.03125F;
 		float offsetY = offset.getY() * 0.0625F;
 		float offsetZ = offset.getZ() * 0.0625F - 0.5F + 0.03125F;

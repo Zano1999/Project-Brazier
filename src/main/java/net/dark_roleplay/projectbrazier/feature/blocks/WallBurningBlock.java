@@ -89,7 +89,7 @@ public class WallBurningBlock extends WallHFacedDecoBlock {
 	}
 
 	@Override
-	public int getLightValue(BlockState state, BlockGetter world, BlockPos pos) {
+	public int getLightBlock(BlockState state, BlockGetter world, BlockPos pos) {
 		return state.getValue(BURNING) ? burningLightLevel : 0;
 	}
 

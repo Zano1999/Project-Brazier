@@ -3,13 +3,15 @@ package net.dark_roleplay.projectbrazier.feature_client.model_loaders.emissive;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.client.renderer.model.*;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.BlockModel;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.resources.model.*;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.IResourceManager;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.JSONUtils;
 import net.minecraftforge.client.model.CompositeModel;
 import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.IModelLoader;
@@ -22,10 +24,10 @@ import java.util.stream.Collectors;
 
 public class EmissiveModel implements IModelGeometry {
 
-	private final IUnbakedModel emissiveModel, nonEmissiveModel;
+	private final UnbakedModel emissiveModel, nonEmissiveModel;
 	private final int skyLight, blockLight;
 
-	public EmissiveModel(IUnbakedModel emissiveModel, IUnbakedModel nonEmissiveModel, int skyLight, int blockLight){
+	public EmissiveModel(UnbakedModel emissiveModel, UnbakedModel nonEmissiveModel, int skyLight, int blockLight){
 		this.emissiveModel = emissiveModel;
 		this.nonEmissiveModel = nonEmissiveModel;
 		this.skyLight = skyLight;
@@ -33,12 +35,12 @@ public class EmissiveModel implements IModelGeometry {
 	}
 
 	@Override
-	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
-		ImmutableMap.Builder<String, IBakedModel> builder = ImmutableMap.builder();
+	public BakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function spriteGetter, ModelState modelTransform, ItemOverrides overrides, ResourceLocation modelLocation) {
+		ImmutableMap.Builder<String, BakedModel> builder = ImmutableMap.builder();
 		if(this.nonEmissiveModel != null)
 			builder.put("non_emissive", this.nonEmissiveModel.bake(bakery, spriteGetter, modelTransform, modelLocation));
 
-		IBakedModel preEmissiveBakedModel = this.emissiveModel.bake(bakery, spriteGetter, modelTransform, modelLocation);
+		BakedModel preEmissiveBakedModel = this.emissiveModel.bake(bakery, spriteGetter, modelTransform, modelLocation);
 		if(preEmissiveBakedModel instanceof SimpleBakedModel){
 			List<BakedQuad> quads = transformQuads(preEmissiveBakedModel.getQuads(null, null, null, EmptyModelData.INSTANCE), this.skyLight, this.blockLight);
 			Map<Direction, List<BakedQuad>> faceQuads = new EnumMap<>(Direction.class);
@@ -57,7 +59,7 @@ public class EmissiveModel implements IModelGeometry {
 					preEmissiveBakedModel.getOverrides()
 			));
 		}
-		return new CompositeModel(owner.isShadedInGui(), owner.isSideLit(), owner.useSmoothLighting(), ((Function<RenderMaterial, TextureAtlasSprite>)spriteGetter).apply(owner.resolveTexture("particle")), builder.build(), owner.getCombinedTransform(), overrides);
+		return new CompositeModel(owner.isShadedInGui(), owner.isSideLit(), owner.useSmoothLighting(), ((Function<Material, TextureAtlasSprite>)spriteGetter).apply(owner.resolveTexture("particle")), builder.build(), owner.getCombinedTransform(), overrides);
 	}
 
 	@Override
@@ -72,19 +74,19 @@ public class EmissiveModel implements IModelGeometry {
 	public static class Loader implements IModelLoader {
 
 		@Override
-		public void onResourceManagerReload(IResourceManager resourceManager) {}
+		public void onResourceManagerReload(ResourceManager resourceManager) {}
 
 		@Override
 		public IModelGeometry read(JsonDeserializationContext deserializationContext, JsonObject modelContents) {
-			IUnbakedModel nonEmissive = null, emissive = null;
+			UnbakedModel nonEmissive = null, emissive = null;
 			if(modelContents.has("nonEmissive")){
-				nonEmissive = deserializationContext.deserialize(JSONUtils.getAsJsonObject(modelContents,"nonEmissive"), BlockModel.class);
+				nonEmissive = deserializationContext.deserialize(GsonHelper.getAsJsonObject(modelContents,"nonEmissive"), BlockModel.class);
 			}
 			if(modelContents.has("emissive")){
-				emissive = deserializationContext.deserialize(JSONUtils.getAsJsonObject(modelContents,"emissive"), BlockModel.class);
+				emissive = deserializationContext.deserialize(GsonHelper.getAsJsonObject(modelContents,"emissive"), BlockModel.class);
 			}
-			int skyLight = JSONUtils.getAsInt(modelContents, "skyLight", 15);
-			int blockLight = JSONUtils.getAsInt(modelContents, "blockLight", 15);
+			int skyLight = GsonHelper.getAsInt(modelContents, "skyLight", 15);
+			int blockLight = GsonHelper.getAsInt(modelContents, "blockLight", 15);
 
 			return new EmissiveModel(emissive, nonEmissive, skyLight, blockLight);
 		}

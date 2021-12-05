@@ -1,12 +1,12 @@
 package net.dark_roleplay.projectbrazier.experimental_features.decorator;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.capability.DecorChunk;
 import net.dark_roleplay.projectbrazier.experimental_features.decorator.capability.DecorContainer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.chunk.ChunkRenderCache;
@@ -28,10 +28,10 @@ public class DecorListener {
 
 	public static void bakeChunk(ChunkBakeEvent event){
 //		if(true) return;
-		MatrixStack stack = event.getMatrixstack();
+		PoseStack stack = event.getMatrixstack();
 		BlockPos pos = event.getPos();
 		BufferBuilder buffer = event.getBuffer(RenderType.cutout());
-		BlockRendererDispatcher renderDispatcher = event.getRenderDispatcher();
+		BlockRenderDispatcher renderDispatcher = event.getRenderDispatcher();
 
 		ChunkRenderCache chunkCache = event.getChunkCache();
 		int chunkX = (pos.getX() >> 4) - chunkCache.centerX;

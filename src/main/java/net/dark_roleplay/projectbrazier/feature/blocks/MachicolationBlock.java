@@ -60,14 +60,14 @@ public class MachicolationBlock extends HFacedDecoBlock {
 		MachicolationType type = MachicolationType.STRAIGHT;
 		if(!context.getPlayer().isCrouching()) {
 			BlockState other;
-			if ((other = world.getBlockState(pos.relative(direction))).getBlock() == this.getBlock()) {
+			if ((other = world.getBlockState(pos.relative(direction))).getBlock() == this) {
 				if (other.getValue(HORIZONTAL_FACING) == direction.getClockWise()) {
 					type = MachicolationType.INNER_CORNER;
 				} else if (other.getValue(HORIZONTAL_FACING) == direction.getCounterClockWise()) {
 					type = MachicolationType.INNER_CORNER;
 					direction = direction.getCounterClockWise();
 				}
-			} else if ((other = world.getBlockState(pos.relative(direction.getOpposite()))).getBlock() == this.getBlock()) {
+			} else if ((other = world.getBlockState(pos.relative(direction.getOpposite()))).getBlock() == this) {
 				if (other.getValue(HORIZONTAL_FACING) == direction.getCounterClockWise()) {
 					type = MachicolationType.OUTER_CORNER;
 					direction = direction.getCounterClockWise();

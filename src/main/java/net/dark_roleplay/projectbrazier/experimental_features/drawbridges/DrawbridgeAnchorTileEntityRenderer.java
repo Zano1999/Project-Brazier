@@ -1,23 +1,23 @@
 package net.dark_roleplay.projectbrazier.experimental_features.drawbridges;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.client.model.data.EmptyModelData;
 
-public class DrawbridgeAnchorTileEntityRenderer extends TileEntityRenderer<DrawbridgeAnchorTileEntity> {
+public class DrawbridgeAnchorTileEntityRenderer extends BlockEntityRenderer<DrawbridgeAnchorTileEntity> {
 
 	public static final ResourceLocation[] LOCATIONS = new ResourceLocation[]{
 			new ResourceLocation(ProjectBrazier.MODID, "block/drawbridge/drawbridge_bl"),
@@ -31,7 +31,7 @@ public class DrawbridgeAnchorTileEntityRenderer extends TileEntityRenderer<Drawb
 			new ResourceLocation(ProjectBrazier.MODID, "block/drawbridge/drawbridge_tr")
 	};
 
-	private static IBakedModel[] models = new IBakedModel[9];
+	private static BakedModel[] models = new BakedModel[9];
 
 	public DrawbridgeAnchorTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcher) {
 		super(rendererDispatcher);
@@ -44,13 +44,13 @@ public class DrawbridgeAnchorTileEntityRenderer extends TileEntityRenderer<Drawb
 	}
 
 	@Override
-	public void render(DrawbridgeAnchorTileEntity te, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, int combinedOverlayIn) {
+	public void render(DrawbridgeAnchorTileEntity te, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int combinedLight, int combinedOverlayIn) {
 		if(models[0] == null){
 			initDrawbridgeModels();
 		}
 		initDrawbridgeModels();
 
-		IVertexBuilder vBuffer = buffer.getBuffer(RenderType.solid());
+		VertexConsumer vBuffer = buffer.getBuffer(RenderType.solid());
 
 		Direction dir = te.getBlockState().getValue(DrawbridgeAnchorBlock.HORIZONTAL_FACING);
 		Direction dirRY = dir.getClockWise();
@@ -81,7 +81,7 @@ public class DrawbridgeAnchorTileEntityRenderer extends TileEntityRenderer<Drawb
 			matrixStack.translate(1, 0, 0);
 			pos2.move(dirRY);
 			for (int h = 0; h < te.getHeight(); h++) {
-				IBakedModel model = null;
+				BakedModel model = null;
 				if (w == 0) {
 					if (h == 0)
 						model = models[0];

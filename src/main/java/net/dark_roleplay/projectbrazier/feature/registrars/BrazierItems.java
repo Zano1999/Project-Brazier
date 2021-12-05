@@ -12,56 +12,54 @@ import net.dark_roleplay.projectbrazier.feature.items.WarHornItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.item.BlockNamedItem;
-import net.minecraft.item.ItemGroup;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-public class BrazierItems extends Registrar {
+public class BrazierItems {
 
 	public static final RegistryObject<Item>
-//			BARLEY = registerItem("barley"),
-//			DOUGH = registerItem("dough"),
-//			FLOUR = registerItem("flour"),
-//			BAT_EAR = registerItem("bat_ear"),
-//			BAT_WING = registerItem("bat_wing"),
-//			WOLF_FUR = registerItem("wolf_fur"),
-//			CUT_GRASS = registerItem("cut_grass"),
-//			HAY = registerItem("hay"),
-			BRONZE_COIN = registerItem("bronze_coin"),
-			GOLD_COIN = registerItem("gold_coin"),
-			SILVER_COIN = registerItem("silver_coin"),
-			COPPER_COIN = registerItem("copper_coin"),
-//			BELL_PEPPER = registerItem("bell_pepper"),
-//			BLUEBERRIES = registerItem("blueberries"),
-//			BUTTER = registerItem("butter"),
-			CAULIFLOWER = registerItem("cauliflower"),
-			WHITE_CABBAGE = registerItem("white_cabbage"),
-//			EGGPLANT = registerItem("eggplant"),
-//			GARLIC = registerItem("garlic"),
-//			GREEN_APPLE = registerItem("green_apple"),
-//			GREEN_CARAMELIZED_APPLE = registerItem("green_caramelized_apple"),
-//			GREEN_PEAR = registerItem("green_pear"),
-//			GRILLED_CATFISH = registerItem("grilled_catfish"),
-//			GRILLED_WOLF = registerItem("grilled_wolf"),
-//			HOPS = registerItem("hops"),
-//			ONION = registerItem("onion"),
-//			RAW_CATFISH = registerItem("raw_catfish"),
-//			RAW_WOLF = registerItem("raw_wolf"),
-//			RED_CARAMELIZED_APPLE = registerItem("red_caramelized_apple"),
-//			RED_GRAPES = registerItem("red_grapes"),
-//			TURNIP = registerItem("turnip"),
-//			YELLOW_APPLE = registerItem("yellow_apple"),
-//			YELLOW_CARAMELIZED_APPLE = registerItem("yellow_caramelized_apple"),
-//			YELLOW_PEAR = registerItem("yellow_pear"),
-			BONE_WAR_HORN = registerItem("bone_war_horn", WarHornItem::new),
-			GOLD_SPYGLASS = registerItem("gold_spyglass", SpyglassItem::new),
-			SILVER_SPYGLASS = registerItem("silver_spyglass", SpyglassItem::new),
-			CAULIFLOWER_SEEDS = registerItem("cauliflower_seeds", prop -> new PlantSeedsItem(BrazierBlocks.CAULIFLOWER.get(), prop)),
-			WHITE_CABBAGE_SEEDS = registerItem("white_cabbage_seeds", prop -> new PlantSeedsItem(BrazierBlocks.WHITE_CABBAGE.get(), prop)),
-			STONE_ARROW_SLIT = registerItem("stone_arrow_slit", prop -> new SelectiveBlockItem(new Block[]{
+//			BARLEY = Registrar.registerItem("barley"),
+//			DOUGH = Registrar.registerItem("dough"),
+//			FLOUR = Registrar.registerItem("flour"),
+//			BAT_EAR = Registrar.registerItem("bat_ear"),
+//			BAT_WING = Registrar.registerItem("bat_wing"),
+//			WOLF_FUR = Registrar.registerItem("wolf_fur"),
+//			CUT_GRASS = Registrar.registerItem("cut_grass"),
+//			HAY = Registrar.registerItem("hay"),
+			BRONZE_COIN = Registrar.registerItem("bronze_coin"),
+			GOLD_COIN = Registrar.registerItem("gold_coin"),
+			SILVER_COIN = Registrar.registerItem("silver_coin"),
+			COPPER_COIN = Registrar.registerItem("copper_coin"),
+//			BELL_PEPPER = Registrar.registerItem("bell_pepper"),
+//			BLUEBERRIES = Registrar.registerItem("blueberries"),
+//			BUTTER = Registrar.registerItem("butter"),
+			CAULIFLOWER = Registrar.registerItem("cauliflower"),
+			WHITE_CABBAGE = Registrar.registerItem("white_cabbage"),
+//			EGGPLANT = Registrar.registerItem("eggplant"),
+//			GARLIC = Registrar.registerItem("garlic"),
+//			GREEN_APPLE = Registrar.registerItem("green_apple"),
+//			GREEN_CARAMELIZED_APPLE = Registrar.registerItem("green_caramelized_apple"),
+//			GREEN_PEAR = Registrar.registerItem("green_pear"),
+//			GRILLED_CATFISH = Registrar.registerItem("grilled_catfish"),
+//			GRILLED_WOLF = Registrar.registerItem("grilled_wolf"),
+//			HOPS = Registrar.registerItem("hops"),
+//			ONION = Registrar.registerItem("onion"),
+//			RAW_CATFISH = Registrar.registerItem("raw_catfish"),
+//			RAW_WOLF = Registrar.registerItem("raw_wolf"),
+//			RED_CARAMELIZED_APPLE = Registrar.registerItem("red_caramelized_apple"),
+//			RED_GRAPES = Registrar.registerItem("red_grapes"),
+//			TURNIP = Registrar.registerItem("turnip"),
+//			YELLOW_APPLE = Registrar.registerItem("yellow_apple"),
+//			YELLOW_CARAMELIZED_APPLE = Registrar.registerItem("yellow_caramelized_apple"),
+//			YELLOW_PEAR = Registrar.registerItem("yellow_pear"),
+			BONE_WAR_HORN = Registrar.registerItem("bone_war_horn", WarHornItem::new),
+			GOLD_SPYGLASS = Registrar.registerItem("gold_spyglass", SpyglassItem::new),
+			SILVER_SPYGLASS = Registrar.registerItem("silver_spyglass", SpyglassItem::new),
+			CAULIFLOWER_SEEDS = Registrar.registerItem("cauliflower_seeds", prop -> new PlantSeedsItem(BrazierBlocks.CAULIFLOWER.get(), prop)),
+			WHITE_CABBAGE_SEEDS = Registrar.registerItem("white_cabbage_seeds", prop -> new PlantSeedsItem(BrazierBlocks.WHITE_CABBAGE.get(), prop)),
+			STONE_ARROW_SLIT = Registrar.registerItem("stone_arrow_slit", prop -> new SelectiveBlockItem(new Block[]{
 					BrazierBlocks.V_STONE_BRICK_ARROW_SLIT.get(),
 					BrazierBlocks.H_STONE_BRICK_ARROW_SLIT.get(),
 					BrazierBlocks.C_STONE_BRICK_ARROW_SLIT.get()
@@ -69,7 +67,7 @@ public class BrazierItems extends Registrar {
 
 	//Experimental Items
 //	public static final RegistryObject<Item>
-//			DECOR_TEST	= registerItem("decor_test", DecorItem::new);
+//			DECOR_TEST	= Registrar.registerItem("decor_test", DecorItem::new);
 
 	public static void registerItemBlocks(RegistryEvent.Register<Item> event){
 		IForgeRegistry<Item> reg = event.getRegistry();

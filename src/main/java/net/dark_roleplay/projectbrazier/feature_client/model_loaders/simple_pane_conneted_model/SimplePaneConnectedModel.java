@@ -4,15 +4,18 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.axis_connected_models.AxisConnectionType;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.BlockModel;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.resources.model.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.IResourceManager;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.world.IBlockDisplayReader;
 import net.minecraftforge.client.model.BakedModelWrapper;
 import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.IModelLoader;
@@ -26,9 +29,9 @@ import java.util.function.Function;
 
 public class SimplePaneConnectedModel implements IModelGeometry {
 
-	private final IUnbakedModel baseModel, priPosModel, priNegModel, secPosModel, secNegModel;
+	private final UnbakedModel baseModel, priPosModel, priNegModel, secPosModel, secNegModel;
 
-	public SimplePaneConnectedModel(IUnbakedModel baseModel, IUnbakedModel priPosModel, IUnbakedModel priNegModel, IUnbakedModel secPosModel, IUnbakedModel secNegModel) {
+	public SimplePaneConnectedModel(UnbakedModel baseModel, UnbakedModel priPosModel, UnbakedModel priNegModel, UnbakedModel secPosModel, UnbakedModel secNegModel) {
 		this.baseModel = baseModel;
 		this.priPosModel = priPosModel;
 		this.priNegModel = priNegModel;
@@ -37,7 +40,7 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 	}
 
 	@Override
-	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
+	public BakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function spriteGetter, ModelState modelTransform, ItemOverrides overrides, ResourceLocation modelLocation) {
 		return new ConnectedBakedModel(
 				this.baseModel.bake(bakery, spriteGetter, modelTransform, modelLocation),
 				this.priPosModel.bake(bakery, spriteGetter, modelTransform, modelLocation),
@@ -47,9 +50,9 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 	}
 
 	@Override
-	public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
+	public Collection<Material> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
 
-		Set<RenderMaterial> textures = new HashSet<>();
+		Set<Material> textures = new HashSet<>();
 
 		textures.addAll(baseModel.getMaterials(modelGetter, missingTextureErrors));
 		textures.addAll(priPosModel.getMaterials(modelGetter, missingTextureErrors));
@@ -62,9 +65,9 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 
 	public static class ConnectedBakedModel extends BakedModelWrapper {
 
-		protected final IBakedModel priPosModel, priNegModel, secPosModel, secNegModel;
+		protected final BakedModel priPosModel, priNegModel, secPosModel, secNegModel;
 
-		public ConnectedBakedModel(IBakedModel baseModel, IBakedModel priPosModel, IBakedModel priNegModel, IBakedModel secPosModel, IBakedModel secNegModel) {
+		public ConnectedBakedModel(BakedModel baseModel, BakedModel priPosModel, BakedModel priNegModel, BakedModel secPosModel, BakedModel secNegModel) {
 			super(baseModel);
 			this.priPosModel = priPosModel;
 			this.priNegModel = priNegModel;
@@ -107,7 +110,7 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 		// hasProperty -> BlockState#has
 		@Nonnull
 		@Override
-		public IModelData getModelData(@Nonnull IBlockDisplayReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull IModelData tileData) {
+		public IModelData getModelData(@Nonnull BlockAndTintGetter world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull IModelData tileData) {
 			IModelData data = new SimplePaneModelData();
 
 			boolean flag, flag2 = false, flag3 = false;
@@ -145,16 +148,16 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 
 	public static class Loader implements IModelLoader {
 		@Override
-		public void onResourceManagerReload(IResourceManager resourceManager) {}
+		public void onResourceManagerReload(ResourceManager resourceManager) {}
 
 		@Override
 		public IModelGeometry read(JsonDeserializationContext deserCtx, JsonObject modelContents) {
-			IUnbakedModel baseModel, priPosModel, priNegModel, secPosModel, secNegModel;
+			UnbakedModel baseModel, priPosModel, priNegModel, secPosModel, secNegModel;
 
-			JsonObject textures = JSONUtils.getAsJsonObject(modelContents, "textures", null);
+			JsonObject textures = GsonHelper.getAsJsonObject(modelContents, "textures", null);
 
-			JsonObject primarySubContents = JSONUtils.getAsJsonObject(modelContents, "primary");
-			JsonObject secondarySubContents = JSONUtils.getAsJsonObject(modelContents, "secondary");
+			JsonObject primarySubContents = GsonHelper.getAsJsonObject(modelContents, "primary");
+			JsonObject secondarySubContents = GsonHelper.getAsJsonObject(modelContents, "secondary");
 
 			baseModel = loadSubModel(deserCtx, modelContents, "base", textures);
 			priPosModel = loadSubModel(deserCtx, primarySubContents, "positive", textures);
@@ -165,10 +168,10 @@ public class SimplePaneConnectedModel implements IModelGeometry {
 			return new SimplePaneConnectedModel(baseModel, priPosModel, priNegModel, secPosModel, secNegModel);
 		}
 
-		private IUnbakedModel loadSubModel(JsonDeserializationContext deserCtx, JsonObject base, String subModelName, JsonObject textures){
-			JsonObject subModelJson = JSONUtils.getAsJsonObject(base, subModelName);
+		private UnbakedModel loadSubModel(JsonDeserializationContext deserCtx, JsonObject base, String subModelName, JsonObject textures){
+			JsonObject subModelJson = GsonHelper.getAsJsonObject(base, subModelName);
 			if(textures != null){
-				JsonObject subModelTextures = JSONUtils.getAsJsonObject(base, "textures", new JsonObject());
+				JsonObject subModelTextures = GsonHelper.getAsJsonObject(base, "textures", new JsonObject());
 				for(Map.Entry<String, JsonElement> entry : textures.entrySet())
 					subModelTextures.add(entry.getKey(), entry.getValue());
 

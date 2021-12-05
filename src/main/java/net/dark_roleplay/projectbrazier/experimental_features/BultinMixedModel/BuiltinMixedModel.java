@@ -3,12 +3,15 @@ package net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.BlockModel;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.resources.model.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.IResourceManager;
 import net.minecraftforge.client.model.BakedModelWrapper;
 import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.IModelLoader;
@@ -23,24 +26,24 @@ import java.util.function.Function;
 
 public class BuiltinMixedModel implements IModelGeometry<BuiltinMixedModel> {
 
-	private final IUnbakedModel originalModel;
+	private final UnbakedModel originalModel;
 
-	private BuiltinMixedModel(IUnbakedModel originalModel){
+	private BuiltinMixedModel(UnbakedModel originalModel){
 		this.originalModel = originalModel;
 	}
 
 	@Override
-	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<RenderMaterial, TextureAtlasSprite>  spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
+	public BakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<Material, TextureAtlasSprite>  spriteGetter, ModelState modelTransform, ItemOverrides overrides, ResourceLocation modelLocation) {
 		return new BuiltinMixedBakedModel(originalModel.bake(bakery, spriteGetter, modelTransform, modelLocation));
 	}
 
 	@Override
-	public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function<ResourceLocation, IUnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
+	public Collection<Material> getTextures(IModelConfiguration owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
 		return originalModel.getMaterials(modelGetter, missingTextureErrors);
 	}
 
 	public static class BuiltinMixedBakedModel extends BakedModelWrapper {
-		public BuiltinMixedBakedModel(IBakedModel originalModel) {
+		public BuiltinMixedBakedModel(BakedModel originalModel) {
 			super(originalModel);
 		}
 
@@ -64,12 +67,12 @@ public class BuiltinMixedModel implements IModelGeometry<BuiltinMixedModel> {
 
 	public static class Loader implements IModelLoader {
 		@Override
-		public void onResourceManagerReload(IResourceManager resourceManager) {}
+		public void onResourceManagerReload(ResourceManager resourceManager) {}
 
 		@Override
 		public IModelGeometry read(JsonDeserializationContext deserializationContext, JsonObject modelContents) {
 			modelContents.remove("loader");
-			IUnbakedModel model = deserializationContext.deserialize(modelContents, BlockModel.class);
+			UnbakedModel model = deserializationContext.deserialize(modelContents, BlockModel.class);
 
 			return new BuiltinMixedModel(model);
 		}

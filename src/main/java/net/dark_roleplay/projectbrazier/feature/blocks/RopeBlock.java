@@ -39,7 +39,7 @@ public class RopeBlock extends HFacedDecoBlock {
 	}
 
 	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
-		if(facing == Direction.UP && facingState.isAir(world, facingPos)){
+		if(facing == Direction.UP && facingState.isAir()){
 			if(world.getBlockState(facingPos.relative(state.getValue(HORIZONTAL_FACING).getOpposite())).getBlock() != BrazierBlocks.ROPE_ANCHOR.get())
 				return Blocks.AIR.defaultBlockState();
 		}

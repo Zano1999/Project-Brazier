@@ -3,11 +3,14 @@ package net.dark_roleplay.projectbrazier.feature.blockentities;
 import net.dark_roleplay.projectbrazier.feature.blocks.BarrelStorageType;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
 import net.dark_roleplay.projectbrazier.feature.containers.GeneralContainer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Inventory;
@@ -35,8 +38,8 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 	private LazyOptional<ItemStackHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler == null ? itemHandler = createInventory() : itemHandler);
 	private LazyOptional<FluidTank> lazyFluidHandler =  LazyOptional.of(() ->  fluidHandler == null ? fluidHandler = createFluidTank() : fluidHandler);
 
-	public BarrelBlockEntity() {
-		super(BrazierBlockEntities.BARREL_BLOCK_ENTITY.get());
+	public BarrelBlockEntity(BlockPos pos, BlockState state) {
+		super(BrazierBlockEntities.BARREL_BLOCK_ENTITY.get(), pos, state);
 	}
 
 	public BarrelStorageType getStorageType() {
@@ -45,8 +48,8 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 
 	//region (De-)Serialization
 	@Override
-	public void load(BlockState state, CompoundTag compound) {
-		super.load(state, compound);
+	public void load(CompoundTag compound) {
+		super.load(compound);
 		if (compound.contains("fluids")) {
 			this.storageType = BarrelStorageType.FLUID;
 			if(this.fluidHandler == null)
@@ -85,7 +88,7 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 	@Override
 	@Nullable
 	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		return new ClientboundBlockEntityDataPacket(this.getBlockPos(), 1, this.save(new CompoundTag()));
+		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
@@ -96,7 +99,7 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 
 	@Override
 	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt){
-		this.load(null, pkt.getTag());
+		this.load(pkt.getTag());
 	}
 
 	//endregion
@@ -156,13 +159,13 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 	}
 
 	@Override
-	public TextComponent getDisplayName() {
+	public Component getDisplayName() {
 		return new TranslatableComponent("container.projectbrazier.gui.container.barrel");
 	}
 
 	@Nullable
 	@Override
-	public Container createMenu(int id, Inventory playerInventory, Player player) {
+	public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player player) {
 		return new GeneralContainer(id, playerInventory, this.level, this.worldPosition);
 	}
 	//endregion

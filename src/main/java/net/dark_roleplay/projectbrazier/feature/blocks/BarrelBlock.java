@@ -154,7 +154,7 @@ public class BarrelBlock extends DecoBlock {
 
 	@Override
 	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.hasTileEntity() && ((newState.getBlock() != this && newState.getBlock() != otherBlock)  || !newState.hasTileEntity())) {
+		if (state.hasBlockEntity() && ((newState.getBlock() != this && newState.getBlock() != otherBlock)  || !newState.hasBlockEntity())) {
 			//if(!isClosed)
 				ItemHandlerUtil.dropContainerItems(world, pos);
 
@@ -180,12 +180,12 @@ public class BarrelBlock extends DecoBlock {
 //	}
 
 	@Override
-	public boolean hasTileEntity(BlockState state) {
+	public boolean hasBlockEntity() {
 		return true;
 	}
 
 	@Override
-	public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
+	public BlockEntity createBlockEntity(BlockGetter world) {
 		return new BarrelBlockEntity();
 	}
 }

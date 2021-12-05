@@ -1,12 +1,12 @@
 package net.dark_roleplay.projectbrazier.util;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.vertex.VertexFormatElement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.VertexFormatElement;
-import net.minecraft.inventory.container.PlayerContainer;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.math.vector.Vector2f;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.model.pipeline.BakedQuadBuilder;
 
@@ -17,7 +17,7 @@ public class ModelUtility {
 	}
 
 	public static TextureAtlasSprite getBlockSprite(ResourceLocation loc) {
-		return Minecraft.getInstance().getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(loc);
+		return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(loc);
 	}
 
 	public static void generateBakedQuad(BakedQuadBuilder builder, TextureAtlasSprite sprite, Vertex[] vertices) {
@@ -61,11 +61,11 @@ public class ModelUtility {
 	public static class Vertex {
 		private Vec3 pos;
 		private int color;
-		private Vector2f texUV;
-		private Vector2f lightUV;
+		private Vec2 texUV;
+		private Vec2 lightUV;
 		private Vec3 normal;
 
-		public Vertex(Vec3 pos, int color, Vector2f texUV, Vector2f lightUV, Vec3 normal) {
+		public Vertex(Vec3 pos, int color, Vec2 texUV, Vec2 lightUV, Vec3 normal) {
 			this.pos = pos;
 			this.color = color;
 			this.texUV = texUV;
@@ -81,11 +81,11 @@ public class ModelUtility {
 			return color;
 		}
 
-		public Vector2f getTexUV() {
+		public Vec2 getTexUV() {
 			return texUV;
 		}
 
-		public Vector2f getLightUV() {
+		public Vec2 getLightUV() {
 			return lightUV;
 		}
 

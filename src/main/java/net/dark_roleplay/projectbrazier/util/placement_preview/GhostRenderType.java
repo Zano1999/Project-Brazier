@@ -16,9 +16,9 @@ public class GhostRenderType extends RenderType {
 			RenderSystem.disableDepthTest();
 			RenderSystem.enableBlend();
 			RenderSystem.blendFunc(GlStateManager.SourceFactor.CONSTANT_ALPHA, GlStateManager.DestFactor.ONE_MINUS_CONSTANT_ALPHA);
-			RenderSystem.blendColor(1F, 1F, 1F, 0.5F);
+			RenderSystem.setShaderFogColor(1F, 1F, 1F, 0.5F);
 		}, () -> {
-			RenderSystem.blendColor(1F, 1F, 1F, 1F);
+			RenderSystem.setShaderFogColor(1F, 1F, 1F, 1F);
 			RenderSystem.defaultBlendFunc();
 			RenderSystem.disableBlend();
 			RenderSystem.enableDepthTest();

@@ -1,10 +1,11 @@
 package net.dark_roleplay.projectbrazier.feature_client.model_loaders.block_specific.roof_model_loader.util;
 
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.util.AdvancedModelBox;
-import net.minecraft.client.renderer.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
-import net.minecraft.util.math.vector.*;
 
 import java.util.ArrayList;
 import java.util.List;

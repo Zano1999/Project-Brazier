@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature.blockentities;
 
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -23,10 +24,9 @@ public class HangingItemBlockEntity extends BlockEntity {
 	};
 	private final LazyOptional<ItemStackHandler> lazyInventory = LazyOptional.of(() -> inventory);
 
-	public HangingItemBlockEntity() {
-		super(BrazierBlockEntities.SINGLE_ITEM_STORAGE.get());
+	public HangingItemBlockEntity(BlockPos pos, BlockState state) {
+		super(BrazierBlockEntities.SINGLE_ITEM_STORAGE.get(), pos, state);
 	}
-
 
 	@Override
 	public CompoundTag save(CompoundTag compound) {
@@ -36,8 +36,8 @@ public class HangingItemBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	public void load(BlockState state, CompoundTag compound) {
-		super.load(state, compound);
+	public void load(CompoundTag compound) {
+		super.load(compound);
 		if(compound.contains("inventory"))
 			this.inventory.deserializeNBT( compound.getCompound("inventory"));
 	}

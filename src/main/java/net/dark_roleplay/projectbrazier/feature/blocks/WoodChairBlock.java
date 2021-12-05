@@ -2,21 +2,13 @@ package net.dark_roleplay.projectbrazier.feature.blocks;
 
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.HFacedDecoBlock;
 import net.dark_roleplay.projectbrazier.util.sitting.SittingUtil;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.network.play.server.SChunkDataPacket;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.util.math.SectionPos;
-import net.minecraft.util.palette.PalettedContainer;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.ChunkSection;
-import net.minecraft.world.chunk.IChunk;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.server.ServerChunkProvider;
 
 public class WoodChairBlock extends HFacedDecoBlock {
 	public WoodChairBlock(Properties props, String shapeName) {

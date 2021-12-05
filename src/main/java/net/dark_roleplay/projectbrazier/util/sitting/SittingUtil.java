@@ -54,7 +54,7 @@ public class SittingUtil {
 
 		if(initFacing != null){
 			entity.yRotO = initFacing.toYRot();
-			entity.yRot = initFacing.toYRot();
+			entity.setYRot(initFacing.toYRot());
 		}
 
 		((ServerLevel) world).addWithUUID(chairEntity);

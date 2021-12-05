@@ -7,34 +7,33 @@ import net.dark_roleplay.projectbrazier.feature.registrars.BrazierPackets;
 import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybinds;
 import net.dark_roleplay.projectbrazier.util.RenderUtils;
 import net.dark_roleplay.projectbrazier.util.screens.TextureList;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.util.math.vector.Vector2f;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.util.text.KeybindTextComponent;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.client.event.DrawHighlightEvent;
+import net.minecraftforge.client.event.DrawSelectionEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.client.event.RenderLevelLastEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class TertiaryInteractionListener extends AbstractGui {
+public class TertiaryInteractionListener extends GuiComponent {
 
 	private static long pressStart;
 	private static boolean wasButtonPressed = false;
 
 	private static boolean hadSuccess = false;
 	private static BlockHitResult rayTraceResult;
-	private static Pair<Vector2f, Boolean> tertiaryScreenPos;
+	private static Pair<Vec2, Boolean> tertiaryScreenPos;
 
 	@SubscribeEvent
-	public static void renderWorldLastEvent(RenderWorldLastEvent event){
+	public static void renderWorldLastEvent(RenderLevelLastEvent event){
 		if(rayTraceResult == null || rayTraceResult.getType() != HitResult.Type.BLOCK) return;
 
 		BlockState state = Minecraft.getInstance().level.getBlockState(rayTraceResult.getBlockPos());
@@ -44,14 +43,14 @@ public class TertiaryInteractionListener extends AbstractGui {
 		if(!block.hasInteraction(Minecraft.getInstance().level, rayTraceResult.getBlockPos(), state, Minecraft.getInstance().player)) return;
 
 		Vec3 hitBlock = new Vec3(rayTraceResult.getBlockPos().getX() + 0.5, rayTraceResult.getBlockPos().getY() + 0.5, rayTraceResult.getBlockPos().getZ() + 0.5);
-		tertiaryScreenPos = RenderUtils.worldToScreenSpace(hitBlock, event.getPartialTicks(), true);
+		tertiaryScreenPos = RenderUtils.worldToScreenSpace(hitBlock, event.getPartialTick(), true);
 
 		if(tertiaryScreenPos.getSecond())
 			hadSuccess = true;
 	}
 
 	@SubscribeEvent
-	public static void renderBlockOverlay(DrawHighlightEvent event){
+	public static void renderBlockOverlay(DrawSelectionEvent event){
 		if(event.getTarget().getType() != HitResult.Type.BLOCK) return;
 		else rayTraceResult = (BlockHitResult) event.getTarget();
 	}
@@ -66,9 +65,9 @@ public class TertiaryInteractionListener extends AbstractGui {
 			if(!(state.getBlock() instanceof ITertiaryInteractor)) return;
 			ITertiaryInteractor block = (ITertiaryInteractor) state.getBlock();
 
-			FontRenderer fontRenderer = Minecraft.getInstance().font;
+			Font fontRenderer = Minecraft.getInstance().font;
 
-			Vector2f screenPos = tertiaryScreenPos.getFirst();
+			Vec2 screenPos = tertiaryScreenPos.getFirst();
 			int posX = (int) screenPos.x;
 			int posY = (int) screenPos.y;
 

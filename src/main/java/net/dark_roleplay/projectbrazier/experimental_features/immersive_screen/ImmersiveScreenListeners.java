@@ -7,7 +7,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.client.event.RenderLevelLastEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 public class ImmersiveScreenListeners {
 
 	@SubscribeEvent
-	public static void renderImmersiveScreen(RenderWorldLastEvent event){
+	public static void renderImmersiveScreen(RenderLevelLastEvent event){
 		ImmersiveScreen scr = getScreen();
 		if(scr == null) return;
 		scr.renderInWorld(event.getContext(), event.getMatrixStack(), event.getPartialTicks());

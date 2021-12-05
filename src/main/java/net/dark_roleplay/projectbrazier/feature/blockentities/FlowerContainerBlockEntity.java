@@ -8,6 +8,7 @@ import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
 import net.dark_roleplay.projectbrazier.feature_client.blocks.CFlowerContainerHelper;
 import net.dark_roleplay.projectbrazier.util.blocks.ChunkRenderUtils;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -17,7 +18,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.Connection;
 import net.minecraftforge.client.model.data.IModelData;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.DistExecutor;
 
 import javax.annotation.Nonnull;
@@ -30,12 +30,12 @@ public class FlowerContainerBlockEntity extends BlockEntity {
 	protected final int flowerCount;
 	protected List<FlowerContainerData> flowers;
 
-	public FlowerContainerBlockEntity() {
-		this(3);
+	public FlowerContainerBlockEntity(BlockPos pos, BlockState state) {
+		this(3, pos, state);
 	}
 
-	public FlowerContainerBlockEntity(int flowerCount) {
-		super(BrazierBlockEntities.FLOWER_CONTAINER.get());
+	public FlowerContainerBlockEntity(int flowerCount, BlockPos pos, BlockState state) {
+		super(BrazierBlockEntities.FLOWER_CONTAINER.get(), pos, state);
 		this.flowerCount = flowerCount;
 
 		this.flowers = DistExecutor.unsafeRunForDist(() -> () -> (List<FlowerContainerData>)(List<?>) CFlowerContainerHelper.createFlowerData(flowerCount), () -> () -> this.createFlowerData(flowerCount));
@@ -82,11 +82,11 @@ public class FlowerContainerBlockEntity extends BlockEntity {
 
 	//region (De-)Serialization
 	@Override
-	public void load(BlockState state, CompoundTag compound) {
-		super.load(state, compound);
+	public void load(CompoundTag compound) {
+		super.load(compound);
 
 		if(!compound.contains("flowers")) return;
-		ListTag flowers = compound.getList("flowers", Constants.NBT.TAG_COMPOUND);
+		ListTag flowers = compound.getList("flowers", CompoundTag.TAG_COMPOUND);
 
 		for(int i = 0; i < flowers.size(); i++)
 			if(!flowers.getCompound(i).isEmpty())
@@ -115,7 +115,7 @@ public class FlowerContainerBlockEntity extends BlockEntity {
 	@Override
 	@Nullable
 	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		return new ClientboundBlockEntityDataPacket(this.getBlockPos(), 1, this.save(new CompoundTag()));
+		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public class FlowerContainerBlockEntity extends BlockEntity {
 
 	@Override
 	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt){
-		this.load(null, pkt.getTag());
+		this.load(pkt.getTag());
 		requestModelDataUpdate();
 		if(this.getLevel().isClientSide())
 			ChunkRenderUtils.rerenderChunk((ClientLevel) this.getLevel(), this.getBlockPos());

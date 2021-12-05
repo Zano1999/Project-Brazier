@@ -1,7 +1,9 @@
 package net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.EmptyModelData;
 import net.minecraftforge.client.model.data.IModelData;
 
@@ -9,8 +11,8 @@ import javax.annotation.Nonnull;
 
 public class MixedTileEntity extends BlockEntity {
 	
-	public MixedTileEntity(BlockEntityType<?> tileEntityType) {
-		super(tileEntityType);
+	public MixedTileEntity(BlockEntityType<?> tileEntityType, BlockPos pos, BlockState state) {
+		super(tileEntityType, pos, state);
 	}
 
 	@Nonnull

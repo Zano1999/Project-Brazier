@@ -7,6 +7,7 @@ import net.dark_roleplay.projectbrazier.util.blocks.HFacedVoxelShape;
 import net.dark_roleplay.projectbrazier.util.json.VoxelShapeLoader;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -17,7 +18,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.ArrayList;
@@ -58,12 +58,12 @@ public class RopeAnchorBlock extends HFacedDecoBlock implements ITertiaryInterac
 
 		List<BlockPos> ropePositions = new ArrayList<BlockPos>();
 
-		BlockPos.Mutable iterPos = pos.mutable();
+		BlockPos.MutableBlockPos iterPos = pos.mutable();
 		iterPos.move(dir).move(Direction.DOWN);
 
 		for(int i = 0; i < 32; i++){
 			BlockState targetState = world.getBlockState(iterPos);
-			if(!isDropped && targetState.isAir(world, iterPos))
+			if(!isDropped && targetState.isAir())
 				ropePositions.add(iterPos.immutable());
 			else if(isDropped && targetState.getBlock() == BrazierBlocks.ROPE.get() && targetState.getValue(HORIZONTAL_FACING) == dir) {
 				ropePositions.add(iterPos.immutable());
@@ -89,7 +89,7 @@ public class RopeAnchorBlock extends HFacedDecoBlock implements ITertiaryInterac
 	}
 
 	@Override
-	public TextComponent getInteractionTooltip(Level world, BlockPos pos, BlockState state, Player player) {
+	public Component getInteractionTooltip(Level world, BlockPos pos, BlockState state, Player player) {
 		return state.getValue(IS_DROPPED) ?
 				new TranslatableComponent("interaction.projectbrazier.rope_anchor.pull_up") :
 				new TranslatableComponent("interaction.projectbrazier.rope_anchor.drop");

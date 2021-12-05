@@ -2,18 +2,17 @@ package net.dark_roleplay.projectbrazier.util.sitting;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.Direction;
-import net.minecraft.entity.*;
-import net.minecraft.nbt.NBTUtil;
-import net.minecraft.network.IPacket;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.util.TransportationHelper;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -54,26 +53,26 @@ public class SittableEntity extends Entity {
 	public void tick() {
 		if (!this.getCommandSenderWorld().isClientSide) {
 			if (!this.isVehicle() || !this.requiredBlock.isAir() && this.requiredBlock != this.getCommandSenderWorld().getBlockState(this.blockPosition())) {
-				this.remove();
+				this.remove(RemovalReason.DISCARDED);
 			}
 		}
 	}
 
 	protected void applyYawToEntity(Entity entityToUpdate) {
-		if (this.xRot < 89 || this.xRot > 91) return;
-		entityToUpdate.setYBodyRot(this.yRot);
-		float f = Mth.wrapDegrees(entityToUpdate.yRot - this.yRot);
+		if (this.getXRot() < 89 || this.getXRot() > 91) return;
+		entityToUpdate.setYBodyRot(this.getYRot());
+		float f = Mth.wrapDegrees(entityToUpdate.getYRot() - this.getYRot());
 		float f1 = Mth.clamp(f, -105.0F, 105.0F);
 		entityToUpdate.yRotO += f1 - f;
-		entityToUpdate.yRot += f1 - f;
-		entityToUpdate.setYHeadRot(entityToUpdate.yRot);
+		entityToUpdate.setYRot(entityToUpdate.getYRot() + f1 - f);
+		entityToUpdate.setYHeadRot(entityToUpdate.getYRot());
 	}
 
 	@Override
 	protected Vec3 limitPistonMovement(Vec3 pos) {
 		Vec3 val = limitPistonMovement(pos);
 		if(val != Vec3.ZERO)
-			this.remove();
+			this.remove(RemovalReason.DISCARDED);
 		return val;
 	}
 
@@ -94,16 +93,16 @@ public class SittableEntity extends Entity {
 
 	@Override
 	protected void readAdditionalSaveData(CompoundTag compound) {
-		NBTUtil.readBlockState(compound.getCompound("requiredBlock"));
+		NbtUtils.readBlockState(compound.getCompound("requiredBlock"));
 	}
 
 	@Override
 	protected void addAdditionalSaveData(CompoundTag compound) {
-		compound.put("requiredBlock", NBTUtil.writeBlockState(this.requiredBlock));
+		compound.put("requiredBlock", NbtUtils.writeBlockState(this.requiredBlock));
 	}
 
 	@Override
-	public IPacket<?> getAddEntityPacket() {
+	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
@@ -133,7 +132,7 @@ public class SittableEntity extends Entity {
 				dir = Direction.EAST;
 		}
 
-		BlockPos.Mutable testPos = pos.mutable();
+		BlockPos.MutableBlockPos testPos = pos.mutable();
 
 		if(dir != Direction.UP && (isValidDismountPosition(world, testPos.move(dir), rider) ||
 				isValidDismountPosition(world, testPos.setWithOffset(pos, dir.getClockWise()), rider) ||
@@ -147,6 +146,6 @@ public class SittableEntity extends Entity {
 	}
 
 	private boolean isValidDismountPosition(Level world, BlockPos pos, Entity entity){
-		return world.getBlockState(pos).isAir(world, pos) && world.getBlockState(pos.below()).entityCanStandOnFace(world, pos, entity, Direction.UP);
+		return world.getBlockState(pos).isAir() && world.getBlockState(pos.below()).entityCanStandOnFace(world, pos, entity, Direction.UP);
 	}
 }

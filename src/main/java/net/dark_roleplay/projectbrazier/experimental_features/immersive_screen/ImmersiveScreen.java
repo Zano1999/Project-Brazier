@@ -1,6 +1,6 @@
 package net.dark_roleplay.projectbrazier.experimental_features.immersive_screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierEntities;
 import net.dark_roleplay.projectbrazier.util.RenderUtils;
@@ -27,12 +27,12 @@ public abstract class ImmersiveScreen extends Screen {
 		Minecraft.getInstance().setCameraEntity(cameraEntity);
 	}
 
-	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+	public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
 		this.raytrace = RenderUtils.screenToWorldSpaceRay(partialTicks);
 	}
 
-	public abstract void renderInWorld(WorldRenderer context, MatrixStack matrixStack, float partialTicks);
+	public abstract void renderInWorld(WorldRenderer context, PoseStack matrixStack, float partialTicks);
 
 	public Vec3 getCameraPos() {
 		return cameraPos;
