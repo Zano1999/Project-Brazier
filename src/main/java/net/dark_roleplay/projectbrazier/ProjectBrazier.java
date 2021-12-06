@@ -1,6 +1,5 @@
 package net.dark_roleplay.projectbrazier;
 
-import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorRegistrar;
 import net.dark_roleplay.projectbrazier.feature.registrars.*;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
@@ -40,7 +39,7 @@ public class ProjectBrazier {
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ProjectBrazierClient::modConstructor);
 
 
-		DecorRegistrar.register();
+//		DecorRegistrar.register();
 		//Decals
 //        FMLJavaModLoadingContext.get().getModEventBus().addListener(DecalRegistry::registerRegistry);
 //        MinecraftForge.EVENT_BUS.addGenericListener(Chunk.class, CapabilityAttachListener::attachChunkCapability);

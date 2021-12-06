@@ -2,7 +2,6 @@ package net.dark_roleplay.projectbrazier.util.capabilities;
 
 import net.dark_roleplay.projectbrazier.util.CapabilityUtil;
 import net.minecraft.core.BlockPos;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.LazyOptional;
@@ -16,8 +15,9 @@ public class ItemHandlerUtil {
 
 		LazyOptional<IItemHandler> inventory = CapabilityUtil.getInventory(world, pos);
 		inventory.ifPresent(inv -> {
-			for(int i = 0; i < inv.getSlots(); i++)
-				InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inv.getStackInSlot(i));
+			//for(int i = 0; i < inv.getSlots(); i++)
+				//TODO Drop items
+				//InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inv.getStackInSlot(i));
 		});
 	}
 }

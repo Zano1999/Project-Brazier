@@ -1,11 +1,11 @@
 package net.dark_roleplay.projectbrazier.experimental_features.immersive_screen;
 
+import com.mojang.math.Vector3f;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.IPacket;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
 
@@ -28,7 +28,7 @@ public class CameraEntity extends Entity {
 	protected void addAdditionalSaveData(CompoundTag compound) {}
 
 	@Override
-	public IPacket<?> getAddEntityPacket() {
+	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

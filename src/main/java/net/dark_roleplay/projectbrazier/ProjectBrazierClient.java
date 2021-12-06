@@ -1,12 +1,9 @@
 package net.dark_roleplay.projectbrazier;
 
 import net.dark_roleplay.marg.common.material.MargMaterial;
-import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.BuiltinMixedModel;
-import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorClientListener;
-import net.dark_roleplay.projectbrazier.experimental_features.decorator.DecorListener;
+import net.dark_roleplay.projectbrazier.experimental_features.builtin_mixed_model.BuiltinMixedModel;
 import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItem;
 import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItemListeners;
-import net.dark_roleplay.projectbrazier.experimental_features.walking_gui.PassiveScreenHelper;
 import net.dark_roleplay.projectbrazier.feature.registrars.*;
 import net.dark_roleplay.projectbrazier.feature_client.blockentityrenderers.BarrelBlockEntityRenderer;
 import net.dark_roleplay.projectbrazier.feature_client.listeners.TertiaryInteractionListener;
@@ -47,8 +44,8 @@ public class ProjectBrazierClient {
 	public static void modConstructor(){
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(ProjectBrazierClient::setupClientStuff);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(ProjectBrazierClient::registerModelLoaders);
-		MinecraftForge.EVENT_BUS.addListener(DecorListener::bakeChunk);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(DecorClientListener::registerModels);
+//		MinecraftForge.EVENT_BUS.addListener(DecorListener::bakeChunk);
+//		FMLJavaModLoadingContext.get().getModEventBus().addListener(DecorClientListener::registerModels);
 
 		MinecraftForge.EVENT_BUS.addListener(TertiaryInteractionListener::renderBlockOverlay);
 		MinecraftForge.EVENT_BUS.addListener(TertiaryInteractionListener::renderGameOverlay);
@@ -65,7 +62,7 @@ public class ProjectBrazierClient {
 		BrazierKeybinds.registerKeybinds(event);
 		ProjectBrazierClient.registerRenderLayers();
 		//TODO Experimental
-		PassiveScreenHelper.editKeybinds();
+//		PassiveScreenHelper.editKeybinds();
 
 		MenuScreens.register(BrazierContainers.GENERAL_CONTAINER.get(), GeneralContainerScreen::new);
 	}

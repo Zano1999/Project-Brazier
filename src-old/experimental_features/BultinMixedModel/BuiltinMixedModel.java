@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel;
+package net.dark_roleplay.projectbrazier.experimental_features.builtin_mixed_model;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;

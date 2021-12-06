@@ -1,30 +1,30 @@
 package net.dark_roleplay.projectbrazier.experimental_features.decorator;
 
+import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.RegionRenderCacheBuilder;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import net.minecraft.client.renderer.ChunkBufferBuilderPack;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.chunk.ChunkRenderCache;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
+import net.minecraft.client.renderer.chunk.RenderChunkRegion;
 import net.minecraft.core.BlockPos;
 import net.minecraftforge.eventbus.api.Event;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
 public class ChunkBakeEvent extends Event {
 
 	private final ChunkRenderDispatcher.CompiledChunk compiledChunks;
-	private final RegionRenderCacheBuilder bufferProvider;
+	private final ChunkBufferBuilderPack bufferProvider;
 	private final PoseStack matrixstack;
 	private final Random random;
 	private final BlockRenderDispatcher renderDispatcher;
-	private final ChunkRenderCache chunkCache;
+	private final RenderChunkRegion chunkCache;
 	private final BlockPos pos;
 
-	public ChunkBakeEvent(ChunkRenderDispatcher.CompiledChunk compiledChunks, RegionRenderCacheBuilder bufferProvider, PoseStack matrixstack, Random random, BlockRenderDispatcher renderDispatcher, ChunkRenderCache chunkCache, BlockPos pos) {
+	public ChunkBakeEvent(ChunkRenderDispatcher.CompiledChunk compiledChunks, ChunkBufferBuilderPack bufferProvider, PoseStack matrixstack, Random random, BlockRenderDispatcher renderDispatcher, RenderChunkRegion chunkCache, BlockPos pos) {
 		this.compiledChunks = compiledChunks;
 		this.bufferProvider = bufferProvider;
 		this.matrixstack = matrixstack;
@@ -36,7 +36,7 @@ public class ChunkBakeEvent extends Event {
 
 	private void enableRenderType(BufferBuilder buffer, RenderType type){
 		if(compiledChunks.hasLayer.add(type))
-			buffer.begin(GL11.GL_QUADS, DefaultVertexFormat.BLOCK);
+			buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.BLOCK);
 
 		compiledChunks.isCompletelyEmpty = false;
 		compiledChunks.hasBlocks.add(type);
@@ -52,7 +52,7 @@ public class ChunkBakeEvent extends Event {
 		return matrixstack;
 	}
 
-	public ChunkRenderCache getChunkCache() {
+	public RenderChunkRegion getChunkCache() {
 		return chunkCache;
 	}
 

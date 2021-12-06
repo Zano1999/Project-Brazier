@@ -12,7 +12,6 @@ import net.dark_roleplay.projectbrazier.util.screens.ScreenTextureWrapper;
 import net.dark_roleplay.projectbrazier.util.screens.TextureList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
-import net.minecraft.client.gui.widget.list.KeyBindingList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -58,10 +57,10 @@ public class SelectiveBlockItemListeners extends GuiComponent {
 
 		//TODO Render keybinds
 
-		KeybindRenderer.renderKeybind(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_PREV.getKeyBinding(), matrixStack, Minecraft.getInstance().font,
-				xOffset + 7 - (KeybindRenderer.getKeybindWidth(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_PREV.getKeyBinding(), Minecraft.getInstance().font)), yOffset + 6, false);
-		KeybindRenderer.renderKeybind(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_NEXT.getKeyBinding(), matrixStack, Minecraft.getInstance().font,
-				xOffset + 7 - (KeybindRenderer.getKeybindWidth(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_NEXT.getKeyBinding(), Minecraft.getInstance().font)), yOffset + 51, false);
+		KeybindRenderer.renderKeybind(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_PREV, matrixStack, Minecraft.getInstance().font,
+				xOffset + 7 - (KeybindRenderer.getKeybindWidth(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_PREV, Minecraft.getInstance().font)), yOffset + 6, false);
+		KeybindRenderer.renderKeybind(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_NEXT, matrixStack, Minecraft.getInstance().font,
+				xOffset + 7 - (KeybindRenderer.getKeybindWidth(BrazierKeybinds.SELECTIVE_BLOCK_ITEM_NEXT, Minecraft.getInstance().font)), yOffset + 51, false);
 
 	}
 

@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -27,9 +28,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.Nullable;
-
-public class HangingItemBlock extends WallHFacedDecoBlock {
+public class HangingItemBlock extends WallHFacedDecoBlock implements EntityBlock {
 
 	public static final BooleanProperty HIDDEN_LEVER = BrazierStateProperties.HIDDEN_LEVER;
 
@@ -51,15 +50,10 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 		builder.add(HIDDEN_LEVER);
 	}
 
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
-	@Override
-	public ItemStack getPickBlock(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player){
-		return this.getItemStack(world, pos, state);
-	}
+//	@Override
+//	public ItemStack getPickBlock(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player){
+//		return this.getItemStack(world, pos, state);
+//	}
 
 	@Override
 	@Deprecated
@@ -92,12 +86,6 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 	@Deprecated
 	public int getDirectSignal(BlockState state, BlockGetter blockAccess, BlockPos pos, Direction side) {
 		return !this.isSignalSource(state) ? 0 : (state.getValue(HORIZONTAL_FACING) == side) ? power : 0;
-	}
-
-	@Nullable
-	@Override
-	public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
-		return BrazierBlockEntities.SINGLE_ITEM_STORAGE.get().create();
 	}
 
 	@Override
@@ -152,5 +140,11 @@ public class HangingItemBlock extends WallHFacedDecoBlock {
 		if(handler == null) return ItemStack.EMPTY;
 
 		return handler.getStackInSlot(0);
+	}
+
+	@org.jetbrains.annotations.Nullable
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return BrazierBlockEntities.SINGLE_ITEM_STORAGE.get().create(pos, state);
 	}
 }

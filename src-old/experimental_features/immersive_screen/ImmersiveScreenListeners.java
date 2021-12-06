@@ -1,10 +1,10 @@
 package net.dark_roleplay.projectbrazier.experimental_features.immersive_screen;
 
+import com.mojang.math.Vector3f;
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.RenderLevelLastEvent;
@@ -18,7 +18,7 @@ public class ImmersiveScreenListeners {
 	public static void renderImmersiveScreen(RenderLevelLastEvent event){
 		ImmersiveScreen scr = getScreen();
 		if(scr == null) return;
-		scr.renderInWorld(event.getContext(), event.getMatrixStack(), event.getPartialTicks());
+		scr.renderInWorld(event.getLevelRenderer(), event.getPoseStack(), event.getPartialTick());
 	}
 
 	@SubscribeEvent

@@ -2,13 +2,12 @@ package net.dark_roleplay.projectbrazier.feature_client.blocks;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.IQuadProvider;
+import net.dark_roleplay.projectbrazier.experimental_features.builtin_mixed_model.IQuadProvider;
 import net.dark_roleplay.projectbrazier.feature.blocks.FlowerContainerData;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Direction;

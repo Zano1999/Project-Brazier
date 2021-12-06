@@ -11,16 +11,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.world.item.Item;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootParameters;
-import net.minecraft.tileentity.ShulkerBoxTileEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.sounds.SoundSource;
@@ -35,10 +31,11 @@ import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class BarrelBlock extends DecoBlock {
+public class BarrelBlock extends DecoBlock implements EntityBlock {
 	private boolean isClosed;
 	private Block otherBlock;
 	private MargMaterial material;
@@ -179,13 +176,9 @@ public class BarrelBlock extends DecoBlock {
 //		return super.getDrops(state, builder);
 //	}
 
+	@Nullable
 	@Override
-	public boolean hasBlockEntity() {
-		return true;
-	}
-
-	@Override
-	public BlockEntity createBlockEntity(BlockGetter world) {
-		return new BarrelBlockEntity();
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new BarrelBlockEntity(pos, state);
 	}
 }

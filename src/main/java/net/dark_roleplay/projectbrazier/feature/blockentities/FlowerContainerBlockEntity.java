@@ -1,8 +1,8 @@
 package net.dark_roleplay.projectbrazier.feature.blockentities;
 
 import com.google.common.collect.ImmutableList;
-import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.BuiltinMixedModelData;
-import net.dark_roleplay.projectbrazier.experimental_features.BultinMixedModel.IQuadProvider;
+import net.dark_roleplay.projectbrazier.experimental_features.builtin_mixed_model.BuiltinMixedModelData;
+import net.dark_roleplay.projectbrazier.experimental_features.builtin_mixed_model.IQuadProvider;
 import net.dark_roleplay.projectbrazier.feature.blocks.FlowerContainerData;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
 import net.dark_roleplay.projectbrazier.feature_client.blocks.CFlowerContainerHelper;

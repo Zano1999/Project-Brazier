@@ -2,14 +2,14 @@ package net.dark_roleplay.projectbrazier.experimental_features.immersive_screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
+import com.mojang.math.Vector3f;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierEntities;
 import net.dark_roleplay.projectbrazier.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.util.math.vector.Vector3f;
 
 public abstract class ImmersiveScreen extends Screen {
 
@@ -32,7 +32,7 @@ public abstract class ImmersiveScreen extends Screen {
 		this.raytrace = RenderUtils.screenToWorldSpaceRay(partialTicks);
 	}
 
-	public abstract void renderInWorld(WorldRenderer context, PoseStack matrixStack, float partialTicks);
+	public abstract void renderInWorld(LevelRenderer context, PoseStack matrixStack, float partialTicks);
 
 	public Vec3 getCameraPos() {
 		return cameraPos;

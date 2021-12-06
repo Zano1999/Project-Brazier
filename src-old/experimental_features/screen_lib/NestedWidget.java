@@ -2,15 +2,16 @@ package net.dark_roleplay.projectbrazier.experimental_features.screen_lib;
 
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.FocusableGui;
-import net.minecraft.client.gui.IGuiEventListener;
-import net.minecraft.client.gui.IRenderable;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Widget;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.narration.NarratableEntry;
 
 import java.util.List;
 
-public class NestedWidget extends FocusableGui implements IRenderable {
-	protected List<IGuiEventListener> listeners = Lists.newArrayList();
-	protected List<IRenderable> renderers = Lists.newArrayList();
+public class NestedWidget{// extends AbstractWidget implements Widget, NarratableEntry {
+	protected List<GuiEventListener> listeners = Lists.newArrayList();
+	protected List<Widget> renderers = Lists.newArrayList();
 
 	protected int posX, posY;
 	protected int width, height;
@@ -22,29 +23,26 @@ public class NestedWidget extends FocusableGui implements IRenderable {
 		this.height = height;
 	}
 
-	@Override
-	public List<? extends IGuiEventListener> children() {
+	public List<? extends GuiEventListener> children() {
 		return listeners;
 	}
 
-	@Override
 	public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-		for(IRenderable child : renderers){
+		for(Widget child : renderers){
 			child.render(matrixStack, mouseX, mouseY, partialTicks);
 		}
 	}
 
-	public <T extends IRenderable & IGuiEventListener> void addChild(T child){
+	public <T extends Widget & GuiEventListener> void addChild(T child){
 		this.listeners.add(child);
 		this.renderers.add(child);
 	}
 
-	public <T extends IRenderable & IGuiEventListener> void removeChild(T child){
+	public <T extends Widget & GuiEventListener> void removeChild(T child){
 		this.listeners.remove(child);
 		this.renderers.remove(child);
 	}
 
-	@Override
 	public boolean isMouseOver(double mouseX, double mouseY) {
 		return mouseX > this.posX && mouseY > this.posY && mouseX < this.posX + this.width && mouseY < this.posY + this.height;
 	}

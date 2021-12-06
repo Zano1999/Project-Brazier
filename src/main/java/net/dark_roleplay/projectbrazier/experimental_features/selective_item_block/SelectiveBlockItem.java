@@ -4,24 +4,25 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.state.Property;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -42,7 +43,7 @@ public class SelectiveBlockItem extends Item {
 	}
 
 	@Override
-	public InteractionResult useOn(ItemUseContext context) {
+	public InteractionResult useOn(UseOnContext context) {
 		InteractionResult actionresulttype = this.tryPlace(new BlockPlaceContext(context));
 		return !actionresulttype.consumesAction() && this.isEdible() ? this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult() : actionresulttype;
 	}
@@ -78,7 +79,7 @@ public class SelectiveBlockItem extends Item {
 
 					SoundType soundtype = blockstate1.getSoundType(world, blockpos, context.getPlayer());
 					world.playSound(playerentity, blockpos, this.getPlaceSound(blockstate1, world, blockpos, context.getPlayer()), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-					if (playerentity == null || !playerentity.abilities.instabuild) {
+					if (playerentity == null || !playerentity.getAbilities().instabuild) {
 						itemstack.shrink(1);
 					}
 
@@ -122,13 +123,13 @@ public class SelectiveBlockItem extends Item {
 		return blockstate;
 	}
 
-	public TextComponent getName(ItemStack stack) {
+	public Component getName(ItemStack stack) {
 		return new TranslatableComponent(this.getDescriptionId(stack));
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public TextComponent getDescription() {
+	public Component getDescription() {
 		return new TranslatableComponent(Minecraft.getInstance().player == null ? this.blocks[0].getDescriptionId() : this.getCurrentBlock(Minecraft.getInstance().player.getGameProfile()).getDescriptionId());
 	}
 

@@ -1,10 +1,8 @@
 package net.dark_roleplay.projectbrazier.feature.registrars;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
-import net.dark_roleplay.projectbrazier.experimental_features.decorator.packets.DecorInitSyncPacket;
 import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItemPacket;
 import net.dark_roleplay.projectbrazier.feature.packets.TertiaryInteractionPacket;
-import net.dark_roleplay.projectbrazier.feature.packets.SyncDrawbridgeState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
@@ -22,9 +20,8 @@ public class BrazierPackets {
 			.simpleChannel();
 
 	public static void registerPackets() {
-		CHANNEL.<SyncDrawbridgeState>registerMessage(0, SyncDrawbridgeState.class, SyncDrawbridgeState::encode, SyncDrawbridgeState::decode, SyncDrawbridgeState::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-		CHANNEL.registerMessage(1, DecorInitSyncPacket.class, DecorInitSyncPacket::encode, DecorInitSyncPacket::decode, DecorInitSyncPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-		CHANNEL.registerMessage(2, TertiaryInteractionPacket.class, TertiaryInteractionPacket::encode, TertiaryInteractionPacket::decode, TertiaryInteractionPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
-		CHANNEL.registerMessage(3, SelectiveBlockItemPacket.class, SelectiveBlockItemPacket::encode, SelectiveBlockItemPacket::decode, SelectiveBlockItemPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
+//		CHANNEL.<SyncDrawbridgeState>registerMessage(0, SyncDrawbridgeState.class, SyncDrawbridgeState::encode, SyncDrawbridgeState::decode, SyncDrawbridgeState::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+		CHANNEL.registerMessage(0, TertiaryInteractionPacket.class, TertiaryInteractionPacket::encode, TertiaryInteractionPacket::decode, TertiaryInteractionPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
+		CHANNEL.registerMessage(1, SelectiveBlockItemPacket.class, SelectiveBlockItemPacket::encode, SelectiveBlockItemPacket::decode, SelectiveBlockItemPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
 	}
 }

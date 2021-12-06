@@ -21,6 +21,9 @@ public final class VoxelShapeHelper {
 		if(direction == Direction.NORTH) return shape;
 		Set<VoxelShape> rotatedShapes = new HashSet<VoxelShape>();
 
+		//TODO Fix VoxelShape rotation
+		if(true) return shape;
+
 		shape.forAllBoxes((x1, y1, z1, x2, y2, z2) -> {
 			y1 = (y1 * 16) - 8; y2 = (y2 * 16) - 8;
 			x1 = (x1 * 16) - 8; x2 = (x2 * 16) - 8;

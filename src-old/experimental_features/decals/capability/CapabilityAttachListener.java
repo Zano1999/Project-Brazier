@@ -4,7 +4,7 @@ import net.dark_roleplay.projectbrazier.ProjectBrazier;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
@@ -23,7 +23,7 @@ public class CapabilityAttachListener {
 	/**
 	 * Registered by {@link ProjectBrazier#ProjectBrazier() Constructor}
 	 */
-	public static void attachChunkCapability(AttachCapabilitiesEvent<Chunk> event){
+	public static void attachChunkCapability(AttachCapabilitiesEvent<ChunkAccess> event){
 		//TODO 1.17 update this vor negative world heights
 		event.addCapability(DecalCapabilityKey, new DecalChunkProvider(0, event.getObject().getMaxBuildHeight()));
 	}
@@ -48,15 +48,25 @@ public class CapabilityAttachListener {
 
 		@Override
 		public CompoundTag serializeNBT() {
-			if (cap == null) return new CompoundTag();
-			return (CompoundTag) DECAL_CAPABILITY.writeNBT(cap, null);
+			return null;
 		}
 
 		@Override
 		public void deserializeNBT(CompoundTag nbt) {
-			if (nbt.isEmpty()) return;
-			cap = DECAL_CAPABILITY.getDefaultInstance();
-			DECAL_CAPABILITY.readNBT(cap, null, nbt);
+
 		}
+
+//		@Override
+//		public CompoundTag serializeNBT() {
+//			if (cap == null) return new CompoundTag();
+//			return (CompoundTag) DECAL_CAPABILITY.writeNBT(cap, null);
+//		}
+//
+//		@Override
+//		public void deserializeNBT(CompoundTag nbt) {
+//			if (nbt.isEmpty()) return;
+//			cap = DECAL_CAPABILITY.getDefaultInstance();
+//			DECAL_CAPABILITY.readNBT(cap, null, nbt);
+//		}
 	}
 }

@@ -5,29 +5,29 @@ import net.dark_roleplay.projectbrazier.feature.blockentities.FlowerContainerBlo
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.DecoBlock;
 import net.dark_roleplay.projectbrazier.util.json.VoxelShapeLoader;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.core.Vec3i;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraftforge.common.ForgeTagHandler;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
-public class FlowerContainerBlock extends DecoBlock {
+public class FlowerContainerBlock extends DecoBlock implements EntityBlock {
 
 	private static Tags.IOptionalNamedTag<Item> POT_PLANTS = ForgeTagHandler.createOptionalTag(ForgeRegistries.ITEMS, new ResourceLocation(ProjectBrazier.MODID, "pot_plant"));
 	private VoxelShape allowedPlacementArea;
@@ -77,7 +77,8 @@ public class FlowerContainerBlock extends DecoBlock {
 				FlowerContainerBlockEntity flowerTe = (FlowerContainerBlockEntity) te;
 				ItemStack stack = flowerTe.removeFlower();
 				while(!stack.isEmpty()) {
-					InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+					//TODO drop Flowers
+					//InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
 					stack = flowerTe.removeFlower();
 				}
 			}
@@ -86,13 +87,9 @@ public class FlowerContainerBlock extends DecoBlock {
 		super.onRemove(state, world, pos, newState, isMoving);
 	}
 
+	@Nullable
 	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
-	@Override
-	public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
-		return new FlowerContainerBlockEntity();
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new FlowerContainerBlockEntity(pos, state);
 	}
 }
