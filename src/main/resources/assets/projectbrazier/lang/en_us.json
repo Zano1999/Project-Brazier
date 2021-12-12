@@ -86,6 +86,8 @@
 	"marg.material.apple": "Apple",
 	"marg.material.orange": "Orange",
 
+	"lang_gen.projectbrazier.candle_holder": "${custom} Candle Holder",
+	"lang_gen.projectbrazier.wall_candle_holder": "${custom} Wall Candle Holder",
 	"lang_gen.projectbrazier.polstered_bench": "${custom} Polstered ${material} Bench",
 	"lang_gen.projectbrazier.log_bench": "${material} Log Bench",
 	"lang_gen.projectbrazier.log_chair": "${material} Log Chair",

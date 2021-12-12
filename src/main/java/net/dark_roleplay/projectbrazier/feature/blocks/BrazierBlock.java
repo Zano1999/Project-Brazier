@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature.blocks;
 
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.DecoBlock;
+import net.dark_roleplay.projectbrazier.feature.blocks.templates.MedievalProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -26,7 +27,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public class BrazierBlock extends DecoBlock {
 
-	public static final BooleanProperty BURNING = BooleanProperty.create("burning");
+	public static final BooleanProperty BURNING = MedievalProperties.BURNING;
 
 	private final int fireDamage;
 

@@ -1,5 +1,6 @@
 package net.dark_roleplay.projectbrazier.util.screens;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 
@@ -19,6 +20,7 @@ public class ScreenTextureWrapper {
 	}
 
 	public void bind(){
-		Minecraft.getInstance().getTextureManager().bindForSetup(textureLocation);
+		RenderSystem.setShaderTexture(0, textureLocation);
+		//Minecraft.getInstance().getTextureManager().bindForSetup(textureLocation);
 	}
 }

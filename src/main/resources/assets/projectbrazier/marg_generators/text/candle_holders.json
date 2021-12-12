@@ -1,0 +1,47 @@
+{
+	"generatorVersion": 0,
+	"customs": [
+		"black",
+		"blue",
+		"brown",
+		"cyan",
+		"gray",
+		"green",
+		"light_blue",
+		"light_gray",
+		"lime",
+		"magenta",
+		"orange",
+		"pink",
+		"purple",
+		"red",
+		"white",
+		"yellow"
+	],
+	"tasks": [
+		{
+			"input": "projectbrazier:blockstates/generator/candle_holder.json",
+			"output": "projectbrazier:blockstates/${custom}_candle_holder.json"
+		},
+		{
+			"input": "projectbrazier:blockstates/generator/wall_candle_holder.json",
+			"output": "projectbrazier:blockstates/${custom}_wall_candle_holder.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/candle_holder.json",
+			"output": "projectbrazier:models/block/candle_holders/${custom}_candle_holder.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/wall_candle_holder.json",
+			"output": "projectbrazier:models/block/candle_holders/${custom}_wall_candle_holder.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/item/candle_holder.json",
+			"output": "projectbrazier:models/item/${custom}_candle_holder.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/item/wall_candle_holder.json",
+			"output": "projectbrazier:models/item/${custom}_wall_candle_holder.json"
+		}
+	]
+}

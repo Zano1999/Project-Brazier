@@ -20,6 +20,7 @@ curseforge {
 			releaseType = getDefaultString('curse_release_type', 'alpha')
 			changelog = project.ext.modChangelog
 			changelogType = 'markdown'
+			addGameVersion project.ext.minecraft_version
 			if (project.hasProperty('curse_versions')) {
 				for (String version : getOptionalString('curse_versions').split(', ')) {
 					addGameVersion version
@@ -27,6 +28,7 @@ curseforge {
 			}
 
 			mainArtifact(jar) {
+				displayName = "$project.ext.mod_name - $project.ext.minecraft_version - v$project.version"
 				if (project.hasProperty('curse_requirements') || project.hasProperty('curse_optionals')) {
 					relations {
 						if (project.hasProperty('curse_requirements')) {

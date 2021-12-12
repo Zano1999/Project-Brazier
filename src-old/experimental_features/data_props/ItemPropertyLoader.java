@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.experimental_features.data_props;
+package net.dark_roleplay.projectbrazier.experimental_features.fixed_data;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

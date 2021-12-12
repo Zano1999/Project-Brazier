@@ -6,9 +6,7 @@ if(project.hasProperty('maven_url')){
     jar.finalizedBy('reobfJar')
     publishing {
         publications {
-            artifactId project.archivesBaseName
-
-            mavenJava(MavenPublications){
+            mavenJava(MavenPublication){
                 artifact jar
                 artifact sourcesJar { classifier = 'sources' }
                 artifact javadocJar { classifier = 'javadoc' }

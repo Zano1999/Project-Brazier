@@ -99,15 +99,14 @@ public class FlowerContainerBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag compound) {
-		super.save(compound);
+	public void saveAdditional(CompoundTag compound) {
+		super.saveAdditional(compound);
 
 		ListTag flowers = new ListTag();
 		for(FlowerContainerData flower : this.getFlowerData())
 			flowers.add(flower.serialize());
 
 		compound.put("flowers", flowers);
-		return compound;
 	}
 	//endregion
 
@@ -120,7 +119,9 @@ public class FlowerContainerBlockEntity extends BlockEntity {
 
 	@Override
 	public CompoundTag getUpdateTag() {
-		return this.save(new CompoundTag());
+		CompoundTag tag = new CompoundTag();
+		this.saveAdditional(tag);
+		return tag;
 	}
 
 

@@ -1,5 +1,6 @@
 package net.dark_roleplay.projectbrazier;
 
+import net.dark_roleplay.projectbrazier.experimental_features.fixed_data.items.ItemFixedData;
 import net.dark_roleplay.projectbrazier.feature.registrars.*;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
@@ -23,6 +24,8 @@ public class ProjectBrazier {
 		BrazierPackets.registerPackets();
 
 		MinecraftForge.EVENT_BUS.addListener(BrazierCommands::registerCommands);
+
+		modEventBus.addGenericListener(Item.class, ItemFixedData::registerItems);
 
 		BrazierRegistries.BLOCKS.register(modEventBus);
 		BrazierRegistries.BLOCKS_NO_ITEMS.register(modEventBus);

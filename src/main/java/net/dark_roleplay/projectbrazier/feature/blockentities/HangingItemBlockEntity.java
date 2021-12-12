@@ -29,10 +29,9 @@ public class HangingItemBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag compound) {
-		compound = super.save(compound);
+	public void saveAdditional(CompoundTag compound) {
+		super.saveAdditional(compound);
 		compound.put("inventory", this.inventory.serializeNBT());
-		return compound;
 	}
 
 	@Override

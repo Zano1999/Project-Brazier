@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature.blocks;
 
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.DecoBlock;
+import net.dark_roleplay.projectbrazier.feature.blocks.templates.MedievalProperties;
 import net.dark_roleplay.projectbrazier.util.Inventories;
 import net.dark_roleplay.projectbrazier.util.blocks.IDisplayTicker;
 import net.minecraft.core.BlockPos;
@@ -30,7 +31,7 @@ import java.util.Random;
 
 public class BurningBlock extends DecoBlock {
 
-	public static final BooleanProperty BURNING = BooleanProperty.create("burning");
+	public static final BooleanProperty BURNING = MedievalProperties.BURNING;
 	private final IDisplayTicker displayTicker;
 
 	private Item replacementItem;

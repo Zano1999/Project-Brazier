@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -148,6 +149,17 @@ public class BarrelBlock extends DecoBlock implements EntityBlock {
 		}
 		return InteractionResult.PASS;
 	}
+
+	@Override
+	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+		if (!level.isClientSide && entity.isOnFire()) {
+			if(level.getBlockEntity(pos) instanceof BarrelBlockEntity be){
+				be.handleEntity(state, pos, entity);
+			}
+		}
+	}
+
+
 
 	@Override
 	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {

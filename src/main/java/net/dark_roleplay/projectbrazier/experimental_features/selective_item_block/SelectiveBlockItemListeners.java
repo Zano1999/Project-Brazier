@@ -46,7 +46,8 @@ public class SelectiveBlockItemListeners extends GuiComponent {
 		TextureList.SELECTIVE_BLOCK_ITEMS.render(matrixStack, xOffset, yOffset);
 		GlStateManager._disableBlend();
 
-		ScreenTexture[][] selectiveTextures = createTexturesForItem(item);//SELECTIVE_TEXTURES.computeIfAbsent(item, SelectiveBlockItemListeners::createTexturesForItem);
+		//createTexturesForItem(item);//
+		ScreenTexture[][] selectiveTextures = SELECTIVE_TEXTURES.computeIfAbsent(item, SelectiveBlockItemListeners::createTexturesForItem);
 
 		int prevIndex = index == 0 ? item.getMaxIndex() : index - 1;
 		int nextIndex = index == item.getMaxIndex() ? 0 : index + 1;

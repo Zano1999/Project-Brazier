@@ -9,6 +9,7 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,8 +19,10 @@ import net.minecraft.world.Container;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -66,8 +69,8 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag compound) {
-		super.save(compound);
+	public void saveAdditional(CompoundTag compound) {
+		super.saveAdditional(compound);
 		switch(this.storageType) {
 			case FLUID:
 				if(this.fluidHandler != null)
@@ -80,7 +83,6 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 			default:
 				break;
 		}
-		return compound;
 	}
 	//endregion
 
@@ -93,7 +95,9 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 
 	@Override
 	public CompoundTag getUpdateTag() {
-		return this.save(new CompoundTag());
+		CompoundTag tag = new CompoundTag();
+		this.saveAdditional(tag);
+		return tag;
 	}
 
 
@@ -148,6 +152,21 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 				BarrelBlockEntity.this.level.sendBlockUpdated(BarrelBlockEntity.this.getBlockPos(), state, state, 3);
 			}
 		};
+	}
+
+	public void handleEntity(BlockState state, BlockPos pos, Entity entity) {
+		if(this.storageType == BarrelStorageType.FLUID){
+			float fluidHeight = ((1/12F) * this.fluidHandler.getFluidAmount()) + 0.125F;
+
+			if(entity.getY() < (double)pos.getY() + fluidHeight) {
+				FluidStack stack = this.fluidHandler.getFluid();
+				if (stack.getFluid() == Fluids.WATER) {
+					entity.clearFire();
+				} else if (stack.getFluid().getAttributes().getTemperature(stack) >= 470) {
+					entity.lavaHurt();
+				}
+			}
+		}
 	}
 
 	//Invalidate Capabilities

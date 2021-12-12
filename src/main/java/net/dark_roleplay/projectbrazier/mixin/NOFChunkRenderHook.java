@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.chunk.RenderChunkRegion;
 import net.minecraft.client.renderer.chunk.VisGraph;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,8 +22,8 @@ public class NOFChunkRenderHook {
 
 	@Inject(
 			method = "compile(FFFLnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher$CompiledChunk;Lnet/minecraft/client/renderer/ChunkBufferBuilderPack;)Ljava/util/Set;",
-			at = @At(value="INVOKE", target="Lnet/minecraft/client/Minecraft;getBlockRenderer()Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;", ordinal = 0)
-			, locals = LocalCapture.CAPTURE_FAILEXCEPTION
+			at = @At(value="INVOKE", target="Lnet/minecraft/client/Minecraft;getBlockRenderer()Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;", ordinal = 0),
+			locals = LocalCapture.CAPTURE_FAILEXCEPTION
 	)
 	private void compileChunk(
 			float xIn, float yIn, float zIn,

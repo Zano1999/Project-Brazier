@@ -25,16 +25,21 @@ apply plugin: 'eclipse'
 apply plugin: 'org.spongepowered.mixin'
 
 applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/forge.gradle");
+applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/mixin.gradle");
 applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/common_manifest.gradle");
 applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/common_artifacts.gradle");
 applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/maven_publish.gradle");
-applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/minify_resources.gradle");
+//applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/minify_resources.gradle");
 applyRemote("https://raw.githubusercontent.com/DarkRoleplay/Gradle-Templates/${script_version}/scripts/curseforge.gradle");
 
 //If dependencies.gradle exists, apply it
 def dependenciesFile = new File('./dependencies.gradle')
 if(dependenciesFile.exists())
     apply from: dependenciesFile
+
+mixin {
+    add sourceSets.main, project.ext.modId + ".refmap.json"
+}
 
 //Downloads and caches
 def applyRemote(String url){

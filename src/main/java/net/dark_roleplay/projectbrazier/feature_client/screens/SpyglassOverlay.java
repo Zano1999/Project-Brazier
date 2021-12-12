@@ -22,7 +22,8 @@ public class SpyglassOverlay extends GuiComponent implements Widget {
 		int width = window.getGuiScaledWidth();
 		int height = window.getGuiScaledHeight();
 
-		Minecraft.getInstance().getTextureManager().bindForSetup(SPYGLASS_OVERLAY);
+		RenderSystem.setShaderTexture(0, SPYGLASS_OVERLAY);
+		//Minecraft.getInstance().getTextureManager().bindForSetup(SPYGLASS_OVERLAY);
 
 		int halfWidth = 0;
 		int halfHeight = 0;

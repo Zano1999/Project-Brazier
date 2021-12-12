@@ -1,5 +1,6 @@
 package net.dark_roleplay.projectbrazier.feature.blocks;
 
+import net.dark_roleplay.projectbrazier.feature.blocks.templates.MedievalProperties;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.WallHFacedDecoBlock;
 import net.dark_roleplay.projectbrazier.util.Inventories;
 import net.dark_roleplay.projectbrazier.util.blocks.IDisplayTicker;
@@ -29,7 +30,7 @@ import java.util.Random;
 
 public class WallBurningBlock extends WallHFacedDecoBlock {
 
-	public static final BooleanProperty BURNING = BooleanProperty.create("burning");
+	public static final BooleanProperty BURNING = MedievalProperties.BURNING;
 	private final IDisplayTicker displayTicker;
 
 	private Item replacementItem;

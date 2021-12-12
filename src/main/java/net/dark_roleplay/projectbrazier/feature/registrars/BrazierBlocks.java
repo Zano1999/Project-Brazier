@@ -8,6 +8,7 @@ import net.dark_roleplay.projectbrazier.feature.blocks.crops.AgedCropBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.*;
 import net.dark_roleplay.projectbrazier.feature_client.blocks.DisplayTickers;
 import net.dark_roleplay.projectbrazier.util.EnumMaterialRegistryObject;
+import net.dark_roleplay.projectbrazier.util.EnumRegistryObject;
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.marg.ConditionHelper;
 import net.minecraft.world.item.DyeColor;
@@ -105,17 +106,17 @@ public class BrazierBlocks {
 			HANGING_HORN = Registrar.registerBlock("hanging_bone_horn", (prop) -> new HangingItemBlock(prop, "hanging_horn", 6), Registrar.METAL, false),
 			HANGING_SILVER_SPYGLASS = Registrar.registerBlock("hanging_silver_spyglass", (prop) -> new HangingItemBlock(prop, "hanging_spyglass", 12), Registrar.METAL, false),
 			HANGING_GOLD_SPYGLASS = Registrar.registerBlock("hanging_gold_spyglass", (prop) -> new HangingItemBlock(prop, "hanging_spyglass", 14), Registrar.METAL, false),
-			IRON_BRAZIER_COAL = Registrar.registerBlock("iron_brazier", (prop) -> new BrazierBlock(prop, 1, "brazier"), Registrar.METAL, true),
-			IRON_FIRE_BOWL = Registrar.registerBlock("iron_fire_bowl", (prop) -> new BrazierBlock(prop, 1, "fire_bowl"), Registrar.METAL, true),
-			SOUL_IRON_BRAZIER_COAL = Registrar.registerBlock("soul_iron_brazier", (prop) -> new BrazierBlock(prop, 2, "brazier"), Registrar.METAL, true),
-			SOUL_IRON_FIRE_BOWL = Registrar.registerBlock("soul_iron_fire_bowl", (prop) -> new BrazierBlock(prop, 2, "fire_bowl"), Registrar.METAL, true),
+			IRON_BRAZIER_COAL = Registrar.registerBlock("iron_brazier", (prop) -> new BrazierBlock(prop, 1, "brazier"), Registrar.METAL_BRAZIER, true),
+			IRON_FIRE_BOWL = Registrar.registerBlock("iron_fire_bowl", (prop) -> new BrazierBlock(prop, 1, "fire_bowl"), Registrar.METAL_BRAZIER, true),
+			SOUL_IRON_BRAZIER_COAL = Registrar.registerBlock("soul_iron_brazier", (prop) -> new BrazierBlock(prop, 2, "brazier"), Registrar.METAL_SOUL_BRAZIER, true),
+			SOUL_IRON_FIRE_BOWL = Registrar.registerBlock("soul_iron_fire_bowl", (prop) -> new BrazierBlock(prop, 2, "fire_bowl"), Registrar.METAL_SOUL_BRAZIER, true),
 			EMPTY_CANDLE_HOLDER = Registrar.registerBlock("empty_candle_holder", (prop) -> new EmptyBurningBlock(prop, "empty_candle_holder"), Registrar.METAL, true),
-			CANDLE_HOLDER = Registrar.registerBlock("candle_holder", (prop) -> new BurningBlock(prop, "candle_holder", 15, DisplayTickers::animatedCandleHolder), Registrar.METAL, true),
+			CANDLE_HOLDER = Registrar.registerBlock("candle_holder", (prop) -> new BurningBlock(prop, "candle_holder", 15, DisplayTickers::animatedCandleHolder), Registrar.METAL_BRAZIER, true),
 			EMPTY_WALL_CANDLE_HOLDER = Registrar.registerBlock("empty_wall_candle_holder", prop -> new EmptyWallBurningBlock(prop, "empty_wall_candle_holder"), Registrar.METAL, true),
-			WALL_CANDLE_HOLDER = Registrar.registerBlock("wall_candle_holder", prop -> new WallBurningBlock(prop, "wall_candle_holder", 15, DisplayTickers::animatedWallCandleHolder), Registrar.METAL, true),
+			WALL_CANDLE_HOLDER = Registrar.registerBlock("wall_candle_holder", prop -> new WallBurningBlock(prop, "wall_candle_holder", 15, DisplayTickers::animatedWallCandleHolder), Registrar.METAL_BRAZIER, true),
 			EMPTY_WALL_TORCH_HOLDER = Registrar.registerBlock("empty_wall_torch_holder", prop -> new EmptyWallBurningBlock(prop, "empty_torch_holder"), Registrar.METAL, true),
-			WALL_TORCH_HOLDER = Registrar.registerBlock("wall_torch_holder", prop -> new WallBurningBlock(prop, "torch_holder", 15, DisplayTickers::animateTorchHolder), Registrar.METAL, true),
-			WALL_SOUL_TORCH_HOLDER = Registrar.registerBlock("wall_soul_torch_holder", prop -> new WallBurningBlock(prop, "torch_holder", 10, DisplayTickers::animateSoulTorchHolder), Registrar.METAL, true),
+			WALL_TORCH_HOLDER = Registrar.registerBlock("wall_torch_holder", prop -> new WallBurningBlock(prop, "torch_holder", 15, DisplayTickers::animateTorchHolder), Registrar.METAL_BRAZIER, true),
+			WALL_SOUL_TORCH_HOLDER = Registrar.registerBlock("wall_soul_torch_holder", prop -> new WallBurningBlock(prop, "torch_holder", 10, DisplayTickers::animateSoulTorchHolder), Registrar.METAL_SOUL_BRAZIER, true),
 			JAIL_LATTICE_CENTERED = Registrar.registerBlock("jail_lattice_centered", prop -> new AxisLatticeBlock(prop, "lattice_centered"), Registrar.METAL, false),
 			JAIL_LATTICE = Registrar.registerBlock("jail_lattice", prop -> new FacedLatticeBlock(prop, "lattice"), Registrar.METAL, true),
 			APPLE_PLANK = Registrar.registerBlock("apple_planks", Block::new, Registrar.WOOD_SOLID, true),
@@ -140,6 +141,12 @@ public class BrazierBlocks {
 			ROPE = Registrar.registerBlock("rope", prop -> new RopeBlock(prop, "rope", "rope_end"), Registrar.ROPE, false),
 			GLIMMERTAIL = Registrar.registerBlock("glimmertail", TallGrassBlock::new, BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS), false);
 
+	public static EnumRegistryObject<DyeColor, Block>
+		COLORED_CANDLE_HOLDER = Registrar.registerBlock("%s_candle_holder", DyeColor.class, (prop) -> new BurningBlock(prop, "candle_holder", 15, DisplayTickers::animatedCandleHolder), Registrar.METAL_BRAZIER, true),
+		COLORED_WALL_CANDLE_HOLDER = Registrar.registerBlock("%s_wall_candle_holder", DyeColor.class, prop -> new WallBurningBlock(prop, "wall_candle_holder", 15, DisplayTickers::animatedWallCandleHolder), Registrar.METAL_BRAZIER, true);
+
+
+
 	//Experimental
 //	public static final RegistryObject<Block>
 //			DRAWBRIDGE_ANCHOR = Registrar.registerBlock("drawbridge_anchor", DrawbridgeAnchorBlock::new, Registrar.STONE_SOLID, false);
@@ -157,10 +164,39 @@ public class BrazierBlocks {
 		emptyTorchHolder.addItem(Items.SOUL_TORCH, WALL_SOUL_TORCH_HOLDER.get());
 
 		EmptyWallBurningBlock wallCandleHolder = (EmptyWallBurningBlock) EMPTY_WALL_CANDLE_HOLDER.get();
-		wallCandleHolder.addItem(Items.TORCH, WALL_CANDLE_HOLDER.get());
+		wallCandleHolder.addItem(Items.CANDLE, WALL_CANDLE_HOLDER.get());
+		wallCandleHolder.addItem(Items.WHITE_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.WHITE));
+		wallCandleHolder.addItem(Items.ORANGE_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.ORANGE));
+		wallCandleHolder.addItem(Items.MAGENTA_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.MAGENTA));
+		wallCandleHolder.addItem(Items.LIGHT_BLUE_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.LIGHT_BLUE));
+		wallCandleHolder.addItem(Items.YELLOW_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.YELLOW));
+		wallCandleHolder.addItem(Items.LIME_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.LIME));
+		wallCandleHolder.addItem(Items.PINK_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.PINK));
+		wallCandleHolder.addItem(Items.GRAY_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.GRAY));
+		wallCandleHolder.addItem(Items.LIGHT_GRAY_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.LIGHT_GRAY));
+		wallCandleHolder.addItem(Items.CYAN_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.CYAN));
+		wallCandleHolder.addItem(Items.PURPLE_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.PURPLE));
+		wallCandleHolder.addItem(Items.BLUE_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.BLUE));
+		wallCandleHolder.addItem(Items.GREEN_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.GREEN));
+		wallCandleHolder.addItem(Items.RED_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.RED));
+		wallCandleHolder.addItem(Items.BLACK_CANDLE, COLORED_WALL_CANDLE_HOLDER.get(DyeColor.BLACK));
 
 		EmptyBurningBlock candleHolder = (EmptyBurningBlock) EMPTY_CANDLE_HOLDER.get();
-		candleHolder.addItem(Items.TORCH, CANDLE_HOLDER.get());
+		candleHolder.addItem(Items.CANDLE, CANDLE_HOLDER.get());
+		candleHolder.addItem(Items.ORANGE_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.ORANGE));
+		candleHolder.addItem(Items.MAGENTA_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.MAGENTA));
+		candleHolder.addItem(Items.LIGHT_BLUE_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.LIGHT_BLUE));
+		candleHolder.addItem(Items.YELLOW_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.YELLOW));
+		candleHolder.addItem(Items.LIME_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.LIME));
+		candleHolder.addItem(Items.PINK_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.PINK));
+		candleHolder.addItem(Items.GRAY_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.GRAY));
+		candleHolder.addItem(Items.LIGHT_GRAY_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.LIGHT_GRAY));
+		candleHolder.addItem(Items.CYAN_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.CYAN));
+		candleHolder.addItem(Items.PURPLE_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.PURPLE));
+		candleHolder.addItem(Items.BLUE_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.BLUE));
+		candleHolder.addItem(Items.GREEN_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.GREEN));
+		candleHolder.addItem(Items.RED_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.RED));
+		candleHolder.addItem(Items.BLACK_CANDLE, COLORED_CANDLE_HOLDER.get(DyeColor.BLACK));
 
 		((FacedLatticeBlock)JAIL_LATTICE.get()).initOtherBlock(JAIL_LATTICE_CENTERED.get());
 		((AxisLatticeBlock)JAIL_LATTICE_CENTERED.get()).initOtherBlock(JAIL_LATTICE.get());

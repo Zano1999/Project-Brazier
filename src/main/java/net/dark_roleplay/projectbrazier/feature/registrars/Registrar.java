@@ -2,7 +2,9 @@ package net.dark_roleplay.projectbrazier.feature.registrars;
 
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.marg.common.material.MaterialCondition;
-import net.dark_roleplay.projectbrazier.experimental_features.data_props.ItemPropertyLoader;
+import net.dark_roleplay.projectbrazier.experimental_features.fixed_data.ItemPropertyLoader;
+import net.dark_roleplay.projectbrazier.feature.blocks.BrazierBlock;
+import net.dark_roleplay.projectbrazier.feature.blocks.templates.MedievalProperties;
 import net.dark_roleplay.projectbrazier.util.EnumMaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.EnumRegistryObject;
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
@@ -157,6 +159,21 @@ public class Registrar {
 					.strength(5.0F, 1200.0F)
 					.sound(SoundType.METAL)
 					.noOcclusion();
+
+	protected static BlockBehaviour.Properties METAL_BRAZIER =
+			BlockBehaviour.Properties.of(Material.HEAVY_METAL, MaterialColor.METAL)
+					.strength(5.0F, 1200.0F)
+					.sound(SoundType.METAL)
+					.lightLevel(state -> state.getValue(MedievalProperties.BURNING) ? 15 : 0)
+					.noOcclusion();
+
+	protected static BlockBehaviour.Properties METAL_SOUL_BRAZIER =
+			BlockBehaviour.Properties.of(Material.HEAVY_METAL, MaterialColor.METAL)
+					.strength(5.0F, 1200.0F)
+					.sound(SoundType.METAL)
+					.lightLevel(state -> state.getValue(MedievalProperties.BURNING) ? 10 : 0)
+					.noOcclusion();
+
 
 	protected static BlockBehaviour.Properties METAL_GLOW =
 			BlockBehaviour.Properties.of(Material.HEAVY_METAL, MaterialColor.METAL)

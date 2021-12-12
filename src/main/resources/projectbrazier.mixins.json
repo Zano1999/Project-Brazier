@@ -5,6 +5,8 @@
 	"compatibilityLevel": "JAVA_8",
 	"refmap": "projectbrazier.refmap.json",
 	"mixins": [
+	],
+	"mixinsDisabled": [
 		"BlockStateMixin",
 		"DebugChunkGeneratorCallback"
 	],

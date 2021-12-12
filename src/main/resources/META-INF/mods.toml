@@ -1,14 +1,14 @@
 modLoader="javafml" #mandatory
-loaderVersion="[32,)" #mandatory
-issueTrackerURL="http://my.issue.tracker/" #optional
+loaderVersion="[38,)" #mandatory
+issueTrackerURL="https://github.com/DarkRoleplay/Project-Brazier/issues" #optional
 license="ARR"
 
 [[mods]]
 	modId="projectbrazier"
-	version="${version}"
+	version="0.6"
 	displayName="Project Brazier"
 	#updateJSONURL="https://dark-roleplay.net/files/versions/drpmedieval/drpmedieval-1.13.2.json" #optional
-	displayURL="https://dark-roleplay.net/"
+	displayURL="https://www.curseforge.com/minecraft/mc-mods/project-brazier"
 	logoFile="project_brazier_logo.png" #optional
 	credits="""
 		Developer Team:\
@@ -31,8 +31,8 @@ license="ARR"
 	hasMargAssets=true
 
 dependencies.projectbrazier = [
-	{modid="forge", mandatory=true, versionRange="[38,)", ordering="NONE",side="BOTH"},
-	{modid="marg", mandatory=true, versionRange="[1.18-0.6,)", ordering="AFTER",side="BOTH"}
+	{modid="forge", mandatory=true, versionRange="[38.0.17,)", ordering="NONE",side="BOTH"},
+	{modid="marg", mandatory=true, versionRange="[1.18-0.7.1,)", ordering="AFTER",side="BOTH"}
 ]
 
 

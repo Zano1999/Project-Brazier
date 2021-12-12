@@ -1,0 +1,42 @@
+
+buildscript {
+	repositories {
+		maven {
+				name = 'Sponge Powered Maven'
+				url = 'https://repo.spongepowered.org/repository/maven-public/'
+		}
+	}    
+	dependencies {
+		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+	}
+}
+
+apply plugin: 'org.spongepowered.mixin'
+
+minecraft {
+	runs {
+		client {
+			arg "--mixin=" + project.ext.modId + ".mixins.json"
+		}
+
+		server {
+			arg "--mixin=" + project.ext.modId + ".mixins.json"
+		}
+	}
+}
+
+mixin {
+    add sourceSets.main, project.ext.modId + ".refmap.json"
+}
+
+dependencies {
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+
+jar {
+	manifest {
+		attributes([
+			"MixinConfigs":  project.ext.modId + ".mixins.json"
+		])
+	}
+}
