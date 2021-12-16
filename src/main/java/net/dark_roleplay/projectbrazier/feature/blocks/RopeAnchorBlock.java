@@ -5,9 +5,15 @@ import net.dark_roleplay.projectbrazier.feature.blocks.templates.HFacedDecoBlock
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlocks;
 import net.dark_roleplay.projectbrazier.util.blocks.HFacedVoxelShape;
 import net.dark_roleplay.projectbrazier.util.json.VoxelShapeLoader;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.FormattedText;
+import net.minecraft.network.chat.Style;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -16,15 +22,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RopeAnchorBlock extends HFacedDecoBlock implements ITertiaryInteractor {
-
+	private static int maxLength = 36;
 	protected final HFacedVoxelShape droppedShapes;
 
 	public static final BooleanProperty IS_DROPPED = BooleanProperty.create("dropped");
@@ -52,40 +60,14 @@ public class RopeAnchorBlock extends HFacedDecoBlock implements ITertiaryInterac
 	}
 
 	@Override
-	public void executeInteraction(Level world, BlockPos pos, BlockState state, Player palyer) {
+	public void executeInteraction(Level world, BlockPos pos, BlockState state, Player player) {
 		boolean isDropped = state.getValue(IS_DROPPED);
-		Direction dir = state.getValue(HORIZONTAL_FACING);
-
-		List<BlockPos> ropePositions = new ArrayList<BlockPos>();
-
-		BlockPos.MutableBlockPos iterPos = pos.mutable();
-		iterPos.move(dir).move(Direction.DOWN);
-
-		for(int i = 0; i < 32; i++){
-			BlockState targetState = world.getBlockState(iterPos);
-			if(!isDropped && targetState.isAir())
-				ropePositions.add(iterPos.immutable());
-			else if(isDropped && targetState.getBlock() == BrazierBlocks.ROPE.get() && targetState.getValue(HORIZONTAL_FACING) == dir) {
-				ropePositions.add(iterPos.immutable());
-				if(targetState.getValue(RopeBlock.IS_END)) break;
-			}else{
-				break;
-			}
-			iterPos.move(0, -1, 0);
-			if(iterPos.getY() < 0) break;
+		if(isDropped){
+			pullUpRope(world, pos, state, player);
+		}else{
+			if(!dropDownRope(world, pos, state, player.getY() + 1 < pos.getY() ? player.getDirection().getOpposite() : player.getDirection()))
+				dropDownRope(world, pos, state, player.getY() + 1 < pos.getY() ? player.getDirection() : player.getDirection().getOpposite());
 		}
-
-		iterPos.setWithOffset(pos,dir).move(Direction.DOWN, ropePositions.size());
-		for(int i = 0; i < ropePositions.size(); i++){
-			if(!isDropped){
-				world.setBlockAndUpdate(iterPos, BrazierBlocks.ROPE.get().defaultBlockState().setValue(HORIZONTAL_FACING, dir).setValue(RopeBlock.IS_END, i == 0));
-			}else{
-				world.setBlockAndUpdate(iterPos, Blocks.AIR.defaultBlockState());
-			}
-			iterPos.move(Direction.UP);
-		}
-
-		world.setBlockAndUpdate(pos, state.setValue(IS_DROPPED, !isDropped));
 	}
 
 	@Override
@@ -93,6 +75,73 @@ public class RopeAnchorBlock extends HFacedDecoBlock implements ITertiaryInterac
 		return state.getValue(IS_DROPPED) ?
 				new TranslatableComponent("interaction.projectbrazier.rope_anchor.pull_up") :
 				new TranslatableComponent("interaction.projectbrazier.rope_anchor.drop");
+	}
+
+	@Override
+	public void neighborChanged(BlockState state, Level world, BlockPos pos, Block otherBlock, BlockPos otherPos, boolean p_55671_) {
+		if (!world.isClientSide)
+			if (world.hasNeighborSignal(pos) && !state.getValue(IS_DROPPED))
+				dropDownRope(world, pos, state, state.getValue(HORIZONTAL_FACING));
+	}
+
+	private boolean pullUpRope(Level world, BlockPos pos, BlockState state, Player player){
+		boolean isDropped = state.getValue(IS_DROPPED);
+
+		if(!isDropped) return false;
+		Direction dir = state.getValue(HORIZONTAL_FACING);
+
+		BlockPos.MutableBlockPos iterPos = pos.mutable();
+		iterPos.move(dir).move(Direction.DOWN);
+
+		BlockState targetState = world.getBlockState(iterPos);
+		while(targetState.getBlock() == BrazierBlocks.ROPE.get() && targetState.getValue(HORIZONTAL_FACING) == dir){
+			iterPos.move(0, -1, 0);
+			targetState = world.getBlockState(iterPos);
+		}
+		iterPos.move(0, 1,0);
+
+		if(world.getEntities(player, new AABB(pos, iterPos).expandTowards(0.5, 0.5, 0.5), otherMob -> otherMob instanceof LivingEntity).size() > 0) {
+			if(player != null) player.displayClientMessage(new TranslatableComponent("interaction.projectbrazier.rope_anchor.pull_up_fail").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)), true);
+			return false;
+		}
+
+		while(iterPos.getY() < pos.getY()) {
+			world.setBlockAndUpdate(iterPos, Blocks.AIR.defaultBlockState());
+			iterPos.move(0, 1, 0);
+		}
+
+		world.setBlockAndUpdate(pos, state.setValue(IS_DROPPED, false));
+		return true;
+	}
+
+	private boolean dropDownRope(Level world, BlockPos pos, BlockState state, Direction dir){
+		boolean isDropped = state.getValue(IS_DROPPED);
+
+		if(isDropped) return false;
+
+		BlockState ropeState = BrazierBlocks.ROPE.get().defaultBlockState().setValue(HORIZONTAL_FACING, dir).setValue(RopeBlock.IS_END, false);
+
+		BlockPos.MutableBlockPos iterPos = pos.mutable();
+		iterPos.move(dir).move(Direction.DOWN);
+
+		for(int i = 0; i < maxLength; i++){
+			BlockState targetState = world.getBlockState(iterPos);
+			if(targetState.isAir())
+				world.setBlockAndUpdate(iterPos, ropeState);
+			else{
+				if(i == 0)
+					return false;
+				break;
+			}
+
+			iterPos.move(0, -1, 0);
+			if(iterPos.getY() < world.getMinBuildHeight()) break;
+		}
+		iterPos.move(0, 1, 0);
+		world.setBlockAndUpdate(iterPos, ropeState.setValue(RopeBlock.IS_END, true));
+
+		world.setBlockAndUpdate(pos, state.setValue(IS_DROPPED, true).setValue(HORIZONTAL_FACING, dir));
+		return true;
 	}
 
 	@Override
