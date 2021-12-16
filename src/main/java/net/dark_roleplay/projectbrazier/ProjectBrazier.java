@@ -2,6 +2,7 @@ package net.dark_roleplay.projectbrazier;
 
 import net.dark_roleplay.projectbrazier.experimental_features.fixed_data.items.ItemFixedData;
 import net.dark_roleplay.projectbrazier.feature.registrars.*;
+import net.dark_roleplay.projectbrazier.feature.world_gen.BrazierWorldGen;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,6 +25,8 @@ public class ProjectBrazier {
 		BrazierPackets.registerPackets();
 
 		MinecraftForge.EVENT_BUS.addListener(BrazierCommands::registerCommands);
+		MinecraftForge.EVENT_BUS.addListener(BrazierWorldGen::biomeLoad);
+
 
 		modEventBus.addGenericListener(Item.class, ItemFixedData::registerItems);
 
