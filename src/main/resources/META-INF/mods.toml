@@ -5,7 +5,7 @@ license="ARR"
 
 [[mods]]
 	modId="projectbrazier"
-	version="0.6"
+	version="0.6.1"
 	displayName="Project Brazier"
 	#updateJSONURL="https://dark-roleplay.net/files/versions/drpmedieval/drpmedieval-1.13.2.json" #optional
 	displayURL="https://www.curseforge.com/minecraft/mc-mods/project-brazier"

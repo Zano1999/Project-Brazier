@@ -33,19 +33,20 @@ public class SittingUtil {
 	}
 
 	public static boolean sitDownEntity(Level world, Vec3 pos, Entity entity, Direction facing, Direction initFacing, double heightOffset, BlockState state){
-		if(world.isClientSide()) return false;
-
 		if(state != null && entity instanceof Player){
 			if(entity.position().distanceToSqr(new Vec3(pos.x(), pos.y(), pos.z())) > 9){
-				((Player)entity).displayClientMessage(new TranslatableComponent("interaction.projectbrazier.chair_to_far", state.getBlock().getName()), true);
+				if(world.isClientSide())
+					((Player)entity).displayClientMessage(new TranslatableComponent("interaction.projectbrazier.chair_to_far", state.getBlock().getName()), true);
 				return false;
 			}
 
 			if(isSomeoneSitting(world, pos)){
-				((Player)entity).displayClientMessage(new TranslatableComponent("interaction.projectbrazier.chair_occupied", state.getBlock().getName()), true);
+				if(world.isClientSide())
+					((Player)entity).displayClientMessage(new TranslatableComponent("interaction.projectbrazier.chair_occupied", state.getBlock().getName()), true);
 				return false;
 			}
 		}
+		if(world.isClientSide()) return false;
 
 		SittableEntity chairEntity = new SittableEntity(BrazierEntities.SITTABLE.get(), world, pos.x(), pos.y(), pos.z(), heightOffset, state != null);
 

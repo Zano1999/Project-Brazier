@@ -6,5 +6,6 @@ repositories{
 }
 
 dependencies{
-    implementation (fg.deobf("net.dark_roleplay.marg:marg-1.18:0.7.1"))
+    implementation (fg.deobf("net.dark_roleplay.marg:marg-1.18:0.7.3"))
+    implementation (fg.deobf("net.dark_roleplay.globaldataandresourcepacks:globaldataandresourcepacks-1.18:1.10.2"))
 }
