@@ -6,6 +6,7 @@ import net.dark_roleplay.projectbrazier.experimental_features.selective_item_blo
 import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItemListeners;
 import net.dark_roleplay.projectbrazier.feature.registrars.*;
 import net.dark_roleplay.projectbrazier.feature_client.blockentityrenderers.BarrelBlockEntityRenderer;
+import net.dark_roleplay.projectbrazier.feature_client.entity_renderers.ZiplineEntityRenderer;
 import net.dark_roleplay.projectbrazier.feature_client.listeners.TertiaryInteractionListener;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.axis_connected_models.AxisConnectedModel;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.block_specific.roof_model_loader.RoofModelLoader;
@@ -16,7 +17,7 @@ import net.dark_roleplay.projectbrazier.feature_client.model_loaders.simple_pane
 import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybinds;
 import net.dark_roleplay.projectbrazier.feature_client.screens.GeneralContainerScreen;
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
-import net.dark_roleplay.projectbrazier.util.sitting.SittableEntityRenderer;
+import net.dark_roleplay.projectbrazier.feature_client.entity_renderers.SittableEntityRenderer;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -119,6 +120,7 @@ public class ProjectBrazierClient {
 		BlockEntityRenderers.register(BrazierBlockEntities.BARREL_BLOCK_ENTITY.get(), BarrelBlockEntityRenderer::new);
 
 		EntityRenderers.register(BrazierEntities.SITTABLE.get(), SittableEntityRenderer::new);
+		EntityRenderers.register(BrazierEntities.ZIPLINE.get(), ZiplineEntityRenderer::new);
 	}
 
 	private static void setRenderLayer(RenderType type, Map<MargMaterial, RegistryObject<Block>>... materialBlockObjects){

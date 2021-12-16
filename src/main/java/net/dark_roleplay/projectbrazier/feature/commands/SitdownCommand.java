@@ -1,11 +1,9 @@
 package net.dark_roleplay.projectbrazier.feature.commands;
 
-import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.dark_roleplay.projectbrazier.util.sitting.SittingUtil;
-import net.minecraft.commands.CommandSource;
+import net.dark_roleplay.projectbrazier.feature.helpers.SittingHelper;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -34,12 +32,12 @@ public class SitdownCommand {
 		if (targets != null)
 			for (Entity entity : targets)
 				if(!entity.isPassenger())
-					SittingUtil.sitDownEntity(entity.getCommandSenderWorld(), targetPos == null ? entity.position() : targetPos, entity, null, null, 0, null);
+					SittingHelper.sitDownEntity(entity.getCommandSenderWorld(), targetPos == null ? entity.position() : targetPos, entity, null, null, 0, null);
 
 		if(!hasEntity){
 			Player player = context.getSource().getPlayerOrException();
 			if(!player.isPassenger())
-				SittingUtil.sitDownEntity(player.getCommandSenderWorld(), targetPos == null ? player.position() : targetPos, player, null, null, 0, null);
+				SittingHelper.sitDownEntity(player.getCommandSenderWorld(), targetPos == null ? player.position() : targetPos, player, null, null, 0, null);
 		}
 
 		return 1;

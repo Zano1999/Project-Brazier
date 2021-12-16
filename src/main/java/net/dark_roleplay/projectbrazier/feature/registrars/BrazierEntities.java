@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature.registrars;
 
-import net.dark_roleplay.projectbrazier.util.sitting.SittableEntity;
+import net.dark_roleplay.projectbrazier.feature.entities.ZiplineEntity;
+import net.dark_roleplay.projectbrazier.feature.entities.SittableEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.RegistryObject;
@@ -22,6 +23,15 @@ public class BrazierEntities{
 							.setShouldReceiveVelocityUpdates(false)
 							.sized(0.5F, 0.001F)
 							.build("sittable")
+			);
+
+	public static final RegistryObject<EntityType<ZiplineEntity>> ZIPLINE =
+			Registrar.registerEntity("zipline",
+					() -> EntityType.Builder.<ZiplineEntity>of(ZiplineEntity::new, MobCategory.MISC)
+							.noSummon()
+							.setUpdateInterval(10)
+							.sized(0.5F, 0.5F)
+							.build("zipline")
 			);
 
 	public static void preRegistry(){}

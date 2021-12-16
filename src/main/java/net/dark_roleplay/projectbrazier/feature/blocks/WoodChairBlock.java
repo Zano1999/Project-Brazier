@@ -1,7 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature.blocks;
 
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.HFacedDecoBlock;
-import net.dark_roleplay.projectbrazier.util.sitting.SittingUtil;
+import net.dark_roleplay.projectbrazier.feature.helpers.SittingHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -65,7 +65,7 @@ public class WoodChairBlock extends HFacedDecoBlock {
 //		System.out.println(endTime);
 
 //		CraftingHelper.openCraftingScreen(player);
-		SittingUtil.sitOnBlockWithRotation(world, pos, player, state.getValue(HORIZONTAL_FACING), state.getValue(HORIZONTAL_FACING), -0.3F, state);
+		SittingHelper.sitOnBlockWithRotation(world, pos, player, state.getValue(HORIZONTAL_FACING), state.getValue(HORIZONTAL_FACING), -0.3F, state);
 
 		return InteractionResult.SUCCESS;
 	}

@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.util.sitting;
+package net.dark_roleplay.projectbrazier.feature.entities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

@@ -4,7 +4,7 @@ import net.dark_roleplay.projectbrazier.feature.blocks.templates.HAxisDecoBlock;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.axis_connected_models.AxisConnectionType;
 import net.dark_roleplay.projectbrazier.util.blocks.AxisVoxelShape;
 import net.dark_roleplay.projectbrazier.util.json.VoxelShapeLoader;
-import net.dark_roleplay.projectbrazier.util.sitting.SittingUtil;
+import net.dark_roleplay.projectbrazier.feature.helpers.SittingHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.block.state.BlockState;
@@ -45,7 +45,7 @@ public class WoodBenchBlock extends HAxisDecoBlock {
 		else if(axis == Direction.Axis.X && yaw > -90 && yaw < 90) facing = Direction.SOUTH;
 		else if(axis == Direction.Axis.X) facing = Direction.NORTH;
 
-		SittingUtil.sitOnBlock(world, pos, player, facing, -0.18F, state);
+		SittingHelper.sitOnBlock(world, pos, player, facing, -0.18F, state);
 
 		return InteractionResult.SUCCESS;
 	}

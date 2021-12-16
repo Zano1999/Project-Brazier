@@ -1,6 +1,7 @@
-package net.dark_roleplay.projectbrazier.util.sitting;
+package net.dark_roleplay.projectbrazier.feature.helpers;
 
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierEntities;
+import net.dark_roleplay.projectbrazier.feature.entities.SittableEntity;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
@@ -14,7 +15,7 @@ import net.minecraft.server.level.ServerLevel;
 
 import java.util.List;
 
-public class SittingUtil {
+public class SittingHelper {
 
 	public static boolean sitOnBlock(Level world, Vec3i pos, Entity entity, double heightOffset, BlockState state){
 		return sitDownEntity(world, new Vec3(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5), entity, null, null, heightOffset, state);

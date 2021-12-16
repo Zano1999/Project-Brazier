@@ -1,5 +1,6 @@
-package net.dark_roleplay.projectbrazier.util.sitting;
+package net.dark_roleplay.projectbrazier.feature_client.entity_renderers;
 
+import net.dark_roleplay.projectbrazier.feature.entities.SittableEntity;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

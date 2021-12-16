@@ -1,7 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature.blocks;
 
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.DecoBlock;
-import net.dark_roleplay.projectbrazier.util.sitting.SittingUtil;
+import net.dark_roleplay.projectbrazier.feature.helpers.SittingHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.Level;
@@ -18,7 +18,7 @@ public class WoodStoolBlock extends DecoBlock {
 	@Deprecated
 	@Override
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		SittingUtil.sitOnBlock(world, pos, player, -0.3F, state);
+		SittingHelper.sitOnBlock(world, pos, player, -0.3F, state);
 		return InteractionResult.SUCCESS;
 	}
 }
