@@ -1,0 +1,70 @@
+{
+	"generatorVersion": 0,
+	"requiredTextures": {
+		"stone": "minecraft:block/stone",
+		"deepslate": "minecraft:block/deepslate",
+		"traces_stone": "projectbrazier:generator/overlays/traces_of_coal_ore",
+		"poor_stone": "projectbrazier:generator/overlays/poor_coal_ore",
+		"rich_stone": "projectbrazier:generator/overlays/rich_coal_ore",
+		"traces_deepslate": "projectbrazier:generator/overlays/traces_of_deepslate_coal_ore",
+		"poor_deepslate": "projectbrazier:generator/overlays/poor_deepslate_coal_ore",
+		"rich_deepslate": "projectbrazier:generator/overlays/rich_deepslate_coal_ore"
+	},
+	"tasks": [
+		{
+			"inputType": "generator",
+			"inputName": "stone",
+			"outputType": "FILE",
+			"outputName": "projectbrazier:block/traces_of_coal_ore",
+			"manipulations": [
+				{"type": "overlay", "texture":  "traces_stone"}
+			]
+		},
+		{
+			"inputType": "generator",
+			"inputName": "stone",
+			"outputType": "FILE",
+			"outputName": "projectbrazier:block/poor_coal_ore",
+			"manipulations": [
+				{"type": "overlay", "texture":  "poor_stone"}
+			]
+		},
+		{
+			"inputType": "generator",
+			"inputName": "stone",
+			"outputType": "FILE",
+			"outputName": "projectbrazier:block/rich_coal_ore",
+			"manipulations": [
+				{"type": "overlay", "texture":  "rich_stone"}
+			]
+		},
+
+		{
+			"inputType": "generator",
+			"inputName": "deepslate",
+			"outputType": "FILE",
+			"outputName": "projectbrazier:block/traces_of_deepslate_coal_ore",
+			"manipulations": [
+				{"type": "overlay", "texture":  "traces_deepslate"}
+			]
+		},
+		{
+			"inputType": "generator",
+			"inputName": "deepslate",
+			"outputType": "FILE",
+			"outputName": "projectbrazier:block/poor_deepslate_coal_ore",
+			"manipulations": [
+				{"type": "overlay", "texture":  "poor_deepslate"}
+			]
+		},
+		{
+			"inputType": "generator",
+			"inputName": "deepslate",
+			"outputType": "FILE",
+			"outputName": "projectbrazier:block/rich_deepslate_coal_ore",
+			"manipulations": [
+				{"type": "overlay", "texture":  "rich_deepslate"}
+			]
+		}
+	]
+}

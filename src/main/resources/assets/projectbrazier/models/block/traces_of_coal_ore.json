@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "projectbrazier:block/traces_of_coal_ore"
+  }
+}
+
+

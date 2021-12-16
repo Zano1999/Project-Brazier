@@ -71,6 +71,12 @@
 	"block.projectbrazier.empty_wall_torch_holder": "Empty wall mounted Torch Holder",
 	"block.projectbrazier.wall_torch_holder": "Wall mounted Torch Holder",
 	"block.projectbrazier.wall_soul_torch_holder": "Wall mounted Soul Torch Holder",
+	"block.projectbrazier.traces_of_coal_ore": "Stone with Coal Ore traces",
+	"block.projectbrazier.poor_coal_ore": "Poor Coal Ore",
+	"block.projectbrazier.rich_coal_ore": "Rich Coal Ore",
+	"block.projectbrazier.traces_of_deepslate_coal_ore": "Deepslate with Coal Ore traces",
+	"block.projectbrazier.poor_deepslate_coal_ore": "Poor Coal Ore",
+	"block.projectbrazier.rich_deepslate_coal_ore": "Rich Coal Ore",
 
 	"interaction.projectbrazier.chair_to_far": "%s is to far away from you.",
 	"interaction.projectbrazier.chair_occupied": "%s is already occupied.",
@@ -81,6 +87,7 @@
 
 	"interaction.projectbrazier.rope_anchor.drop": "Drop rope down",
 	"interaction.projectbrazier.rope_anchor.pull_up": "Pull rope up",
+	"interaction.projectbrazier.rope_anchor.pull_up_fail": "Can not pull rope up while it's being used",
 
 
 	"marg.material.apple": "Apple",

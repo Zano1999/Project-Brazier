@@ -85,6 +85,13 @@ public class BrazierBlocks {
 
 	public static final RegistryObject<Block>
 			HOOF_FUNGUS = Registrar.registerBlock("hoof_fungus", WallFungiBlock::new, Registrar.PLANT_FUNGI, true),
+			TRACES_OF_COAL_ORE = Registrar.registerBlock("traces_of_coal_ore", Block::new, Registrar.STONE_SOLID, true),
+			POOR_COAL_ORE = Registrar.registerBlock("poor_coal_ore", Block::new, Registrar.STONE_SOLID, true),
+			RICH_COAL_ORE = Registrar.registerBlock("rich_coal_ore", Block::new, Registrar.STONE_SOLID, true),
+			TRACES_OF_DEEPSLATE_COAL_ORE = Registrar.registerBlock("traces_of_deepslate_coal_ore", Block::new, Registrar.STONE_SOLID, true),
+			POOR_DEEPSLATE_COAL_ORE = Registrar.registerBlock("poor_deepslate_coal_ore", Block::new, Registrar.STONE_SOLID, true),
+			RICH_DEEPSLATE_COAL_ORE = Registrar.registerBlock("rich_deepslate_coal_ore", Block::new, Registrar.STONE_SOLID, true),
+
 			ANDESITE_BRICKS = Registrar.registerBlock("andesite_bricks", Block::new, Registrar.STONE_SOLID, true),
 			DIORITE_BRICKS = Registrar.registerBlock("diorite_bricks", Block::new, Registrar.STONE_SOLID, true),
 			GRANITE_BRICKS = Registrar.registerBlock("granite_bricks", Block::new, Registrar.STONE_SOLID, true),
