@@ -12,12 +12,9 @@ import net.dark_roleplay.projectbrazier.util.EnumRegistryObject;
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.marg.ConditionHelper;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.TallGrassBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -84,6 +81,8 @@ public class BrazierBlocks {
 			POLSTERED_WOOD_BENCH	= Registrar.registerBlock("%s_polstered_${material}_bench", DyeColor.class, WOOD_CHAIR_BENCH, prop -> new WoodBenchBlock(prop, "default_polstered_wood_bench", "positive_polstered_wood_bench", "negative_polstered_wood_bench", "centered_polstered_wood_bench"), Registrar::MARG_WOOD, true);
 
 	public static final RegistryObject<Block>
+			CLAY_IN_DIRT = Registrar.registerBlock("clay_in_dirt", Block::new, BlockBehaviour.Properties.of(Material.CLAY).strength(0.6F).sound(SoundType.GRAVEL), true),
+			CLAY_IN_GRASSY_DIRT = Registrar.registerBlock("clay_in_grassy_dirt", GrassyClayBlock::new, BlockBehaviour.Properties.of(Material.GRASS).randomTicks().strength(0.6F).sound(SoundType.GRASS), true),
 			HOOF_FUNGUS = Registrar.registerBlock("hoof_fungus", WallFungiBlock::new, Registrar.PLANT_FUNGI, true),
 			TRACES_OF_COAL_ORE = Registrar.registerBlock("traces_of_coal_ore", Block::new, Registrar.STONE_SOLID, true),
 			POOR_COAL_ORE = Registrar.registerBlock("poor_coal_ore", Block::new, Registrar.STONE_SOLID, true),

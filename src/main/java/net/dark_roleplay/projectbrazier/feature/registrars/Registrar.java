@@ -1,5 +1,6 @@
 package net.dark_roleplay.projectbrazier.feature.registrars;
 
+import com.mojang.serialization.Codec;
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.marg.common.material.MaterialCondition;
 import net.dark_roleplay.projectbrazier.experimental_features.fixed_data.ItemPropertyLoader;
@@ -8,6 +9,8 @@ import net.dark_roleplay.projectbrazier.feature.blocks.templates.MedievalPropert
 import net.dark_roleplay.projectbrazier.util.EnumMaterialRegistryObject;
 import net.dark_roleplay.projectbrazier.util.EnumRegistryObject;
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
@@ -16,6 +19,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.entity.Entity;
@@ -225,5 +232,15 @@ public class Registrar {
 					.of(Material.WOOL, MaterialColor.SNOW)
 					.strength(0.8F)
 					.sound(SoundType.WOOL);
+	//endregion
+
+	//region worldgen
+	protected static <R extends FeatureConfiguration, T extends Feature<R>> RegistryObject<Feature<R>> registerFeature(String name, Supplier<Feature<R>> supplier) {
+		return BrazierRegistries.FEATURES.register(name, supplier);
+	}
+
+	private static <P extends PlacementModifier> PlacementModifierType<P> register(ResourceLocation resourceLocation, Codec<P> codec) {
+		return Registry.register(Registry.PLACEMENT_MODIFIERS, resourceLocation, () -> codec);
+	}
 	//endregion
 }

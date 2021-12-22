@@ -8,6 +8,9 @@
 	"bat_wing": {
 		"ItemGroup": "misc"
 	},
+	"lump_of_dry_clay": {
+		"ItemGroup": "misc"
+	},
 	"bell_pepper": {
 		"ItemGroup": "food",
 		"Food": {

@@ -1,0 +1,9 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "particle": "projectbrazier:block/clay_in_dirt",
+        "bottom": "projectbrazier:block/clay_in_dirt",
+        "top": "minecraft:block/grass_block_top",
+        "side": "projectbrazier:block/clay_in_grassy_dirt_snowed"
+    }
+}

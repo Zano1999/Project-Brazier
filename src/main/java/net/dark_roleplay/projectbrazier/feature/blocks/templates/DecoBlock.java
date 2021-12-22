@@ -18,6 +18,8 @@ public class DecoBlock extends Block {
 		this.shape = VoxelShapeLoader.getVoxelShape(shapeName);
 	}
 
+
+
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		return shape;

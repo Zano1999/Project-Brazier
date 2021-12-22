@@ -28,6 +28,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
@@ -81,7 +82,8 @@ public class ProjectBrazierClient {
 	}
 
 	public static void registerRenderLayers(){
-		ItemBlockRenderTypes.setRenderLayer(BrazierBlocks.GLIMMERTAIL.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(BrazierBlocks.CLAY_IN_GRASSY_DIRT.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(BrazierBlocks.GLIMMERTAIL.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(BrazierBlocks.CAULIFLOWER.get(), RenderType.cutoutMipped());
 		ItemBlockRenderTypes.setRenderLayer(BrazierBlocks.WHITE_CABBAGE.get(), RenderType.cutoutMipped());
 		ItemBlockRenderTypes.setRenderLayer(BrazierBlocks.HANGING_HORN.get(), RenderType.cutout());
@@ -154,5 +156,9 @@ public class ProjectBrazierClient {
 		event.getBlockColors().register(
 				(state, reader, pos, color) -> reader != null && pos != null ? BiomeColors.getAverageGrassColor(reader, pos) : GrassColor.get(0.5D, 1.0D),
 				BrazierBlocks.GLIMMERTAIL.get());
+
+		event.getBlockColors().register((state, reader, pos, color) -> {
+			return reader != null && pos != null ? BiomeColors.getAverageGrassColor(reader, pos) : GrassColor.get(0.5D, 1.0D);
+		}, BrazierBlocks.CLAY_IN_GRASSY_DIRT.get());
 	}
 }

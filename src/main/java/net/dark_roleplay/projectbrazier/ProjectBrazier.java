@@ -1,9 +1,13 @@
 package net.dark_roleplay.projectbrazier;
 
 import net.dark_roleplay.projectbrazier.experimental_features.fixed_data.items.ItemFixedData;
+import net.dark_roleplay.projectbrazier.feature.mechanics.spreader.SpreadBehaviors;
+import net.dark_roleplay.projectbrazier.feature.mechanics.spreader.SpreaderType;
 import net.dark_roleplay.projectbrazier.feature.registrars.*;
-import net.dark_roleplay.projectbrazier.feature.world_gen.BrazierWorldGen;
+import net.dark_roleplay.projectbrazier.feature.registrars.BrazierWorldGen;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -25,6 +29,8 @@ public class ProjectBrazier {
 		BrazierPackets.registerPackets();
 
 		MinecraftForge.EVENT_BUS.addListener(BrazierCommands::registerCommands);
+
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(BrazierWorldGen::setup);
 		MinecraftForge.EVENT_BUS.addListener(BrazierWorldGen::biomeLoad);
 
 
@@ -37,13 +43,13 @@ public class ProjectBrazier {
 		BrazierRegistries.CONTAINERS.register(modEventBus);
 		BrazierRegistries.ENTITIES.register(modEventBus);
 		BrazierRegistries.SOUNDS.register(modEventBus);
+		BrazierRegistries.FEATURES.register(modEventBus);
 
 		modEventBus.addListener(this::hackyHackToByPassLoadingOrder);
 		modEventBus.addListener(this::setupCommonStuff);
 		modEventBus.addListener(this::setupServerStuff);
 
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ProjectBrazierClient::modConstructor);
-
 
 //		DecorRegistrar.register();
 		//Decals
@@ -61,6 +67,7 @@ public class ProjectBrazier {
 		BrazierContainers.preRegistry();
 		BrazierEntities.preRegistry();
 		BrazierSounds.preRegistry();
+		BrazierWorldGen.preRegistry();
 
 		modEventBus.addListener(BrazierBlocks::postRegistry);
 		modEventBus.addListener(BrazierBlockEntities::postRegistry);
@@ -72,6 +79,28 @@ public class ProjectBrazier {
 	}
 
 	public void setupCommonStuff(FMLCommonSetupEvent event) {
+		SpreadBehaviors.addSpreaderBehavior(
+				BrazierBlocks.CLAY_IN_DIRT.get(),
+				SpreaderType.GRASS,
+				(state, level, pos) ->
+						BrazierBlocks.CLAY_IN_GRASSY_DIRT.get().defaultBlockState()
+								.setValue(BlockStateProperties.SNOWY, level.getBlockState(pos.above()).is(Blocks.SNOW))
+		);
+
+		SpreadBehaviors.addSpreaderBehavior(
+				BrazierBlocks.CLAY_IN_GRASSY_DIRT.get(),
+				SpreaderType.REVERT,
+				(state, level, pos) -> BrazierBlocks.CLAY_IN_DIRT.get().defaultBlockState()
+		);
+
+
+		SpreadBehaviors.addSpreaderBehavior(
+				Blocks.DIRT,
+				SpreaderType.GRASS,
+				(state, level, pos) ->
+						Blocks.GRASS_BLOCK.defaultBlockState()
+								.setValue(BlockStateProperties.SNOWY, level.getBlockState(pos.above()).is(Blocks.SNOW))
+		);
 	}
 
 	public void setupServerStuff(FMLDedicatedServerSetupEvent event) {

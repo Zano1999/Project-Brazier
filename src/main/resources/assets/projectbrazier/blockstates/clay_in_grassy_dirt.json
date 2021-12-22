@@ -1,0 +1,24 @@
+{
+    "variants": {
+        "snowy=false": [
+            {
+                "model": "projectbrazier:block/dry_clay_grass"
+            },
+            {
+                "model": "projectbrazier:block/dry_clay_grass",
+                "y": 90
+            },
+            {
+                "model": "projectbrazier:block/dry_clay_grass",
+                "y": 180
+            },
+            {
+                "model": "projectbrazier:block/dry_clay_grass",
+                "y": 270
+            }
+        ],
+        "snowy=true": {
+            "model": "projectbrazier:block/dry_clay_snowed"
+        }
+    }
+}

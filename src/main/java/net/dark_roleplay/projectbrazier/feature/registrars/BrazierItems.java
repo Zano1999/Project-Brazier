@@ -32,6 +32,7 @@ public class BrazierItems {
 			GOLD_COIN = Registrar.registerItem("gold_coin"),
 			SILVER_COIN = Registrar.registerItem("silver_coin"),
 			COPPER_COIN = Registrar.registerItem("copper_coin"),
+			LUMP_OF_DRY_CLAY = Registrar.registerItem("lump_of_dry_clay"),
 //			BELL_PEPPER = Registrar.registerItem("bell_pepper"),
 //			BLUEBERRIES = Registrar.registerItem("blueberries"),
 //			BUTTER = Registrar.registerItem("butter"),
