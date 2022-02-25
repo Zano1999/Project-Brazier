@@ -2,11 +2,14 @@ package net.dark_roleplay.projectbrazier;
 
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.experimental_features.builtin_mixed_model.BuiltinMixedModel;
+import net.dark_roleplay.projectbrazier.experimental_features.chopping_block.ChoppingBlockBlockEntityRenderer;
 import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItem;
 import net.dark_roleplay.projectbrazier.experimental_features.selective_item_block.SelectiveBlockItemListeners;
 import net.dark_roleplay.projectbrazier.feature.registrars.*;
 import net.dark_roleplay.projectbrazier.feature_client.blockentityrenderers.BarrelBlockEntityRenderer;
+import net.dark_roleplay.projectbrazier.feature_client.blockentityrenderers.ZiplineBlockEntityRenderer;
 import net.dark_roleplay.projectbrazier.feature_client.entity_renderers.ZiplineEntityRenderer;
+import net.dark_roleplay.projectbrazier.feature_client.listeners.ResourceReloadUtil;
 import net.dark_roleplay.projectbrazier.feature_client.listeners.TertiaryInteractionListener;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.axis_connected_models.AxisConnectedModel;
 import net.dark_roleplay.projectbrazier.feature_client.model_loaders.block_specific.roof_model_loader.RoofModelLoader;
@@ -29,9 +32,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ForgeModelBakery;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -46,6 +49,7 @@ public class ProjectBrazierClient {
 	public static void modConstructor(){
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(ProjectBrazierClient::setupClientStuff);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(ProjectBrazierClient::registerModelLoaders);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(ResourceReloadUtil::registerReloadListeners);
 //		MinecraftForge.EVENT_BUS.addListener(DecorListener::bakeChunk);
 //		FMLJavaModLoadingContext.get().getModEventBus().addListener(DecorClientListener::registerModels);
 
@@ -63,6 +67,7 @@ public class ProjectBrazierClient {
 	public static void setupClientStuff(FMLClientSetupEvent event) {
 		BrazierKeybinds.registerKeybinds(event);
 		ProjectBrazierClient.registerRenderLayers();
+		ItemProperties.register(BrazierItems.ROPE.get(), new ResourceLocation(ProjectBrazier.MODID, "stack_size"), (stack, level, entity, val) -> stack.getCount());
 		//TODO Experimental
 //		PassiveScreenHelper.editKeybinds();
 
@@ -78,6 +83,9 @@ public class ProjectBrazierClient {
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "axis_connected_model"), new AxisConnectedModel.Loader());
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "builtin_mixed"), new BuiltinMixedModel.Loader());
 		ModelLoaderRegistry.registerLoader(new ResourceLocation(ProjectBrazier.MODID, "pane_corner_model"), new PaneCornerModel.Loader());
+
+		ForgeModelBakery.addSpecialModel(new ResourceLocation(ProjectBrazier.MODID, "entity/zipline_handle"));
+
 
 		registerItemOverrides();
 	}
@@ -118,6 +126,10 @@ public class ProjectBrazierClient {
 		//TODO Move to TER registration event?
 //		ClientRegistry.bindTileEntityRenderer(BrazierBlockEntities.DRAWBRODGE_ANCHOR.get(), DrawbridgeAnchorTileEntityRenderer::new);
 		BlockEntityRenderers.register(BrazierBlockEntities.BARREL_BLOCK_ENTITY.get(), BarrelBlockEntityRenderer::new);
+		BlockEntityRenderers.register(BrazierBlockEntities.ZIPLINE_ANCHOR.get(), ZiplineBlockEntityRenderer::new);
+
+		BlockEntityRenderers.register(BrazierBlockEntities.CHOPPING_BLOCK.get(), ChoppingBlockBlockEntityRenderer::new);
+
 
 		EntityRenderers.register(BrazierEntities.SITTABLE.get(), SittableEntityRenderer::new);
 		EntityRenderers.register(BrazierEntities.ZIPLINE.get(), ZiplineEntityRenderer::new);
@@ -139,6 +151,12 @@ public class ProjectBrazierClient {
 
 	public static void registerItemOverrides(){
 		ItemProperties.register(BrazierItems.STONE_ARROW_SLIT.get(), new ResourceLocation(ProjectBrazier.MODID, "variant"), (stack, world, entity, val) -> {
+			if (entity != null && entity instanceof Player)
+				return ((SelectiveBlockItem)stack.getItem()).getCurrentIndex(((Player) entity).getGameProfile());
+			return 0;
+		});
+
+		ItemProperties.register(BrazierItems.DEEPSLATE_ARROW_SLIT.get(), new ResourceLocation(ProjectBrazier.MODID, "variant"), (stack, world, entity, val) -> {
 			if (entity != null && entity instanceof Player)
 				return ((SelectiveBlockItem)stack.getItem()).getCurrentIndex(((Player) entity).getGameProfile());
 			return 0;

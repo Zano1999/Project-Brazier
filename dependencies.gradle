@@ -3,9 +3,17 @@ repositories{
         name = 'Dark Roleplay Maven'
         url = 'https://maven.dark-roleplay.net'
     }
+    maven {
+        name = 'Curse Maven'
+        url = 'https://cursemaven.com'
+        content {
+            includeGroup 'curse.maven'
+        }
+    }
 }
 
 dependencies{
     implementation (fg.deobf("net.dark_roleplay.marg:marg-1.18:0.7.3"))
     implementation (fg.deobf("net.dark_roleplay.globaldataandresourcepacks:globaldataandresourcepacks-1.18:1.10.2"))
+    runtimeOnly (fg.deobf("curse.maven:jei-238222:3599262"))
 }

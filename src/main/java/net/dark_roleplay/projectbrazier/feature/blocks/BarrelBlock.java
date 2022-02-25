@@ -4,7 +4,10 @@ import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.projectbrazier.feature.blockentities.BarrelBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.DecoBlock;
 import net.dark_roleplay.projectbrazier.util.capabilities.ItemHandlerUtil;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
@@ -12,6 +15,8 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -34,6 +39,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
 public class BarrelBlock extends DecoBlock implements EntityBlock {
@@ -54,7 +60,13 @@ public class BarrelBlock extends DecoBlock implements EntityBlock {
 	}
 
 	@Override
+	public void appendHoverText(ItemStack p_49816_, @Nullable BlockGetter p_49817_, List<Component> lines, TooltipFlag flag) {
+		lines.add(new TranslatableComponent("block.info.projectbrazier.barrel").withStyle(ChatFormatting.RED));
+	}
+
+	@Override
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if(true) return InteractionResult.PASS;
 		if(world.isClientSide) return InteractionResult.SUCCESS;
 
 		if(isClosed) {

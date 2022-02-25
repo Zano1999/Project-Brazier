@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +37,19 @@ public class ItemPropertyLoader {
         }
     }
 
-    private static Item.Properties loadProp(JsonObject propObj){
+    public static void loadItemProperties(InputStream input){
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(input))) {
+            JsonParser parser = new JsonParser();
+            JsonObject properties = parser.parse(reader).getAsJsonObject();
+
+            for(Map.Entry<String, JsonElement> entry : properties.entrySet())
+                PROPERTIES.put(entry.getKey(), loadProp((JsonObject) entry.getValue()));
+        }catch(IOException e){
+            System.out.println(e);
+        }
+    }
+
+    public static Item.Properties loadProp(JsonObject propObj){
         Item.Properties prop = new Item.Properties();
 
         prop.stacksTo(GsonHelper.getAsInt(propObj, "MaxCount", 64));

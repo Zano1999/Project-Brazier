@@ -1,8 +1,10 @@
 package net.dark_roleplay.projectbrazier.feature.registrars;
 
+import net.dark_roleplay.projectbrazier.experimental_features.chopping_block.ChoppingBlockBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.blockentities.BarrelBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.blockentities.FlowerContainerBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.blockentities.HangingItemBlockEntity;
+import net.dark_roleplay.projectbrazier.feature.blockentities.ZiplineBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -20,6 +22,13 @@ public class BrazierBlockEntities{
 
 	public static final RegistryObject<BlockEntityType<FlowerContainerBlockEntity>>
 			FLOWER_CONTAINER = Registrar.registerBlockEntity("flower_container", FlowerContainerBlockEntity::new, BrazierBlocks.FLOWER_BUCKET.values(), BrazierBlocks.FLOWER_BARRELS.values());
+
+	public static final RegistryObject<BlockEntityType<ZiplineBlockEntity>>
+			ZIPLINE_ANCHOR = Registrar.registerBlockEntity("zipline_anchor", ZiplineBlockEntity::new, BrazierBlocks.ZIPLINE_ANCHOR.values());
+
+
+	public static final RegistryObject<BlockEntityType<ChoppingBlockBlockEntity>>
+			CHOPPING_BLOCK = Registrar.registerBlockEntity("chopping_block", ChoppingBlockBlockEntity::new, BrazierBlocks.CHOPPING_BLOCK.values());
 
 
 	public static void preRegistry(){}

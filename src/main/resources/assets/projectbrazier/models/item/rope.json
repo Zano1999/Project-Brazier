@@ -1,0 +1,11 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "projectbrazier:item/rope"
+	},
+	"overrides": [
+		{ "predicate": {"projectbrazier:stack_size": 8 }, "model": "projectbrazier:item/rope_1" },
+		{ "predicate": {"projectbrazier:stack_size": 16 }, "model": "projectbrazier:item/rope_2" },
+		{ "predicate": {"projectbrazier:stack_size": 32 }, "model": "projectbrazier:item/rope_3" }
+	]
+}

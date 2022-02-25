@@ -11,6 +11,7 @@
 		"DebugChunkGeneratorCallback"
 	],
 	"client": [
+		"PlayerModelMixin",
 		"NOFChunkRenderHook"
 	],
 	"minVersion": "0.8"

@@ -2,6 +2,7 @@ package net.dark_roleplay.projectbrazier.feature.entities;
 
 import com.mojang.math.Vector3d;
 import com.mojang.math.Vector3f;
+import net.dark_roleplay.projectbrazier.feature.registrars.BrazierSounds;
 import net.dark_roleplay.projectbrazier.util.data.NBTUtil2;
 import net.dark_roleplay.projectbrazier.util.math.VectorUtils;
 import net.minecraft.nbt.CompoundTag;
@@ -14,6 +15,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -40,9 +42,12 @@ public class ZiplineEntity extends Entity implements IEntityAdditionalSpawnData 
 	public ZiplineEntity(EntityType<?> type, Level world, Vector3f start, Vector3f end, Vector3f mid) {
 		super(type, world);
 
-		this.start = start;
-		this.end = end;
-		this.mid = mid;
+		this.start = start.copy();
+		this.end = end.copy();
+		this.mid = mid.copy();
+		this.start.setY(this.start.y() - 2.1875F);
+		this.end.setY(this.end.y() - 2.1875F);
+		this.mid.setY(this.mid.y() - 2.1875F);
 
 		this.setYRot((float) (Math.atan2(end.z() - start.z(), end.x() - start.x()) * 180/Math.PI) - 90);
 		this.yRotO = this.getYRot();
@@ -50,6 +55,11 @@ public class ZiplineEntity extends Entity implements IEntityAdditionalSpawnData 
 		this.setPos(start.x(), start.y(), start.z());
 
 		calculateLUT(start, end, mid);
+	}
+
+	@Override
+	public double getPassengersRidingOffset() {
+		return 0.5D;
 	}
 
 	private void calculateLUT(Vector3f start, Vector3f end, Vector3f mid){
@@ -78,7 +88,7 @@ public class ZiplineEntity extends Entity implements IEntityAdditionalSpawnData 
 	public void onPassengerTurned(Entity entityToUpdate) {
 		entityToUpdate.setYBodyRot(this.getYRot());
 		float f = Mth.wrapDegrees(entityToUpdate.getYRot() - this.getYRot());
-		float f1 = Mth.clamp(f, -105.0F, 105.0F);
+		float f1 = Mth.clamp(f, -95, 95);
 		entityToUpdate.yRotO += f1 - f;
 		entityToUpdate.setYRot(entityToUpdate.getYRot() + f1 - f);
 		entityToUpdate.setYHeadRot(entityToUpdate.getYRot());
@@ -93,6 +103,9 @@ public class ZiplineEntity extends Entity implements IEntityAdditionalSpawnData 
 	public void tick(){
 		super.tick();
 
+		if(this.tickCount % 3 == 0)
+			this.playSound(BrazierSounds.ZIPLINE.get(), 1, 1);
+
 		//if(this.getLevel().isClientSide) return;
 
 		this.dist += speed;
@@ -100,8 +113,14 @@ public class ZiplineEntity extends Entity implements IEntityAdditionalSpawnData 
 
 		double progress = distToT(LUT, dist);
 
+		if(dist + speed + 0.25F > LUT[LUT.length - 1] && !this.getLevel().isClientSide){
+			this.getPassengers().forEach(passenger -> {
+				passenger.stopRiding();
+				passenger.setDeltaMovement(new Vec3(0, 5, 5));
+			});
+		}
+
 		if(progress >= 1F && !this.getLevel().isClientSide){
-			this.getPassengers().forEach(passenger -> passenger.stopRiding());
 			this.remove(RemovalReason.DISCARDED);
 		}
 

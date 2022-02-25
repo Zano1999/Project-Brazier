@@ -1,0 +1,9 @@
+{
+	"type": "projectbrazier:selective_block",
+	"creativeTab": "projectbrazier:decoration",
+	"blocks": [
+		"projectbrazier:vertical_deepslate_brick_arrow_slit",
+		"projectbrazier:horizontal_deepslate_brick_arrow_slit",
+		"projectbrazier:cross_deepslate_brick_arrow_slit"
+	]
+}

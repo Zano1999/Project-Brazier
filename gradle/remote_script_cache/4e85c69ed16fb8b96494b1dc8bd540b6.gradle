@@ -22,6 +22,8 @@ minecraft {
 			taskName modName.replaceAll("\\s","") + 'Client'
 
 			property 'forge.logging.console.level', loggingLevel
+			property 'mixin.env.remapRefMap', 'true'
+			property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 			if(loggingANSI)
 				property 'terminal.ansi', 'true'
 
@@ -37,6 +39,8 @@ minecraft {
 			taskName modName.replaceAll("\\s","") + ' Server'
 
 			property 'forge.logging.console.level', loggingLevel
+			property 'mixin.env.remapRefMap', 'true'
+			property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 			if(loggingANSI)
 					property 'terminal.ansi', 'true'
 

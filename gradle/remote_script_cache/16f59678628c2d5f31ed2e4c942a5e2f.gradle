@@ -20,7 +20,7 @@ curseforge {
 			releaseType = getDefaultString('curse_release_type', 'alpha')
 			changelog = project.ext.modChangelog
 			changelogType = 'markdown'
-			addGameVersion project.ext.minecraft_version
+			addGameVersion project.version
 			if (project.hasProperty('curse_versions')) {
 				for (String version : getOptionalString('curse_versions').split(', ')) {
 					addGameVersion version

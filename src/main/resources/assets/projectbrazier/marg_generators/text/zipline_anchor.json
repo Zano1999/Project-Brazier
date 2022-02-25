@@ -1,0 +1,24 @@
+{
+	"generatorVersion": 0,
+	"material": {
+		"materialType": "wood",
+		"textures": [
+			"stripped_log_top",
+			"stripped_log"
+		]
+	},
+	"tasks": [
+		{
+			"input": "projectbrazier:blockstates/generator/zipline_anchor.json",
+			"output": "projectbrazier:blockstates/${material}_zipline_anchor.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/zipline_anchor.json",
+			"output": "projectbrazier:models/block/${material}_zipline_anchor.json"
+		},
+		{
+			"input": "projectbrazier:models/generator/block/zipline_anchor.json",
+			"output": "projectbrazier:models/item/${material}_zipline_anchor.json"
+		}
+	]
+}

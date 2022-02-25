@@ -4,10 +4,9 @@ import com.mojang.serialization.Codec;
 import net.dark_roleplay.marg.common.material.MargMaterial;
 import net.dark_roleplay.marg.common.material.MaterialCondition;
 import net.dark_roleplay.projectbrazier.experimental_features.fixed_data.ItemPropertyLoader;
-import net.dark_roleplay.projectbrazier.feature.blocks.BrazierBlock;
 import net.dark_roleplay.projectbrazier.feature.blocks.templates.MedievalProperties;
-import net.dark_roleplay.projectbrazier.util.EnumMaterialRegistryObject;
-import net.dark_roleplay.projectbrazier.util.EnumRegistryObject;
+import net.dark_roleplay.projectbrazier.util.marg.EnumMaterialRegistryObject;
+import net.dark_roleplay.projectbrazier.util.marg.EnumRegistryObject;
 import net.dark_roleplay.projectbrazier.util.MaterialRegistryObject;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -42,14 +41,14 @@ import java.util.stream.Collectors;
 public class Registrar {
 
 	//region Blocks
-	protected static <T extends Block> RegistryObject<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> factory, BlockBehaviour.Properties props, boolean registerItem) {
+	public static <T extends Block> RegistryObject<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> factory, BlockBehaviour.Properties props, boolean registerItem) {
 		return (registerItem ?
 				BrazierRegistries.BLOCKS :
 				BrazierRegistries.BLOCKS_NO_ITEMS)
 				.register(name, () -> factory.apply(props));
 	}
 
-	protected static <T extends Enum<T>, B extends Block> EnumMaterialRegistryObject<T, B> registerBlock(String name, Class<T> clazz, MaterialCondition condition, Function<BlockBehaviour.Properties, B> supplier, Function<MargMaterial, BlockBehaviour.Properties> propertyFactory, boolean registerItem) {
+	public static <T extends Enum<T>, B extends Block> EnumMaterialRegistryObject<T, B> registerBlock(String name, Class<T> clazz, MaterialCondition condition, Function<BlockBehaviour.Properties, B> supplier, Function<MargMaterial, BlockBehaviour.Properties> propertyFactory, boolean registerItem) {
 		EnumMaterialRegistryObject<T, B> regObj = new EnumMaterialRegistryObject<>(clazz);
 		for (T type : clazz.getEnumConstants()) {
 			String enumizedName = "";
@@ -64,11 +63,11 @@ public class Registrar {
 		return regObj;
 	}
 
-	protected static <T extends Enum<T>, B extends Block> EnumRegistryObject<T, B> registerBlock(String name, Class<T> clazz, Function<BlockBehaviour.Properties, B> supplier, BlockBehaviour.Properties props, boolean registerItem) {
+	public static <T extends Enum<T>, B extends Block> EnumRegistryObject<T, B> registerBlock(String name, Class<T> clazz, Function<BlockBehaviour.Properties, B> supplier, BlockBehaviour.Properties props, boolean registerItem) {
 		return registerBlock(name, clazz, type -> true, supplier, props, registerItem);
 	}
 
-	protected static <T extends Enum<T>, B extends Block> EnumRegistryObject<T, B> registerBlock(String name, Class<T> clazz, Predicate<T> filter, Function<BlockBehaviour.Properties, B> supplier, BlockBehaviour.Properties props, boolean registerItem) {
+	public static <T extends Enum<T>, B extends Block> EnumRegistryObject<T, B> registerBlock(String name, Class<T> clazz, Predicate<T> filter, Function<BlockBehaviour.Properties, B> supplier, BlockBehaviour.Properties props, boolean registerItem) {
 		EnumRegistryObject<T, B> regObj = new EnumRegistryObject<>(clazz);
 		for (T type : clazz.getEnumConstants())
 			if(filter.test(type))
@@ -80,11 +79,11 @@ public class Registrar {
 		return regObj;
 	}
 
-	protected static <T extends Block> MaterialRegistryObject<T> registerBlock(String name, MaterialCondition condition, Function<BlockBehaviour.Properties, T> factory, Function<MargMaterial, BlockBehaviour.Properties> propertyFactory, boolean createItem) {
+	public static <T extends Block> MaterialRegistryObject<T> registerBlock(String name, MaterialCondition condition, Function<BlockBehaviour.Properties, T> factory, Function<MargMaterial, BlockBehaviour.Properties> propertyFactory, boolean createItem) {
 		return registerBlock(name, condition, (material, props) -> factory.apply(props), propertyFactory, createItem);
 	}
 
-	protected static <T extends Block> MaterialRegistryObject<T> registerBlock(String name, MaterialCondition condition, BiFunction<MargMaterial, BlockBehaviour.Properties, T> factory, Function<MargMaterial, BlockBehaviour.Properties> propertyFactory, boolean createItem) {
+	public static <T extends Block> MaterialRegistryObject<T> registerBlock(String name, MaterialCondition condition, BiFunction<MargMaterial, BlockBehaviour.Properties, T> factory, Function<MargMaterial, BlockBehaviour.Properties> propertyFactory, boolean createItem) {
 		MaterialRegistryObject<T> blocks = new MaterialRegistryObject();
 
 		for (MargMaterial material : condition) {
@@ -100,29 +99,30 @@ public class Registrar {
 	//endregion
 
 	//region Items
-	protected static RegistryObject<Item> registerItem(String name) {
+	public static RegistryObject<Item> registerItem(String name) {
 		return registerItem(name, Item::new);
 	}
 
-	protected static <T extends Item> RegistryObject<T> registerItem(String name, Function<Item.Properties, T> supplier) {
+
+	public static <T extends Item> RegistryObject<T> registerItem(String name, Function<Item.Properties, T> supplier) {
 		return BrazierRegistries.ITEMS.register(name, () -> supplier.apply(ItemPropertyLoader.getProp(name)));
 	}
 	//endregion
 
 	//region Containers
 
-	protected static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerContainer(String name, IContainerFactory<T> factory) {
+	public static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerContainer(String name, IContainerFactory<T> factory) {
 		return BrazierRegistries.CONTAINERS.register(name, () -> new MenuType<>(factory));
 	}
 
 	//endregion
 
 	//region TileEntityTypes
-	protected static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registerBlockEntity(String name, BlockEntityType.BlockEntitySupplier<T> supplier, RegistryObject<Block>... blocks) {
+	public static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registerBlockEntity(String name, BlockEntityType.BlockEntitySupplier<T> supplier, RegistryObject<Block>... blocks) {
 		return BrazierRegistries.BLOCK_ENTITIES.register(name, () -> createType(supplier, blocks));
 	}
 
-	protected static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registerBlockEntity(String name, BlockEntityType.BlockEntitySupplier<T> supplier, Collection<RegistryObject<Block>>... blocks) {
+	public static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registerBlockEntity(String name, BlockEntityType.BlockEntitySupplier<T> supplier, Collection<RegistryObject<Block>>... blocks) {
 		return BrazierRegistries.BLOCK_ENTITIES.register(name, () -> createType(supplier, blocks));
 	}
 
@@ -137,44 +137,44 @@ public class Registrar {
 
 	//region Entities
 
-	protected static <T extends Entity> RegistryObject<EntityType<T>> registerEntity(String name, Supplier<EntityType<T>> supplier) {
+	public static <T extends Entity> RegistryObject<EntityType<T>> registerEntity(String name, Supplier<EntityType<T>> supplier) {
 		return BrazierRegistries.ENTITIES.register(name, supplier);
 	}
 
 	//endregion
 
 	//region AbstractBlock.Properties
-	protected static Block.Properties MARG_WOOD(MargMaterial material) {
+	public static Block.Properties MARG_WOOD(MargMaterial material) {
 		return BlockBehaviour.Properties.of(Material.WOOD, material.getProperties().getMapColor())
 				.strength(2.0F, 3.0F)
 				.sound(SoundType.WOOD).noOcclusion();
 	}
 
-	protected static final BlockBehaviour.Properties WOOD =
+	public static final BlockBehaviour.Properties WOOD =
 			BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD)
 					.strength(2.0F, 3.0F)
 					.sound(SoundType.WOOD)
 					.noOcclusion();
 
-	protected static final BlockBehaviour.Properties WOOD_SOLID =
+	public static final BlockBehaviour.Properties WOOD_SOLID =
 			BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD)
 					.strength(2.0F, 3.0F)
 					.sound(SoundType.WOOD);
 
-	protected static BlockBehaviour.Properties METAL =
+	public static BlockBehaviour.Properties METAL =
 			BlockBehaviour.Properties.of(Material.HEAVY_METAL, MaterialColor.METAL)
 					.strength(5.0F, 1200.0F)
 					.sound(SoundType.METAL)
 					.noOcclusion();
 
-	protected static BlockBehaviour.Properties METAL_BRAZIER =
+	public static BlockBehaviour.Properties METAL_BRAZIER =
 			BlockBehaviour.Properties.of(Material.HEAVY_METAL, MaterialColor.METAL)
 					.strength(5.0F, 1200.0F)
 					.sound(SoundType.METAL)
 					.lightLevel(state -> state.getValue(MedievalProperties.BURNING) ? 15 : 0)
 					.noOcclusion();
 
-	protected static BlockBehaviour.Properties METAL_SOUL_BRAZIER =
+	public static BlockBehaviour.Properties METAL_SOUL_BRAZIER =
 			BlockBehaviour.Properties.of(Material.HEAVY_METAL, MaterialColor.METAL)
 					.strength(5.0F, 1200.0F)
 					.sound(SoundType.METAL)
@@ -182,37 +182,37 @@ public class Registrar {
 					.noOcclusion();
 
 
-	protected static BlockBehaviour.Properties METAL_GLOW =
+	public static BlockBehaviour.Properties METAL_GLOW =
 			BlockBehaviour.Properties.of(Material.HEAVY_METAL, MaterialColor.METAL)
 					.strength(5.0F, 1200.0F)
 					.sound(SoundType.METAL)
 					.lightLevel(state -> 15)
 					.noOcclusion();
 
-	protected static BlockBehaviour.Properties METAL_SOLID =
+	public static BlockBehaviour.Properties METAL_SOLID =
 			BlockBehaviour.Properties.of(Material.HEAVY_METAL, MaterialColor.METAL)
 					.strength(5.0F, 1200.0F)
 					.sound(SoundType.METAL);
 
-	protected static BlockBehaviour.Properties STONE =
+	public static BlockBehaviour.Properties STONE =
 			BlockBehaviour.Properties.
 					of(Material.STONE, MaterialColor.STONE)
 					.strength(1.5F, 6.0F)
 					.sound(SoundType.STONE)
 					.noOcclusion();
 
-	protected static BlockBehaviour.Properties STONE_SOLID =
+	public static BlockBehaviour.Properties STONE_SOLID =
 			BlockBehaviour.Properties.
 					of(Material.STONE, MaterialColor.STONE)
 					.strength(1.5F, 6.0F)
 					.sound(SoundType.STONE);
 
-	protected static final BlockBehaviour.Properties SNOW_SOLID =
+	public static final BlockBehaviour.Properties SNOW_SOLID =
 			Block.Properties.of(Material.TOP_SNOW)
 					.strength(0.3F)
 					.sound(SoundType.SNOW);
 
-	protected static BlockBehaviour.Properties PLANT_FUNGI =
+	public static BlockBehaviour.Properties PLANT_FUNGI =
 			BlockBehaviour.Properties.
 					of(Material.PLANT, MaterialColor.WOOD)
 					.strength(1.5F, 6.0F)
@@ -235,7 +235,7 @@ public class Registrar {
 	//endregion
 
 	//region worldgen
-	protected static <R extends FeatureConfiguration, T extends Feature<R>> RegistryObject<Feature<R>> registerFeature(String name, Supplier<Feature<R>> supplier) {
+	public static <R extends FeatureConfiguration, T extends Feature<R>> RegistryObject<Feature<R>> registerFeature(String name, Supplier<Feature<R>> supplier) {
 		return BrazierRegistries.FEATURES.register(name, supplier);
 	}
 

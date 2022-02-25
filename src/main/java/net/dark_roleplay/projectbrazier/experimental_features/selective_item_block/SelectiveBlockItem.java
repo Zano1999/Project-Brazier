@@ -10,6 +10,7 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -28,18 +29,30 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-public class SelectiveBlockItem extends Item {
+public class SelectiveBlockItem extends BlockItem {
 
 	protected final Map<GameProfile, Integer> PLAYER_SELECTED = new WeakHashMap<>();
 
 	protected Block[] blocks;
 
+	public SelectiveBlockItem(List<Block> blocks, Properties builder) {
+		this(blocks.toArray(new Block[blocks.size()]), builder);
+	}
+
 	public SelectiveBlockItem(Block[] blocks, Properties builder) {
-		super(builder);
+		super(blocks[0], builder);
 		this.blocks = blocks;
+	}
+
+	@Override
+	public void registerBlocks(Map<Block, Item> byBlock, Item item) {
+		for(Block block : blocks){
+			byBlock.put(block, item);
+		}
 	}
 
 	@Override

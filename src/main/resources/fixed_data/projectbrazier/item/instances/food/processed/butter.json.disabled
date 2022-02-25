@@ -1,0 +1,8 @@
+{
+	"type": "projectbrazier:item",
+	"creativeTab": "projectbrazier:miscellaneous",
+	"food": {
+		"nutrition": 8,
+		"saturation": 0.2
+	}
+}

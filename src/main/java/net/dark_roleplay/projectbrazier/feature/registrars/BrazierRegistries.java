@@ -1,6 +1,7 @@
 package net.dark_roleplay.projectbrazier.feature.registrars;
 
 import net.dark_roleplay.projectbrazier.ProjectBrazier;
+import net.dark_roleplay.projectbrazier.experimental_features.fixed_data.items.ItemFixedDataRegistry;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
@@ -12,6 +13,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class BrazierRegistries {
+	public static final ItemFixedDataRegistry ITEMS_FD = new ItemFixedDataRegistry(ForgeRegistries.ITEMS, ProjectBrazier.MODID);
+
 //	public static final DeferredRegister<Decal> DECALS = DeferredRegister.create(DecalRegistry.REGISTRY, ProjectBrazier.MODID);
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ProjectBrazier.MODID);
 	public static final DeferredRegister<Block> BLOCKS_NO_ITEMS = DeferredRegister.create(ForgeRegistries.BLOCKS, ProjectBrazier.MODID);

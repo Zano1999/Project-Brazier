@@ -20,6 +20,8 @@
 	"item.projectbrazier.gold_coin": "Gold Coin",
 	"item.projectbrazier.silver_coin": "Silver Coin",
 	"item.projectbrazier.copper_coin": "Copper Coin",
+	"item.projectbrazier.weathered_copper_coin": "Weathered Copper Coin",
+	"item.projectbrazier.oxidized_copper_coin": "Oxidized Copper Coin",
 	"item.projectbrazier.bone_war_horn": "Bone War Horn",
 	"item.projectbrazier.gold_spyglass": "Gold Spyglass",
 	"item.projectbrazier.silver_spyglass": "Silver Spyglass",
@@ -28,6 +30,9 @@
 	"item.projectbrazier.cauliflower": "Cauliflower",
 	"item.projectbrazier.white_cabbage": "White Cabbage",
 	"item.projectbrazier.stone_arrow_slit": "Stone Brick Arrow Slit",
+	"item.projectbrazier.lump_of_dry_clay": "Lump of Dry Clay",
+	"item.projectbrazier.rope": "Rope",
+	"item.projectbrazier.deepslate_arrow_slit": "Deepslate Arrow Slit",
 
 	"block.projectbrazier.hoof_fungus": "Hoof Fungus",
 	"block.projectbrazier.stone_machicolations": "Stone Machicolations",
@@ -77,6 +82,12 @@
 	"block.projectbrazier.traces_of_deepslate_coal_ore": "Deepslate with Coal Ore traces",
 	"block.projectbrazier.poor_deepslate_coal_ore": "Poor Coal Ore",
 	"block.projectbrazier.rich_deepslate_coal_ore": "Rich Coal Ore",
+	"block.projectbrazier.clay_in_dirt": "Clay in Dirt",
+	"block.projectbrazier.clay_in_grassy_dirt": "Clay in Grassy Dirt",
+	"block.projectbrazier.deepslate_machicolations": "Deepslate Machicolations",
+	"block.projectbrazier.deepslate_crenellations": "Deepslate Crenellations",
+
+	"block.info.projectbrazier.barrel": "Barrel functionality is currently disabled due to a major bug, sorry :(",
 
 	"interaction.projectbrazier.chair_to_far": "%s is to far away from you.",
 	"interaction.projectbrazier.chair_occupied": "%s is already occupied.",
@@ -88,7 +99,13 @@
 	"interaction.projectbrazier.rope_anchor.drop": "Drop rope down",
 	"interaction.projectbrazier.rope_anchor.pull_up": "Pull rope up",
 	"interaction.projectbrazier.rope_anchor.pull_up_fail": "Can not pull rope up while it's being used",
+	"interaction.projectbrazier.zipline.rope.set": "Rope attached to first point",
+	"interaction.projectbrazier.zipline.rope.to_short": "Zipline is to short, needs to be %s blocks apart",
+	"interaction.projectbrazier.zipline.rope.to_far": "Zipline is to long, %s blocks is the maximum",
+	"interaction.projectbrazier.zipline.rope.not_steep_enough": "Zipline is not steep enough",
+	"interaction.projectbrazier.zipline.rope.not_enough_rope": "You are missing %s ropes",
 
+	"interaction.projectbrazier.rope_maker.not_enough_string": "You are missing %s String",
 
 	"marg.material.apple": "Apple",
 	"marg.material.orange": "Orange",
@@ -100,6 +117,7 @@
 	"lang_gen.projectbrazier.log_chair": "${material} Log Chair",
 	"lang_gen.projectbrazier.firewood": "${material} Firewood",
 	"lang_gen.projectbrazier.hollow_log": "Hollow ${material} Log",
+	"lang_gen.projectbrazier.zipline_anchor": "${material} Zipline Anchor",
 	"lang_gen.projectbrazier.stripped_log_bench": "Stripped ${material} Log Bench",
 	"lang_gen.projectbrazier.stripped_log_chair": "Stripped ${material} Log Chair",
 	"lang_gen.projectbrazier.stripped_hollow_log": "Stripped Hollow ${material} Log",

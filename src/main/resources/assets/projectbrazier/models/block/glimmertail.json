@@ -3,9 +3,9 @@
 	"ambientocclusion": false,
 	"emissive": {
 		"parent": "minecraft:block/tinted_cross",
+		"blockLight": 2,
+		"skyLight": 0,
 		"textures": {
-			"blockLight": 2,
-			"skyLight": 0,
 			"cross": "projectbrazier:block/glimmertail_emissive"
 		}
 	},

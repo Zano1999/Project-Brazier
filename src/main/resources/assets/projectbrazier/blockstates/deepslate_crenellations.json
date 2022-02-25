@@ -1,0 +1,16 @@
+{
+	"variants": {
+		"facing=north,type=straight": {"model":  "projectbrazier:block/deepslate_crenellations"},
+		"facing=east,type=straight": {"model":  "projectbrazier:block/deepslate_crenellations", "y": 90},
+		"facing=south,type=straight": {"model":  "projectbrazier:block/deepslate_crenellations", "y": 180},
+		"facing=west,type=straight": {"model":  "projectbrazier:block/deepslate_crenellations", "y": 270},
+		"facing=north,type=outer_corner": {"model":  "projectbrazier:block/deepslate_outer_crenellations"},
+		"facing=east,type=outer_corner": {"model":  "projectbrazier:block/deepslate_outer_crenellations", "y": 90},
+		"facing=south,type=outer_corner": {"model":  "projectbrazier:block/deepslate_outer_crenellations", "y": 180},
+		"facing=west,type=outer_corner": {"model":  "projectbrazier:block/deepslate_outer_crenellations", "y": 270},
+		"facing=north,type=inner_corner": {"model":  "projectbrazier:block/deepslate_inner_crenellations"},
+		"facing=east,type=inner_corner": {"model":  "projectbrazier:block/deepslate_inner_crenellations", "y": 90},
+		"facing=south,type=inner_corner": {"model":  "projectbrazier:block/deepslate_inner_crenellations", "y": 180},
+		"facing=west,type=inner_corner": {"model":  "projectbrazier:block/deepslate_inner_crenellations", "y": 270}
+	}
+}

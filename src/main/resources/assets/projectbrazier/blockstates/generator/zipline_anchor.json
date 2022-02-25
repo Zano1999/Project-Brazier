@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"axis=z": {"model": "projectbrazier:block/${material}_zipline_anchor", "y":90},
+		"axis=x": {"model": "projectbrazier:block/${material}_zipline_anchor"}
+	}
+}

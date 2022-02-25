@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import net.dark_roleplay.projectbrazier.experimental_features.builtin_mixed_model.IQuadProvider;
 import net.dark_roleplay.projectbrazier.feature.blocks.FlowerContainerData;
+import net.dark_roleplay.projectbrazier.feature_client.listeners.ResourceReloadUtil;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
@@ -27,6 +28,10 @@ import java.util.Random;
 public class CFlowerContainerData extends FlowerContainerData implements IQuadProvider {
 	private EnumMap<Direction, List<BakedQuad>> quads;
 	private List<BakedQuad> nullQuads;
+
+	public CFlowerContainerData(){
+		ResourceReloadUtil.addReloadListener(this, () -> quads = null);
+	}
 
 	@Override
 	public void deserialize(CompoundTag nbt) {

@@ -103,7 +103,8 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 
 	@Override
 	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt){
-		this.load(pkt.getTag());
+		if(pkt.getTag() != null)
+			this.load(pkt.getTag());
 	}
 
 	//endregion
@@ -127,11 +128,11 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 			protected void onContentsChanged(int slot){
 				for(int currentSlot = 0; currentSlot < this.getSlots(); currentSlot++) {
 					if(!this.getStackInSlot(currentSlot).isEmpty()) {
-						if(BarrelBlockEntity.this.storageType != BarrelStorageType.ITEMS)
-							BarrelBlockEntity.this.storageType = BarrelStorageType.ITEMS;
+						BarrelBlockEntity.this.storageType = BarrelStorageType.ITEMS;
 						break;
 					}
 					BarrelBlockEntity.this.storageType = BarrelStorageType.NONE;
+					lazyItemHandler.invalidate();
 				}
 				BarrelBlockEntity.this.setChanged();
 			}
@@ -142,9 +143,10 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 		return new FluidTank(16000){
 			@Override
 			protected void onContentsChanged(){
-				if(this.getFluidAmount() == 0)
+				if(this.getFluidAmount() == 0) {
 					BarrelBlockEntity.this.storageType = BarrelStorageType.NONE;
-				else if(BarrelBlockEntity.this.storageType != BarrelStorageType.FLUID){
+					lazyFluidHandler.invalidate();
+				}else if(BarrelBlockEntity.this.storageType != BarrelStorageType.FLUID){
 					BarrelBlockEntity.this.storageType = BarrelStorageType.FLUID;
 				}
 				BarrelBlockEntity.this.setChanged();
@@ -188,9 +190,4 @@ public class BarrelBlockEntity extends BlockEntity implements MenuProvider {
 		return new GeneralContainer(id, playerInventory, this.level, this.worldPosition);
 	}
 	//endregion
-
-
-	public ItemStackHandler getItemHandler() {
-		return itemHandler;
-	}
 }

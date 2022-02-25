@@ -28,17 +28,10 @@ public class SpyglassItem extends Item {
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
-		ZiplineHelper.startZipline(
-				player,
-				world,
-				new Vector3f(57, 64, 684),
-				new Vector3f(7, 50, 701),
-				new Vector3f(29, 52, 693)
-		);
 		ItemStack itemstack = player.getItemInHand(hand);
-//		if(world.isClientSide){
-//			SpyglassListeners.toogleZoom();
-//		}
+		if(world.isClientSide){
+			SpyglassListeners.toogleZoom();
+		}
 		return InteractionResultHolder.consume(itemstack);
 	}
 }

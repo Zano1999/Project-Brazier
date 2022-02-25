@@ -1,8 +1,9 @@
 package net.dark_roleplay.projectbrazier;
 
-import net.dark_roleplay.projectbrazier.experimental_features.fixed_data.items.ItemFixedData;
+import net.dark_roleplay.projectbrazier.experimental_features.fixed_data.creative_tabs.CreativeTabFixedData;
 import net.dark_roleplay.projectbrazier.feature.mechanics.spreader.SpreadBehaviors;
 import net.dark_roleplay.projectbrazier.feature.mechanics.spreader.SpreaderType;
+import net.dark_roleplay.projectbrazier.feature.player_actions.zipline_creation.ZiplineCreationAction;
 import net.dark_roleplay.projectbrazier.feature.registrars.*;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierWorldGen;
 import net.minecraft.world.item.Item;
@@ -34,7 +35,8 @@ public class ProjectBrazier {
 		MinecraftForge.EVENT_BUS.addListener(BrazierWorldGen::biomeLoad);
 
 
-		modEventBus.addGenericListener(Item.class, ItemFixedData::registerItems);
+		modEventBus.addListener(CreativeTabFixedData::load);
+		modEventBus.addGenericListener(Item.class, BrazierRegistries.ITEMS_FD::registryListener);
 
 		BrazierRegistries.BLOCKS.register(modEventBus);
 		BrazierRegistries.BLOCKS_NO_ITEMS.register(modEventBus);

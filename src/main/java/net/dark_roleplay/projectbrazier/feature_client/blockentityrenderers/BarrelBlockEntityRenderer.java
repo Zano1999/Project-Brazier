@@ -1,8 +1,9 @@
 package net.dark_roleplay.projectbrazier.feature_client.blockentityrenderers;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
 import net.dark_roleplay.projectbrazier.feature.blockentities.BarrelBlockEntity;
 import net.dark_roleplay.projectbrazier.feature.blocks.BarrelStorageType;
 import net.minecraft.client.Minecraft;
@@ -25,6 +26,7 @@ public class BarrelBlockEntityRenderer implements BlockEntityRenderer<BarrelBloc
 
 	@Override
 	public void render(BarrelBlockEntity tileEntity, float partialTicks, PoseStack matrix, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+
 		LazyOptional<IFluidHandler> lazyTank = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 		if(tileEntity.getStorageType() != BarrelStorageType.FLUID || !lazyTank.isPresent()) return;
 

@@ -1,0 +1,7 @@
+{
+	"parent": "projectbrazier:block/zipline_anchor",
+	"textures": {
+		"log_side": "${texture%stripped_log}",
+		"log_end": "${texture%stripped_log_top}"
+	}
+}

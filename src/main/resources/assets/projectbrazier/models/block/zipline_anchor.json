@@ -1,0 +1,36 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"particle": "projectbrazier:block/rope/rope",
+		"rope": "projectbrazier:block/rope/rope",
+		"log_side": "block/stripped_oak_log",
+		"log_end": "block/stripped_oak_log_top",
+		"rope_knot": "projectbrazier:block/rope/rope_knot"
+	},
+	"elements": [
+		{
+			"from": [0, 4, 4],
+			"to": [16, 12, 12],
+			"faces": {
+				"north": {"uv": [4, 0, 12, 16], "rotation": 90, "texture": "#log_side"},
+				"east": {"uv": [4, 4, 12, 12], "texture": "#log_end", "cullface": "east"},
+				"south": {"uv": [4, 0, 12, 16], "rotation": 90, "texture": "#log_side"},
+				"west": {"uv": [4, 4, 12, 12], "texture": "#log_end", "cullface": "west"},
+				"up": {"uv": [4, 0, 12, 16], "rotation": 90, "texture": "#log_side"},
+				"down": {"uv": [4, 0, 12, 16], "rotation": 90, "texture": "#log_side"}
+			}
+		},
+		{
+			"from": [2, 3, 3],
+			"to": [14, 13, 13],
+			"faces": {
+				"north": {"uv": [0, 0, 12, 10], "texture": "#rope"},
+				"east": {"uv": [3, 3, 13, 13], "texture": "#rope_knot"},
+				"south": {"uv": [0, 2, 12, 12], "texture": "#rope"},
+				"west": {"uv": [3, 3, 13, 13], "texture": "#rope_knot"},
+				"up": {"uv": [0, 2, 12, 12], "texture": "#rope"},
+				"down": {"uv": [0, 6, 12, 16], "texture": "#rope"}
+			}
+		}
+	]
+}

@@ -9,9 +9,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.BlockGetter;
 
 public interface ITertiaryInteractor {
-	boolean hasInteraction(BlockGetter world, BlockPos pos, BlockState state, Player palyer);
+	boolean hasInteraction(BlockGetter world, BlockPos pos, BlockState state, Player player);
 
-	void executeInteraction(Level world, BlockPos pos, BlockState state, Player palyer);
+	void executeInteraction(Level world, BlockPos pos, BlockState state, Player player);
 
 	Component getInteractionTooltip(Level world, BlockPos pos, BlockState state, Player player);
 

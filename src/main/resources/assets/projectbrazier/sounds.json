@@ -2,5 +2,8 @@
 	"war_horn":{
 		"subtitle": "subtitles.projectbrazier.war_horn",
 		"sounds": [ "projectbrazier:item/war_horn_0" ]
+	},
+	"zipline": {
+		"sounds": ["projectbrazier:zipline"]
 	}
 }

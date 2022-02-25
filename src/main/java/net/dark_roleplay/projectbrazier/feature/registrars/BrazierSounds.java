@@ -8,7 +8,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class BrazierSounds {
 	public static final RegistryObject<SoundEvent>
-			WAR_HORN = BrazierRegistries.SOUNDS.register("war_horn", () -> new SoundEvent(new ResourceLocation(ProjectBrazier.MODID, "war_horn")));
+			WAR_HORN = BrazierRegistries.SOUNDS.register("war_horn", () -> new SoundEvent(new ResourceLocation(ProjectBrazier.MODID, "war_horn"))),
+			ZIPLINE = BrazierRegistries.SOUNDS.register("zipline", () -> new SoundEvent(new ResourceLocation(ProjectBrazier.MODID, "zipline")));
 
 
 	public static void preRegistry(){}

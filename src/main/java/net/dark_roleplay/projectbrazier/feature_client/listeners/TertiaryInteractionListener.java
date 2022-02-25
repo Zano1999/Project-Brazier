@@ -5,7 +5,7 @@ import net.dark_roleplay.projectbrazier.feature.mechanics.tertiary_interactions.
 import net.dark_roleplay.projectbrazier.feature.packets.TertiaryInteractionPacket;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierPackets;
 import net.dark_roleplay.projectbrazier.feature_client.registrars.BrazierKeybinds;
-import net.dark_roleplay.projectbrazier.util.RenderUtils;
+import net.dark_roleplay.projectbrazier.util.rendering.RenderUtils;
 import net.dark_roleplay.projectbrazier.util.screens.TextureList;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiComponent;

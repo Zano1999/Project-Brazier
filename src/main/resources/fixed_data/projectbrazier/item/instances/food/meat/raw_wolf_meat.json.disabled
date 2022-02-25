@@ -1,0 +1,9 @@
+{
+	"type": "projectbrazier:item",
+	"creativeTab": "projectbrazier:miscellaneous",
+	"food": {
+		"nutrition": 4,
+		"saturation": 0.2,
+		"isMeat": true
+	}
+}
