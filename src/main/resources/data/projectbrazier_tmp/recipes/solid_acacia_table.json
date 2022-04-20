@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "acacia_planks"
+	},
+	"result": "projectbrazier:solid_acacia_table",
+	"group": "projectbrazier:solid_table",
+	"count": 1
+}

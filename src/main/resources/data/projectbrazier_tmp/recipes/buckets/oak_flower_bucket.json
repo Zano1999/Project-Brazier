@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "oak_planks"
+	},
+	"result": "projectbrazier:oak_flower_bucket",
+	"group": "projectbrazier:flower_bucket",
+	"count": 1
+}

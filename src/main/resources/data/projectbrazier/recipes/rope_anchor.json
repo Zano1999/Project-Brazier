@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "rope_anchor",
+	"pattern": [
+		"###",
+		"#X#",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "projectbrazier:rope"
+		},
+		"X": {
+			"tag": "minecraft:logs"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:rope_anchor",
+		"count": 1
+	}
+}

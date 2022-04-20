@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "polstered_warped_bench",
+	"pattern": [
+		"###",
+		"#X#",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "projectbrazier:warped_bench"
+		},
+		"X": {
+			"item": "minecraft:yellow_wool"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:yellow_polstered_warped_bench",
+		"count": 8
+	}
+}

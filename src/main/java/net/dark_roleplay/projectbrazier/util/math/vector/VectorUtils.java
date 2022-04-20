@@ -1,4 +1,4 @@
-package net.dark_roleplay.projectbrazier.util.math;
+package net.dark_roleplay.projectbrazier.util.math.vector;
 
 import com.mojang.math.Vector3d;
 import com.mojang.math.Vector3f;

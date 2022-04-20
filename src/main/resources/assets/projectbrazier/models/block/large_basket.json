@@ -1,0 +1,38 @@
+{
+	"textures": {
+		"1": "projectbrazier:block/basket_top",
+		"3": "projectbrazier:block/basket_side",
+		"4": "projectbrazier:block/basket_bottom",
+		"5": "projectbrazier:block/basket_lit_bottom",
+		"6": "projectbrazier:block/basket_lit_top",
+		"7": "projectbrazier:block/basket_lit_side",
+		"particle": "projectbrazier:block/basket_lit_bottom"
+	},
+	"elements": [
+		{
+			"from": [1, 0, 1],
+			"to": [15, 14, 15],
+			"faces": {
+				"north": {"uv": [1, 2, 15, 16], "texture": "#3"},
+				"east": {"uv": [1, 2, 15, 16], "texture": "#3"},
+				"south": {"uv": [1, 2, 15, 16], "texture": "#3"},
+				"west": {"uv": [1, 2, 15, 16], "texture": "#3"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#1"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#4"}
+			}
+		},
+		{
+			"from": [0, 13, 0],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "z", "origin": [18.75, 6.75, 11]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 3], "texture": "#7"},
+				"east": {"uv": [0, 0, 16, 3], "texture": "#7"},
+				"south": {"uv": [0, 0, 16, 3], "texture": "#7"},
+				"west": {"uv": [0, 0, 16, 3], "texture": "#7"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#6"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#5"}
+			}
+		}
+	]
+}

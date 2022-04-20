@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "minecraft:deepslate_bricks"
+	},
+	"result": "projectbrazier:deepslate_machicolations",
+	"group": "projectbrazier:machicolations",
+	"count": 1
+}

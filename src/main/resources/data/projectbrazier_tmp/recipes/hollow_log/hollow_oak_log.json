@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "oak_log"
+	},
+	"result": "projectbrazier:hollow_oak_log",
+	"group": "projectbrazier:hollow_logs",
+	"count": 1
+}

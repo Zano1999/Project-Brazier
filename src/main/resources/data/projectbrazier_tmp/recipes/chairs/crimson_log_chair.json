@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "crimson_stem"
+	},
+	"result": "projectbrazier:crimson_log_chair",
+	"group": "projectbrazier:log_chair",
+	"count": 1
+}

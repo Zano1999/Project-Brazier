@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "projectbrazier:apple_planks"
+	},
+	"result": "projectbrazier:apple_flower_bucket",
+	"group": "projectbrazier:flower_bucket",
+	"count": 1
+}

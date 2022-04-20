@@ -41,7 +41,7 @@ public class BrazierBlocks {
 
 
 	public static final MaterialRegistryObject<Block>
-			CHOPPING_BLOCK = Registrar.registerBlock("${material}_chopping_block", LOG_CON, (mat, prop) -> new ChoppingBlockBlock(prop), Registrar::MARG_WOOD, true),
+//			CHOPPING_BLOCK = Registrar.registerBlock("${material}_chopping_block", LOG_CON, (mat, prop) -> new ChoppingBlockBlock(prop), Registrar::MARG_WOOD, true),
 			OPEN_BARRELS = Registrar.registerBlock("${material}_open_barrel", BARREL_CON, (mat, prop) -> new BarrelBlock(mat, prop, "open_barrel", false), Registrar::MARG_WOOD, true),
 			CLOSED_BARRELS = Registrar.registerBlock("${material}_closed_barrel", BARREL_CON, (mat, prop) -> new BarrelBlock(mat, prop, "closed_barrel", true), Registrar::MARG_WOOD, true),
 			FLOWER_BARRELS = Registrar.registerBlock("${material}_flower_barrel", BARREL_CON, (mat, prop) -> new FlowerContainerBlock(prop, "flower_barrel", "flower_barrel_flower_area"), Registrar::MARG_WOOD, true),

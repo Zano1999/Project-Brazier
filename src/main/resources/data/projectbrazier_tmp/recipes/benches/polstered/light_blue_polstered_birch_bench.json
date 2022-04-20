@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "polstered_birch_bench",
+	"pattern": [
+		"###",
+		"#X#",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "projectbrazier:birch_bench"
+		},
+		"X": {
+			"item": "minecraft:light_blue_wool"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:light_blue_polstered_birch_bench",
+		"count": 8
+	}
+}

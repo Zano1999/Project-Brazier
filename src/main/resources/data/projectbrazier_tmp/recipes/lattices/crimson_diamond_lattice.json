@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "crimson_planks"
+	},
+	"result": "projectbrazier:crimson_diamond_lattice",
+	"group": "projectbrazier:diamond_lattice",
+	"count": 1
+}

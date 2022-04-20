@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "zipline_anchor",
+	"pattern": [
+		" X ",
+		"XZX",
+		" X "
+	],
+	"key": {
+		"X": {
+			"item": "projectbrazier:rope"
+		},
+		"Z": {
+			"item": "minecraft:stripped_acacia_log"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:acacia_zipline_anchor",
+		"count": 1
+	}
+}

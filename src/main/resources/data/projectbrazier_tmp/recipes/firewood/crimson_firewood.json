@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "crimson_stem"
+	},
+	"result": "projectbrazier:crimson_firewood",
+	"group": "projectbrazier:firewood",
+	"count": 1
+}

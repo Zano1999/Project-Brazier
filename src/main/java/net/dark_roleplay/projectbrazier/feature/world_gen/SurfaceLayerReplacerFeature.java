@@ -47,7 +47,7 @@ public class SurfaceLayerReplacerFeature extends Feature<NoneFeatureConfiguratio
 
 				int y2 = worldGenLevel.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x2, z2);
 				mutPos.set(x2, y2 - 1, z2);
-				Biome.BiomeCategory cat = worldGenLevel.getBiome(mutPos).getBiomeCategory();
+				Biome.BiomeCategory cat = Biome.getBiomeCategory(worldGenLevel.getBiome(mutPos));
 				if(!(cat == Biome.BiomeCategory.FOREST ||
 						cat == Biome.BiomeCategory.PLAINS ||
 						cat == Biome.BiomeCategory.JUNGLE ||

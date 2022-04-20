@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "polstered_crimson_bench",
+	"pattern": [
+		"###",
+		"#X#",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "projectbrazier:crimson_bench"
+		},
+		"X": {
+			"item": "minecraft:blue_wool"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:blue_polstered_crimson_bench",
+		"count": 8
+	}
+}

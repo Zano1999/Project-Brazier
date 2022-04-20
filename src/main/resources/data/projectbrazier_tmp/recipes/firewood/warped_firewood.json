@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "warped_stem"
+	},
+	"result": "projectbrazier:warped_firewood",
+	"group": "projectbrazier:firewood",
+	"count": 1
+}

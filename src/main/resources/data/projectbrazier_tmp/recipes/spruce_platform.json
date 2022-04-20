@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "spruce_planks"
+	},
+	"result": "projectbrazier:spruce_platform",
+	"group": "projectbrazier:platform",
+	"count": 2
+}

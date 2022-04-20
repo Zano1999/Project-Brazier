@@ -4,6 +4,6 @@
 		"item": "minecraft:stone_bricks"
 	},
 	"result": "projectbrazier:stone_arrow_slit",
-	"group": "projectbrazier:stone_arrow_slit",
+	"group": "projectbrazier:arrow_slit",
 	"count": 2
 }

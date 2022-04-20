@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "stripped_warped_stem"
+	},
+	"result": "projectbrazier:stripped_hollow_warped_log",
+	"group": "projectbrazier:stripped_hollow_logs",
+	"count": 1
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "projectbrazier:apple_zipline_anchor"
+        }
+      ]
+    }
+  ]
+}

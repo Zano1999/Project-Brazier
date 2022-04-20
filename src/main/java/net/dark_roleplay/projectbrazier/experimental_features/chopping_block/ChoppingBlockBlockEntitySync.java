@@ -19,8 +19,8 @@ public class ChoppingBlockBlockEntitySync {
 	public ChoppingBlockBlockEntitySync(){}
 
 	public ChoppingBlockBlockEntitySync(ChoppingBlockBlockEntity be){
-		this.pos = be.getBlockPos();
-		this.item = be.getHeldItem();
+//		this.pos = be.();
+//		this.item = be.getHeldItem();
 	}
 
 	public static void encode(ChoppingBlockBlockEntitySync pkt, FriendlyByteBuf buffer){
@@ -41,8 +41,8 @@ public class ChoppingBlockBlockEntitySync {
 			if(!level.hasChunkAt(pkt.pos)) return;
 			LevelChunk chunk = level.getChunkAt(pkt.pos);
 			BlockEntity be = chunk.getBlockEntity(pkt.pos);
-			if(!(level.getBlockEntity(pkt.pos) instanceof ChoppingBlockBlockEntity cbe)) return;
-			cbe.forceSetItem(pkt.item);
+//			if(!(level.getBlockEntity(pkt.pos) instanceof ChoppingBlockBlockEntity cbe)) return;
+//			cbe.forceSetItem(pkt.item);
 
 			ctxSupplier.get().setPacketHandled(true);
 		});

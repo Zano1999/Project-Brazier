@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "crimson_stem"
+	},
+	"result": "projectbrazier:hollow_crimson_log",
+	"group": "projectbrazier:hollow_logs",
+	"count": 1
+}

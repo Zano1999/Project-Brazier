@@ -1,7 +1,7 @@
 package net.dark_roleplay.projectbrazier.util.math;
 
 import com.mojang.math.Vector3f;
-import net.dark_roleplay.projectbrazier.util.math.VectorUtils;
+import net.dark_roleplay.projectbrazier.util.math.vector.VectorUtils;
 import net.minecraft.util.Mth;
 
 public class BezierUtils {

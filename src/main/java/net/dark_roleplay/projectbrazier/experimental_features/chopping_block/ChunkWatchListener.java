@@ -7,17 +7,17 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.NetworkDirection;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
+//@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ChunkWatchListener {
 
-	@SubscribeEvent
-	public static void listenToChunk(ChunkWatchEvent.Watch event){
-		LevelChunk chunk = event.getWorld().getChunk(event.getPos().x, event.getPos().z);
-		chunk.getBlockEntities().forEach((pos, be) -> {
-			if(be instanceof ChoppingBlockBlockEntity cbe){
-				BrazierPackets.BLOCK_ENTITY.sendTo(new ChoppingBlockBlockEntitySync(cbe), event.getPlayer().connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
-			}
-		});
-	}
+//	@SubscribeEvent
+//	public static void listenToChunk(ChunkWatchEvent.Watch event){
+//		LevelChunk chunk = event.getWorld().getChunk(event.getPos().x, event.getPos().z);
+//		chunk.getBlockEntities().forEach((pos, be) -> {
+//			if(be instanceof ChoppingBlockBlockEntity cbe){
+//				BrazierPackets.BLOCK_ENTITY.sendTo(new ChoppingBlockBlockEntitySync(cbe), event.getPlayer().connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+//			}
+//		});
+//	}
 
 }

@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "acacia_planks"
+	},
+	"result": "projectbrazier:acacia_armrest_chair",
+	"group": "projectbrazier:armrest_chair",
+	"count": 1
+}

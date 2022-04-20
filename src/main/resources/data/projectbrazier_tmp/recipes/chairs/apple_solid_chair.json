@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "projectbrazier:apple_planks"
+	},
+	"result": "projectbrazier:apple_solid_chair",
+	"group": "projectbrazier:solid_chair",
+	"count": 1
+}

@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "birch_log"
+	},
+	"result": "projectbrazier:birch_log_bench",
+	"group": "projectbrazier:log_benches",
+	"count": 1
+}

@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "polstered_oak_bench",
+	"pattern": [
+		"###",
+		"#X#",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "projectbrazier:oak_bench"
+		},
+		"X": {
+			"item": "minecraft:pink_wool"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:pink_polstered_oak_bench",
+		"count": 8
+	}
+}

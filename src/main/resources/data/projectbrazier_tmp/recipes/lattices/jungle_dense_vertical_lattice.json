@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "jungle_planks"
+	},
+	"result": "projectbrazier:jungle_dense_vertical_lattice",
+	"group": "projectbrazier:dense_vertical_lattice",
+	"count": 1
+}

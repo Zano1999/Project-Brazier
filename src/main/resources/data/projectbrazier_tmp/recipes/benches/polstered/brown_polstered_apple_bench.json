@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "polstered_apple_bench",
+	"pattern": [
+		"###",
+		"#X#",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "projectbrazier:apple_bench"
+		},
+		"X": {
+			"item": "minecraft:brown_wool"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:brown_polstered_apple_bench",
+		"count": 8
+	}
+}

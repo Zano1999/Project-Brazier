@@ -13,6 +13,7 @@ import net.dark_roleplay.projectbrazier.experimental_features.link.either_codec_
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.registries.NewRegistryEvent;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,7 +30,7 @@ public class CreativeTabFixedData extends FixedData {
 		CREATIVE_TYPE_PROVIDERS.register(new CodecDispatchType(new ResourceLocation(ProjectBrazier.MODID, "creative_mode_tab"), BasicTabProvider.class, BasicTabProvider.CODEC));
 	}
 
-	public static void load(RegistryEvent.NewRegistry event){
+	public static void load(NewRegistryEvent event){
 		TABS.clear();
 		FixedDataPack pack = FixedDataPack.getPackForMod(ProjectBrazier.MODID);
 

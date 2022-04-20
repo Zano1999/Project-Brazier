@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "warped_planks"
+	},
+	"result": "projectbrazier:warped_closed_barrel",
+	"group": "projectbrazier:closed_barrel",
+	"count": 1
+}

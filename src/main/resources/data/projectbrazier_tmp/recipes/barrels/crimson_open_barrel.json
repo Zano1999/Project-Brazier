@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "crimson_planks"
+	},
+	"result": "projectbrazier:crimson_open_barrel",
+	"group": "projectbrazier:open_barrel",
+	"count": 1
+}

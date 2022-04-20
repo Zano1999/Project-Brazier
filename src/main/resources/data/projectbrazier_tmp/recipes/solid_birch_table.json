@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "birch_planks"
+	},
+	"result": "projectbrazier:solid_birch_table",
+	"group": "projectbrazier:solid_table",
+	"count": 1
+}

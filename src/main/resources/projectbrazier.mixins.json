@@ -12,7 +12,8 @@
 	],
 	"client": [
 		"PlayerModelMixin",
-		"NOFChunkRenderHook"
+		"NOFChunkRenderHook",
+		"DebugRendererHook"
 	],
 	"minVersion": "0.8"
 }

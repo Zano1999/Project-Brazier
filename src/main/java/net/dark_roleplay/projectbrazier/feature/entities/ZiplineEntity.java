@@ -1,21 +1,15 @@
 package net.dark_roleplay.projectbrazier.feature.entities;
 
-import com.mojang.math.Vector3d;
 import com.mojang.math.Vector3f;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierSounds;
 import net.dark_roleplay.projectbrazier.util.data.NBTUtil2;
-import net.dark_roleplay.projectbrazier.util.math.VectorUtils;
+import net.dark_roleplay.projectbrazier.util.math.vector.VectorUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializer;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;

@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "polstered_orange_bench",
+	"pattern": [
+		"###",
+		"#X#",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "projectbrazier:orange_bench"
+		},
+		"X": {
+			"item": "minecraft:white_wool"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:white_polstered_orange_bench",
+		"count": 8
+	}
+}

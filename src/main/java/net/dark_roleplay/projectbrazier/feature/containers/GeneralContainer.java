@@ -63,7 +63,7 @@ public class GeneralContainer extends AbstractContainerMenu {
 
 	@Override
 	public boolean stillValid(Player player) {
-		return this.worldPos.closerThan(player.position(), 5);
+		return this.worldPos.closerThan(player.blockPosition(), 5);
 	}
 
 	//TODO Properly Implement Shift Clicking

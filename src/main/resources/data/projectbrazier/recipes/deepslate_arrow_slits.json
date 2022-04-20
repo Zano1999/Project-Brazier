@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "minecraft:deepslate_bricks"
+	},
+	"result": "projectbrazier:deepslate_arrow_slit",
+	"group": "projectbrazier:arrow_slit",
+	"count": 2
+}

@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "oak_log"
+	},
+	"result": "projectbrazier:oak_log_chair",
+	"group": "projectbrazier:log_chair",
+	"count": 1
+}

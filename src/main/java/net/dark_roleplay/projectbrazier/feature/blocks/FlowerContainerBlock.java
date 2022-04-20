@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -22,14 +23,14 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeTagHandler;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ForgeItemTagsProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 public class FlowerContainerBlock extends DecoBlock implements EntityBlock {
 
-	private static Tags.IOptionalNamedTag<Item> POT_PLANTS = ForgeTagHandler.createOptionalTag(ForgeRegistries.ITEMS, new ResourceLocation(ProjectBrazier.MODID, "pot_plant"));
+	private static TagKey<Item> POT_PLANTS = ItemTags.create(new ResourceLocation(ProjectBrazier.MODID, "pot_plant"));
 	private VoxelShape allowedPlacementArea;
 
 	public FlowerContainerBlock(Properties properties, String shapeName, String allowedPlacement) {
@@ -51,7 +52,7 @@ public class FlowerContainerBlock extends DecoBlock implements EntityBlock {
 			if(!stack.isEmpty())
 				player.addItem(stack);
 		}else {
-			if(heldItem.getItem() instanceof BlockItem && (ItemTags.FLOWERS.contains(heldItem.getItem()) || POT_PLANTS.contains(heldItem.getItem()))) {
+			if(heldItem.getItem() instanceof BlockItem && (heldItem.is(ItemTags.FLOWERS) || heldItem.is(POT_PLANTS))) {
 				Vec3 hitPos = hit.getLocation();
 				Vec3i offsetPos = new Vec3i((int) Math.floor((hitPos.x() - pos.getX()) * 16), (int) Math.floor((hitPos.y() - pos.getY()) * 16), (int) Math.floor((hitPos.z() - pos.getZ()) * 16));
 

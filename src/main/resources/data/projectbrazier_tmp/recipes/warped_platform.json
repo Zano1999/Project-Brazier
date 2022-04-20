@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "warped_planks"
+	},
+	"result": "projectbrazier:warped_platform",
+	"group": "projectbrazier:platform",
+	"count": 2
+}

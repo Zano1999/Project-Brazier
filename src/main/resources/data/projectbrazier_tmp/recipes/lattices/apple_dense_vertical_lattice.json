@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "projectbrazier:apple_planks"
+	},
+	"result": "projectbrazier:apple_dense_vertical_lattice",
+	"group": "projectbrazier:dense_vertical_lattice",
+	"count": 1
+}

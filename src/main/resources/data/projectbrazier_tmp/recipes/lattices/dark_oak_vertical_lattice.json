@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "dark_oak_planks"
+	},
+	"result": "projectbrazier:dark_oak_vertical_lattice",
+	"group": "projectbrazier:vertical_lattice",
+	"count": 1
+}

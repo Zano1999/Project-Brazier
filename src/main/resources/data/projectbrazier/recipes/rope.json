@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "rope",
+	"pattern": [
+		"###",
+		"# #",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "minecraft:string"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:rope",
+		"count": 8
+	}
+}

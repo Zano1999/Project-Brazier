@@ -128,7 +128,7 @@ public class ProjectBrazierClient {
 		BlockEntityRenderers.register(BrazierBlockEntities.BARREL_BLOCK_ENTITY.get(), BarrelBlockEntityRenderer::new);
 		BlockEntityRenderers.register(BrazierBlockEntities.ZIPLINE_ANCHOR.get(), ZiplineBlockEntityRenderer::new);
 
-		BlockEntityRenderers.register(BrazierBlockEntities.CHOPPING_BLOCK.get(), ChoppingBlockBlockEntityRenderer::new);
+//		BlockEntityRenderers.register(BrazierBlockEntities.CHOPPING_BLOCK.get(), ChoppingBlockBlockEntityRenderer::new);
 
 
 		EntityRenderers.register(BrazierEntities.SITTABLE.get(), SittableEntityRenderer::new);

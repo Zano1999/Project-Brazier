@@ -27,8 +27,8 @@ public class BrazierBlockEntities{
 			ZIPLINE_ANCHOR = Registrar.registerBlockEntity("zipline_anchor", ZiplineBlockEntity::new, BrazierBlocks.ZIPLINE_ANCHOR.values());
 
 
-	public static final RegistryObject<BlockEntityType<ChoppingBlockBlockEntity>>
-			CHOPPING_BLOCK = Registrar.registerBlockEntity("chopping_block", ChoppingBlockBlockEntity::new, BrazierBlocks.CHOPPING_BLOCK.values());
+//	public static final RegistryObject<BlockEntityType<ChoppingBlockBlockEntity>>
+//			CHOPPING_BLOCK = Registrar.registerBlockEntity("chopping_block", ChoppingBlockBlockEntity::new, BrazierBlocks.CHOPPING_BLOCK.values());
 
 
 	public static void preRegistry(){}

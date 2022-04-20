@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "projectbrazier:orange_log"
+	},
+	"result": "projectbrazier:orange_firewood",
+	"group": "projectbrazier:firewood",
+	"count": 1
+}

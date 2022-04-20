@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "polstered_acacia_bench",
+	"pattern": [
+		"###",
+		"#X#",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "projectbrazier:acacia_bench"
+		},
+		"X": {
+			"item": "minecraft:brown_wool"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:brown_polstered_acacia_bench",
+		"count": 8
+	}
+}

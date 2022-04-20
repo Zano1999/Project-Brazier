@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "zipline_anchor",
+	"pattern": [
+		" X ",
+		"XZX",
+		" X "
+	],
+	"key": {
+		"X": {
+			"item": "projectbrazier:rope"
+		},
+		"Z": {
+			"item": "minecraft:stripped_warped_stem"
+		}
+	},
+	"result": {
+		"item": "projectbrazier:warped_zipline_anchor",
+		"count": 1
+	}
+}

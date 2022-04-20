@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "projectbrazier:stripped_orange_log"
+	},
+	"result": "projectbrazier:stripped_orange_log_bench",
+	"group": "projectbrazier:stripped_log_benches",
+	"count": 1
+}

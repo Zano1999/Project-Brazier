@@ -5,7 +5,7 @@ import net.dark_roleplay.projectbrazier.feature.helpers.ZiplineHelper;
 import net.dark_roleplay.projectbrazier.feature.registrars.BrazierBlockEntities;
 import net.dark_roleplay.projectbrazier.util.math.bezier.BezierCurve;
 import net.dark_roleplay.projectbrazier.util.data.NBTUtil2;
-import net.dark_roleplay.projectbrazier.util.math.VectorUtils;
+import net.dark_roleplay.projectbrazier.util.math.vector.VectorUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;

@@ -32,6 +32,6 @@ public class BrazierPackets {
 		CHANNEL.registerMessage(0, TertiaryInteractionPacket.class, TertiaryInteractionPacket::encode, TertiaryInteractionPacket::decode, TertiaryInteractionPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
 		CHANNEL.registerMessage(1, SelectiveBlockItemPacket.class, SelectiveBlockItemPacket::encode, SelectiveBlockItemPacket::decode, SelectiveBlockItemPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
 
-		BLOCK_ENTITY.registerMessage(0, ChoppingBlockBlockEntitySync.class, ChoppingBlockBlockEntitySync::encode, ChoppingBlockBlockEntitySync::decode, ChoppingBlockBlockEntitySync::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+//		BLOCK_ENTITY.registerMessage(0, ChoppingBlockBlockEntitySync.class, ChoppingBlockBlockEntitySync::encode, ChoppingBlockBlockEntitySync::decode, ChoppingBlockBlockEntitySync::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 	}
 }

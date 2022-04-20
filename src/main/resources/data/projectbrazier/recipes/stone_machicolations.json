@@ -4,6 +4,6 @@
 		"item": "minecraft:stone_bricks"
 	},
 	"result": "projectbrazier:stone_machicolations",
-	"group": "projectbrazier:stone_machicolations",
+	"group": "projectbrazier:machicolations",
 	"count": 1
 }
